@@ -20,7 +20,7 @@ export default figure({
   boundsOf: ['A', 'B', 'C', 'D'],
   dims: '|BC|a |CA|b |AB|c <A <B <C',
   toggles: {
-    'შემოხაზული წრე': '(OA) O',
+    'შემოხაზული წრეწირი': '(OA) O',
     'სიმაღლე A-დან': 'AH <AHB H',
   },
   classify: 'triangle',

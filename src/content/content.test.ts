@@ -96,8 +96,11 @@ describe('site', () => {
   });
 
   it('no glossary "avoid" variant appears', () => {
+    // an avoided prefix may still start the right term („ჩახაზული წრ“ → „ჩახაზული წრეწირი“): those hits don't count
+    const wrong = (src: string, a: string, ka: string) =>
+      [...src.matchAll(new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))].some(m => !src.startsWith(ka.slice(0, -1), m.index));
     const bad = topics.flatMap(t => glossary.terms.flatMap(g => ('avoid' in g ? (g.avoid as string[]) : [])
-      .filter(a => t.src.includes(a)).map(a => `${t.slug}: „${a}“ → „${g.ka}“`)));
+      .filter(a => wrong(t.src, a, g.ka)).map(a => `${t.slug}: „${a}“ → „${g.ka}“`)));
     expect(bad).toEqual([]);
   });
 

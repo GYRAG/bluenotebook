@@ -20,8 +20,8 @@ export default figure({
   dims: '|BC|a |CA|b |AB|c',
   toggles: {
     'სიმაღლე': 'CH <CHB H',
-    'ჩახაზული წრე': '(IT1) I',
-    'შემოხაზული წრე': '(OA) O',
+    'ჩახაზული წრეწირი': '(IT1) I',
+    'შემოხაზული წრეწირი': '(OA) O',
   },
   classify: 'triangle',
   readouts: ({ A, B, C, H, I, T1, O }) => {

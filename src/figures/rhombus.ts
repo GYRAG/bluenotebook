@@ -18,7 +18,7 @@ export default figure({
   dims: '|AB|a <A <B',
   toggles: {
     'დიაგონალები': 'AC BD O',
-    'ჩახაზული წრე': '(OT) O T',
+    'ჩახაზული წრეწირი': '(OT) O T',
     'აღნიშვნები': 'AB=BC=CD=DA <A=<C <B=<D',
   },
   classify: 'quad',
