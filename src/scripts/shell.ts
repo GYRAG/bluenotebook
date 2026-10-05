@@ -47,6 +47,9 @@ $('[data-sheet-toggle]')?.addEventListener('click', e => {
   (e.currentTarget as HTMLElement).setAttribute('aria-expanded', String(up));
 });
 
+// a long contents list: keep the current page in view after navigating
+$('.nav [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
+
 // ---------- last-viewed topic ----------
 interface Last { url: string; title: string }
 const prev = load<Last | null>('last', null); // read before this page replaces it — the palette offers it

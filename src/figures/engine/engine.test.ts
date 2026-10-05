@@ -5,6 +5,19 @@ import { solveDrag, snap } from './solve';
 import { classifyQuad, classifyTriangle } from './classify';
 import { boardBounds, randomParams, rng } from './bounds';
 import type { FigureSpec } from './spec';
+import { moveShape, shapeSvg, snapTo } from './sketch';
+
+describe('sketch', () => {
+  it('snaps to grid crossings and moves shapes', () => {
+    expect(snapTo([0.74, -1.26], 0.5)).toEqual([0.5, -1.5]);
+    expect(moveShape({ t: 'line', p: [[0, 0], [1, 1]] }, [2, -1]).p).toEqual([[2, -1], [3, 0]]);
+  });
+  it('draws in screen pixels with y pointing down', () => {
+    const px = (u: V): V => [100 + u[0] * 10, 100 - u[1] * 10];
+    expect(shapeSvg({ t: 'circle', p: [[0, 0], [3, 4]] }, px, 'c', 2)).toBe('<circle class="c" data-i="2" cx="100.0" cy="100.0" r="50.0"/>');
+    expect(shapeSvg({ t: 'rect', p: [[1, 1], [-1, -1]] }, px, 'r')).toBe('<rect class="r" x="90.0" y="90.0" width="20.0" height="20.0"/>');
+  });
+});
 
 const figures = Object.entries(import.meta.glob<{ default: FigureSpec }>(['../*.ts', '!../registry.ts'], { eager: true }))
   .map(([path, m]) => [path.slice(3, -3), m.default] as const);

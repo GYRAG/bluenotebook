@@ -11,6 +11,7 @@ export default defineConfig({
   site: 'https://matematikis-baza.vercel.app',
   trailingSlash: 'always',
   devToolbar: { enabled: false },
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' }, // a page starts loading when its link is hovered or focused
   markdown: {
     processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [[rehypeKatex, { strict: 'ignore' }], rehypeGlue] }),
   },

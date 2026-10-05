@@ -7,6 +7,7 @@ import { classifyQuad, classifyTriangle, type Verdict } from './classify';
 import { add, segDist, type V } from './geom';
 import { parseRefs, type Ref } from './refs';
 import { renderScene, type View } from './render';
+import { Sketch, type Tool } from './sketch';
 import { snap, solveDrag } from './solve';
 import type { FigureSpec, Params } from './spec';
 
@@ -35,6 +36,7 @@ export class GeoFigure extends HTMLElement {
   private raf = 0;
   private poly: string[] = [];
   private base: Ref[] = [];
+  private sketch!: Sketch;
 
   async connectedCallback() {
     this.name = this.dataset.figure!;
@@ -50,9 +52,11 @@ export class GeoFigure extends HTMLElement {
     this.layer = this.svg.querySelector('.layer')!;
     this.handles = this.svg.querySelector('.handles')!;
     this.tools = document.querySelector(`[data-figure-tools="${this.name}"]`);
+    this.sketch = new Sketch(this.svg.querySelector('.sketch')!, `sketch:${this.name}`, () => this.view, e => this.units(e));
     this.buildHandles();
     this.bindInput();
     this.bindTools();
+    this.bindSketch();
     const hint = this.querySelector<HTMLElement>('.hint');
     if (hint && !this.hasAttribute('data-alt') && !load('hint-seen', false)) hint.hidden = false;
     new ResizeObserver(() => { this.layout(); this.render(); }).observe(this);
@@ -115,6 +119,7 @@ export class GeoFigure extends HTMLElement {
     }
     this.updateReadouts(pts);
     this.updateVerdict(pts);
+    this.sketch.render();
   }
 
   private px = (u: V): V => [this.view.ox + u[0] * this.view.k, this.view.oy - u[1] * this.view.k];
@@ -197,6 +202,7 @@ export class GeoFigure extends HTMLElement {
   private bindInput() {
     const svg = this.svg;
     svg.addEventListener('pointerdown', e => {
+      if (this.sketch.on) { this.sketch.down(e); svg.setPointerCapture(e.pointerId); e.preventDefault(); return; }
       const h = (e.target as Element).closest<SVGGElement>('.handle');
       if (!h) return this.setHover(this.nearestSide(e)); // tap a side → its length
       this.drag = h.dataset.p!;
@@ -205,11 +211,12 @@ export class GeoFigure extends HTMLElement {
       e.preventDefault();
     });
     svg.addEventListener('pointermove', e => {
+      if (this.sketch.on) return this.sketch.move(e);
       if (this.drag) this.dragTo(this.drag, this.units(e));
       else if (e.pointerType === 'mouse') this.setHover(this.nearestSide(e));
     });
     svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !this.drag) this.setHover(null); });
-    const end = () => { this.drag = null; this.handles.querySelectorAll('.dragging').forEach(h => h.classList.remove('dragging')); };
+    const end = () => { if (this.sketch.on) this.sketch.up(); this.drag = null; this.handles.querySelectorAll('.dragging').forEach(h => h.classList.remove('dragging')); };
     svg.addEventListener('pointerup', end);
     svg.addEventListener('pointercancel', end);
     this.handles.addEventListener('keydown', e => {
@@ -220,6 +227,42 @@ export class GeoFigure extends HTMLElement {
       e.stopPropagation();
       this.dragTo(h.dataset.p!, add(this.spec.points(this.params)[h.dataset.p!]!, d));
     });
+  }
+
+  // ---------- drawing on the grid ----------
+  private bindSketch() {
+    const bar = this.querySelector<HTMLElement>('.sk');
+    if (!bar) return;
+    const tools = bar.querySelector<HTMLElement>('.sk-tools')!, toggle = bar.querySelector<HTMLButtonElement>('.sk-toggle')!;
+    const live = this.querySelector('[data-live]')!;
+    const sync = () => {
+      const on = this.sketch.on;
+      toggle.setAttribute('aria-pressed', String(on));
+      tools.hidden = !on;
+      this.classList.toggle('drawing', on);
+      bar.querySelectorAll<HTMLButtonElement>('[data-tool]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tool === this.sketch.tool)));
+      bar.querySelector<HTMLButtonElement>('[data-sk=undo]')!.disabled = !this.sketch.canUndo;
+      bar.querySelector<HTMLButtonElement>('[data-sk=clear]')!.disabled = !this.sketch.count;
+    };
+    bar.addEventListener('click', e => {
+      const b = (e.target as Element).closest<HTMLButtonElement>('button');
+      if (!b) return;
+      if (b === toggle) {
+        this.sketch.setTool(this.sketch.on ? null : 'pen');
+        live.textContent = this.sketch.on ? 'ხატვის რეჟიმი: ფანქარი' : 'ხატვის რეჟიმი გამორთულია';
+        this.touched();
+      } else if (b.dataset.tool) this.sketch.setTool(b.dataset.tool as Tool);
+      else if (b.dataset.sk === 'undo') this.sketch.undo();
+      else if (b.dataset.sk === 'clear') this.sketch.clear();
+      sync();
+    });
+    this.svg.addEventListener('pointerup', sync); // undo / clear become available after a stroke
+    this.addEventListener('keydown', e => {
+      if (!this.sketch.on) return;
+      if (e.key === 'Escape') { this.sketch.cancel(); e.stopPropagation(); }
+      if (e.key.toLowerCase() === 'z' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.sketch.undo(); sync(); }
+    });
+    sync();
   }
 
   private bindTools() {
