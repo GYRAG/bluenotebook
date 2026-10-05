@@ -24,6 +24,8 @@ describe('reference grammar', () => {
     expect(parseRef("A1B'")).toEqual({ k: 'seg', s: ['A1', "B'"] });
     expect(parseRef('ABCD')).toEqual({ k: 'poly', ps: ['A', 'B', 'C', 'D'] });
     expect(parseRef('<ABC')).toEqual({ k: 'angle', ang: { a: 'A', v: 'B', b: 'C' } });
+    expect(parseRef('arc:O1AB')).toEqual({ k: 'arc', c: 'O1', a: 'A', b: 'B' });
+    expect(() => parseRef('arc:OA')).toThrow();
     expect(parseRef('<A')).toEqual({ k: 'angle', ang: { v: 'A' } });
     expect(parseRef('AB=CD=EF')).toEqual({ k: 'eqseg', segs: [['A', 'B'], ['C', 'D'], ['E', 'F']] });
     expect(parseRef('<A=<C')).toEqual({ k: 'eqang', angs: [{ v: 'A' }, { v: 'C' }] });

@@ -1,0 +1,70 @@
+---
+title: წრეწირის სიგრძე და წრის ფართობი
+slug: circle-length
+subject: geometry
+section: circles
+order: 28
+summary: რიცხვი პი, წრეწირისა და რკალის სიგრძე, წრის, სექტორისა და სეგმენტის ფართობი.
+tags: [წრეწირის სიგრძე, რკალის სიგრძე, წრის ფართობი, სექტორი, სეგმენტი, პი]
+prerequisites: [circle, inscribed-angle]
+status: draft
+figure: circle-sector
+---
+
+<Definition>**წრე** — სიბრტყის ნაწილი, რომელიც წრეწირით არის შემოსაზღვრული. **წრიული სექტორი** — წრის ნაწილი ორ რადიუსსა და რკალს შორის; **წრიული სეგმენტი** — წრის ნაწილი ქორდასა და რკალს შორის. წრეწირის სიგრძის შეფარდებას დიამეტრთან რიცხვი $\pi$ ეწოდება: $\pi \approx 3.14159$.</Definition>
+
+<Formulas>
+<Formula id="circumference-formula" name="წრეწირის სიგრძე" tex="C = 2\pi R" live="C" proof="circumference" />
+<Formula id="arc-formula" name="რკალის სიგრძე" tex="l = \frac{\pi R \alpha}{180^\circ}" live="l" proof="arc-length" />
+<Formula id="area-formula" name="წრის ფართობი" tex="S = \pi R^2" live="S" proof="circle-area" />
+<Formula id="sector-formula" name="სექტორის ფართობი" tex="S_1 = \frac{\pi R^2 \alpha}{360^\circ} = \tfrac12\, l R" live="S₁" proof="sector-area" />
+<Formula id="segment-formula" name="სეგმენტის ფართობი" tex="S_2 = \frac{R^2}{2}\left(\frac{\pi\alpha}{180^\circ} - \sin\alpha\right)" live="S₂" proof="segment-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="circumference" title="წრეწირის სიგრძის შეფარდება დიამეტრთან ყველა წრეწირისთვის ერთი და იგივეა, ამიტომ $C = 2\pi R$" why="წრეწირებში ჩახაზული წესიერი $n$-კუთხედების პერიმეტრები რადიუსების პროპორციულია.">
+<Proof given="წრეწირი რადიუსით $R$" prove="$\tfrac{C}{2R}$ არ არის დამოკიდებული $R$-ზე">
+<Step show="(OA)" hl="(OA)">წრეწირის სიგრძე მასში ჩახაზული წესიერი $n$-კუთხედების პერიმეტრების ზღვარია, როცა $n$ უსასრულოდ იზრდება.</Step>
+<Step tex="a_n = 2R\sin\frac{180^\circ}{n}, \qquad P_n = 2nR\sin\frac{180^\circ}{n}">$n$-კუთხედის გვერდი ქორდაა, რომელზეც $\tfrac{360^\circ}{n}$ ცენტრალური კუთხე ეყრდნობა.</Step>
+<Step tex="\frac{P_n}{2R} = n\sin\frac{180^\circ}{n}">ეს შეფარდება მხოლოდ $n$-ზეა დამოკიდებული, $R$-ზე — არა.</Step>
+<Step tex="\frac{C}{2R} = \pi \;\Rightarrow\; C = 2\pi R \quad \blacksquare">ზღვარში ყველა წრეწირისთვის ერთი და იგივე რიცხვი მიიღება — ესაა $\pi$.</Step>
+</Proof>
+</Property>
+
+<Property id="arc-length" title="$\alpha$ გრადუსიანი რკალის სიგრძე $\tfrac{\pi R\alpha}{180^\circ}$-ია" why="რკალის სიგრძე ცენტრალური კუთხის პროპორციულია; $360^\circ$-ს მთელი წრეწირი შეესაბამება.">
+<Proof given="რკალი ცენტრალური კუთხით $\alpha$" prove="$l = \tfrac{\pi R\alpha}{180^\circ}$">
+<Step hl="arc:OAB <AOB">ტოლ ცენტრალურ კუთხეებს ტოლი რკალები შეესაბამება, ამიტომ რკალის სიგრძე $\alpha$-ს პროპორციულია.</Step>
+<Step show="(OA)" tex="l = 2\pi R \cdot \frac{\alpha}{360^\circ} = \frac{\pi R\alpha}{180^\circ} \quad \blacksquare">$\alpha = 360^\circ$ — მთელი წრეწირი, $2\pi R$.</Step>
+</Proof>
+</Property>
+
+<Property id="circle-area" title="წრის ფართობი $\pi R^2$-ია" why="ჩახაზული წესიერი მრავალკუთხედის ფართობი $\tfrac12 P_n r_n$-ია, ზღვარში — $\tfrac12\, C R$.">
+<Proof given="წრე რადიუსით $R$" prove="$S = \pi R^2$">
+<Step show="(OA)" hl="(OA)">ჩავხაზოთ წრეში წესიერი $n$-კუთხედი. ცენტრიდან ის $n$ ტოლ ტოლფერდა სამკუთხედად იყოფა; მათი სიმაღლე $r_n$-ია (აპოთემა).</Step>
+<Step tex="S_n = n \cdot \tfrac12\, a_n r_n = \tfrac12\, P_n r_n">სამკუთხედების ფართობების ჯამი.</Step>
+<Step tex="S = \tfrac12 \cdot 2\pi R \cdot R = \pi R^2 \quad \blacksquare">როცა $n \to \infty$: $P_n \to 2\pi R$, $r_n \to R$, $S_n \to S$.</Step>
+</Proof>
+</Property>
+
+<Property id="sector-area" title="სექტორის ფართობი $\tfrac{\pi R^2\alpha}{360^\circ} = \tfrac12\, lR$" why="სექტორის ფართობიც ცენტრალური კუთხის პროპორციულია.">
+<Proof given="სექტორი ცენტრალური კუთხით $\alpha$" prove="$S_1 = \tfrac{\pi R^2\alpha}{360^\circ}$">
+<Step hl="OA OB arc:OAB">ტოლ ცენტრალურ კუთხეებს ტოლი სექტორები შეესაბამება — ფართობი $\alpha$-ს პროპორციულია.</Step>
+<Step tex="S_1 = \pi R^2 \cdot \frac{\alpha}{360^\circ}">$\alpha = 360^\circ$-ზე სექტორი მთელი წრეა.</Step>
+<Step tex="S_1 = \tfrac12 \cdot \frac{\pi R\alpha}{180^\circ} \cdot R = \tfrac12\, lR \quad \blacksquare">რკალის სიგრძე $l = \tfrac{\pi R\alpha}{180^\circ}$.</Step>
+</Proof>
+</Property>
+
+<Property id="segment-area" title="სეგმენტის ფართობი სექტორისა და სამკუთხედის ფართობების სხვაობაა" why="სექტორს ჩამოვაჭრათ ტოლფერდა სამკუთხედი $OAB$.">
+<Proof given="სეგმენტი ქორდით $AB$, $\angle AOB = \alpha \le 180^\circ$" prove="$S_2 = \tfrac{R^2}{2}\left(\tfrac{\pi\alpha}{180^\circ} - \sin\alpha\right)$">
+<Step show="AB" hl="AB arc:OAB">სეგმენტი ქორდა $AB$-სა და რკალს შორისაა.</Step>
+<Step hl="OAB" tex="S_{OAB} = \tfrac12 R^2\sin\alpha">ფართობი ორი გვერდითა და მათ შორის კუთხით.</Step>
+<Step tex="S_2 = \frac{\pi R^2\alpha}{360^\circ} - \frac{R^2}{2}\sin\alpha \quad \blacksquare">სექტორს გამოვაკლოთ სამკუთხედი.</Step>
+</Proof>
+</Property>
+
+<Remark>თუ $\alpha > 180^\circ$, სეგმენტი სექტორსა და სამკუთხედს აერთიანებს — ფორმულა იგივე რჩება, რადგან მაშინ $\sin\alpha < 0$.</Remark>
+
+</Properties>
+
+<Remark kind="mistake">რკალისა და სექტორის ფორმულებში $\alpha$ გრადუსებშია. რადიანებში იგივე ფორმულები ასე იწერება: $l = R\alpha$, $S_1 = \tfrac12 R^2\alpha$.</Remark>

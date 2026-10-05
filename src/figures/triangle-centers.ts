@@ -21,6 +21,7 @@ export default figure({
       A, B, C,
       A1: mid(B, C), B1: mid(C, A), C1: mid(A, B), G: centroid(A, B, C),
       I, L, T: foot(I, B, C), E: intersect(B, A, C, add(C, sub(L, A))), // E: on line BA, CE ∥ AL
+      D: lerp(B, C, 0.3), // any point of BC (Stewart's theorem)
       O: circumcenter(A, B, C),
       H: orthocenter(A, B, C), A2: foot(A, B, C), B2: foot(B, C, A), C2: foot(C, A, B),
       A3: sub(add(B, C), A), B3: sub(add(C, A), B), C3: sub(add(A, B), C),
@@ -68,6 +69,10 @@ export default figure({
       const A: V = [0, 0], B: V = [1, 0], C = polar(Math.sin(rad(be)) / Math.sin(rad(ga)), al), H = orthocenter(A, B, C);
       return ga < 90 && near(angleAt(B, H, C), 180 - al);
     },
+    stewart: ({ A, B, C }) => [0.1, 0.3, 0.5, 0.85].every(t => { // AD to any point D of BC
+      const D = lerp(B, C, t), a = dist(B, C), b = dist(C, A), c = dist(A, B), m = dist(B, D), n = dist(D, C), d = dist(A, D);
+      return near(b * b * m + c * c * n, a * (d * d + m * n));
+    }),
     'orthocenter-proof': ({ A, B, C, A3, B3, C3 }) =>
       near(dist(A, mid(B3, C3)), 0) && near(dist(B, mid(C3, A3)), 0) && near(dist(C, mid(A3, B3)), 0) && parallel(B3, C3, B, C),
   },

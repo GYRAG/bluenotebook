@@ -1,0 +1,66 @@
+---
+title: ცენტრალური და ჩახაზული კუთხეები
+slug: inscribed-angle
+subject: geometry
+section: circles
+order: 26
+summary: ჩახაზული კუთხე ცენტრალურის ნახევარია; დიამეტრზე დაყრდნობილი კუთხე მართია; ქორდა და ჩახაზული კუთხე.
+tags: [ცენტრალური კუთხე, ჩახაზული კუთხე, რკალი, დიამეტრი, ქორდა]
+prerequisites: [circle, isosceles-triangle, triangle]
+status: draft
+figure: inscribed-angle
+---
+
+<Definition>**ცენტრალური კუთხე** — კუთხე, რომლის წვერო წრეწირის ცენტრშია. **ჩახაზული კუთხე** — კუთხე, რომლის წვერო წრეწირზე ძევს, გვერდები კი წრეწირს კვეთს. წრეწირის ორი წერტილი მას ორ **რკალად** ყოფს; რკალის გრადუსული ზომა მასზე დაყრდნობილი ცენტრალური კუთხის ტოლია: ${\smile}AB = \angle AOB$.</Definition>
+
+<Formulas>
+<Formula id="inscribed-formula" name="ჩახაზული კუთხე" tex="\angle ACB = \tfrac12\,\angle AOB = \tfrac12 {\smile}AB" live="∠ACB" proof="inscribed-angle" />
+<Formula id="same-arc-formula" name="ერთ რკალზე დაყრდნობილი კუთხეები" tex="\angle ACB = \angle ADB" proof="same-arc" />
+<Formula id="diameter-formula" name="დიამეტრზე დაყრდნობილი კუთხე" tex="AF = 2R \;\Rightarrow\; \angle ABF = 90^\circ" proof="diameter-right" />
+<Formula id="chord-formula" name="ქორდა და ჩახაზული კუთხე" tex="AB = 2R\sin\angle ACB" live="AB" proof="chord-sine" />
+</Formulas>
+
+<Properties>
+
+<Property id="inscribed-angle" title="ჩახაზული კუთხე იმავე რკალზე დაყრდნობილი ცენტრალური კუთხის ნახევარია" why="დიამეტრი ჩახაზულ კუთხეს ორად ყოფს; თითოეული ნაწილი ტოლფერდა სამკუთხედის გარე კუთხის ნახევარია.">
+<Proof given="$\angle ACB$ — ჩახაზული, $\angle AOB$ — ცენტრალური, ორივე ${\smile}AB$-ზე" prove="$\angle ACB = \tfrac12\angle AOB$">
+<Step hl="<ACB <AOB arc:OAB">ორივე კუთხე ერთსა და იმავე $AB$ რკალს ეყრდნობა.</Step>
+<Step show="CE E" hl="CE">გავავლოთ დიამეტრი $CE$.</Step>
+<Step show="OC" hl="AOC <OCA=<OAC" tex="\angle AOE = 2\angle ACE">$OA = OC$ — $\triangle AOC$ ტოლფერდაა, $\angle AOE$ კი მისი გარე კუთხეა: $\angle AOE = \angle OAC + \angle OCA$.</Step>
+<Step hl="BOC <OCB=<OBC" tex="\angle EOB = 2\angle ECB">იგივე ტოლფერდა $\triangle BOC$-ში.</Step>
+<Step hl="<ACB" tex="\angle ACB = \tfrac12\angle AOB \quad \blacksquare">შევკრიბოთ: $\angle ACE + \angle ECB = \tfrac12(\angle AOE + \angle EOB)$. თუ $O$ კუთხის გარეთაა, იგივე მსჯელობა გამოკლებით მუშაობს; თუ $O$ კუთხის გვერდზე ძევს, საკმარისია მე-3 ნაბიჯი.</Step>
+</Proof>
+</Property>
+
+<Property id="same-arc" title="ერთსა და იმავე რკალზე დაყრდნობილი ჩახაზული კუთხეები ტოლია" why="ორივე ერთი და იმავე ცენტრალური კუთხის ნახევარია.">
+<Proof given="$C$ და $D$ — ერთი რკალის წერტილები" prove="$\angle ACB = \angle ADB$">
+<Step show="DA DB D" hl="arc:OAB">ორივე კუთხე $AB$ რკალს ეყრდნობა.</Step>
+<Step hl="<ACB=<ADB" tex="\angle ACB = \tfrac12\angle AOB = \angle ADB \quad \blacksquare">წინა თვისებით.</Step>
+</Proof>
+</Property>
+
+<Property id="diameter-right" title="დიამეტრზე დაყრდნობილი ჩახაზული კუთხე მართია" why="შესაბამისი ცენტრალური კუთხე გაშლილია — $180^\circ$.">
+<Proof given="$AF$ — დიამეტრი, $B$ — წრეწირის წერტილი" prove="$\angle ABF = 90^\circ$">
+<Step show="AF F BF AB" hl="AF">$AF$ ცენტრზე გადის — ის დიამეტრია, $\angle AOF = 180^\circ$.</Step>
+<Step hl="<ABF" tex="\angle ABF = \tfrac12 \cdot 180^\circ = 90^\circ \quad \blacksquare">ჩახაზული კუთხე ცენტრალურის ნახევარია.</Step>
+</Proof>
+</Property>
+
+<Remark>შებრუნებულიც სამართლიანია: მართკუთხა სამკუთხედის ჰიპოტენუზა მასზე შემოხაზული წრეწირის დიამეტრია.</Remark>
+
+<Property id="chord-sine" title="ქორდა უდრის $2R$-ს, გამრავლებულს მასზე დაყრდნობილი ჩახაზული კუთხის სინუსზე: $AB = 2R\sin\angle ACB$" why="დიამეტრი $AF$ მართკუთხა სამკუთხედს ქმნის, რომელშიც იგივე კუთხეა.">
+<Proof given="$\angle ACB$ — ჩახაზული, $AB$ რკალზე" prove="$AB = 2R\sin\angle ACB$">
+<Step show="AF F BF AB" hl="AF">გავავლოთ დიამეტრი $AF = 2R$.</Step>
+<Step hl="<AFB=<ACB" tex="\angle AFB = \angle ACB">ორივე $AB$ რკალს ეყრდნობა.</Step>
+<Step hl="ABF <ABF">$\angle ABF = 90^\circ$ — დიამეტრზე დაყრდნობილი კუთხე.</Step>
+<Step tex="AB = AF\sin\angle AFB = 2R\sin\angle ACB \quad \blacksquare">მართკუთხა $\triangle ABF$-ში.</Step>
+</Proof>
+</Property>
+
+<Remark>ეს სინუსების თეორემაა: სამკუთხედის ყოველი გვერდი $2R$-ს უდრის, გამრავლებულს მოპირდაპირე კუთხის სინუსზე, $\tfrac{a}{\sin\alpha} = 2R$.</Remark>
+
+</Properties>
+
+<Remark kind="convention">${\smile}AB$ ყოველთვის ის რკალია, რომელზეც კუთხე ეყრდნობა — რომელიც კუთხის შიგნით ძევს.</Remark>
+
+<Remark kind="mistake">თუ $C$ და $D$ $AB$ ქორდის სხვადასხვა მხარესაა, $\angle ACB$ და $\angle ADB$ ტოლი არ არის — მათი ჯამი $180^\circ$-ია (ჩახაზული ოთხკუთხედი $ACBD$).</Remark>

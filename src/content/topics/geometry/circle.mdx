@@ -1,0 +1,106 @@
+---
+title: წრეწირი, ქორდა და მხები
+slug: circle
+subject: geometry
+section: circles
+order: 25
+summary: ქორდისა და მხების თვისებები, ერთი წერტილიდან გავლებული მხებები, ორი წრეწირის საერთო მხებები.
+tags: [წრეწირი, რადიუსი, დიამეტრი, ქორდა, მხები, მკვეთი, საერთო მხები]
+prerequisites: [congruence, isosceles-triangle, right-triangle]
+status: draft
+figure: circle
+figures: [two-circles]
+---
+
+<Definition>**წრეწირი** — სიბრტყის ყველა იმ წერტილის სიმრავლე, რომლებიც მოცემული წერტილიდან (**ცენტრიდან**) ერთსა და იმავე $R$ მანძილზეა; $R$ — **რადიუსი**. წრეწირის ორი წერტილის შემაერთებელი მონაკვეთი **ქორდაა**, ცენტრზე გამავალი ქორდა — **დიამეტრი** ($2R$). წრფე, რომელსაც წრეწირთან ერთადერთი საერთო წერტილი აქვს, **მხებია**; წრფე, რომელიც წრეწირს ორ წერტილში კვეთს, — **მკვეთი**.</Definition>
+
+<Formulas>
+<Formula id="chord-length-formula" name="ქორდა და მისი მანძილი ცენტრამდე" tex="AB = 2\sqrt{R^2 - d^2}" live="AB" proof="chord-length" />
+<Formula id="tangent-length-formula" name="მხების მონაკვეთი" tex="PT^2 = OP^2 - R^2" live="PT" proof="tangent-length" />
+<Formula id="two-tangents-formula" name="ორი მხები ერთი წერტილიდან" tex="PT_1 = PT_2, \qquad \angle OPT_1 = \angle OPT_2" proof="two-tangents" />
+<Formula id="outer-tangent-formula" name="ორი წრეწირის გარე საერთო მხები" tex="K_1K_2 = \sqrt{d^2 - (R - r)^2}" proof="outer-tangent" />
+<Formula id="inner-tangent-formula" name="ორი წრეწირის შიგა საერთო მხები" tex="L_1L_2 = \sqrt{d^2 - (R + r)^2}" proof="inner-tangent" />
+</Formulas>
+
+<Properties title="ქორდა">
+
+<Property id="chord-perpendicular" title="ცენტრიდან ქორდაზე დაშვებული მართობი ქორდას შუაზე ყოფს" why="$OA = OB$, ამიტომ $\triangle OAB$ ტოლფერდაა, ფუძეზე დაშვებული სიმაღლე კი მედიანაცაა.">
+<Proof given="$AB$ — ქორდა, $OM \perp AB$" prove="$AM = MB$">
+<Step show="OA OB OM M <OMB" hl="OA=OB">$OA = OB = R$ — $\triangle OAB$ ტოლფერდაა.</Step>
+<Step hl="OM <OMB">$OM$ ფუძეზე დაშვებული სიმაღლეა.</Step>
+<Step hl="AM=MB" tex="AM = MB \quad \blacksquare">ტოლფერდა სამკუთხედში ფუძეზე დაშვებული სიმაღლე მედიანაცაა.</Step>
+</Proof>
+</Property>
+
+<Remark>პირიქით: ქორდის შუაწერტილზე გამავალი დიამეტრი ქორდის მართობია (თუ ქორდა თვითონ დიამეტრი არ არის).</Remark>
+
+<Property id="chord-length" title="ქორდის სიგრძე $AB = 2\sqrt{R^2 - d^2}$, სადაც $d$ ცენტრიდან ქორდამდე მანძილია" why="რადიუსი, ქორდის ნახევარი და $d$ მართკუთხა სამკუთხედს ქმნის.">
+<Proof given="$OM = d$, $OM \perp AB$" prove="$AB = 2\sqrt{R^2 - d^2}$">
+<Step show="OA OM M <OMA" hl="OAM" tex="AM^2 = OA^2 - OM^2 = R^2 - d^2">პითაგორას თეორემა მართკუთხა $\triangle OMA$-ში.</Step>
+<Step hl="AB" tex="AB = 2\,AM = 2\sqrt{R^2 - d^2} \quad \blacksquare">წინა თვისებით $M$ ქორდის შუაწერტილია.</Step>
+</Proof>
+</Property>
+
+<Property id="equal-chords" title="ტოლი ქორდები ცენტრიდან თანაბრადაა დაშორებული; პირიქით, ცენტრიდან თანაბრად დაშორებული ქორდები ტოლია" why="ქორდის სიგრძე მხოლოდ $R$-სა და ცენტრამდე მანძილზეა დამოკიდებული.">
+<Proof given="$AB$ და $CD$ — ქორდები, $OM \perp AB$, $ON \perp CD$" prove="$AB = CD \iff OM = ON$">
+<Step show="CD C D OA OB OC OD" hl="OAB OCD">ორი ქორდა და რადიუსები მათ ბოლოებამდე: $OA = OB = OC = OD = R$.</Step>
+<Step show="OM ON M N" hl="OM ON" tex="OM^2 = R^2 - \tfrac14 AB^2, \qquad ON^2 = R^2 - \tfrac14 CD^2">წინა თვისებით.</Step>
+<Step hl="OM=ON AB=CD" tex="AB = CD \iff OM = ON \quad \blacksquare">მანძილები და სიგრძეები დადებითია, ამიტომ ერთი ტოლობა მეორის ტოლფასია.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="მხები">
+
+<Property id="tangent-radius" title="მხები შეხების წერტილში გავლებული რადიუსის მართობია" why="რადიუსი ცენტრიდან მხებამდე უმოკლესი მანძილია: მხების ყველა სხვა წერტილი წრეწირის გარეთაა.">
+<Proof given="$PT_1$ — მხები, $T_1$ — შეხების წერტილი" prove="$OT_1 \perp PT_1$">
+<Step show="OT1" hl="OT1 PT1">მხების ყველა წერტილი, $T_1$-ის გარდა, წრეწირის გარეთაა, ამიტომ ცენტრიდან მათი მანძილი $R$-ზე მეტია.</Step>
+<Step tex="OH < OT_1 = R">დავუშვათ, $OT_1$ მხების მართობი არ არის და $OH$ — $O$-დან მხებზე დაშვებული მართობია, $H \ne T_1$. მართკუთხა $\triangle OHT_1$-ში კათეტი ჰიპოტენუზაზე ნაკლებია.</Step>
+<Step hl="<OT1P">მაშინ $H$ წრეწირის შიგნით აღმოჩნდებოდა და წრფე წრეწირს ორ წერტილში გადაკვეთდა — მხები არ იქნებოდა. ამიტომ $OT_1 \perp PT_1$. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>პირიქით: წრფე, რომელიც რადიუსის ბოლოზე გადის და ამ რადიუსის მართობია, მხებია.</Remark>
+
+<Property id="two-tangents" title="ერთი წერტილიდან წრეწირისადმი გავლებული მხებების მონაკვეთები ტოლია, ცენტრი კი მათ შორის კუთხის ბისექტრისაზე ძევს" why="ორი მართკუთხა სამკუთხედი საერთო ჰიპოტენუზით და ტოლი კათეტებით.">
+<Proof given="$PT_1$, $PT_2$ — მხებები" prove="$PT_1 = PT_2,\ \angle OPT_1 = \angle OPT_2$">
+<Step show="OT1 OT2 OP <OT1P <OT2P" hl="<OT1P <OT2P">მხები რადიუსის მართობია: $\angle OT_1P = \angle OT_2P = 90^\circ$.</Step>
+<Step hl="OT1P OT2P OT1=OT2" tex="\triangle OT_1P = \triangle OT_2P">$OP$ საერთო ჰიპოტენუზაა, $OT_1 = OT_2 = R$ — ჰიპოტენუზითა და კათეტით.</Step>
+<Step hl="PT1=PT2 <OPT1=<OPT2" tex="PT_1 = PT_2, \qquad \angle OPT_1 = \angle OPT_2 \quad \blacksquare">ტოლი სამკუთხედების შესაბამისი ელემენტები.</Step>
+</Proof>
+</Property>
+
+<Property id="tangent-length" title="მხების მონაკვეთი $PT^2 = OP^2 - R^2$" why="პითაგორას თეორემა მართკუთხა $\triangle OTP$-ში.">
+<Proof given="$PT_1$ — მხები" prove="$PT_1^2 = OP^2 - R^2$">
+<Step show="OT1 OP <OT1P" hl="OT1P" tex="PT_1^2 = OP^2 - OT_1^2 = OP^2 - R^2 \quad \blacksquare">$\angle OT_1P = 90^\circ$ — პითაგორას თეორემა.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ორი წრეწირი">
+
+<Property id="outer-tangent" title="ორი წრეწირის გარე საერთო მხების მონაკვეთი $\sqrt{d^2 - (R - r)^2}$-ია" why="მხების პარალელური გადატანა ცენტრამდე მართკუთხა სამკუთხედს ქმნის კათეტით $R - r$.">
+<Proof figure="two-circles" given="წრეწირები $(O_1, R)$ და $(O_2, r)$, $O_1O_2 = d$; $K_1K_2$ — გარე საერთო მხები" prove="$K_1K_2 = \sqrt{d^2 - (R - r)^2}$">
+<Step show="O1K1 O2K2" hl="O1K1 O2K2 <O1K1K2 <O2K2K1">რადიუსები შეხების წერტილებში მხების მართობია, ამიტომ $O_1K_1 \parallel O_2K_2$.</Step>
+<Step show="O2F F" hl="O2F K1K2">$O_2$-დან გავავლოთ $O_2F \parallel K_2K_1$, $F \in O_1K_1$. $FK_1K_2O_2$ მართკუთხედია: $O_2F = K_1K_2$, $FK_1 = r$.</Step>
+<Step show="O1O2" hl="O1FO2 <O1FO2" tex="O_1F = R - r, \qquad O_1O_2 = d">$\triangle O_1FO_2$ მართკუთხაა $F$-თან.</Step>
+<Step tex="K_1K_2 = O_2F = \sqrt{d^2 - (R - r)^2} \quad \blacksquare">პითაგორას თეორემა.</Step>
+</Proof>
+</Property>
+
+<Property id="inner-tangent" title="ორი წრეწირის შიგა საერთო მხების მონაკვეთი $\sqrt{d^2 - (R + r)^2}$-ია" why="იგივე გადატანა, ოღონდ რადიუსები მხების სხვადასხვა მხარესაა — კათეტი $R + r$ გამოდის.">
+<Proof figure="two-circles" given="$L_1L_2$ — შიგა საერთო მხები, $O_1O_2 = d$" prove="$L_1L_2 = \sqrt{d^2 - (R + r)^2}$">
+<Step show="O1L1 O2L2" hl="O1L1 O2L2 <O1L1L2 <O2L2L1">რადიუსები მხების მართობია; $O_1L_1 \parallel O_2L_2$, ოღონდ ისინი მხების სხვადასხვა მხარესაა.</Step>
+<Step show="L1G O2G G" hl="O2G L1L2">გავაგრძელოთ $O_1L_1$ და გადავზომოთ $L_1G = r$. $L_1GO_2L_2$ მართკუთხედია: $GO_2 = L_1L_2$.</Step>
+<Step show="O1O2" hl="O1GO2 <O1GO2" tex="O_1G = R + r, \qquad O_1O_2 = d">$\triangle O_1GO_2$ მართკუთხაა $G$-თან.</Step>
+<Step tex="L_1L_2 = GO_2 = \sqrt{d^2 - (R + r)^2} \quad \blacksquare">პითაგორას თეორემა.</Step>
+</Proof>
+</Property>
+
+<Remark>ორი წრეწირის ურთიერთგანლაგება ($d$ — მანძილი ცენტრებს შორის, $R \ge r$): $d > R + r$ — ერთმანეთის გარეთაა (4 საერთო მხები); $d = R + r$ — გარედან ეხება (3); $R - r < d < R + r$ — იკვეთება (2); $d = R - r$ — შიგნიდან ეხება (1); $d < R - r$ — ერთი მეორის შიგნითაა (0).</Remark>
+
+</Properties>
+
+<Remark kind="mistake">$PT^2 = OP^2 - R^2$-ში $OP$ მანძილია ცენტრამდე და არა წრეწირამდე. $P$-დან წრეწირამდე უმოკლესი მანძილი $OP - R$-ია.</Remark>

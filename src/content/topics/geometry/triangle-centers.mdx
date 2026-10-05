@@ -20,6 +20,7 @@ parent: triangle
 <Formula id="bisector-formula" name="ბისექტრისის თვისება" tex="\frac{BL}{LC} = \frac{AB}{AC}" proof="bisector-theorem" />
 <Formula id="median-length-formula" name="მედიანის სიგრძე" tex="m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}" proof="median-length" />
 <Formula id="bisector-length-formula" name="ბისექტრისის სიგრძე" tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c}" proof="bisector-length" />
+<Formula id="stewart-formula" name="სტიუარტის თეორემა" tex="b^2 m + c^2 n = a\left(d^2 + mn\right)" proof="stewart" />
 <Formula id="six-triangles-formula" name="მედიანებით მიღებული სამკუთხედები" tex="S_{GBA_1} = S_{GA_1C} = \ldots = \tfrac16 S" proof="six-triangles" />
 <Formula id="angle-bic-formula" name="კუთხე ბისექტრისებს შორის" tex="\angle BIC = 90^\circ + \frac{\alpha}{2}" proof="angle-bic" />
 <Formula id="angle-bhc-formula" name="კუთხე სიმაღლეებს შორის (მახვილკუთხა)" tex="\angle BHC = 180^\circ - \alpha" proof="angle-bhc" />
@@ -83,6 +84,18 @@ parent: triangle
 <Step tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c} \quad \blacksquare">$\sin\alpha = 2\sin\tfrac{\alpha}{2}\cos\tfrac{\alpha}{2}$; გავყოთ $\sin\tfrac{\alpha}{2}$-ზე.</Step>
 </Proof>
 </Property>
+
+<Property id="stewart" title="სტიუარტის თეორემა: თუ $D \in BC$, $BD = m$, $DC = n$ და $AD = d$, მაშინ $b^2 m + c^2 n = a\left(d^2 + mn\right)$" why="კოსინუსების თეორემა ორჯერ: $D$-სთან მოსაზღვრე კუთხეების კოსინუსები ერთმანეთის საპირისპიროა.">
+<Proof given="$D \in BC$, $BD = m,\ DC = n,\ AD = d$, $m + n = a$" prove="$b^2 m + c^2 n = a\left(d^2 + mn\right)$">
+<Step show="AD D" hl="AD">$AD$ — მონაკვეთი $A$-დან $BC$-ის ნებისმიერ წერტილამდე.</Step>
+<Step hl="ABD" tex="c^2 = d^2 + m^2 - 2dm\cos\angle ADB">კოსინუსების თეორემა $\triangle ABD$-ში.</Step>
+<Step hl="ADC" tex="b^2 = d^2 + n^2 + 2dn\cos\angle ADB">$\triangle ADC$-ში: $\angle ADC = 180^\circ - \angle ADB$, ამიტომ $\cos\angle ADC = -\cos\angle ADB$.</Step>
+<Step tex="b^2 m + c^2 n = (m + n)\left(d^2 + mn\right)">პირველი გავამრავლოთ $n$-ზე, მეორე — $m$-ზე და შევკრიბოთ: კოსინუსიანი წევრები ბათილდება.</Step>
+<Step tex="b^2 m + c^2 n = a\left(d^2 + mn\right) \quad \blacksquare">$m + n = a$.</Step>
+</Proof>
+</Property>
+
+<Remark kind="special">$m = n = \tfrac{a}{2}$-ზე სტიუარტის თეორემა მედიანის სიგრძის ფორმულას იძლევა. ბისექტრისისთვის ($\tfrac{m}{n} = \tfrac{c}{b}$) მიიღება $l_a^2 = bc - mn$.</Remark>
 
 <Property id="incenter" title="სამკუთხედის ბისექტრისები ერთ წერტილში იკვეთება — ჩახაზული წრეწირის ცენტრში" why="ბისექტრისის ყოველი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული.">
 <Proof given="$I$ — $\angle A$ და $\angle B$ ბისექტრისების გადაკვეთა" prove="$I$ ძევს $\angle C$-ს ბისექტრისაზეც და ყველა გვერდიდან თანაბრადაა დაშორებული">

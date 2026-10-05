@@ -1,0 +1,91 @@
+---
+title: კუთხეები და მონაკვეთები წრეწირში
+slug: circle-angles
+subject: geometry
+section: circles
+order: 27
+summary: მხებითა და ქორდით შედგენილი კუთხე, კუთხეები ქორდებსა და მკვეთებს შორის, ქორდებისა და მკვეთების მონაკვეთების ნამრავლები.
+tags: [მხები, ქორდა, მკვეთი, რკალი, მონაკვეთების ნამრავლი]
+prerequisites: [inscribed-angle, similarity]
+status: draft
+figure: circle-chords
+figures: [circle-secants]
+---
+
+<Definition>აქ ყველა კუთხე რკალებით გამოისახება: ${\smile}AB$ რკალის გრადუსული ზომაა, ანუ მასზე დაყრდნობილი ცენტრალური კუთხე. ძირითადი იარაღი ჩახაზული კუთხეა — ის რკალის ნახევარია.</Definition>
+
+<Formulas>
+<Formula id="tangent-chord-formula" name="მხებითა და ქორდით შედგენილი კუთხე" tex="\angle XAB = \tfrac12 {\smile}AB" proof="tangent-chord" />
+<Formula id="chords-angle-formula" name="კუთხე ორ ქორდას შორის" tex="\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right)" live="∠AEB" proof="chords-angle" />
+<Formula id="secants-angle-formula" name="კუთხე ორ მკვეთს შორის" tex="\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right)" proof="secants-angle" />
+<Formula id="chords-product-formula" name="ქორდების მონაკვეთები" tex="AE \cdot EC = BE \cdot ED" live="AE·EC" proof="intersecting-chords" />
+<Formula id="secants-product-formula" name="ორი მკვეთი ერთი წერტილიდან" tex="PA \cdot PB = PC \cdot PD" proof="secant-secant" />
+<Formula id="tangent-secant-formula" name="მხები და მკვეთი ერთი წერტილიდან" tex="PT^2 = PA \cdot PB" proof="tangent-secant" />
+</Formulas>
+
+<Properties title="კუთხეები">
+
+<Property id="tangent-chord" title="მხებითა და ქორდით შედგენილი კუთხე მის შიგნით მდებარე რკალის ნახევარია" why="მხები რადიუსის მართობია, $\triangle OAB$ კი ტოლფერდაა.">
+<Proof given="$AX$ — მხები $A$ წერტილში, $AB$ — ქორდა" prove="$\angle XAB = \tfrac12 {\smile}AB$">
+<Step show="line:AX X AB" hl="<XAB arc:OAB">კუთხე მხებსა $AX$-სა და ქორდა $AB$-ს შორის; მის შიგნით $AB$ რკალია.</Step>
+<Step show="OA OB" hl="OAB" tex="\angle OAB = 90^\circ - \tfrac12\angle AOB">$\triangle OAB$ ტოლფერდაა: $\angle OAB = \tfrac12(180^\circ - \angle AOB)$.</Step>
+<Step hl="<OAX" tex="\angle XAB = \tfrac12\angle AOB = \tfrac12 {\smile}AB \quad \blacksquare">მხები რადიუსის მართობია, ამიტომ $\angle XAB = 90^\circ - \angle OAB$.</Step>
+</Proof>
+</Property>
+
+<Property id="chords-angle" title="ორ გადამკვეთ ქორდას შორის კუთხე მასა და მის ვერტიკალურ კუთხეში მოქცეული რკალების ჯამის ნახევარია" why="ეს კუთხე სამკუთხედის გარე კუთხეა, რომლის ორი შიგა კუთხე ჩახაზულია.">
+<Proof given="ქორდები $AC$ და $BD$ იკვეთება $E$-ში" prove="$\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right)$">
+<Step hl="<AEB arc:OAB arc:OCD">$\angle AEB$ და მისი ვერტიკალური $\angle CED$ ეყრდნობა $AB$ და $CD$ რკალებს.</Step>
+<Step show="BC" hl="BEC" tex="\angle AEB = \angle EBC + \angle ECB">$\angle AEB$ — $\triangle BEC$-ის გარე კუთხე.</Step>
+<Step hl="<DBC <ACB" tex="\begin{gathered} \angle DBC = \tfrac12 {\smile}CD \\ \angle ACB = \tfrac12 {\smile}AB \end{gathered}">ჩახაზული კუთხეები.</Step>
+<Step tex="\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right) \quad \blacksquare">შევკრიბოთ.</Step>
+</Proof>
+</Property>
+
+<Property id="secants-angle" title="წრეწირის გარეთ მდებარე წერტილიდან გავლებულ ორ მკვეთს შორის კუთხე მათ შორის მოქცეული რკალების სხვაობის ნახევარია" why="ახლო რკალზე დაყრდნობილი ჩახაზული კუთხე გამოაკლდება შორეულზე დაყრდნობილს.">
+<Proof figure="circle-secants" given="$PAB$ და $PCD$ — მკვეთები, $A$ და $C$ — ახლო წერტილები" prove="$\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right)$">
+<Step hl="<BPD arc:ODB arc:OAC">$P$-დან ჩანს შორეული $BD$ და ახლო $AC$ რკალი.</Step>
+<Step show="AD" hl="PAD" tex="\angle BAD = \angle APD + \angle ADP">$\angle BAD$ — $\triangle PAD$-ის გარე კუთხე.</Step>
+<Step hl="<BAD <ADC" tex="\begin{gathered} \angle BAD = \tfrac12 {\smile}BD \\ \angle ADC = \tfrac12 {\smile}AC \end{gathered}">ჩახაზული კუთხეები.</Step>
+<Step tex="\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right) \quad \blacksquare">$\angle APD = \angle BAD - \angle ADP$.</Step>
+</Proof>
+</Property>
+
+<Remark>იგივე წესი მუშაობს მხებისთვისაც: მხებსა და მკვეთს, ან ორ მხებს შორის კუთხე მათ შორის მოქცეული რკალების სხვაობის ნახევარია.</Remark>
+
+</Properties>
+
+<Properties title="მონაკვეთები">
+
+<Property id="intersecting-chords" title="თუ ორი ქორდა იკვეთება, ერთის მონაკვეთების ნამრავლი მეორის მონაკვეთების ნამრავლის ტოლია" why="ქორდების ბოლოების შეერთება ორ მსგავს სამკუთხედს იძლევა.">
+<Proof given="ქორდები $AC$ და $BD$ იკვეთება $E$-ში" prove="$AE \cdot EC = BE \cdot ED$">
+<Step hl="AE EC BE ED">ქორდები $AC$ და $BD$ $E$-ში იკვეთება.</Step>
+<Step show="AD BC" hl="<DAC=<DBC" tex="\angle DAE = \angle CBE">ორივე $CD$ რკალს ეყრდნობა.</Step>
+<Step hl="AED BEC" tex="\triangle AED \sim \triangle BEC">$\angle AED = \angle BEC$ (ვერტიკალური) — ორი კუთხით.</Step>
+<Step tex="\frac{AE}{BE} = \frac{ED}{EC} \;\Rightarrow\; AE \cdot EC = BE \cdot ED \quad \blacksquare">შესაბამისი გვერდების შეფარდებები.</Step>
+</Proof>
+</Property>
+
+<Property id="secant-secant" title="ერთი წერტილიდან გავლებული ორი მკვეთისთვის $PA \cdot PB = PC \cdot PD$" why="იგივე მსგავსება, ოღონდ წერტილი წრეწირის გარეთაა.">
+<Proof figure="circle-secants" given="$PAB$ და $PCD$ — მკვეთები" prove="$PA \cdot PB = PC \cdot PD$">
+<Step hl="PA PB PC PD">ორი მკვეთი $P$-დან: $PAB$ და $PCD$.</Step>
+<Step show="AD CB" hl="<PDA=<PBC" tex="\angle PDA = \angle PBC">ორივე $AC$ რკალს ეყრდნობა.</Step>
+<Step hl="PAD PCB" tex="\triangle PAD \sim \triangle PCB">$\angle P$ საერთოა — ორი კუთხით.</Step>
+<Step tex="\frac{PA}{PC} = \frac{PD}{PB} \;\Rightarrow\; PA \cdot PB = PC \cdot PD \quad \blacksquare">შესაბამისი გვერდების შეფარდებები.</Step>
+</Proof>
+</Property>
+
+<Property id="tangent-secant" title="ერთი წერტილიდან გავლებული მხებისა და მკვეთისთვის $PT^2 = PA \cdot PB$" why="მხებითა და ქორდით შედგენილი კუთხე ჩახაზული კუთხის ტოლია — ისევ მსგავსი სამკუთხედები.">
+<Proof figure="circle-secants" given="$PT$ — მხები, $PAB$ — მკვეთი" prove="$PT^2 = PA \cdot PB$">
+<Step show="TA TB" hl="PT PA PB">მხები $PT$ და მკვეთი $PAB$.</Step>
+<Step hl="<PTA=<TBA arc:OAT" tex="\angle PTA = \tfrac12 {\smile}AT = \angle TBA">მხებითა და ქორდით შედგენილი კუთხე (პირველი თვისება) და ჩახაზული კუთხე ერთსა და იმავე რკალზე.</Step>
+<Step hl="PTA PBT" tex="\triangle PTA \sim \triangle PBT">$\angle P$ საერთოა — ორი კუთხით.</Step>
+<Step tex="\frac{PT}{PB} = \frac{PA}{PT} \;\Rightarrow\; PT^2 = PA \cdot PB \quad \blacksquare">შესაბამისი გვერდების შეფარდებები.</Step>
+</Proof>
+</Property>
+
+<Remark>სამივე ერთი ფაქტია: თუ $P$-ზე გამავალი წრფე წრეწირს $A$ და $B$ წერტილებში კვეთს, ნამრავლი $PA \cdot PB$ წრფის არჩევაზე არ არის დამოკიდებული და $|OP^2 - R^2|$-ის ტოლია.</Remark>
+
+</Properties>
+
+<Remark kind="mistake">$PA \cdot PB = PC \cdot PD$-ში ყველა მონაკვეთი $P$-დან იზომება: $PB$ მთელი მკვეთია და არა მისი შიგა ნაწილი $AB$.</Remark>

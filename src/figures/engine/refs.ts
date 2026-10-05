@@ -3,6 +3,7 @@
 //
 //   A          point              AB        segment          ABC…   polygon (3+ points)
 //   line:AB    full line          ray:AB    ray from A        (OA)   circle, centre O through A
+//   arc:OAB    arc of the circle centred at O (radius OA), counter-clockwise from A to B
 //   <ABC       angle at B         <A        interior angle of the base polygon at A
 //                                           (drawn as a square mark when it is 90°)
 //   AB=CD      equal-length ticks <A=<C     equal-angle arcs  AB||CD parallel arrows
@@ -21,6 +22,7 @@ export type Ref =
   | { k: 'eqang'; angs: Ang[] }
   | { k: 'par'; segs: Seg[] }
   | { k: 'circle'; c: string; p: string }
+  | { k: 'arc'; c: string; a: string; b: string }
   | { k: 'dim'; s: Seg; sym?: string };
 
 const NAME = /[A-Z][0-9']*/y;
@@ -53,8 +55,13 @@ function ang(s: string): Ang {
 
 export function parseRef(tok: string): Ref {
   let m: RegExpMatchArray | null;
-  if ((m = tok.match(/^\|([^|]+)\|([a-zα-ω]\w*)?$/))) return { k: 'dim', s: seg(m[1]!), ...(m[2] ? { sym: m[2] } : {}) };
+  if ((m = tok.match(/^\|([^|]+)\|([A-Za-zα-ω]\w*)?$/))) return { k: 'dim', s: seg(m[1]!), ...(m[2] ? { sym: m[2] } : {}) };
   if ((m = tok.match(/^(line|ray):(.+)$/))) return { k: m[1] as 'line' | 'ray', s: seg(m[2]!) };
+  if ((m = tok.match(/^arc:(.+)$/))) {
+    const n = names(m[1]!);
+    if (n.length !== 3) throw new Error(`"${tok}": an arc is arc:OAB (centre, from, to)`);
+    return { k: 'arc', c: n[0]!, a: n[1]!, b: n[2]! };
+  }
   if ((m = tok.match(/^\(([^)]+)\)$/))) { const [c, p] = seg(m[1]!); return { k: 'circle', c, p }; }
   if (tok.includes('||')) return { k: 'par', segs: tok.split('||').map(seg) };
   if (tok.includes('=')) {
@@ -81,5 +88,6 @@ export function refPoints(r: Ref): string[] {
     case 'eqseg': case 'par': return r.segs.flat();
     case 'eqang': return r.angs.flatMap(angPts);
     case 'circle': return [r.c, r.p];
+    case 'arc': return [r.c, r.a, r.b];
   }
 }

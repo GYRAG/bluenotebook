@@ -31,6 +31,14 @@ export function renderScene(s: Scene): string {
     if (obstacle) segs.push([a, b]);
     return `<line class="${c}" x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}"/>`;
   };
+  /** Curves are label obstacles too: sampled as short chords (maths angles, counter-clockwise). */
+  const curve = (C: V, R: number, a0: number, d: number) => {
+    const n = Math.max(4, Math.ceil(Math.abs(d) / (Math.PI / 16)));
+    for (let i = 0; i < n; i++) {
+      const t1 = a0 + (d * i) / n, t2 = a0 + (d * (i + 1)) / n;
+      segs.push([[C[0] + R * Math.cos(t1), C[1] - R * Math.sin(t1)], [C[0] + R * Math.cos(t2), C[1] - R * Math.sin(t2)]]);
+    }
+  };
   const text = (p: V, t: string, c: string, extra = '') => `<text class="${c}" x="${f(p[0])}" y="${f(p[1])}"${extra}>${t}</text>`;
   const textBox = (p: V, chars: number, h = 18): Box => ({ x0: p[0] - chars * 4.2 - 2, x1: p[0] + chars * 4.2 + 2, y0: p[1] - h / 2, y1: p[1] + h / 2 });
 
@@ -140,6 +148,18 @@ export function renderScene(s: Scene): string {
           const C = P(r.c), R = dist(C, P(r.p));
           labelled.add(r.c);
           lines += `<circle class="${c === 'base' ? 'base' : c}" cx="${f(C[0])}" cy="${f(C[1])}" r="${f(R)}" fill="none"/>`;
+          curve(C, R, 0, 2 * Math.PI);
+          break;
+        }
+        case 'arc': { // counter-clockwise on the page from a to b (the page shows the maths orientation)
+          const C = P(r.c), A = P(r.a), R = dist(C, A);
+          const a0 = Math.atan2(-(A[1] - C[1]), A[0] - C[0]), B = P(r.b);
+          let d = Math.atan2(-(B[1] - C[1]), B[0] - C[0]) - a0;
+          while (d <= 0) d += 2 * Math.PI;
+          const E: V = [C[0] + R * Math.cos(a0 + d), C[1] - R * Math.sin(a0 + d)];
+          labelled.add(r.a); labelled.add(r.b);
+          lines += `<path class="${c === 'base' ? 'base' : c}" d="M${f(A[0])} ${f(A[1])}A${f(R)} ${f(R)} 0 ${d > Math.PI ? 1 : 0} 0 ${f(E[0])} ${f(E[1])}" fill="none"/>`;
+          curve(C, R, a0, d);
           break;
         }
         case 'dim': dims += dimension(r.s, r.sym); break;

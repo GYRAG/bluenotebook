@@ -33,7 +33,7 @@ Status key: ✓ covered · ◐ partly · ✗ missing. Every new property gets a 
 
 ## Order of work
 
-**C1 — niche formulas on existing pages** ✓ done (Stewart skipped: rarely examined)
+**C1 — niche formulas on existing pages** ✓ done
 - Trapezoid: segment joining diagonal midpoints (a − b)/2; isosceles: leg projection (a − b)/2, diagonal
   projection (a + b)/2; perpendicular diagonals ⇒ h = (a + b)/2, S = h²; S_AOB = S_COD, S_AOB² = S_AOD·S_BOC;
   tangential: h = 2r, isosceles tangential h² = ab; leg-angle bisectors meet at 90° on the midline.
@@ -43,7 +43,7 @@ Status key: ✓ covered · ◐ partly · ✗ missing. Every new property gets a 
   ∠BHC = 180° − A, Stewart.
 - Right triangle: r = (a + b − c)/2, R = c/2, h = ab/c, h² = pq. Equilateral: R = 2r = a/√3.
 
-**C2 — circle (section „წრეწირი“)**: circle, chord, tangent · central and inscribed angles · angles between
+**C2 — circle (section „წრეწირი“)** ✓ done (4 topics + Stewart added to C1): circle, chord, tangent · central and inscribed angles · angles between
 chords/secants/tangents + chord·chord, secant·secant, tangent² · circumference, arc, sector, segment, two circles.
 
 **C3** — polygons, regular polygons, right-triangle trigonometry (§17), Thales and proportional segments,
