@@ -11,7 +11,7 @@
     { "ka": "ფუძე", "en": "base" },
     { "ka": "ფერდი", "en": "leg (of a trapezoid / isosceles triangle)" },
     { "ka": "დიაგონალი", "en": "diagonal" },
-    { "ka": "საშუალო ხაზი", "en": "midline" },
+    { "ka": "შუახაზი", "en": "midline", "avoid": ["საშუალო ხაზ"] },
     { "ka": "მედიანა", "en": "median" },
     { "ka": "ბისექტრისა", "en": "angle bisector" },
     { "ka": "სიმაღლე", "en": "altitude / height" },

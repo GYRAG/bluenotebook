@@ -5,19 +5,19 @@ subject: geometry
 section: quadrilaterals
 order: 24
 summary: ოთხკუთხედი, რომლის ზუსტად ერთი წყვილი მოპირდაპირე გვერდი პარალელურია.
-tags: [ფუძე, ფერდი, საშუალო ხაზი, ტოლფერდა ტრაპეცია]
+tags: [ფუძე, ფერდი, შუახაზი, ტოლფერდა ტრაპეცია]
 prerequisites: [quadrilateral, triangle-centers, similarity]
 status: draft
 figure: trapezoid
 parent: quadrilateral
 ---
 
-<Definition>ტრაპეცია ეწოდება ოთხკუთხედს, რომლის ორი მოპირდაპირე გვერდი პარალელურია, ხოლო დანარჩენი ორი — არა. პარალელურ გვერდებს ($AD \parallel BC$) **ფუძეები** ეწოდება, დანარჩენ ორს — **ფერდები**. ფერდების შუაწერტილების შემაერთებელი მონაკვეთი ტრაპეციის **საშუალო ხაზია**.</Definition>
+<Definition>ტრაპეცია ეწოდება ოთხკუთხედს, რომლის ორი მოპირდაპირე გვერდი პარალელურია, ხოლო დანარჩენი ორი — არა. პარალელურ გვერდებს ($AD \parallel BC$) **ფუძეები** ეწოდება, დანარჩენ ორს — **ფერდები**. ფერდების შუაწერტილების შემაერთებელი მონაკვეთი ტრაპეციის **შუახაზია**.</Definition>
 
 <Remark kind="convention">ქართულ სკოლაში ტრაპეციას ზუსტად ერთი წყვილი პარალელური გვერდი აქვს, ამიტომ პარალელოგრამი ტრაპეცია არ არის. ზოგ სახელმძღვანელოში (განსაკუთრებით ინგლისურენოვანში) ტრაპეციად ითვლება ყველა ოთხკუთხედი, რომელსაც *ერთი მაინც* წყვილი პარალელური გვერდი აქვს — მაშინ პარალელოგრამიც ტრაპეციაა.</Remark>
 
 <Formulas>
-<Formula id="midline-formula" name="საშუალო ხაზი" tex="m = \frac{a + b}{2}" live="m" proof="midline" />
+<Formula id="midline-formula" name="შუახაზი" tex="m = \frac{a + b}{2}" live="m" proof="midline" />
 <Formula id="area-formula" name="ფართობი" tex="S = \frac{a + b}{2}\, h = m\,h" live="S" proof="area" />
 <Formula id="ratio-formula" name="დიაგონალების გადაკვეთა" tex="AO : OC = BO : OD \;\text{—}\; a : b" live="AO:OC" proof="diagonals-ratio" />
 <Formula id="segment-formula" name="მონაკვეთი დიაგონალების გადაკვეთაზე, ფუძეების პარალელური" tex="PQ = \frac{2ab}{a + b}" live="PQ" proof="segment-through-o" />
@@ -33,13 +33,13 @@ parent: quadrilateral
 </Proof>
 </Property>
 
-<Property id="midline" title="საშუალო ხაზი ფუძეების პარალელურია და მათი ჯამის ნახევრის ტოლია" why="ტრაპეცია სამკუთხედად „გადაკეთდება“, რომლის საშუალო ხაზიც იგივეა.">
+<Property id="midline" title="შუახაზი ფუძეების პარალელურია და მათი ჯამის ნახევრის ტოლია" why="ტრაპეცია სამკუთხედად „გადაკეთდება“, რომლის შუახაზიც იგივეა.">
 <Proof given="$M, N$ — $AB$ და $CD$ ფერდების შუაწერტილები" prove="$MN \parallel AD,\ MN = \tfrac{a + b}{2}$">
 <Step show="M N" hl="M N">$M$ და $N$ ფერდების შუაწერტილებია.</Step>
 <Step show="BE DE E" hl="BE">გავავლოთ $BN$ და გავაგრძელოთ, სანამ $AD$ წრფეს $E$ წერტილში არ გადაკვეთს.</Step>
 <Step hl="BCN EDN CN=DN" tex="\triangle BCN = \triangle EDN">$CN = DN$, $\angle BNC = \angle END$ (ვერტიკალური), $\angle BCN = \angle EDN$ (ჯვარედინი, $BC \parallel AE$) — სამკუთხედები ტოლია (კგკ).</Step>
 <Step hl="BN=NE BC=DE" tex="BN = NE, \qquad DE = BC = b">ტოლი სამკუთხედების შესაბამისი გვერდები.</Step>
-<Step show="MN" hl="MN ABE" tex="MN = \tfrac12 AE = \tfrac{a + b}{2} \quad \blacksquare">$MN$ შეაერთებს $\triangle ABE$-ის $AB$ და $BE$ გვერდების შუაწერტილებს — ის ამ სამკუთხედის საშუალო ხაზია; $AE = AD + DE = a + b$.</Step>
+<Step show="MN" hl="MN ABE" tex="MN = \tfrac12 AE = \tfrac{a + b}{2} \quad \blacksquare">$MN$ შეაერთებს $\triangle ABE$-ის $AB$ და $BE$ გვერდების შუაწერტილებს — ის ამ სამკუთხედის შუახაზია; $AE = AD + DE = a + b$.</Step>
 </Proof>
 </Property>
 
@@ -71,7 +71,7 @@ parent: quadrilateral
 
 </Properties>
 
-<Remark>$\tfrac{2ab}{a+b}$ არის $a$ და $b$ რიცხვების საშუალო ჰარმონიული. ის ყოველთვის საშუალო ხაზზე ($\tfrac{a+b}{2}$) ნაკლებია, თუ $a \ne b$.</Remark>
+<Remark>$\tfrac{2ab}{a+b}$ არის $a$ და $b$ რიცხვების საშუალო ჰარმონიული. ის ყოველთვის შუახაზზე ($\tfrac{a+b}{2}$) ნაკლებია, თუ $a \ne b$.</Remark>
 
 <Properties title="ტოლფერდა ტრაპეცია (ფერდები ტოლია)">
 

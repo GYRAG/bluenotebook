@@ -31,7 +31,7 @@ export default figure({
   boundsOf: ['A', 'B', 'C'], // O, H and A3B3C3 may leave the page for extreme shapes; proofs pick fitting ones
   dims: '<A <B <C',
   toggles: {
-    'საშუალო ხაზი': 'B1C1 B1 C1',
+    'შუახაზი': 'B1C1 B1 C1',
     'მედიანები': 'AA1 BB1 CC1 G',
     'ბისექტრისები': 'AL BI CI I',
     'ჩახაზული წრე': '(IT) I T',

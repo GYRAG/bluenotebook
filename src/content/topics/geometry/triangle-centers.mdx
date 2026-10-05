@@ -4,25 +4,25 @@ slug: triangle-centers
 subject: geometry
 section: triangles
 order: 13
-summary: საშუალო ხაზი, მედიანები, ბისექტრისები, შუამართობები, სიმაღლეები — და სად იკვეთება ისინი.
-tags: [მედიანა, ბისექტრისა, სიმაღლე, შუამართობი, საშუალო ხაზი, ჩახაზული წრე, შემოხაზული წრე]
+summary: შუახაზი, მედიანები, ბისექტრისები, შუამართობები, სიმაღლეები — და სად იკვეთება ისინი.
+tags: [მედიანა, ბისექტრისა, სიმაღლე, შუამართობი, შუახაზი, ჩახაზული წრე, შემოხაზული წრე]
 prerequisites: [triangle, isosceles-triangle, similarity]
 status: draft
 figure: triangle-centers
 parent: triangle
 ---
 
-<Definition>**მედიანა** აერთებს წვეროს მოპირდაპირე გვერდის შუაწერტილთან; **ბისექტრისა** ყოფს კუთხეს შუაზე; **სიმაღლე** არის წვეროდან მოპირდაპირე გვერდის შემცველ წრფეზე დაშვებული მართობი; **შუამართობი** არის გვერდის შუაწერტილზე გავლებული მართობი წრფე; **საშუალო ხაზი** აერთებს ორი გვერდის შუაწერტილებს.</Definition>
+<Definition>**მედიანა** აერთებს წვეროს მოპირდაპირე გვერდის შუაწერტილთან; **ბისექტრისა** ყოფს კუთხეს შუაზე; **სიმაღლე** არის წვეროდან მოპირდაპირე გვერდის შემცველ წრფეზე დაშვებული მართობი; **შუამართობი** არის გვერდის შუაწერტილზე გავლებული მართობი წრფე; **შუახაზი** აერთებს ორი გვერდის შუაწერტილებს.</Definition>
 
 <Formulas>
-<Formula id="midline-formula" name="საშუალო ხაზი" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC" proof="midline" />
+<Formula id="midline-formula" name="შუახაზი" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC" proof="midline" />
 <Formula id="medians-formula" name="მედიანების გადაკვეთა" tex="AG : GA_1 = 2 : 1" live="AG:GA₁" proof="medians" />
 <Formula id="bisector-formula" name="ბისექტრისის თვისება" tex="\frac{BL}{LC} = \frac{AB}{AC}" proof="bisector-theorem" />
 </Formulas>
 
 <Properties>
 
-<Property id="midline" title="სამკუთხედის საშუალო ხაზი მესამე გვერდის პარალელურია და მისი ნახევრის ტოლია" why="პატარა სამკუთხედი დიდის ზუსტად ორჯერ შემცირებული ასლია.">
+<Property id="midline" title="სამკუთხედის შუახაზი მესამე გვერდის პარალელურია და მისი ნახევრის ტოლია" why="პატარა სამკუთხედი დიდის ზუსტად ორჯერ შემცირებული ასლია.">
 <Proof given="$B_1, C_1$ — $AC$ და $AB$-ს შუაწერტილები" prove="$B_1C_1 \parallel BC,\ B_1C_1 = \tfrac12 BC$">
 <Step show="B1C1 B1 C1" hl="B1C1">შევაერთოთ შუაწერტილები.</Step>
 <Step hl="AC1B1 ABC" tex="\frac{AC_1}{AB} = \frac{AB_1}{AC} = \frac12">$\triangle AC_1B_1$ და $\triangle ABC$-ს საერთო $\angle A$ აქვთ, ხოლო მის მოსაზღვრე გვერდები პროპორციულია — სამკუთხედები მსგავსია.</Step>
@@ -30,10 +30,10 @@ parent: triangle
 </Proof>
 </Property>
 
-<Property id="medians" title="სამკუთხედის მედიანები ერთ წერტილში იკვეთება, რომელიც თითოეულ მედიანას წვეროდან $2 : 1$ შეფარდებით ყოფს" why="საშუალო ხაზი ორჯერ პატარა მსგავს სამკუთხედს ქმნის.">
+<Property id="medians" title="სამკუთხედის მედიანები ერთ წერტილში იკვეთება, რომელიც თითოეულ მედიანას წვეროდან $2 : 1$ შეფარდებით ყოფს" why="შუახაზი ორჯერ პატარა მსგავს სამკუთხედს ქმნის.">
 <Proof given="$A_1, B_1, C_1$ — გვერდების შუაწერტილები" prove="მედიანები იკვეთება $G$-ში, $AG : GA_1 = 2 : 1$">
 <Step show="BB1 CC1 G" hl="BB1 CC1">ორი მედიანა $BB_1$ და $CC_1$ იკვეთება $G$-ში.</Step>
-<Step show="B1C1" hl="B1C1 BC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12 BC">$B_1C_1$ საშუალო ხაზია.</Step>
+<Step show="B1C1" hl="B1C1 BC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12 BC">$B_1C_1$ შუახაზია.</Step>
 <Step hl="GB1C1 GBC" tex="\frac{GB_1}{GB} = \frac{GC_1}{GC} = \frac{B_1C_1}{BC} = \frac12">$\triangle GB_1C_1 \sim \triangle GBC$: ვერტიკალური კუთხეები $G$-სთან და ჯვარედინი კუთხეები ($B_1C_1 \parallel BC$).</Step>
 <Step show="AA1" hl="AA1">ანალოგიურად მედიანა $AA_1$ $BB_1$-ს კვეთს წერტილში, რომელიც $BB_1$-ს $B$-დან $2 : 1$ შეფარდებით ყოფს — ესაა იგივე $G$. ამიტომ სამივე მედიანა $G$-ზე გადის. ∎</Step>
 </Proof>

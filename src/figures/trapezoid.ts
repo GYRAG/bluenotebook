@@ -29,7 +29,7 @@ export default figure({
   dims: '|AD|a |BC|b <A <D',
   toggles: {
     'სიმაღლე': 'BH <BHD',
-    'საშუალო ხაზი': 'MN M N',
+    'შუახაზი': 'MN M N',
     'დიაგონალები': 'AC BD O',
     'მონაკვეთი O-ზე': 'PQ P Q O',
   },
