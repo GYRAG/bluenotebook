@@ -33,7 +33,7 @@ Status key: ✓ covered · ◐ partly · ✗ missing. Every new property gets a 
 
 ## Order of work
 
-**C1 — niche formulas on existing pages** (no new pages)
+**C1 — niche formulas on existing pages** ✓ done (Stewart skipped: rarely examined)
 - Trapezoid: segment joining diagonal midpoints (a − b)/2; isosceles: leg projection (a − b)/2, diagonal
   projection (a + b)/2; perpendicular diagonals ⇒ h = (a + b)/2, S = h²; S_AOB = S_COD, S_AOB² = S_AOD·S_BOC;
   tangential: h = 2r, isosceles tangential h² = ab; leg-angle bisectors meet at 90° on the midline.
