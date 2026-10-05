@@ -1,0 +1,15 @@
+---
+import { tex } from '@/lib/math';
+
+// One proof step: a sentence, an optional KaTeX line, and what the figure shows.
+// show: constructions that stay drawn from here on (dashed) · hl: what this step points at
+// set: figure parameters for this step (e.g. {{ alpha: 65 }}) — all in the ref grammar.
+interface Props { show?: string; hl?: string; set?: Record<string, number>; tex?: string }
+const { show, hl, set, tex: src } = Astro.props;
+---
+<li class="step" data-show={show} data-hl={hl} data-set={set && JSON.stringify(set)}>
+  <div class="step-b">
+    <div class="step-t"><slot /></div>
+    {src && <div class="step-tex" set:html={tex(src, true)} />}
+  </div>
+</li>

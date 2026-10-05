@@ -1,0 +1,20 @@
+---
+import Icon from '../Icon.astro';
+import { md } from '@/lib/math';
+
+interface Props { given: string; prove: string }
+const { given, prove } = Astro.props;
+---
+<div class="proof-body">
+  <dl class="given">
+    <div><dt>მოც.</dt><dd set:html={md(given)} /></div>
+    <div><dt>დას.</dt><dd set:html={md(prove)} /></div>
+  </dl>
+  <ol class="steps"><slot /></ol>
+  <div class="stepper">
+    <button class="sbtn" type="button" data-step="prev" aria-label="წინა ნაბიჯი"><Icon name="left" /></button>
+    <div class="dots"></div>
+    <span class="count" aria-live="polite"></span>
+    <button class="sbtn sbtn-next" type="button" data-step="next" aria-label="შემდეგი ნაბიჯი"><Icon name="right" /></button>
+  </div>
+</div>

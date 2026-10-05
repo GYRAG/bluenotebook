@@ -5,10 +5,135 @@ subject: geometry
 section: quadrilaterals
 order: 20
 summary: ოთხკუთხედი, რომლის მოპირდაპირე გვერდები წყვილ-წყვილად პარალელურია.
+tags: [ოთხკუთხედი, დიაგონალი, ფართობი]
+prerequisites: [quadrilateral]
 status: draft
 figure: parallelogram
 parent: quadrilateral
 ---
 
-პარალელოგრამი არის ოთხკუთხედი, რომლის მოპირდაპირე გვერდები წყვილ-წყვილად პარალელურია.
-პარალელოგრამის დიაგონალები გადაკვეთის წერტილით შუაზე იყოფა: $AO = OC$.
+<Definition>პარალელოგრამი ეწოდება ოთხკუთხედს, რომლის მოპირდაპირე გვერდები წყვილ-წყვილად პარალელურია: $AB \parallel CD$ და $BC \parallel AD$.</Definition>
+
+<Formulas>
+<Formula id="area-height" name="ფართობი — გვერდი და სიმაღლე" tex="S = a\,h_a" live="S" proof="area-base-height" />
+<Formula id="area-two-sides" name="ფართობი — ორი გვერდი და კუთხე" tex="S = ab\sin\alpha" live="S" proof="area-sine" />
+<Formula id="height" name="სიმაღლე" tex="h_a = b\sin\alpha" live="hₐ" proof="area-sine" />
+<Formula id="perimeter" name="პერიმეტრი" tex="P = 2(a+b)" live="P" proof="opposite-sides-equal" />
+<Formula id="adjacent-angles" name="მეზობელი კუთხეები" tex="\alpha + \beta = 180^\circ" live="β" proof="adjacent-angles-sum" />
+<Formula id="diagonals" name="დიაგონალები" tex="d_1^2 + d_2^2 = 2\left(a^2 + b^2\right)" proof="diagonal-squares" />
+</Formulas>
+
+<Properties>
+
+<Property id="opposite-sides-equal" title="მოპირდაპირე გვერდები ტოლია" why="დიაგონალი პარალელოგრამს ორ ტოლ სამკუთხედად ყოფს.">
+<Proof given="$ABCD$ — პარალელოგრამი" prove="$AB = CD,\ BC = DA$">
+<Step show="AC" hl="AC">გავავლოთ დიაგონალი $AC$. ის პარალელოგრამს ორ სამკუთხედად ყოფს: $ABC$ და $CDA$.</Step>
+<Step hl="<BAC=<DCA AB||CD" tex="\angle BAC = \angle DCA">$AB \parallel CD$, ხოლო $AC$ მკვეთია, ამიტომ შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="<BCA=<DAC BC||AD" tex="\angle BCA = \angle DAC">$BC \parallel AD$ და $AC$ ისევ მკვეთია — კიდევ ერთი წყვილი ტოლი ჯვარედინი კუთხე.</Step>
+<Step hl="ABC CDA" tex="\triangle ABC = \triangle CDA">$AC$ ორივე სამკუთხედის საერთო გვერდია, ამიტომ სამკუთხედები ტოლია გვერდისა და მასთან მდებარე ორი კუთხის მიხედვით (კგკ).</Step>
+<Step hl="AB=CD BC=DA" tex="AB = CD,\qquad BC = DA \quad \blacksquare">ტოლ სამკუთხედებში შესაბამისი გვერდებიც ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="opposite-angles-equal" title="მოპირდაპირე კუთხეები ტოლია" why="იგივე ორი ტოლი სამკუთხედი.">
+<Proof given="$ABCD$ — პარალელოგრამი" prove="$\angle A = \angle C,\ \angle B = \angle D$">
+<Step show="AC" hl="ABC CDA" tex="\triangle ABC = \triangle CDA">პირველი თვისების დამტკიცებაში ვნახეთ, რომ დიაგონალი $AC$ პარალელოგრამს ორ ტოლ სამკუთხედად ყოფს.</Step>
+<Step hl="<B=<D" tex="\angle B = \angle D">ტოლ სამკუთხედებში $AC$-ს პირდაპირ მდებარე კუთხეები ტოლია.</Step>
+<Step hl="<BAC=<DCA <DAC=<BCA" tex="\begin{aligned}\angle A &= \angle BAC + \angle DAC \\ &= \angle DCA + \angle BCA = \angle C \quad \blacksquare\end{aligned}">$\angle A$ და $\angle C$ თითოეული ორი ნაწილისგან შედგება, ხოლო ეს ნაწილები წყვილ-წყვილად ტოლი ჯვარედინი კუთხეებია.</Step>
+</Proof>
+</Property>
+
+<Property id="adjacent-angles-sum" title="ერთ გვერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია" why="ეს შიგა ცალმხრივი კუთხეებია პარალელურ წრფეებთან.">
+<Proof given="$ABCD$ — პარალელოგრამი" prove="$\angle A + \angle B = 180^\circ$">
+<Step hl="AD||BC AB">$AD \parallel BC$, ხოლო $AB$ მათი მკვეთია.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ \quad \blacksquare">$\angle A$ და $\angle B$ შიგა ცალმხრივი კუთხეებია, ხოლო პარალელური წრფეების შიგა ცალმხრივი კუთხეების ჯამი $180^\circ$-ია.</Step>
+</Proof>
+</Property>
+
+<Remark>იგივე სამართლიანია ნებისმიერი გვერდისთვის: $\angle B + \angle C = \angle C + \angle D = \angle D + \angle A = 180^\circ$.</Remark>
+
+<Property id="diagonals-bisect" title="დიაგონალები გადაკვეთის წერტილით შუაზე იყოფა" why="პარალელოგრამი $O$-ს გარშემო $180^\circ$-ით მობრუნებისას თავის თავს ემთხვევა.">
+<Proof given="$ABCD$ — პარალელოგრამი, $O = AC \cap BD$" prove="$AO = OC,\ BO = OD$">
+<Step show="AC BD O" hl="AC BD">გავავლოთ დიაგონალები $AC$ და $BD$; მათი გადაკვეთის წერტილი აღვნიშნოთ $O$-თი.</Step>
+<Step hl="AB=CD" tex="AB = CD">პარალელოგრამის მოპირდაპირე გვერდები ტოლია (თვისება 1).</Step>
+<Step hl="<BAO=<DCO <ABO=<CDO" tex="\begin{gathered}\angle BAO = \angle DCO \\ \angle ABO = \angle CDO\end{gathered}">$AB \parallel CD$, ხოლო $AC$ და $BD$ მკვეთებია, ამიტომ შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="ABO CDO" tex="\triangle ABO = \triangle CDO">სამკუთხედები ტოლია გვერდისა და მასთან მდებარე ორი კუთხის მიხედვით (კგკ).</Step>
+<Step hl="AO=OC BO=OD" tex="AO = OC,\qquad BO = OD \quad \blacksquare">ტოლ სამკუთხედებში ტოლი კუთხეების პირდაპირ მდებარე გვერდები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-squares" title="დიაგონალების კვადრატების ჯამი ოთხივე გვერდის კვადრატების ჯამის ტოლია" why="კოსინუსების თეორემა ორჯერ: მეზობელი კუთხეების კოსინუსები ერთმანეთის საპირისპიროა.">
+<Proof given="$AB = a,\ AD = b,\ \angle A = \alpha$" prove="$AC^2 + BD^2 = 2(a^2 + b^2)$">
+<Step show="BD" hl="ABD" tex="BD^2 = a^2 + b^2 - 2ab\cos\alpha">$\triangle ABD$-ში კოსინუსების თეორემით:</Step>
+<Step show="AC" hl="ABC" tex="AC^2 = a^2 + b^2 - 2ab\cos(180^\circ - \alpha)">$\triangle ABC$-ში $BC = b$ (თვისება 1), ხოლო $\angle B = 180^\circ - \alpha$ (თვისება 3):</Step>
+<Step tex="AC^2 = a^2 + b^2 + 2ab\cos\alpha">რადგან $\cos(180^\circ - \alpha) = -\cos\alpha$:</Step>
+<Step hl="AC BD" tex="AC^2 + BD^2 = 2\left(a^2 + b^2\right) \quad \blacksquare">შევკრიბოთ ორი ტოლობა — $2ab\cos\alpha$ ბათილდება.</Step>
+</Proof>
+</Property>
+
+<Property id="area-base-height" title="ფართობი გვერდისა და მასზე დაშვებული სიმაღლის ნამრავლის ტოლია" why="ჩამოჭერი სამკუთხედი ერთი მხრიდან, მიადგი მეორეს — მიიღებ მართკუთხედს.">
+<Proof given="$ABCD$ — პარალელოგრამი, $DH \perp AB$" prove="$S = AB \cdot DH = a\,h_a$">
+<Step set={{ alpha: 65 }} show="DH <DHB" hl="DH">$D$-დან $AB$-ზე დავუშვათ სიმაღლე $DH$.</Step>
+<Step show="BK CK <CKA" hl="AHD BKC">$C$-დან $AB$-ის გაგრძელებაზე დავუშვათ სიმაღლე $CK$. მივიღეთ ორი მართკუთხა სამკუთხედი: $AHD$ და $BKC$.</Step>
+<Step hl="AD=BC DH=CK" tex="\triangle AHD = \triangle BKC">$AD = BC$ (თვისება 1), ხოლო $DH = CK$ — ეს პარალელურ წრფეებს შორის მანძილია. სამკუთხედები ტოლია ჰიპოტენუზისა და კათეტის მიხედვით.</Step>
+<Step hl="HKCD" tex="S_{ABCD} = S_{HKCD} = a\,h_a \quad \blacksquare">ჩამოვჭრათ $\triangle AHD$ და მივადგათ $\triangle BKC$-ს ადგილას: პარალელოგრამი გადაიქცევა $HKCD$ მართკუთხედად, რომლის გვერდია $HK = AB = a$.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="ფართობი ორი მეზობელი გვერდისა და მათ შორის კუთხის სინუსის ნამრავლია" why="სიმაღლე უდრის $b\sin\alpha$-ს.">
+<Proof given="$AB = a,\ AD = b,\ \angle A = \alpha$" prove="$S = ab\sin\alpha$">
+<Step set={{ alpha: 65 }} show="DH <DHB" hl="AHD" tex="h_a = DH = b\sin\alpha">$\triangle AHD$ მართკუთხაა: $AD = b$ ჰიპოტენუზაა, $DH$ — $\alpha$ კუთხის პირდაპირ მდებარე კათეტი.</Step>
+<Step hl="DH AB" tex="S = a\,h_a = ab\sin\alpha \quad \blacksquare">ჩავსვათ ფორმულაში $S = a\,h_a$ (თვისება 6).</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>თუ $\alpha$ ბლაგვია, სიმაღლის ფუძე $AB$-ის გაგრძელებაზე ხვდება, მაგრამ ფორმულა იგივე რჩება, რადგან $\sin(180^\circ - \alpha) = \sin\alpha$.</Remark>
+
+<Properties title="ნიშნები — როდის არის ოთხკუთხედი პარალელოგრამი">
+
+<Property id="criterion-sides" kind="criterion" title="თუ ოთხკუთხედის მოპირდაპირე გვერდები წყვილ-წყვილად ტოლია, ის პარალელოგრამია" why="სამი გვერდით ტოლი სამკუთხედები ტოლ ჯვარედინ კუთხეებს იძლევა.">
+<Proof given="$ABCD$ — ოთხკუთხედი, $AB = CD,\ BC = DA$" prove="$ABCD$ — პარალელოგრამი">
+<Step show="AC" hl="AC">გავავლოთ დიაგონალი $AC$.</Step>
+<Step hl="AB=CD BC=DA ABC CDA" tex="\triangle ABC = \triangle CDA">$AB = CD$, $BC = DA$ და $AC$ საერთოა, ამიტომ სამკუთხედები ტოლია სამი გვერდის მიხედვით (გგგ).</Step>
+<Step hl="<BAC=<DCA" tex="AB \parallel CD">შესაბამისი კუთხეები ტოლია: $\angle BAC = \angle DCA$. ეს შიგა ჯვარედინი კუთხეებია $AB$ და $CD$ წრფეებისა და $AC$ მკვეთისთვის.</Step>
+<Step hl="<BCA=<DAC" tex="BC \parallel AD">ასევე $\angle BCA = \angle DAC$.</Step>
+<Step hl="AB||CD BC||AD">ორივე წყვილი მოპირდაპირე გვერდი პარალელურია, ე.ი. $ABCD$ პარალელოგრამია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-equal-parallel" kind="criterion" title="თუ ოთხკუთხედის ორი მოპირდაპირე გვერდი ტოლი და პარალელურია, ის პარალელოგრამია" why="ორი გვერდითა და მათ შორის კუთხით ტოლი სამკუთხედები.">
+<Proof given="$ABCD$ — ოთხკუთხედი, $AB = CD,\ AB \parallel CD$" prove="$ABCD$ — პარალელოგრამი">
+<Step show="AC" hl="AC AB||CD">გავავლოთ დიაგონალი $AC$.</Step>
+<Step hl="<BAC=<DCA" tex="\angle BAC = \angle DCA">$AB \parallel CD$, ამიტომ შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="AB=CD ABC CDA" tex="\triangle ABC = \triangle CDA">$AB = CD$ და $AC$ საერთოა, ამიტომ სამკუთხედები ტოლია ორი გვერდისა და მათ შორის კუთხის მიხედვით (გკგ).</Step>
+<Step hl="<BCA=<DAC" tex="BC \parallel AD">შესაბამისი კუთხეები $\angle BCA = \angle DAC$ შიგა ჯვარედინი კუთხეებია $BC$ და $AD$ წრფეებისთვის.</Step>
+<Step hl="AB||CD BC||AD">ორივე წყვილი მოპირდაპირე გვერდი პარალელურია, ე.ი. $ABCD$ პარალელოგრამია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonals" kind="criterion" title="თუ ოთხკუთხედის დიაგონალები გადაკვეთის წერტილით შუაზე იყოფა, ის პარალელოგრამია" why="ვერტიკალური კუთხეები და ორი წყვილი ტოლი ნახევარი.">
+<Proof given="$O = AC \cap BD,\ AO = OC,\ BO = OD$" prove="$ABCD$ — პარალელოგრამი">
+<Step show="AC BD O" hl="AO=OC BO=OD">დიაგონალები $O$ წერტილში იკვეთება და შუაზე იყოფა.</Step>
+<Step hl="<AOB=<COD" tex="\angle AOB = \angle COD">ეს კუთხეები ვერტიკალურია.</Step>
+<Step hl="ABO CDO" tex="\triangle AOB = \triangle COD">სამკუთხედები ტოლია ორი გვერდისა და მათ შორის კუთხის მიხედვით (გკგ).</Step>
+<Step hl="AB=CD <BAO=<DCO" tex="AB = CD,\qquad AB \parallel CD">აქედან $AB = CD$ და $\angle BAO = \angle DCO$ — ეს შიგა ჯვარედინი კუთხეებია, ამიტომ $AB \parallel CD$.</Step>
+<Step hl="AB||CD">ორი მოპირდაპირე გვერდი ტოლი და პარალელურია, ამიტომ $ABCD$ პარალელოგრამია (წინა ნიშანი). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-angles" kind="criterion" title="თუ ოთხკუთხედის მოპირდაპირე კუთხეები წყვილ-წყვილად ტოლია, ის პარალელოგრამია" why="კუთხეების ჯამი $360^\circ$-ია, ამიტომ მეზობელი კუთხეების ჯამი $180^\circ$ გამოდის.">
+<Proof given="$\angle A = \angle C,\ \angle B = \angle D$" prove="$ABCD$ — პარალელოგრამი">
+<Step hl="<A=<C <B=<D" tex="\angle A + \angle B + \angle C + \angle D = 360^\circ">ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია.</Step>
+<Step tex="2\angle A + 2\angle B = 360^\circ \;\Rightarrow\; \angle A + \angle B = 180^\circ">ჩავსვათ $\angle C = \angle A$ და $\angle D = \angle B$.</Step>
+<Step hl="<A <B AD||BC" tex="AD \parallel BC">$\angle A$ და $\angle B$ შიგა ცალმხრივი კუთხეებია $AD$ და $BC$ წრფეებისა და $AB$ მკვეთისთვის, ხოლო მათი ჯამი $180^\circ$-ია.</Step>
+<Step hl="<A <D AB||DC" tex="AB \parallel DC">ანალოგიურად $\angle A + \angle D = \angle A + \angle B = 180^\circ$, ამიტომ $AB \parallel DC$. ორივე წყვილი პარალელურია — $ABCD$ პარალელოგრამია. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">მართკუთხედი, რომბი და კვადრატი პარალელოგრამის კერძო შემთხვევებია, ამიტომ ყველა ზემოთ ჩამოთვლილი თვისება მათთვისაც სამართლიანია.</Remark>
+
+<Remark kind="mistake">პარალელოგრამის დიაგონალები საზოგადოდ არც ტოლია, არც ურთიერთმართობი და არც კუთხეების ბისექტრისები. ტოლია მხოლოდ მართკუთხედში, ურთიერთმართობი — მხოლოდ რომბში (კვადრატში ორივე ერთად).</Remark>

@@ -1,4 +1,4 @@
-import { angleAt, area, dist, foot, intersect, mid, near, parallel, polar, rad, type V } from './engine/geom';
+import { add, angleAt, area, cross, dist, foot, intersect, mid, near, parallel, polar, rad, sub, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // The centre O stays fixed and the shape breathes around it, so the figure never drifts
@@ -15,7 +15,8 @@ export default figure({
     const d = polar(b, alpha), c: V = [(a + d[0]) / 2, d[1] / 2];
     const A: V = [-c[0], -c[1]], B: V = [a - c[0], -c[1]], D: V = [d[0] - c[0], d[1] - c[1]];
     const C: V = [B[0] + d[0], B[1] + d[1]];
-    return { A, B, C, D, O: [0, 0], H: foot(D, A, B) };
+    const H = foot(D, A, B);
+    return { A, B, C, D, O: [0, 0], H, K: add(H, sub(B, A)) }; // K: foot from C, for the area proof
   },
   drag: { B: ['a'], D: ['b', 'alpha'] },
   base: 'ABCD',
@@ -46,5 +47,33 @@ export default figure({
     'diagonal-squares': ({ A, B, C, D }) => near(dist(A, C) ** 2 + dist(B, D) ** 2, 2 * (dist(A, B) ** 2 + dist(B, C) ** 2)),
     'area-base-height': ({ A, B, C, D, H }) => near(area([A, B, C, D]), dist(A, B) * dist(D, H)),
     'area-sine': ({ A, B, C, D }, { a, b, alpha }) => near(area([A, B, C, D]), a * b * Math.sin(rad(alpha))),
+    // criteria: build a quadrilateral from the hypothesis only, then confirm it is a parallelogram
+    'criterion-sides': (_, { a, b, alpha }) => {
+      const A: V = [0, 0], B: V = [a, 0], C = add(B, polar(b, alpha));
+      const D = otherIntersection(A, dist(B, C), C, dist(A, B), B); // AD = BC, CD = AB, D across AC from B
+      return isParallelogram(A, B, C, D);
+    },
+    'criterion-equal-parallel': (_, { a, b, alpha }) => {
+      const A: V = [0, 0], B: V = [a, 0], D = polar(b, alpha), C = add(D, sub(B, A)); // DC equal and parallel to AB
+      return parallel(A, D, B, C);
+    },
+    'criterion-diagonals': (_, { a, b, alpha }) => {
+      const u = polar(a / 2, 0), v = polar(b / 2, alpha); // halves of the diagonals around O = (0, 0)
+      return isParallelogram([-u[0], -u[1]], [-v[0], -v[1]], u, v);
+    },
+    'criterion-angles': (_, { a, b, alpha }) => { // the proof's key step: a convex quadrilateral's angles sum to 360°
+      const A: V = [0, 0], B: V = [a, 0], C = add(B, polar(b * 0.8, alpha * 0.9)), D = polar(b, alpha);
+      return near(angleAt(D, A, B) + angleAt(A, B, C) + angleAt(B, C, D) + angleAt(C, D, A), 360);
+    },
   },
 });
+
+const isParallelogram = (A: V, B: V, C: V, D: V) => parallel(A, B, D, C) && parallel(A, D, B, C);
+
+/** The intersection of circles (c1, r1) and (c2, r2) on the other side of line c1c2 from `away`. */
+function otherIntersection(c1: V, r1: number, c2: V, r2: number, away: V): V {
+  const d = dist(c1, c2), x = (d * d + r1 * r1 - r2 * r2) / (2 * d), h = Math.sqrt(Math.max(0, r1 * r1 - x * x));
+  const u: V = [(c2[0] - c1[0]) / d, (c2[1] - c1[1]) / d], base = add(c1, [u[0] * x, u[1] * x]);
+  const p1 = add(base, [-u[1] * h, u[0] * h]), p2 = add(base, [u[1] * h, -u[0] * h]);
+  return Math.sign(cross(sub(c2, c1), sub(p1, c1))) !== Math.sign(cross(sub(c2, c1), sub(away, c1))) ? p1 : p2;
+}

@@ -1,0 +1,27 @@
+---
+import Icon from '../Icon.astro';
+import { md } from '@/lib/math';
+
+interface Props {
+  id: string;                              // stable deep link; also the figure's numeric check id
+  title: string;                           // the statement
+  why: string;                             // one-line intuition
+  kind?: 'property' | 'criterion' | 'converse';
+}
+const { id, title, why, kind = 'property' } = Astro.props;
+const KIND = { property: 'თვისება', criterion: 'ნიშანი', converse: 'შებრუნებული თეორემა' } as const;
+---
+<li class="prop" id={id} data-kind={kind}>
+  <button class="prop-row" type="button" aria-expanded="false" aria-controls={`${id}--proof`}>
+    <span class="prop-n" aria-hidden="true"></span>
+    <span class="prop-b"><span class="prop-t" set:html={md(title)} /><span class="prop-w" set:html={md(why)} /></span>
+    <Icon name="right" />
+  </button>
+  <div class="proof" id={`${id}--proof`} hidden>
+    <button class="back" type="button" data-proof-close><Icon name="left" /><span>ყველა თვისება</span></button>
+    <p class="proof-k">{KIND[kind]} · დამტკიცება</p>
+    <h3 class="proof-h" set:html={md(title)} />
+    <p class="why"><b>იდეა.</b> <span set:html={md(why)} /></p>
+    <slot />
+  </div>
+</li>

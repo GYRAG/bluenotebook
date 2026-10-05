@@ -1,0 +1,6 @@
+---
+interface Props { kind?: 'note' | 'special' | 'mistake' | 'convention' }
+const { kind = 'note' } = Astro.props;
+const LABEL = { note: 'შენიშვნა', special: 'კერძო შემთხვევა', mistake: 'გავრცელებული შეცდომა', convention: 'შეთანხმება' } as const;
+---
+<aside class="remark" data-kind={kind}><b class="remark-k">{LABEL[kind]}.</b> <slot /></aside>

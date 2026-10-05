@@ -73,6 +73,7 @@ export class GeoFigure extends HTMLElement {
     this.scene = scene;
     if (scene?.set) this.params = snap(this.spec, { ...this.params, ...scene.set } as Params);
     this.classList.toggle('proving', !!scene);
+    if (scene) this.querySelector<HTMLElement>('.hint')?.setAttribute('hidden', '');
     this.syncAll();
     this.schedule();
   }
@@ -139,9 +140,11 @@ export class GeoFigure extends HTMLElement {
   private updateReadouts(pts: Record<string, V>) {
     if (!this.tools || !this.spec.readouts) return;
     const ro = this.spec.readouts(pts, this.params);
-    this.tools.querySelectorAll<HTMLElement>('[data-ro]').forEach(el => {
-      const r = ro[+el.dataset.ro!];
-      if (r) el.textContent = r[2] ? `${Math.round(r[1])}${r[2]}` : r[1].toFixed(2);
+    const fmt = (r: (typeof ro)[number]) => (r[2] ? `${Math.round(r[1])}${r[2]}` : r[1].toFixed(2));
+    this.tools.querySelectorAll<HTMLElement>('[data-ro]').forEach(el => { const r = ro[+el.dataset.ro!]; if (r) el.textContent = fmt(r); });
+    document.querySelectorAll<HTMLElement>('[data-ro-label]').forEach(el => { // live values on formula cards
+      const r = ro.find(x => x[0] === el.dataset.roLabel);
+      if (r) el.textContent = `= ${fmt(r)}`;
     });
   }
 

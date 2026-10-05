@@ -1,0 +1,24 @@
+---
+import Icon from '../Icon.astro';
+import { md, tex } from '@/lib/math';
+
+interface Props {
+  id: string;        // stable: deep links and pins use it
+  name: string;
+  tex: string;
+  live?: string;     // a figure readout label (e.g. "S"): shows the value for the current figure
+  proof?: string;    // id of the property that proves it
+}
+const { id, name, tex: src, live, proof } = Astro.props;
+---
+<article class="fx" id={id}>
+  <div class="fx-h">
+    <h3 set:html={md(name)} />
+    {proof && <a class="fx-proof" href={`#${proof}`}>დამტკიცება</a>}
+    <button class="pin" type="button" aria-pressed="false" aria-label={`ჩამაგრება: ${name}`} data-pin={id}><Icon name="star" /></button>
+  </div>
+  <div class="fx-row">
+    <div class="fx-tex" set:html={tex(src, true)} />
+    {live && <output class="fx-val" data-ro-label={live}></output>}
+  </div>
+</article>

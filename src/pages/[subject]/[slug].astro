@@ -4,6 +4,7 @@ import Shell from '@/layouts/Shell.astro';
 import Panel from '@/components/Panel.astro';
 import Figure from '@/components/Figure.astro';
 import FigureTools from '@/components/FigureTools.astro';
+import { formulasView, propertiesView } from '@/components/content';
 
 export async function getStaticPaths() {
   const topics = await getCollection('topics');
@@ -19,7 +20,8 @@ const fig = topic.data.figure;
   )}
   <Panel slot="panel">
     {fig ? <FigureTools slot="tools" name={fig} /> : <p slot="tools" class="empty"><b>ჯერ ცარიელია</b>სლაიდერები და გადამრთველები გამოჩნდება, როცა თემას ნახაზი ექნება.</p>}
-    <p slot="formulas" class="empty"><b>ჯერ ცარიელია</b>ამ თემაში ფორმულები ჯერ არ დაწერილა.</p>
-    <div slot="props" class="prose"><Content /></div>
+    <div slot="formulas"><Content components={formulasView} /></div>
+    <div slot="props"><Content components={propertiesView} /></div>
   </Panel>
 </Shell>
+<script>import '@/scripts/topic';</script>
