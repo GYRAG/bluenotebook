@@ -21,6 +21,8 @@ parent: triangle
 <Formula id="altitude-formula" name="სიმაღლე ჰიპოტენუზაზე" tex="h = \frac{ab}{c}, \qquad h^2 = AH \cdot HB" live="h" proof="altitude-relations" />
 <Formula id="projection-formula" name="კათეტი და მისი გეგმილი" tex="b^2 = c \cdot AH, \qquad a^2 = c \cdot BH" proof="leg-projection" />
 <Formula id="median-formula" name="მედიანა ჰიპოტენუზაზე" tex="m_c = \tfrac{c}{2}" proof="median-hypotenuse" />
+<Formula id="circumradius-formula" name="შემოხაზული წრეწირის რადიუსი" tex="R = \tfrac{c}{2}" proof="median-hypotenuse" />
+<Formula id="inradius-formula" name="ჩახაზული წრეწირის რადიუსი" tex="r = \frac{a + b - c}{2}" live="r" proof="inradius" />
 <Formula id="thirty-formula" name="30°-ის პირდაპირ კათეტი" tex="\angle A = 30^\circ \;\Rightarrow\; a = \tfrac{c}{2}" proof="thirty-sixty" />
 <Formula id="forty-five-formula" name="ტოლფერდა მართკუთხა" tex="c = a\sqrt2" proof="forty-five" />
 </Formulas>
@@ -96,6 +98,15 @@ parent: triangle
 <Proof given="$\angle C = 90^\circ$" prove="$S = \tfrac12 ab$">
 <Step show="M D AD BD" hl="ACBD">შევავსოთ სამკუთხედი მართკუთხედამდე $ACBD$; მისი ფართობი $ab$-ა.</Step>
 <Step hl="ABC" tex="S = \tfrac12\, ab \quad \blacksquare">დიაგონალი $AB$ მართკუთხედს ორ ტოლ სამკუთხედად ყოფს (გგგ).</Step>
+</Proof>
+</Property>
+
+<Property id="inradius" title="მართკუთხა სამკუთხედში ჩახაზული წრეწირის რადიუსი $r = \tfrac{a + b - c}{2}$" why="მართი კუთხის წვეროდან მხების წერტილებამდე მანძილი $r$-ია, დანარჩენი წვეროებიდან — მხებების ტოლი მონაკვეთები.">
+<Proof given="$\angle C = 90^\circ$, წრეწირი ეხება $BC$-ს $K$-ში, $AC$-ს $L$-ში, $AB$-ს $T$-ში" prove="$r = \tfrac{a + b - c}{2}$">
+<Step show="(IT) I K L T" hl="(IT)">ჩახაზული წრეწირი სამივე გვერდს ეხება.</Step>
+<Step show="IK IL" hl="CKIL" tex="CK = CL = r">$CKIL$ კვადრატია: $C$, $K$ და $L$ კუთხეები მართია, ხოლო $IK = IL = r$.</Step>
+<Step hl="BK=BT AL=AT" tex="\begin{gathered} BT = BK = a - r \ AT = AL = b - r \end{gathered}">ერთი წერტილიდან წრეწირისადმი გავლებული მხებების მონაკვეთები ტოლია.</Step>
+<Step hl="AB" tex="r = \frac{a + b - c}{2} \quad \blacksquare">$c = AT + TB = (b - r) + (a - r)$.</Step>
 </Proof>
 </Property>
 

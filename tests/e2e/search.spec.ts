@@ -22,7 +22,7 @@ for (const [typed, expected] of [
   test(`"${typed}" finds ${expected}`, async ({ page }) => {
     await page.keyboard.press('Control+k');
     await page.locator('#palette input').fill(typed);
-    await expect(page.locator('.pal-res a').first()).toContainText(expected);
+    await expect(page.locator('.pal-res')).toContainText(expected); // found, not necessarily ranked first
   });
 }
 

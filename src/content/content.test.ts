@@ -35,6 +35,11 @@ for (const [path, src] of Object.entries(files)) {
       expect(missing).toEqual([]);
     });
 
+    it('every <Property> sits inside <Properties> (otherwise both tabs render it)', () => {
+      const outside = src.replace(/<Properties\b[\s\S]*?<\/Properties>/g, '');
+      expect([...outside.matchAll(/<Property\s+id="([^"]+)"/g)].map(m => m[1])).toEqual([]);
+    });
+
     it('ids are unique on the page', () => {
       const ids = [...src.matchAll(/<(?:Property|Formula)\s+id="([^"]+)"/g)].map(m => m[1]!);
       expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);

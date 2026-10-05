@@ -18,6 +18,11 @@ parent: triangle
 <Formula id="midline-formula" name="შუახაზი" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC" proof="midline" />
 <Formula id="medians-formula" name="მედიანების გადაკვეთა" tex="AG : GA_1 = 2 : 1" live="AG:GA₁" proof="medians" />
 <Formula id="bisector-formula" name="ბისექტრისის თვისება" tex="\frac{BL}{LC} = \frac{AB}{AC}" proof="bisector-theorem" />
+<Formula id="median-length-formula" name="მედიანის სიგრძე" tex="m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}" proof="median-length" />
+<Formula id="bisector-length-formula" name="ბისექტრისის სიგრძე" tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c}" proof="bisector-length" />
+<Formula id="six-triangles-formula" name="მედიანებით მიღებული სამკუთხედები" tex="S_{GBA_1} = S_{GA_1C} = \ldots = \tfrac16 S" proof="six-triangles" />
+<Formula id="angle-bic-formula" name="კუთხე ბისექტრისებს შორის" tex="\angle BIC = 90^\circ + \frac{\alpha}{2}" proof="angle-bic" />
+<Formula id="angle-bhc-formula" name="კუთხე სიმაღლეებს შორის (მახვილკუთხა)" tex="\angle BHC = 180^\circ - \alpha" proof="angle-bhc" />
 </Formulas>
 
 <Properties>
@@ -41,6 +46,25 @@ parent: triangle
 
 <Remark>$G$-ს სამკუთხედის **სიმძიმის ცენტრი** ეწოდება: ერთგვაროვანი სამკუთხა ფირფიტა ზუსტად ამ წერტილზე წონასწორობს.</Remark>
 
+<Property id="six-triangles" title="მედიანები სამკუთხედს ექვს ტოლდიდ სამკუთხედად ყოფს" why="მედიანა სამკუთხედს ორ ტოლდიდ ნაწილად ყოფს — ტოლი ფუძეები, საერთო სიმაღლე.">
+<Proof given="$AA_1, BB_1, CC_1$ — მედიანები, $G$ — მათი გადაკვეთა" prove="ექვსივე სამკუთხედის ფართობი $\tfrac16 S$-ია">
+<Step show="AA1 BB1 CC1 G" hl="AA1 BB1 CC1">სამი მედიანა სამკუთხედს ექვს ნაწილად ყოფს.</Step>
+<Step hl="GBA1 GA1C">ტოლი ფუძეები და საერთო სიმაღლე: $S_{GBA_1} = S_{GA_1C} = x$, ასევე $S_{GCB_1} = S_{GB_1A} = y$ და $S_{GAC_1} = S_{GC_1B} = z$.</Step>
+<Step hl="ABA1 AA1C" tex="2z + x = 2y + x \;\Rightarrow\; z = y">მედიანა $AA_1$: $S_{ABA_1} = S_{AA_1C}$ (ტოლი ფუძეები $BA_1 = A_1C$, საერთო სიმაღლე).</Step>
+<Step hl="BCB1 BB1A" tex="2x + y = 2z + y \;\Rightarrow\; x = z">იგივე მედიანისთვის $BB_1$.</Step>
+<Step tex="x = y = z = \tfrac16 S \quad \blacksquare">ექვსი ტოლი ნაწილი მთელ ფართობს შეადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="median-length" title="მედიანის სიგრძე: $m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}$" why="მედიანის გაორმაგება პარალელოგრამს იძლევა, რომლის დიაგონალებია $2m_a$ და $a$.">
+<Proof given="$AA_1 = m_a$ — მედიანა, $BC = a,\ CA = b,\ AB = c$" prove="$4m_a^2 = 2b^2 + 2c^2 - a^2$">
+<Step set={{ c: 3.6, b: 3.2, alpha: 65 }} show="AA1 A1" hl="AA1">$AA_1$ — მედიანა.</Step>
+<Step show="A1A3 BA3 CA3 A3" hl="ABA3C">გავაგრძელოთ ის: $A_1A_3 = AA_1$. $ABA_3C$-ის დიაგონალები $AA_3$ და $BC$ ერთმანეთს შუაზე ყოფს — ის პარალელოგრამია.</Step>
+<Step hl="AA3 BC" tex="AA_3^2 + BC^2 = 2\left(AB^2 + AC^2\right)">პარალელოგრამის დიაგონალების კვადრატების ჯამი ოთხივე გვერდის კვადრატების ჯამის ტოლია.</Step>
+<Step tex="4m_a^2 = 2b^2 + 2c^2 - a^2 \quad \blacksquare">$AA_3 = 2m_a$, $BC = a$.</Step>
+</Proof>
+</Property>
+
 <Property id="bisector-theorem" title="ბისექტრისა მოპირდაპირე გვერდს მოსაზღვრე გვერდების პროპორციულ ნაწილებად ყოფს" why="ბისექტრისის პარალელური წრფე ტოლფერდა სამკუთხედს ქმნის.">
 <Proof given="$AL$ — $\angle A$-ს ბისექტრისა, $L \in BC$" prove="$\tfrac{BL}{LC} = \tfrac{AB}{AC}$">
 <Step show="AL L" hl="AL <BAL=<LAC">$AL$ ყოფს $\angle A$-ს შუაზე.</Step>
@@ -51,12 +75,29 @@ parent: triangle
 </Proof>
 </Property>
 
+<Property id="bisector-length" title="ბისექტრისის სიგრძე: $l_a = \tfrac{2bc\cos(\alpha/2)}{b + c}$" why="ბისექტრისა სამკუთხედს ორად ყოფს — ფართობები იკრიბება.">
+<Proof given="$AL = l_a$ — $\angle A$-ს ბისექტრისა, $AC = b,\ AB = c$" prove="$l_a = \tfrac{2bc\cos(\alpha/2)}{b + c}$">
+<Step show="AL L" hl="<BAL=<LAC">$AL$ კუთხეს ორ $\tfrac{\alpha}{2}$ ნაწილად ყოფს.</Step>
+<Step hl="ABL ALC" tex="S_{ABC} = S_{ABL} + S_{ALC}">ბისექტრისა სამკუთხედს ორად ყოფს.</Step>
+<Step tex="bc\sin\alpha = (b + c)\, l_a \sin\tfrac{\alpha}{2}">სამივე ფართობი ორი გვერდითა და მათ შორის კუთხით, ორზე გამრავლებული: $bc\sin\alpha = c\,l_a\sin\tfrac{\alpha}{2} + b\,l_a\sin\tfrac{\alpha}{2}$.</Step>
+<Step tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c} \quad \blacksquare">$\sin\alpha = 2\sin\tfrac{\alpha}{2}\cos\tfrac{\alpha}{2}$; გავყოთ $\sin\tfrac{\alpha}{2}$-ზე.</Step>
+</Proof>
+</Property>
+
 <Property id="incenter" title="სამკუთხედის ბისექტრისები ერთ წერტილში იკვეთება — ჩახაზული წრეწირის ცენტრში" why="ბისექტრისის ყოველი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული.">
 <Proof given="$I$ — $\angle A$ და $\angle B$ ბისექტრისების გადაკვეთა" prove="$I$ ძევს $\angle C$-ს ბისექტრისაზეც და ყველა გვერდიდან თანაბრადაა დაშორებული">
 <Step show="AL BI I" hl="AL BI">$I$ ძევს $\angle A$-ს ბისექტრისაზე — ის $AB$-დან და $AC$-დან თანაბრადაა დაშორებული; $\angle B$-ს ბისექტრისაზე — $BA$-დან და $BC$-დან.</Step>
 <Step show="T IT" hl="IT">მაშასადამე $I$ სამივე გვერდიდან ერთნაირ მანძილზეა ($r$).</Step>
 <Step show="CI" hl="CI">წერტილი, რომელიც კუთხის შიგნითაა და მისი გვერდებიდან თანაბრადაა დაშორებული, ბისექტრისაზე ძევს — $I$ ძევს $\angle C$-ს ბისექტრისაზეც.</Step>
 <Step show="(IT)" hl="(IT)">წრეწირი ცენტრით $I$ და რადიუსით $r$ სამივე გვერდს ეხება — ესაა ჩახაზული წრეწირი. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="angle-bic" title="ორი ბისექტრისა ერთმანეთს $90^\circ + \tfrac{\alpha}{2}$ კუთხით კვეთს: $\angle BIC = 90^\circ + \tfrac{\alpha}{2}$" why="$\triangle BIC$-ში ორი კუთხე $\beta$-სა და $\gamma$-ს ნახევრებია.">
+<Proof given="$BI$, $CI$ — $\angle B$-სა და $\angle C$-ს ბისექტრისები" prove="$\angle BIC = 90^\circ + \tfrac{\alpha}{2}$">
+<Step show="BI CI I" hl="<BIC">$I$ — ბისექტრისების გადაკვეთა.</Step>
+<Step hl="BIC" tex="\angle IBC + \angle ICB = \tfrac12(\beta + \gamma) = 90^\circ - \tfrac{\alpha}{2}">$\beta + \gamma = 180^\circ - \alpha$.</Step>
+<Step tex="\angle BIC = 90^\circ + \frac{\alpha}{2} \quad \blacksquare">$\triangle BIC$-ის კუთხეების ჯამი $180^\circ$-ია.</Step>
 </Proof>
 </Property>
 
@@ -75,6 +116,14 @@ parent: triangle
 <Step hl="AB3=AC3">$ABCB_3$ და $AC_3BC$ პარალელოგრამებია, ამიტომ $AB_3 = BC = AC_3$ — $A$ არის $B_3C_3$-ის შუაწერტილი. ასევე $B$ და $C$ — სხვა გვერდების შუაწერტილებია.</Step>
 <Step show="AA2" hl="AA2">$AA_2 \perp BC$, ხოლო $BC \parallel B_3C_3$, ამიტომ $AA_2$ არის $B_3C_3$-ის შუამართობი. ასევე დანარჩენი ორი სიმაღლე.</Step>
 <Step show="BB2 CC2 H" hl="H">დიდი სამკუთხედის შუამართობები ერთ წერტილში იკვეთება (წინა თვისება) — სიმაღლეებიც. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="angle-bhc" title="მახვილკუთხა სამკუთხედში ორი სიმაღლე ერთმანეთს $180^\circ - \alpha$ კუთხით კვეთს: $\angle BHC = 180^\circ - \alpha$" why="სიმაღლეებითა და $A$ კუთხით შედგენილ ოთხკუთხედს ორი მართი კუთხე აქვს.">
+<Proof given="$BB_2$, $CC_2$ — სიმაღლეები, $H$ — მათი გადაკვეთა, $\triangle ABC$ მახვილკუთხაა" prove="$\angle BHC = 180^\circ - \alpha$">
+<Step show="BB2 CC2 H B2 C2" hl="<BB2A <CC2A">$BB_2 \perp AC$, $CC_2 \perp AB$.</Step>
+<Step hl="AC2HB2" tex="\angle C_2HB_2 = 180^\circ - \alpha">ოთხკუთხედის $AC_2HB_2$ კუთხეების ჯამი $360^\circ$-ია: $360^\circ - 90^\circ - 90^\circ - \alpha$.</Step>
+<Step hl="<BHC" tex="\angle BHC = \angle C_2HB_2 = 180^\circ - \alpha \quad \blacksquare">ვერტიკალური კუთხეები.</Step>
 </Proof>
 </Property>
 

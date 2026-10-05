@@ -18,6 +18,7 @@ parent: triangle
 <Formula id="height-formula" name="სიმაღლე ფუძეზე" tex="h = \sqrt{b^2 - \tfrac{a^2}{4}}" live="h" proof="three-in-one" />
 <Formula id="equilateral-height-formula" name="ტოლგვერდა: სიმაღლე" tex="h = \frac{a\sqrt3}{2}" proof="equilateral-height" />
 <Formula id="equilateral-area-formula" name="ტოლგვერდა: ფართობი" tex="S = \frac{a^2\sqrt3}{4}" proof="equilateral-height" />
+<Formula id="equilateral-radii-formula" name="ტოლგვერდა: წრეწირების რადიუსები" tex="R = \frac{a}{\sqrt3} = \frac{a\sqrt3}{3}, \qquad r = \frac{a\sqrt3}{6}, \qquad R = 2r" proof="equilateral-radii" />
 <Formula id="equilateral-angles-formula" name="ტოლგვერდა: კუთხეები" tex="\alpha = \beta = \gamma = 60^\circ" proof="equilateral-angles" />
 </Formulas>
 
@@ -75,8 +76,15 @@ parent: triangle
 </Proof>
 </Property>
 
-</Properties>
+<Property id="equilateral-radii" title="ტოლგვერდა სამკუთხედში ჩახაზული და შემოხაზული წრეწირების ცენტრები ემთხვევა და $R = 2r = \tfrac{a\sqrt3}{3}$" why="ყოველი სიმაღლე მედიანაცაა და ბისექტრისაც, ხოლო მედიანების გადაკვეთა მათ $2 : 1$ შეფარდებით ყოფს.">
+<Proof given="$\triangle ABC$ — ტოლგვერდა, გვერდი $a$, $G$ — მედიანების გადაკვეთა" prove="$R = \tfrac{a\sqrt3}{3},\ r = \tfrac{a\sqrt3}{6}$">
+<Step set={{ theta: 60 }} show="AH H G" hl="AH">$AH$ სიმაღლეა, მედიანაც და ბისექტრისაც; ასეა სამივე წვეროდან.</Step>
+<Step hl="GA GB GC">ამიტომ $G$ ერთდროულად ბისექტრისების გადაკვეთაა (ჩახაზული წრეწირის ცენტრი) და შუამართობების გადაკვეთა (შემოხაზულის ცენტრი).</Step>
+<Step show="(GA)" hl="AG" tex="R = AG = \tfrac23 h = \tfrac23 \cdot \frac{a\sqrt3}{2} = \frac{a\sqrt3}{3}">მედიანების გადაკვეთა მედიანას წვეროდან $2 : 1$ შეფარდებით ყოფს.</Step>
+<Step show="(GH)" hl="GH" tex="r = GH = \tfrac13 h = \frac{a\sqrt3}{6} = \frac{R}{2} \quad \blacksquare">$GH \perp BC$, ამიტომ $GH$ ჩახაზული წრეწირის რადიუსია.</Step>
+</Proof>
+</Property>
 
-<Remark kind="special">ტოლგვერდა სამკუთხედში სამივე სიმაღლე მედიანაცაა და ბისექტრისაც, ამიტომ ჩახაზული და შემოხაზული წრეწირების ცენტრები ერთმანეთს ემთხვევა: $r = \tfrac{a\sqrt3}{6}$, $R = \tfrac{a\sqrt3}{3} = 2r$.</Remark>
+</Properties>
 
 <Remark kind="mistake">„ბისექტრისა = მედიანა = სიმაღლე“ მხოლოდ ფუძეზე დაშვებულ წრფეს ეხება; ფერდებზე დაშვებული ეს სამი წრფე, საზოგადოდ, განსხვავებულია.</Remark>

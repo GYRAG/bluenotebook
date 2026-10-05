@@ -12,7 +12,7 @@ export default figure({
   points: ({ b, theta }) => {
     const a = 2 * b * Math.sin(rad(theta / 2)), h = b * Math.cos(rad(theta / 2));
     const A: V = [0, h / 2], B: V = [-a / 2, -h / 2], C: V = [a / 2, -h / 2];
-    return { A, B, C, H: mid(B, C) };
+    return { A, B, C, H: mid(B, C), G: [0, h / 2 - (2 * h) / 3] as V }; // G: centroid (centre of both circles when equilateral)
   },
   drag: { A: ['b'], C: ['b', 'theta'] }, // A only moves up and down: one parameter
   base: 'ABC',
@@ -24,6 +24,11 @@ export default figure({
   classify: 'triangle',
   readouts: ({ A, B, C, H }) => [['a', dist(B, C)], ['h', dist(A, H)], ['P', dist(A, B) + dist(B, C) + dist(C, A)], ['S', area([A, B, C])]],
   checks: {
+    'equilateral-radii': (_, { b }) => { // θ = 60°: equilateral with side b
+      const h = (b * Math.sqrt(3)) / 2, A: V = [0, h], B: V = [-b / 2, 0], C: V = [b / 2, 0], G: V = [0, h / 3];
+      return near(dist(G, A), b / Math.sqrt(3)) && near(dist(G, B), dist(G, C)) && near(dist(G, mid(B, C)), b / (2 * Math.sqrt(3)))
+        && near(dist(G, foot(G, A, B)), dist(G, mid(B, C)));
+    },
     'base-angles-equal': ({ A, B, C }) => near(angleAt(A, B, C), angleAt(A, C, B)),
     'three-in-one': ({ A, B, C }) => { // the bisector from A is also the median and the altitude
       const L = bisectorFoot(A, B, C);

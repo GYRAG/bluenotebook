@@ -1,4 +1,4 @@
-import { angleAt, area, centroid, circleIntersection, dist, foot, mid, near, sub, add, type V } from './engine/geom';
+import { angleAt, area, centroid, circleIntersection, dist, foot, incenter, mid, near, sub, add, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // Right angle at C; legs BC = a, AC = b; the centroid stays put.
@@ -12,7 +12,8 @@ export default figure({
   points: ({ a, b }) => {
     const G = centroid([0, 0], [a, 0], [0, b]);
     const C = sub([0, 0], G), B = sub([a, 0], G), A = sub([0, b], G), M = mid(A, B);
-    return { A, B, C, H: foot(C, A, B), M, D: sub(add(M, M), C) };
+    const I = incenter(A, B, C);
+    return { A, B, C, H: foot(C, A, B), M, D: sub(add(M, M), C), I, K: foot(I, B, C), L: foot(I, A, C), T: foot(I, A, B) }; // incircle touch points
   },
   drag: { A: ['b'], B: ['a'] },
   base: 'ABC',
@@ -22,8 +23,12 @@ export default figure({
     'მედიანა ჰიპოტენუზაზე': 'CM M',
   },
   classify: 'triangle',
-  readouts: ({ A, B, C, H }) => [['c', dist(A, B)], ['h', dist(C, H)], ['α', angleAt(B, A, C), '°'], ['β', angleAt(A, B, C), '°'], ['S', area([A, B, C])]],
+  readouts: ({ A, B, C, H, I, T }) => [['c', dist(A, B)], ['h', dist(C, H)], ['α', angleAt(B, A, C), '°'], ['β', angleAt(A, B, C), '°'], ['S', area([A, B, C])], ['r', dist(I, T)]],
   checks: {
+    inradius: ({ A, B, C, I, K, L, T }) => {
+      const a = dist(B, C), b = dist(A, C), c = dist(A, B), r = dist(I, T);
+      return near(r, (a + b - c) / 2) && near(dist(C, K), r) && near(dist(C, L), r) && near(dist(B, K), dist(B, T)) && near(dist(A, L), dist(A, T));
+    },
     pythagoras: ({ A, B, C }) => near(dist(A, B) ** 2, dist(B, C) ** 2 + dist(A, C) ** 2),
     'pythagoras-converse': (_, { a, b }) => { // build a triangle with sides a, b, √(a²+b²) from circles only
       const C: V = [0, 0], B: V = [a, 0], A = circleIntersection(C, b, B, Math.hypot(a, b), [a / 2, -1]);

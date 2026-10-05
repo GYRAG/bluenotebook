@@ -1,5 +1,5 @@
 import {
-  add, angleAt, area, centroid, circumcenter, dist, foot, incenter, intersect, lerp, mid, near, orthocenter, parallel, perpendicular, sub, triangleSAS,
+  add, angleAt, area, centroid, circumcenter, dist, foot, incenter, intersect, lerp, mid, near, orthocenter, parallel, perpendicular, polar, rad, sub, triangleSAS, type V,
 } from './engine/geom';
 import { figure } from './engine/spec';
 
@@ -52,6 +52,22 @@ export default figure({
     incenter: ({ A, B, C, I }) => [[A, B], [B, C], [C, A]].every(([p, q]) => near(dist(I, foot(I, p!, q!)), dist(I, foot(I, A, B)))),
     circumcenter: ({ A, B, C, O }) => near(dist(O, A), dist(O, B)) && near(dist(O, B), dist(O, C)),
     orthocenter: ({ A, B, C, H }) => perpendicular(A, H, B, C) && perpendicular(B, H, C, A) && (near(dist(C, H), 0, 1e-9) || perpendicular(C, H, A, B)),
+    'median-length': ({ A, B, C, A1, A3 }) => {
+      const a = dist(B, C), b = dist(C, A), c = dist(A, B);
+      return near(dist(A, A1), 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a)) && near(dist(A1, mid(A, A3)), 0) && parallel(A, B, C, A3);
+    },
+    'six-triangles': ({ A, B, C, G, A1, B1, C1 }) =>
+      [[G, B, A1], [G, A1, C], [G, C, B1], [G, B1, A], [G, A, C1], [G, C1, B]].every(t => near(area(t as V[]), area([A, B, C]) / 6)),
+    'bisector-length': ({ A, B, C, L }) => {
+      const b = dist(C, A), c = dist(A, B), al = rad(angleAt(B, A, C));
+      return near(dist(A, L), (2 * b * c * Math.cos(al / 2)) / (b + c));
+    },
+    'angle-bic': ({ A, B, C, I }) => near(angleAt(B, I, C), 90 + angleAt(B, A, C) / 2),
+    'angle-bhc': (_, { c, alpha }) => { // an acute triangle built from the angles (α' 40–80°, β' 55–70°, so γ < 90°)
+      const al = 40 + ((alpha - 25) / 85) * 40, be = 55 + ((c - 3) / 4) * 15, ga = 180 - al - be;
+      const A: V = [0, 0], B: V = [1, 0], C = polar(Math.sin(rad(be)) / Math.sin(rad(ga)), al), H = orthocenter(A, B, C);
+      return ga < 90 && near(angleAt(B, H, C), 180 - al);
+    },
     'orthocenter-proof': ({ A, B, C, A3, B3, C3 }) =>
       near(dist(A, mid(B3, C3)), 0) && near(dist(B, mid(C3, A3)), 0) && near(dist(C, mid(A3, B3)), 0) && parallel(B3, C3, B, C),
   },
