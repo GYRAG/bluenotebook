@@ -1,0 +1,140 @@
+<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>გეომეტრიის ბაზა</title>
+<style>
+:root{--bg:#faf8f4;--fg:#1f1d1a;--mu:#6b665e;--cd:#fff;--bd:#e4dfd5;--ac:#c2410c;--fl:#c2410c22;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#161412;--fg:#ece8e1;--mu:#9a948a;--cd:#201d1a;--bd:#34302b;--ac:#fb923c;--fl:#fb923c26}}
+:root[data-theme=dark]{--bg:#161412;--fg:#ece8e1;--mu:#9a948a;--cd:#201d1a;--bd:#34302b;--ac:#fb923c;--fl:#fb923c26}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,"Noto Sans Georgian",sans-serif}
+.w{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2em 0}.mu{color:var(--mu);font-size:.9rem}
+#tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+#tabs button{border:1px solid var(--bd);background:var(--cd);color:var(--fg);padding:7px 12px;border-radius:99px;font:inherit;cursor:pointer}
+#tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:12px;margin-bottom:12px}
+svg{width:100%;height:auto;touch-action:none;display:block}
+svg text{fill:var(--fg);font-size:12px;text-anchor:middle;dominant-baseline:middle}
+.poly{fill:var(--fl);stroke:var(--ac);stroke-width:2.5}
+.ln{stroke:var(--mu);stroke-dasharray:5 4;fill:none}.vr{stroke:#2563eb;fill:#2563eb18;stroke-dasharray:4 3}
+.dot{fill:var(--ac);cursor:grab}
+label{display:block;font-size:.9rem;margin:6px 0}label b{color:var(--ac)}
+input[type=range]{width:100%;accent-color:var(--ac)}
+#info{font-size:.9rem;line-height:1.7;border-top:1px solid var(--bd);margin-top:8px;padding-top:8px}
+#fm span{display:inline-block;background:var(--fl);color:var(--ac);border-radius:8px;padding:3px 9px;margin:3px 4px 3px 0;font-size:.9rem;font-weight:600}
+details{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}details p{margin:.5em 0 .2em;color:var(--mu)}
+</style></head><body><div class="w">
+<h1>გეომეტრიის ბაზა · ბრტყელი ფიგურები</h1>
+<div class="mu">კვადრატი ⊂ მართკუთხედი, რომბი ⊂ პარალელოგრამი ⊂ ოთხკუთხედი; ტრაპეცია ⊂ ოთხკუთხედი. სლაიდერებით ფიგურა გადააქციე სხვა ფიგურად და დააკვირდი ქვემოთ „ახლა“ ხაზს. ოთხკუთხედის წვეროები გადაათრიე.</div>
+<div id="tabs"></div>
+<div class="c"><svg id="sv" viewBox="0 0 420 300"></svg><div id="ct"></div><div id="info"></div></div>
+<div class="mu" id="df"></div><div id="fm"></div><div id="pr"></div>
+<p class="mu">მოწოდება: დამტკიცებები მოკლეა — ძირითადი იდეა. შემდეგ თემებს დავამატებთ.</p>
+</div>
+<script>
+const K=30,$=s=>document.querySelector(s),r2=x=>Math.round(x*100)/100,rad=Math.PI/180,sv=$('#sv');
+const pa=v=>{const c=Math.cos(v.al*rad),s=Math.sin(v.al*rad);return[[0,0],[v.a,0],[v.a+v.b*c,v.b*s],[v.b*c,v.b*s]]};
+const SH=[
+{n:'სამკუთხედი',d:'სამი წვერო, სამი გვერდი. ყველაფერი დანარჩენი სამკუთხედებისგან აიგება.',
+sl:[['A','კუთხე A°',10,150,60,1],['B','კუთხე B°',10,150,70,1]],
+f:v=>{const A=v.A,B=Math.min(v.B,170-A),C=180-A-B,b=8*Math.sin(B*rad)/Math.sin(C*rad);return[[0,0],[8,0],[b*Math.cos(A*rad),b*Math.sin(A*rad)]]},
+fm:['S = ½·a·h','S = ½·a·b·sin C','c² = a²+b² (მართკუთხა)','h = a√3/2 (ტოლგვერდა)'],
+pr:[['კუთხეთა ჯამი = 180°','A-ში გავავლოთ BC-ს პარალელური წრფე. შიგა ჯვარედინი კუთხეები ტოლია, ამიტომ B და C გადმოდის A-ზე და სამივე ერთად სწორ კუთხეს ქმნის.'],
+['გარე კუთხე = ორი არამიმდებარე შიგა კუთხის ჯამი','გარე კუთხე = 180° − C = (A+B+C) − C = A+B.'],
+['უტოლობა: a < b + c','B-დან C-მდე სწორი გზა უმოკლესია, B→A→C გზა გრძელია. ე.ი. სამკუთხედი არსებობს, თუ უდიდესი გვერდი დანარჩენი ორის ჯამზე ნაკლებია.'],
+['საშუალო ხაზი ფუძის პარალელურია და ½-ის ტოლია','M, N — AB და AC-ს შუაწერტილები. MN გავაგრძელოთ NP = MN-ით. AMCP-ს დიაგონალები შუაზე იყოფა → პარალელოგრამია, CP ∥= AM = MB. მაშინ MBCP პარალელოგრამია → MP ∥ BC, MP = BC, ე.ი. MN = ½BC.'],
+['მედიანები ერთ წერტილში იკვეთება და 2:1-ად იყოფა','BN და CM მედიანები G-ში იკვეთება. MN საშუალო ხაზია → MNG ~ CBG კოეფიციენტით ½ → GN : GB = 1 : 2. მესამე მედიანისთვისაც იგივეა.'],
+['ტოლფერდა: ფუძესთან კუთხეები ტოლია; სიმაღლე = მედიანა = ბისექტრისა','AH სიმაღლე: AB = AC, AH საერთო, ∠H = 90° → ორი მართკუთხა სამკუთხედი ტოლია (ჰიპოტენუზა-კათეტი) → B = C, BH = HC, ∠BAH = ∠HAC.'],
+['ტოლგვერდა: ყველა კუთხე 60°, h = a√3/2','ტოლფერდობა ყოველ წყვილზე → სამივე კუთხე ტოლია → 180°/3 = 60°. სიმაღლე გვერდს შუაზე ყოფს: h² = a² − (a/2)² = 3a²/4.'],
+['პითაგორას თეორემა: a² + b² = c²','a+b გვერდის კვადრატში ჩავსვათ 4 მართკუთხა სამკუთხედი და შიგნით c² კვადრატი დარჩება: (a+b)² = c² + 4·½ab → a² + b² = c².'],
+['ფართობი S = ½·a·h','სიმაღლე სამკუთხედს ორ მართკუთხა სამკუთხედად ყოფს, თითოეული შესაბამისი მართკუთხედის ნახევარია: ½xh + ½yh = ½(x+y)h.']]},
+{n:'ოთხკუთხედი',drag:1,vr:1,d:'ზოგადი ოთხკუთხედი — წვეროები თავისუფლად გადაათრიე.',sl:[],
+f:()=>[[-4,-2],[4,-2.5],[3,2.5],[-3,2]],
+fm:['კუთხეთა ჯამი = 360°','S = ½·d₁·d₂·sin φ','ჩახაზვადი: A + C = 180°','შემოხაზვადი: a + c = b + d'],
+pr:[['კუთხეთა ჯამი = 360°','დიაგონალი ოთხკუთხედს ორ სამკუთხედად ყოფს: 2·180° = 360°.'],
+['გვერდი < დანარჩენი სამის ჯამი','AB < BC + CA, ხოლო CA < CD + DA (სამკუთხედის უტოლობა ორჯერ).'],
+['გვერდების შუაწერტილები ყოველთვის პარალელოგრამს ქმნის','ჩართე „შუაწერტილები“. AC დიაგონალისთვის ორივე საშუალო ხაზი (ABC-ში და ADC-ში) ∥ AC და ½AC → მოპირდაპირე გვერდები ტოლი და პარალელურია.'],
+['ფართობი S = ½·d₁·d₂·sin φ (ამოზნექილი)','დიაგონალები 4 სამკუთხედად ყოფს; თითოეულის ფართობი ½·x·y·sin φ; ჯამი იძლევა ½·d₁·d₂·sin φ-ს.'],
+['წრეში ჩახაზვადია ⇔ A + C = 180°; წრის შემოხაზვადია ⇔ a + c = b + d','ჩახაზული კუთხე = ½ რკალი; A და C ერთად მთელ წრეს (360°) ეყრდნობა → ½·360° = 180°. შემოხაზვადში მხების მონაკვეთები ტოლია → ორ-ორი გვერდის ჯამები ტოლია.']]},
+{n:'პარალელოგრამი',d:'მოპირდაპირე გვერდები წყვილ-წყვილად პარალელურია.',
+sl:[['a','a',2,9,6,.5],['b','b',2,7,4,.5],['al','კუთხე α°',30,150,60,1]],f:pa,
+fm:['S = a·h','S = a·b·sin α','P = 2(a+b)','d₁² + d₂² = 2(a²+b²)'],
+pr:[['მოპირდაპირე გვერდები ტოლია','AC დიაგონალი: AC საერთო, ჯვარედინი კუთხეები ტოლია (ორივე წყვილი პარალელურია) → კგკ → ABC = CDA → AB = CD, BC = DA.'],
+['მოპირდაპირე კუთხეები ტოლია; მეზობლების ჯამი 180°','ზემოთ ტოლობიდან B = D, ხოლო BD დიაგონალით A = C. მეზობლები: BC ∥ AD → ცალმხრივი კუთხეების ჯამი 180°.'],
+['დიაგონალები გადაკვეთისას შუაზე იყოფა','AOB და COD: AB = CD, ჯვარედინი კუთხეები ტოლია → კგკ → AO = OC, BO = OD.'],
+['ნიშანი: ორი გვერდი ტოლია და პარალელური ⇒ პარალელოგრამი','AB ∥= CD. ABC და CDA: AB = CD, AC საერთო, ∠BAC = ∠DCA → ტოლია → ∠BCA = ∠DAC → BC ∥ AD.'],
+['S = a·h','ABH სამკუთხედი გადავიტანოთ მარჯვნივ (DCH-ის ადგილას) — მივიღებთ მართკუთხედს a × h.'],
+['d₁² + d₂² = 2(a²+b²)','კოსინუსების თეორემით d₁² = a²+b²−2ab·cos α, d₂² = a²+b²+2ab·cos α (cos(180°−α) = −cos α). შევკრიბოთ.']]},
+{n:'მართკუთხედი',d:'პარალელოგრამი, რომლის ყველა კუთხე 90°-ია.',
+sl:[['a','a',2,9,6,.5],['b','b',2,7,4,.5]],f:v=>pa({a:v.a,b:v.b,al:90}),
+fm:['S = a·b','P = 2(a+b)','d = √(a²+b²)','R = d/2'],
+pr:[['პარალელოგრამის ყველა თვისება აქვს','თუ A = 90°, მაშინ B = 180° − 90° = 90°, C = A, D = B — ყველა კუთხე სწორია.'],
+['დიაგონალები ტოლია','ABD და DCA: AB = DC, AD საერთო, ∠A = ∠D = 90° → გკგ → BD = AC.'],
+['ნიშანი: პარალელოგრამი ტოლი დიაგონალებით = მართკუთხედი','ABD = DCA (გგგ) → ∠A = ∠D, ხოლო A + D = 180° → ორივე 90°.'],
+['ჩახაზვადია, R = d/2','დიაგონალები ტოლია და შუაზე იყოფა → გადაკვეთის O წერტილი ყველა წვეროდან d/2 მანძილზეა.'],
+['S = a·b','a × b ერთეულოვანი კვადრატი ზუსტად ავსებს ფიგურას (პარალელოგრამის ფორმულა h = b-თვის).']]},
+{n:'რომბი',d:'პარალელოგრამი, რომლის ყველა გვერდი ტოლია.',
+sl:[['a','a',2,7,5,.5],['al','კუთხე α°',30,150,60,1]],f:v=>pa({a:v.a,b:v.a,al:v.al}),
+fm:['S = d₁·d₂/2','S = a² · sin α','P = 4a','a² = (d₁/2)² + (d₂/2)²'],
+pr:[['დიაგონალები მართობია','AB = AD, O — BD-ს შუა → ABD ტოლფერდაა, AO მედიანაა → სიმაღლეცაა → AC ⊥ BD.'],
+['დიაგონალები კუთხეების ბისექტრისებია','იგივე ტოლფერდა სამკუთხედში მედიანა = ბისექტრისა → AC ყოფს ∠A-ს შუაზე.'],
+['a² = (d₁/2)² + (d₂/2)²','დიაგონალები 4 ტოლ მართკუთხა სამკუთხედად ყოფს; პითაგორა AOB-ში.'],
+['S = d₁·d₂/2','თითო სამკუთხედი: ½·(d₁/2)·(d₂/2) = d₁d₂/8. ოთხი ასეთი → d₁d₂/2.'],
+['ჩახაზული წრე: r = h/2','ცენტრი O გვერდებიდან თანაბრადაა დაშორებული (ბისექტრისებზეა), ხოლო მოპირდაპირე გვერდებს შორის მანძილი h = 2r.']]},
+{n:'კვადრატი',d:'რომბიც და მართკუთხედიც ერთდროულად.',
+sl:[['a','a',2,7,5,.5]],f:v=>[[0,0],[v.a,0],[v.a,v.a],[0,v.a]],
+fm:['S = a²','S = d²/2','d = a√2','R = a√2/2, r = a/2'],
+pr:[['მართკუთხედისა და რომბის ყველა თვისება აქვს','ყველა გვერდი ტოლია (რომბი) + ყველა კუთხე 90° (მართკუთხედი).'],
+['დიაგონალები: ტოლი, მართობი, შუაზე იყოფა, კუთხეს ყოფს 45°-ად','ტოლი (მართკუთხედი), მართობი (რომბი); ABC მართკუთხა ტოლფერდაა → ფუძესთან კუთხეები 45°.'],
+['d = a√2','პითაგორა: d² = a² + a² = 2a².'],
+['S = a² = d²/2','a² = d²/2, რადგან d² = 2a².'],
+['ორი წრე ერთი ცენტრით','ცენტრი O: წვეროებიდან d/2 = a√2/2 (R), გვერდებიდან a/2 (r).']]},
+{n:'ტრაპეცია',d:'ორი გვერდი პარალელურია (ფუძეები a, b), დანარჩენი ორი — ფერდები.',
+sl:[['a','ქვედა ფუძე a',3,10,8,.5],['b','ზედა ფუძე b',1,8,4,.5],['h','სიმაღლე h',1,6,3,.5],['s','წანაცვლება',-3,6,2,.5]],
+f:v=>[[0,0],[v.a,0],[v.s+v.b,v.h],[v.s,v.h]],
+fm:['m = (a+b)/2','S = m·h','S = ½(a+b)·h','AO : OC = a : b'],
+pr:[['საშუალო ხაზი ∥ ფუძეებს და m = (a+b)/2','M, N — BC და AD-ს შუაწერტილები. DM გავაგრძელოთ AB-ს გაგრძელებამდე K-ში. DCM = KBM (კგკ) → BK = b, DM = MK. MN საშუალო ხაზია ADK-ში → MN ∥ AK, MN = ½(a+b).'],
+['S = ½(a+b)·h','ტრაპეციას M-ის გარშემო 180°-ით შემოვატრიალოთ და მივაკრათ — მივიღებთ პარალელოგრამს ფუძით a+b და სიმაღლით h.'],
+['დიაგონალების გადაკვეთა დიაგონალებს a : b-ად ყოფს','OAB ~ OCD (კკ: ჯვარედინი კუთხეები) → AO : OC = AB : CD = a : b.'],
+['ფერდზე მდებარე კუთხეების ჯამი 180°','ფუძეები პარალელურია → ცალმხრივი კუთხეები: A + D = 180°, B + C = 180°.'],
+['ტოლფერდა: ფუძესთან კუთხეები ტოლია, დიაგონალები ტოლია, ჩახაზვადია','C-დან და D-დან სიმაღლეები → ორი ტოლი მართკუთხა სამკუთხედი (ჰიპოტენუზა-კათეტი) → A = B. ABC = BAD (გკგ) → AC = BD. A + C = 180° → წრეში ჩახაზვადია.']]}
+];
+let cur,P0,dg=-1;
+const dist=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1]);
+function cls(P){const e=P.map((p,i)=>{const q=P[(i+1)%4];return[q[0]-p[0],q[1]-p[1]]}),L=e.map(v=>Math.hypot(...v));
+const pr=(i,j)=>Math.abs(e[i][0]*e[j][1]-e[i][1]*e[j][0])/(L[i]*L[j])<.03,
+rt=(i,j)=>Math.abs(e[i][0]*e[j][0]+e[i][1]*e[j][1])/(L[i]*L[j])<.03,
+eq=(x,y)=>Math.abs(x-y)<.03*Math.max(x,y),p1=pr(0,2),p2=pr(1,3);
+if(p1&&p2){const R=rt(0,1),H=eq(L[0],L[1]);return R&&H?'კვადრატი':R?'მართკუთხედი':H?'რომბი':'პარალელოგრამი'}
+if(p1||p2){const l=p1?[1,3]:[0,2];const R=[0,1,2,3].some(i=>rt(i,(i+1)%4));return eq(L[l[0]],L[l[1]])?'ტოლფერდა ტრაპეცია':R?'მართკუთხა ტრაპეცია':'ტრაპეცია'}
+return'ზოგადი ოთხკუთხედი'}
+function pick(i){cur=SH[i];P0=cur.drag?cur.f().map(p=>[...p]):null;
+$('#tabs').innerHTML=SH.map((s,j)=>`<button class="${j==i?'on':''}" onclick="pick(${j})">${s.n}</button>`).join('');
+$('#ct').innerHTML=cur.sl.map(([k,l,mn,mx,v,st],j)=>`<label>${l}: <b id="o${j}"></b><input id="s${j}" type="range" min="${mn}" max="${mx}" value="${v}" step="${st}" oninput="draw()"></label>`).join('')+(cur.sl.length||cur.drag?`<label><input type="checkbox" id="dg" onchange="draw()"> დიაგონალები</label>`:'')+(cur.vr?`<label><input type="checkbox" id="vr" onchange="draw()"> შუაწერტილების ოთხკუთხედი</label>`:'');
+if(!cur.sl.length&&!cur.drag)$('#ct').innerHTML='';
+$('#df').textContent=cur.d;$('#fm').innerHTML=cur.fm.map(x=>`<span>${x}</span>`).join('');
+$('#pr').innerHTML=cur.pr.map(([t,p])=>`<details><summary>${t}</summary><p>${p}</p></details>`).join('');draw()}
+function draw(){const v={};cur.sl.forEach(([k],j)=>{v[k]=+$('#s'+j).value;$('#o'+j).textContent=v[k]});
+const U=cur.drag?P0:cur.f(v),n=U.length;let k=K,ox=210,oy=150;
+if(!cur.drag){const X=U.map(p=>p[0]),Y=U.map(p=>p[1]),w=Math.max(...X)-Math.min(...X),h=Math.max(...Y)-Math.min(...Y);k=Math.min(K,330/w,200/h);ox=210-k*(Math.max(...X)+Math.min(...X))/2;oy=150+k*(Math.max(...Y)+Math.min(...Y))/2}
+const P=U.map(p=>[ox+p[0]*k,oy-p[1]*k]),c=[P.reduce((s,p)=>s+p[0],0)/n,P.reduce((s,p)=>s+p[1],0)/n];
+const ar=P.reduce((s,p,i)=>{const q=P[(i+1)%n];return s+p[0]*q[1]-q[0]*p[1]},0)/2;
+const nm=(a,b,m)=>{const d=Math.hypot(a,b)||1;return[a/d*m,b/d*m]};
+const an=P.map((p,i)=>{const a=P[(i+n-1)%n],b=P[(i+1)%n],e1=[b[0]-p[0],b[1]-p[1]],e2=[a[0]-p[0],a[1]-p[1]];let t=Math.atan2(e1[0]*e2[1]-e1[1]*e2[0],e1[0]*e2[0]+e1[1]*e2[1])/rad;if(ar<0)t=-t;return t>0?t:t+360});
+const L=P.map((p,i)=>dist(p,P[(i+1)%n])/k),ch=id=>$('#'+id)&&$('#'+id).checked;
+let s=`<polygon class="poly" points="${P.map(p=>p.join(',')).join(' ')}"/>`;
+if(n==4&&ch('dg'))s+=`<line class="ln" x1="${P[0][0]}" y1="${P[0][1]}" x2="${P[2][0]}" y2="${P[2][1]}"/><line class="ln" x1="${P[1][0]}" y1="${P[1][1]}" x2="${P[3][0]}" y2="${P[3][1]}"/>`;
+if(ch('vr'))s+=`<polygon class="vr" points="${P.map((p,i)=>{const q=P[(i+1)%4];return(p[0]+q[0])/2+','+(p[1]+q[1])/2}).join(' ')}"/>`;
+P.forEach((p,i)=>{const a=P[(i+n-1)%n],b=P[(i+1)%n],o=nm(p[0]-c[0],p[1]-c[1],17);
+let u=nm(nm(b[0]-p[0],b[1]-p[1],1)[0]+nm(a[0]-p[0],a[1]-p[1],1)[0],nm(b[0]-p[0],b[1]-p[1],1)[1]+nm(a[0]-p[0],a[1]-p[1],1)[1],28);if(an[i]>180)u=[-u[0],-u[1]];
+const m=[(p[0]+b[0])/2,(p[1]+b[1])/2],so=nm(m[0]-c[0],m[1]-c[1],13);
+s+=`<text x="${p[0]+u[0]}" y="${p[1]+u[1]}" style="font-size:10px;fill:var(--ac)">${Math.round(an[i])}°</text><text x="${m[0]+so[0]}" y="${m[1]+so[1]}" style="font-size:10px;fill:var(--mu)">${r2(L[i])}</text><text x="${p[0]+o[0]}" y="${p[1]+o[1]}" style="font-weight:700;font-size:14px">${'ABCD'[i]}</text><circle class="dot" data-i="${i}" cx="${p[0]}" cy="${p[1]}" r="${cur.drag?9:4}"/>`});
+sv.innerHTML=s;
+let t=n==3?(()=>{const e=(x,y)=>Math.abs(x-y)<.03*Math.max(x,y),q=e(L[0],L[1])+e(L[1],L[2])+e(L[0],L[2]);const sd=q==3?'ტოლგვერდა':q?'ტოლფერდა':'სხვადასხვაგვერდა';const ag=an.some(x=>Math.abs(x-90)<.6)?'მართკუთხა':an.some(x=>x>90.6)?'ბლაგვკუთხა':'მახვილკუთხა';return sd+' '+ag+' სამკუთხედი'})():cls(P);
+let h=`<b>ახლა: ${t}</b><br>კუთხეთა ჯამი: ${Math.round(an.reduce((a,b)=>a+b))}° · P = ${r2(L.reduce((a,b)=>a+b))} · S = ${r2(Math.abs(ar)/k/k)}`;
+if(n==4){const d1=dist(P[0],P[2])/k,d2=dist(P[1],P[3])/k;h+=`<br>დიაგონალები: d₁ = ${r2(d1)}, d₂ = ${r2(d2)}`}
+$('#info').innerHTML=h}
+sv.addEventListener('pointerdown',e=>{if(cur.drag&&e.target.dataset.i!=null){dg=+e.target.dataset.i;sv.setPointerCapture(e.pointerId)}});
+sv.addEventListener('pointermove',e=>{if(dg<0)return;const pt=sv.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const q=pt.matrixTransform(sv.getScreenCTM().inverse());P0[dg]=[(Math.min(400,Math.max(20,q.x))-210)/K,(150-Math.min(280,Math.max(20,q.y)))/K];draw()});
+sv.addEventListener('pointerup',()=>dg=-1);
+pick(0);
+</script></body></html>

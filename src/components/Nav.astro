@@ -1,0 +1,39 @@
+---
+import { SUBJECTS, type SubjectId } from '@/subjects';
+import { allTopics, sectionsOf, subjectsWithContent, topicUrl } from '@/lib/topics';
+import Icon from './Icon.astro';
+
+interface Props { current?: { subject: SubjectId; slug: string } | undefined }
+const { current } = Astro.props;
+
+const topics = await allTopics();
+const subject: SubjectId = current?.subject ?? 'geometry';
+const subjects = subjectsWithContent(topics);
+const sections = sectionsOf(topics, subject);
+const pageNo = (id: string) => String(sections.flatMap(s => s.items).findIndex(t => t.id === id) + 1).padStart(2, '0');
+---
+<nav id="nav" class="nav" popover aria-label="თემები">
+  <a class="brand" href="/"><span class="brand-t">მათემატიკის ბაზა</span><span class="brand-s">რვეული № 1</span></a>
+  <button class="search" type="button" data-open-palette><Icon name="search" /><span>ძიება</span><kbd>/</kbd></button>
+  {subjects.length > 1 ? (
+    <details class="subject">
+      <summary>{SUBJECTS[subject].label}<Icon name="chev" /></summary>
+      <ul>
+        {subjects.map(id => (
+          <li><a href={topicUrl(topics.find(t => t.data.subject === id)!)} aria-current={id === subject ? 'true' : undefined}>{SUBJECTS[id].label}</a></li>
+        ))}
+      </ul>
+    </details>
+  ) : <p class="subject-name">{SUBJECTS[subject].label}</p>}
+  {sections.map(s => (
+    <details class="sec" open={!current || s.items.some(t => t.id === current.slug)}>
+      <summary>{s.label}<Icon name="chev" /></summary>
+      <ul class="topics">
+        {s.items.map(t => <li><a href={topicUrl(t)} aria-current={t.id === current?.slug ? 'page' : undefined}><span class="t-t">{t.data.title}</span><span class="t-n">{pageNo(t.id)}</span></a></li>)}
+      </ul>
+    </details>
+  ))}
+  <div class="nav-foot">
+    <button class="nf" type="button" data-theme-toggle><Icon name="theme" /><span data-theme-label>თემა</span></button>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+---
+// The right-hand panel (a bottom sheet on phones): three tabs, one scrolling body.
+const TABS = [['tools', 'ხელსაწყოები'], ['formulas', 'ფორმულები'], ['props', 'თვისებები']] as const;
+---
+<aside class="panel" aria-label="ხელსაწყოები და ცნობები">
+  <button class="grip" type="button" data-sheet-toggle aria-label="პანელის გაშლა" aria-expanded="false"><span></span></button>
+  <div class="tabs" role="tablist" aria-label="განყოფილებები">
+    {TABS.map(([id, label], i) => (
+      <button type="button" role="tab" id={`tab-${id}`} aria-controls={`tp-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}><span class="tab-l">{label}</span></button>
+    ))}
+  </div>
+  <div class="panel-body" data-pagefind-body>
+    {TABS.map(([id], i) => (
+      <section role="tabpanel" id={`tp-${id}`} aria-labelledby={`tab-${id}`} hidden={i !== 0}>
+        {id === 'tools' && <slot name="tools" />}
+        {id === 'formulas' && <slot name="formulas" />}
+        {id === 'props' && <slot name="props" />}
+      </section>
+    ))}
+  </div>
+</aside>

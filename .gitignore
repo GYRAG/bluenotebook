@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+screenshots/
+test-results/
+playwright-report/
+.vercel/
+*.local
+.env*
+.DS_Store

@@ -1,0 +1,57 @@
+---
+import '@fontsource/noto-sans-georgian/400.css';
+import '@fontsource/noto-sans-georgian/600.css';
+import '@fontsource/noto-serif-georgian/600.css';
+import 'katex/dist/katex.min.css';
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import Nav from '@/components/Nav.astro';
+import Palette from '@/components/Palette.astro';
+import Icon from '@/components/Icon.astro';
+import type { SubjectId } from '@/subjects';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: { subject: SubjectId; slug: string };
+  panel?: boolean;
+  draft?: boolean;
+  lede?: string;
+}
+const { title, description = 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.', current, panel = true, draft = false, lede } = Astro.props;
+---
+<!doctype html>
+<html lang="ka">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title} · მათემატიკის ბაზა</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#2657ff" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script is:inline>
+    try { const t = JSON.parse(localStorage.getItem('mb:theme')); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+  </script>
+</head>
+<body data-topic={current ? `/${current.subject}/${current.slug}/` : undefined}>
+  <a class="skip" href="#main">შინაარსზე გადასვლა</a>
+  <div class:list={['app', { 'no-panel': !panel }]}>
+    <header class="topbar">
+      <button class="icon-btn" type="button" popovertarget="nav" aria-label="თემების სია"><Icon name="menu" /></button>
+      <span class="topbar-title">{title}</span>
+      <button class="icon-btn" type="button" data-open-palette aria-label="ძიება"><Icon name="search" /></button>
+    </header>
+    <Nav current={current} />
+    <main class="stage" id="main" tabindex="-1">
+      <h1 class="title" data-pagefind-meta="title">{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      {draft && <p class="status-note">დრაფტი — შესამოწმებელია</p>}
+      <slot />
+    </main>
+    <slot name="panel" />
+  </div>
+  <Palette />
+  <div class="toast" role="status" hidden></div>
+  <script>import '@/scripts/shell';</script>
+</body>
+</html>

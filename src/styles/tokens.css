@@ -1,0 +1,43 @@
+/* Design tokens — the only place colours, spacing and type are defined.
+   Two inks: cobalt paper + white ink (day), navy paper (night). Emphasis comes from weight,
+   hatching and dimming, never from a second hue. Contrast (WCAG AA) noted per pair. */
+:root {
+  --paper: #2657ff;      /* figure page                                 */
+  --paper-2: #1f4ce6;    /* nav + panel, one shade deeper               */
+  --ink: #ffffff;        /* 5.4:1 on paper, 6.4:1 on paper-2            */
+  --ink-2: #e6ecff;      /* secondary text, ≥4.5:1 on both papers       */
+  --on-ink: #1f4ce6;     /* text on an ink-filled chip                  */
+  --line: rgb(255 255 255 / .72);  /* control borders, ≥3:1             */
+  --line-2: rgb(255 255 255 / .22); /* decorative rules only           */
+  --grid: rgb(255 255 255 / .13);
+  --grid-2: rgb(255 255 255 / .055); /* faint paper in the margin panel */
+  --aux: rgb(255 255 255 / .8);     /* construction lines (dashed)      */
+  --fill: rgb(255 255 255 / .08);
+  --scrim: rgb(8 18 60 / .5);
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px;
+  --r: 2px;
+  --bw: 1.5px;
+
+  --font-body: 'Noto Sans Georgian', system-ui, sans-serif;
+  --font-head: 'Noto Serif Georgian', Georgia, serif;
+  --font-math: KaTeX_Math, 'Times New Roman', serif;
+  --fs-ui: 14px; --fs-body: 16px; --fs-h2: 21px; --fs-h1: 32px;
+  --w1: 400; --w2: 600;
+
+  --nav-w: 248px; --panel-w: 384px; --topbar-h: 52px; --fig-h: 44dvh;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0f1c47; --paper-2: #0b1538; --ink: #e9eeff; --ink-2: #aebbe8; --on-ink: #0f1c47;
+    --line: rgb(233 238 255 / .5); --line-2: rgb(233 238 255 / .16); --grid: rgb(233 238 255 / .07); --grid-2: rgb(233 238 255 / .035);
+    --aux: rgb(233 238 255 / .72); --fill: rgb(233 238 255 / .05); --scrim: rgb(0 0 0 / .5);
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #0f1c47; --paper-2: #0b1538; --ink: #e9eeff; --ink-2: #aebbe8; --on-ink: #0f1c47;
+  --line: rgb(233 238 255 / .5); --line-2: rgb(233 238 255 / .16); --grid: rgb(233 238 255 / .07); --grid-2: rgb(233 238 255 / .035);
+  --aux: rgb(233 238 255 / .72); --fill: rgb(233 238 255 / .05); --scrim: rgb(0 0 0 / .5);
+}

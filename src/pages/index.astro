@@ -1,0 +1,39 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import { allTopics, sectionsOf, topicUrl } from '@/lib/topics';
+
+const sections = sectionsOf(await allTopics(), 'geometry');
+---
+<Shell title="მათემატიკის ბაზა" panel={false}>
+  <div class="home">
+    <a class="continue" href="/" data-continue hidden>გააგრძელე: <b></b></a>
+    <p>ფორმულები, თვისებები და დამტკიცებები — ყველაფერი ნახაზზე. აირჩიე თემა ან დააჭირე <kbd>/</kbd> ძიებისთვის.</p>
+    <!-- phones only: the table of contents (on desktop the nav already shows it) -->
+    <div class="toc">
+      {sections.map(s => (
+        <section>
+          <h2>{s.label}</h2>
+          <ul>{s.items.map(t => <li><a href={topicUrl(t)}>{t.data.title}</a></li>)}</ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</Shell>
+<script>
+  import { load } from '@/lib/store';
+  const last = load<{ url: string; title: string } | null>('last', null);
+  const a = document.querySelector<HTMLAnchorElement>('[data-continue]');
+  if (last && a) { a.href = last.url; a.querySelector('b')!.textContent = last.title; a.hidden = false; }
+</script>
+<style>
+  .home { display: grid; gap: var(--s4); max-width: 56ch; margin-top: var(--s5); color: var(--ink-2); }
+  .continue { justify-self: start; display: inline-flex; gap: var(--s2); align-items: center; min-height: 44px; padding: 0 var(--s4); border: var(--bw) solid var(--line); border-radius: var(--r); color: var(--ink); }
+  .continue:hover { background: var(--ink); color: var(--on-ink); }
+  kbd { border: 1px solid var(--line-2); border-radius: var(--r); padding: 0 6px; color: var(--ink); }
+  .toc { display: none; }
+  @media (max-width: 899px) {
+    .toc { display: grid; gap: var(--s4); margin-top: var(--s2); }
+    .toc h2 { font-size: var(--fs-ui); font-weight: var(--w2); color: var(--ink-2); }
+    .toc a { display: flex; align-items: center; min-height: 44px; color: var(--ink); font-size: 17px; }
+  }
+</style>

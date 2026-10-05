@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+---
+<dialog id="palette" class="pal" aria-label="ძიება">
+  <label class="pal-in">
+    <Icon name="search" />
+    <input type="search" placeholder="თემა, თვისება ან ფორმულა…" autocomplete="off" spellcheck="false" aria-describedby="pal-status" />
+    <kbd>Esc</kbd>
+  </label>
+  <div class="pal-body">
+    <p class="pal-status" id="pal-status" aria-live="polite">დაწერე რამდენიმე ასო.</p>
+    <ul class="pal-res"></ul>
+  </div>
+</dialog>
