@@ -21,6 +21,9 @@ parent: quadrilateral
 <Formula id="perimeter" name="პერიმეტრი" tex="P = 2(a+b)" live="P" proof="opposite-sides-equal" />
 <Formula id="adjacent-angles" name="მეზობელი კუთხეები" tex="\alpha + \beta = 180^\circ" live="β" proof="adjacent-angles-sum" />
 <Formula id="diagonals" name="დიაგონალები" tex="d_1^2 + d_2^2 = 2\left(a^2 + b^2\right)" proof="diagonal-squares" />
+<Formula id="area-diagonals-formula" name="ფართობი — დიაგონალები და მათ შორის კუთხე" tex="S = \tfrac12\, d_1 d_2 \sin\varphi" live="S" proof="area-diagonals" />
+<Formula id="four-triangles-formula" name="დიაგონალებით მიღებული სამკუთხედები" tex="S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S" proof="four-triangles" />
+<Formula id="bisector-formula" name="კუთხის ბისექტრისა" tex="\angle BAE = \angle EAD \;\Rightarrow\; BE = AB" proof="bisector-isosceles" />
 </Formulas>
 
 <Properties>
@@ -84,6 +87,38 @@ parent: quadrilateral
 <Proof given="$AB = a,\ AD = b,\ \angle A = \alpha$" prove="$S = ab\sin\alpha$">
 <Step set={{ alpha: 65 }} show="DH <DHB" hl="AHD" tex="h_a = DH = b\sin\alpha">$\triangle AHD$ მართკუთხაა: $AD = b$ ჰიპოტენუზაა, $DH$ — $\alpha$ კუთხის პირდაპირ მდებარე კათეტი.</Step>
 <Step hl="DH AB" tex="S = a\,h_a = ab\sin\alpha \quad \blacksquare">ჩავსვათ ფორმულაში $S = a\,h_a$ (თვისება 6).</Step>
+</Proof>
+</Property>
+
+
+<Property id="four-triangles" title="დიაგონალები პარალელოგრამს ოთხ ტოლდიდ სამკუთხედად ყოფს" why="$O$ დიაგონალების შუაწერტილია: მეზობელ სამკუთხედებს ტოლი ფუძეები და საერთო სიმაღლე აქვს.">
+<Proof given="$O = AC \cap BD$" prove="$S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S$">
+<Step show="AC BD O" hl="AO=OC">დიაგონალები ერთმანეთს შუაზე ყოფს: $AO = OC$, $BO = OD$.</Step>
+<Step hl="AOB BOC" tex="S_{AOB} = S_{BOC}">ორ სამკუთხედს საერთო წვერო $B$ აქვს, ფუძეები $AO = OC$ კი ერთ წრფეზე ძევს — სიმაღლე საერთოა.</Step>
+<Step hl="BOC COD" tex="S_{BOC} = S_{COD}">იგივე, წვერო $C$ და ფუძეები $BO = OD$.</Step>
+<Step hl="COD DOA" tex="S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S \quad \blacksquare">ასევე $S_{COD} = S_{DOA}$; ოთხი ტოლი ნაწილი მთელ ფართობს შეადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="ფართობი დიაგონალებისა და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია" why="ოთხივე სამკუთხედის ფართობი $\tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} \sin\varphi$-ია.">
+<Proof given="$AC = d_1,\ BD = d_2,\ \angle AOB = \varphi$" prove="$S = \tfrac12\, d_1 d_2 \sin\varphi$">
+<Step show="AC BD O" hl="<AOB" tex="S_{AOB} = \tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} \sin\varphi">$AO = \tfrac{d_1}{2}$, $BO = \tfrac{d_2}{2}$; ფართობი ორი გვერდითა და მათ შორის კუთხით.</Step>
+<Step hl="AOB BOC COD DOA" tex="S = 4\,S_{AOB} = \tfrac12\, d_1 d_2 \sin\varphi \quad \blacksquare">წინა თვისებით ოთხივე სამკუთხედი ტოლდიდია (მეზობელი კუთხეების სინუსები ტოლია).</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-isosceles" title="პარალელოგრამის კუთხის ბისექტრისა მისგან ტოლფერდა სამკუთხედს ჩამოჭრის" why="ბისექტრისა ორ ტოლ კუთხეს ქმნის, პარალელური გვერდი კი — მესამეს, ჯვარედინს.">
+<Proof given="$AE$ — $\angle A$-ს ბისექტრისა, $E \in BC$" prove="$BE = AB$">
+<Step set={{ a: 3, b: 4, alpha: 70 }} show="AE E" hl="<BAE=<EAD">$AE$ $\angle A$-ს ორ ტოლ ნაწილად ყოფს.</Step>
+<Step hl="<EAD=<AEB" tex="\angle EAD = \angle AEB">$AD \parallel BC$, ხოლო $AE$ მკვეთია — ეს ჯვარედინი კუთხეებია.</Step>
+<Step hl="ABE AB=BE" tex="BE = AB \quad \blacksquare">$\angle BAE = \angle AEB$ — $\triangle ABE$-ს ორი ტოლი კუთხე აქვს, ამიტომ ის ტოლფერდაა.</Step>
+</Proof>
+</Property>
+
+<Property id="adjacent-bisectors" title="ერთ გვერდთან მდებარე ორი კუთხის ბისექტრისები მართი კუთხით იკვეთება" why="კუთხეების ჯამი $180^\circ$-ია, ნახევრებისა — $90^\circ$.">
+<Proof given="$AF$, $BF$ — $\angle A$-სა და $\angle B$-ს ბისექტრისები" prove="$\angle AFB = 90^\circ$">
+<Step set={{ a: 5, b: 3, alpha: 60 }} show="AF BF F" hl="AF BF">გავავლოთ ორი ბისექტრისა.</Step>
+<Step hl="<AFB" tex="\angle FAB + \angle FBA = 90^\circ">ეს $\angle A$-სა და $\angle B$-ს ნახევრებია, ხოლო $\angle A + \angle B = 180^\circ$. ამიტომ $\triangle AFB$-ში $\angle AFB = 90^\circ$. ∎</Step>
 </Proof>
 </Property>
 

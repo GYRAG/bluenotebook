@@ -1,4 +1,4 @@
-import { add, angleAt, area, circleIntersection, dist, foot, intersect, mid, near, parallel, polar, rad, sub, type V } from './engine/geom';
+import { add, angleAt, area, circleIntersection, dist, foot, intersect, mid, near, parallel, polar, rad, sub, unit, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // The centre O stays fixed and the shape breathes around it, so the figure never drifts
@@ -16,9 +16,15 @@ export default figure({
     const A: V = [-c[0], -c[1]], B: V = [a - c[0], -c[1]], D: V = [d[0] - c[0], d[1] - c[1]];
     const C: V = [B[0] + d[0], B[1] + d[1]];
     const H = foot(D, A, B);
-    return { A, B, C, D, O: [0, 0], H, K: add(H, sub(B, A)) }; // K: foot from C, for the area proof
+    const bis = (P: V, Q: V, R: V) => add(P, add(unit(sub(Q, P)), unit(sub(R, P)))); // a second point on the bisector of ∠QPR
+    return {
+      A, B, C, D, O: [0, 0], H, K: add(H, sub(B, A)), // K: foot from C, for the area proof
+      E: intersect(A, bis(A, B, D), B, C), // bisector of ∠A meets line BC
+      F: intersect(A, bis(A, B, D), B, bis(B, A, C)), // bisectors of ∠A and ∠B meet
+    };
   },
   drag: { B: ['a'], D: ['b', 'alpha'] },
+  boundsOf: ['A', 'B', 'C', 'D'], // E and F are proof helpers; their proofs pick a shape where they fit
   base: 'ABCD',
   dims: '|AB|a |DA|b <A <B',
   toggles: {
@@ -47,6 +53,14 @@ export default figure({
     'diagonal-squares': ({ A, B, C, D }) => near(dist(A, C) ** 2 + dist(B, D) ** 2, 2 * (dist(A, B) ** 2 + dist(B, C) ** 2)),
     'area-base-height': ({ A, B, C, D, H }) => near(area([A, B, C, D]), dist(A, B) * dist(D, H)),
     'area-sine': ({ A, B, C, D }, { a, b, alpha }) => near(area([A, B, C, D]), a * b * Math.sin(rad(alpha))),
+    'bisector-isosceles': ({ A, B, C, D, E }) =>
+      near(angleAt(B, A, E), angleAt(E, A, D)) && near(dist(E, foot(E, B, C)), 0) && near(dist(B, E), dist(A, B)),
+    'adjacent-bisectors': ({ A, B, F }) => near(angleAt(A, F, B), 90),
+    'four-triangles': ({ A, B, C, D, O }) => {
+      const s = [area([A, O, B]), area([B, O, C]), area([C, O, D]), area([D, O, A])];
+      return s.every(x => near(x, area([A, B, C, D]) / 4));
+    },
+    'area-diagonals': ({ A, B, C, D, O }) => near(area([A, B, C, D]), 0.5 * dist(A, C) * dist(B, D) * Math.sin(rad(angleAt(A, O, B)))),
     // criteria: build a quadrilateral from the hypothesis only, then confirm it is a parallelogram
     'criterion-sides': (_, { a, b, alpha }) => {
       const A: V = [0, 0], B: V = [a, 0], C = add(B, polar(b, alpha));
