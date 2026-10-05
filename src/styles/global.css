@@ -43,7 +43,9 @@ summary::-webkit-details-marker { display: none; }
 /* nav: an ordinary column on desktop, a popover drawer on phones */
 .nav[popover] {
   grid-area: nav; position: static; inset: auto; margin: 0; width: auto; height: auto; max-width: none; max-height: none;
-  border: 0; color: inherit; background: var(--paper-2);
+  border: 0; color: inherit;
+  background: linear-gradient(var(--grid-2) 1px, transparent 1px) 0 0 / 24px 24px local,
+    linear-gradient(90deg, var(--grid-2) 1px, transparent 1px) 0 0 / 24px 24px local, var(--paper-2);
   display: flex; flex-direction: column; min-height: 0; overflow: auto; padding: var(--s5) var(--s4) var(--s3) var(--s5);
 }
 /* the notebook's cover label */
@@ -120,6 +122,19 @@ summary::-webkit-details-marker { display: none; }
 .status-note { font-size: var(--fs-ui); color: var(--ink-2); margin-top: var(--s2); }
 .skip { position: fixed; left: var(--s2); top: -100px; z-index: 70; padding: 10px var(--s4); background: var(--ink); color: var(--on-ink); font-weight: var(--w2); }
 .skip:focus { top: var(--s2); }
+
+/* the spiral binding between the contents page and the figure page */
+@media (min-width: 900px) {
+  .stage { background: radial-gradient(circle, var(--paper-2) 0 3.5px, var(--ink) 3.5px 5px, transparent 5.5px) 0 14px / 14px 30px repeat-y; padding-left: 36px; }
+}
+
+/* scrollbars: a thin pencil line, no arrows, no track */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-thumb { background: var(--line-2) padding-box; border: 3px solid transparent; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active { background-color: var(--line); }
+@supports (-moz-appearance: none) { * { scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; } }
 
 /* states */
 .empty { color: var(--ink-2); font-size: 15px; padding: var(--s4) 0; }
