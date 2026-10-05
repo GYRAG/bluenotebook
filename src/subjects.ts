@@ -6,7 +6,7 @@ export const SUBJECTS = {
   },
   algebra: { label: 'ალგებრა', sections: { equations: 'განტოლებები' } },
   trig: { label: 'ტრიგონომეტრია', sections: { basics: 'საფუძვლები' } },
-  precalc: { label: 'Precalculus', sections: { functions: 'ფუნქციები' } }, // Georgian label: ask before Phase 2
+  precalc: { label: 'პრეკალკულუსი', sections: { functions: 'ფუნქციები' } }, // no Georgian school equivalent; transliterated
   'number-theory': { label: 'რიცხვთა თეორია', sections: { basics: 'საფუძვლები' } },
   sat: { label: 'SAT', sections: { math: 'მათემატიკა' } },
 } as const satisfies Record<string, { label: string; sections: Record<string, string> }>;
