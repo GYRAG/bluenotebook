@@ -213,8 +213,8 @@ geo-figure { display: block; position: relative; }
 .fig .grid { stroke: var(--grid); stroke-width: 1; }
 .fig .shape { fill: var(--fill); stroke: var(--ink); stroke-width: 2.25; stroke-linejoin: round; }
 .fig .base { stroke: var(--ink); stroke-width: 2.25; stroke-linecap: round; }
-.fig .extra { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 18 4 2 4; }  /* drafting centre line */
-.fig .aux { stroke: var(--aux); stroke-width: 1.5; stroke-dasharray: 7 5; }             /* construction */
+.fig .extra { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 18 4 2 4; fill: none; }  /* drafting centre line */
+.fig .aux { stroke: var(--aux); stroke-width: 1.5; stroke-dasharray: 7 5; fill: none; }             /* construction */
 .fig .hl { stroke: var(--ink); stroke-width: 4; stroke-linecap: round; fill: none; }
 .fig .hl-fill { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.5; }
 .hatch-l { stroke: var(--ink); stroke-width: 1.1; stroke-opacity: .8; }

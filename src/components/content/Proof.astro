@@ -2,10 +2,10 @@
 import Icon from '../Icon.astro';
 import { md } from '@/lib/math';
 
-interface Props { given: string; prove: string }
-const { given, prove } = Astro.props;
+interface Props { given: string; prove: string; figure?: string }
+const { given, prove, figure } = Astro.props;
 ---
-<div class="proof-body">
+<div class="proof-body" data-figure={figure}>
   <dl class="given">
     <div><dt>მოც.</dt><dd set:html={md(given)} /></div>
     <div><dt>დას.</dt><dd set:html={md(prove)} /></div>

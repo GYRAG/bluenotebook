@@ -11,6 +11,7 @@ export interface Scene {
   view: View;
   base: Ref[]; dims: Ref[]; extra: Ref[]; aux: Ref[]; hl: Ref[];
   poly: string[];                    // the base polygon, for interior angles like <A
+  unlabeled?: string[];
 }
 type Box = { x0: number; y0: number; x1: number; y1: number };
 
@@ -37,26 +38,31 @@ export function renderScene(s: Scene): string {
   for (let x = ((ox % cell) + cell) % cell; x <= W; x += cell) grid += `<line class="grid" x1="${f(x)}" y1="0" x2="${f(x)}" y2="${H}"/>`;
   for (let y = ((oy % cell) + cell) % cell; y <= H; y += cell) grid += `<line class="grid" x1="0" y1="${f(y)}" x2="${W}" y2="${f(y)}"/>`;
 
-  const angleOf = (a: Ang): [V, V, V] => {
-    if (a.a && a.b) return [P(a.a), P(a.v), P(a.b)];
+  const polyUnits = s.poly.map(n => s.pts[n]!);
+  const orient = Math.sign(polyUnits.reduce((acc, p, i) => acc + cross(p, polyUnits[(i + 1) % polyUnits.length]!), 0)) || 1;
+  /** [ray end, vertex, ray end, reflex?]: interior angles of the base polygon can be reflex. */
+  const angleOf = (a: Ang): [V, V, V, boolean] => {
+    if (a.a && a.b) return [P(a.a), P(a.v), P(a.b), false];
     const i = s.poly.indexOf(a.v), n = s.poly.length;
     if (i < 0) throw new Error(`<${a.v}: not a vertex of the base polygon`);
-    return [P(s.poly[(i + n - 1) % n]!), P(a.v), P(s.poly[(i + 1) % n]!)];
+    const pv = polyUnits[(i + n - 1) % n]!, v = polyUnits[i]!, nx = polyUnits[(i + 1) % n]!;
+    return [P(s.poly[(i + n - 1) % n]!), P(a.v), P(s.poly[(i + 1) % n]!), Math.sign(cross(sub(v, pv), sub(nx, v))) === -orient];
   };
-  function arc([p, v, q]: [V, V, V], r: number, count: number, c: string, value?: string) {
+  function arc([p, v, q, reflex]: [V, V, V, boolean], r: number, count: number, c: string, value?: string) {
     const a1 = Math.atan2(p[1] - v[1], p[0] - v[0]);
     let d = Math.atan2(q[1] - v[1], q[0] - v[0]) - a1;
     while (d <= -Math.PI) d += 2 * Math.PI;
     while (d > Math.PI) d -= 2 * Math.PI;
-    const u = unit(sub(p, v)), w = unit(sub(q, v)), bis = unit(add(u, w));
+    if (reflex) d -= Math.sign(d) * 2 * Math.PI;
+    const u = unit(sub(p, v)), w = unit(sub(q, v)), bis = scale(unit(add(u, w)), reflex ? -1 : 1);
     let out = '';
-    if (Math.abs(Math.abs(d) - Math.PI / 2) < 1e-6) { // right angle → square mark
+    if (!reflex && Math.abs(Math.abs(d) - Math.PI / 2) < 1e-6) { // right angle → square mark
       const z = 13, p1 = add(v, scale(u, z)), p3 = add(v, scale(w, z)), p2 = add(p1, scale(w, z));
       out = `<path class="${c}" d="M${f(p1[0])} ${f(p1[1])}L${f(p2[0])} ${f(p2[1])}L${f(p3[0])} ${f(p3[1])}"/>`;
     } else {
       for (let i = 0; i < count; i++) {
         const R = r + i * 5, e1 = add(v, [R * Math.cos(a1), R * Math.sin(a1)]), e2 = add(v, [R * Math.cos(a1 + d), R * Math.sin(a1 + d)]);
-        out += `<path class="${c}" d="M${f(e1[0])} ${f(e1[1])}A${R} ${R} 0 0 ${d > 0 ? 1 : 0} ${f(e2[0])} ${f(e2[1])}"/>`;
+        out += `<path class="${c}" d="M${f(e1[0])} ${f(e1[1])}A${R} ${R} 0 ${Math.abs(d) > Math.PI ? 1 : 0} ${d > 0 ? 1 : 0} ${f(e2[0])} ${f(e2[1])}"/>`;
       }
     }
     boxes.push(arcBox(v, bis, r));
@@ -126,7 +132,7 @@ export function renderScene(s: Scene): string {
           else { lines += `<polygon class="${c === 'base' ? 'shape' : c}" points="${pts}"/>`; r.ps.forEach((p, i) => segs.push([P(p), P(r.ps[(i + 1) % r.ps.length]!)])); }
           break;
         }
-        case 'angle': marks += arc(angleOf(r.ang), 22, 1, c === 'hl' ? 'arc arc-hl' : 'arc', c === 'dims' ? `${Math.round(angleAt(...angleUnits(r.ang)))}°` : undefined); break;
+        case 'angle': marks += arc(angleOf(r.ang), 22, 1, c === 'hl' ? 'arc arc-hl' : 'arc', c === 'dims' ? `${Math.round(angleValue(r.ang))}°` : undefined); break;
         case 'eqseg': eq++; for (const sg of r.segs) { if (c === 'hl') lines += line(P(sg[0]), P(sg[1]), 'hl'); marks += ticks(sg, eq, markC); } break;
         case 'eqang': eqa++; for (const a of r.angs) marks += arc(angleOf(a), 22, eqa, c === 'hl' ? 'arc arc-hl' : 'arc'); break;
         case 'par': par++; for (const sg of r.segs) marks += arrows(sg, par, markC); break;
@@ -140,10 +146,11 @@ export function renderScene(s: Scene): string {
       }
     }
   }
-  const angleUnits = (a: Ang): [V, V, V] => {
-    if (a.a && a.b) return [s.pts[a.a]!, s.pts[a.v]!, s.pts[a.b]!];
+  const angleValue = (a: Ang) => {
+    if (a.a && a.b) return angleAt(s.pts[a.a]!, s.pts[a.v]!, s.pts[a.b]!);
     const i = s.poly.indexOf(a.v), n = s.poly.length;
-    return [s.pts[s.poly[(i + n - 1) % n]!]!, s.pts[a.v]!, s.pts[s.poly[(i + 1) % n]!]!];
+    const x = angleAt(s.pts[s.poly[(i + n - 1) % n]!]!, s.pts[a.v]!, s.pts[s.poly[(i + 1) % n]!]!);
+    return angleOf(a)[3] ? 360 - x : x;
   };
   draw(s.base, 'base'); draw(s.extra, 'extra'); draw(s.aux, 'aux'); draw(s.hl, 'hl'); draw(s.dims, 'dims');
 
@@ -152,6 +159,7 @@ export function renderScene(s: Scene): string {
     return boxes.some(o => b.x0 < o.x1 && b.x1 > o.x0 && b.y0 < o.y1 && b.y1 > o.y0) || segs.some(([a, c]) => segHitsBox(a, c, b));
   }
   for (const n of labelled) {
+    if (s.unlabeled?.includes(n)) continue;
     const p = P(n), pref = Math.atan2(p[1] - centre[1], p[0] - centre[0]), half = { w: 6 + n.length * 4, h: 11 };
     let best: V | null = null;
     for (let i = 0; i < 24 && !best; i++) {

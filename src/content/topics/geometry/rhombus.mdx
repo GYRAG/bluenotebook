@@ -1,0 +1,107 @@
+---
+title: რომბი
+slug: rhombus
+subject: geometry
+section: quadrilaterals
+order: 22
+summary: პარალელოგრამი, რომლის ყველა გვერდი ტოლია.
+tags: [პარალელოგრამი, დიაგონალი, ჩახაზული წრე]
+prerequisites: [parallelogram, isosceles-triangle, right-triangle]
+status: draft
+figure: rhombus
+parent: parallelogram
+---
+
+<Definition>რომბი ეწოდება პარალელოგრამს, რომლის ყველა გვერდი ტოლია.</Definition>
+
+<Formulas>
+<Formula id="area-diagonals-formula" name="ფართობი დიაგონალებით" tex="S = \tfrac12\, d_1 d_2" live="S" proof="area-diagonals" />
+<Formula id="area-sine-formula" name="ფართობი გვერდითა და კუთხით" tex="S = a^2 \sin\alpha" live="S" proof="area-sine" />
+<Formula id="area-height-formula" name="ფართობი სიმაღლით" tex="S = a\,h" live="S" proof="area-sine" />
+<Formula id="side-formula" name="გვერდი დიაგონალებით" tex="a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2" proof="side-from-diagonals" />
+<Formula id="inradius" name="ჩახაზული წრის რადიუსი" tex="r = \tfrac{h}{2}" live="r" proof="incircle" />
+<Formula id="perimeter" name="პერიმეტრი" tex="P = 4a" live="P" />
+</Formulas>
+
+<Remark kind="special">რომბი პარალელოგრამია: მისი მოპირდაპირე კუთხეები ტოლია, დიაგონალები შუაზე იყოფა.</Remark>
+
+<Properties>
+
+<Property id="diagonals-perpendicular" title="რომბის დიაგონალები ურთიერთმართობია" why="დიაგონალი ტოლფერდა სამკუთხედის მედიანაა, ე.ი. სიმაღლეც.">
+<Proof given="$ABCD$ — რომბი, $O = AC \cap BD$" prove="$AC \perp BD$">
+<Step show="AC BD O" hl="AC BD">გავავლოთ დიაგონალები.</Step>
+<Step hl="ABD AB=AD">$AB = AD$, ამიტომ $\triangle ABD$ ტოლფერდაა $BD$ ფუძით.</Step>
+<Step hl="BO=OD AO">$O$ არის $BD$-ს შუაწერტილი (პარალელოგრამის დიაგონალები შუაზე იყოფა), ამიტომ $AO$ ამ სამკუთხედის მედიანაა.</Step>
+<Step hl="<AOB" tex="AC \perp BD \quad \blacksquare">ტოლფერდა სამკუთხედში ფუძეზე გავლებული მედიანა სიმაღლეცაა.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-bisect-angles" title="რომბის დიაგონალები მისი კუთხეების ბისექტრისებია" why="იგივე მედიანა ბისექტრისაცაა.">
+<Proof given="$ABCD$ — რომბი" prove="$\angle BAC = \angle DAC$">
+<Step show="AC BD O" hl="ABD AO">$\triangle ABD$-ში ($AB = AD$) $AO$ ფუძეზე გავლებული მედიანაა.</Step>
+<Step hl="<BAO=<DAO" tex="\angle BAO = \angle DAO \quad \blacksquare">ტოლფერდა სამკუთხედში ეს მედიანა ბისექტრისაცაა. იგივე ყოველ წვეროზე სამართლიანია.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="რომბის ფართობი დიაგონალების ნამრავლის ნახევარია" why="დიაგონალები მას ოთხ ტოლ მართკუთხა სამკუთხედად ყოფს.">
+<Proof given="$AC = d_1,\ BD = d_2$" prove="$S = \tfrac12 d_1 d_2$">
+<Step show="AC BD O" hl="<AOB">დიაგონალები ურთიერთმართობია და შუაზე იყოფა.</Step>
+<Step hl="ABO BCO CDO DAO" tex="S_{AOB} = \tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} = \tfrac{d_1 d_2}{8}">მივიღეთ ოთხი მართკუთხა სამკუთხედი $\tfrac{d_1}{2}$ და $\tfrac{d_2}{2}$ კათეტებით.</Step>
+<Step tex="S = 4 \cdot \tfrac{d_1 d_2}{8} = \tfrac12\, d_1 d_2 \quad \blacksquare">ოთხი ასეთი სამკუთხედი მთელ რომბს შეადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="side-from-diagonals" title="გვერდის კვადრატი დიაგონალების ნახევრების კვადრატების ჯამია" why="გვერდი მართკუთხა სამკუთხედის ჰიპოტენუზაა.">
+<Proof given="$AC = d_1,\ BD = d_2$" prove="$a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2$">
+<Step show="AC BD O" hl="ABO <AOB">$\triangle AOB$ მართკუთხაა, $AO = \tfrac{d_1}{2}$, $BO = \tfrac{d_2}{2}$, ჰიპოტენუზა $AB = a$.</Step>
+<Step tex="a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2 \quad \blacksquare">პითაგორას თეორემით.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="რომბის ფართობი უდრის $a^2 \sin\alpha$-ს" why="პარალელოგრამის ფორმულა, როცა $b = a$.">
+<Proof given="$AB = AD = a,\ \angle A = \alpha$" prove="$S = a^2 \sin\alpha$">
+<Step show="DH <DHB" hl="DH" tex="h = DH = a \sin\alpha">$D$-დან $AB$-ზე დაშვებული სიმაღლე $\triangle AHD$-ის კათეტია $\alpha$-ს პირდაპირ.</Step>
+<Step tex="S = a\,h = a^2 \sin\alpha \quad \blacksquare">პარალელოგრამის ფართობის ფორმულით.</Step>
+</Proof>
+</Property>
+
+<Property id="incircle" title="რომბში წრეწირის ჩახაზვა შეიძლება; ცენტრი დიაგონალების გადაკვეთის წერტილია, $r = \tfrac{h}{2}$" why="დიაგონალები ბისექტრისებია, ამიტომ $O$ ყველა გვერდიდან თანაბრადაა დაშორებული.">
+<Proof given="$ABCD$ — რომბი, $O = AC \cap BD$" prove="$O$ ყველა გვერდიდან $\tfrac{h}{2}$ მანძილზეა">
+<Step show="AC BD O" hl="AC BD">დიაგონალები კუთხეების ბისექტრისებია.</Step>
+<Step show="OT T <OTB" hl="OT">კუთხის ბისექტრისის ყოველი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული; $O$ ყველა ბისექტრისაზე ძევს, ამიტომ ოთხივე გვერდიდან ერთნაირ მანძილზეა.</Step>
+<Step show="(OT)" hl="(OT)" tex="r = \tfrac{h}{2} \quad \blacksquare">$O$ ძევს $AB$-სა და $CD$-ს შორის ზუსტად შუაში (ის $AC$-ს შუაწერტილია), ხოლო მათ შორის მანძილი სიმაღლეა $h$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ნიშნები — როდის არის პარალელოგრამი რომბი">
+
+<Property id="criterion-perpendicular-diagonals" kind="criterion" title="თუ პარალელოგრამის დიაგონალები ურთიერთმართობია, ის რომბია" why="ერთი დიაგონალი მეორის შუამართობი გამოდის.">
+<Proof given="$ABCD$ — პარალელოგრამი, $AC \perp BD$" prove="$AB = AD$">
+<Step show="AC BD O" hl="BO=OD <AOB">$O$ არის $BD$-ს შუაწერტილი და $AO \perp BD$.</Step>
+<Step hl="ABO ADO" tex="\triangle ABO = \triangle ADO">$BO = DO$, $AO$ საერთოა, კუთხეები $O$-სთან მართია — სამკუთხედები ტოლია (გკგ).</Step>
+<Step hl="AB=AD" tex="AB = AD">მეზობელი გვერდები ტოლია, ხოლო მოპირდაპირე გვერდები პარალელოგრამში ისედაც ტოლია — ოთხივე გვერდი ტოლია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonal-bisects-angle" kind="criterion" title="თუ პარალელოგრამის დიაგონალი მისი კუთხის ბისექტრისაა, ის რომბია" why="ბისექტრისა და ჯვარედინი კუთხეები ტოლფერდა სამკუთხედს ქმნის.">
+<Proof given="$ABCD$ — პარალელოგრამი, $\angle BAC = \angle DAC$" prove="$AB = BC$">
+<Step show="AC" hl="<BAC=<DAC">$AC$ ყოფს $\angle A$-ს შუაზე.</Step>
+<Step hl="<DAC=<BCA" tex="\angle DAC = \angle BCA">$AD \parallel BC$ — შიგა ჯვარედინი კუთხეები.</Step>
+<Step hl="ABC <BAC=<BCA" tex="\angle BAC = \angle BCA \;\Rightarrow\; AB = BC \quad \blacksquare">$\triangle ABC$-ში ორი კუთხე ტოლია, ამიტომ ის ტოლფერდაა.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-four-sides" kind="criterion" title="ოთხკუთხედი, რომლის ოთხივე გვერდი ტოლია, რომბია" why="მოპირდაპირე გვერდების ტოლობა უკვე პარალელოგრამს ნიშნავს.">
+<Proof given="$AB = BC = CD = DA$" prove="$ABCD$ — რომბი">
+<Step hl="AB=CD BC=DA">მოპირდაპირე გვერდები წყვილ-წყვილად ტოლია, ამიტომ $ABCD$ პარალელოგრამია (პარალელოგრამის ნიშანი).</Step>
+<Step hl="AB=BC=CD=DA">ეს პარალელოგრამი, რომლის ყველა გვერდი ტოლია, — განმარტებით რომბია. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">ურთიერთმართობი დიაგონალები თავისთავად რომბს არ იძლევა — ნიშანი მხოლოდ პარალელოგრამს ეხება. მაგალითად, ოთხკუთხედი, რომლის დიაგონალები მართობია, მაგრამ ერთმანეთს შუაზე არ ყოფს, რომბი არ არის.</Remark>
+
+<Remark kind="special">რომბი, რომლის ერთი კუთხე მართია, კვადრატია.</Remark>

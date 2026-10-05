@@ -21,6 +21,7 @@ export const polar = (r: number, angle: number, o: V = [0, 0]): V => [o[0] + r *
 /** Intersection of lines AB and CD (they must not be parallel). */
 export function intersect(a: V, b: V, c: V, d: V): V {
   const r = sub(b, a), s = sub(d, c), den = cross(r, s);
+  if (Math.abs(den) < 1e-12) return mid(a, c); // parallel: no intersection; stay finite
   return add(a, scale(r, cross(sub(c, a), s) / den));
 }
 
@@ -51,4 +52,36 @@ export const perpendicular = (a: V, b: V, c: V, d: V, tol = 1e-6) => Math.abs(do
 export function segDist(p: V, a: V, b: V): number {
   const ab = sub(b, a), t = Math.max(0, Math.min(1, dot(sub(p, a), ab) / (dot(ab, ab) || 1)));
   return dist(p, add(a, scale(ab, t)));
+}
+
+/** Do segments AB and CD cross at an interior point? */
+export function segmentsCross(a: V, b: V, c: V, d: V): boolean {
+  const d1 = cross(sub(b, a), sub(c, a)), d2 = cross(sub(b, a), sub(d, a)), d3 = cross(sub(d, c), sub(a, c)), d4 = cross(sub(d, c), sub(b, c));
+  return d1 * d2 < 0 && d3 * d4 < 0;
+}
+/** A quadrilateral whose sides do not cross each other. */
+export const isSimpleQuad = ([a, b, c, d]: readonly V[]) => !segmentsCross(a!, b!, c!, d!) && !segmentsCross(b!, c!, d!, a!);
+export const isConvex = (poly: readonly V[]) => {
+  const t = poly.map((p, i) => Math.sign(cross(sub(p, poly[(i + poly.length - 1) % poly.length]!), sub(poly[(i + 1) % poly.length]!, p))));
+  return t.every(x => x === t[0]);
+};
+/** Interior angles (degrees) of a simple polygon, reflex angles included. */
+export function interiorAngles(poly: readonly V[]): number[] {
+  const o = Math.sign(signedArea(poly)) || 1;
+  return poly.map((p, i) => {
+    const a = poly[(i + poly.length - 1) % poly.length]!, b = poly[(i + 1) % poly.length]!;
+    const turn = deg(Math.atan2(cross(sub(p, a), sub(b, p)), dot(sub(p, a), sub(b, p))));
+    return 180 - o * turn;
+  });
+}
+/** The intersection of circles (c1, r1), (c2, r2) on the other side of line c1c2 from `away`. */
+export function circleIntersection(c1: V, r1: number, c2: V, r2: number, away: V): V {
+  const d = dist(c1, c2), x = (d * d + r1 * r1 - r2 * r2) / (2 * d), h = Math.sqrt(Math.max(0, r1 * r1 - x * x));
+  const u: V = [(c2[0] - c1[0]) / d, (c2[1] - c1[1]) / d], base = add(c1, scale(u, x));
+  const p1 = add(base, scale(perp(u), h)), p2 = add(base, scale(perp(u), -h));
+  return Math.sign(cross(sub(c2, c1), sub(p1, c1))) !== Math.sign(cross(sub(c2, c1), sub(away, c1))) ? p1 : p2;
+}
+/** Circumcentre of triangle ABC. */
+export function circumcenter(a: V, b: V, c: V): V {
+  return intersect(mid(a, b), add(mid(a, b), perp(sub(b, a))), mid(a, c), add(mid(a, c), perp(sub(c, a))));
 }

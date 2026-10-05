@@ -1,0 +1,143 @@
+---
+title: ტრაპეცია
+slug: trapezoid
+subject: geometry
+section: quadrilaterals
+order: 24
+summary: ოთხკუთხედი, რომლის ზუსტად ერთი წყვილი მოპირდაპირე გვერდი პარალელურია.
+tags: [ფუძე, ფერდი, საშუალო ხაზი, ტოლფერდა ტრაპეცია]
+prerequisites: [quadrilateral, triangle-centers, similarity]
+status: draft
+figure: trapezoid
+parent: quadrilateral
+---
+
+<Definition>ტრაპეცია ეწოდება ოთხკუთხედს, რომლის ორი მოპირდაპირე გვერდი პარალელურია, ხოლო დანარჩენი ორი — არა. პარალელურ გვერდებს ($AD \parallel BC$) **ფუძეები** ეწოდება, დანარჩენ ორს — **ფერდები**. ფერდების შუაწერტილების შემაერთებელი მონაკვეთი ტრაპეციის **საშუალო ხაზია**.</Definition>
+
+<Remark kind="convention">ქართულ სკოლაში ტრაპეციას ზუსტად ერთი წყვილი პარალელური გვერდი აქვს, ამიტომ პარალელოგრამი ტრაპეცია არ არის. ზოგ სახელმძღვანელოში (განსაკუთრებით ინგლისურენოვანში) ტრაპეციად ითვლება ყველა ოთხკუთხედი, რომელსაც *ერთი მაინც* წყვილი პარალელური გვერდი აქვს — მაშინ პარალელოგრამიც ტრაპეციაა.</Remark>
+
+<Formulas>
+<Formula id="midline-formula" name="საშუალო ხაზი" tex="m = \frac{a + b}{2}" live="m" proof="midline" />
+<Formula id="area-formula" name="ფართობი" tex="S = \frac{a + b}{2}\, h = m\,h" live="S" proof="area" />
+<Formula id="ratio-formula" name="დიაგონალების გადაკვეთა" tex="AO : OC = BO : OD \;\text{—}\; a : b" live="AO:OC" proof="diagonals-ratio" />
+<Formula id="segment-formula" name="მონაკვეთი დიაგონალების გადაკვეთაზე, ფუძეების პარალელური" tex="PQ = \frac{2ab}{a + b}" live="PQ" proof="segment-through-o" />
+</Formulas>
+
+<Properties>
+
+<Property id="angles-on-legs" title="ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია" why="ეს შიგა ცალმხრივი კუთხეებია პარალელურ ფუძეებთან.">
+<Proof given="$ABCD$ — ტრაპეცია, $AD \parallel BC$" prove="$\angle A + \angle B = 180^\circ,\ \angle C + \angle D = 180^\circ$">
+<Step hl="AD||BC AB">$AD \parallel BC$, ხოლო ფერდი $AB$ მათი მკვეთია.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ">$\angle A$ და $\angle B$ შიგა ცალმხრივი კუთხეებია.</Step>
+<Step hl="<C <D" tex="\angle C + \angle D = 180^\circ \quad \blacksquare">იგივე მეორე ფერდისთვის ($CD$ მკვეთი).</Step>
+</Proof>
+</Property>
+
+<Property id="midline" title="საშუალო ხაზი ფუძეების პარალელურია და მათი ჯამის ნახევრის ტოლია" why="ტრაპეცია სამკუთხედად „გადაკეთდება“, რომლის საშუალო ხაზიც იგივეა.">
+<Proof given="$M, N$ — $AB$ და $CD$ ფერდების შუაწერტილები" prove="$MN \parallel AD,\ MN = \tfrac{a + b}{2}$">
+<Step show="M N" hl="M N">$M$ და $N$ ფერდების შუაწერტილებია.</Step>
+<Step show="BE DE E" hl="BE">გავავლოთ $BN$ და გავაგრძელოთ, სანამ $AD$ წრფეს $E$ წერტილში არ გადაკვეთს.</Step>
+<Step hl="BCN EDN CN=DN" tex="\triangle BCN = \triangle EDN">$CN = DN$, $\angle BNC = \angle END$ (ვერტიკალური), $\angle BCN = \angle EDN$ (ჯვარედინი, $BC \parallel AE$) — სამკუთხედები ტოლია (კგკ).</Step>
+<Step hl="BN=NE BC=DE" tex="BN = NE, \qquad DE = BC = b">ტოლი სამკუთხედების შესაბამისი გვერდები.</Step>
+<Step show="MN" hl="MN ABE" tex="MN = \tfrac12 AE = \tfrac{a + b}{2} \quad \blacksquare">$MN$ შეაერთებს $\triangle ABE$-ის $AB$ და $BE$ გვერდების შუაწერტილებს — ის ამ სამკუთხედის საშუალო ხაზია; $AE = AD + DE = a + b$.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="ტრაპეციის ფართობი ფუძეების ჯამის ნახევრისა და სიმაღლის ნამრავლია" why="დიაგონალი მას ორ სამკუთხედად ყოფს ერთი და იმავე სიმაღლით.">
+<Proof given="$AD = a,\ BC = b$, სიმაღლე $h$" prove="$S = \tfrac{a + b}{2}\, h$">
+<Step show="BD BH <BHD" hl="BD">გავავლოთ დიაგონალი $BD$ და სიმაღლე $BH$.</Step>
+<Step hl="ABD" tex="S_{ABD} = \tfrac12\, a\,h">$\triangle ABD$-ის ფუძეა $AD = a$, სიმაღლე — $h$.</Step>
+<Step hl="BCD" tex="S_{BCD} = \tfrac12\, b\,h">$\triangle BCD$-ის ფუძეა $BC = b$; $D$-დან $BC$ წრფემდე მანძილიც $h$-ია (პარალელურ წრფეებს შორის მანძილი).</Step>
+<Step tex="S = \tfrac12 a h + \tfrac12 b h = \frac{a + b}{2}\, h = m\,h \quad \blacksquare">შევკრიბოთ.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-ratio" title="დიაგონალების გადაკვეთის წერტილი თითოეულ დიაგონალს ფუძეების შეფარდებით ყოფს" why="ფუძეებზე აგებული ორი სამკუთხედი მსგავსია.">
+<Proof given="$O = AC \cap BD$" prove="$AO : OC = DO : OB = a : b$">
+<Step show="AC BD O" hl="AC BD">გავავლოთ დიაგონალები.</Step>
+<Step hl="<AOD=<COB <OAD=<OCB">$\angle AOD = \angle COB$ (ვერტიკალური), $\angle OAD = \angle OCB$ (ჯვარედინი, $AD \parallel BC$).</Step>
+<Step hl="AOD BOC" tex="\triangle AOD \sim \triangle COB \;\Rightarrow\; \frac{AO}{OC} = \frac{DO}{OB} = \frac{AD}{CB} = \frac{a}{b} \quad \blacksquare">სამკუთხედები მსგავსია ორი კუთხით.</Step>
+</Proof>
+</Property>
+
+<Property id="segment-through-o" title="დიაგონალების გადაკვეთაზე გამავალი, ფუძეების პარალელური მონაკვეთი $\tfrac{2ab}{a+b}$-ია და $O$ მას შუაზე ყოფს" why="ორი წყვილი მსგავსი სამკუთხედი ერთსა და იმავე $\tfrac{ab}{a+b}$-ს იძლევა.">
+<Proof given="$PQ \parallel AD$, $O \in PQ$, $P \in AB$, $Q \in CD$" prove="$PQ = \tfrac{2ab}{a + b}$">
+<Step show="AC BD O PQ P Q" hl="PQ" tex="\frac{AO}{AC} = \frac{a}{a + b}">წინა თვისებიდან $AO : OC = a : b$.</Step>
+<Step hl="APO ABC" tex="\frac{PO}{BC} = \frac{AO}{AC} \;\Rightarrow\; PO = \frac{ab}{a + b}">$PO \parallel BC$, ამიტომ $\triangle APO \sim \triangle ABC$.</Step>
+<Step hl="DQO DCB" tex="\frac{OQ}{BC} = \frac{DO}{DB} = \frac{a}{a + b} \;\Rightarrow\; OQ = \frac{ab}{a + b}">$OQ \parallel BC$, ამიტომ $\triangle DQO \sim \triangle DCB$.</Step>
+<Step hl="PO=OQ" tex="PQ = PO + OQ = \frac{2ab}{a + b} \quad \blacksquare">$PO = OQ$ — $O$ ამ მონაკვეთის შუაწერტილია.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>$\tfrac{2ab}{a+b}$ არის $a$ და $b$ რიცხვების საშუალო ჰარმონიული. ის ყოველთვის საშუალო ხაზზე ($\tfrac{a+b}{2}$) ნაკლებია, თუ $a \ne b$.</Remark>
+
+<Properties title="ტოლფერდა ტრაპეცია (ფერდები ტოლია)">
+
+<Property id="isosceles-base-angles" title="ტოლფერდა ტრაპეციის კუთხეები თითოეულ ფუძესთან ტოლია" why="ორი სიმაღლე ორ ტოლ მართკუთხა სამკუთხედს ჩამოჭრის.">
+<Proof given="$AB = CD$" prove="$\angle A = \angle D,\ \angle B = \angle C$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH CK">დავუშვათ სიმაღლეები $BH$ და $CK$; $BH = CK$ (პარალელურ ფუძეებს შორის მანძილი).</Step>
+<Step hl="ABH DCK AB=CD BH=CK" tex="\triangle ABH = \triangle DCK">მართკუთხა სამკუთხედები ტოლია ჰიპოტენუზისა ($AB = DC$) და კათეტის ($BH = CK$) მიხედვით.</Step>
+<Step hl="<A=<D" tex="\angle A = \angle D">შესაბამისი კუთხეები ტოლია.</Step>
+<Step hl="<B=<C" tex="\angle B = 180^\circ - \angle A = 180^\circ - \angle D = \angle C \quad \blacksquare">ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-diagonals" title="ტოლფერდა ტრაპეციის დიაგონალები ტოლია" why="ორი სამკუთხედი საერთო ფუძით და ტოლი ფერდებით.">
+<Proof given="$AB = CD$" prove="$AC = BD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="AC BD" hl="AC BD">გავავლოთ დიაგონალები.</Step>
+<Step hl="ABD AB=DC <A=<D" tex="AB = DC,\quad AD = DA,\quad \angle A = \angle D">განვიხილოთ $\triangle ABD$ და $\triangle DCA$: ფერდები ტოლია, $AD$ საერთოა, ფუძესთან კუთხეები ტოლია (წინა თვისება).</Step>
+<Step hl="AC=BD" tex="\triangle ABD = \triangle DCA \;\Rightarrow\; BD = CA \quad \blacksquare">გკგ.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-cyclic" title="ტოლფერდა ტრაპეციის გარშემო წრეწირის შემოხაზვა შეიძლება" why="მოპირდაპირე კუთხეების ჯამი $180^\circ$ გამოდის.">
+<Proof given="$AB = CD$" prove="$A, B, C, D$ ერთ წრეწირზე ძევს">
+<Step set={{ a: 6, b: 3, s: 1.5 }} hl="<A <B" tex="\angle A + \angle B = 180^\circ">ერთ ფერდთან მდებარე კუთხეები.</Step>
+<Step hl="<B=<C" tex="\angle A + \angle C = \angle A + \angle B = 180^\circ">$\angle C = \angle B$ (ტოლფერდა ტრაპეცია).</Step>
+<Step hl="ABCD">მოპირდაპირე კუთხეების ჯამი $180^\circ$-ია — ოთხკუთხედის გარშემო წრეწირის შემოხაზვა შეიძლება. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-base-angles" kind="converse" title="თუ ტრაპეციის კუთხეები ფუძესთან ტოლია, ის ტოლფერდაა" why="იგივე ორი მართკუთხა სამკუთხედი, ოღონდ კათეტითა და კუთხით.">
+<Proof given="$\angle A = \angle D$" prove="$AB = CD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH=CK">დავუშვათ სიმაღლეები: $BH = CK$.</Step>
+<Step hl="ABH DCK <A=<D" tex="\triangle ABH = \triangle DCK">მართკუთხა სამკუთხედები ტოლია კათეტისა და მახვილი კუთხის მიხედვით.</Step>
+<Step hl="AB=CD" tex="AB = DC \quad \blacksquare">ჰიპოტენუზები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonals" kind="converse" title="თუ ტრაპეციის დიაგონალები ტოლია, ის ტოლფერდაა" why="ერთი დიაგონალის პარალელური გადატანა ტოლფერდა სამკუთხედს ქმნის.">
+<Proof given="$AC = BD$" prove="$AB = CD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="AC BD CE DE E" hl="CE">$C$-ზე გავავლოთ $BD$-ს პარალელური წრფე; ის $AD$ წრფეს $E$-ში კვეთს. $BCED$ პარალელოგრამია, ამიტომ $CE = BD = AC$.</Step>
+<Step hl="ACE AC=CE" tex="\angle CAE = \angle CEA">$\triangle ACE$ ტოლფერდაა.</Step>
+<Step hl="<CEA=<BDA" tex="\angle CAD = \angle CEA = \angle BDA">$CE \parallel BD$ — შესაბამისი კუთხეები.</Step>
+<Step hl="ACD ABD" tex="\triangle ACD = \triangle DBA \;\Rightarrow\; CD = BA \quad \blacksquare">$AC = DB$, $AD$ საერთოა, $\angle CAD = \angle BDA$ — გკგ.</Step>
+</Proof>
+</Property>
+
+<Property id="cyclic-is-isosceles" kind="converse" title="თუ ტრაპეციის გარშემო წრეწირის შემოხაზვა შეიძლება, ის ტოლფერდაა" why="ჩახაზვადობა და ცალმხრივი კუთხეები ერთად ფუძესთან ტოლ კუთხეებს იძლევა.">
+<Proof given="$ABCD$ ჩახაზულია წრეწირში" prove="$AB = CD$">
+<Step hl="<A <C" tex="\angle A + \angle C = 180^\circ">ჩახაზული ოთხკუთხედის მოპირდაპირე კუთხეები.</Step>
+<Step hl="<C <D" tex="\angle C + \angle D = 180^\circ">ერთ ფერდთან მდებარე კუთხეები.</Step>
+<Step hl="<A=<D" tex="\angle A = \angle D">აქედან ფუძესთან კუთხეები ტოლია, ამიტომ (წინა ნიშნით) ტრაპეცია ტოლფერდაა. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ჩახაზული წრეწირი">
+
+<Property id="incircle-condition" title="ტრაპეციაში წრეწირის ჩახაზვა მაშინ და მხოლოდ მაშინ შეიძლება, როცა ფუძეების ჯამი ფერდების ჯამის ტოლია" why="ეს ზოგადი ოთხკუთხედის ნიშანია (პიტოს თეორემა და მისი შებრუნებული).">
+<Proof given="$ABCD$ — ტრაპეცია, $AD = a,\ BC = b,\ AB = c,\ CD = d$" prove="ჩახაზვადია $\Leftrightarrow\ a + b = c + d$">
+<Step hl="AD BC">ტრაპეცია ამოზნექილი ოთხკუთხედია; მისი მოპირდაპირე გვერდებია $AD, BC$ და $AB, CD$.</Step>
+<Step hl="AB CD" tex="a + b = c + d">წრეწირზე შემოხაზულ ოთხკუთხედში მოპირდაპირე გვერდების ჯამები ტოლია, ხოლო, პირიქით, ამ ტოლობის შემთხვევაში წრეწირის ჩახაზვა შეიძლება (ოთხკუთხედი). ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">**მართკუთხა ტრაპეცია**: ერთი ფერდი ფუძეების მართობია; მისი სიმაღლე ამ ფერდის ტოლია. სცადე $s = 0$ — სლაიდერით ნახავ.</Remark>
+
+<Remark kind="mistake">ტოლფერდა ტრაპეციის დიაგონალები ტოლია, მაგრამ, მართკუთხედისგან განსხვავებით, ერთმანეთს შუაზე არ ყოფს — ისინი გადაკვეთის წერტილით $a : b$ შეფარდებით იყოფა.</Remark>

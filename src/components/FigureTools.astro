@@ -12,7 +12,7 @@ const sym = (s: string) => s.replace(/[ₐ₁₂₃ᵦ]/g, c => `<sub>${SUB[c]}<
 const switches = [['__dims', 'ზომები', true], ...Object.keys(spec.toggles ?? {}).map(t => [t, t, false])] as const;
 ---
 <div class="tools" data-figure-tools={name}>
-  {Object.entries(spec.params).map(([key, d]) => (
+  {Object.entries(spec.params).filter(([, d]) => !d.hidden).map(([key, d]) => (
     <div class="ctl" data-param={key}>
       <label class="ctl-l" for={`r-${key}`}>{d.label} <i>{d.sym}</i></label>
       <button class="reset" type="button" aria-label={`${d.sym} — საწყისზე დაბრუნება`} hidden><Icon name="reset" /></button>

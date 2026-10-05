@@ -1,4 +1,4 @@
-import { add, angleAt, area, cross, dist, foot, intersect, mid, near, parallel, polar, rad, sub, type V } from './engine/geom';
+import { add, angleAt, area, circleIntersection, dist, foot, intersect, mid, near, parallel, polar, rad, sub, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // The centre O stays fixed and the shape breathes around it, so the figure never drifts
@@ -50,7 +50,7 @@ export default figure({
     // criteria: build a quadrilateral from the hypothesis only, then confirm it is a parallelogram
     'criterion-sides': (_, { a, b, alpha }) => {
       const A: V = [0, 0], B: V = [a, 0], C = add(B, polar(b, alpha));
-      const D = otherIntersection(A, dist(B, C), C, dist(A, B), B); // AD = BC, CD = AB, D across AC from B
+      const D = circleIntersection(A, dist(B, C), C, dist(A, B), B); // AD = BC, CD = AB, D across AC from B
       return isParallelogram(A, B, C, D);
     },
     'criterion-equal-parallel': (_, { a, b, alpha }) => {
@@ -70,10 +70,3 @@ export default figure({
 
 const isParallelogram = (A: V, B: V, C: V, D: V) => parallel(A, B, D, C) && parallel(A, D, B, C);
 
-/** The intersection of circles (c1, r1) and (c2, r2) on the other side of line c1c2 from `away`. */
-function otherIntersection(c1: V, r1: number, c2: V, r2: number, away: V): V {
-  const d = dist(c1, c2), x = (d * d + r1 * r1 - r2 * r2) / (2 * d), h = Math.sqrt(Math.max(0, r1 * r1 - x * x));
-  const u: V = [(c2[0] - c1[0]) / d, (c2[1] - c1[1]) / d], base = add(c1, [u[0] * x, u[1] * x]);
-  const p1 = add(base, [-u[1] * h, u[0] * h]), p2 = add(base, [u[1] * h, -u[0] * h]);
-  return Math.sign(cross(sub(c2, c1), sub(p1, c1))) !== Math.sign(cross(sub(c2, c1), sub(away, c1))) ? p1 : p2;
-}

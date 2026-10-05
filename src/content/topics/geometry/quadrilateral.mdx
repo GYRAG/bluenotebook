@@ -1,0 +1,124 @@
+---
+title: ოთხკუთხედი
+slug: quadrilateral
+subject: geometry
+section: quadrilaterals
+order: 19
+summary: ოთხი წვერო, ოთხი გვერდი. ამოზნექილი და ჩაზნექილი, ჩახაზული და შემოხაზული.
+tags: [ოთხკუთხედი, დიაგონალი, ჩახაზული, შემოხაზული, პტოლემეოსი]
+prerequisites: [triangle, triangle-area, triangle-centers]
+status: draft
+figure: quadrilateral
+figures: [cyclic-quad, tangential-quad]
+---
+
+<Definition>ოთხკუთხედი შედგება ოთხი წერტილისგან (წვეროებისგან), რომელთაგან არცერთი სამი არ ძევს ერთ წრფეზე, და მათი მიმდევრობით შემაერთებელი ოთხი მონაკვეთისგან, რომლებიც ერთმანეთს არ კვეთს. ოთხკუთხედი **ამოზნექილია**, თუ ის მთლიანად ძევს თავისი ყოველი გვერდის შემცველი წრფის ერთ მხარეს; წინააღმდეგ შემთხვევაში — **ჩაზნექილი** (მას ერთი კუთხე $180^\circ$-ზე მეტი აქვს).</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="კუთხეების ჯამი" tex="\angle A + \angle B + \angle C + \angle D = 360^\circ" live="∑" proof="angle-sum" />
+<Formula id="area-diagonals-formula" name="ფართობი დიაგონალებით (ამოზნექილი)" tex="S = \tfrac12\, d_1 d_2 \sin\varphi" live="S" proof="area-diagonals" />
+<Formula id="cyclic-formula" name="ჩახაზული ოთხკუთხედი" tex="\angle A + \angle C = \angle B + \angle D = 180^\circ" proof="cyclic-opposite-angles" />
+<Formula id="ptolemy-formula" name="პტოლემეოსის თეორემა" tex="AC \cdot BD = AB \cdot CD + AD \cdot BC" proof="ptolemy" />
+<Formula id="pitot-formula" name="შემოხაზული ოთხკუთხედი" tex="AB + CD = BC + AD" proof="pitot" />
+</Formulas>
+
+<Properties>
+
+<Property id="angle-sum" title="ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია" why="დიაგონალი მას ორ სამკუთხედად ყოფს.">
+<Proof given="$ABCD$ — ოთხკუთხედი" prove="$\angle A + \angle B + \angle C + \angle D = 360^\circ$">
+<Step show="AC" hl="AC">გავავლოთ დიაგონალი $AC$ (ჩაზნექილ ოთხკუთხედში — იმ წვეროდან, რომლის კუთხეც $180^\circ$-ზე მეტია; ასეთი დიაგონალი ოთხკუთხედის შიგნით გადის).</Step>
+<Step hl="ABC ACD">დიაგონალი ოთხკუთხედს ორ სამკუთხედად ყოფს — $ABC$ და $ACD$. $\angle A$ და $\angle C$ თითოეული ორ ნაწილად გაიყო, რომლებიც სხვადასხვა სამკუთხედს ეკუთვნის.</Step>
+<Step tex="\angle A + \angle B + \angle C + \angle D = 180^\circ + 180^\circ = 360^\circ \quad \blacksquare">ოთხკუთხედის ოთხივე კუთხე ზუსტად ამ ორი სამკუთხედის ექვს კუთხეს შეადგენს, ხოლო თითოეული სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
+</Proof>
+</Property>
+
+<Property id="side-inequality" title="ოთხკუთხედის ყოველი გვერდი დანარჩენი სამის ჯამზე ნაკლებია" why="სამკუთხედის უტოლობა ორჯერ.">
+<Proof given="$ABCD$ — ოთხკუთხედი" prove="$AB < BC + CD + DA$">
+<Step show="AC" hl="ABC" tex="AB < AC + CB">$\triangle ABC$-ში სამკუთხედის უტოლობით:</Step>
+<Step hl="ACD" tex="AC < AD + DC">$\triangle ACD$-ში:</Step>
+<Step tex="AB < AC + CB < AD + DC + CB \quad \blacksquare">ჩავსვათ მეორე უტოლობა პირველში.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="ამოზნექილი ოთხკუთხედის ფართობი დიაგონალების და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია" why="დიაგონალები ოთხკუთხედს ოთხ სამკუთხედად ყოფს, ყველას ერთი და იგივე სინუსი აქვს.">
+<Proof given="$ABCD$ ამოზნექილია, $O = AC \cap BD$, $\angle AOB = \varphi$" prove="$S = \tfrac12\, AC \cdot BD \sin\varphi$">
+<Step show="AC BD O" hl="<AOB">გავავლოთ დიაგონალები. $O$-სთან ოთხი კუთხეა: $\varphi$, $180^\circ - \varphi$, $\varphi$, $180^\circ - \varphi$; ყველას სინუსი $\sin\varphi$-ია.</Step>
+<Step hl="ABO BCO CDO DAO" tex="S = \tfrac12 \sin\varphi\,\left(OA\cdot OB + OB \cdot OC + OC \cdot OD + OD \cdot OA\right)">ოთხკუთხედი ოთხ სამკუთხედად დაიყო, თითოეულის ფართობი $\tfrac12 xy\sin\varphi$-ია.</Step>
+<Step tex="S = \tfrac12 \sin\varphi\,(OA + OC)(OB + OD) = \tfrac12\, AC \cdot BD \sin\varphi \quad \blacksquare">ფრჩხილი ჯგუფდება: $OB(OA + OC) + OD(OC + OA)$.</Step>
+</Proof>
+</Property>
+
+<Property id="varignon" title="გვერდების შუაწერტილები ყოველთვის პარალელოგრამის წვეროებია (ვარინიონის პარალელოგრამი)" why="მის გვერდებს ორი დიაგონალის საშუალო ხაზები ქმნის.">
+<Proof given="$K, L, M, N$ — $AB$, $BC$, $CD$, $DA$ გვერდების შუაწერტილები" prove="$KLMN$ — პარალელოგრამი">
+<Step show="K L M N AC" hl="AC">გავავლოთ დიაგონალი $AC$.</Step>
+<Step show="KL" hl="KL ABC" tex="KL \parallel AC, \qquad KL = \tfrac12 AC">$KL$ არის $\triangle ABC$-ის საშუალო ხაზი.</Step>
+<Step show="NM" hl="NM ACD" tex="NM \parallel AC, \qquad NM = \tfrac12 AC">$NM$ არის $\triangle ACD$-ის საშუალო ხაზი.</Step>
+<Step show="LM KN" hl="KL=NM KL||NM">მაშასადამე $KL \parallel NM$ და $KL = NM$ — ორი მოპირდაპირე გვერდი ტოლი და პარალელურია, ამიტომ $KLMN$ პარალელოგრამია. ∎</Step>
+<Step show="BD" hl="KLMN" tex="P_{KLMN} = AC + BD">ასევე $LM = KN = \tfrac12 BD$, ამიტომ მისი პერიმეტრი დიაგონალების ჯამის ტოლია.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>ვარინიონის პარალელოგრამი ჩაზნექილ ოთხკუთხედშიც არსებობს — დამტკიცებაში ამოზნექილობა არსად გამოგვიყენებია.</Remark>
+
+<Properties title="წრეწირში ჩახაზული ოთხკუთხედი">
+
+<Property id="cyclic-opposite-angles" title="წრეწირში ჩახაზული ოთხკუთხედის მოპირდაპირე კუთხეების ჯამი $180^\circ$-ია" why="ორი მოპირდაპირე კუთხე ერთად მთელ წრეწირს ეყრდნობა.">
+<Proof figure="cyclic-quad" given="$A, B, C, D$ წრეწირზე ძევს" prove="$\angle A + \angle C = 180^\circ$">
+<Step hl="<A">ჩახაზული კუთხე $\angle A = \angle BAD$ ეყრდნობა $BCD$ რკალს, ამიტომ მისი ნახევრის ტოლია.</Step>
+<Step hl="<C">$\angle C = \angle BCD$ ეყრდნობა დანარჩენ, $BAD$ რკალს.</Step>
+<Step tex="\angle A + \angle C = \tfrac12\left(\smile BCD + \smile BAD\right) = \tfrac12 \cdot 360^\circ = 180^\circ \quad \blacksquare">ორი რკალი ერთად მთელ წრეწირს შეადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="cyclic-criterion" kind="converse" title="თუ ოთხკუთხედის მოპირდაპირე კუთხეების ჯამი $180^\circ$-ია, მის გარშემო წრეწირის შემოხაზვა შეიძლება" why="სხვა შემთხვევაში წვერო წრეწირის შიგნით ან გარეთ იქნებოდა და კუთხე შეიცვლებოდა.">
+<Proof figure="cyclic-quad" given="$\angle A + \angle C = 180^\circ$" prove="$A, B, C, D$ ერთ წრეწირზე ძევს">
+<Step hl="ABD">$A$, $B$, $D$ წერტილებზე გავავლოთ წრეწირი (სამ წერტილზე ის ყოველთვის გადის). დავუშვათ, $C$ მასზე არ ძევს.</Step>
+<Step hl="<C">თუ $C$ წრეწირის შიგნითაა, $DC$ სხივი წრეწირს გადაკვეთს $C'$ წერტილში $C$-ს იქით. $ABC'D$ ჩახაზულია, ამიტომ $\angle BC'D = 180^\circ - \angle A = \angle BCD$.</Step>
+<Step>მაგრამ $\angle BCD$ არის $\triangle BCC'$-ის გარე კუთხე, ამიტომ ის $\angle BC'C = \angle BC'D$-ზე მეტია — წინააღმდეგობა. თუ $C$ წრეწირის გარეთაა, ანალოგიურად მივიღებთ $\angle BCD < \angle BC'D$-ს.</Step>
+<Step hl="ABCD">მაშასადამე, $C$ წრეწირზე ძევს. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="ptolemy" title="პტოლემეოსის თეორემა: ჩახაზულ ოთხკუთხედში დიაგონალების ნამრავლი მოპირდაპირე გვერდების ნამრავლთა ჯამის ტოლია" why="დიაგონალზე ერთი კარგად შერჩეული წერტილი ორ წყვილ მსგავს სამკუთხედს ქმნის.">
+<Proof figure="cyclic-quad" given="$ABCD$ ჩახაზულია წრეწირში" prove="$AC \cdot BD = AB \cdot CD + AD \cdot BC$">
+<Step show="AC BD AE E" hl="<BAE=<CAD">$BD$-ზე ავიღოთ $E$ წერტილი ისე, რომ $\angle BAE = \angle CAD$.</Step>
+<Step hl="ABE ACD" tex="AB \cdot CD = AC \cdot BE">$\angle ABE = \angle ABD = \angle ACD$ — ერთსა და იმავე $AD$ რკალზე დაყრდნობილი ჩახაზული კუთხეები. ამიტომ $\triangle ABE \sim \triangle ACD$ (ორი კუთხით).</Step>
+<Step hl="AED ABC" tex="AD \cdot BC = AC \cdot ED">$\angle BAE = \angle CAD$ ტოლობის ორივე მხარეს დავუმატოთ (ან გამოვაკლოთ) $\angle EAC$: $\angle BAC = \angle EAD$. ასევე $\angle ADE = \angle ADB = \angle ACB$ ($AB$ რკალი). ამიტომ $\triangle AED \sim \triangle ABC$.</Step>
+<Step tex="AB \cdot CD + AD \cdot BC = AC\,(BE + ED) = AC \cdot BD \quad \blacksquare">შევკრიბოთ ორი ტოლობა; $BE + ED = BD$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="წრეწირზე შემოხაზული ოთხკუთხედი">
+
+<Property id="pitot" title="წრეწირზე შემოხაზულ ოთხკუთხედში მოპირდაპირე გვერდების ჯამები ტოლია" why="ერთი წვეროდან გავლებული მხების მონაკვეთები ტოლია.">
+<Proof figure="tangential-quad" given="$ABCD$-ის გვერდები წრეწირს ეხება $T_1, T_2, T_3, T_4$ წერტილებში" prove="$AB + CD = BC + AD$">
+<Step show="T1 T2 T3 T4" hl="AT1=AT4 BT1=BT2 CT2=CT3 DT3=DT4">ერთი წერტილიდან წრეწირისადმი გავლებული ორი მხების მონაკვეთი ტოლია: $AT_1 = AT_4$, $BT_1 = BT_2$, $CT_2 = CT_3$, $DT_3 = DT_4$.</Step>
+<Step tex="AB + CD = (AT_1 + T_1B) + (CT_3 + T_3D)">ყოველი გვერდი შეხების წერტილით ორ მხების მონაკვეთად იყოფა.</Step>
+<Step tex="AB + CD = AT_4 + BT_2 + CT_2 + DT_4 = BC + AD \quad \blacksquare">შევცვალოთ თითოეული მონაკვეთი მისი ტოლით და გადავაჯგუფოთ.</Step>
+</Proof>
+</Property>
+
+<Property id="pitot-converse" kind="converse" title="თუ ამოზნექილი ოთხკუთხედის მოპირდაპირე გვერდების ჯამები ტოლია, მასში წრეწირის ჩახაზვა შეიძლება" why="წინააღმდეგ შემთხვევაში ერთ სამკუთხედში გვერდი დანარჩენი ორის სხვაობის ტოლი გამოვიდოდა.">
+<Proof figure="tangential-quad" given="$AB + CD = BC + AD$" prove="არსებობს წრეწირი, რომელიც ოთხივე გვერდს ეხება">
+<Step hl="AB BC AD">ავაგოთ წრეწირი, რომელიც სამ გვერდს — $AB$-ს, $BC$-ს და $AD$-ს ეხება: მისი ცენტრი $A$ და $B$ კუთხეების ბისექტრისების გადაკვეთის წერტილია.</Step>
+<Step>დავუშვათ, $CD$ ამ წრეწირს არ ეხება. $C$-დან გავავლოთ წრეწირის მხები, რომელიც $AD$ წრფეს $D'$ წერტილში კვეთს. $ABCD'$ შემოხაზულია, ამიტომ $AB + CD' = BC + AD'$.</Step>
+<Step tex="CD - CD' = AD - AD' = \pm DD'">გამოვაკლოთ ეს ტოლობა მოცემულს.</Step>
+<Step>$\triangle CDD'$-ში ერთი გვერდი ($DD'$) დანარჩენი ორის სხვაობის ტოლი გამოვიდა, რაც სამკუთხედის უტოლობას ეწინააღმდეგება. მაშასადამე $D' = D$ და წრეწირი $CD$-საც ეხება. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="center-on-bisectors" title="ჩახაზული წრეწირის ცენტრი ოთხკუთხედის ყველა კუთხის ბისექტრისაზე ძევს" why="ცენტრი ყველა გვერდიდან თანაბრადაა დაშორებული.">
+<Proof figure="tangential-quad" given="წრეწირი $(I, r)$ ეხება $ABCD$-ის ოთხივე გვერდს" prove="$I$ ძევს $A, B, C, D$ კუთხეების ბისექტრისებზე">
+<Step show="T1 T4 IT1 IT4" hl="IT1=IT4">$I$-დან $AB$-მდე და $AD$-მდე მანძილი რადიუსის ტოლია: $IT_1 = IT_4 = r$.</Step>
+<Step hl="AT1I AT4I">მართკუთხა სამკუთხედები $AT_1I$ და $AT_4I$ ტოლია ჰიპოტენუზისა ($AI$) და კათეტის მიხედვით, ამიტომ $\angle T_1AI = \angle T_4AI$ — $AI$ ბისექტრისაა.</Step>
+<Step>იგივე მსჯელობა ყოველ წვეროს ეხება. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">ყველა ოთხკუთხედში წრეწირის ჩახაზვა ან შემოხაზვა არ შეიძლება. მაგალითად, რომბს (რომელიც კვადრატი არ არის) ჩახაზული წრეწირი აქვს, შემოხაზული — არა; მართკუთხედს (რომელიც კვადრატი არ არის) — პირიქით.</Remark>

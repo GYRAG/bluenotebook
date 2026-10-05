@@ -1,0 +1,81 @@
+---
+title: კვადრატი
+slug: square
+subject: geometry
+section: quadrilaterals
+order: 23
+summary: მართკუთხედი ტოლი გვერდებით — ანუ რომბი მართი კუთხეებით.
+tags: [მართკუთხედი, რომბი, დიაგონალი]
+prerequisites: [rectangle, rhombus]
+status: draft
+figure: square
+parent: rectangle
+---
+
+<Definition>კვადრატი ეწოდება მართკუთხედს, რომლის ყველა გვერდი ტოლია. სხვაგვარად: კვადრატი არის რომბი, რომლის ყველა კუთხე მართია. ამიტომ მას პარალელოგრამის, მართკუთხედისა და რომბის ყველა თვისება აქვს.</Definition>
+
+<Formulas>
+<Formula id="area-formula" name="ფართობი" tex="S = a^2 = \tfrac{d^2}{2}" live="S" proof="area" />
+<Formula id="diagonal-formula" name="დიაგონალი" tex="d = a\sqrt2" live="d" proof="diagonal-length" />
+<Formula id="circumradius" name="შემოხაზული წრის რადიუსი" tex="R = \tfrac{a\sqrt2}{2}" live="R" proof="circles" />
+<Formula id="inradius" name="ჩახაზული წრის რადიუსი" tex="r = \tfrac{a}{2}" live="r" proof="circles" />
+<Formula id="perimeter" name="პერიმეტრი" tex="P = 4a" live="P" />
+</Formulas>
+
+<Properties>
+
+<Property id="diagonals" title="კვადრატის დიაგონალები ტოლია, ურთიერთმართობია და გადაკვეთის წერტილით შუაზე იყოფა" why="ის ერთდროულად მართკუთხედიცაა და რომბიც.">
+<Proof given="$ABCD$ — კვადრატი" prove="$AC = BD,\ AC \perp BD,\ AO = OC,\ BO = OD$">
+<Step show="AC BD O" hl="AO=OC BO=OD">კვადრატი პარალელოგრამია — დიაგონალები შუაზე იყოფა.</Step>
+<Step hl="AC=BD">კვადრატი მართკუთხედია — დიაგონალები ტოლია.</Step>
+<Step hl="<AOB">კვადრატი რომბია — დიაგონალები ურთიერთმართობია (და კუთხეების ბისექტრისებია). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-angle" title="დიაგონალი გვერდთან $45^\circ$-იან კუთხეს ადგენს" why="დიაგონალი კვადრატს ორ ტოლფერდა მართკუთხა სამკუთხედად ყოფს.">
+<Proof given="$ABCD$ — კვადრატი" prove="$\angle BAC = 45^\circ$">
+<Step show="AC" hl="ABC AB=BC <B">$\triangle ABC$-ში $AB = BC$ და $\angle B = 90^\circ$.</Step>
+<Step hl="<BAC=<BCA" tex="\angle BAC = \angle BCA = \tfrac{180^\circ - 90^\circ}{2} = 45^\circ \quad \blacksquare">ტოლფერდა სამკუთხედის ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-length" title="კვადრატის დიაგონალი უდრის $a\sqrt2$-ს" why="პითაგორა ორი ტოლი კათეტით.">
+<Proof given="$AB = BC = a$" prove="$AC = a\sqrt2$">
+<Step show="AC" hl="ABC <B" tex="AC^2 = a^2 + a^2 = 2a^2">პითაგორას თეორემა $\triangle ABC$-ში.</Step>
+<Step tex="AC = a\sqrt2 \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="area" title="კვადრატის ფართობი $a^2$-ია, ანუ $\tfrac{d^2}{2}$" why="მართკუთხედის ფორმულა $b = a$-თვის; ხოლო $d^2 = 2a^2$.">
+<Proof given="$AB = a,\ AC = d$" prove="$S = a^2 = \tfrac{d^2}{2}$">
+<Step hl="ABCD" tex="S = a \cdot a = a^2">მართკუთხედის ფართობი გვერდების ნამრავლია.</Step>
+<Step show="AC" hl="AC" tex="d^2 = 2a^2 \;\Rightarrow\; S = a^2 = \tfrac{d^2}{2} \quad \blacksquare">წინა თვისებიდან.</Step>
+</Proof>
+</Property>
+
+<Property id="circles" title="კვადრატს აქვს შემოხაზული და ჩახაზული წრეწირი ერთი ცენტრით" why="ის მართკუთხედიცაა (შემოხაზული) და რომბიც (ჩახაზული).">
+<Proof given="$ABCD$ — კვადრატი, $O = AC \cap BD$" prove="$R = \tfrac{a\sqrt2}{2},\ r = \tfrac{a}{2}$">
+<Step show="AC BD O (OA)" hl="(OA)" tex="R = \tfrac{d}{2} = \tfrac{a\sqrt2}{2}">როგორც მართკუთხედს, შემოხაზული წრეწირის ცენტრი $O$-ა, რადიუსი — დიაგონალის ნახევარი.</Step>
+<Step show="OT T (OT)" hl="(OT) OT" tex="r = \tfrac{a}{2} \quad \blacksquare">როგორც რომბს, ჩახაზული წრეწირის ცენტრიც $O$-ა, რადიუსი — სიმაღლის ნახევარი, ხოლო სიმაღლე აქ გვერდია $a$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ნიშნები">
+
+<Property id="criterion-rectangle" kind="criterion" title="თუ მართკუთხედის დიაგონალები ურთიერთმართობია, ის კვადრატია" why="მართობი დიაგონალების მქონე პარალელოგრამი რომბია.">
+<Proof given="$ABCD$ — მართკუთხედი, $AC \perp BD$" prove="$ABCD$ — კვადრატი">
+<Step show="AC BD O" hl="<AOB">მართკუთხედი პარალელოგრამია, ხოლო მართობი დიაგონალების მქონე პარალელოგრამი რომბია.</Step>
+<Step hl="AB=BC=CD=DA">ის ერთდროულად მართკუთხედი და რომბია — ე.ი. კვადრატი. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-rhombus" kind="criterion" title="თუ რომბის ერთი კუთხე მართია (ან დიაგონალები ტოლია), ის კვადრატია" why="ასეთი პარალელოგრამი მართკუთხედია.">
+<Proof given="$ABCD$ — რომბი, $\angle A = 90^\circ$ ან $AC = BD$" prove="$ABCD$ — კვადრატი">
+<Step hl="<A">რომბი პარალელოგრამია. მართი კუთხის (ან ტოლი დიაგონალების) მქონე პარალელოგრამი მართკუთხედია.</Step>
+<Step hl="AB=BC=CD=DA">ის ერთდროულად რომბი და მართკუთხედია — ე.ი. კვადრატი. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>

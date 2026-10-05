@@ -53,7 +53,8 @@ export class GeoFigure extends HTMLElement {
     this.buildHandles();
     this.bindInput();
     this.bindTools();
-    if (!load('hint-seen', false)) this.querySelector<HTMLElement>('.hint')!.hidden = false;
+    const hint = this.querySelector<HTMLElement>('.hint');
+    if (hint && !this.hasAttribute('data-alt') && !load('hint-seen', false)) hint.hidden = false;
     new ResizeObserver(() => { this.layout(); this.render(); }).observe(this);
     this.layout(); this.render();
     this.dispatchEvent(new Event('ready'));
@@ -104,7 +105,7 @@ export class GeoFigure extends HTMLElement {
     const pts = this.spec.points(this.params), sc = this.scene;
     const dims = sc ? [] : [...(this.dimsOn ? parseRefs(this.spec.dims) : []), ...(this.hover ? parseRefs(`|${this.hover.join('')}|`) : [])];
     const extra = sc ? [] : [...this.toggles].flatMap(t => parseRefs(this.spec.toggles?.[t]));
-    this.layer.innerHTML = renderScene({ pts, view: this.view, base: this.base, dims, extra, aux: parseRefs(sc?.show), hl: parseRefs(sc?.hl), poly: this.poly });
+    this.layer.innerHTML = renderScene({ pts, view: this.view, base: this.base, dims, extra, aux: parseRefs(sc?.show), hl: parseRefs(sc?.hl), poly: this.poly, unlabeled: this.spec.unlabeled ?? [] });
     for (const h of this.handles.querySelectorAll<SVGGElement>('.handle')) {
       const p = this.px(pts[h.dataset.p!]!);
       h.setAttribute('transform', `translate(${p[0].toFixed(1)} ${p[1].toFixed(1)})`);
@@ -168,8 +169,7 @@ export class GeoFigure extends HTMLElement {
     if (hint && !hint.hidden) { hint.hidden = true; save('hint-seen', true); }
   }
 
-  private dragTo(point: string, target: V) {
-    if (this.scene) return;
+  private dragTo(point: string, target: V) { // allowed during proofs too: the proof holds for any shape
     this.params = solveDrag(this.spec, this.params, point, target);
     this.touched();
     this.syncAll();

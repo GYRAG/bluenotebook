@@ -1,0 +1,91 @@
+---
+title: მართკუთხედი
+slug: rectangle
+subject: geometry
+section: quadrilaterals
+order: 21
+summary: პარალელოგრამი, რომლის ყველა კუთხე მართია.
+tags: [პარალელოგრამი, დიაგონალი, შემოხაზული წრე]
+prerequisites: [parallelogram, right-triangle]
+status: draft
+figure: rectangle
+parent: parallelogram
+---
+
+<Definition>მართკუთხედი ეწოდება პარალელოგრამს, რომლის ყველა კუთხე მართია.</Definition>
+
+<Formulas>
+<Formula id="area-formula" name="ფართობი" tex="S = ab" live="S" proof="area" />
+<Formula id="perimeter" name="პერიმეტრი" tex="P = 2(a + b)" live="P" />
+<Formula id="diagonal-formula" name="დიაგონალი" tex="d = \sqrt{a^2 + b^2}" live="d" proof="diagonal-length" />
+<Formula id="circumradius" name="შემოხაზული წრის რადიუსი" tex="R = \tfrac{d}{2}" live="R" proof="circumcircle" />
+</Formulas>
+
+<Remark kind="special">მართკუთხედი პარალელოგრამია, ამიტომ პარალელოგრამის ყველა თვისება მასაც აქვს: მოპირდაპირე გვერდები ტოლია, დიაგონალები გადაკვეთის წერტილით შუაზე იყოფა.</Remark>
+
+<Properties>
+
+<Property id="diagonals-equal" title="მართკუთხედის დიაგონალები ტოლია" why="ორი მართკუთხა სამკუთხედი საერთო კათეტით.">
+<Proof given="$ABCD$ — მართკუთხედი" prove="$AC = BD$">
+<Step show="AC BD" hl="AC BD">გავავლოთ დიაგონალები.</Step>
+<Step hl="ABD">განვიხილოთ $\triangle ABD$ და $\triangle BAC$.</Step>
+<Step hl="AD=BC <A=<B" tex="AB = BA,\qquad AD = BC,\qquad \angle A = \angle B = 90^\circ">$AB$ საერთოა, $AD = BC$ (მოპირდაპირე გვერდები), ორივე კუთხე მართია.</Step>
+<Step hl="AC=BD" tex="\triangle ABD = \triangle BAC \;\Rightarrow\; BD = AC \quad \blacksquare">სამკუთხედები ტოლია ორი გვერდისა და მათ შორის კუთხის მიხედვით (გკგ).</Step>
+</Proof>
+</Property>
+
+<Property id="circumcircle" title="მართკუთხედის გარშემო წრეწირის შემოხაზვა შეიძლება; ცენტრი დიაგონალების გადაკვეთის წერტილია" why="დიაგონალები ტოლია და შუაზე იყოფა — ოთხივე ნახევარი ტოლია.">
+<Proof given="$ABCD$ — მართკუთხედი, $O = AC \cap BD$" prove="$OA = OB = OC = OD = \tfrac{d}{2}$">
+<Step show="AC BD O" hl="AO=CO BO=DO">დიაგონალები გადაკვეთის წერტილით შუაზე იყოფა (პარალელოგრამი).</Step>
+<Step hl="AO=BO=CO=DO" tex="OA = OB = OC = OD = \tfrac{d}{2}">დიაგონალები ტოლია, ამიტომ მათი ნახევრებიც ტოლია.</Step>
+<Step show="(OA)" hl="(OA)">$O$ ოთხივე წვეროდან ერთნაირადაა დაშორებული — წრეწირი ცენტრით $O$ და რადიუსით $\tfrac{d}{2}$ ოთხივე წვეროზე გადის. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-length" title="დიაგონალი უდრის $\sqrt{a^2 + b^2}$-ს" why="დიაგონალი მართკუთხა სამკუთხედის ჰიპოტენუზაა.">
+<Proof given="$AB = a,\ AD = b$" prove="$BD = \sqrt{a^2 + b^2}$">
+<Step show="BD" hl="ABD <A">$\triangle ABD$ მართკუთხაა ($\angle A = 90^\circ$), $BD$ მისი ჰიპოტენუზაა.</Step>
+<Step tex="BD^2 = AB^2 + AD^2 = a^2 + b^2 \quad \blacksquare">პითაგორას თეორემით.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="ფართობი მეზობელი გვერდების ნამრავლის ტოლია" why="სიმაღლე უბრალოდ მეორე გვერდია.">
+<Proof given="$AB = a,\ AD = b$" prove="$S = ab$">
+<Step hl="AD <A">$AD \perp AB$, ამიტომ $AD$ არის $AB$-ზე დაშვებული სიმაღლე: $h_a = b$.</Step>
+<Step tex="S = a\,h_a = ab \quad \blacksquare">პარალელოგრამის ფართობის ფორმულით.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ნიშნები — როდის არის პარალელოგრამი მართკუთხედი">
+
+<Property id="criterion-right-angle" kind="criterion" title="თუ პარალელოგრამის ერთი კუთხე მართია, ის მართკუთხედია" why="მოპირდაპირე კუთხეები ტოლია, მეზობლების ჯამი $180^\circ$.">
+<Proof given="$ABCD$ — პარალელოგრამი, $\angle A = 90^\circ$" prove="$ABCD$ — მართკუთხედი">
+<Step hl="<A <C" tex="\angle C = \angle A = 90^\circ">პარალელოგრამის მოპირდაპირე კუთხეები ტოლია.</Step>
+<Step hl="<B <D" tex="\angle B = \angle D = 180^\circ - 90^\circ = 90^\circ">მეზობელი კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step>ოთხივე კუთხე მართია — $ABCD$ მართკუთხედია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-equal-diagonals" kind="criterion" title="თუ პარალელოგრამის დიაგონალები ტოლია, ის მართკუთხედია" why="ტოლი დიაგონალები ტოლ მეზობელ კუთხეებს იძლევა, ხოლო მათი ჯამი $180^\circ$-ია.">
+<Proof given="$ABCD$ — პარალელოგრამი, $AC = BD$" prove="$ABCD$ — მართკუთხედი">
+<Step show="AC BD" hl="AC=BD">გავავლოთ ტოლი დიაგონალები.</Step>
+<Step hl="ABD" tex="\triangle ABD = \triangle BAC">$AB$ საერთოა, $AD = BC$, $BD = AC$ — სამკუთხედები ტოლია სამი გვერდის მიხედვით (გგგ).</Step>
+<Step hl="<A=<B" tex="\angle A = \angle B">ტოლ სამკუთხედებში შესაბამისი კუთხეები ტოლია.</Step>
+<Step tex="\angle A + \angle B = 180^\circ \;\Rightarrow\; \angle A = 90^\circ">მეზობელი კუთხეების ჯამი $180^\circ$-ია. წინა ნიშნით $ABCD$ მართკუთხედია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-three-right-angles" kind="criterion" title="თუ ოთხკუთხედის სამი კუთხე მართია, ის მართკუთხედია" why="მეოთხე კუთხე იძულებით $90^\circ$ გამოდის.">
+<Proof given="$\angle A = \angle B = \angle C = 90^\circ$" prove="$ABCD$ — მართკუთხედი">
+<Step hl="<A <B <C" tex="\angle D = 360^\circ - 3 \cdot 90^\circ = 90^\circ">ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია.</Step>
+<Step hl="<A=<C <B=<D">მოპირდაპირე კუთხეები წყვილ-წყვილად ტოლია, ამიტომ $ABCD$ პარალელოგრამია; მისი ყველა კუთხე მართია — მართკუთხედია. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">ოთხკუთხედი, რომლის დიაგონალები ტოლია, მართკუთხედი სულაც არ უნდა იყოს — მაგალითად, ტოლფერდა ტრაპეცია. ნიშანი მხოლოდ პარალელოგრამს ეხება.</Remark>
+
+<Remark kind="special">მართკუთხედი, რომლის მეზობელი გვერდები ტოლია, კვადრატია.</Remark>

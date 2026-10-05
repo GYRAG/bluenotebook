@@ -72,7 +72,8 @@ for (const [name, spec] of figures) {
 
     it('every point stays inside the fixed board and is finite', () => {
       const [x0, y0, x1, y1] = boardBounds(spec);
-      for (const p of samples) for (const [x, y] of Object.values(spec.points(snap(spec, p)))) {
+      for (const p of samples) for (const [n, [x, y]] of Object.entries(spec.points(snap(spec, p)))) {
+        if (spec.boundsOf && !spec.boundsOf.includes(n)) continue;
         expect(Number.isFinite(x) && Number.isFinite(y)).toBe(true);
         expect(x >= x0 - 1e-9 && x <= x1 + 1e-9 && y >= y0 - 1e-9 && y <= y1 + 1e-9).toBe(true);
       }

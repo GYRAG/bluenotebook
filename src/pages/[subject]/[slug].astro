@@ -18,6 +18,7 @@ const fig = topic.data.figure;
   {fig ? <Figure name={fig} /> : (
     <div class="figure paper"><p class="empty figure-empty"><b>ნახაზი ჯერ არ არის</b>ინტერაქტიული ფიგურა აქ გამოჩნდება.</p></div>
   )}
+  {topic.data.figures.map(name => <Figure name={name} alt />)}
   <Panel slot="panel">
     {fig ? <FigureTools slot="tools" name={fig} /> : <p slot="tools" class="empty"><b>ჯერ ცარიელია</b>სლაიდერები და გადამრთველები გამოჩნდება, როცა თემას ნახაზი ექნება.</p>}
     <div slot="formulas"><Content components={formulasView} /></div>

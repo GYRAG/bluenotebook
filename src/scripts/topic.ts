@@ -7,11 +7,18 @@ const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document)
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
 const panel = $('.panel');
 const body = $('.panel-body');
-const fig = $<GeoFigure>('geo-figure');
-const figReady = new Promise<void>(res => {
-  if (!fig || fig.spec) return res();
-  fig.addEventListener('ready', () => res(), { once: true });
+const mainFig = $<GeoFigure>('geo-figure:not([data-alt])');
+let fig = mainFig; // the figure the open proof plays on
+const ready = (f: GeoFigure | null) => new Promise<void>(res => {
+  if (!f || f.spec) return res();
+  f.addEventListener('ready', () => res(), { once: true });
 });
+/** Proofs with <Proof figure="…"> play on that figure; it replaces the main one meanwhile. */
+function useFigure(name: string | undefined) {
+  const alt = name ? $<GeoFigure>(`geo-figure[data-alt][data-figure="${name}"]`) : null;
+  for (const f of $$<GeoFigure>('geo-figure')) f.hidden = alt ? f !== alt : f.hasAttribute('data-alt');
+  fig = alt ?? mainFig;
+}
 
 // ---------- proof stepper ----------
 let open: { li: HTMLElement; steps: HTMLElement[]; i: number } | null = null;
@@ -37,7 +44,8 @@ function go(i: number) {
   const cur = steps[i]!, r = cur.getBoundingClientRect(), pb = body!.getBoundingClientRect();
   if (r.bottom > pb.bottom - 96) body!.scrollTop += r.bottom - pb.bottom + 96; // keep it above the sticky controls
   else if (r.top < pb.top) body!.scrollTop += r.top - pb.top - 12;
-  void figReady.then(() => fig?.setScene(scene(steps, i)));
+  const f = fig;
+  void ready(f).then(() => f?.setScene(scene(steps, i)));
 }
 
 function openProof(li: HTMLElement) {
@@ -52,6 +60,7 @@ function openProof(li: HTMLElement) {
     return b;
   }));
   open = { li, steps, i: 0 };
+  useFigure($<HTMLElement>('.proof-body', li)?.dataset.figure);
   li.classList.add('open');
   panel?.classList.add('proof-open');
   $('.proof', li)!.hidden = false;
@@ -72,7 +81,9 @@ function closeProof(restoreFocus = true) {
   $('.prop-row', li)!.setAttribute('aria-expanded', 'false');
   open = null;
   history.replaceState(null, '', location.pathname);
-  void figReady.then(() => fig?.setScene(null));
+  const f = fig;
+  void ready(f).then(() => f?.setScene(null));
+  useFigure(undefined);
   if (restoreFocus) { $<HTMLElement>('.prop-row', li)!.focus(); li.scrollIntoView({ block: 'nearest' }); }
 }
 
