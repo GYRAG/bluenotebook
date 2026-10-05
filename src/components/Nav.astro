@@ -33,6 +33,12 @@ const pageNo = (id: string) => String(sections.flatMap(s => s.items).findIndex(t
       </ul>
     </details>
   ))}
+  {subject === 'geometry' && (
+    <ul class="extra">
+      <li><a href="/geometry/relationships/" aria-current={Astro.url.pathname === '/geometry/relationships/' ? 'page' : undefined}>ფიგურების კავშირები</a></li>
+      <li><a href="/cheatsheet/" aria-current={Astro.url.pathname === '/cheatsheet/' ? 'page' : undefined}>შპარგალკა</a></li>
+    </ul>
+  )}
   <div class="nav-foot">
     <button class="nf" type="button" data-theme-toggle><Icon name="theme" /><span data-theme-label>თემა</span></button>
   </div>

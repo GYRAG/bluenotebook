@@ -80,6 +80,11 @@ summary::-webkit-details-marker { display: none; }
 .topics a:hover { color: var(--ink); }
 .topics a[aria-current='page'] { color: var(--ink); font-weight: var(--w2); }
 .nav-foot { margin-top: auto; padding-top: var(--s4); }
+.extra { margin-top: var(--s4); }
+.extra a { color: var(--ink-2); font-size: 15px; }
+.extra a:hover, .extra a[aria-current] { color: var(--ink); }
+.extra a[aria-current] { font-weight: var(--w2); }
+.app.no-panel .stage { overflow: auto; overscroll-behavior: contain; }
 .nf { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; font-size: var(--fs-ui); color: var(--ink-2); }
 
 /* title: the one flourish — a double pen underline */

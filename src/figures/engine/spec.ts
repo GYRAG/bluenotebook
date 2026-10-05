@@ -19,7 +19,7 @@ export interface FigureSpec<K extends string = string, P extends string = string
   /** The whole figure: parameters → named points. Constraints live here (a rhombus has one side length). */
   points: (p: Params<K>) => Record<P, V>;
   /** Which parameters each draggable point moves; the engine inverts `points` numerically. */
-  drag?: Record<string, K[]>;
+  drag?: Record<string, NoInfer<K>[]>;
   base: string;                        // refs always drawn
   unlabeled?: string[];                // helper points that get no letter (line ends etc.)
   boundsOf?: string[];                 // points that size the board (default: all)

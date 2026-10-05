@@ -1,0 +1,8 @@
+---
+import { md, tex } from '@/lib/math';
+
+// Compact formula for the cheat sheet: name and formula, nothing interactive.
+interface Props { id: string; name: string; tex: string }
+const { name, tex: src } = Astro.props;
+---
+<div class="cf"><span class="cf-n" set:html={md(name)} /><span class="cf-t" set:html={tex(src)} /></div>

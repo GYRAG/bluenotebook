@@ -38,7 +38,7 @@ export default figure({
       return right([-u[0], -u[1]], [-v[0], -v[1]], u, v);
     },
     'criterion-three-right-angles': (_, { a, b }) => { // right angles at A, B, C force the fourth
-      const A: V = [0, 0], B: V = [a, 0], C: V = [a, b];
+      const A: V = [0, 0], C: V = [a, b]; // B = (a, 0)
       const D = intersect(A, [0, 1], C, [a - 1, b]); // ⟂ AB through A meets ⟂ BC through C
       return near(angleAt(C, D, A), 90);
     },

@@ -8,7 +8,7 @@ const VIEWPORTS = [
   { name: 'tablet', width: 768, height: 1024 },
   { name: 'desktop', width: 1440, height: 900 },
 ];
-const PAGES = [['topic', '/geometry/parallelogram/'], ['home', '/']] as const;
+const PAGES = [['topic', '/geometry/parallelogram/'], ['home', '/'], ['relationships', '/geometry/relationships/'], ['cheatsheet', '/cheatsheet/']] as const;
 
 for (const vp of VIEWPORTS) {
   for (const theme of ['light', 'dark'] as const) {

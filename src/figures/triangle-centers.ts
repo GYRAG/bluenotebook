@@ -1,5 +1,5 @@
 import {
-  add, angleAt, area, centroid, circumcenter, dist, foot, incenter, intersect, lerp, mid, near, orthocenter, parallel, perpendicular, sub, triangleSAS, type V,
+  add, angleAt, area, centroid, circumcenter, dist, foot, incenter, intersect, lerp, mid, near, orthocenter, parallel, perpendicular, sub, triangleSAS,
 } from './engine/geom';
 import { figure } from './engine/spec';
 

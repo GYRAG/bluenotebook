@@ -27,3 +27,13 @@ test('all topic pages render their figure and proofs without errors', async ({ p
   }
   expect(errors).toEqual([]);
 });
+
+test('relationships: picking facts names the shape; cheat sheet lists every topic', async ({ page }) => {
+  await page.goto('/geometry/relationships/');
+  for (const f of ['diagBisect', 'diagPerp']) await page.locator(`[data-fact=${f}]`).click();
+  await expect(page.locator('.answer-v')).toHaveText('რომბი');
+  await page.locator('[data-shape=square]').first().click();
+  await expect(page.locator('[data-for=square]')).toBeVisible();
+  await page.goto('/cheatsheet/');
+  expect(await page.locator('.cheat-topic').count()).toBeGreaterThanOrEqual(15);
+});
