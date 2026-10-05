@@ -12,7 +12,7 @@ export default figure({
   params: {
     c: { label: 'გვერდი', sym: 'c', min: 3, max: 7, step: 0.1, value: 6 },
     b: { label: 'გვერდი', sym: 'b', min: 2, max: 6, step: 0.1, value: 4.5 },
-    alpha: { label: 'კუთხე', sym: 'α', min: 25, max: 120, step: 1, value: 60, unit: '°' },
+    alpha: { label: 'კუთხე', sym: 'α', min: 25, max: 110, step: 1, value: 60, unit: '°' },
   },
   points: ({ c, b, alpha }) => {
     const { A, B, C } = triangleSAS(c, b, alpha), I = incenter(A, B, C);
@@ -28,7 +28,7 @@ export default figure({
   },
   drag: { B: ['c'], C: ['b', 'alpha'] },
   base: 'ABC',
-  boundsOf: ['A', 'B', 'C', 'O', 'H', 'A3', 'B3', 'C3'],
+  boundsOf: ['A', 'B', 'C'], // O, H and A3B3C3 may leave the page for extreme shapes; proofs pick fitting ones
   dims: '<A <B <C',
   toggles: {
     'საშუალო ხაზი': 'B1C1 B1 C1',

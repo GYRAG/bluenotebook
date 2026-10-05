@@ -4,8 +4,78 @@ slug: triangle
 subject: geometry
 section: triangles
 order: 10
-summary: სამი წვერო და სამი გვერდი.
+summary: სამი წვერო და სამი გვერდი. კუთხეების ჯამი, გარე კუთხე, სამკუთხედის უტოლობა.
+tags: [კუთხეების ჯამი, გარე კუთხე, უტოლობა]
+prerequisites: [angles, congruence]
 status: draft
+figure: triangle
 ---
 
-სამკუთხედის კუთხეების ჯამი $180^\circ$-ია. ყოველ სამკუთხედში დიდი გვერდის პირდაპირ დიდი კუთხე ძევს.
+<Definition>სამკუთხედი შედგება სამი წერტილისგან (**წვეროებისგან**), რომლებიც ერთ წრფეზე არ ძევს, და მათი შემაერთებელი სამი მონაკვეთისგან (**გვერდებისგან**). გვერდების მიხედვით სამკუთხედი არის **ტოლგვერდა** (სამივე გვერდი ტოლია), **ტოლფერდა** (ორი გვერდი ტოლია) ან **სხვადასხვაგვერდა**; კუთხეების მიხედვით — **მახვილკუთხა** (ყველა კუთხე მახვილია), **მართკუთხა** (ერთი კუთხე მართია) ან **ბლაგვკუთხა** (ერთი კუთხე ბლაგვია).</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="კუთხეების ჯამი" tex="\alpha + \beta + \gamma = 180^\circ" live="∑" proof="angle-sum" />
+<Formula id="exterior-formula" name="გარე კუთხე" tex="\gamma' = 180^\circ - \gamma = \alpha + \beta" proof="exterior-angle" />
+<Formula id="inequality-formula" name="სამკუთხედის უტოლობა" tex="|b - c| < a < b + c" live="a" proof="triangle-inequality" />
+<Formula id="perimeter" name="პერიმეტრი" tex="P = a + b + c" live="P" />
+</Formulas>
+
+<Properties>
+
+<Property id="angle-sum" title="სამკუთხედის კუთხეების ჯამი $180^\circ$-ია" why="$C$-ზე გავლებული პარალელური წრფე სამივე კუთხეს ერთ გაშლილ კუთხეში აგროვებს.">
+<Proof given="$ABC$ — სამკუთხედი" prove="$\angle A + \angle B + \angle C = 180^\circ$">
+<Step show="EF" hl="EF AB||EF">$C$ წვეროზე გავავლოთ $AB$-ს პარალელური წრფე $EF$ ($E$ — $A$-ს მხარეს).</Step>
+<Step hl="<ECA=<CAB" tex="\angle ECA = \angle A">$EF \parallel AB$, $AC$ მკვეთია — შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="<FCB=<CBA" tex="\angle FCB = \angle B">$BC$ მკვეთისთვის — იგივე.</Step>
+<Step hl="<ECA <ACB <BCF" tex="\angle A + \angle B + \angle C = 180^\circ \quad \blacksquare">სამი კუთხე $C$-სთან ერთად გაშლილ კუთხეს $ECF$-ს ადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="exterior-angle" title="სამკუთხედის გარე კუთხე მისი არამოსაზღვრე ორი შიგა კუთხის ჯამის ტოლია" why="გარე და შიგა კუთხე ერთად $180^\circ$-ია, ისევე როგორც დანარჩენი ორი კუთხე მესამესთან ერთად.">
+<Proof given="$X$ ძევს $AC$-ს გაგრძელებაზე $C$-ს იქით" prove="$\angle BCX = \angle A + \angle B$">
+<Step show="CX" hl="<BCX">$\angle BCX$ არის $C$ წვეროსთან მდებარე გარე კუთხე.</Step>
+<Step hl="<BCX <ACB" tex="\angle BCX = 180^\circ - \angle C">გარე და შიგა კუთხე მოსაზღვრეა.</Step>
+<Step hl="<A <B" tex="\angle BCX = 180^\circ - \angle C = \angle A + \angle B \quad \blacksquare">კუთხეების ჯამით $\angle A + \angle B = 180^\circ - \angle C$.</Step>
+</Proof>
+</Property>
+
+<Remark>აქედან გამომდინარე, გარე კუთხე ყოველ არამოსაზღვრე შიგა კუთხეზე მეტია.</Remark>
+
+<Property id="at-most-one-obtuse" title="სამკუთხედს შეიძლება ჰქონდეს მხოლოდ ერთი მართი ან ბლაგვი კუთხე" why="ორი ასეთი კუთხე უკვე $180^\circ$-ს შეადგენდა.">
+<Proof given="$ABC$ — სამკუთხედი" prove="მაქსიმუმ ერთი კუთხეა $\ge 90^\circ$">
+<Step hl="<A <B">დავუშვათ, ორი კუთხე, მაგალითად $\angle A$ და $\angle B$, $90^\circ$-ზე ნაკლები არ არის.</Step>
+<Step hl="<C" tex="\angle C = 180^\circ - \angle A - \angle B \le 0^\circ">მაშინ მესამე კუთხე ნული ან უარყოფითი გამოვიდოდა, რაც შეუძლებელია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="larger-side-larger-angle" title="სამკუთხედში დიდი გვერდის პირდაპირ დიდი კუთხე ძევს" why="დიდ გვერდზე პატარას გადაზომვა ტოლფერდა სამკუთხედს და გარე კუთხეს იძლევა.">
+<Proof given="$AB > AC$" prove="$\angle C > \angle B$">
+<Step set={{ c: 6, b: 3.5, alpha: 55 }} show="CK K" hl="AK=AC">$AB$-ზე გადავზომოთ $AK = AC$. რადგან $AC < AB$, $K$ ძევს $A$-სა და $B$-ს შორის.</Step>
+<Step hl="ACK <AKC=<ACK" tex="\angle AKC = \angle ACK">$\triangle AKC$ ტოლფერდაა.</Step>
+<Step hl="<AKC <B" tex="\angle AKC > \angle B">$\angle AKC$ არის $\triangle KBC$-ის გარე კუთხე, ამიტომ არამოსაზღვრე $\angle B$-ზე მეტია.</Step>
+<Step hl="<C" tex="\angle C = \angle ACB > \angle ACK = \angle AKC > \angle B \quad \blacksquare">$CK$ სხივი $\angle ACB$-ს შიგნით გადის.</Step>
+</Proof>
+</Property>
+
+<Property id="larger-angle-larger-side" kind="converse" title="სამკუთხედში დიდი კუთხის პირდაპირ დიდი გვერდი ძევს" why="სხვა ორი შესაძლებლობა წინა თვისებას ან ტოლფერდა სამკუთხედს ეწინააღმდეგება.">
+<Proof given="$\angle C > \angle B$" prove="$AB > AC$">
+<Step hl="<C <B">დავუშვათ, რომ $AB > AC$ არ არის. მაშინ ან $AB = AC$, ან $AB < AC$.</Step>
+<Step hl="AB AC">თუ $AB = AC$, სამკუთხედი ტოლფერდაა და $\angle C = \angle B$ — ეწინააღმდეგება პირობას.</Step>
+<Step>თუ $AB < AC$, წინა თვისებით $\angle C < \angle B$ — ისევ წინააღმდეგობა. მაშასადამე $AB > AC$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="triangle-inequality" title="სამკუთხედის ყოველი გვერდი დანარჩენი ორის ჯამზე ნაკლებია" why="ორ წერტილს შორის უმოკლესი გზა მონაკვეთია; დამტკიცება — დიდი კუთხე დიდი გვერდის პირდაპირ.">
+<Proof given="$ABC$ — სამკუთხედი" prove="$AB < AC + CB$">
+<Step set={{ c: 4.5, b: 2.5, alpha: 70 }} show="CD D BD" hl="CD=CB" tex="AD = AC + CD = AC + CB">$AC$-ს გაგრძელებაზე $C$-ს იქით გადავზომოთ $CD = CB$.</Step>
+<Step hl="BCD <CBD=<CDB" tex="\angle CBD = \angle CDB">$\triangle BCD$ ტოლფერდაა.</Step>
+<Step hl="<ABD <ADB" tex="\angle ABD = \angle ABC + \angle CBD > \angle CBD = \angle ADB">$C$ ძევს $AD$-ზე, ამიტომ $BC$ სხივი $\angle ABD$-ს შიგნით გადის.</Step>
+<Step hl="ABD" tex="AD > AB \;\Rightarrow\; AB < AC + CB \quad \blacksquare">$\triangle ABD$-ში დიდი კუთხის პირდაპირ დიდი გვერდი ძევს.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>შებრუნებულიც სამართლიანია: თუ სამი დადებითი რიცხვიდან უდიდესი დანარჩენი ორის ჯამზე ნაკლებია, ასეთი გვერდებით სამკუთხედი არსებობს. საკმარისია უდიდესი გვერდის შემოწმება.</Remark>
+
+<Remark kind="mistake">„სამი მონაკვეთისგან სამკუთხედი ყოველთვის აიგება“ — არა: მაგალითად, 2, 3 და 6 გვერდებით სამკუთხედი არ არსებობს, რადგან $6 > 2 + 3$.</Remark>

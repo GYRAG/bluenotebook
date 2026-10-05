@@ -1,0 +1,57 @@
+---
+title: სინუსებისა და კოსინუსების თეორემები
+slug: sine-cosine-laws
+subject: geometry
+section: triangles
+order: 15
+summary: ნებისმიერი სამკუთხედის ამოხსნა — გვერდები კუთხეების სინუსების პროპორციულია, c² = a² + b² − 2ab·cos γ.
+tags: [სინუსი, კოსინუსი, შემოხაზული წრე]
+prerequisites: [right-triangle, triangle-area]
+status: draft
+figure: sine-cosine-laws
+parent: triangle
+---
+
+<Definition>აღნიშვნები: $a = BC$, $b = CA$, $c = AB$; $\alpha, \beta, \gamma$ — მათ პირდაპირ მდებარე კუთხეები; $R$ — შემოხაზული წრეწირის რადიუსი.</Definition>
+
+<Formulas>
+<Formula id="sine-law-formula" name="სინუსების თეორემა" tex="\frac{a}{\sin\alpha} = \frac{b}{\sin\beta} = \frac{c}{\sin\gamma} = 2R" live="2R" proof="sine-law" />
+<Formula id="cosine-law-formula" name="კოსინუსების თეორემა" tex="c^2 = a^2 + b^2 - 2ab\cos\gamma" proof="cosine-law" />
+<Formula id="cosine-angle-formula" name="კუთხე სამი გვერდით" tex="\cos\gamma = \frac{a^2 + b^2 - c^2}{2ab}" proof="cosine-law" />
+<Formula id="angle-type-formula" name="კუთხის სახე" tex="c^2 < a^2 + b^2 \iff \gamma < 90^\circ" proof="angle-type" />
+</Formulas>
+
+<Properties>
+
+<Property id="sine-law" title="სინუსების თეორემა: სამკუთხედის გვერდები მოპირდაპირე კუთხეების სინუსების პროპორციულია, ხოლო შეფარდება $2R$-ია" why="ფართობი სამნაირად; ხოლო $2R$ — დიამეტრზე აგებული მართკუთხა სამკუთხედიდან.">
+<Proof given="$ABC$ — სამკუთხედი, $R$ — შემოხაზული წრეწირის რადიუსი" prove="$\tfrac{a}{\sin\alpha} = \tfrac{b}{\sin\beta} = \tfrac{c}{\sin\gamma} = 2R$">
+<Step hl="ABC" tex="S = \tfrac12\, bc\sin\alpha = \tfrac12\, ca\sin\beta = \tfrac12\, ab\sin\gamma">ფართობი ორი გვერდითა და მათ შორის კუთხით, სამნაირად.</Step>
+<Step tex="\frac{\sin\alpha}{a} = \frac{\sin\beta}{b} = \frac{\sin\gamma}{c}">გავყოთ $\tfrac12 abc$-ზე.</Step>
+<Step show="(OA) O BD D" hl="BD">გავავლოთ დიამეტრი $BD$ ($BD = 2R$).</Step>
+<Step show="CD" hl="BCD <BCD" tex="\angle BCD = 90^\circ">დიამეტრზე დაყრდნობილი ჩახაზული კუთხე მართია.</Step>
+<Step hl="<BDC <A" tex="\sin\angle BDC = \sin\alpha">$\angle BDC$ და $\angle BAC$ ერთსა და იმავე $BC$ რკალს ეყრდნობა: ისინი ან ტოლია, ან მათი ჯამი $180^\circ$-ია — სინუსი ორივე შემთხვევაში ერთია.</Step>
+<Step hl="BC" tex="a = BC = BD\sin\angle BDC = 2R\sin\alpha \;\Rightarrow\; \frac{a}{\sin\alpha} = 2R \quad \blacksquare">მართკუთხა $\triangle BCD$-ში.</Step>
+</Proof>
+</Property>
+
+<Property id="cosine-law" title="კოსინუსების თეორემა: $c^2 = a^2 + b^2 - 2ab\cos\gamma$" why="სიმაღლე და პითაგორა; $\cos\gamma$ მარტო „შესწორებაა“ პითაგორასთვის.">
+<Proof given="$BC = a,\ CA = b,\ \angle C = \gamma$" prove="$AB^2 = a^2 + b^2 - 2ab\cos\gamma$">
+<Step show="AH H <AHB" hl="AH">$A$-დან $BC$ წრფეზე დავუშვათ სიმაღლე $AH$.</Step>
+<Step hl="AHC" tex="AH = b\sin\gamma, \qquad CH = b\cos\gamma">მართკუთხა $\triangle AHC$-ში ($\gamma$ ბლაგვისთვის $H$ $C$-ს მეორე მხარესაა და $\cos\gamma < 0$ — ფორმულები იგივე რჩება).</Step>
+<Step hl="BH" tex="BH = a - b\cos\gamma">$B$-დან $H$-მდე — $BC$-ს გამოკლებული $CH$ (ნიშნით).</Step>
+<Step hl="AHB" tex="c^2 = b^2\sin^2\gamma + (a - b\cos\gamma)^2 = a^2 + b^2 - 2ab\cos\gamma \quad \blacksquare">პითაგორა $\triangle AHB$-ში და $\sin^2\gamma + \cos^2\gamma = 1$.</Step>
+</Proof>
+</Property>
+
+<Property id="angle-type" title="კუთხე $\gamma$ მახვილია, მართია ან ბლაგვია იმის მიხედვით, $c^2$ ნაკლებია, ტოლია თუ მეტი $a^2 + b^2$-ზე" why="$\cos\gamma$-ს ნიშანი და $a^2 + b^2 - c^2$-ის ნიშანი ერთია.">
+<Proof given="$a, b, c$ — სამკუთხედის გვერდები" prove="$\gamma < 90^\circ \iff c^2 < a^2 + b^2$">
+<Step tex="a^2 + b^2 - c^2 = 2ab\cos\gamma">კოსინუსების თეორემა.</Step>
+<Step hl="<C" tex="\cos\gamma > 0 \iff \gamma < 90^\circ">$2ab > 0$, ამიტომ ორივე მხარეს ერთი ნიშანი აქვს; $\cos\gamma$ დადებითია მახვილი კუთხისთვის, ნულია მართისთვის, უარყოფითია ბლაგვისთვის. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">$\gamma = 90^\circ$-თვის $\cos\gamma = 0$ და კოსინუსების თეორემა პითაგორას თეორემად იქცევა.</Remark>
+
+<Remark kind="mistake">სინუსების თეორემით კუთხის პოვნისას ორი პასუხი შეიძლება იყოს: $\sin\alpha = \sin(180^\circ - \alpha)$. შეამოწმე, ორივე ეტევა თუ არა სამკუთხედში.</Remark>

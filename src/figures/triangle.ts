@@ -23,6 +23,7 @@ export default figure({
   },
   drag: { B: ['c'], C: ['b', 'alpha'] },
   base: 'ABC',
+  boundsOf: ['A', 'B', 'C', 'E', 'F', 'X'], // D and K only appear in proofs that set a fitting triangle
   dims: '|AB|c |AC|b |BC|a <A <B <C',
   toggles: { 'გარე კუთხე': 'CX <BCX' },
   classify: 'triangle',

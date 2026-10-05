@@ -1,0 +1,69 @@
+---
+title: სამკუთხედის ფართობი
+slug: triangle-area
+subject: geometry
+section: triangles
+order: 14
+summary: ხუთი ფორმულა — სიმაღლით, სინუსით, ჰერონის, ჩახაზული და შემოხაზული წრეწირის რადიუსით.
+tags: [ფართობი, ჰერონი, ნახევარპერიმეტრი, ჩახაზული წრე, შემოხაზული წრე]
+prerequisites: [triangle, right-triangle, triangle-centers, sine-cosine-laws]
+status: draft
+figure: triangle-area
+parent: triangle
+---
+
+<Definition>აღნიშვნები: გვერდები $a = BC$, $b = CA$, $c = AB$; კუთხეები $\alpha, \beta, \gamma$; **ნახევარპერიმეტრი** $p = \tfrac{a + b + c}{2}$; $r$ — ჩახაზული, $R$ — შემოხაზული წრეწირის რადიუსი.</Definition>
+
+<Formulas>
+<Formula id="height-formula" name="ფუძე და სიმაღლე" tex="S = \tfrac12\, c\, h_c" live="S" proof="area-height" />
+<Formula id="sine-formula" name="ორი გვერდი და კუთხე" tex="S = \tfrac12\, bc \sin\alpha" live="S" proof="area-sine" />
+<Formula id="heron-formula" name="ჰერონის ფორმულა" tex="S = \sqrt{p(p - a)(p - b)(p - c)}" live="S" proof="heron" />
+<Formula id="inradius-formula" name="ჩახაზული წრეწირით" tex="S = p\,r, \qquad r = \frac{S}{p}" live="r" proof="area-inradius" />
+<Formula id="circumradius-formula" name="შემოხაზული წრეწირით" tex="S = \frac{abc}{4R}, \qquad R = \frac{abc}{4S}" live="R" proof="area-circumradius" />
+</Formulas>
+
+<Properties>
+
+<Property id="area-height" title="სამკუთხედის ფართობი ფუძისა და სიმაღლის ნამრავლის ნახევარია" why="სიმაღლე სამკუთხედს ორ მართკუთხა სამკუთხედად ყოფს, თითოეული მართკუთხედის ნახევარია.">
+<Proof given="$CH \perp AB$, $CH = h_c$" prove="$S = \tfrac12\, c\, h_c$">
+<Step set={{ alpha: 60 }} show="CH H <CHB" hl="CH">დავუშვათ სიმაღლე $CH$ (მახვილკუთხა სამკუთხედში $H$ ძევს $AB$-ზე).</Step>
+<Step hl="AHC CHB" tex="S = \tfrac12\, AH \cdot h_c + \tfrac12\, HB \cdot h_c">თითოეული მართკუთხა სამკუთხედი კათეტებზე აგებული მართკუთხედის ნახევარია.</Step>
+<Step tex="S = \tfrac12\,(AH + HB)\, h_c = \tfrac12\, c\, h_c \quad \blacksquare">თუ $H$ $AB$-ს გაგრძელებაზე ხვდება (ბლაგვი $\alpha$ ან $\beta$), ფართობები შეკრების ნაცვლად აკლდება და იგივე მიიღება.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="ფართობი ორი გვერდისა და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია" why="სიმაღლე $h_c = b\sin\alpha$.">
+<Proof given="$CA = b,\ AB = c,\ \angle A = \alpha$" prove="$S = \tfrac12\, bc\sin\alpha$">
+<Step show="CH H <CHB" hl="AHC" tex="h_c = CH = b\sin\alpha">მართკუთხა $\triangle AHC$-ში $CH$ არის $\alpha$-ს პირდაპირ კათეტი (ბლაგვი $\alpha$-თვის — $180^\circ - \alpha$-ს პირდაპირ, სინუსი იგივეა).</Step>
+<Step tex="S = \tfrac12\, c \cdot b\sin\alpha \quad \blacksquare">ჩავსვათ წინა ფორმულაში.</Step>
+</Proof>
+</Property>
+
+<Property id="heron" title="ჰერონის ფორმულა: $S = \sqrt{p(p-a)(p-b)(p-c)}$" why="სინუსი გამოვიყვანოთ კოსინუსების თეორემიდან და ჩავსვათ $\tfrac12 ab\sin\gamma$-ში.">
+<Proof given="გვერდები $a, b, c$" prove="$S = \sqrt{p(p - a)(p - b)(p - c)}$">
+<Step tex="\cos\gamma = \frac{a^2 + b^2 - c^2}{2ab}">კოსინუსების თეორემით.</Step>
+<Step tex="4a^2b^2 \sin^2\gamma = (2ab)^2 - (a^2 + b^2 - c^2)^2">$\sin^2\gamma = 1 - \cos^2\gamma$.</Step>
+<Step tex="= \big(c^2 - (a - b)^2\big)\big((a + b)^2 - c^2\big)">კვადრატების სხვაობა ორჯერ.</Step>
+<Step tex="= (c - a + b)(c + a - b)(a + b - c)(a + b + c) = 16\,p(p - a)(p - b)(p - c)">ისევ კვადრატების სხვაობა; თითოეული ფრჩხილი $2p$-ით გამოისახება, მაგ. $a + b - c = 2(p - c)$.</Step>
+<Step tex="S = \tfrac12\, ab\sin\gamma = \sqrt{p(p - a)(p - b)(p - c)} \quad \blacksquare">$S^2 = \tfrac14 a^2b^2\sin^2\gamma$.</Step>
+</Proof>
+</Property>
+
+<Property id="area-inradius" title="ფართობი ნახევარპერიმეტრისა და ჩახაზული წრეწირის რადიუსის ნამრავლია" why="ჩახაზული წრეწირის ცენტრი სამკუთხედს სამ სამკუთხედად ყოფს, ყველას სიმაღლე $r$-ია.">
+<Proof given="$I$ — ჩახაზული წრეწირის ცენტრი, რადიუსი $r$" prove="$S = p\,r$">
+<Step show="(IT1) I IT1 IT2 IT3 T1 T2 T3" hl="IT1 IT2 IT3">$I$-დან გვერდებამდე მანძილი $r$-ია (შეხების წერტილებთან რადიუსი გვერდის მართობია).</Step>
+<Step show="IA IB IC" hl="AIB BIC CIA" tex="S = \tfrac12\, c\,r + \tfrac12\, a\,r + \tfrac12\, b\,r">შევაერთოთ $I$ წვეროებთან — სამი სამკუთხედი $r$ სიმაღლით.</Step>
+<Step tex="S = \tfrac12\,(a + b + c)\, r = p\,r \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="area-circumradius" title="ფართობი უდრის $\tfrac{abc}{4R}$-ს" why="სინუსების თეორემა $\sin\gamma$-ს $R$-ით გამოსახავს.">
+<Proof given="$R$ — შემოხაზული წრეწირის რადიუსი" prove="$S = \tfrac{abc}{4R}$">
+<Step show="(OA) O" hl="(OA)" tex="\frac{c}{\sin\gamma} = 2R \;\Rightarrow\; \sin\gamma = \frac{c}{2R}">სინუსების თეორემით.</Step>
+<Step tex="S = \tfrac12\, ab\sin\gamma = \frac{abc}{4R} \quad \blacksquare">ჩავსვათ ფართობის ფორმულაში.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">$p$ — ნახევარპერიმეტრია და არა პერიმეტრი: ჰერონის ფორმულაში $P$-ს ჩასმა ფართობს დაახლოებით ოთხჯერ გაზრდის.</Remark>

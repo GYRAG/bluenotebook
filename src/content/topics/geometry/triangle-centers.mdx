@@ -1,0 +1,83 @@
+---
+title: ღირსშესანიშნავი წერტილები
+slug: triangle-centers
+subject: geometry
+section: triangles
+order: 13
+summary: საშუალო ხაზი, მედიანები, ბისექტრისები, შუამართობები, სიმაღლეები — და სად იკვეთება ისინი.
+tags: [მედიანა, ბისექტრისა, სიმაღლე, შუამართობი, საშუალო ხაზი, ჩახაზული წრე, შემოხაზული წრე]
+prerequisites: [triangle, isosceles-triangle, similarity]
+status: draft
+figure: triangle-centers
+parent: triangle
+---
+
+<Definition>**მედიანა** აერთებს წვეროს მოპირდაპირე გვერდის შუაწერტილთან; **ბისექტრისა** ყოფს კუთხეს შუაზე; **სიმაღლე** არის წვეროდან მოპირდაპირე გვერდის შემცველ წრფეზე დაშვებული მართობი; **შუამართობი** არის გვერდის შუაწერტილზე გავლებული მართობი წრფე; **საშუალო ხაზი** აერთებს ორი გვერდის შუაწერტილებს.</Definition>
+
+<Formulas>
+<Formula id="midline-formula" name="საშუალო ხაზი" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC" proof="midline" />
+<Formula id="medians-formula" name="მედიანების გადაკვეთა" tex="AG : GA_1 = 2 : 1" live="AG:GA₁" proof="medians" />
+<Formula id="bisector-formula" name="ბისექტრისის თვისება" tex="\frac{BL}{LC} = \frac{AB}{AC}" proof="bisector-theorem" />
+</Formulas>
+
+<Properties>
+
+<Property id="midline" title="სამკუთხედის საშუალო ხაზი მესამე გვერდის პარალელურია და მისი ნახევრის ტოლია" why="პატარა სამკუთხედი დიდის ზუსტად ორჯერ შემცირებული ასლია.">
+<Proof given="$B_1, C_1$ — $AC$ და $AB$-ს შუაწერტილები" prove="$B_1C_1 \parallel BC,\ B_1C_1 = \tfrac12 BC$">
+<Step show="B1C1 B1 C1" hl="B1C1">შევაერთოთ შუაწერტილები.</Step>
+<Step hl="AC1B1 ABC" tex="\frac{AC_1}{AB} = \frac{AB_1}{AC} = \frac12">$\triangle AC_1B_1$ და $\triangle ABC$-ს საერთო $\angle A$ აქვთ, ხოლო მის მოსაზღვრე გვერდები პროპორციულია — სამკუთხედები მსგავსია.</Step>
+<Step hl="<AC1B1=<ABC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC \quad \blacksquare">მსგავსებიდან $\angle AC_1B_1 = \angle ABC$ — შესაბამისი კუთხეები, ამიტომ წრფეები პარალელურია; მსგავსების კოეფიციენტი $\tfrac12$-ია.</Step>
+</Proof>
+</Property>
+
+<Property id="medians" title="სამკუთხედის მედიანები ერთ წერტილში იკვეთება, რომელიც თითოეულ მედიანას წვეროდან $2 : 1$ შეფარდებით ყოფს" why="საშუალო ხაზი ორჯერ პატარა მსგავს სამკუთხედს ქმნის.">
+<Proof given="$A_1, B_1, C_1$ — გვერდების შუაწერტილები" prove="მედიანები იკვეთება $G$-ში, $AG : GA_1 = 2 : 1$">
+<Step show="BB1 CC1 G" hl="BB1 CC1">ორი მედიანა $BB_1$ და $CC_1$ იკვეთება $G$-ში.</Step>
+<Step show="B1C1" hl="B1C1 BC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12 BC">$B_1C_1$ საშუალო ხაზია.</Step>
+<Step hl="GB1C1 GBC" tex="\frac{GB_1}{GB} = \frac{GC_1}{GC} = \frac{B_1C_1}{BC} = \frac12">$\triangle GB_1C_1 \sim \triangle GBC$: ვერტიკალური კუთხეები $G$-სთან და ჯვარედინი კუთხეები ($B_1C_1 \parallel BC$).</Step>
+<Step show="AA1" hl="AA1">ანალოგიურად მედიანა $AA_1$ $BB_1$-ს კვეთს წერტილში, რომელიც $BB_1$-ს $B$-დან $2 : 1$ შეფარდებით ყოფს — ესაა იგივე $G$. ამიტომ სამივე მედიანა $G$-ზე გადის. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>$G$-ს სამკუთხედის **სიმძიმის ცენტრი** ეწოდება: ერთგვაროვანი სამკუთხა ფირფიტა ზუსტად ამ წერტილზე წონასწორობს.</Remark>
+
+<Property id="bisector-theorem" title="ბისექტრისა მოპირდაპირე გვერდს მოსაზღვრე გვერდების პროპორციულ ნაწილებად ყოფს" why="ბისექტრისის პარალელური წრფე ტოლფერდა სამკუთხედს ქმნის.">
+<Proof given="$AL$ — $\angle A$-ს ბისექტრისა, $L \in BC$" prove="$\tfrac{BL}{LC} = \tfrac{AB}{AC}$">
+<Step show="AL L" hl="AL <BAL=<LAC">$AL$ ყოფს $\angle A$-ს შუაზე.</Step>
+<Step show="CE E AE" hl="CE">$C$-ზე გავავლოთ $AL$-ის პარალელური წრფე; ის $BA$ წრფეს $E$-ში კვეთს.</Step>
+<Step hl="<ACE=<LAC <AEC=<BAL" tex="\angle ACE = \angle AEC">$\angle ACE = \angle LAC$ (ჯვარედინი), $\angle AEC = \angle BAL$ (შესაბამისი), ხოლო $\angle LAC = \angle BAL$.</Step>
+<Step hl="ACE AE=AC" tex="AE = AC">$\triangle ACE$ ტოლფერდაა.</Step>
+<Step hl="BAL BEC" tex="\frac{BL}{LC} = \frac{BA}{AE} = \frac{AB}{AC} \quad \blacksquare">$AL \parallel EC$, ამიტომ $\triangle BAL \sim \triangle BEC$ და პარალელური წრფეები $BC$ და $BE$ გვერდებს პროპორციულად ჭრის.</Step>
+</Proof>
+</Property>
+
+<Property id="incenter" title="სამკუთხედის ბისექტრისები ერთ წერტილში იკვეთება — ჩახაზული წრეწირის ცენტრში" why="ბისექტრისის ყოველი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული.">
+<Proof given="$I$ — $\angle A$ და $\angle B$ ბისექტრისების გადაკვეთა" prove="$I$ ძევს $\angle C$-ს ბისექტრისაზეც და ყველა გვერდიდან თანაბრადაა დაშორებული">
+<Step show="AL BI I" hl="AL BI">$I$ ძევს $\angle A$-ს ბისექტრისაზე — ის $AB$-დან და $AC$-დან თანაბრადაა დაშორებული; $\angle B$-ს ბისექტრისაზე — $BA$-დან და $BC$-დან.</Step>
+<Step show="T IT" hl="IT">მაშასადამე $I$ სამივე გვერდიდან ერთნაირ მანძილზეა ($r$).</Step>
+<Step show="CI" hl="CI">წერტილი, რომელიც კუთხის შიგნითაა და მისი გვერდებიდან თანაბრადაა დაშორებული, ბისექტრისაზე ძევს — $I$ ძევს $\angle C$-ს ბისექტრისაზეც.</Step>
+<Step show="(IT)" hl="(IT)">წრეწირი ცენტრით $I$ და რადიუსით $r$ სამივე გვერდს ეხება — ესაა ჩახაზული წრეწირი. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="circumcenter" title="სამკუთხედის გვერდების შუამართობები ერთ წერტილში იკვეთება — შემოხაზული წრეწირის ცენტრში" why="შუამართობის ყოველი წერტილი მონაკვეთის ბოლოებიდან თანაბრადაა დაშორებული.">
+<Proof given="$O$ — $AB$ და $AC$-ს შუამართობების გადაკვეთა" prove="$OA = OB = OC$">
+<Step show="OC1 OB1 O" hl="OC1" tex="OA = OB">$O$ ძევს $AB$-ს შუამართობზე.</Step>
+<Step hl="OB1" tex="OA = OC">$O$ ძევს $AC$-ს შუამართობზე.</Step>
+<Step show="OA1" hl="OA1">აქედან $OB = OC$ — $O$ ძევს $BC$-ს შუამართობზეც.</Step>
+<Step show="(OA)" hl="(OA)">წრეწირი ცენტრით $O$ და რადიუსით $R = OA$ სამივე წვეროზე გადის. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="orthocenter" title="სამკუთხედის სიმაღლეები (ან მათი გაგრძელებები) ერთ წერტილში იკვეთება" why="სიმაღლეები უფრო დიდი სამკუთხედის შუამართობებია.">
+<Proof given="$AA_2, BB_2, CC_2$ — სიმაღლეები" prove="ისინი ერთ წერტილზე გადის">
+<Step set={{ c: 3.6, b: 3.2, alpha: 65 }} show="A3B3C3 A3 B3 C3" hl="A3B3C3">ყოველ წვეროზე გავავლოთ მოპირდაპირე გვერდის პარალელური წრფე — მივიღებთ $A_3B_3C_3$ სამკუთხედს.</Step>
+<Step hl="AB3=AC3">$ABCB_3$ და $AC_3BC$ პარალელოგრამებია, ამიტომ $AB_3 = BC = AC_3$ — $A$ არის $B_3C_3$-ის შუაწერტილი. ასევე $B$ და $C$ — სხვა გვერდების შუაწერტილებია.</Step>
+<Step show="AA2" hl="AA2">$AA_2 \perp BC$, ხოლო $BC \parallel B_3C_3$, ამიტომ $AA_2$ არის $B_3C_3$-ის შუამართობი. ასევე დანარჩენი ორი სიმაღლე.</Step>
+<Step show="BB2 CC2 H" hl="H">დიდი სამკუთხედის შუამართობები ერთ წერტილში იკვეთება (წინა თვისება) — სიმაღლეებიც. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>ოთხი წერტილი: $G$ (მედიანები), $I$ (ბისექტრისები), $O$ (შუამართობები), $H$ (სიმაღლეები). ბლაგვკუთხა სამკუთხედში $O$ და $H$ სამკუთხედის გარეთაა, მართკუთხაში $O$ ჰიპოტენუზის შუაშია, $H$ — მართი კუთხის წვეროში. ტოლგვერდაში ოთხივე ემთხვევა.</Remark>

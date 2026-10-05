@@ -1,0 +1,82 @@
+---
+title: ტოლფერდა სამკუთხედი
+slug: isosceles-triangle
+subject: geometry
+section: triangles
+order: 11
+summary: ორი ტოლი გვერდი — ფუძესთან ტოლი კუთხეები, ერთი წრფე სამ როლში. ტოლგვერდა სამკუთხედი.
+tags: [ფუძე, ფერდი, ტოლგვერდა, ბისექტრისა, მედიანა, სიმაღლე]
+prerequisites: [triangle, congruence]
+status: draft
+figure: isosceles-triangle
+parent: triangle
+---
+
+<Definition>სამკუთხედს **ტოლფერდა** ეწოდება, თუ მისი ორი გვერდი ტოლია. ტოლ გვერდებს **ფერდები** ეწოდება, მესამეს — **ფუძე**. სამკუთხედი, რომლის სამივე გვერდი ტოლია, **ტოლგვერდაა** — ის ტოლფერდა სამკუთხედის კერძო შემთხვევაა.</Definition>
+
+<Formulas>
+<Formula id="height-formula" name="სიმაღლე ფუძეზე" tex="h = \sqrt{b^2 - \tfrac{a^2}{4}}" live="h" proof="three-in-one" />
+<Formula id="equilateral-height-formula" name="ტოლგვერდა: სიმაღლე" tex="h = \frac{a\sqrt3}{2}" proof="equilateral-height" />
+<Formula id="equilateral-area-formula" name="ტოლგვერდა: ფართობი" tex="S = \frac{a^2\sqrt3}{4}" proof="equilateral-height" />
+<Formula id="equilateral-angles-formula" name="ტოლგვერდა: კუთხეები" tex="\alpha = \beta = \gamma = 60^\circ" proof="equilateral-angles" />
+</Formulas>
+
+<Properties>
+
+<Property id="base-angles-equal" title="ტოლფერდა სამკუთხედის ფუძესთან მდებარე კუთხეები ტოლია" why="წვეროს კუთხის ბისექტრისა სამკუთხედს ორ ტოლ ნახევრად ყოფს.">
+<Proof given="$AB = AC$" prove="$\angle B = \angle C$">
+<Step show="AH H" hl="AH">გავავლოთ $A$ კუთხის ბისექტრისა $AH$ ($H$ ძევს $BC$-ზე).</Step>
+<Step hl="ABH ACH AB=AC" tex="\triangle ABH = \triangle ACH">$AB = AC$, $AH$ საერთოა, $\angle BAH = \angle CAH$ — სამკუთხედები ტოლია ორი გვერდისა და მათ შორის კუთხის მიხედვით (გკგ).</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C \quad \blacksquare">შესაბამისი კუთხეები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="three-in-one" title="ტოლფერდა სამკუთხედში ფუძეზე გავლებული ბისექტრისა მედიანაცაა და სიმაღლეც" why="იგივე ორი ტოლი სამკუთხედი: ფუძე შუაზე იყოფა, კუთხეები $H$-სთან ტოლია.">
+<Proof given="$AB = AC$, $AH$ — ბისექტრისა" prove="$BH = HC,\ AH \perp BC$">
+<Step show="AH H" hl="ABH ACH" tex="\triangle ABH = \triangle ACH">წინა თვისების დამტკიცებიდან.</Step>
+<Step hl="BH=HC" tex="BH = HC">შესაბამისი გვერდები — $AH$ მედიანაა.</Step>
+<Step hl="<AHB=<AHC" tex="\angle AHB = \angle AHC = \tfrac{180^\circ}{2} = 90^\circ \quad \blacksquare">ეს ტოლი კუთხეები ერთად გაშლილ კუთხეს ადგენს — $AH$ სიმაღლეცაა.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-base-angles" kind="converse" title="თუ სამკუთხედის ორი კუთხე ტოლია, ის ტოლფერდაა" why="ტოლი კუთხეების წვეროდან სიმაღლე ორ ტოლ მართკუთხა სამკუთხედს ქმნის.">
+<Proof given="$\angle B = \angle C$" prove="$AB = AC$">
+<Step show="AH H <AHC" hl="AH">გავავლოთ სიმაღლე $AH$. $\angle B$ და $\angle C$ ტოლია და მათი ჯამი $180^\circ$-ზე ნაკლებია, ამიტომ ორივე მახვილია და $H$ ძევს $BC$-ზე.</Step>
+<Step hl="ABH ACH <B=<C" tex="\triangle ABH = \triangle ACH">მართკუთხა სამკუთხედებს საერთო კათეტი $AH$ აქვთ, ხოლო მისი პირდაპირ მდებარე მახვილი კუთხეები ტოლია.</Step>
+<Step hl="AB=AC" tex="AB = AC \quad \blacksquare">ჰიპოტენუზები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-median-altitude" kind="converse" title="თუ სამკუთხედის მედიანა სიმაღლეცაა, სამკუთხედი ტოლფერდაა" why="მედიანა, რომელიც ფუძის მართობია, ფუძის შუამართობია.">
+<Proof given="$BH = HC$, $AH \perp BC$" prove="$AB = AC$">
+<Step show="AH H <AHC" hl="BH=HC">$AH$ მედიანაცაა და სიმაღლეც.</Step>
+<Step hl="ABH ACH" tex="\triangle ABH = \triangle ACH">$BH = HC$, $AH$ საერთოა, კუთხეები $H$-სთან მართია — გკგ.</Step>
+<Step hl="AB=AC" tex="AB = AC \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="ტოლგვერდა სამკუთხედი">
+
+<Property id="equilateral-angles" title="ტოლგვერდა სამკუთხედის ყველა კუთხე $60^\circ$-ია" why="ყოველი წყვილი გვერდი ტოლია, ამიტომ ყოველი წყვილი კუთხეც.">
+<Proof given="$AB = BC = CA$" prove="$\angle A = \angle B = \angle C = 60^\circ$">
+<Step set={{ theta: 60 }} hl="AB=AC <B=<C">$AB = AC$, ამიტომ $\angle B = \angle C$.</Step>
+<Step hl="BA=BC <A=<C">$BA = BC$, ამიტომ $\angle A = \angle C$.</Step>
+<Step hl="<A <B <C" tex="3\angle A = 180^\circ \;\Rightarrow\; \angle A = \angle B = \angle C = 60^\circ \quad \blacksquare">სამივე კუთხე ტოლია, ხოლო მათი ჯამი $180^\circ$-ია.</Step>
+</Proof>
+</Property>
+
+<Property id="equilateral-height" title="ტოლგვერდა სამკუთხედის სიმაღლე $\tfrac{a\sqrt3}{2}$-ია, ფართობი — $\tfrac{a^2\sqrt3}{4}$" why="სიმაღლე მედიანაცაა, ასე რომ პითაგორა $a$ და $\tfrac{a}{2}$ გვერდებით.">
+<Proof given="$AB = BC = CA = a$, $AH \perp BC$" prove="$AH = \tfrac{a\sqrt3}{2},\ S = \tfrac{a^2\sqrt3}{4}$">
+<Step set={{ theta: 60 }} show="AH H <AHC" hl="BH=HC" tex="BH = \tfrac{a}{2}">სიმაღლე მედიანაცაა.</Step>
+<Step hl="ABH" tex="AH^2 = a^2 - \tfrac{a^2}{4} = \tfrac{3a^2}{4} \;\Rightarrow\; AH = \tfrac{a\sqrt3}{2}">პითაგორას თეორემა $\triangle ABH$-ში.</Step>
+<Step hl="ABC" tex="S = \tfrac12 \cdot a \cdot \tfrac{a\sqrt3}{2} = \tfrac{a^2\sqrt3}{4} \quad \blacksquare">სამკუთხედის ფართობი — ფუძისა და სიმაღლის ნამრავლის ნახევარი.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">ტოლგვერდა სამკუთხედში სამივე სიმაღლე მედიანაცაა და ბისექტრისაც, ამიტომ ჩახაზული და შემოხაზული წრეწირების ცენტრები ერთმანეთს ემთხვევა: $r = \tfrac{a\sqrt3}{6}$, $R = \tfrac{a\sqrt3}{3} = 2r$.</Remark>
+
+<Remark kind="mistake">„ბისექტრისა = მედიანა = სიმაღლე“ მხოლოდ ფუძეზე დაშვებულ წრფეს ეხება; ფერდებზე დაშვებული ეს სამი წრფე, საზოგადოდ, განსხვავებულია.</Remark>

@@ -1,0 +1,104 @@
+---
+title: მართკუთხა სამკუთხედი
+slug: right-triangle
+subject: geometry
+section: triangles
+order: 12
+summary: პითაგორას თეორემა (ორი დამტკიცებით) და მისი შებრუნებული, მედიანა ჰიპოტენუზაზე, 30–60–90 და 45–45–90.
+tags: [პითაგორა, კათეტი, ჰიპოტენუზა, სიმაღლე, მედიანა]
+prerequisites: [triangle, isosceles-triangle, similarity, rectangle]
+status: draft
+figure: right-triangle
+figures: [pythagoras-squares]
+parent: triangle
+---
+
+<Definition>სამკუთხედს **მართკუთხა** ეწოდება, თუ მისი ერთი კუთხე მართია. მართი კუთხის მოსაზღვრე გვერდები **კათეტებია** ($a = BC$, $b = AC$), მართი კუთხის პირდაპირ მდებარე — **ჰიპოტენუზა** ($c = AB$).</Definition>
+
+<Formulas>
+<Formula id="pythagoras-formula" name="პითაგორას თეორემა" tex="a^2 + b^2 = c^2" live="c" proof="pythagoras" />
+<Formula id="area-formula" name="ფართობი" tex="S = \tfrac12\, ab" live="S" proof="area" />
+<Formula id="altitude-formula" name="სიმაღლე ჰიპოტენუზაზე" tex="h = \frac{ab}{c}, \qquad h^2 = AH \cdot HB" live="h" proof="altitude-relations" />
+<Formula id="projection-formula" name="კათეტი და მისი გეგმილი" tex="b^2 = c \cdot AH, \qquad a^2 = c \cdot BH" proof="leg-projection" />
+<Formula id="median-formula" name="მედიანა ჰიპოტენუზაზე" tex="m_c = \tfrac{c}{2}" proof="median-hypotenuse" />
+<Formula id="thirty-formula" name="30°-ის პირდაპირ კათეტი" tex="\angle A = 30^\circ \;\Rightarrow\; a = \tfrac{c}{2}" proof="thirty-sixty" />
+<Formula id="forty-five-formula" name="ტოლფერდა მართკუთხა" tex="c = a\sqrt2" proof="forty-five" />
+</Formulas>
+
+<Properties>
+
+<Property id="leg-projection" title="კათეტი ჰიპოტენუზისა და მასზე ამ კათეტის გეგმილის საშუალო პროპორციულია" why="სიმაღლე სამკუთხედს ორ, თავისი მსგავს, სამკუთხედად ყოფს.">
+<Proof given="$\angle C = 90^\circ$, $CH \perp AB$" prove="$AC^2 = AB \cdot AH,\ BC^2 = AB \cdot BH$">
+<Step show="CH H <CHB" hl="CH">გავავლოთ სიმაღლე $CH$.</Step>
+<Step hl="ACH ABC" tex="\frac{AC}{AB} = \frac{AH}{AC} \;\Rightarrow\; AC^2 = AB \cdot AH">$\triangle ACH \sim \triangle ABC$: $\angle A$ საერთოა, $\angle AHC = \angle ACB = 90^\circ$.</Step>
+<Step hl="BCH ABC" tex="\frac{BC}{AB} = \frac{BH}{BC} \;\Rightarrow\; BC^2 = AB \cdot BH \quad \blacksquare">$\triangle CBH \sim \triangle ABC$: $\angle B$ საერთოა, მართი კუთხეები.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras" title="პითაგორას თეორემა: ჰიპოტენუზის კვადრატი კათეტების კვადრატების ჯამის ტოლია" why="(1) ორი მსგავსი სამკუთხედი სიმაღლის გავლების შემდეგ.">
+<Proof given="$\angle C = 90^\circ$" prove="$AB^2 = AC^2 + BC^2$">
+<Step show="CH H <CHB" hl="CH">გავავლოთ სიმაღლე $CH$; $H$ ჰიპოტენუზას $AH$ და $HB$ ნაწილებად ყოფს.</Step>
+<Step hl="ACH BCH" tex="AC^2 = AB \cdot AH, \qquad BC^2 = AB \cdot BH">წინა თვისებით.</Step>
+<Step hl="AB" tex="AC^2 + BC^2 = AB\,(AH + HB) = AB^2 \quad \blacksquare">შევკრიბოთ.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras-areas" title="პითაგორას თეორემა — მეორე დამტკიცება ფართობებით" why="(2) ოთხი ერთნაირი სამკუთხედი დიდ კვადრატში და შიგნით დარჩენილი კვადრატი $c$ გვერდით.">
+<Proof figure="pythagoras-squares" given="კათეტები $a, b$, ჰიპოტენუზა $c$" prove="$a^2 + b^2 = c^2$">
+<Step hl="PQRS" tex="S_{PQRS} = (a + b)^2">ავაგოთ კვადრატი $a + b$ გვერდით.</Step>
+<Step hl="PKN QLK RML SNM" tex="4 \cdot \tfrac12 ab = 2ab">მის კუთხეებში ოთხი ტოლი მართკუთხა სამკუთხედია $a$ და $b$ კათეტებით.</Step>
+<Step hl="KLMN" tex="S_{KLMN} = c^2">შუაში დარჩენილი $KLMN$ კვადრატია: მისი გვერდები ჰიპოტენუზებია ($c$), ხოლო თითოეული კუთხე $180^\circ$-ს გამოკლებული სამკუთხედის ორი მახვილი კუთხეა, რომელთა ჯამი $90^\circ$-ია.</Step>
+<Step tex="(a + b)^2 = 2ab + c^2 \;\Rightarrow\; a^2 + b^2 = c^2 \quad \blacksquare">დიდი კვადრატის ფართობი ნაწილების ფართობების ჯამია.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras-converse" kind="converse" title="თუ სამკუთხედში $a^2 + b^2 = c^2$, მაშინ $c$-ს პირდაპირ კუთხე მართია" why="ავაგოთ მართკუთხა სამკუთხედი იგივე კათეტებით — მისი ჰიპოტენუზაც $c$ გამოვა.">
+<Proof given="$BC^2 + AC^2 = AB^2$" prove="$\angle C = 90^\circ$">
+<Step hl="BC AC">ავაგოთ მართკუთხა სამკუთხედი $A'B'C'$ კათეტებით $B'C' = BC = a$ და $A'C' = AC = b$.</Step>
+<Step tex="A'B'^2 = a^2 + b^2 = AB^2 \;\Rightarrow\; A'B' = AB">პითაგორას თეორემით.</Step>
+<Step hl="<C" tex="\triangle ABC = \triangle A'B'C' \;\Rightarrow\; \angle C = \angle C' = 90^\circ \quad \blacksquare">სამკუთხედები ტოლია სამი გვერდის მიხედვით (გგგ).</Step>
+</Proof>
+</Property>
+
+<Property id="altitude-relations" title="ჰიპოტენუზაზე დაშვებული სიმაღლე: $h^2 = AH \cdot HB$ და $h = \tfrac{ab}{c}$" why="ორი პატარა სამკუთხედი ერთმანეთის მსგავსია; ფართობი ორნაირად.">
+<Proof given="$\angle C = 90^\circ$, $CH \perp AB$, $CH = h$" prove="$h^2 = AH \cdot HB,\ h = \tfrac{ab}{c}$">
+<Step show="CH H <CHB" hl="ACH CBH" tex="\frac{AH}{CH} = \frac{CH}{HB} \;\Rightarrow\; h^2 = AH \cdot HB">$\triangle ACH \sim \triangle CBH$: ორივე მართკუთხაა და $\angle ACH = 90^\circ - \angle A = \angle B$.</Step>
+<Step hl="ABC" tex="\tfrac12\, ab = \tfrac12\, c\,h \;\Rightarrow\; h = \frac{ab}{c} \quad \blacksquare">ფართობი ორნაირად: კათეტებით და ჰიპოტენუზითა და სიმაღლით.</Step>
+</Proof>
+</Property>
+
+<Property id="median-hypotenuse" title="ჰიპოტენუზაზე გავლებული მედიანა ჰიპოტენუზის ნახევარია" why="სამკუთხედი მართკუთხედის ნახევარია, ხოლო მართკუთხედის დიაგონალები ტოლია.">
+<Proof given="$\angle C = 90^\circ$, $M$ — $AB$-ს შუაწერტილი" prove="$CM = \tfrac{AB}{2}$">
+<Step show="CM M" hl="CM">გავავლოთ მედიანა $CM$.</Step>
+<Step show="MD D AD BD" hl="CM=MD">გავაგრძელოთ $MD = CM$-მდე. $ACBD$-ის დიაგონალები შუაზე იყოფა — ის პარალელოგრამია, ხოლო $\angle C = 90^\circ$ — მართკუთხედი.</Step>
+<Step hl="CD AB" tex="CD = AB \;\Rightarrow\; CM = \tfrac{CD}{2} = \tfrac{AB}{2} \quad \blacksquare">მართკუთხედის დიაგონალები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Remark>აქედან: მართკუთხა სამკუთხედის შემოხაზული წრეწირის ცენტრი ჰიპოტენუზის შუაწერტილია, $R = \tfrac{c}{2}$.</Remark>
+
+<Property id="thirty-sixty" title="$30^\circ$-იანი კუთხის პირდაპირ მდებარე კათეტი ჰიპოტენუზის ნახევარია" why="მედიანა ჰიპოტენუზაზე ტოლგვერდა სამკუთხედს ჩამოჭრის.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = 30^\circ$" prove="$BC = \tfrac{AB}{2}$">
+<Step set={{ a: 2, b: 3.5 }} show="CM M" hl="CM=MB" tex="\angle B = 60^\circ,\qquad CM = MB = \tfrac{AB}{2}">$\angle B = 90^\circ - 30^\circ$; ჰიპოტენუზაზე მედიანა მის ნახევარს უდრის (ნახაზზე $\angle A \approx 30^\circ$).</Step>
+<Step hl="CMB">$\triangle CMB$ ტოლფერდაა $60^\circ$-იანი კუთხით, ამიტომ ტოლგვერდაა.</Step>
+<Step hl="BC" tex="BC = MB = \tfrac{AB}{2} \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="forty-five" title="ტოლფერდა მართკუთხა სამკუთხედის მახვილი კუთხეები $45^\circ$-ია, ჰიპოტენუზა $a\sqrt2$" why="ტოლი კათეტები — ტოლი მახვილი კუთხეები.">
+<Proof given="$\angle C = 90^\circ$, $BC = AC = a$" prove="$\angle A = \angle B = 45^\circ,\ AB = a\sqrt2$">
+<Step set={{ a: 3, b: 3 }} hl="BC=AC <A=<B" tex="\angle A = \angle B = \tfrac{90^\circ}{2} = 45^\circ">ტოლფერდა სამკუთხედში ფუძესთან კუთხეები ტოლია, ხოლო მათი ჯამი $90^\circ$-ია.</Step>
+<Step hl="AB" tex="AB^2 = a^2 + a^2 \;\Rightarrow\; AB = a\sqrt2 \quad \blacksquare">პითაგორას თეორემით.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="მართკუთხა სამკუთხედის ფართობი კათეტების ნამრავლის ნახევარია" why="ის კათეტებზე აგებული მართკუთხედის ნახევარია.">
+<Proof given="$\angle C = 90^\circ$" prove="$S = \tfrac12 ab$">
+<Step show="M D AD BD" hl="ACBD">შევავსოთ სამკუთხედი მართკუთხედამდე $ACBD$; მისი ფართობი $ab$-ა.</Step>
+<Step hl="ABC" tex="S = \tfrac12\, ab \quad \blacksquare">დიაგონალი $AB$ მართკუთხედს ორ ტოლ სამკუთხედად ყოფს (გგგ).</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">პითაგორას თეორემა მხოლოდ მართკუთხა სამკუთხედშია სამართლიანი. ზოგად სამკუთხედში $c^2 = a^2 + b^2 - 2ab\cos\gamma$ (კოსინუსების თეორემა).</Remark>
