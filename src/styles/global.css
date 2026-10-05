@@ -85,6 +85,12 @@ summary::-webkit-details-marker { display: none; }
 .extra a:hover, .extra a[aria-current] { color: var(--ink); }
 .extra a[aria-current] { font-weight: var(--w2); }
 .app.no-panel .stage { overflow: auto; overscroll-behavior: contain; }
+/* a text topic (no figure): title on top, the panel becomes the page below it */
+.app.no-figure { grid-template-columns: var(--nav-w) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: 'nav stage' 'nav panel'; }
+.app.no-figure .stage { padding-bottom: var(--s2); }
+.app.no-figure .panel { border-left: 0; background: var(--paper); }
+.app.no-figure .tabs { max-width: 420px; }
+.app.no-figure .panel-body > * { max-width: 720px; }
 .nf { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; font-size: var(--fs-ui); color: var(--ink-2); }
 
 /* title: the one flourish — a double pen underline */
@@ -107,7 +113,7 @@ summary::-webkit-details-marker { display: none; }
 
 /* panel: tabs + one scrolling body */
 .grip { display: none; }
-.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: none; padding: var(--s3) var(--s4) var(--s1); }
+.tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); flex: none; padding: var(--s3) var(--s4) var(--s1); }
 .tabs [role='tab'] {
   position: relative; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--s1);
   font-size: var(--fs-ui); color: var(--ink-2); text-align: center;
@@ -130,7 +136,8 @@ summary::-webkit-details-marker { display: none; }
 
 /* the spiral binding between the contents page and the figure page */
 @media (min-width: 900px) {
-  .stage { background: radial-gradient(circle, var(--paper-2) 0 3.5px, var(--ink) 3.5px 5px, transparent 5.5px) 0 14px / 14px 30px repeat-y; padding-left: 36px; }
+  .stage, .app.no-figure .panel { background: radial-gradient(circle, var(--paper-2) 0 3.5px, var(--ink) 3.5px 5px, transparent 5.5px) 0 14px / 14px 30px repeat-y; padding-left: 36px; }
+  .app.no-figure .panel { padding-left: 12px; background-color: var(--paper); }
 }
 
 /* scrollbars: a thin pencil line, no arrows, no track */
@@ -183,6 +190,9 @@ summary::-webkit-details-marker { display: none; }
     grid-template-areas: 'top' 'stage' 'panel';
   }
   .app.no-panel { grid-template-rows: var(--topbar-h) minmax(0, 1fr); grid-template-areas: 'top' 'stage'; }
+  .app.no-figure { grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--topbar-h) minmax(0, 1fr); grid-template-areas: 'top' 'panel'; }
+  .app.no-figure .stage, .app.no-figure .grip { display: none; }
+  .app.no-figure .panel { border-top: 0; padding-top: var(--s2); }
   .app.sheet-up { --fig-h: 28dvh; }
   .topbar { grid-area: top; display: flex; align-items: center; gap: 2px; padding: 0 var(--s1); }
   .topbar-title { flex: 1; min-width: 0; padding-left: var(--s1); font: var(--w2) 19px/1.2 var(--font-head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -209,8 +219,6 @@ summary::-webkit-details-marker { display: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
-/* topic placeholders until the figure engine lands (M2) */
-.figure-empty { position: absolute; left: var(--s4); bottom: var(--s2); }
 .prose p { padding: var(--s2) 0; }
 
 /* ---------- the figure (geo-figure) ---------- */

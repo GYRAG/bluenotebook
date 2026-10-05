@@ -15,10 +15,11 @@ interface Props {
   description?: string;
   current?: { subject: SubjectId; slug: string };
   panel?: boolean;
+  figure?: boolean; // false: a text topic — the panel takes the page under the title
   draft?: boolean;
   lede?: string;
 }
-const { title, description = 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.', current, panel = true, draft = false, lede } = Astro.props;
+const { title, description = 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.', current, panel = true, figure = true, draft = false, lede } = Astro.props;
 ---
 <!doctype html>
 <html lang="ka">
@@ -35,7 +36,7 @@ const { title, description = 'მათემატიკის პირად�
 </head>
 <body data-topic={current ? `/${current.subject}/${current.slug}/` : undefined}>
   <a class="skip" href="#main">შინაარსზე გადასვლა</a>
-  <div class:list={['app', { 'no-panel': !panel }]}>
+  <div class:list={['app', { 'no-panel': !panel, 'no-figure': panel && !figure }]}>
     <header class="topbar">
       <button class="icon-btn" type="button" popovertarget="nav" aria-label="თემების სია"><Icon name="menu" /></button>
       <span class="topbar-title">{title}</span>

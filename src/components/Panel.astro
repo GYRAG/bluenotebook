@@ -1,6 +1,8 @@
 ---
 // The right-hand panel (a bottom sheet on phones): three tabs, one scrolling body.
-const TABS = [['tools', 'ხელსაწყოები'], ['formulas', 'ფორმულები'], ['props', 'თვისებები']] as const;
+const ALL = [['tools', 'ხელსაწყოები'], ['formulas', 'ფორმულები'], ['props', 'თვისებები']] as const;
+const { tools = true } = Astro.props as { tools?: boolean }; // no figure → no tools tab
+const TABS = tools ? ALL : ALL.slice(1);
 ---
 <aside class="panel" aria-label="ხელსაწყოები და ცნობები">
   <button class="grip" type="button" data-sheet-toggle aria-label="პანელის გაშლა" aria-expanded="false"><span></span></button>

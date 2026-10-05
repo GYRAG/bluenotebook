@@ -1,0 +1,62 @@
+---
+title: მოდულის შემცველი განტოლებები
+slug: abs-equations
+subject: algebra
+section: equations
+order: 1
+summary: მოდულის განმარტება და მოდულის შემცველი განტოლებების სამი ძირითადი ტიპი.
+tags: [მოდული, აბსოლუტური სიდიდე, განტოლება, უცხო ამონახსნი]
+prerequisites: []
+status: draft
+---
+
+<Definition>რიცხვის **მოდული** $|x|$ უდრის $x$-ს, თუ $x \ge 0$, და $-x$-ს, თუ $x < 0$. გეომეტრიულად $|x|$ რიცხვით წრფეზე მანძილია $x$-დან $0$-მდე, ხოლო $|x - a|$ — მანძილი $x$-დან $a$-მდე.</Definition>
+
+<Formulas>
+<Formula id="abs-def" name="მოდულის განმარტება" tex="|x| = \begin{cases} x, & x \ge 0 \\ -x, & x < 0 \end{cases}" />
+<Formula id="abs-a" name="უმარტივესი განტოლება" tex="|x| = a \iff x = \pm a \quad (a \ge 0)" proof="simplest" />
+<Formula id="abs-abs" name="მოდული მოდულის ტოლია" tex="|f(x)| = |g(x)| \iff f(x) = \pm g(x)" proof="abs-equals-abs" />
+<Formula id="abs-g" name="მოდული გამოსახულების ტოლია" tex="|f(x)| = g(x) \iff \begin{cases} g(x) \ge 0 \\ f(x) = \pm g(x) \end{cases}" proof="abs-equals-expr" />
+<Formula id="midpoint" name="ტოლი მანძილები" tex="|x - a| = |x - b|,\ a \ne b \iff x = \frac{a + b}{2}" proof="distance" />
+</Formulas>
+
+<Properties>
+
+<Property id="simplest" title="განტოლებას $|x| = a$ აქვს ორი ამონახსნი $x = \pm a$, თუ $a > 0$; ერთი, $x = 0$, თუ $a = 0$; არცერთი, თუ $a < 0$" why="მოდული მანძილია: უარყოფითი ვერ იქნება, ხოლო $0$-დან $a$ მანძილზე ორი წერტილია.">
+<Proof given="$|x| = a$" prove="ამონახსნები $a$-ს ნიშნის მიხედვით">
+<Step tex="|x| \ge 0">თუ $a < 0$: ნებისმიერი $x$-ისთვის $|x| \ge 0 > a$, ამიტომ ამონახსნი არ არსებობს.</Step>
+<Step tex="x \ge 0:\ |x| = x = a">თუ $x \ge 0$, მაშინ $|x| = x$, ე.ი. $x = a$ — ეს გამოდგება, როცა $a \ge 0$.</Step>
+<Step tex="x < 0:\ |x| = -x = a">თუ $x < 0$, მაშინ $|x| = -x$, ე.ი. $x = -a$ — ეს გამოდგება, როცა $a > 0$.</Step>
+<Step tex="x = \pm a \quad \blacksquare">$a > 0$-ზე ორი განსხვავებული ამონახსნია, $a = 0$-ზე ორივე შემთხვევა ერთსა და იმავე $x = 0$-ს იძლევა.</Step>
+</Proof>
+</Property>
+
+<Property id="abs-equals-abs" title="$|f(x)| = |g(x)|$ მაშინ და მხოლოდ მაშინ, როცა $f(x) = g(x)$ ან $f(x) = -g(x)$" why="ორი რიცხვის მოდულები ტოლია, როცა რიცხვები ან ტოლია, ან მოპირდაპირე.">
+<Proof given="$|u| = |v|$" prove="$u = v$ ან $u = -v$">
+<Step tex="|u| = |v| \iff u^2 = v^2">ორივე მხარე არაუარყოფითია, ამიტომ კვადრატში აყვანა ტოლფას განტოლებას იძლევა; თან $|u|^2 = u^2$.</Step>
+<Step tex="u^2 - v^2 = (u - v)(u + v) = 0">გადავიტანოთ ერთ მხარეს და დავშალოთ მამრავლებად.</Step>
+<Step tex="u = v \quad \text{ან} \quad u = -v \quad \blacksquare">ნამრავლი ნულია მაშინ და მხოლოდ მაშინ, როცა ერთ-ერთი მამრავლი ნულია.</Step>
+</Proof>
+</Property>
+
+<Property id="abs-equals-expr" title="$|f(x)| = g(x)$ ტოლფასია სისტემის: $g(x) \ge 0$ და $f(x) = \pm g(x)$" why="მოდული უარყოფითს ვერ უდრის, ამიტომ ჯერ $g(x) \ge 0$, შემდეგ — წინა თვისება.">
+<Proof given="$|f(x)| = g(x)$" prove="$g(x) \ge 0$ და $f(x) = \pm g(x)$">
+<Step>თუ $g(x) < 0$, ტოლობა შეუძლებელია, რადგან $|f(x)| \ge 0$. ამიტომ ამონახსნი აუცილებლად აკმაყოფილებს $g(x) \ge 0$-ს.</Step>
+<Step tex="g(x) = |g(x)|">თუ $g(x) \ge 0$, მაშინ $g(x)$ თავისი მოდულის ტოლია და განტოლება ხდება $|f(x)| = |g(x)|$.</Step>
+<Step tex="f(x) = \pm g(x),\quad g(x) \ge 0 \quad \blacksquare">წინა თვისებით $f(x) = g(x)$ ან $f(x) = -g(x)$; მიღებული ფესვებიდან ვტოვებთ მხოლოდ იმათ, სადაც $g(x) \ge 0$.</Step>
+</Proof>
+</Property>
+
+<Property id="distance" title="თუ $a \ne b$, განტოლებას $|x - a| = |x - b|$ აქვს ერთადერთი ამონახსნი $x = \tfrac{a + b}{2}$" why="$x$ თანაბრად არის დაშორებული $a$-სა და $b$-ს, ე.ი. მათი შუაწერტილია.">
+<Proof given="$|x - a| = |x - b|$, $a \ne b$" prove="$x = \tfrac{a + b}{2}$">
+<Step tex="x - a = \pm(x - b)">მე-2 თვისებით.</Step>
+<Step tex="x - a = x - b \Rightarrow a = b">პირველი შემთხვევა $a \ne b$ პირობას ეწინააღმდეგება.</Step>
+<Step tex="2x = a + b \Rightarrow x = \frac{a + b}{2} \quad \blacksquare">მეორედან.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>მაგალითი: $|2x - 1| = 5$ ⇒ $2x - 1 = 5$ ან $2x - 1 = -5$ ⇒ $x = 3$ ან $x = -2$.</Remark>
+
+<Remark kind="mistake">$|x - 3| = x - 5$: $x - 3 = \pm(x - 5)$-დან მიიღება $x = 4$, მაგრამ მაშინ $x - 5 = -1 < 0$ — ეს **უცხო ამონახსნია** და განტოლებას ამონახსნი არ აქვს. პირობა $g(x) \ge 0$ ყოველთვის შეამოწმე.</Remark>

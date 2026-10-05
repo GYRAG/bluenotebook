@@ -3,7 +3,7 @@
 // typed word lets prefix matching find every form of it.
 // ponytail: suffix list covers the school cases + plural; a real stemmer if recall ever falls short.
 const ENDINGS = [
-  'ებისთვის', 'ისთვის', 'ებიდან', 'ებამდე', 'ებით', 'ებში', 'ებზე', 'ების', 'ებად', 'ებმა', 'ებს', 'ები',
+  'ებისთვის', 'ებისგან', 'ისთვის', 'ისგან', 'ებიდან', 'ებამდე', 'ებით', 'ებში', 'ებზე', 'ების', 'ებად', 'ებმა', 'ებს', 'ები',
   'იდან', 'ამდე', 'ისა', 'ში', 'ზე', 'ით', 'ის', 'ად', 'მა', 'ს', 'ი', 'ა', 'ე', 'ო', 'უ',
 ];
 const MIN_STEM = 3;

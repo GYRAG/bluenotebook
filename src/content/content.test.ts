@@ -1,9 +1,12 @@
-// Content ↔ figure consistency (the full linter is `pnpm check`, M6). For every topic with a
-// figure: each <Property> has a numeric check on the figure its proof plays on, and every
-// point a proof step mentions exists on that figure.
+// The content linter (`pnpm check` = Zod frontmatter via `astro sync` + this file).
+// Per topic: each <Property> has a numeric check on the figure its proof plays on, and every
+// point a proof step mentions exists on that figure. Site-wide: slugs, links, prerequisites,
+// glossary terms.
 import { describe, expect, it } from 'vitest';
 import { parseRefs, refPoints } from '@/figures/engine/refs';
 import type { FigureSpec } from '@/figures/engine/spec';
+import { stemKa } from '@/lib/ka-search';
+import glossary from './glossary.json';
 
 const files = import.meta.glob<string>('./topics/**/*.mdx', { query: '?raw', import: 'default', eager: true });
 const specs = import.meta.glob<{ default: FigureSpec }>(['../figures/*.ts', '!../figures/registry.ts'], { eager: true });
@@ -59,3 +62,49 @@ for (const [path, src] of Object.entries(files)) {
     });
   });
 }
+
+const field = (src: string, k: string) => src.match(new RegExp(`^${k}:\\s*(.+)$`, 'm'))?.[1]?.trim();
+const list = (v?: string) => v?.replace(/^\[|\]$/g, '').split(',').map(x => x.trim()).filter(Boolean) ?? [];
+const topics = Object.entries(files).map(([path, src]) => ({
+  path, src, slug: field(src, 'slug')!, subject: field(src, 'subject')!, file: path.split('/').pop()!.replace(/\.mdx$/, ''),
+}));
+const slugs = new Set(topics.map(t => t.slug));
+const urls = new Set(topics.map(t => `/${t.subject}/${t.slug}/`));
+
+describe('site', () => {
+  it('slug matches the file name and is unique', () => {
+    expect(topics.filter(t => t.slug !== t.file).map(t => t.path)).toEqual([]);
+    expect(topics.length).toBe(slugs.size);
+  });
+
+  it('prerequisites and parent name existing topics', () => {
+    const bad = topics.flatMap(t => [...list(field(t.src, 'prerequisites')), ...list(field(t.src, 'parent'))]
+      .filter(s => !slugs.has(s)).map(s => `${t.slug} → ${s}`));
+    expect(bad).toEqual([]);
+  });
+
+  it('internal links resolve', () => {
+    const extra = new Set(['/', '/cheatsheet/', '/geometry/relationships/']);
+    const bad = topics.flatMap(t => [...t.src.matchAll(/\]\((\/[^)#\s]*)(?:#[^)]*)?\)|href="(\/[^"#]*)/g)]
+      .map(m => m[1] ?? m[2]!).filter(u => !urls.has(u) && !extra.has(u)).map(u => `${t.slug} → ${u}`));
+    expect(bad).toEqual([]);
+  });
+
+  it('no glossary "avoid" variant appears', () => {
+    const bad = topics.flatMap(t => glossary.terms.flatMap(g => ('avoid' in g ? (g.avoid as string[]) : [])
+      .filter(a => t.src.includes(a)).map(a => `${t.slug}: „${a}“ → „${g.ka}“`)));
+    expect(bad).toEqual([]);
+  });
+
+  it('terms defined in bold are in the glossary', () => {
+    // Compare head words stemmed to a fixed point: „ტოლია“, „ტოლი“ → „ტოლ“. Loose on purpose —
+    // it catches a new term or a misspelling, not which of two related terms was meant.
+    const head = (s: string) => { let w = s.split(/\s+/)[0]!, v; while ((v = stemKa(w)) !== w) w = v; return w; };
+    const known = new Set(glossary.terms.map(g => head(g.ka)));
+    const bad = topics.flatMap(t => [...t.src.matchAll(/<Definition>([\s\S]*?)<\/Definition>/g)]
+      .flatMap(d => [...d[1]!.matchAll(/\*\*([^*]+)\*\*/g)].map(b => b[1]!.trim()))
+      .filter(b => !known.has(head(b)))
+      .map(b => `${t.slug}: ${b}`));
+    expect(bad).toEqual([]);
+  });
+});

@@ -14,13 +14,11 @@ const { topic } = Astro.props;
 const { Content } = await render(topic);
 const fig = topic.data.figure;
 ---
-<Shell title={topic.data.title} description={topic.data.summary} current={{ subject: topic.data.subject, slug: topic.id }} draft={topic.data.status === 'draft'} lede={topic.data.summary}>
-  {fig ? <Figure name={fig} /> : (
-    <div class="figure paper"><p class="empty figure-empty"><b>ნახაზი ჯერ არ არის</b>ინტერაქტიული ფიგურა აქ გამოჩნდება.</p></div>
-  )}
+<Shell title={topic.data.title} description={topic.data.summary} current={{ subject: topic.data.subject, slug: topic.id }} draft={topic.data.status === 'draft'} lede={topic.data.summary} figure={!!fig}>
+  {fig && <Figure name={fig} />}
   {topic.data.figures.map(name => <Figure name={name} alt />)}
-  <Panel slot="panel">
-    {fig ? <FigureTools slot="tools" name={fig} /> : <p slot="tools" class="empty"><b>ჯერ ცარიელია</b>სლაიდერები და გადამრთველები გამოჩნდება, როცა თემას ნახაზი ექნება.</p>}
+  <Panel slot="panel" tools={!!fig}>
+    {fig && <FigureTools slot="tools" name={fig} />}
     <div slot="formulas"><Content components={formulasView} /></div>
     <div slot="props"><Content components={propertiesView} /></div>
   </Panel>
