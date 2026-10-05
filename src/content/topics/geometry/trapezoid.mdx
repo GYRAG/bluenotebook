@@ -21,6 +21,11 @@ parent: quadrilateral
 <Formula id="area-formula" name="ფართობი" tex="S = \frac{a + b}{2}\, h = m\,h" live="S" proof="area" />
 <Formula id="ratio-formula" name="დიაგონალების გადაკვეთა" tex="AO : OC = BO : OD \;\text{—}\; a : b" live="AO:OC" proof="diagonals-ratio" />
 <Formula id="segment-formula" name="მონაკვეთი დიაგონალების გადაკვეთაზე, ფუძეების პარალელური" tex="PQ = \frac{2ab}{a + b}" live="PQ" proof="segment-through-o" />
+<Formula id="diag-midpoints-formula" name="დიაგონალების შუაწერტილებს შორის მონაკვეთი" tex="XY = \frac{a - b}{2}" live="XY" proof="diagonal-midpoints" />
+<Formula id="diag-triangles-formula" name="დიაგონალებით მიღებული სამკუთხედები" tex="S_{AOB} = S_{COD}, \qquad S_{AOB}^2 = S_{AOD} \cdot S_{BOC}" proof="diagonal-triangles" />
+<Formula id="iso-projections-formula" name="ტოლფერდა: სიმაღლის ფუძე და დიაგონალი" tex="AH = \frac{a - b}{2},\quad HD = \frac{a + b}{2},\quad d^2 = h^2 + \left(\frac{a + b}{2}\right)^2" proof="isosceles-projections" />
+<Formula id="iso-perp-formula" name="ტოლფერდა, მართობი დიაგონალებით" tex="h = \frac{a + b}{2}, \qquad S = h^2" proof="isosceles-perpendicular-diagonals" />
+<Formula id="iso-tangential-formula" name="ტოლფერდა, ჩახაზული წრეწირით" tex="c = \frac{a + b}{2}, \qquad h = 2r = \sqrt{ab}" proof="isosceles-tangential" />
 </Formulas>
 
 <Properties>
@@ -69,6 +74,36 @@ parent: quadrilateral
 </Proof>
 </Property>
 
+<Property id="diagonal-midpoints" title="დიაგონალების შუაწერტილები შუახაზზე ძევს და მათ შორის მანძილი ფუძეების სხვაობის ნახევარია ($a > b$)" why="$M$-ზე ორი სამკუთხედის შუახაზი გადის: $\tfrac{b}{2}$ და $\tfrac{a}{2}$.">
+<Proof given="$X, Y$ — $AC$ და $BD$ დიაგონალების შუაწერტილები, $a > b$" prove="$X, Y \in MN,\ XY = \tfrac{a - b}{2}$">
+<Step show="AC BD X Y M" hl="X Y">$X$ და $Y$ დიაგონალების შუაწერტილებია, $M$ — $AB$ ფერდის შუაწერტილი.</Step>
+<Step show="MX" hl="MX ABC" tex="MX \parallel BC, \qquad MX = \tfrac{b}{2}">$MX$ აერთებს $\triangle ABC$-ის ორი გვერდის შუაწერტილებს — ის ამ სამკუთხედის შუახაზია.</Step>
+<Step show="MY" hl="MY ABD" tex="MY \parallel AD, \qquad MY = \tfrac{a}{2}">$MY$ — $\triangle ABD$-ის შუახაზი.</Step>
+<Step show="MN N" hl="MN">$MX$ და $MY$ $M$-ზე გადის და ფუძეების პარალელურია. $M$-ზე ფუძეების პარალელური მხოლოდ ერთი წრფე გადის — შუახაზის წრფე, ამიტომ $X$ და $Y$ მასზე ძევს.</Step>
+<Step hl="XY" tex="XY = MY - MX = \frac{a - b}{2} \quad \blacksquare">$X$ და $Y$ $M$-დან ერთ მხარესაა და $MX < MY$.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-triangles" title="დიაგონალები ტრაპეციას ოთხ სამკუთხედად ყოფს: ფერდებთან მდებარე სამკუთხედები ტოლდიდია, ხოლო თითოეულის ფართობის კვადრატი ფუძეებთან მდებარე სამკუთხედების ფართობების ნამრავლია" why="ერთი და იმავე ფუძისა და სიმაღლის სამკუთხედები ტოლდიდია.">
+<Proof given="$O = AC \cap BD$" prove="$S_{AOB} = S_{COD},\ S_{AOB}^2 = S_{AOD} \cdot S_{BOC}$">
+<Step show="AC BD O" hl="ABD ACD" tex="S_{ABD} = S_{ACD}">ორ სამკუთხედს საერთო ფუძე $AD$ აქვს, სიმაღლეები კი ტოლია: $B$ და $C$ ერთნაირად არის დაშორებული $AD$-დან.</Step>
+<Step hl="AOB COD" tex="S_{AOB} = S_{ABD} - S_{AOD} = S_{ACD} - S_{AOD} = S_{COD}">ორივეს გამოვაკლოთ $S_{AOD}$.</Step>
+<Step hl="AOB AOD" tex="\frac{S_{AOB}}{S_{AOD}} = \frac{OB}{OD}">სამკუთხედებს საერთო წვერო $A$ აქვს, ფუძეები $OB$ და $OD$ კი ერთ წრფეზე ძევს — ფართობები ფუძეების პროპორციულია.</Step>
+<Step hl="BOC COD" tex="\frac{S_{BOC}}{S_{COD}} = \frac{OB}{OD}">იგივე, საერთო წვეროთი $C$.</Step>
+<Step tex="S_{AOB} \cdot S_{COD} = S_{AOD} \cdot S_{BOC} \;\Rightarrow\; S_{AOB}^2 = S_{AOD} \cdot S_{BOC} \quad \blacksquare">ორი შეფარდება ტოლია; ჩავსვათ $S_{COD} = S_{AOB}$.</Step>
+</Proof>
+</Property>
+
+<Property id="leg-bisectors" title="ერთ ფერდთან მდებარე კუთხეების ბისექტრისები მართი კუთხით იკვეთება, ხოლო გადაკვეთის წერტილი შუახაზის წრფეზე ძევს" why="ნახევრების ჯამი $90^\circ$-ია; ჰიპოტენუზაზე გავლებული მედიანა მისი ნახევარია.">
+<Proof given="$AL$, $BL$ — $\angle A$-სა და $\angle B$-ს ბისექტრისები" prove="$\angle ALB = 90^\circ$, $L \in MN$">
+<Step show="AL BL L" hl="AL BL">$AL$ და $BL$ — $AB$ ფერდთან მდებარე კუთხეების ბისექტრისები.</Step>
+<Step hl="<ALB" tex="\angle LAB + \angle LBA = \tfrac12(\angle A + \angle B) = 90^\circ">ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია, ამიტომ $\triangle ALB$-ში $\angle ALB = 90^\circ$.</Step>
+<Step show="ML M" hl="ML=AM" tex="ML = \tfrac12 AB = AM">$LM$ მართკუთხა $\triangle ALB$-ის მედიანაა ჰიპოტენუზაზე.</Step>
+<Step hl="<MLA=<LAD" tex="\angle MLA = \angle MAL = \angle LAD">$\triangle AML$ ტოლფერდაა, $AL$ კი ბისექტრისაა.</Step>
+<Step show="MN N" hl="ML||AD">$\angle MLA$ და $\angle LAD$ ჯვარედინი კუთხეებია, ამიტომ $ML \parallel AD$. $M$-ზე $AD$-ს პარალელური მხოლოდ შუახაზის წრფე გადის — $L$ მასზე ძევს. ∎</Step>
+</Proof>
+</Property>
+
 </Properties>
 
 <Remark>$\tfrac{2ab}{a+b}$ არის $a$ და $b$ რიცხვების საშუალო ჰარმონიული. ის ყოველთვის შუახაზზე ($\tfrac{a+b}{2}$) ნაკლებია, თუ $a \ne b$.</Remark>
@@ -89,6 +124,25 @@ parent: quadrilateral
 <Step set={{ a: 6, b: 3, s: 1.5 }} show="AC BD" hl="AC BD">გავავლოთ დიაგონალები.</Step>
 <Step hl="ABD AB=DC <A=<D" tex="AB = DC,\quad AD = DA,\quad \angle A = \angle D">განვიხილოთ $\triangle ABD$ და $\triangle DCA$: ფერდები ტოლია, $AD$ საერთოა, ფუძესთან კუთხეები ტოლია (წინა თვისება).</Step>
 <Step hl="AC=BD" tex="\triangle ABD = \triangle DCA \;\Rightarrow\; BD = CA \quad \blacksquare">გკგ.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-projections" title="ტოლფერდა ტრაპეციაში სიმაღლე დიდ ფუძეს $\tfrac{a-b}{2}$ და $\tfrac{a+b}{2}$ მონაკვეთებად ყოფს, დიაგონალი კი $d^2 = h^2 + \left(\tfrac{a+b}{2}\right)^2$" why="ორი სიმაღლე ორ ტოლ მართკუთხა სამკუთხედს ჩამოჭრის, შუაში კი მართკუთხედი რჩება.">
+<Proof given="$AB = CD$, $BH$ და $CK$ — სიმაღლეები" prove="$AH = \tfrac{a-b}{2},\ HD = \tfrac{a+b}{2}$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH CK">დავუშვათ სიმაღლეები $BH$ და $CK$.</Step>
+<Step hl="AH KD" tex="AH = KD">$\triangle ABH = \triangle DCK$ (ჰიპოტენუზით და კათეტით).</Step>
+<Step hl="HK" tex="HK = BC = b">$HBCK$ მართკუთხედია.</Step>
+<Step hl="AH HD" tex="AH = \frac{a - b}{2}, \qquad HD = HK + KD = \frac{a + b}{2}">$AD = AH + HK + KD = 2\,AH + b = a$.</Step>
+<Step show="BD" hl="BHD" tex="d^2 = BD^2 = h^2 + \left(\frac{a + b}{2}\right)^2 \quad \blacksquare">პითაგორას თეორემა მართკუთხა $\triangle BHD$-ში.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-perpendicular-diagonals" title="თუ ტოლფერდა ტრაპეციის დიაგონალები ურთიერთმართობია, მისი სიმაღლე შუახაზის ტოლია: $h = \tfrac{a+b}{2}$, $S = h^2$" why="დიაგონალი ფუძესთან $45^\circ$-ს ადგენს, ამიტომ სიმაღლე ფუძის თავის მონაკვეთს უდრის.">
+<Proof given="$AB = CD$, $AC \perp BD$" prove="$h = \tfrac{a+b}{2},\ S = h^2$">
+<Step set={{ a: 4, b: 2, h: 3, s: 1 }} show="AC BD O" hl="<AOD">დიაგონალები $O$-ში მართი კუთხით იკვეთება.</Step>
+<Step hl="AOD" tex="\angle OAD = \angle ODA = 45^\circ">$\triangle ABD = \triangle DCA$ (იხ. დიაგონალების ტოლობა), ამიტომ $\angle ODA = \angle OAD$; მათი ჯამი $90^\circ$-ია.</Step>
+<Step show="BH <BHD" hl="BHD" tex="h = BH = HD = \frac{a + b}{2}">მართკუთხა $\triangle BHD$-ში $\angle BDH = 45^\circ$, ამიტომ ის ტოლფერდაა; $HD = \tfrac{a+b}{2}$ წინა თვისებით.</Step>
+<Step tex="S = \frac{a + b}{2} \cdot h = h \cdot h = h^2 \quad \blacksquare">ფართობის ფორმულა.</Step>
 </Proof>
 </Property>
 
@@ -133,6 +187,15 @@ parent: quadrilateral
 <Proof given="$ABCD$ — ტრაპეცია, $AD = a,\ BC = b,\ AB = c,\ CD = d$" prove="ჩახაზვადია $\Leftrightarrow\ a + b = c + d$">
 <Step hl="AD BC">ტრაპეცია ამოზნექილი ოთხკუთხედია; მისი მოპირდაპირე გვერდებია $AD, BC$ და $AB, CD$.</Step>
 <Step hl="AB CD" tex="a + b = c + d">წრეწირზე შემოხაზულ ოთხკუთხედში მოპირდაპირე გვერდების ჯამები ტოლია, ხოლო, პირიქით, ამ ტოლობის შემთხვევაში წრეწირის ჩახაზვა შეიძლება (ოთხკუთხედი). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-tangential" title="თუ ტოლფერდა ტრაპეციაში წრეწირი ჩაიხაზება, მისი ფერდი $\tfrac{a+b}{2}$-ია, ხოლო სიმაღლე $h = 2r = \sqrt{ab}$" why="წინა ნიშანი ფერდს იძლევა, პითაგორას თეორემა — სიმაღლეს.">
+<Proof given="$AB = CD = c$, ტრაპეციაში ჩახაზულია $r$ რადიუსის წრეწირი" prove="$c = \tfrac{a+b}{2},\ h = 2r = \sqrt{ab}$">
+<Step set={{ a: 6, b: 1.5, h: 3, s: 2.25 }} show="(IT) I" hl="(IT)">წრეწირი ოთხივე გვერდს ეხება.</Step>
+<Step hl="AB CD" tex="2c = a + b \;\Rightarrow\; c = \frac{a + b}{2}">წინა თვისებით ფერდების ჯამი ფუძეების ჯამის ტოლია.</Step>
+<Step show="BH <BHA" hl="ABH" tex="h^2 = c^2 - \left(\frac{a - b}{2}\right)^2 = ab">$AH = \tfrac{a-b}{2}$ (სიმაღლის ფუძე), პითაგორას თეორემა $\triangle ABH$-ში; $c = \tfrac{a+b}{2}$ და $\left(\tfrac{a+b}{2}\right)^2 - \left(\tfrac{a-b}{2}\right)^2 = ab$.</Step>
+<Step show="IT T" hl="IT" tex="h = 2r \quad \blacksquare">ფუძეები წრეწირის პარალელური მხებებია — მათ შორის მანძილი დიამეტრია.</Step>
 </Proof>
 </Property>
 
