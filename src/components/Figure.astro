@@ -2,17 +2,17 @@
 import { FIGURES } from '@/figures/registry';
 import Icon from './Icon.astro';
 
-interface Props { name: string; alt?: boolean } // alt: a second figure used only by some proofs
-const { name, alt = false } = Astro.props;
+interface Props { name: string; alt?: boolean; draw?: boolean } // alt: a second figure used only by some proofs; draw: open in drawing mode
+const { name, alt = false, draw = false } = Astro.props;
 const spec = FIGURES[name];
 if (!spec) throw new Error(`figure "${name}" not found in src/figures/`);
 const drag = Object.keys(spec.drag ?? {});
 const TOOLS = [
   ['pen', 'ფანქარი', 'pencil'], ['line', 'მონაკვეთი', 'line'], ['circle', 'წრეწირი', 'circle'], ['rect', 'მართკუთხედი', 'rect'],
-  ['tri', 'სამკუთხედი (სამი შეხებით)', 'tri'], ['move', 'გადატანა', 'move'], ['erase', 'საშლელი', 'erase'],
+  ['tri', 'სამკუთხედი (სამი შეხებით)', 'tri'], ['move', 'ნახატის გადატანა', 'move'], ['erase', 'საშლელი', 'erase'], ['pan', 'ფურცლის გადაადგილება', 'hand'],
 ] as const;
 ---
-<geo-figure class="figure" data-figure={name} data-alt={alt ? '' : undefined} hidden={alt || undefined}>
+<geo-figure class="figure" data-figure={name} data-alt={alt ? '' : undefined} data-draw={draw ? '' : undefined} hidden={alt || undefined}>
   <svg class="fig" role="img" aria-label={spec.label}>
     <defs>
       <marker id="arw" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path class="arw" d="M0 1.8L10 5L0 8.2z" /></marker>
@@ -28,6 +28,7 @@ const TOOLS = [
   )}
   <div class="sk">
     <button type="button" class="sk-btn sk-toggle" aria-pressed="false" aria-label="ხატვა ბადეზე" title="ხატვა ბადეზე"><Icon name="pencil" /></button>
+    <button type="button" class="sk-btn sk-fit" aria-label="ხედის დაბრუნება" title="ხედის დაბრუნება" hidden><Icon name="fit" /></button>
     <div class="sk-tools" role="toolbar" aria-label="ხატვის ხელსაწყოები" hidden>
       {TOOLS.map(([id, label, icon]) => <button type="button" class="sk-btn" data-tool={id} aria-pressed="false" aria-label={label} title={label}><Icon name={icon} /></button>)}
       <button type="button" class="sk-btn" data-sk="undo" aria-label="გაუქმება (Ctrl+Z)" title="გაუქმება (Ctrl+Z)"><Icon name="undo" /></button>

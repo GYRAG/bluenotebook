@@ -52,3 +52,62 @@ test('draw, move, erase and undo sketches on the grid; they survive a reload', a
   await expect(fig).not.toHaveClass(/drawing/);
   await expect(fig.getByRole('toolbar')).toBeHidden();
 });
+
+test('the paper moves: drag empty space to pan, wheel to zoom, the reset button brings it back', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/geometry/rhombus/');
+  const fig = page.locator('geo-figure:not([data-alt])'), A = fig.locator('.handle[data-p="B"]');
+  const box = (await fig.locator('svg.fig').boundingBox())!;
+  const pos = async () => (await A.boundingBox())!;
+  const p0 = await pos();
+  await page.mouse.move(box.x + 40, box.y + 40); await page.mouse.down(); // empty corner of the paper
+  await page.mouse.move(box.x + 140, box.y + 90, { steps: 6 }); await page.mouse.up();
+  const p1 = await pos();
+  expect(Math.round(p1.x - p0.x)).toBe(100);
+  expect(Math.round(p1.y - p0.y)).toBe(50);
+  const fit = fig.getByRole('button', { name: 'ხედის დაბრუნება' });
+  await expect(fit).toBeVisible();
+
+  const D = fig.locator('.handle[data-p="D"]'), span = async () => (await D.boundingBox())!.x - (await A.boundingBox())!.x;
+  const s0 = await span();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.wheel(0, -400); // zoom in
+  await expect.poll(span).not.toBe(s0);
+  expect(Math.abs(await span())).toBeGreaterThan(Math.abs(s0));
+
+  await fit.click();
+  await expect(fit).toBeHidden();
+  expect(Math.round((await pos()).x)).toBe(Math.round(p0.x));
+});
+
+test('the blank sheet opens ready to draw', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/sheet/');
+  const fig = page.locator('geo-figure');
+  await expect(fig).toHaveClass(/drawing/);
+  const box = (await fig.locator('svg.fig').boundingBox())!;
+  await page.mouse.move(box.x + 60, box.y + box.height - 60); await page.mouse.down();
+  await page.mouse.move(box.x + 160, box.y + box.height - 120, { steps: 8 }); await page.mouse.up();
+  await expect(fig.locator('.sketch .sk-ink')).toHaveCount(1);
+  await page.screenshot({ path: 'test-results/sheet-phone.png' });
+});
+
+test.describe('touch', () => {
+  test.use({ hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 } });
+  test('two fingers pinch to zoom', async ({ page }) => {
+    await page.goto('/geometry/rhombus/');
+    const fig = page.locator('geo-figure:not([data-alt])');
+    const B = fig.locator('.handle[data-p="B"]'), D = fig.locator('.handle[data-p="D"]');
+    const span = async () => Math.abs((await D.boundingBox())!.x - (await B.boundingBox())!.x);
+    const s0 = await span(), box = (await fig.locator('svg.fig').boundingBox())!;
+    const cx = box.x + 40, cy = box.y + 40; // empty paper near the corner
+    const cdp = await page.context().newCDPSession(page);
+    const touch = (type: 'touchStart' | 'touchMove' | 'touchEnd', d: number) => cdp.send('Input.dispatchTouchEvent', {
+      type, touchPoints: type === 'touchEnd' ? [] : [{ x: cx, y: cy, id: 1 }, { x: cx + d, y: cy + d, id: 2 }],
+    });
+    await touch('touchStart', 30);
+    for (let d = 40; d <= 120; d += 10) await touch('touchMove', d);
+    await touch('touchEnd', 0);
+    await expect.poll(span).toBeGreaterThan(s0 * 1.5);
+  });
+});

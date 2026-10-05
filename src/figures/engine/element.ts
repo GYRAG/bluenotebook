@@ -4,7 +4,7 @@
 import { load, save } from '@/lib/store';
 import { boardBounds } from './bounds';
 import { classifyQuad, classifyTriangle, type Verdict } from './classify';
-import { add, segDist, type V } from './geom';
+import { add, dist, mid, segDist, sub, type V } from './geom';
 import { parseRefs, type Ref } from './refs';
 import { renderScene, type View } from './render';
 import { Sketch, type Tool } from './sketch';
@@ -13,6 +13,7 @@ import type { FigureSpec, Params } from './spec';
 
 const SPECS = import.meta.glob<{ default: FigureSpec }>(['../*.ts', '!../registry.ts']); // one lazy chunk per figure
 const CELL_MAX = 24;
+const ZOOM: [number, number] = [0.3, 5];
 
 export interface ProofScene { set?: Partial<Params>; show?: string; hl?: string }
 
@@ -37,6 +38,12 @@ export class GeoFigure extends HTMLElement {
   private poly: string[] = [];
   private base: Ref[] = [];
   private sketch!: Sketch;
+  // the view: zoom and the unit point at the centre of the svg (null: the board's centre)
+  private zoom = 1;
+  private centre: V | null = null;
+  private pointers = new Map<number, V>();                  // pointers down, in svg px (pinch)
+  private pinch: { d: number; m: V } | null = null;
+  private pan: { last: V; moved: boolean } | null = null;   // a drag on empty paper
 
   async connectedCallback() {
     this.name = this.dataset.figure!;
@@ -97,10 +104,33 @@ export class GeoFigure extends HTMLElement {
   private layout(W = this.svg.getBoundingClientRect().width, H = this.svg.getBoundingClientRect().height) {
     const [x0, y0, x1, y1] = this.board;
     const bw = x1 - x0, bh = y1 - y0;
-    const kf = Math.max(4, Math.min((W - Math.min(150, W * 0.24)) / bw, (H - Math.min(110, H * 0.22)) / bh));
-    const n = Math.max(1, Math.ceil(kf / CELL_MAX)), cell = Math.floor(kf / n), k = cell * n;
-    this.view = { W, H, k, cell, ox: Math.round(W / 2 - ((x0 + x1) / 2) * k) + 0.5, oy: Math.round(H / 2 + ((y0 + y1) / 2) * k) + 0.5 };
+    const kf = Math.max(4, Math.min((W - Math.min(150, W * 0.24)) / bw, (H - Math.min(110, H * 0.22)) / bh)) * this.zoom;
+    const n = Math.max(1, Math.ceil(kf / CELL_MAX)), cell = Math.max(1, Math.floor(kf / n)), k = cell * n; // one unit = whole cells
+    const [cx, cy] = this.centre ?? [(x0 + x1) / 2, (y0 + y1) / 2];
+    this.view = { W, H, k, cell, ox: Math.round(W / 2 - cx * k) + 0.5, oy: Math.round(H / 2 + cy * k) + 0.5 };
     this.svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  }
+
+  // ---------- moving the paper: pan, zoom about a point, reset ----------
+  private at = (e: { clientX: number; clientY: number }): V => { const r = this.svg.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  private unitsAt = (p: V): V => [(p[0] - this.view.ox) / this.view.k, (this.view.oy - p[1]) / this.view.k];
+  private panBy(d: V) {
+    const [x0, y0, x1, y1] = this.board, [cx, cy] = this.centre ?? [(x0 + x1) / 2, (y0 + y1) / 2]; // exact, not re-read from the rounded view
+    this.centre = [cx - d[0] / this.view.k, cy + d[1] / this.view.k];
+    this.moved();
+  }
+  private zoomAt(p: V, factor: number) {
+    const u = this.unitsAt(p);
+    this.zoom = Math.min(ZOOM[1], Math.max(ZOOM[0], this.zoom * factor));
+    this.layout(); // new scale; then put u back under p
+    this.centre = [u[0] - (p[0] - this.view.W / 2) / this.view.k, u[1] + (p[1] - this.view.H / 2) / this.view.k];
+    this.moved();
+  }
+  resetView() { this.zoom = 1; this.centre = null; this.moved(); }
+  private moved() {
+    this.layout(); this.schedule();
+    const fit = this.querySelector<HTMLElement>('.sk-fit');
+    if (fit) fit.hidden = this.zoom === 1 && !this.centre;
   }
 
   private schedule() {
@@ -201,24 +231,60 @@ export class GeoFigure extends HTMLElement {
 
   private bindInput() {
     const svg = this.svg;
+    const pinchState = () => { const [a, b] = [...this.pointers.values()] as [V, V]; return { d: dist(a, b), m: mid(a, b) }; };
     svg.addEventListener('pointerdown', e => {
-      if (this.sketch.on) { this.sketch.down(e); svg.setPointerCapture(e.pointerId); e.preventDefault(); return; }
-      const h = (e.target as Element).closest<SVGGElement>('.handle');
-      if (!h) return this.setHover(this.nearestSide(e)); // tap a side → its length
-      this.drag = h.dataset.p!;
-      h.classList.add('dragging');
+      this.pointers.set(e.pointerId, this.at(e));
       svg.setPointerCapture(e.pointerId);
       e.preventDefault();
+      if (this.pointers.size === 2) { // a second finger: pinch and two-finger pan, whatever was going on
+        this.sketch.cancel(); this.drag = null; this.pan = null;
+        this.pinch = pinchState();
+        return;
+      }
+      if (this.pointers.size > 2) return;
+      const drawing = this.sketch.on && this.sketch.tool !== 'pan';
+      if (drawing) return this.sketch.down(e);
+      const h = !this.sketch.on && (e.target as Element).closest<SVGGElement>('.handle');
+      if (h) { this.drag = h.dataset.p!; h.classList.add('dragging'); return; }
+      this.pan = { last: this.at(e), moved: false }; // empty paper: a tap shows a side's length, a drag moves the paper
+      if (!this.sketch.on) this.setHover(this.nearestSide(e));
     });
     svg.addEventListener('pointermove', e => {
-      if (this.sketch.on) return this.sketch.move(e);
-      if (this.drag) this.dragTo(this.drag, this.units(e));
-      else if (e.pointerType === 'mouse') this.setHover(this.nearestSide(e));
+      if (this.pointers.has(e.pointerId)) this.pointers.set(e.pointerId, this.at(e));
+      if (this.pinch) {
+        if (this.pointers.size !== 2) return;
+        const now = pinchState();
+        this.panBy(sub(now.m, this.pinch.m));
+        if (this.pinch.d > 0) this.zoomAt(now.m, now.d / this.pinch.d);
+        this.pinch = now;
+        return;
+      }
+      if (this.sketch.on && this.sketch.tool !== 'pan') return this.sketch.move(e);
+      if (this.drag) return this.dragTo(this.drag, this.units(e));
+      if (this.pan) {
+        const p = this.at(e), d = sub(p, this.pan.last);
+        if (!this.pan.moved && Math.hypot(d[0], d[1]) < 4) return; // still a tap
+        if (!this.pan.moved) { this.pan.moved = true; this.setHover(null); this.classList.add('panning'); this.touched(); }
+        this.pan.last = p;
+        return this.panBy(d);
+      }
+      if (e.pointerType === 'mouse' && !this.sketch.on) this.setHover(this.nearestSide(e));
     });
-    svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !this.drag) this.setHover(null); });
-    const end = () => { if (this.sketch.on) this.sketch.up(); this.drag = null; this.handles.querySelectorAll('.dragging').forEach(h => h.classList.remove('dragging')); };
+    svg.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !this.drag && !this.pan) this.setHover(null); });
+    const end = (e: PointerEvent) => {
+      this.pointers.delete(e.pointerId);
+      if (this.pinch) { if (this.pointers.size < 2) this.pinch = null; return; }
+      if (this.sketch.on && this.sketch.tool !== 'pan') this.sketch.up();
+      this.drag = null; this.pan = null;
+      this.classList.remove('panning');
+      this.handles.querySelectorAll('.dragging').forEach(h => h.classList.remove('dragging'));
+    };
     svg.addEventListener('pointerup', end);
     svg.addEventListener('pointercancel', end);
+    svg.addEventListener('wheel', e => { // wheel and trackpad pinch: zoom about the pointer (the page itself never scrolls)
+      e.preventDefault();
+      this.zoomAt(this.at(e), Math.exp(-e.deltaY * (e.deltaMode === 1 ? 0.05 : 0.0015)));
+    }, { passive: false });
     this.handles.addEventListener('keydown', e => {
       const h = (e.target as Element).closest<SVGGElement>('.handle'), s = e.shiftKey ? 0.5 : 0.1;
       const d = ({ ArrowLeft: [-s, 0], ArrowRight: [s, 0], ArrowUp: [0, s], ArrowDown: [0, -s] } as Record<string, V>)[e.key];
@@ -240,6 +306,7 @@ export class GeoFigure extends HTMLElement {
       toggle.setAttribute('aria-pressed', String(on));
       tools.hidden = !on;
       this.classList.toggle('drawing', on);
+      this.dataset.tool = this.sketch.tool ?? '';
       bar.querySelectorAll<HTMLButtonElement>('[data-tool]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tool === this.sketch.tool)));
       bar.querySelector<HTMLButtonElement>('[data-sk=undo]')!.disabled = !this.sketch.canUndo;
       bar.querySelector<HTMLButtonElement>('[data-sk=clear]')!.disabled = !this.sketch.count;
@@ -247,6 +314,7 @@ export class GeoFigure extends HTMLElement {
     bar.addEventListener('click', e => {
       const b = (e.target as Element).closest<HTMLButtonElement>('button');
       if (!b) return;
+      if (b.matches('.sk-fit')) { this.resetView(); return; }
       if (b === toggle) {
         this.sketch.setTool(this.sketch.on ? null : 'pen');
         live.textContent = this.sketch.on ? 'ხატვის რეჟიმი: ფანქარი' : 'ხატვის რეჟიმი გამორთულია';
@@ -257,6 +325,7 @@ export class GeoFigure extends HTMLElement {
       sync();
     });
     this.svg.addEventListener('pointerup', sync); // undo / clear become available after a stroke
+    if (this.hasAttribute('data-draw')) this.sketch.setTool('pen'); // a blank sheet opens ready to draw
     this.addEventListener('keydown', e => {
       if (!this.sketch.on) return;
       if (e.key === 'Escape') { this.sketch.cancel(); e.stopPropagation(); }

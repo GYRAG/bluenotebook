@@ -5,7 +5,7 @@ import { load, save } from '@/lib/store';
 import { add, dist, sub, type V } from './geom';
 import type { View } from './render';
 
-export type Tool = 'pen' | 'line' | 'circle' | 'rect' | 'tri' | 'move' | 'erase';
+export type Tool = 'pen' | 'line' | 'circle' | 'rect' | 'tri' | 'move' | 'erase' | 'pan'; // pan: the figure moves the paper
 export type Shape =
   | { t: 'pen' | 'tri'; p: V[] }               // tri: three corners (fewer while being drawn)
   | { t: 'line' | 'rect' | 'circle'; p: V[] }; // two points: ends / opposite corners / centre and a point on it
