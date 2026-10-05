@@ -85,3 +85,19 @@ export function circleIntersection(c1: V, r1: number, c2: V, r2: number, away: V
 export function circumcenter(a: V, b: V, c: V): V {
   return intersect(mid(a, b), add(mid(a, b), perp(sub(b, a))), mid(a, c), add(mid(a, c), perp(sub(c, a))));
 }
+
+/** Incentre of triangle ABC (weighted by the opposite side lengths). */
+export function incenter(a: V, b: V, c: V): V {
+  const la = dist(b, c), lb = dist(c, a), lc = dist(a, b), s = la + lb + lc;
+  return [(la * a[0] + lb * b[0] + lc * c[0]) / s, (la * a[1] + lb * b[1] + lc * c[1]) / s];
+}
+/** Orthocentre: where two altitudes meet. */
+export const orthocenter = (a: V, b: V, c: V): V => intersect(a, foot(a, b, c), b, foot(b, c, a));
+export const centroid = (...ps: V[]): V => scale(ps.reduce(add, [0, 0] as V), 1 / ps.length);
+
+/** Triangle from two sides and the angle between them (AB = c, AC = b, ∠A = alpha),
+ *  shifted so its centroid sits at the origin (the figure stays put while it changes). */
+export function triangleSAS(c: number, b: number, alpha: number): { A: V; B: V; C: V } {
+  const A: V = [0, 0], B: V = [c, 0], C = polar(b, alpha), G = centroid(A, B, C);
+  return { A: sub(A, G), B: sub(B, G), C: sub(C, G) };
+}
