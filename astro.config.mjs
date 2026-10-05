@@ -9,6 +9,7 @@ import rehypeKatex from 'rehype-katex';
 export default defineConfig({
   site: 'https://matematikis-baza.vercel.app',
   trailingSlash: 'always',
+  devToolbar: { enabled: false },
   markdown: {
     processor: unified({ remarkPlugins: [remarkMath], rehypePlugins: [[rehypeKatex, { strict: 'ignore' }]] }),
   },

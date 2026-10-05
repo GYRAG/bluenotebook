@@ -6,10 +6,10 @@ export default defineConfig({
   testDir: 'tests/e2e',
   fullyParallel: true,
   reporter: [['list']],
-  use: { baseURL: 'http://localhost:4321', channel: 'chrome' },
+  use: { baseURL: 'http://localhost:4322', channel: 'chrome' },
   webServer: {
-    command: 'pnpm build && pnpm preview --port 4321',
-    url: 'http://localhost:4321',
+    command: 'pnpm build && pnpm preview --port 4322',
+    url: 'http://localhost:4322',
     reuseExistingServer: true,
     timeout: 240_000,
   },

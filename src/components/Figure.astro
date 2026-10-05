@@ -1,0 +1,25 @@
+---
+import { FIGURES } from '@/figures/registry';
+
+interface Props { name: string }
+const { name } = Astro.props;
+const spec = FIGURES[name];
+if (!spec) throw new Error(`figure "${name}" not found in src/figures/`);
+const drag = Object.keys(spec.drag ?? {});
+---
+<geo-figure class="figure" data-figure={name}>
+  <svg class="fig" role="img" aria-label={spec.label}>
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path class="arw" d="M0 1.8L10 5L0 8.2z" /></marker>
+      <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="hatch-l" x1="0" y1="0" x2="0" y2="6" /></pattern>
+    </defs>
+    <g class="layer"></g>
+    <g class="handles"></g>
+  </svg>
+  <div class="stamp" hidden><span class="stamp-k">ახლა</span><b class="stamp-v"></b><span class="stamp-why"></span></div>
+  {drag.length > 0 && (
+    <p class="hint" hidden>გადაათრიე {drag.map((p, i) => <>{i > 0 && ' ან '}<i>{p}</i></>)} · შეეხე გვერდს</p>
+  )}
+  <p class="sr-only" aria-live="polite" data-live></p>
+</geo-figure>
+<script>import '@/figures/engine/element';</script>

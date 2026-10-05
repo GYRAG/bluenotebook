@@ -1,0 +1,33 @@
+---
+import { FIGURES } from '@/figures/registry';
+import Icon from './Icon.astro';
+
+interface Props { name: string }
+const { name } = Astro.props;
+const spec = FIGURES[name]!;
+const pts = spec.points(Object.fromEntries(Object.entries(spec.params).map(([k, d]) => [k, d.value])));
+const readouts = spec.readouts?.(pts, Object.fromEntries(Object.entries(spec.params).map(([k, d]) => [k, d.value]))) ?? [];
+const SUB: Record<string, string> = { 'ₐ': 'a', '₁': '1', '₂': '2', '₃': '3', 'ᵦ': 'b' };
+const sym = (s: string) => s.replace(/[ₐ₁₂₃ᵦ]/g, c => `<sub>${SUB[c]}</sub>`);
+const switches = [['__dims', 'ზომები', true], ...Object.keys(spec.toggles ?? {}).map(t => [t, t, false])] as const;
+---
+<div class="tools" data-figure-tools={name}>
+  {Object.entries(spec.params).map(([key, d]) => (
+    <div class="ctl" data-param={key}>
+      <label class="ctl-l" for={`r-${key}`}>{d.label} <i>{d.sym}</i></label>
+      <button class="reset" type="button" aria-label={`${d.sym} — საწყისზე დაბრუნება`} hidden><Icon name="reset" /></button>
+      <input class="num" type="number" inputmode="decimal" min={d.min} max={d.max} step={d.step} value={d.value} aria-label={`${d.label} ${d.sym}`} />
+      <input class="rng" id={`r-${key}`} type="range" min={d.min} max={d.max} step={d.step} value={d.value} />
+    </div>
+  ))}
+  <div class="toggles">
+    {switches.map(([key, label, on]) => (
+      <button class="sw" type="button" role="switch" data-toggle={key} aria-checked={on ? 'true' : 'false'}><span>{label}</span><span class="sw-t" aria-hidden="true"></span></button>
+    ))}
+  </div>
+  {readouts.length > 0 && (
+    <dl class="ro">
+      {readouts.map(([label], i) => <div><dt set:html={sym(label)} /><dd data-ro={i}></dd></div>)}
+    </dl>
+  )}
+</div>

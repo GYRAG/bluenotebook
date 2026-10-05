@@ -4,8 +4,24 @@
     {
       "name": "prototypes",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4600", "--directory", "design/prototypes"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4600",
+        "--directory",
+        "design/prototypes"
+      ],
       "port": 4600
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev",
+        "--port",
+        "4321"
+      ],
+      "port": 4321
     }
   ]
 }

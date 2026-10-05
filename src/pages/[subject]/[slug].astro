@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Shell from '@/layouts/Shell.astro';
 import Panel from '@/components/Panel.astro';
+import Figure from '@/components/Figure.astro';
+import FigureTools from '@/components/FigureTools.astro';
 
 export async function getStaticPaths() {
   const topics = await getCollection('topics');
@@ -9,13 +11,14 @@ export async function getStaticPaths() {
 }
 const { topic } = Astro.props;
 const { Content } = await render(topic);
+const fig = topic.data.figure;
 ---
 <Shell title={topic.data.title} description={topic.data.summary} current={{ subject: topic.data.subject, slug: topic.id }} draft={topic.data.status === 'draft'} lede={topic.data.summary}>
-  <div class="figure paper">
-    <p class="empty figure-empty"><b>ნახაზი ჯერ არ არის</b>ინტერაქტიული ფიგურა აქ გამოჩნდება.</p>
-  </div>
+  {fig ? <Figure name={fig} /> : (
+    <div class="figure paper"><p class="empty figure-empty"><b>ნახაზი ჯერ არ არის</b>ინტერაქტიული ფიგურა აქ გამოჩნდება.</p></div>
+  )}
   <Panel slot="panel">
-    <p slot="tools" class="empty"><b>ჯერ ცარიელია</b>სლაიდერები და გადამრთველები გამოჩნდება, როცა თემას ნახაზი ექნება.</p>
+    {fig ? <FigureTools slot="tools" name={fig} /> : <p slot="tools" class="empty"><b>ჯერ ცარიელია</b>სლაიდერები და გადამრთველები გამოჩნდება, როცა თემას ნახაზი ექნება.</p>}
     <p slot="formulas" class="empty"><b>ჯერ ცარიელია</b>ამ თემაში ფორმულები ჯერ არ დაწერილა.</p>
     <div slot="props" class="prose"><Content /></div>
   </Panel>
