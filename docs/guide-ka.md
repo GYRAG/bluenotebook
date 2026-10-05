@@ -61,7 +61,7 @@ figure: rhombus                  # არასავალდებულო: �
 - `proof="roots"` ფორმულას თვისების დამტკიცებასთან აკავშირებს.
 - `id` გვერდზე უნიკალურია და ბმულად გამოიყენება: `/algebra/quadratic-equations/#roots`.
 - `Property kind`: `property` (თვისება), `criterion` (ნიშანი), `converse` (შებრუნებული თეორემა).
-- `Remark kind`: `note` (შენიშვნა), `special` (კერძო შემთხვევა), `mistake` (გავრცელებული შეცდომა), `convention`.
+- `Remark kind`: `note` (შენიშვნა), `special` (კერძო შემთხვევა), `mistake` (გავრცელებული შეცდომა), `convention` (შეთანხმება).
 
 ## 5. მათემატიკის წერა — ყურადღება!
 
