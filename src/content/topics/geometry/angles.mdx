@@ -1,0 +1,84 @@
+---
+title: კუთხეები და პარალელური წრფეები
+slug: angles
+subject: geometry
+section: basics
+order: 1
+summary: კუთხეების სახეები, მოსაზღვრე და ვერტიკალური კუთხეები, პარალელური წრფეები და მკვეთი.
+tags: [კუთხე, ვერტიკალური, მოსაზღვრე, პარალელური, მკვეთი, ჯვარედინი, ცალმხრივი, შესაბამისი]
+prerequisites: []
+status: draft
+figure: angles
+---
+
+<Definition>კუთხე არის **მახვილი**, თუ $90^\circ$-ზე ნაკლებია, **მართი** — თუ $90^\circ$-ია, **ბლაგვი** — თუ $90^\circ$-სა და $180^\circ$-ს შორისაა, **გაშლილი** — თუ $180^\circ$-ია. ორი კუთხე **მოსაზღვრეა**, თუ მათ ერთი გვერდი საერთო აქვთ, ხოლო დანარჩენი ორი ერთ წრფეს ადგენს; **ვერტიკალურია**, თუ ერთის გვერდები მეორის გვერდების გაგრძელებაა. ორი წრფის **მკვეთით** მიიღება წყვილები: **შესაბამისი**, **შიგა ჯვარედინი** და **შიგა ცალმხრივი** კუთხეები.</Definition>
+
+<Formulas>
+<Formula id="adjacent-formula" name="მოსაზღვრე კუთხეები" tex="\angle 1 + \angle 2 = 180^\circ" proof="adjacent-angles" />
+<Formula id="vertical-formula" name="ვერტიკალური კუთხეები" tex="\angle 1 = \angle 3" proof="vertical-angles" />
+<Formula id="alternate-formula" name="პარალელური წრფეები: შიგა ჯვარედინი" tex="a \parallel b \iff \angle 1 = \angle 2" proof="alternate-angles" />
+<Formula id="corresponding-formula" name="პარალელური წრფეები: შესაბამისი" tex="a \parallel b \iff \angle 1 = \angle 2" proof="corresponding-angles" />
+<Formula id="co-interior-formula" name="პარალელური წრფეები: შიგა ცალმხრივი" tex="a \parallel b \iff \angle 1 + \angle 2 = 180^\circ" proof="co-interior-angles" />
+</Formulas>
+
+<Properties>
+
+<Property id="adjacent-angles" title="მოსაზღვრე კუთხეების ჯამი $180^\circ$-ია" why="ისინი ერთად გაშლილ კუთხეს ადგენს.">
+<Proof given="$\angle R_1EF$ და $\angle FEL_1$ მოსაზღვრეა" prove="$\angle R_1EF + \angle FEL_1 = 180^\circ$">
+<Step hl="<R1EF <FEL1">ორ კუთხეს საერთო გვერდი $EF$ აქვს, ხოლო $ER_1$ და $EL_1$ სხივები ერთ წრფეს ადგენს.</Step>
+<Step tex="\angle R_1EF + \angle FEL_1 = \angle R_1EL_1 = 180^\circ \quad \blacksquare">ორი კუთხე ერთად გაშლილ კუთხეს $R_1EL_1$-ს შეადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="vertical-angles" title="ვერტიკალური კუთხეები ტოლია" why="ორივე ერთი და იმავე კუთხის მოსაზღვრეა.">
+<Proof given="$\angle R_1EF$ და $\angle L_1ET_1$ ვერტიკალურია" prove="$\angle R_1EF = \angle L_1ET_1$">
+<Step hl="<R1EF <FEL1" tex="\angle R_1EF + \angle FEL_1 = 180^\circ">მოსაზღვრე კუთხეები.</Step>
+<Step hl="<L1ET1 <FEL1" tex="\angle L_1ET_1 + \angle FEL_1 = 180^\circ">$EF$ და $ET_1$ ერთ წრფეს ადგენს — ესეც მოსაზღვრე კუთხეებია.</Step>
+<Step hl="<R1EF=<L1ET1" tex="\angle R_1EF = 180^\circ - \angle FEL_1 = \angle L_1ET_1 \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="პარალელური წრფეები და მკვეთი">
+
+<Property id="criterion-alternate" kind="criterion" title="თუ ორი წრფის მკვეთით შიგა ჯვარედინი კუთხეები ტოლია, წრფეები პარალელურია" why="წინააღმდეგ შემთხვევაში ორ წრფეს ორი საერთო წერტილი ექნებოდა.">
+<Proof given="$a$ და $b$ წრფეები, მკვეთი $EF$, $\angle L_1EF = \angle R_2FE$" prove="$a \parallel b$">
+<Step hl="<L1EF=<R2FE">დავუშვათ, რომ $a$ და $b$ იკვეთება რომელიმე $K$ წერტილში — მაგალითად, $EF$-ის მარჯვნივ.</Step>
+<Step hl="EF">$EF$-ის მეორე მხარეს, $a$ წრფეზე, გადავზომოთ $EK' = FK$. სამკუთხედები $EFK'$ და $FEK$ ტოლია (გკგ): $EF$ საერთოა, $EK' = FK$, ხოლო $\angle FEK' = \angle EFK$ — ესაა მოცემული ტოლი ჯვარედინი კუთხეები.</Step>
+<Step>აქედან $\angle EFK' = \angle FEK$. მაშინ $\angle EFK' + \angle EFK = \angle FEK + \angle FEK' = 180^\circ$ (მოსაზღვრე კუთხეები $E$-სთან), ე.ი. $K'$ ძევს $b$ წრფეზე.</Step>
+<Step>გამოდის, რომ $a$ და $b$ წრფეები ორივე გადის $K$ და $K'$ წერტილებზე. ორ წერტილზე მხოლოდ ერთი წრფე გადის — წინააღმდეგობა. მაშასადამე $a \parallel b$. ∎</Step>
+</Proof>
+</Property>
+
+<Remark kind="convention">**პარალელურობის აქსიომა**: წერტილზე, რომელიც მოცემულ წრფეზე არ ძევს, ამ წრფის პარალელური მხოლოდ ერთი წრფე გადის. ის არ მტკიცდება — ევკლიდეს გეომეტრიის ერთ-ერთი საწყისი დებულებაა.</Remark>
+
+<Property id="alternate-angles" title="თუ ორი პარალელური წრფე მკვეთით იკვეთება, შიგა ჯვარედინი კუთხეები ტოლია" why="ტოლი კუთხით გავლებული წრფე პარალელურია, ხოლო პარალელური მხოლოდ ერთია.">
+<Proof given="$a \parallel b$, მკვეთი $EF$" prove="$\angle L_1EF = \angle R_2FE$">
+<Step hl="<L1EF">$F$-ზე გავავლოთ წრფე $b'$ ისე, რომ ის $EF$-თან $\angle L_1EF$-ის ტოლ ჯვარედინ კუთხეს ადგენდეს.</Step>
+<Step hl="L2R2">წინა ნიშნით $b' \parallel a$. მაგრამ $F$-ზე $a$-ს პარალელური მხოლოდ ერთი წრფე გადის — ესაა $b$. ამიტომ $b' = b$.</Step>
+<Step hl="<L1EF=<R2FE" tex="\angle L_1EF = \angle R_2FE \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="corresponding-angles" title="პარალელური წრფეების მკვეთით შესაბამისი კუთხეები ტოლია" why="შესაბამისი კუთხე ჯვარედინის ვერტიკალურია.">
+<Proof given="$a \parallel b$" prove="$\angle R_1EF = \angle R_2FT_2$">
+<Step hl="<R1EF=<L2FE" tex="\angle R_1EF = \angle L_2FE">შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="<L2FE=<R2FT2" tex="\angle L_2FE = \angle R_2FT_2">ვერტიკალური კუთხეები.</Step>
+<Step hl="<R1EF=<R2FT2" tex="\angle R_1EF = \angle R_2FT_2 \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="co-interior-angles" title="პარალელური წრფეების მკვეთით შიგა ცალმხრივი კუთხეების ჯამი $180^\circ$-ია" why="ცალმხრივი კუთხე ჯვარედინის მოსაზღვრეა.">
+<Proof given="$a \parallel b$" prove="$\angle R_1EF + \angle R_2FE = 180^\circ$">
+<Step hl="<R1EF=<L2FE" tex="\angle R_1EF = \angle L_2FE">შიგა ჯვარედინი კუთხეები.</Step>
+<Step hl="<L2FE <R2FE" tex="\angle R_2FE = 180^\circ - \angle L_2FE">მოსაზღვრე კუთხეები $F$-სთან.</Step>
+<Step hl="<R1EF <R2FE" tex="\angle R_1EF + \angle R_2FE = 180^\circ \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>შებრუნებულიც სამართლიანია: თუ შესაბამისი კუთხეები ტოლია ან შიგა ცალმხრივი კუთხეების ჯამი $180^\circ$-ია, წრფეები პარალელურია — ორივე შემთხვევა ვერტიკალური ან მოსაზღვრე კუთხეებით ჯვარედინების ტოლობაზე დაიყვანება.</Remark>
+
+<Remark kind="mistake">ეს ტოლობები მხოლოდ პარალელური წრფეებისთვისაა სამართლიანი. თუ წრფეები პარალელური არ არის, მკვეთით მიღებული ჯვარედინი კუთხეები ტოლი არ არის.</Remark>

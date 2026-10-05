@@ -1,0 +1,76 @@
+---
+title: მსგავსება
+slug: similarity
+subject: geometry
+section: basics
+order: 3
+summary: მსგავსი სამკუთხედები, მსგავსების სამი ნიშანი, ფართობებისა და პერიმეტრების შეფარდება.
+tags: [მსგავსება, მსგავსების კოეფიციენტი, პროპორციული მონაკვეთები]
+prerequisites: [congruence, angles]
+status: draft
+figure: similarity
+---
+
+<Definition>სამკუთხედები **მსგავსია** ($\triangle ABC \sim \triangle A_1B_1C_1$), თუ მათი შესაბამისი კუთხეები ტოლია, ხოლო შესაბამისი გვერდები პროპორციულია: $\tfrac{A_1B_1}{AB} = \tfrac{B_1C_1}{BC} = \tfrac{C_1A_1}{CA} = k$. რიცხვს $k$ **მსგავსების კოეფიციენტი** ეწოდება.</Definition>
+
+<Formulas>
+<Formula id="aa-formula" name="ნიშანი — ორი კუთხე" tex="\angle A = \angle A_1,\ \angle B = \angle B_1" proof="aa" />
+<Formula id="sas-formula" name="ნიშანი — ორი გვერდი და კუთხე" tex="\frac{A_1B_1}{AB} = \frac{A_1C_1}{AC},\ \angle A = \angle A_1" proof="sas-similarity" />
+<Formula id="sss-formula" name="ნიშანი — სამი გვერდი" tex="\frac{A_1B_1}{AB} = \frac{B_1C_1}{BC} = \frac{C_1A_1}{CA}" proof="sss-similarity" />
+<Formula id="area-formula" name="ფართობების შეფარდება" tex="\frac{S_1}{S} = k^2" live="S₁ : S" proof="area-ratio" />
+<Formula id="perimeter-formula" name="პერიმეტრების შეფარდება" tex="\frac{P_1}{P} = k" live="P₁ : P" proof="perimeter-ratio" />
+</Formulas>
+
+<Properties>
+
+<Property id="parallel-lemma" title="სამკუთხედის გვერდის პარალელური წრფე მისგან მსგავს სამკუთხედს ჩამოჭრის" why="ფართობები ერთი და იმავე სიმაღლით გვერდების შეფარდებას იძლევა.">
+<Proof given="$B_2 \in AB$, $C_2 \in AC$, $B_2C_2 \parallel BC$" prove="$\tfrac{AB_2}{AB} = \tfrac{AC_2}{AC} = \tfrac{B_2C_2}{BC}$">
+<Step set={{ k: 0.6 }} show="B2C2 B2 C2" hl="B2C2||BC">$B_2C_2 \parallel BC$.</Step>
+<Step show="BC2 CB2" hl="B2C2B B2C2C" tex="S_{B_2C_2B} = S_{B_2C_2C}">ორ სამკუთხედს საერთო ფუძე $B_2C_2$ აქვს, ხოლო სიმაღლეები ტოლია — $B$ და $C$ ერთნაირად არიან დაშორებული $B_2C_2$-ის პარალელური $BC$ წრფიდან.</Step>
+<Step hl="ABC2 AB2C" tex="S_{ABC_2} = S_{AB_2C}">ორივე ტოლობას დავუმატოთ $S_{AB_2C_2}$.</Step>
+<Step tex="\frac{AB_2}{AB} = \frac{S_{AB_2C}}{S_{ABC}} = \frac{S_{ABC_2}}{S_{ABC}} = \frac{AC_2}{AC}">საერთო წვეროს მქონე სამკუთხედების ფართობები ერთ წრფეზე მდებარე ფუძეების პროპორციულია.</Step>
+<Step tex="\frac{B_2C_2}{BC} = \frac{AB_2}{AB} \quad \blacksquare">მესამე შეფარდებისთვის $C_2$-ზე გავავლოთ $AB$-ს პარალელური წრფე და იგივე მსჯელობა გავიმეოროთ $C$ კუთხისთვის. კუთხეები კი ტოლია, რადგან ისინი შესაბამისია.</Step>
+</Proof>
+</Property>
+
+<Property id="aa" kind="criterion" title="თუ ერთი სამკუთხედის ორი კუთხე მეორის ორ კუთხეს უდრის, სამკუთხედები მსგავსია" why="მეორე სამკუთხედის ასლი პირველში ჩაჯდება გვერდის პარალელურად.">
+<Proof given="$\angle A = \angle A_1,\ \angle B = \angle B_1$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step hl="<BAC=<B1A1C1 <ABC=<A1B1C1">ორი წყვილი ტოლი კუთხე.</Step>
+<Step show="B2C2 B2 C2" hl="AB2C2">$AB$ სხივზე გადავზომოთ $AB_2 = A_1B_1$ და გავავლოთ $B_2C_2 \parallel BC$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1">$AB_2 = A_1B_1$, $\angle A = \angle A_1$, $\angle AB_2C_2 = \angle B = \angle B_1$ (შესაბამისი კუთხეები) — კგკ.</Step>
+<Step hl="ABC" tex="\triangle ABC \sim \triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">წინა თვისებით.</Step>
+</Proof>
+</Property>
+
+<Property id="sas-similarity" kind="criterion" title="თუ ორი გვერდი პროპორციულია და მათ შორის კუთხეები ტოლია, სამკუთხედები მსგავსია" why="იგივე ჩადგმა: ასლი პირველი ნიშნით ემთხვევა.">
+<Proof given="$\tfrac{A_1B_1}{AB} = \tfrac{A_1C_1}{AC} = k,\ \angle A = \angle A_1$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step show="B2C2 B2 C2" hl="AB2C2">$AB$-ზე გადავზომოთ $AB_2 = A_1B_1$, გავავლოთ $B_2C_2 \parallel BC$.</Step>
+<Step hl="AC2" tex="AC_2 = k \cdot AC = A_1C_1">$\triangle AB_2C_2 \sim \triangle ABC$ კოეფიციენტით $k$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">გკგ: $AB_2 = A_1B_1$, $AC_2 = A_1C_1$, $\angle A = \angle A_1$.</Step>
+</Proof>
+</Property>
+
+<Property id="sss-similarity" kind="criterion" title="თუ სამი გვერდი პროპორციულია, სამკუთხედები მსგავსია" why="ჩადგმული ასლის სამივე გვერდი მეორე სამკუთხედის გვერდებს ემთხვევა.">
+<Proof given="$\tfrac{A_1B_1}{AB} = \tfrac{B_1C_1}{BC} = \tfrac{C_1A_1}{CA} = k$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step show="B2C2 B2 C2" hl="AB2C2">ისევ $AB_2 = A_1B_1$ და $B_2C_2 \parallel BC$.</Step>
+<Step tex="AC_2 = k \cdot AC = A_1C_1, \qquad B_2C_2 = k \cdot BC = B_1C_1">$\triangle AB_2C_2 \sim \triangle ABC$ კოეფიციენტით $k$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">გგგ.</Step>
+</Proof>
+</Property>
+
+<Property id="area-ratio" title="მსგავსი სამკუთხედების ფართობების შეფარდება მსგავსების კოეფიციენტის კვადრატია" why="ფართობში ორი სიგრძე მრავლდება, თითოეული $k$-ჯერ იზრდება.">
+<Proof given="$\triangle A_1B_1C_1 \sim \triangle ABC$ კოეფიციენტით $k$" prove="$S_1 : S = k^2$">
+<Step hl="<BAC=<B1A1C1" tex="S = \tfrac12\, AB \cdot AC \sin A">ფართობი ორი გვერდითა და კუთხით.</Step>
+<Step hl="A1B1C1" tex="S_1 = \tfrac12\,(k\,AB)(k\,AC)\sin A = k^2 S \quad \blacksquare">კუთხე იგივეა, ორი გვერდი $k$-ჯერ იზრდება.</Step>
+</Proof>
+</Property>
+
+<Property id="perimeter-ratio" title="მსგავსი სამკუთხედების პერიმეტრების შეფარდება მსგავსების კოეფიციენტის ტოლია" why="ყოველი გვერდი $k$-ჯერ იზრდება.">
+<Proof given="$\triangle A_1B_1C_1 \sim \triangle ABC$ კოეფიციენტით $k$" prove="$P_1 : P = k$">
+<Step hl="A1B1C1" tex="P_1 = k\,AB + k\,BC + k\,CA = k\,P \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">მსგავსებისას გვერდები პროპორციულია, ფართობები კი — $k^2$-ის პროპორციული. გვერდის 2-ჯერ გაზრდა ფართობს 4-ჯერ ზრდის.</Remark>

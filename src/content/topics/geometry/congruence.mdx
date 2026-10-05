@@ -1,0 +1,66 @@
+---
+title: სამკუთხედების ტოლობა
+slug: congruence
+subject: geometry
+section: basics
+order: 2
+summary: ტოლობის სამი ნიშანი — გკგ, კგკ, გგგ — და მართკუთხა სამკუთხედების ნიშნები.
+tags: [ტოლობის ნიშანი, გკგ, კგკ, გგგ, ჰიპოტენუზა, კათეტი]
+prerequisites: [angles]
+status: draft
+figure: congruence
+---
+
+<Definition>ორი სამკუთხედი **ტოლია**, თუ ერთის მეორეზე დადებით ისინი ერთმანეთს ზუსტად ემთხვევა. ტოლ სამკუთხედებში შესაბამისი გვერდები და შესაბამისი კუთხეები ტოლია; ჩაწერა $\triangle ABC = \triangle A_1B_1C_1$ ნიშნავს, რომ $A \leftrightarrow A_1$, $B \leftrightarrow B_1$, $C \leftrightarrow C_1$. **ტოლობის ნიშანი** არის რამდენიმე ელემენტის ტოლობა, რომელიც სამკუთხედების ტოლობისთვის საკმარისია.</Definition>
+
+<Formulas>
+<Formula id="sas-formula" name="ნიშანი 1 — გკგ" tex="AB = A_1B_1,\ AC = A_1C_1,\ \angle A = \angle A_1" proof="sas" />
+<Formula id="asa-formula" name="ნიშანი 2 — კგკ" tex="AB = A_1B_1,\ \angle A = \angle A_1,\ \angle B = \angle B_1" proof="asa" />
+<Formula id="sss-formula" name="ნიშანი 3 — გგგ" tex="AB = A_1B_1,\ BC = B_1C_1,\ CA = C_1A_1" proof="sss" />
+<Formula id="hl-formula" name="მართკუთხა — ჰიპოტენუზა და კათეტი" tex="\angle C = \angle C_1 = 90^\circ,\ AB = A_1B_1,\ AC = A_1C_1" proof="right-criteria" />
+</Formulas>
+
+<Properties title="ტოლობის ნიშნები">
+
+<Property id="sas" kind="criterion" title="თუ ორი გვერდი და მათ შორის კუთხე ტოლია, სამკუთხედები ტოლია (გკგ)" why="დადებისას ტოლი კუთხე კუთხეს ფარავს, ტოლი გვერდები — გვერდებს.">
+<Proof given="$AB = A_1B_1,\ AC = A_1C_1,\ \angle A = \angle A_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 AC=A1C1 <BAC=<B1A1C1">მოცემულია ორი გვერდი და მათ შორის კუთხე.</Step>
+<Step hl="A1B1C1">დავადოთ $\triangle A_1B_1C_1$ $\triangle ABC$-ზე ისე, რომ $A_1$ $A$-ს დაემთხვეს, ხოლო $A_1B_1$ სხივი — $AB$ სხივს.</Step>
+<Step hl="AB=A1B1">$A_1B_1 = AB$, ამიტომ $B_1$ ზუსტად $B$-ზე მოხვდება.</Step>
+<Step hl="<BAC=<B1A1C1">$\angle A_1 = \angle A$, ამიტომ $A_1C_1$ სხივი $AC$ სხივზე დაეცემა, ხოლო $A_1C_1 = AC$-ის გამო $C_1$ — $C$-ზე.</Step>
+<Step hl="ABC A1B1C1">სამივე წვერო დაემთხვა, ე.ი. სამკუთხედები ტოლია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="asa" kind="criterion" title="თუ გვერდი და მის ბოლოებთან მდებარე ორი კუთხე ტოლია, სამკუთხედები ტოლია (კგკ)" why="დადებისას ორი სხივი ერთსა და იმავე წერტილში იკვეთება.">
+<Proof given="$AB = A_1B_1,\ \angle A = \angle A_1,\ \angle B = \angle B_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 <BAC=<B1A1C1 <ABC=<A1B1C1">მოცემულია გვერდი და ორი მოსაზღვრე კუთხე.</Step>
+<Step hl="A1B1C1">დავადოთ ისე, რომ $A_1 \to A$, $B_1 \to B$ (გვერდები ტოლია) და $C_1$ იმავე მხარეს აღმოჩნდეს, საითაც $C$.</Step>
+<Step>$\angle A_1 = \angle A$, ამიტომ $A_1C_1$ სხივი $AC$-ზე დაეცემა; $\angle B_1 = \angle B$, ამიტომ $B_1C_1$ — $BC$-ზე. ორი სხივი მხოლოდ ერთ წერტილში იკვეთება, ამიტომ $C_1 = C$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="sss" kind="criterion" title="თუ სამი გვერდი შესაბამისად ტოლია, სამკუთხედები ტოლია (გგგ)" why="ორი სამკუთხედის მიდებით ორი ტოლფერდა სამკუთხედი მიიღება.">
+<Proof given="$AB = A_1B_1,\ BC = B_1C_1,\ CA = C_1A_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 BC=B1C1 CA=C1A1">მოცემულია სამი წყვილი ტოლი გვერდი.</Step>
+<Step>მივადოთ $\triangle A_1B_1C_1$ $\triangle ABC$-ს ისე, რომ $A_1B_1$ დაემთხვეს $AB$-ს, ხოლო $C_1$ აღმოჩნდეს $AB$-ს მეორე მხარეს — $C_2$ წერტილში.</Step>
+<Step>$AC = AC_2$ და $BC = BC_2$ — $\triangle ACC_2$ და $\triangle BCC_2$ ტოლფერდაა, ამიტომ მათი ფუძესთან კუთხეები ტოლია: $\angle ACC_2 = \angle AC_2C$, $\angle BCC_2 = \angle BC_2C$.</Step>
+<Step hl="<ACB=<A1C1B1" tex="\angle ACB = \angle AC_2B">ამ ტოლობების შეკრებით (ან გამოკლებით, თუ $CC_2$ $AB$-ს გარეთ გადის).</Step>
+<Step hl="ABC A1B1C1">ახლა $\triangle ABC$ და $\triangle ABC_2$ ტოლია პირველი ნიშნით (გკგ: $CA = C_2A$, $CB = C_2B$ და მათ შორის კუთხეები). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="right-criteria" kind="criterion" title="მართკუთხა სამკუთხედები ტოლია, თუ ჰიპოტენუზა და კათეტი შესაბამისად ტოლია" why="ორი სამკუთხედი ტოლფერდა სამკუთხედს ადგენს.">
+<Proof given="$\angle C = \angle C_1 = 90^\circ,\ AB = A_1B_1,\ AC = A_1C_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 AC=A1C1">მოცემულია ჰიპოტენუზა და კათეტი.</Step>
+<Step>მივადოთ სამკუთხედები ისე, რომ $A_1C_1$ დაემთხვეს $AC$-ს, ხოლო $B_1$ აღმოჩნდეს $BC$ წრფეზე $C$-ს მეორე მხარეს (ორივე კუთხე $C$-სთან მართია, ამიტომ $B, C, B_1$ ერთ წრფეზე ძევს).</Step>
+<Step>$AB = AB_1$, ამიტომ $\triangle ABB_1$ ტოლფერდაა და $\angle B = \angle B_1$. მაშინ მართკუთხა სამკუთხედებში მესამე კუთხეებიც ტოლია: $\angle BAC = \angle B_1AC$.</Step>
+<Step hl="ABC A1B1C1">$AB = AB_1$, $AC$ საერთოა და მათ შორის კუთხეები ტოლია — გკგ. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>მართკუთხა სამკუთხედები ტოლია აგრეთვე: **ორი კათეტით** (გკგ), **კათეტითა და მახვილი კუთხით** და **ჰიპოტენუზითა და მახვილი კუთხით** — ორ ბოლო შემთხვევაში მეორე მახვილი კუთხეც ტოლია ($90^\circ$-ს გამოკლებული), ასე რომ კგკ გამოიყენება.</Remark>
+
+<Remark kind="mistake">ორი გვერდი და **არა** მათ შორის მდებარე კუთხე ტოლობისთვის არ კმარა: შეიძლება აიგოს ორი განსხვავებული სამკუთხედი იგივე მონაცემებით. „კკკ“ (სამი კუთხე) ტოლობის ნიშანი არ არის — ის მხოლოდ მსგავსებას იძლევა.</Remark>
