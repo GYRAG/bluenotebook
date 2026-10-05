@@ -48,6 +48,8 @@ $('[data-sheet-toggle]')?.addEventListener('click', e => {
 });
 
 // ---------- last-viewed topic ----------
+interface Last { url: string; title: string }
+const prev = load<Last | null>('last', null); // read before this page replaces it — the palette offers it
 const topic = document.body.dataset.topic;
 if (topic) save('last', { url: topic, title: $('.title')?.textContent ?? '' });
 
@@ -68,10 +70,32 @@ const loadPagefind = () => (pagefind ??= import(/* @vite-ignore */ `${'/pagefind
   return m;
 }));
 
+// Empty query: pinned formulas and the last topic — two taps from anywhere.
+interface Pin { url: string; name: string; html: string; topic: string }
+function showHome() {
+  const pins = load<Pin[]>('pins', []), last = prev;
+  const head = (t: string) => Object.assign(document.createElement('li'), { className: 'pal-h', textContent: t });
+  const rows: HTMLLIElement[] = [];
+  if (pins.length) {
+    rows.push(head('ჩამაგრებული ფორმულები'));
+    for (const p of pins) {
+      const li = item(p.url, p.name, '');
+      const ex = $('.pal-ex', li)!;
+      ex.textContent = p.topic;
+      ex.insertAdjacentHTML('beforebegin', `<span class="pal-fx">${p.html}</span>`); // our own KaTeX markup, saved on pin
+      rows.push(li);
+    }
+  }
+  if (last && last.url !== location.pathname) rows.push(head('ბოლოს ნანახი'), item(last.url, last.title, ''));
+  list.replaceChildren(...rows);
+  status.textContent = pins.length ? '' : 'დაწერე რამდენიმე ასო. ★-ით ჩამაგრებული ფორმულები აქ გამოჩნდება.';
+}
+
 function openPalette() {
   if (dialog.open) return;
   dialog.showModal();
   input.select();
+  if (!input.value) showHome();
   void loadPagefind().catch(() => {});
 }
 $$('[data-open-palette]').forEach(b => b.addEventListener('click', openPalette));
@@ -88,7 +112,7 @@ let seq = 0;
 async function runSearch() {
   const q = kaQuery(input.value);
   const my = ++seq;
-  if (!q) { list.replaceChildren(); status.textContent = 'დაწერე რამდენიმე ასო.'; return; }
+  if (!q) return showHome();
   status.textContent = 'ვეძებ…';
   let pf: Pagefind;
   try { pf = await loadPagefind(); } catch {

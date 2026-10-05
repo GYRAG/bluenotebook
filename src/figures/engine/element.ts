@@ -56,6 +56,9 @@ export class GeoFigure extends HTMLElement {
     const hint = this.querySelector<HTMLElement>('.hint');
     if (hint && !this.hasAttribute('data-alt') && !load('hint-seen', false)) hint.hidden = false;
     new ResizeObserver(() => { this.layout(); this.render(); }).observe(this);
+    // Print lays out without running scripts, so draw for the print box (72×52mm in global.css) up front.
+    addEventListener('beforeprint', () => { this.layout(272, 196); this.render(); });
+    addEventListener('afterprint', () => { this.layout(); this.render(); });
     this.layout(); this.render();
     this.dispatchEvent(new Event('ready'));
   }
@@ -87,9 +90,9 @@ export class GeoFigure extends HTMLElement {
   }
 
   // ---------- layout + render ----------
-  private layout() {
-    const r = this.svg.getBoundingClientRect(), [x0, y0, x1, y1] = this.board;
-    const W = r.width, H = r.height, bw = x1 - x0, bh = y1 - y0;
+  private layout(W = this.svg.getBoundingClientRect().width, H = this.svg.getBoundingClientRect().height) {
+    const [x0, y0, x1, y1] = this.board;
+    const bw = x1 - x0, bh = y1 - y0;
     const kf = Math.max(4, Math.min((W - Math.min(150, W * 0.24)) / bw, (H - Math.min(110, H * 0.22)) / bh));
     const n = Math.max(1, Math.ceil(kf / CELL_MAX)), cell = Math.floor(kf / n), k = cell * n;
     this.view = { W, H, k, cell, ox: Math.round(W / 2 - ((x0 + x1) / 2) * k) + 0.5, oy: Math.round(H / 2 + ((y0 + y1) / 2) * k) + 0.5 };

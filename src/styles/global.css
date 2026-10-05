@@ -161,10 +161,12 @@ summary::-webkit-details-marker { display: none; }
 .pal-body { overflow: auto; padding: var(--s1) 0 var(--s3); }
 .pal-h { font-size: var(--fs-ui); font-weight: var(--w2); color: var(--ink-2); padding: 14px var(--s4) var(--s1); }
 .pal-status { padding: var(--s3) var(--s4); color: var(--ink-2); font-size: 15px; }
+.pal-status:empty { display: none; }
 .pal-res a { display: block; padding: 10px var(--s4); }
 .pal-res a:hover, .pal-res a:focus-visible { background: var(--ink); color: var(--on-ink); outline: none; }
 .pal-res .sub { padding-left: calc(var(--s4) + 14px); font-size: 15px; }
 .pal-res mark { background: none; color: inherit; font-weight: var(--w2); text-decoration: underline; text-underline-offset: 3px; }
+.pal-fx { display: block; padding: 2px 0; overflow-x: auto; }
 .pal-ex { display: block; font-size: var(--fs-ui); color: var(--ink-2); }
 .pal-res a:hover .pal-ex, .pal-res a:focus-visible .pal-ex { color: inherit; }
 
@@ -364,3 +366,40 @@ geo-figure.proving .aux { stroke-opacity: .65; }
 .dot::before { content: ''; width: 9px; height: 9px; border: var(--bw) solid var(--line); border-radius: 50%; }
 .dot[aria-current='true']::before { background: var(--ink); border-color: var(--ink); }
 .count { font-size: var(--fs-ui); color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 40px; text-align: center; }
+
+/* ---------- print: one sheet per topic — white paper, blue ink ----------
+   Figure on top, formulas and the property list below in two columns; proofs, tools and
+   chrome stay on screen. The SVG has a viewBox, so it scales to the print box as drawn. */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme] {
+    --paper: #fff; --paper-2: #fff; --ink: #1736b8; --ink-2: #2b438f; --on-ink: #fff;
+    --line: #1736b8; --line-2: rgb(23 54 184 / .3); --grid: transparent; --grid-2: transparent;
+    --aux: #1736b8; --fill: rgb(23 54 184 / .06); color-scheme: light;
+  }
+  html, body { height: auto; overflow: visible; font-size: 9.5pt; line-height: 1.4; }
+  .app, .app.no-panel { display: block; height: auto; }
+  .nav, .topbar, .skip, .toast, .pal, .grip, .tabs, #tp-tools, .pin, .fx-proof, .fx-val, .prop-row .ic,
+  .stamp, .hint, .handles, .status-note, .back, .stepper { display: none !important; }
+  /* title and lede on the left, the figure as it is on screen to the right */
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr) 72mm; align-content: start; column-gap: 6mm; padding: 0; overflow: visible !important; }
+  .stage > * { grid-column: 1; }
+  .stage > .title { display: block !important; font-size: 18pt; } /* a print page is phone-narrow */
+  .stage > .lede { display: block !important; margin: 1mm 0 0; }
+  geo-figure[data-alt] { display: none !important; }
+  .stage > .figure { grid-column: 2; grid-row: 1 / span 4; height: 52mm; margin: 0; background: none; }
+  .panel { display: block; border: 0; background: none; margin-top: 3mm; }
+  .panel-body { overflow: visible; padding: 0; columns: 2; column-gap: 7mm; column-rule: 1px solid var(--line-2); }
+  .panel-body section[role='tabpanel'] { display: block !important; }
+  .fx, .prop, .def, .remark { break-inside: avoid; }
+  .fx { padding: .5mm 0; margin: 0; }
+  .fx-h h3, .prop-w, .group-h { font-size: 8.5pt; }
+  .fx-tex .katex-display > .katex { font-size: 1.05em; padding: 1mm 3mm; }
+  .def, .remark { font-size: inherit; padding-bottom: 1.5mm; }
+  .remark { margin: 1.5mm 0; }
+  .group-h { margin: 2mm 0 0; }
+  .prop-row { grid-template-columns: 5mm minmax(0, 1fr); gap: 1.5mm; padding: 1mm 0; }
+  .prop-t { font-size: 9.5pt; line-height: 1.35; }
+  .prop-n::before { font-size: 9.5pt; }
+  a { text-decoration: none; }
+}

@@ -43,4 +43,15 @@ test('a formula links to its proof, and pins survive a reload', async ({ page })
   await expect(page.locator('#perimeter .pin')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#area-height .fx-proof').click();
   await expect(page.locator('#area-base-height .proof')).toBeVisible();
+
+  // two taps from any page: open search, pick the pin
+  await page.goto('/geometry/rhombus/');
+  await page.keyboard.press('/');
+  const res = page.locator('#palette .pal-res');
+  await expect(res.locator('.pal-h').first()).toHaveText('ჩამაგრებული ფორმულები');
+  await expect(res.locator('.pal-fx .katex')).toHaveCount(1);
+  await expect(res.getByText('ბოლოს ნანახი')).toBeVisible();
+  await res.locator('a', { hasText: 'პერიმეტრი' }).click();
+  await expect(page).toHaveURL(/\/geometry\/parallelogram\/#perimeter$/);
+  await expect(page.locator('#perimeter')).toBeInViewport();
 });
