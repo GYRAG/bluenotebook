@@ -13,6 +13,7 @@ const PAGES = [['topic', '/geometry/parallelogram/'], ['home', '/'], ['relations
 for (const vp of VIEWPORTS) {
   for (const theme of ['light', 'dark'] as const) {
     test(`${vp.name} ${theme}: no page scroll, tools in reach`, async ({ page }) => {
+      test.setTimeout(90_000); // six pages per test; slower when the whole suite runs in parallel
       await page.setViewportSize({ width: vp.width, height: vp.height });
       await page.addInitScript(t => localStorage.setItem('mb:theme', JSON.stringify(t)), theme);
       const errors: string[] = [];
