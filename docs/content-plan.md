@@ -46,14 +46,14 @@ Status key: ✓ covered · ◐ partly · ✗ missing. Every new property gets a 
 **C2 — circle (section „წრეწირი“)** ✓ done (4 topics + Stewart added to C1): circle, chord, tangent · central and inscribed angles · angles between
 chords/secants/tangents + chord·chord, secant·secant, tangent² · circumference, arc, sector, segment, two circles.
 
-**C3** — polygons, regular polygons, right-triangle trigonometry (§17), Thales and proportional segments,
+**C3** ✓ done — polygons, regular polygons, right-triangle trigonometry (§17), Thales and proportional segments,
 distance and loci (§6–7), solving triangles (§19 cases).
 
-**C4** — coordinates (§23) and vectors (§30, plane).
+**C4** ✓ done — coordinates (§23) and vectors (§30, plane).
 
-**C5** — transformations (§13–14): symmetry, rotation, translation, homothety.
+**C5** ✓ done — transformations (§13–14): symmetry, rotation, translation, homothety.
 
-**C6** — stereometry: extend the engine to 3D points + projection, drag to rotate; then lines/planes,
+**C6** ✓ done — stereometry: extend the engine to 3D points + projection, drag to rotate; then lines/planes,
 three perpendiculars, angles, projection area S′ = S cos φ, prism, parallelepiped, pyramid, cylinder, cone,
 sphere, areas and volumes.
 

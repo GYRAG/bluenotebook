@@ -1,52 +1,160 @@
 # მათემატიკის ბაზა
 
-A personal math reference in Georgian: definitions, formulas, properties and step-by-step proofs, with
-interactive figures you can drag. Built for one high-school student; geometry first, other subjects added
-as plain content files.
+A geometry notebook for the Georgian national exam, written in Georgian, where every figure moves.
 
-- Interactive figures: drag vertices, sliders, live measurements, a stamp when the shape becomes special
-  (e.g. a parallelogram turns into a rhombus).
-- Proofs play on the figure step by step (← / →); every property has a deep link (`/geometry/rhombus/#diagonals-perpendicular`).
-- Search (`/` or Ctrl+K) with Georgian word-ending handling; pinned formulas (★) show in the empty search.
-- Cheat sheet, shape-relationship page, one-page print per topic, light/dark themes.
+Each topic is one page of a blue school notebook: an interactive figure on the left, and on the right the formulas, the properties and their step-by-step proofs. Drag a vertex and every measurement, readout and formula value follows. Open a proof and the figure plays it, one step at a time.
 
-## Stack
-Astro (static) + MDX + TypeScript strict, KaTeX at build time, Pagefind search, self-hosted Noto fonts,
-a small custom SVG geometry engine (no JSXGraph: ~259 KB gzipped). Vitest + Playwright. pnpm.
+![Trapezoid: the figure, its formulas and their live values](docs/images/readme-topic.png)
 
-## Run
+---
+
+## What is inside
+
+The syllabus follows S. Topuria's geometry textbook, planimetry and stereometry.
+
+| Section | Topics |
+| --- | --- |
+| Foundations | angles and parallel lines, congruence, perpendicular bisector and angle bisector, Thales' theorem, similarity |
+| Triangles | the triangle, isosceles, right triangle, sine and cosine in a right triangle, remarkable points (medians, bisectors, altitudes, Stewart's theorem), area, the laws of sines and cosines |
+| Quadrilaterals | the quadrilateral (cyclic, tangential, Ptolemy), parallelogram, rectangle, rhombus, square, trapezoid |
+| Circle | chords and tangents, inscribed and central angles, angles and segments in a circle, circumference and area |
+| Polygons | angle sums and diagonals, regular polygons |
+| Coordinates and vectors | distance, midpoint, equations of a line and a circle, vector operations, dot product |
+| Transformations | symmetries, rotation, translation, homothety |
+| Stereometry | lines and planes in space, perpendicularity and the three perpendiculars theorem, dihedral angles, coordinates in space |
+| Solids | prism and parallelepiped, pyramid, cylinder and cone, ball and sphere |
+
+In numbers: 37 topics, 223 properties with proofs, 180 formula cards, 45 interactive figures, and a glossary of 102 school terms.
+
+The site also has:
+- a cheat sheet with every formula on one page;
+- a page on how the quadrilaterals are related, which can also work out what a shape is from the facts you know;
+- a blank sheet of squared paper for your own drawings.
+
+---
+
+## Proofs that play on the figure
+
+Every property has a proof written for a school student. Each step highlights what it talks about: a segment, an angle, a pair of congruent triangles, an arc. The left and right arrow keys walk through the steps. While a proof is open you can still drag the figure, because the proof holds for every shape, not just the one drawn.
+
+![The common tangent of two circles, proved step by step](docs/images/readme-proof.png)
+
+---
+
+## Solids you can turn
+
+Stereometry figures are real 3D models drawn the way textbooks draw them:
+- hidden edges are dashed;
+- the back halves of circles are dashed too;
+- cylinders and cones get their outline lines.
+
+Drag the paper and the solid turns. One button brings it back to the starting view.
+
+![A cylinder in the night theme](docs/images/readme-solid.png)
+
+---
+
+## Draw on the grid
+
+Every figure has a pencil, so you can sketch on top of the drawing:
+- freehand lines, segments, circles, rectangles and triangles;
+- move and erase what you drew, and undo.
+
+Shapes snap to the squares of the grid. They can also be drawn from exact sizes: a segment by its length, a circle by its radius, a triangle by its three sides. Impossible triangles are refused with the reason.
+
+The blank sheet is the same pencil on empty notebook paper, where one square is one unit.
+
+![Shapes drawn from typed sizes on the blank sheet](docs/images/readme-sheet.png)
+
+---
+
+## Made for a phone too
+
+On a phone the figure stays at the top and the formulas and properties move into a sheet below it. The page itself never scrolls; only the panels do.
+
+Search with Georgian word endings is opened with `/` or Ctrl+K. Formulas you pin with the star button appear in search before you type anything. There is a light and a night theme, and a one-page print layout for every topic.
+
+<p align="center"><img src="docs/images/readme-phone.png" alt="The rhombus on a phone" width="320"></p>
+
+---
+
+## Correct by construction
+
+A reference site for an exam is only useful if it is right. Two layers keep it that way.
+
+**Every claim is checked numerically.** Each property on a figure page has a matching check in its figure's file. The test suite runs every check on 500 random shapes.
+- Criteria are checked by building the shape from the hypothesis alone.
+- Areas and volumes are measured independently of their formulas: by fine polygons, by tetrahedra, or by summing slices.
+
+**Every page is linted.** `pnpm check` validates the frontmatter. It also checks that:
+- every proof step only mentions points that exist on its figure;
+- every link and prerequisite resolves;
+- every term defined in bold is in the glossary;
+- no wrong variant of a term (for example „საშუალო ხაზი“ instead of „შუახაზი“) appears.
+
+Pages stay marked as drafts until a person has read their Georgian and their proofs.
+
+---
+
+## Running it
+
 ```bash
 pnpm install
-pnpm dev          # http://localhost:4321 (search needs a build)
-pnpm build        # dist/ + Pagefind index
-pnpm preview
+pnpm dev          # http://localhost:4321
+pnpm build        # the static site in dist/, with the search index
+pnpm preview      # serve the build
 ```
 
-## Quality gates
+Search only works after a build.
+
+### Checks
+
 ```bash
-pnpm check        # frontmatter schema + content lint (links, prerequisites, glossary, proof ↔ figure)
-pnpm test         # engine + every figure's numeric property checks on random shapes
+pnpm check        # content: frontmatter, links, glossary, proofs against their figures
+pnpm test         # geometry engine and every figure's checks on random shapes
 pnpm typecheck
-pnpm e2e          # Playwright on a production build, 4 viewports × 2 themes
+pnpm e2e          # Playwright on the production build: layout at four sizes and two themes, proofs, search, drawing
 ```
 
-## Adding content
+### Adding a topic
+
 ```bash
-pnpm new topic algebra/quadratic-equations equations
+pnpm new topic geometry/my-topic triangles
 ```
-creates `src/content/topics/algebra/quadratic-equations.mdx` as a draft with every available block.
-Fill it in, run `pnpm check`, then `pnpm dev`. A new subject is one entry in `src/subjects.ts`.
-The day-to-day guide (in Georgian) is [docs/guide-ka.md](docs/guide-ka.md); repo conventions are in
-[CLAUDE.md](CLAUDE.md).
 
-Topics with a figure reference a spec in `src/figures/` (`figure: rhombus`); each `<Property>` id must have a
-numeric check in that spec, which `pnpm check` enforces.
+This creates a draft page with every building block. [docs/guide-ka.md](docs/guide-ka.md) is the day-to-day guide in Georgian, and [CLAUDE.md](CLAUDE.md) holds the repository's conventions. A new subject is one entry in `src/subjects.ts`; the first algebra topic was added this way, with no code changes.
 
-## Deploy (Vercel)
-1. Push the repo to GitHub and import it in Vercel. Framework preset: Astro (detected).
-2. Build command `pnpm build`, output directory `dist` (both set in `vercel.json`).
-3. Vercel picks pnpm from `packageManager` in `package.json`. If the build complains about the pnpm
-   version, set the environment variable `ENABLE_EXPERIMENTAL_COREPACK=1`.
-4. Set `site` in `astro.config.mjs` to the final domain.
+---
 
-No server code, no environment variables, no analytics.
+## How it is built
+
+- **Astro** generates a static site from **MDX** pages. Each topic file is rendered twice, once as formulas and once as properties, so it never imports anything.
+- **KaTeX** renders all mathematics at build time.
+- **Pagefind** builds the search index; a small stemmer handles Georgian word endings.
+- **A custom SVG geometry engine**, written for this site instead of using JSXGraph (about 259 KB):
+  - a figure maps its sliders to named points, so constraints hold by construction;
+  - dragging a vertex inverts that mapping numerically;
+  - text and marks are drawn at a fixed size whatever the zoom, and labels move out of each other's way;
+  - solids are projected from 3D on every frame.
+- **Vitest** runs the checks and **Playwright** the browser tests.
+- Fonts are self-hosted (Noto Sans and Noto Serif Georgian), and there is no tracking.
+
+```
+src/
+  content/topics/   one MDX file per topic, glossary.json
+  figures/          one file per figure; engine/ is the renderer, solver and 3D projection
+  components/       page parts: panel, figure, proof blocks
+  scripts/          proof stepper, search, theme
+  pages/            topic pages, cheat sheet, relationships, blank sheet
+tests/e2e/          browser tests
+```
+
+---
+
+## Deploying
+
+The site is fully static.
+
+1. Import the repository into Vercel. `vercel.json` already sets the build command (`pnpm build`) and the output folder (`dist`).
+2. Vercel picks the pnpm version from `packageManager` in `package.json`.
+3. Set `site` in `astro.config.mjs` to the final address.

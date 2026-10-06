@@ -20,19 +20,28 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - Calm, uncluttered UI; the "blue notebook" look (cobalt #2657ff paper, white ink, navy night) is deliberate.
   No neobrutalism, no generic UI kit look. Colours only from `src/styles/tokens.css`.
 - The page never scrolls; only the nav and the panel do. Touch targets ≥ 44px. WCAG AA in both themes.
+- Commits: plain messages, **no `Co-Authored-By: Claude` trailer** (the owner's request). README: no icons or emoji.
+- Terminology follows the school/exam usage (Topuria's textbook): e.g. შუახაზი, ჩახაზული/შემოხაზული წრეწირი.
+  The glossary's `avoid` lists catch wrong variants.
 
 ## Architecture
 - `src/content/topics/<subject>/<slug>.mdx` — topics. MDX imports nothing: the page renders the same
   file twice with different component maps (`formulasView`, `propertiesView`; `cheatView` for /cheatsheet/).
 - `src/content.config.ts` — Zod schema. `src/subjects.ts` — subjects and nav sections.
-- `src/figures/<name>.ts` — figure specs: params → named points (constraints by construction);
-  dragging inverts `points` numerically (`engine/solve.ts`). Ref grammar in `engine/refs.ts`:
-  `A`, `AB`, `ABC…`, `line:AB`, `ray:AB`, `<ABC`, `<A`, `AB=CD`, `<A=<C`, `AB||CD`, `(OA)`, `|AB|a`.
+- `src/figures/<name>.ts` — figure specs (every `.ts` there is a figure; shared helpers live in `engine/`):
+  params → named points (constraints by construction); dragging inverts `points` numerically (`engine/solve.ts`).
+  Ref grammar in `engine/refs.ts`: `A`, `AB`, `ABC…`, `line:AB`, `ray:AB`, `vec:AB`, `arc:OAB`, `hid:AB`, `<ABC`,
+  `<A`, `AB=CD`, `<A=<C`, `AB||CD`, `(OA)`, `|AB|a`. `base` may be a function of the params (regular n-gon).
+  Options: `axes` (coordinate axes), `unitPx` (fixed scale, blank sheet), `board` (fixed board).
+- `src/figures/engine/solid.ts` — solids: 3D points + faces + circles, projected per view (hidden params
+  `yaw`, `pitch`; dragging the paper turns them). Hidden edges and back halves are emitted as `hid:` refs.
+  Checks/readouts receive true 3D points. Never use dimension lines (`|AB|`) on solids: they measure 2D.
+- `src/figures/engine/sketch.ts` — the pencil (drawing on the grid), stored per figure as `mb:sketch:<name>`.
 - `src/figures/engine/element.ts` — `<geo-figure>`; renders in screen pixels (fixed text size), fixed board
   (`bounds.ts`), whole-cell unit. Proof steps call `setScene({ set, show, hl })`.
 - `src/scripts/shell.ts` (theme, tabs, sheet, search palette, pins in empty search),
   `src/scripts/topic.ts` (proof stepper, deep links `#property-id`, pins).
-- localStorage keys are prefixed `mb:` (`theme`, `last`, `pins`, `fig:<name>`, `hint-seen`); every access is guarded.
+- localStorage keys are prefixed `mb:` (`theme`, `last`, `pins`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
 
 ## Gotchas
 - MDX attribute strings take LaTeX with **single** backslashes: `tex="\frac{a}{b}"`. `\\` is a KaTeX line break.
@@ -41,6 +50,9 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - Astro 7 needs the unified Markdown processor in `astro.config.mjs` for KaTeX.
 - Pagefind has no Georgian stemmer: `src/lib/ka-search.ts` strips case endings before prefix search.
 - Topics without a figure get the text layout (`.app.no-figure`) and no tools tab.
+- KaTeX is pinned to 0.19 for every package (pnpm override): rehype-katex otherwise pulls 0.16, whose markup
+  the 0.19 stylesheet does not style. No Georgian inside `\text{}` in formulas — KaTeX has no Georgian glyphs.
+- Shell heredocs on this machine collapse `\\` to `\`: write scripts with the Write tool when they contain LaTeX.
 
 ## Milestone routine
 Commit per milestone; screenshots at 375×667, 390×844, 768×1024, 1440×900 in light and dark; design critique;
