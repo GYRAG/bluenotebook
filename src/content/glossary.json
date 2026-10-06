@@ -86,6 +86,22 @@
     { "ka": "პარალელური გადატანა", "en": "translation" },
     { "ka": "მოძრაობა", "en": "isometry (distance-preserving map)", "note": "verify with the user" },
     { "ka": "ჰომოთეტია", "en": "homothety (dilation)" },
+    { "ka": "აცდენილი წრფეები", "en": "skew lines" },
+    { "ka": "მართობი", "en": "perpendicular (segment or line)" },
+    { "ka": "დახრილი", "en": "oblique (slant) segment to a plane" },
+    { "ka": "გეგმილი", "en": "projection" },
+    { "ka": "კუთხე წრფესა და სიბრტყეს შორის", "en": "angle between a line and a plane" },
+    { "ka": "ორწახნაგა კუთხე", "en": "dihedral angle" },
+    { "ka": "წრფივი კუთხე", "en": "linear (plane) angle of a dihedral angle" },
+    { "ka": "პრიზმა", "en": "prism" },
+    { "ka": "პარალელეპიპედი", "en": "parallelepiped" },
+    { "ka": "მართკუთხა პარალელეპიპედი", "en": "rectangular box (cuboid)" },
+    { "ka": "პირამიდა", "en": "pyramid" },
+    { "ka": "ცილინდრი", "en": "cylinder" },
+    { "ka": "კონუსი", "en": "cone" },
+    { "ka": "მსახველი", "en": "generator (slant height) of a cylinder or cone" },
+    { "ka": "სფერო", "en": "sphere (the surface)" },
+    { "ka": "ბირთვი", "en": "ball (the solid)" },
     { "ka": "ნახევარპერიმეტრი", "en": "semiperimeter", "note": "letter p (S = p·r)" }
   ]
 }

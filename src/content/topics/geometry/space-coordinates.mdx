@@ -1,0 +1,54 @@
+---
+title: კოორდინატები და ვექტორები სივრცეში
+slug: space-coordinates
+subject: geometry
+section: stereo
+order: 53
+summary: მანძილი ორ წერტილს შორის სივრცეში, შუაწერტილი, სფეროს განტოლება, ვექტორების სკალარული ნამრავლი.
+tags: [კოორდინატები სივრცეში, მანძილი, სფეროს განტოლება, სკალარული ნამრავლი]
+prerequisites: [coordinates, vectors, perpendicularity]
+status: draft
+figure: space-coords
+---
+
+<Definition>სივრცეში კოორდინატთა სისტემას სამი ურთიერთმართობი ღერძი ქმნის: $Ox$, $Oy$, $Oz$. წერტილი $A(x;\, y;\, z)$; ვექტორის კოორდინატები — ბოლოსა და სათავის კოორდინატების სხვაობები.</Definition>
+
+<Formulas>
+<Formula id="distance-formula" name="მანძილი ორ წერტილს შორის" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}" live="|OA|" proof="distance-3d" />
+<Formula id="midpoint-formula" name="შუაწერტილი" tex="M\left(\frac{x_1 + x_2}{2};\ \frac{y_1 + y_2}{2};\ \frac{z_1 + z_2}{2}\right)" proof="midpoint-3d" />
+<Formula id="sphere-formula" name="სფეროს განტოლება" tex="(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2" proof="sphere-equation" />
+<Formula id="dot-formula" name="სკალარული ნამრავლი" tex="\vec a \cdot \vec b = x_1x_2 + y_1y_2 + z_1z_2 = |\vec a|\,|\vec b|\cos\varphi" live="OA·OB" proof="dot-3d" />
+</Formulas>
+
+<Properties>
+
+<Property id="distance-3d" title="წერტილის $A(x;\, y;\, z)$ მანძილი სათავემდე $\sqrt{x^2 + y^2 + z^2}$-ია" why="პითაგორას თეორემა ორჯერ: სიბრტყე $Oxy$-ში და შემდეგ ვერტიკალურად.">
+<Proof given="$A(x;\, y;\, z)$, $A_4(x;\, y;\, 0)$ — მისი გეგმილი $Oxy$-ზე" prove="$OA^2 = x^2 + y^2 + z^2$">
+<Step show="OA4 A1A4 A2A4" hl="OA4" tex="OA_4^2 = x^2 + y^2">მანძილის ფორმულა სიბრტყე $Oxy$-ში.</Step>
+<Step show="OA A4A <OA4A" hl="OA4A" tex="OA^2 = OA_4^2 + A_4A^2 = x^2 + y^2 + z^2 \quad \blacksquare">$A_4A \perp Oxy$, ამიტომ $\triangle OA_4A$ მართკუთხაა, $A_4A = z$. ორი წერტილისთვის კოორდინატები სხვაობებით შეიცვლება.</Step>
+</Proof>
+</Property>
+
+<Property id="midpoint-3d" title="შუაწერტილის ყოველი კოორდინატი ბოლოების კოორდინატების საშუალოა" why="გეგმილები ღერძებზე — თალესის თეორემა, როგორც სიბრტყეზე.">
+<Proof given="$O(0;\, 0;\, 0)$, $A(x;\, y;\, z)$, $M$ — $OA$-ს შუაწერტილი" prove="$M\left(\tfrac x2;\ \tfrac y2;\ \tfrac z2\right)$">
+<Step show="OA M" hl="OA">დავუშვათ $O$-დან, $M$-დან და $A$-დან მართობები თითოეულ ღერძზე.</Step>
+<Step tex="x_M = \frac{x_1 + x_2}{2}, \quad y_M = \frac{y_1 + y_2}{2}, \quad z_M = \frac{z_1 + z_2}{2} \quad \blacksquare">პარალელური სიბრტყეები ღერძზე ტოლ მონაკვეთებს ჩამოჭრის (თალესი), ამიტომ ყოველ ღერძზე $M$-ის გეგმილი შუაწერტილია.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-equation" title="სფეროს განტოლება ცენტრით $(a;\, b;\, c)$ და რადიუსით $R$: $(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2$" why="სფერო ცენტრიდან $R$ მანძილზე მდებარე წერტილებია.">
+<Proof given="ცენტრი $(a;\, b;\, c)$, რადიუსი $R$" prove="$(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2$">
+<Step tex="(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2 \quad \blacksquare">წერტილი $(x;\, y;\, z)$ სფეროზეა მაშინ და მხოლოდ მაშინ, როცა მისი მანძილი ცენტრამდე $R$-ია — მანძილის ფორმულა, აყვანილი კვადრატში.</Step>
+</Proof>
+</Property>
+
+<Property id="dot-3d" title="სივრცეში სკალარული ნამრავლი $x_1x_2 + y_1y_2 + z_1z_2$-ია" why="კოსინუსების თეორემა $\triangle OAB$-ში, როგორც სიბრტყეზე, ოღონდ სამი კოორდინატით.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $\vec b = \overrightarrow{OB}$, $\varphi = \angle AOB$" prove="$|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 + z_1z_2$">
+<Step show="vec:OA vec:OB B AB" hl="OAB <AOB" tex="AB^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a|\,|\vec b|\cos\varphi">კოსინუსების თეორემა $\triangle OAB$-ში.</Step>
+<Step tex="|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 + z_1z_2 \quad \blacksquare">$AB^2$, $|\vec a|^2$, $|\vec b|^2$ კოორდინატებით ჩავწეროთ და შევამციროთ.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">სივრცეში წრფის განტოლება $y = kx + b$ არ არის — ასეთი განტოლება სივრცეში სიბრტყეს აღწერს.</Remark>

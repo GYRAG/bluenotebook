@@ -34,6 +34,7 @@ const SIZES = [
   {drag.length > 0 && (
     <p class="hint" hidden>გადაათრიე {drag.map((p, i) => <>{i > 0 && ' ან '}<i>{p}</i></>)} · შეეხე გვერდს</p>
   )}
+  {spec.orbit && <p class="hint" hidden>გადაათრიე ფურცელი — სხეული დატრიალდება</p>}
   <div class="sk">
     <button type="button" class="sk-btn sk-toggle" aria-pressed="false" aria-label="ხატვა ბადეზე" title="ხატვა ბადეზე"><Icon name="pencil" /></button>
     <button type="button" class="sk-btn sk-fit" aria-label="ხედის დაბრუნება" title="ხედის დაბრუნება" hidden><Icon name="fit" /></button>

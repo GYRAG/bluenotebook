@@ -1,0 +1,59 @@
+---
+title: წრფეები და სიბრტყეები სივრცეში
+slug: lines-planes
+subject: geometry
+section: stereo
+order: 50
+summary: წრფისა და სიბრტყის, ორი სიბრტყის პარალელურობის ნიშნები, პარალელური სიბრტყეების კვეთა, აცდენილი წრფეები.
+tags: [სტერეომეტრია, სიბრტყე, პარალელური სიბრტყეები, აცდენილი წრფეები]
+prerequisites: [angles]
+status: draft
+figure: box
+---
+
+<Definition>სივრცეში ორი წრფე ან იკვეთება, ან **პარალელურია** (ერთ სიბრტყეში ძევს და არ იკვეთება), ან **აცდენილია** — არ არსებობს სიბრტყე, რომელიც ორივეს შეიცავს. წრფე და სიბრტყე პარალელურია, თუ საერთო წერტილი არ აქვთ; ორი სიბრტყე პარალელურია, თუ არ იკვეთება. ნახაზის მოდელია პარალელეპიპედი $ABCDA_1B_1C_1D_1$ — მისი ფუძის სიბრტყეა $\alpha$.</Definition>
+
+<Formulas>
+<Formula id="line-plane-formula" name="წრფისა და სიბრტყის პარალელურობის ნიშანი" tex="a \parallel b,\ b \subset \alpha,\ a \not\subset \alpha \;\Rightarrow\; a \parallel \alpha" proof="line-plane-parallel" />
+<Formula id="planes-formula" name="სიბრტყეების პარალელურობის ნიშანი" tex="a, b \subset \beta,\ a \cap b \ne \varnothing,\ a \parallel \alpha,\ b \parallel \alpha \;\Rightarrow\; \beta \parallel \alpha" proof="planes-parallel" />
+<Formula id="cuts-formula" name="პარალელური სიბრტყეების კვეთა" tex="\alpha \parallel \beta \;\Rightarrow\; \gamma \cap \alpha \parallel \gamma \cap \beta" proof="parallel-cuts" />
+</Formulas>
+
+<Properties>
+
+<Property id="line-plane-parallel" kind="criterion" title="თუ სიბრტყის გარეთ მდებარე წრფე ამ სიბრტყის რომელიმე წრფის პარალელურია, ის სიბრტყის პარალელურია" why="წინააღმდეგ შემთხვევაში ორი პარალელური წრფე გადაიკვეთებოდა.">
+<Proof given="$A_1B_1 \parallel AB$, $AB \subset \alpha$, $A_1B_1 \not\subset \alpha$" prove="$A_1B_1 \parallel \alpha$">
+<Step hl="A1B1 AB">$A_1B_1 \parallel AB$; $AB$ ფუძის სიბრტყეში $\alpha$ ძევს, $A_1B_1$ — მის გარეთ.</Step>
+<Step hl="ABB1A1">ორი პარალელური წრფე ერთ სიბრტყეს განსაზღვრავს — $\beta = (ABB_1A_1)$; $\beta$ და $\alpha$ წრფე $AB$-ზე იკვეთება.</Step>
+<Step hl="A1B1">თუ $A_1B_1$ $\alpha$-ს რომელიმე წერტილში გადაკვეთდა, ეს წერტილი ორივე სიბრტყეს ეკუთვნოდა, ე.ი. $AB$-ზე იქნებოდა — $A_1B_1$ და $AB$ გადაიკვეთებოდა, პარალელურობის საწინააღმდეგოდ. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="planes-parallel" kind="criterion" title="თუ ერთი სიბრტყის ორი გადამკვეთი წრფე მეორე სიბრტყის პარალელურია, სიბრტყეები პარალელურია" why="წინააღმდეგ შემთხვევაში ერთ წერტილზე ერთი წრფის ორი პარალელური გაივლიდა.">
+<Proof given="$A_1B_1, A_1D_1 \subset \beta$, ორივე $\alpha$-ს პარალელურია" prove="$\beta \parallel \alpha$">
+<Step hl="A1B1 A1D1">ზედა ფუძის სიბრტყეში $\beta$ წრფეები $A_1B_1$ და $A_1D_1$ $A_1$-ში იკვეთება; ორივე $\alpha$-ს პარალელურია (წინა ნიშანი).</Step>
+<Step>დავუშვათ, $\beta$ და $\alpha$ წრფე $c$-ზე იკვეთება. $A_1B_1$ $\beta$-შია და $\alpha$-ს არ კვეთს, ამიტომ $c$-საც არ კვეთს: $A_1B_1 \parallel c$. ასევე $A_1D_1 \parallel c$.</Step>
+<Step hl="A1B1 A1D1">მაშინ $A_1$-ზე $c$-ს ორი პარალელური წრფე გაივლიდა — ეს შეუძლებელია. ამიტომ $\beta \parallel \alpha$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="parallel-cuts" title="თუ ორ პარალელურ სიბრტყეს მესამე სიბრტყე კვეთს, გადაკვეთის წრფეები პარალელურია" why="წრფეები ერთ სიბრტყეშია და არ იკვეთება.">
+<Proof given="$\alpha \parallel \beta$, სიბრტყე $\gamma = (ACC_1A_1)$ მათ $AC$-სა და $A_1C_1$-ზე კვეთს" prove="$AC \parallel A_1C_1$">
+<Step show="AC A1C1 AA1 CC1" hl="ACC1A1">$AC$ და $A_1C_1$ ერთ სიბრტყეში $\gamma$ ძევს.</Step>
+<Step hl="AC A1C1">ისინი პარალელურ სიბრტყეებშია, ამიტომ საერთო წერტილი არ აქვთ. ერთ სიბრტყეში მდებარე, არგადამკვეთი წრფეები პარალელურია. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="skew-lines" kind="criterion" title="თუ ერთი წრფე სიბრტყეში ძევს, მეორე კი ამ სიბრტყეს პირველი წრფის გარეთ კვეთს, ეს წრფეები აცდენილია" why="წრფე და მის გარეთ მდებარე წერტილი ერთადერთ სიბრტყეს განსაზღვრავს.">
+<Proof given="$AB \subset \alpha$, $CC_1 \cap \alpha = C$, $C \notin AB$" prove="$AB$ და $CC_1$ აცდენილია">
+<Step hl="AB CC1">$AB$ $\alpha$-ში ძევს, $CC_1$ კი $\alpha$-ს წერტილ $C$-ში კვეთს, რომელიც $AB$-ზე არ არის.</Step>
+<Step>დავუშვათ, $AB$ და $CC_1$ ერთ სიბრტყეში $\gamma$ ძევს. $\gamma$ შეიცავს $AB$-ს და $C$-ს, ამიტომ $\gamma = \alpha$ (წრფე და მის გარეთ წერტილი ერთადერთ სიბრტყეს განსაზღვრავს).</Step>
+<Step hl="CC1">მაშინ $CC_1$ მთლიანად $\alpha$-ში იქნებოდა, მაგრამ $C_1$ $\alpha$-ში არ არის. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>აცდენილ წრფეებს შორის კუთხე იზომება ერთის პარალელური გადატანით მეორის წერტილზე; მანძილი მათ შორის — საერთო მართობის სიგრძეა. მაგალითად, $AB$-სა და $CC_1$-ს საერთო მართობია $BC$.</Remark>
+
+<Remark kind="mistake">„არ იკვეთება“ სივრცეში „პარალელურს“ არ ნიშნავს: არგადამკვეთი წრფეები შეიძლება აცდენილი იყოს. პარალელურობისთვის ერთ სიბრტყეში მდებარეობაც საჭიროა.</Remark>

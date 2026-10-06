@@ -1,0 +1,53 @@
+---
+title: ბირთვი და სფერო
+slug: sphere
+subject: geometry
+section: solids
+order: 57
+summary: ბირთვის კვეთა სიბრტყით, ბირთვის მოცულობა და სფეროს ფართობი.
+tags: [ბირთვი, სფერო, კვეთა, მოცულობა, ზედაპირის ფართობი]
+prerequisites: [cylinder-cone, perpendicularity]
+status: draft
+figure: sphere
+---
+
+<Definition>**სფერო** სივრცის ყველა იმ წერტილის სიმრავლეა, რომლებიც მოცემული წერტილიდან (ცენტრიდან) $R$ მანძილზეა. **ბირთვი** სფეროთი შემოსაზღვრული სხეულია.</Definition>
+
+<Formulas>
+<Formula id="section-formula" name="კვეთის რადიუსი" tex="\rho = \sqrt{R^2 - d^2}" live="ρ" proof="section-radius" />
+<Formula id="volume-formula" name="ბირთვის მოცულობა" tex="V = \tfrac43\,\pi R^3" live="V" proof="sphere-volume" />
+<Formula id="area-formula" name="სფეროს ფართობი" tex="S = 4\pi R^2" proof="sphere-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="section-radius" title="ბირთვის კვეთა სიბრტყით წრეა, რომლის ცენტრი ბირთვის ცენტრიდან სიბრტყეზე დაშვებული მართობის ფუძეა, რადიუსი კი $\sqrt{R^2 - d^2}$" why="კვეთის ყოველი წერტილი ცენტრიდან $R$-ზეა, ამიტომ მართობის ფუძიდან — ერთსა და იმავე მანძილზე.">
+<Proof given="ბირთვი ცენტრით $O$, სიბრტყე $O$-დან $d$ მანძილზე, $OP$ — მართობი" prove="კვეთის წერტილები $P$-დან $\sqrt{R^2 - d^2}$ მანძილზეა">
+<Step show="OP P" hl="OP">$OP \perp$ სიბრტყე, $OP = d$.</Step>
+<Step show="PK OK K <OPK" hl="OPK" tex="PK^2 = OK^2 - OP^2 = R^2 - d^2">კვეთის ნებისმიერი წერტილისთვის $K$: $\triangle OPK$ მართკუთხაა, $OK = R$.</Step>
+<Step tex="PK = \sqrt{R^2 - d^2} \quad \blacksquare">მანძილი არ არის დამოკიდებული $K$-ზე — კვეთა წრეწირით შემოსაზღვრული წრეა ცენტრით $P$.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-volume" title="ბირთვის მოცულობა $\tfrac43\pi R^3$-ია" why="ყოველ სიმაღლეზე ნახევარბირთვის კვეთა ცილინდრისა და კონუსის კვეთების სხვაობის ტოლია (არქიმედე).">
+<Proof given="ბირთვი რადიუსით $R$" prove="$V = \tfrac43 \pi R^3$">
+<Step tex="\pi(R^2 - z^2) = \pi R^2 - \pi z^2">ცენტრიდან $z$ სიმაღლეზე ბირთვის კვეთის ფართობი $\pi(R^2 - z^2)$-ია (წინა თვისება).</Step>
+<Step>ავიღოთ ცილინდრი რადიუსითა და სიმაღლით $R$, საიდანაც ამოჭრილია კონუსი იმავე ფუძითა და წვეროთი ქვედა ფუძის ცენტრში. $z$ სიმაღლეზე მისი კვეთა რგოლია ფართობით $\pi R^2 - \pi z^2$ — ზუსტად ნახევარბირთვის კვეთის ტოლი.</Step>
+<Step tex="V_{1/2} = \pi R^2 \cdot R - \tfrac13\,\pi R^2 \cdot R = \tfrac23\,\pi R^3">კავალიერის პრინციპით მოცულობებიც ტოლია.</Step>
+<Step tex="V = \tfrac43\,\pi R^3 \quad \blacksquare">ორი ნახევარბირთვი.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-area" title="სფეროს ფართობი $4\pi R^2$-ია" why="ბირთვი ვიწრო პირამიდებად იყოფა, წვეროთი ცენტრში და სიმაღლით $R$.">
+<Proof given="სფერო რადიუსით $R$" prove="$S = 4\pi R^2$">
+<Step>დავყოთ სფერო წვრილ ნაწილებად და თითოეული შევაერთოთ ცენტრთან: ბირთვი პირამიდების ჯამად იქცევა, რომელთა სიმაღლე ზღვარში $R$-ია, ფუძეების ფართობების ჯამი კი — $S$.</Step>
+<Step tex="V = \tfrac13\, S\, R">პირამიდების მოცულობების ჯამი.</Step>
+<Step tex="S = \frac{3V}{R} = \frac{3}{R} \cdot \tfrac43\,\pi R^3 = 4\pi R^2 \quad \blacksquare">წინა თვისებით $V = \tfrac43 \pi R^3$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>სიბრტყე, რომელიც სფეროს ერთ წერტილში ეხება, **მხები სიბრტყეა**; ის შეხების წერტილში გავლებული რადიუსის მართობია (კვეთის რადიუსი $\rho = 0$, როცა $d = R$).</Remark>
+
+<Remark kind="mistake">„სფერო“ ზედაპირია (ფართობი $4\pi R^2$), „ბირთვი“ — სხეული (მოცულობა $\tfrac43 \pi R^3$).</Remark>

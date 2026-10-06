@@ -1,0 +1,48 @@
+---
+title: ორწახნაგა კუთხე და გეგმილის ფართობი
+slug: space-angles
+subject: geometry
+section: stereo
+order: 52
+summary: კუთხე წრფესა და სიბრტყეს შორის, ორწახნაგა კუთხე და მისი წრფივი კუთხე, სიბრტყეების მართობულობა, მრავალკუთხედის ორთოგონალური გეგმილის ფართობი.
+tags: [ორწახნაგა კუთხე, წრფივი კუთხე, გეგმილი, მართობული სიბრტყეები]
+prerequisites: [perpendicularity, trigonometry]
+status: draft
+figure: dihedral
+---
+
+<Definition>**კუთხე წრფესა და სიბრტყეს შორის** კუთხეა წრფესა და მის გეგმილს შორის. **ორწახნაგა კუთხე** ფიგურაა, რომელიც ორი, ერთი წრფით (წიბოთი) შემოსაზღვრული ნახევარსიბრტყით შედგება. მისი **წრფივი კუთხე** წიბოს ერთ წერტილში, ორივე ნახევარსიბრტყეში წიბოს მართობულად გავლებული სხივებით შედგენილი კუთხეა. სიბრტყეები ურთიერთმართობია, თუ მათ შორის ორწახნაგა კუთხე მართია.</Definition>
+
+<Formulas>
+<Formula id="projection-formula" name="გეგმილის ფართობი" tex="S' = S\cos\varphi" live="S'" proof="projection-area" />
+<Formula id="perp-planes-formula" name="სიბრტყეების მართობულობის ნიშანი" tex="a \perp \alpha,\ a \subset \beta \;\Rightarrow\; \beta \perp \alpha" proof="planes-perpendicular" />
+</Formulas>
+
+<Properties>
+
+<Property id="linear-angle-equal" title="ორწახნაგა კუთხის ყველა წრფივი კუთხე ტოლია" why="წიბოს გასწვრივ პარალელური გადატანა ერთ წრფივ კუთხეს მეორეზე ადებს.">
+<Proof given="$\angle TKT'$ და $\angle M_2M_1M_3$ — წრფივი კუთხეები" prove="$\angle TKT' = \angle M_2M_1M_3$">
+<Step show="KT KT' K M1M2 M1M3 M1 M2 M3" hl="<TKT' <M2M1M3">ორივე კუთხის გვერდები წიბოს მართობია და შესაბამის ნახევარსიბრტყეებში ძევს.</Step>
+<Step hl="KT M1M2">$KT \parallel M_1M_2$: ერთ სიბრტყეში, ერთი წრფის მართობი წრფეები პარალელურია; ასევე $KT' \parallel M_1M_3$.</Step>
+<Step>პარალელური გადატანა $\overrightarrow{KM_1}$-ით $K$-ს $M_1$-ში, სხივებს კი შესაბამისად პარალელურ სხივებში გადაიყვანს — ერთი კუთხე მეორეზე დაედება. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="projection-area" title="მრავალკუთხედის ორთოგონალური გეგმილის ფართობი უდრის მის ფართობს, გამრავლებულს სიბრტყეებს შორის კუთხის კოსინუსზე" why="სიმაღლე, წიბოს მართობი, $\cos\varphi$-ზე მრავლდება, ფუძე კი არ იცვლება.">
+<Proof given="$\triangle E_1E_2T$, $E_1E_2$ — წიბოზე, $T'$ — $T$-ს გეგმილი" prove="$S' = S\cos\varphi$">
+<Step show="E1E2T E1T' E2T' TT' T' KT KT' K" hl="<TKT'">$TK \perp E_1E_2$ (სიმაღლე), ხოლო სამი მართობის შებრუნებული თეორემით $T'K \perp E_1E_2$. ამიტომ $\angle TKT' = \varphi$ — წრფივი კუთხეა.</Step>
+<Step hl="TKT'" tex="T'K = TK\cos\varphi">მართკუთხა $\triangle TT'K$.</Step>
+<Step hl="E1E2T'" tex="S' = \tfrac12\,E_1E_2 \cdot TK\cos\varphi = S\cos\varphi \quad \blacksquare">ფუძე იგივეა, სიმაღლე $\cos\varphi$-ზე მრავლდება. ნებისმიერი მრავალკუთხედი წიბოს პარალელური წრფეებით ასეთ სამკუთხედებად (და მათ სხვაობებად) იყოფა.</Step>
+</Proof>
+</Property>
+
+<Property id="planes-perpendicular" kind="criterion" title="თუ სიბრტყე მეორე სიბრტყის მართობ წრფეზე გადის, სიბრტყეები ურთიერთმართობია" why="ეს წრფე თვითონვე ქმნის წრფივ კუთხეს — მართს.">
+<Proof given="$KT \perp$ ქვედა სიბრტყე, $KT \subset$ ზედა სიბრტყე" prove="სიბრტყეები ურთიერთმართობია">
+<Step set={{ phi: 90 }} show="KT K" hl="KT">$KT$ ქვედა სიბრტყის მართობია, ზედა სიბრტყეში ძევს, $K$ კი წიბოზეა.</Step>
+<Step show="KT'" hl="<TKT'">ქვედა სიბრტყეში გავავლოთ $KT' \perp E_1E_2$. $KT$ მთელი ქვედა სიბრტყის მართობია, ამიტომ $KT \perp KT'$ — წრფივი კუთხე მართია. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">ორწახნაგა კუთხე წიბოს მართობ სხივებს შორის იზომება. ნებისმიერი ორი სხივი ორ წახნაგში (არა წიბოს მართობი) სხვა კუთხეს იძლევა.</Remark>

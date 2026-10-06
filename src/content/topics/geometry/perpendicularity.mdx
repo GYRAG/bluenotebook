@@ -1,0 +1,61 @@
+---
+title: წრფისა და სიბრტყის მართობულობა
+slug: perpendicularity
+subject: geometry
+section: stereo
+order: 51
+summary: წრფისა და სიბრტყის მართობულობის ნიშანი, სამი მართობის თეორემა და მისი შებრუნებული, მანძილი წერტილიდან სიბრტყემდე.
+tags: [მართობი, დახრილი, გეგმილი, სამი მართობის თეორემა]
+prerequisites: [lines-planes, perpendicular-bisector, congruence]
+status: draft
+figure: perp-plane
+---
+
+<Definition>წრფე სიბრტყის მართობია, თუ ის ამ სიბრტყის ყველა წრფის მართობია. თუ $AH \perp \alpha$, $H \in \alpha$, მაშინ $AH$ — **მართობია**, ნებისმიერი სხვა მონაკვეთი $AB$ ($B \in \alpha$) — **დახრილი**, $HB$ კი — დახრილის **გეგმილი**. მანძილი წერტილიდან სიბრტყემდე მართობის სიგრძეა.</Definition>
+
+<Formulas>
+<Formula id="criterion-formula" name="მართობულობის ნიშანი" tex="a \perp b,\ a \perp c,\ b, c \subset \alpha,\ b \cap c \ne \varnothing \;\Rightarrow\; a \perp \alpha" proof="line-plane-perpendicular" />
+<Formula id="three-perp-formula" name="სამი მართობის თეორემა" tex="c \subset \alpha,\ c \perp HB \iff c \perp AB" proof="three-perpendiculars" />
+<Formula id="slant-formula" name="მართობი და დახრილი" tex="AB^2 = AH^2 + HB^2" live="AB" proof="perpendicular-shortest-3d" />
+</Formulas>
+
+<Properties>
+
+<Property id="line-plane-perpendicular" kind="criterion" title="თუ წრფე სიბრტყის ორი გადამკვეთი წრფის მართობია, ის სიბრტყის მართობია" why="ტოლი სამკუთხედების ჯაჭვი სიბრტყის ნებისმიერ წრფეს შუამართობად აქცევს.">
+<Proof given="$AH \perp b$, $AH \perp c$, $b = HE$ და $c = HF$ — $\alpha$-ს წრფეები" prove="$AH \perp x$ $\alpha$-ს ნებისმიერი წრფისთვის $x$">
+<Step show="HE HF E F" hl="AH HE HF">$AH$ $\alpha$-ს ორი წრფის, $b = HE$-სა და $c = HF$-ის მართობია.</Step>
+<Step show="A'H A' AE A'E AF A'F" hl="AE=A'E AF=A'F">$AH$-ის გაგრძელებაზე გადავზომოთ $HA' = AH$. $b$ და $c$ $AA'$-ის შუამართობებია, ამიტომ $AE = A'E$, $AF = A'F$.</Step>
+<Step show="EF HX X" hl="AEF A'EF">ავიღოთ $\alpha$-ს ნებისმიერი წრფე $x$ $H$-ზე და წრფე $EF$, რომელიც მას $X$-ში კვეთს. $\triangle AEF = \triangle A'EF$ (გგგ).</Step>
+<Step show="AX A'X" hl="AEX A'EX">ამიტომ $\angle AEX = \angle A'EX$, და $\triangle AEX = \triangle A'EX$ (გკგ): $AX = A'X$.</Step>
+<Step hl="AXA' HX">$\triangle AXA'$ ტოლფერდაა, $XH$ მისი მედიანაა, ე.ი. სიმაღლეც: $AH \perp x$. $x$ ნებისმიერი იყო — $AH \perp \alpha$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="three-perpendiculars" title="სამი მართობის თეორემა: სიბრტყის წრფე, რომელიც დახრილის გეგმილის მართობია, თვითონ დახრილის მართობიცაა" why="ეს წრფე მართობის და გეგმილის სიბრტყის მართობი გამოდის.">
+<Proof given="$AH \perp \alpha$, $AB$ — დახრილი, $c = C_1C_2 \subset \alpha$, $B \in c$, $c \perp HB$" prove="$c \perp AB$">
+<Step show="AB HB B C1C2 C1 C2" hl="C1C2 HB">$c$ გადის $B$-ზე და გეგმილ $HB$-ის მართობია.</Step>
+<Step hl="C1C2 AH">$AH \perp \alpha$, ამიტომ $AH \perp c$.</Step>
+<Step hl="AHB">$c$ სიბრტყე $AHB$-ის ორი გადამკვეთი წრფის, $HB$-სა და $AH$-ის, მართობია — წინა ნიშნით $c \perp (AHB)$.</Step>
+<Step hl="C1C2 AB" tex="c \perp AB \quad \blacksquare">$AB$ ამ სიბრტყეში ძევს.</Step>
+</Proof>
+</Property>
+
+<Property id="three-perpendiculars-converse" kind="converse" title="შებრუნებული: სიბრტყის წრფე, რომელიც დახრილის მართობია, მისი გეგმილის მართობიცაა" why="იგივე მსჯელობა: წრფე $AB$-სა და $AH$-ის მართობია.">
+<Proof given="$AH \perp \alpha$, $c \subset \alpha$, $B \in c$, $c \perp AB$" prove="$c \perp HB$">
+<Step show="AB HB B C1C2 C1 C2" hl="C1C2 AB">$c \perp AB$ და $c \perp AH$ ($AH$ მთელი $\alpha$-ს მართობია).</Step>
+<Step hl="AHB" tex="c \perp (AHB) \;\Rightarrow\; c \perp HB \quad \blacksquare">$c$ სიბრტყე $AHB$-ის ორი გადამკვეთი წრფის მართობია, $HB$ კი ამ სიბრტყეში ძევს.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-shortest-3d" title="წერტილიდან სიბრტყემდე მართობი ნებისმიერ დახრილზე მოკლეა" why="დახრილი მართკუთხა სამკუთხედის ჰიპოტენუზაა.">
+<Proof given="$AH \perp \alpha$, $AB$ — დახრილი" prove="$AB > AH$">
+<Step show="AB HB B" hl="AHB" tex="AB^2 = AH^2 + HB^2">$AH \perp HB$ — $\triangle AHB$ მართკუთხაა.</Step>
+<Step tex="AB > AH \quad \blacksquare">$HB > 0$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>დახრილებიდან, რომლებიც ერთი წერტილიდანაა გავლებული, უფრო გრძელია ის, რომლის გეგმილიც უფრო გრძელია; ტოლ დახრილებს ტოლი გეგმილები აქვს.</Remark>
+
+<Remark kind="mistake">წრფე სიბრტყის მართობი რომ იყოს, ერთი წრფის მართობობა არ კმარა — საჭიროა ორი გადამკვეთი წრფე.</Remark>

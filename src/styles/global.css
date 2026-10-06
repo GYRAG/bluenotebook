@@ -247,6 +247,7 @@ geo-figure { display: block; position: relative; }
 .fig .arc-hl { stroke-width: 2.8; }
 .fig .dim, .fig .dim-ext { stroke: var(--ink); stroke-width: 1; }
 .fig .axis { stroke: var(--ink-2); stroke-width: 1.25; }
+.fig .hid { stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 6 5; stroke-linecap: butt; opacity: .8; } /* hidden edges of solids */
 .fig .axis-t { font: italic 17px var(--font-math); fill: var(--ink-2); }
 .fig .tick { font: 12px var(--font-body); fill: var(--ink-2); }
 .fig .arw { fill: var(--ink); }

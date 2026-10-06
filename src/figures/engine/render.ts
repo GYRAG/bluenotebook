@@ -169,6 +169,7 @@ export function renderScene(s: Scene): string {
         case 'eqseg': eq++; for (const sg of r.segs) { if (c === 'hl') lines += line(P(sg[0]), P(sg[1]), 'hl'); marks += ticks(sg, eq, markC); } break;
         case 'eqang': eqa++; for (const a of r.angs) marks += arc(angleOf(a), 22, eqa, c === 'hl' ? 'arc arc-hl' : 'arc'); break;
         case 'par': par++; for (const sg of r.segs) marks += arrows(sg, par, markC); break;
+        case 'hid': r.s.forEach(p => labelled.add(p)); lines += line(P(r.s[0]), P(r.s[1]), c === 'base' ? 'hid' : c); break;
         case 'vec': { // an arrow: the shaft stops short so the head ends exactly at the point
           const A = P(r.s[0]), B = P(r.s[1]);
           r.s.forEach(p => labelled.add(p));

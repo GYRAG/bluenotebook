@@ -1,0 +1,61 @@
+---
+title: პრიზმა და პარალელეპიპედი
+slug: prism
+subject: geometry
+section: solids
+order: 54
+summary: პრიზმის გვერდითი ზედაპირი და მოცულობა, პარალელეპიპედის დიაგონალები, მართკუთხა პარალელეპიპედის დიაგონალი.
+tags: [პრიზმა, პარალელეპიპედი, მოცულობა, გვერდითი ზედაპირი, დიაგონალი]
+prerequisites: [lines-planes, perpendicularity, parallelogram]
+status: draft
+figure: box
+---
+
+<Definition>**პრიზმა** მრავალწახნაგაა, რომლის ორი წახნაგი (ფუძეები) პარალელურ სიბრტყეებში მდებარე ტოლი მრავალკუთხედებია, დანარჩენები (გვერდითი წახნაგები) კი პარალელოგრამებია. პრიზმა მართია, თუ გვერდითი წიბოები ფუძის მართობია. **პარალელეპიპედი** პრიზმაა, რომლის ფუძე პარალელოგრამია; **მართკუთხა პარალელეპიპედის** ყველა წახნაგი მართკუთხედია.</Definition>
+
+<Formulas>
+<Formula id="diagonal-formula" name="მართკუთხა პარალელეპიპედის დიაგონალი" tex="d^2 = a^2 + b^2 + c^2" live="d" proof="box-diagonal" />
+<Formula id="lateral-formula" name="მართი პრიზმის გვერდითი ზედაპირი" tex="S_{\text{გვ}} = P\,h" proof="prism-lateral" />
+<Formula id="full-formula" name="სრული ზედაპირი" tex="S_{\text{სრ}} = S_{\text{გვ}} + 2S" />
+<Formula id="volume-formula" name="მოცულობა" tex="V = S\,h, \qquad V = abc" live="V" proof="prism-volume" />
+</Formulas>
+
+<Properties>
+
+<Property id="parallelepiped-diagonals" title="პარალელეპიპედის ოთხივე დიაგონალი ერთ წერტილში იკვეთება და ამ წერტილით შუაზე იყოფა" why="ყოველი ორი დიაგონალი ერთი პარალელოგრამის დიაგონალებია.">
+<Proof given="$ABCDA_1B_1C_1D_1$ — პარალელეპიპედი" prove="$AC_1, BD_1, CA_1, DB_1$ იკვეთება $O$-ში და შუაზე იყოფა">
+<Step show="AC1 CA1 AC A1C1" hl="ACC1A1">$AA_1$ და $CC_1$ ტოლი და პარალელურია (ორივე $BB_1$-ისა), ამიტომ $ACC_1A_1$ პარალელოგრამია.</Step>
+<Step hl="AC1 CA1">პარალელოგრამის დიაგონალები $AC_1$ და $CA_1$ ერთმანეთს შუაზე ყოფს.</Step>
+<Step show="BD1 AD1 BC1" hl="ABC1D1">$AB$ და $D_1C_1$ ტოლი და პარალელურია, ამიტომ $ABC_1D_1$-იც პარალელოგრამია: $AC_1$ და $BD_1$ შუაწერტილი საერთოა.</Step>
+<Step show="DB1 O" hl="AC1 BD1 CA1 DB1">ასევე $DB_1$-ისთვის. ოთხივე დიაგონალს საერთო შუაწერტილი $O$ აქვს. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="box-diagonal" title="მართკუთხა პარალელეპიპედის დიაგონალის კვადრატი სამი განზომილების კვადრატების ჯამია" why="პითაგორას თეორემა ორჯერ: ფუძეში და დიაგონალურ კვეთაში.">
+<Proof given="მართკუთხა პარალელეპიპედი, $AB = a$, $BC = b$, $CC_1 = c$" prove="$AC_1^2 = a^2 + b^2 + c^2$">
+<Step set={{ tilt: 0 }} show="AC" hl="ABC" tex="AC^2 = a^2 + b^2">მართკუთხა $\triangle ABC$ ფუძეში.</Step>
+<Step show="AC1" hl="ACC1" tex="AC_1^2 = AC^2 + CC_1^2">$CC_1$ ფუძის მართობია, ამიტომ $CC_1 \perp AC$ — $\triangle ACC_1$ მართკუთხაა.</Step>
+<Step tex="d^2 = a^2 + b^2 + c^2 \quad \blacksquare">ჩავსვათ.</Step>
+</Proof>
+</Property>
+
+<Property id="prism-lateral" title="მართი პრიზმის გვერდითი ზედაპირი ფუძის პერიმეტრისა და სიმაღლის ნამრავლია" why="გვერდითი წახნაგები ერთი და იმავე სიმაღლის მართკუთხედებია.">
+<Proof given="მართი პრიზმა, ფუძის პერიმეტრი $P$, სიმაღლე $h$" prove="$S_{\text{გვ}} = P\,h$">
+<Step set={{ tilt: 0 }} hl="ABB1A1 BCC1B1 CDD1C1 DAA1D1">მართ პრიზმაში გვერდითი წახნაგები მართკუთხედებია, ყველას სიმაღლე $h$-ია.</Step>
+<Step tex="S_{\text{გვ}} = AB\cdot h + BC\cdot h + CD\cdot h + DA\cdot h = P\,h \quad \blacksquare">მართკუთხედების ფართობების ჯამი.</Step>
+</Proof>
+</Property>
+
+<Property id="prism-volume" title="პრიზმის მოცულობა ფუძის ფართობისა და სიმაღლის ნამრავლია" why="დახრილ პრიზმას ყოველ სიმაღლეზე იგივე კვეთა აქვს, რაც მართს.">
+<Proof given="პრიზმა, ფუძის ფართობი $S$, სიმაღლე $h$" prove="$V = S\,h$">
+<Step set={{ tilt: 0 }} tex="V = abc = S\,h">მართკუთხა პარალელეპიპედის მოცულობა $abc$-ა — ის $a \cdot b \cdot c$ ერთეულოვან კუბს იტევს.</Step>
+<Step set={{ tilt: 25 }} show="A1H H" hl="A1H">დახრილ პრიზმაში სიმაღლე $h = A_1H$ — მანძილი ფუძეებს შორის.</Step>
+<Step tex="V = S\,h \quad \blacksquare">ფუძის პარალელური ყოველი კვეთა ფუძის ტოლია, ისევე როგორც იმავე ფუძისა და სიმაღლის მართ პრიზმაში. კავალიერის პრინციპით სხეულებს, რომელთა კვეთები ყოველ სიმაღლეზე ტოლდიდია, ტოლი მოცულობა აქვს.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">კუბი მართკუთხა პარალელეპიპედია ტოლი წიბოებით: $d = a\sqrt3$, $V = a^3$, $S_{\text{სრ}} = 6a^2$.</Remark>
+
+<Remark kind="mistake">დახრილი პრიზმის სიმაღლე გვერდითი წიბო არ არის — სიმაღლე ფუძეებს შორის მართობია, წიბო კი დახრილი.</Remark>

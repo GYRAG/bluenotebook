@@ -133,3 +133,17 @@ test('shapes from typed sizes, with their measurements', async ({ page }) => {
   await expect(fig.locator('.sketch .sk-val')).toHaveText(['r = 3.0', '1.5', '1.0', '1.0']);
   await page.screenshot({ path: 'test-results/sheet-sizes.png' });
 });
+
+test('a solid turns when the paper is dragged; the reset button turns it back', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/geometry/prism/');
+  const fig = page.locator('geo-figure:not([data-alt])'), box = (await fig.locator('svg.fig').boundingBox())!;
+  const hidden = () => fig.locator('.layer line.hid').count();
+  const svg0 = await fig.locator('.layer').innerHTML();
+  await page.mouse.move(box.x + 60, box.y + box.height - 60); await page.mouse.down();
+  await page.mouse.move(box.x + 260, box.y + box.height - 20, { steps: 8 }); await page.mouse.up();
+  await expect.poll(() => fig.locator('.layer').innerHTML()).not.toBe(svg0);
+  expect(await hidden()).toBeGreaterThan(0); // some edges are always behind
+  await fig.getByRole('button', { name: 'ხედის დაბრუნება' }).click();
+  await expect.poll(() => fig.locator('.layer').innerHTML()).toBe(svg0);
+});

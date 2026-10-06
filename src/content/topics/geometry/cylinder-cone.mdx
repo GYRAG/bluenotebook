@@ -1,0 +1,75 @@
+---
+title: ცილინდრი და კონუსი
+slug: cylinder-cone
+subject: geometry
+section: solids
+order: 56
+summary: ცილინდრისა და კონუსის გვერდითი ზედაპირი და მოცულობა, ღერძული კვეთა, კონუსის მსახველი.
+tags: [ცილინდრი, კონუსი, მსახველი, ღერძული კვეთა, ბრუნვითი სხეული]
+prerequisites: [prism, pyramid, circle-length]
+status: draft
+figure: cylinder
+figures: [cone]
+---
+
+<Definition>**ცილინდრი** მართკუთხედის თავისი გვერდის გარშემო ბრუნვით მიიღება, **კონუსი** — მართკუთხა სამკუთხედის კათეტის გარშემო ბრუნვით. ცილინდრის ფუძეები ტოლი წრეებია, კონუსის ფუძე — წრე; კონუსის წვეროს ფუძის წრეწირის წერტილებთან შემაერთებელი მონაკვეთი **მსახველია** $l$. ღერძზე გამავალი სიბრტყით კვეთა ღერძული კვეთაა.</Definition>
+
+<Formulas>
+<Formula id="cyl-lateral-formula" name="ცილინდრის გვერდითი ზედაპირი" tex="S_{\text{გვ}} = 2\pi r h" live="S₁" proof="cylinder-lateral" />
+<Formula id="cyl-volume-formula" name="ცილინდრის მოცულობა" tex="V = \pi r^2 h" live="V" proof="cylinder-volume" />
+<Formula id="generator-formula" name="კონუსის მსახველი" tex="l^2 = r^2 + h^2" proof="cone-generator" />
+<Formula id="cone-lateral-formula" name="კონუსის გვერდითი ზედაპირი" tex="S_{\text{გვ}} = \pi r l" proof="cone-lateral" />
+<Formula id="cone-volume-formula" name="კონუსის მოცულობა" tex="V = \tfrac13\,\pi r^2 h" proof="cone-volume" />
+</Formulas>
+
+<Properties title="ცილინდრი">
+
+<Property id="axial-section" title="ცილინდრის ღერძული კვეთა მართკუთხედია გვერდებით $2r$ და $h$" why="მსახველები ღერძის პარალელურია და ფუძის მართობია.">
+<Proof given="ცილინდრი, $AB$ — ქვედა ფუძის დიამეტრი" prove="$ABB_1A_1$ — მართკუთხედი, $AB = 2r$, $AA_1 = h$">
+<Step show="AB A1B1 AA1 BB1" hl="ABB1A1">ღერძზე გამავალი სიბრტყე ფუძეებს დიამეტრებზე $AB$ და $A_1B_1$ კვეთს, გვერდით ზედაპირს — მსახველებზე $AA_1$ და $BB_1$.</Step>
+<Step hl="AA1 BB1" tex="AB = 2r, \qquad AA_1 = h \quad \blacksquare">მსახველები ფუძეების მართობია — კვეთა მართკუთხედია.</Step>
+</Proof>
+</Property>
+
+<Property id="cylinder-lateral" title="ცილინდრის გვერდითი ზედაპირი $2\pi rh$-ია" why="გაშლისას გვერდითი ზედაპირი მართკუთხედია გვერდებით $2\pi r$ და $h$.">
+<Proof given="ცილინდრი, რადიუსი $r$, სიმაღლე $h$" prove="$S_{\text{გვ}} = 2\pi r h$">
+<Step show="O1B BB1" hl="BB1">გავჭრათ გვერდითი ზედაპირი მსახველ $BB_1$-ზე და გავშალოთ სიბრტყეზე.</Step>
+<Step tex="S_{\text{გვ}} = 2\pi r \cdot h \quad \blacksquare">მიიღება მართკუთხედი: ერთი გვერდი ფუძის წრეწირის სიგრძეა $2\pi r$, მეორე — სიმაღლე $h$.</Step>
+</Proof>
+</Property>
+
+<Property id="cylinder-volume" title="ცილინდრის მოცულობა ფუძის ფართობისა და სიმაღლის ნამრავლია: $V = \pi r^2 h$" why="ჩახაზული წესიერი პრიზმები ზღვარში ცილინდრს იძლევა.">
+<Proof given="ცილინდრი, რადიუსი $r$, სიმაღლე $h$" prove="$V = \pi r^2 h$">
+<Step>ცილინდრში ჩავხაზოთ წესიერი $n$-კუთხა პრიზმა; მისი მოცულობა $S_n h$-ია.</Step>
+<Step tex="V = \pi r^2 h \quad \blacksquare">როცა $n \to \infty$, $S_n \to \pi r^2$ — პრიზმა ცილინდრს ავსებს.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="კონუსი">
+
+<Property id="cone-generator" title="კონუსის მსახველი $l = \sqrt{r^2 + h^2}$" why="სიმაღლე, რადიუსი და მსახველი მართკუთხა სამკუთხედს ქმნის.">
+<Proof figure="cone" given="კონუსი, $SO = h$, $OA = r$" prove="$SA^2 = r^2 + h^2$">
+<Step show="SA OA SO" hl="SOA" tex="SA^2 = SO^2 + OA^2 = h^2 + r^2 \quad \blacksquare">$SO \perp$ ფუძე, ამიტომ $\triangle SOA$ მართკუთხაა.</Step>
+</Proof>
+</Property>
+
+<Property id="cone-lateral" title="კონუსის გვერდითი ზედაპირი $\pi rl$-ია" why="გაშლისას გვერდითი ზედაპირი $l$ რადიუსის სექტორია, რკალით $2\pi r$.">
+<Proof figure="cone" given="კონუსი, რადიუსი $r$, მსახველი $l$" prove="$S_{\text{გვ}} = \pi r l$">
+<Step show="SA" hl="SA">გავჭრათ გვერდითი ზედაპირი მსახველ $SA$-ზე და გავშალოთ.</Step>
+<Step>მიიღება სექტორი რადიუსით $l$, რომლის რკალის სიგრძე ფუძის წრეწირის სიგრძეა $2\pi r$.</Step>
+<Step tex="S_{\text{გვ}} = \tfrac12 \cdot 2\pi r \cdot l = \pi r l \quad \blacksquare">სექტორის ფართობი რკალისა და რადიუსის ნამრავლის ნახევარია.</Step>
+</Proof>
+</Property>
+
+<Property id="cone-volume" title="კონუსის მოცულობა $\tfrac13 \pi r^2 h$-ია" why="ჩახაზული წესიერი პირამიდები ზღვარში კონუსს იძლევა.">
+<Proof figure="cone" given="კონუსი, რადიუსი $r$, სიმაღლე $h$" prove="$V = \tfrac13 \pi r^2 h$">
+<Step>კონუსში ჩავხაზოთ წესიერი $n$-კუთხა პირამიდა; მისი მოცულობა $\tfrac13 S_n h$-ია.</Step>
+<Step tex="V = \tfrac13\,\pi r^2 h \quad \blacksquare">როცა $n \to \infty$, $S_n \to \pi r^2$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">კონუსის გვერდითი ზედაპირის ფორმულაში მსახველია ($\pi r l$), მოცულობის ფორმულაში — სიმაღლე ($\tfrac13 \pi r^2 h$). მათი აღრევა ყველაზე ხშირი შეცდომაა.</Remark>

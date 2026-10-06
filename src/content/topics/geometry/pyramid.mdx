@@ -1,0 +1,58 @@
+---
+title: პირამიდა
+slug: pyramid
+subject: geometry
+section: solids
+order: 55
+summary: პირამიდის მოცულობა, წესიერი პირამიდის აპოთემა და გვერდითი ზედაპირი, ტოლი გვერდითი წიბოების მქონე პირამიდა.
+tags: [პირამიდა, წესიერი პირამიდა, აპოთემა, მოცულობა]
+prerequisites: [prism, perpendicularity, regular-polygon]
+status: draft
+figure: pyramid
+---
+
+<Definition>**პირამიდა** მრავალწახნაგაა, რომლის ერთი წახნაგი (ფუძე) მრავალკუთხედია, დანარჩენები კი საერთო წვეროს მქონე სამკუთხედებია. პირამიდა **წესიერია**, თუ ფუძე წესიერი მრავალკუთხედია და სიმაღლის ფუძე მისი ცენტრია. წესიერი პირამიდის გვერდითი წახნაგის სიმაღლე **აპოთემაა** $l$.</Definition>
+
+<Formulas>
+<Formula id="volume-formula" name="მოცულობა" tex="V = \tfrac13\, S\,h" live="V" proof="pyramid-volume" />
+<Formula id="lateral-formula" name="წესიერი პირამიდის გვერდითი ზედაპირი" tex="S_{\text{გვ}} = \tfrac12\, P\, l" proof="regular-lateral-area" />
+<Formula id="apothem-formula" name="აპოთემა და გვერდითი წიბო" tex="l^2 = h^2 + r^2, \qquad SA^2 = h^2 + R^2" live="l" proof="apothem-relations" />
+<Formula id="frustum-formula" name="წაკვეთილი პირამიდის მოცულობა" tex="V = \tfrac{h}{3}\left(S_1 + S_2 + \sqrt{S_1S_2}\right)" />
+</Formulas>
+
+<Properties>
+
+<Property id="equal-edges-circumcenter" title="თუ პირამიდის ყველა გვერდითი წიბო ტოლია, სიმაღლის ფუძე ფუძის გარშემო შემოხაზული წრეწირის ცენტრია" why="სიმაღლე და წიბოები ტოლ მართკუთხა სამკუთხედებს ქმნის.">
+<Proof given="$SA = SB = SC = SD$, $SO$ — სიმაღლე" prove="$OA = OB = OC = OD$">
+<Step show="SO O" hl="SO">$SO \perp$ ფუძე.</Step>
+<Step show="OA OB OC OD" hl="SOA SOB SOC SOD">$\triangle SOA$, $\triangle SOB$, $\triangle SOC$, $\triangle SOD$ მართკუთხაა, საერთო კათეტით $SO$ და ტოლი ჰიპოტენუზებით — ჰიპოტენუზითა და კათეტით ტოლია.</Step>
+<Step tex="OA = OB = OC = OD \quad \blacksquare">$O$ ფუძის ყველა წვეროდან თანაბრადაა დაშორებული.</Step>
+</Proof>
+</Property>
+
+<Property id="apothem-relations" title="წესიერ პირამიდაში $l^2 = h^2 + r^2$ და $SA^2 = h^2 + R^2$" why="სიმაღლე, აპოთემა და გვერდითი წიბო მართკუთხა სამკუთხედებს ქმნის.">
+<Proof given="წესიერი პირამიდა, $SO = h$, $SM = l$" prove="$l^2 = h^2 + r^2$, $SA^2 = h^2 + R^2$">
+<Step show="SO SM OM O M <SOM" hl="SOM" tex="l^2 = h^2 + r^2">მართკუთხა $\triangle SOM$: $OM = r$ — ფუძეში ჩახაზული წრეწირის რადიუსი ($\tfrac a2$ კვადრატისთვის).</Step>
+<Step show="SO OA" hl="SOA" tex="SA^2 = h^2 + R^2 \quad \blacksquare">მართკუთხა $\triangle SOA$: $OA = R$ — შემოხაზული წრეწირის რადიუსი ($\tfrac{a\sqrt2}{2}$).</Step>
+</Proof>
+</Property>
+
+<Property id="regular-lateral-area" title="წესიერი პირამიდის გვერდითი ზედაპირი ფუძის ნახევარპერიმეტრისა და აპოთემის ნამრავლია" why="გვერდითი წახნაგები ტოლი ტოლფერდა სამკუთხედებია სიმაღლით $l$.">
+<Proof given="წესიერი პირამიდა, ფუძის პერიმეტრი $P$, აპოთემა $l$" prove="$S_{\text{გვ}} = \tfrac12 P l$">
+<Step show="SM M" hl="SAB SBC SCD SDA">გვერდითი წიბოები ტოლია, ფუძის გვერდები — ასევე: წახნაგები ტოლი ტოლფერდა სამკუთხედებია, ყველას სიმაღლე $l$-ია.</Step>
+<Step tex="S_{\text{გვ}} = 4 \cdot \tfrac12\, a\,l = \tfrac12\, P\,l \quad \blacksquare">სამკუთხედების ფართობების ჯამი.</Step>
+</Proof>
+</Property>
+
+<Property id="pyramid-volume" title="პირამიდის მოცულობა ფუძის ფართობისა და სიმაღლის ნამრავლის მესამედია" why="სამკუთხა პრიზმა სამ ტოლი მოცულობის პირამიდად იყოფა.">
+<Proof given="პირამიდა, ფუძის ფართობი $S$, სიმაღლე $h$" prove="$V = \tfrac13 S h$">
+<Step>ორ პირამიდას ტოლდიდი ფუძეებითა და ტოლი სიმაღლეებით ტოლი მოცულობა აქვს: ყოველ სიმაღლეზე მათი კვეთები ტოლდიდია (კავალიერის პრინციპი).</Step>
+<Step>სამკუთხა პრიზმა $ABCA_1B_1C_1$ სამ პირამიდად იყოფა: $A_1ABC$, $A_1BB_1C_1$, $A_1BCC_1$. პირველ ორს ტოლი ფუძეები ($ABC$ და $A_1B_1C_1$) და ტოლი სიმაღლეები აქვს; ბოლო ორს — საერთო წვერო $A_1$ და ფუძეები, პარალელოგრამ $BCC_1B_1$-ის ნახევრები.</Step>
+<Step tex="V = \tfrac13\, S\,h">სამივე ტოლია, პრიზმის მოცულობა კი $Sh$-ია.</Step>
+<Step show="AC" hl="SABC SACD" tex="V_{SABCD} = \tfrac13\, S\,h \quad \blacksquare">ნებისმიერი პირამიდა ფუძის დიაგონალებით სამკუთხა პირამიდებად იყოფა, რომელთაც საერთო სიმაღლე აქვს.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">აპოთემა (გვერდითი წახნაგის სიმაღლე, $SM$) და პირამიდის სიმაღლე ($SO$) სხვადასხვა მონაკვეთია: $l > h$.</Remark>

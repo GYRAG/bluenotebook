@@ -13,6 +13,7 @@ export function randomParams(spec: FigureSpec, r: () => number): Params {
  *  An even grid over the sliders (extremes of a shape are often mid-range, e.g. a rhombus is
  *  tallest at 90°) plus random samples for figures with many parameters. */
 export function boardBounds(spec: FigureSpec): [number, number, number, number] {
+  if (spec.board) return spec.board;
   const keys = Object.keys(spec.params), r = rng(7), samples: Params[] = [];
   const per = Math.max(2, Math.floor(Math.pow(4000, 1 / keys.length)));
   if (Math.pow(per, keys.length) <= 20000) {

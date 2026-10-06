@@ -125,11 +125,23 @@ export class GeoFigure extends HTMLElement {
     this.centre = [u[0] - (p[0] - this.view.W / 2) / this.view.k, u[1] + (p[1] - this.view.H / 2) / this.view.k];
     this.moved();
   }
-  resetView() { this.zoom = 1; this.centre = null; this.moved(); }
+  /** Solids: dragging the paper turns the view (yaw left–right, pitch up–down). */
+  private orbitBy([dx, dy]: V) {
+    const yaw = this.params.yaw!, pitch = this.params.pitch!;
+    this.params = snap(this.spec, { ...this.params, yaw: ((yaw - dx * 0.5 + 540) % 360) - 180, pitch: pitch + dy * 0.4 });
+    this.persist();
+    this.moved();
+  }
+  private turned() { return !!this.spec.orbit && (this.params.yaw !== this.spec.params.yaw!.value || this.params.pitch !== this.spec.params.pitch!.value); }
+  resetView() {
+    this.zoom = 1; this.centre = null;
+    if (this.spec.orbit) { this.params = { ...this.params, yaw: this.spec.params.yaw!.value, pitch: this.spec.params.pitch!.value }; this.persist(); }
+    this.moved();
+  }
   private moved() {
     this.layout(); this.schedule();
     const fit = this.querySelector<HTMLElement>('.sk-fit');
-    if (fit) fit.hidden = this.zoom === 1 && !this.centre;
+    if (fit) fit.hidden = this.zoom === 1 && !this.centre && !this.turned();
   }
 
   private schedule() {
@@ -272,7 +284,7 @@ export class GeoFigure extends HTMLElement {
         if (!this.pan.moved && Math.hypot(d[0], d[1]) < 4) return; // still a tap
         if (!this.pan.moved) { this.pan.moved = true; this.setHover(null); this.classList.add('panning'); this.touched(); }
         this.pan.last = p;
-        return this.panBy(d);
+        return this.spec.orbit && !this.sketch.on ? this.orbitBy(d) : this.panBy(d); // a solid turns; the hand tool still pans
       }
       if (e.pointerType === 'mouse' && !this.sketch.on) this.setHover(this.nearestSide(e));
     });

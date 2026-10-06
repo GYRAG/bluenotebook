@@ -56,6 +56,7 @@ describe('reference grammar', () => {
     expect(parseRef('<ABC')).toEqual({ k: 'angle', ang: { a: 'A', v: 'B', b: 'C' } });
     expect(parseRef('arc:O1AB')).toEqual({ k: 'arc', c: 'O1', a: 'A', b: 'B' });
     expect(parseRef('vec:OA')).toEqual({ k: 'vec', s: ['O', 'A'] });
+    expect(parseRef('hid:A1B1')).toEqual({ k: 'hid', s: ['A1', 'B1'] });
     expect(() => parseRef('arc:OA')).toThrow();
     expect(parseRef('<A')).toEqual({ k: 'angle', ang: { v: 'A' } });
     expect(parseRef('AB=CD=EF')).toEqual({ k: 'eqseg', segs: [['A', 'B'], ['C', 'D'], ['E', 'F']] });
