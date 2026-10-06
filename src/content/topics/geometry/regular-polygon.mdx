@@ -1,0 +1,68 @@
+---
+title: წესიერი მრავალკუთხედი
+slug: regular-polygon
+subject: geometry
+section: polygons
+order: 30
+summary: წესიერი მრავალკუთხედის კუთხეები, ჩახაზული და შემოხაზული წრეწირები, გვერდი, აპოთემა და ფართობი.
+tags: [წესიერი მრავალკუთხედი, ექვსკუთხედი, აპოთემა, ჩახაზული წრეწირი, შემოხაზული წრეწირი]
+prerequisites: [polygon, inscribed-angle, trigonometry]
+status: draft
+figure: regular-polygon
+parent: polygon
+---
+
+<Definition>**წესიერი მრავალკუთხედი** ამოზნექილი მრავალკუთხედია, რომლის ყველა გვერდი და ყველა კუთხე ტოლია. ცენტრიდან გვერდამდე მანძილი — ჩახაზული წრეწირის რადიუსი $r$ — მისი **აპოთემაა**.</Definition>
+
+<Formulas>
+<Formula id="angle-formula" name="შიგა და ცენტრალური კუთხე" tex="\alpha_n = \frac{(n - 2)\cdot 180^\circ}{n}, \qquad \angle AOB = \frac{360^\circ}{n}" live="∠AOB" proof="regular-angles" />
+<Formula id="side-formula" name="გვერდი და აპოთემა" tex="a_n = 2R\sin\frac{180^\circ}{n}, \qquad r = R\cos\frac{180^\circ}{n}" live="a" proof="regular-side" />
+<Formula id="area-formula" name="ფართობი" tex="S = \tfrac12\, P r" live="S" proof="regular-area" />
+<Formula id="special-formula" name="სამკუთხედი, კვადრატი, ექვსკუთხედი" tex="a_3 = R\sqrt3, \qquad a_4 = R\sqrt2, \qquad a_6 = R" proof="special-sides" />
+</Formulas>
+
+<Properties>
+
+<Property id="regular-circles" title="წესიერ მრავალკუთხედს აქვს შემოხაზული და ჩახაზული წრეწირები საერთო ცენტრით" why="ორი მეზობელი კუთხის ბისექტრისები ტოლფერდა სამკუთხედს ქმნის, ის კი ყველა გვერდზე მეორდება.">
+<Proof given="წესიერი მრავალკუთხედი" prove="ცენტრი $O$ ყველა წვეროდან და ყველა გვერდიდან თანაბრადაა დაშორებული">
+<Step show="OA OB O" hl="OAB">$A$ და $B$ კუთხეების ბისექტრისები $O$-ში იკვეთება. $\angle OAB = \angle OBA$ (ტოლი კუთხეების ნახევრები), ამიტომ $OA = OB$.</Step>
+<Step show="OC" hl="OAB OBC" tex="\triangle OAB = \triangle OBC">$AB = BC$, $OB$ საერთოა, $\angle OBA = \angle OBC$ — გკგ. ამიტომ $OC = OA$ და $OC$ ბისექტრისაა.</Step>
+<Step show="(OA)" hl="(OA)">ასე წვეროდან წვეროზე: $O$ ყველა წვეროდან თანაბრადაა დაშორებული — შემოხაზული წრეწირის ცენტრია.</Step>
+<Step show="OM M (OM)" hl="(OM)">ტოლი სამკუთხედების ფუძეზე დაშვებული სიმაღლეები ტოლია: $O$ ყველა გვერდიდანაც თანაბრადაა დაშორებული — ჩახაზული წრეწირის ცენტრიცაა. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="regular-angles" title="წესიერი $n$-კუთხედის კუთხე $\tfrac{(n-2)\cdot180^\circ}{n}$-ია, ცენტრალური კუთხე — $\tfrac{360^\circ}{n}$" why="ჯამი $n$ ტოლ ნაწილად იყოფა.">
+<Proof given="წესიერი $n$-კუთხედი" prove="$\alpha_n = \tfrac{(n - 2)\cdot180^\circ}{n}$">
+<Step hl="<A" tex="\alpha_n = \frac{(n - 2)\cdot 180^\circ}{n}">ამოზნექილი $n$-კუთხედის კუთხეების ჯამი $(n - 2)\cdot180^\circ$-ია, ყველა კუთხე ტოლია.</Step>
+<Step show="OA OB" hl="<AOB" tex="\angle AOB = \frac{360^\circ}{n} \quad \blacksquare">$O$-სთან $n$ ტოლი სამკუთხედის კუთხეები სრულ კუთხეს ადგენს.</Step>
+</Proof>
+</Property>
+
+<Property id="regular-side" title="წესიერი $n$-კუთხედის გვერდი $2R\sin\tfrac{180^\circ}{n}$-ია, აპოთემა — $R\cos\tfrac{180^\circ}{n}$" why="აპოთემა ტოლფერდა სამკუთხედს $AOB$ ორ მართკუთხა სამკუთხედად ყოფს.">
+<Proof given="$OA = R$, $OM \perp AB$" prove="$a = 2R\sin\tfrac{180^\circ}{n}$, $r = R\cos\tfrac{180^\circ}{n}$">
+<Step show="OA OB OM M <OMB" hl="OMA" tex="\angle AOM = \frac{180^\circ}{n}">$OM$ ტოლფერდა $\triangle AOB$-ის სიმაღლე და ბისექტრისაა.</Step>
+<Step tex="\begin{gathered} a = 2\,AM = 2R\sin\frac{180^\circ}{n} \\ r = OM = R\cos\frac{180^\circ}{n} \end{gathered} \quad \blacksquare">მართკუთხა $\triangle OMA$-ში.</Step>
+</Proof>
+</Property>
+
+<Property id="regular-area" title="წესიერი მრავალკუთხედის ფართობი ნახევარპერიმეტრისა და აპოთემის ნამრავლია: $S = \tfrac12 Pr$" why="ცენტრიდან $n$ ტოლი სამკუთხედი, ყველას სიმაღლე $r$.">
+<Proof given="წესიერი $n$-კუთხედი, გვერდი $a$, აპოთემა $r$" prove="$S = \tfrac12\, P r$">
+<Step show="OA OB OM M" hl="OAB" tex="S_{OAB} = \tfrac12\, a r">ფუძე $a$, სიმაღლე $r$.</Step>
+<Step tex="S = n \cdot \tfrac12\, a r = \tfrac12\, P r \quad \blacksquare">$n$ ასეთი სამკუთხედი, $P = na$.</Step>
+</Proof>
+</Property>
+
+<Property id="special-sides" title="წესიერი ექვსკუთხედის გვერდი შემოხაზული წრეწირის რადიუსის ტოლია; კვადრატისა — $R\sqrt2$, სამკუთხედისა — $R\sqrt3$" why="წინა ფორმულა $n = 6, 4, 3$-ისთვის.">
+<Proof given="$n = 6, 4, 3$" prove="$a_6 = R,\ a_4 = R\sqrt2,\ a_3 = R\sqrt3$">
+<Step set={{ n: 6 }} show="OA OB" hl="OAB" tex="a_6 = 2R\sin 30^\circ = R">$\angle AOB = 60^\circ$: $\triangle AOB$ ტოლგვერდაა.</Step>
+<Step set={{ n: 4 }} tex="a_4 = 2R\sin 45^\circ = R\sqrt2">კვადრატი.</Step>
+<Step set={{ n: 3 }} tex="a_3 = 2R\sin 60^\circ = R\sqrt3 \quad \blacksquare">ტოლგვერდა სამკუთხედი.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>წესიერ ექვსკუთხედს მთავარი დიაგონალები ექვს ტოლგვერდა სამკუთხედად ყოფს, ამიტომ $S_6 = 6 \cdot \tfrac{a^2\sqrt3}{4} = \tfrac{3a^2\sqrt3}{2}$.</Remark>
+
+<Remark kind="mistake">„ყველა გვერდი ტოლია“ წესიერობისთვის არ კმარა: რომბს ყველა გვერდი ტოლი აქვს, მაგრამ (თუ კვადრატი არ არის) წესიერი არ არის — კუთხეებიც ტოლი უნდა იყოს.</Remark>

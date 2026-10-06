@@ -2,7 +2,10 @@
 export const SUBJECTS = {
   geometry: {
     label: 'გეომეტრია',
-    sections: { basics: 'საფუძვლები', triangles: 'სამკუთხედი', quadrilaterals: 'ოთხკუთხედები', circles: 'წრეწირი' },
+    sections: {
+      basics: 'საფუძვლები', triangles: 'სამკუთხედი', quadrilaterals: 'ოთხკუთხედები', circles: 'წრეწირი', polygons: 'მრავალკუთხედები',
+      coordinates: 'კოორდინატები და ვექტორები', transformations: 'გარდაქმნები', stereo: 'სტერეომეტრია', solids: 'სხეულები',
+    },
   },
   algebra: { label: 'ალგებრა', sections: { equations: 'განტოლებები' } },
   trig: { label: 'ტრიგონომეტრია', sections: { basics: 'საფუძვლები' } },

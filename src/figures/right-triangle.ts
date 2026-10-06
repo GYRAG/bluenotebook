@@ -3,7 +3,7 @@ import { figure } from './engine/spec';
 
 // Right angle at C; legs BC = a, AC = b; the centroid stays put.
 export default figure({
-  kind: 'მართკუთხა სამკუთხედი',
+  kind: 'სხვადასხვაგვერდა მართკუთხა სამკუთხედი', // the ordinary state: the stamp appears only when it turns isosceles
   label: 'მართკუთხა სამკუთხედი ABC, ∠C = 90°',
   params: {
     a: { label: 'კათეტი', sym: 'a', min: 1.5, max: 5, step: 0.1, value: 3 },

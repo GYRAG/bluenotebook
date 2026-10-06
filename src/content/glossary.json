@@ -63,6 +63,16 @@
     { "ka": "მსგავსების კოეფიციენტი", "en": "scale factor (k)" },
     { "ka": "მოდული", "en": "absolute value", "note": "also აბსოლუტური სიდიდე" },
     { "ka": "უცხო ამონახსნი", "en": "extraneous solution" },
+    { "ka": "მანძილი", "en": "distance (point to line: the perpendicular)" },
+    { "ka": "პროპორციული მონაკვეთები", "en": "proportional segments" },
+    { "ka": "სინუსი", "en": "sine (sin)" },
+    { "ka": "კოსინუსი", "en": "cosine (cos)" },
+    { "ka": "ტანგენსი", "en": "tangent (tg)", "note": "written tg, not tan" },
+    { "ka": "კოტანგენსი", "en": "cotangent (ctg)" },
+    { "ka": "მრავალკუთხედი", "en": "polygon" },
+    { "ka": "წესიერი მრავალკუთხედი", "en": "regular polygon" },
+    { "ka": "გარე კუთხე", "en": "exterior angle" },
+    { "ka": "აპოთემა", "en": "apothem" },
     { "ka": "ნახევარპერიმეტრი", "en": "semiperimeter", "note": "letter p (S = p·r)" }
   ]
 }

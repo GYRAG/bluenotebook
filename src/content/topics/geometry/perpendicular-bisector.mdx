@@ -1,0 +1,68 @@
+---
+title: შუამართობი და ბისექტრისა
+slug: perpendicular-bisector
+subject: geometry
+section: basics
+order: 3
+summary: მანძილი წერტილიდან წრფემდე; შუამართობისა და ბისექტრისის წერტილები და მათი შებრუნებული თვისებები.
+tags: [მანძილი, მართობი, დახრილი, შუამართობი, ბისექტრისა]
+prerequisites: [congruence, isosceles-triangle]
+status: draft
+figure: perp-bisector
+figures: [angle-bisector]
+---
+
+<Definition>**მანძილი** წერტილიდან წრფემდე ამ წერტილიდან წრფეზე დაშვებული მართობის სიგრძეა. მონაკვეთის **შუამართობი** მის შუაწერტილზე გავლებული მართობი წრფეა. კუთხის **ბისექტრისა** სხივია, რომელიც კუთხეს შუაზე ყოფს.</Definition>
+
+<Formulas>
+<Formula id="shortest-formula" name="მართობი და დახრილი" tex="PX^2 = PM^2 + MX^2 \;\Rightarrow\; PX > PM" live="PX" proof="perpendicular-shortest" />
+<Formula id="perp-bisector-formula" name="შუამართობის წერტილი" tex="PM \perp AB,\ AM = MB \;\Rightarrow\; PA = PB" live="PA" proof="perp-bisector" />
+<Formula id="bisector-formula" name="ბისექტრისის წერტილი" tex="\angle XOP = \angle POY \;\Rightarrow\; PK = PL" proof="bisector-equidistant" />
+</Formulas>
+
+<Properties>
+
+<Property id="perpendicular-shortest" title="წერტილიდან წრფემდე გავლებულ მონაკვეთებს შორის უმოკლესი მართობია" why="ყოველი სხვა მონაკვეთი (დახრილი) მართკუთხა სამკუთხედის ჰიპოტენუზაა.">
+<Proof given="$PM \perp AB$, $X$ — წრფის სხვა წერტილი" prove="$PX > PM$">
+<Step show="PM PX X <PMB" hl="PMX" tex="PX^2 = PM^2 + MX^2">პითაგორას თეორემა მართკუთხა $\triangle PMX$-ში.</Step>
+<Step hl="PM" tex="PX > PM \quad \blacksquare">$X \ne M$, ამიტომ $MX > 0$.</Step>
+</Proof>
+</Property>
+
+<Property id="perp-bisector" title="შუამართობის ყოველი წერტილი მონაკვეთის ბოლოებიდან თანაბრადაა დაშორებული" why="შუამართობი მონაკვეთს ორ ტოლ მართკუთხა სამკუთხედად „ხედავს“.">
+<Proof given="$P$ — $AB$-ს შუამართობის წერტილი" prove="$PA = PB$">
+<Step show="PM <PMA" hl="AM=MB">$M$ — $AB$-ს შუაწერტილია და $PM \perp AB$.</Step>
+<Step hl="PMA PMB" tex="\triangle PMA = \triangle PMB">$PM$ საერთოა, $AM = MB$, მათ შორის კუთხეები მართია — გკგ.</Step>
+<Step hl="PA=PB" tex="PA = PB \quad \blacksquare">ტოლი სამკუთხედების შესაბამისი გვერდები.</Step>
+</Proof>
+</Property>
+
+<Property id="perp-bisector-converse" kind="converse" title="მონაკვეთის ბოლოებიდან თანაბრად დაშორებული წერტილი მის შუამართობზე ძევს" why="ასეთი წერტილი ტოლფერდა სამკუთხედის წვეროა, მედიანა კი სიმაღლეც გამოდის.">
+<Proof given="$PA = PB$" prove="$P$ ძევს $AB$-ს შუამართობზე">
+<Step hl="PAB PA=PB">$\triangle PAB$ ტოლფერდაა.</Step>
+<Step show="PM" hl="PM">$M$ — $AB$-ს შუაწერტილი, ამიტომ $PM$ ფუძეზე გავლებული მედიანაა.</Step>
+<Step hl="<PMB">ტოლფერდა სამკუთხედში ფუძეზე გავლებული მედიანა სიმაღლეცაა: $PM \perp AB$, ე.ი. $PM$ შუამართობია. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>ამრიგად, შუამართობი მონაკვეთის ბოლოებიდან თანაბრად დაშორებული წერტილების სიმრავლეა (ამ წერტილთა გეომეტრიული ადგილი).</Remark>
+
+<Property id="bisector-equidistant" title="კუთხის ბისექტრისის ყოველი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული" why="ორი მართკუთხა სამკუთხედი საერთო ჰიპოტენუზითა და ტოლი მახვილი კუთხით.">
+<Proof figure="angle-bisector" given="$OP$ — $\angle XOY$-ის ბისექტრისა, $PK \perp OX$, $PL \perp OY$" prove="$PK = PL$">
+<Step show="OP" hl="<XOP=<POY">$OP$ კუთხეს შუაზე ყოფს.</Step>
+<Step show="PK PL K L <PKO <PLO" hl="OKP OLP" tex="\triangle OKP = \triangle OLP">მართკუთხა სამკუთხედები საერთო ჰიპოტენუზით $OP$ და ტოლი მახვილი კუთხეებით.</Step>
+<Step hl="PK=PL" tex="PK = PL \quad \blacksquare">შესაბამისი კათეტები.</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-converse" kind="converse" title="კუთხის შიგნით მდებარე წერტილი, რომელიც გვერდებიდან თანაბრადაა დაშორებული, ბისექტრისაზე ძევს" why="იგივე ორი მართკუთხა სამკუთხედი, ოღონდ ჰიპოტენუზითა და კათეტით.">
+<Proof figure="angle-bisector" given="$P$ კუთხის შიგნითაა, $PK \perp OX$, $PL \perp OY$, $PK = PL$" prove="$\angle XOP = \angle POY$">
+<Step show="OP PK PL K L <PKO <PLO" hl="PK=PL">$P$-დან გვერდებამდე მანძილები ტოლია.</Step>
+<Step hl="OKP OLP" tex="\triangle OKP = \triangle OLP">ჰიპოტენუზა $OP$ საერთოა, კათეტები $PK = PL$.</Step>
+<Step hl="<XOP=<POY" tex="\angle KOP = \angle LOP \quad \blacksquare">შესაბამისი კუთხეები — $OP$ ბისექტრისაა.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">მანძილი წერტილიდან წრფემდე მართობის სიგრძეა და არა ნებისმიერი მონაკვეთისა, რომელიც წერტილს წრფესთან აერთებს.</Remark>

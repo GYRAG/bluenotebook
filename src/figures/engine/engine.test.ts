@@ -113,7 +113,7 @@ for (const [name, spec] of figures) {
 
     it('refs only mention points the figure defines', () => {
       const pts = Object.keys(spec.points(samples[0]!));
-      const refs = [spec.base, spec.dims, ...Object.values(spec.toggles ?? {})].flatMap(s => parseRefs(s)).flatMap(refPoints);
+      const refs = [typeof spec.base === 'function' ? spec.base(samples[0]!) : spec.base, spec.dims, ...Object.values(spec.toggles ?? {})].flatMap(s => parseRefs(s)).flatMap(refPoints);
       expect(refs.filter(n => !pts.includes(n))).toEqual([]);
     });
 

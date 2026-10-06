@@ -1,0 +1,78 @@
+---
+title: სინუსი, კოსინუსი და ტანგენსი მართკუთხა სამკუთხედში
+slug: trigonometry
+subject: geometry
+section: triangles
+order: 13
+summary: მახვილი კუთხის სინუსი, კოსინუსი, ტანგენსი და კოტანგენსი; ძირითადი იგივეობები და 30, 45, 60 გრადუსის მნიშვნელობები.
+tags: [სინუსი, კოსინუსი, ტანგენსი, კოტანგენსი, მართკუთხა სამკუთხედი]
+prerequisites: [right-triangle, similarity]
+status: draft
+figure: trig-triangle
+---
+
+<Definition>მართკუთხა სამკუთხედში ($\angle C = 90^\circ$) მახვილი კუთხის $\alpha = \angle A$ **სინუსი** მოპირდაპირე კათეტის შეფარდებაა ჰიპოტენუზასთან, **კოსინუსი** — მიმდებარე კათეტისა ჰიპოტენუზასთან, **ტანგენსი** — მოპირდაპირე კათეტისა მიმდებარესთან, **კოტანგენსი** — მიმდებარისა მოპირდაპირესთან.</Definition>
+
+<Formulas>
+<Formula id="sin-formula" name="სინუსი" tex="\sin\alpha = \frac{a}{c}" live="sin α" proof="trig-angle-only" />
+<Formula id="cos-formula" name="კოსინუსი" tex="\cos\alpha = \frac{b}{c}" live="cos α" proof="trig-angle-only" />
+<Formula id="tg-formula" name="ტანგენსი და კოტანგენსი" tex="\operatorname{tg}\alpha = \frac{a}{b}, \qquad \operatorname{ctg}\alpha = \frac{b}{a}" live="tg α" proof="tan-ratio" />
+<Formula id="identity-formula" name="ძირითადი იგივეობა" tex="\sin^2\alpha + \cos^2\alpha = 1" proof="pythagorean-identity" />
+<Formula id="ratio-formula" name="ტანგენსი სინუსითა და კოსინუსით" tex="\operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha}, \qquad \operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = 1" proof="tan-ratio" />
+<Formula id="complementary-formula" name="დამატებითი კუთხე" tex="\sin(90^\circ - \alpha) = \cos\alpha, \qquad \cos(90^\circ - \alpha) = \sin\alpha" proof="complementary" />
+<Formula id="one-plus-tan-formula" name="ტანგენსი და კოსინუსი" tex="1 + \operatorname{tg}^2\alpha = \frac{1}{\cos^2\alpha}" proof="one-plus-tan" />
+<Formula id="values-formula" name="მნიშვნელობები" tex="\begin{array}{c|ccc} & 30^\circ & 45^\circ & 60^\circ \\ \hline \sin & \tfrac12 & \tfrac{\sqrt2}{2} & \tfrac{\sqrt3}{2} \\ \cos & \tfrac{\sqrt3}{2} & \tfrac{\sqrt2}{2} & \tfrac12 \\ \operatorname{tg} & \tfrac{\sqrt3}{3} & 1 & \sqrt3 \end{array}" proof="special-values" />
+</Formulas>
+
+<Properties>
+
+<Property id="trig-angle-only" title="მახვილი კუთხის სინუსი, კოსინუსი და ტანგენსი მხოლოდ კუთხეზეა დამოკიდებული, სამკუთხედის ზომაზე — არა" why="ერთი და იმავე მახვილი კუთხის მქონე მართკუთხა სამკუთხედები მსგავსია.">
+<Proof given="$\triangle ABC$ და $\triangle AB_1C_1$: $\angle C = \angle C_1 = 90^\circ$, $\angle A$ საერთოა" prove="$\tfrac{BC}{AB} = \tfrac{B_1C_1}{AB_1}$">
+<Step show="B1C1 B1 C1 <B1C1A" hl="AB1C1">ავიღოთ სხვა მართკუთხა სამკუთხედი იმავე კუთხით $\alpha$.</Step>
+<Step hl="AB1C1 ABC" tex="\triangle AB_1C_1 \sim \triangle ABC">ორი კუთხით: $\angle A$ საერთოა, $\angle C_1 = \angle C = 90^\circ$.</Step>
+<Step tex="\frac{B_1C_1}{AB_1} = \frac{BC}{AB} \quad \blacksquare">მსგავს სამკუთხედებში შესაბამისი გვერდების შეფარდებები ტოლია; იგივე დანარჩენი შეფარდებებისთვის.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagorean-identity" title="$\sin^2\alpha + \cos^2\alpha = 1$" why="პითაგორას თეორემა, გაყოფილი $c^2$-ზე.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\sin^2\alpha + \cos^2\alpha = 1$">
+<Step hl="ABC" tex="a^2 + b^2 = c^2">პითაგორას თეორემა.</Step>
+<Step tex="\sin^2\alpha + \cos^2\alpha = \frac{a^2 + b^2}{c^2} = 1 \quad \blacksquare">გავყოთ $c^2$-ზე.</Step>
+</Proof>
+</Property>
+
+<Property id="tan-ratio" title="$\operatorname{tg}\alpha = \tfrac{\sin\alpha}{\cos\alpha}$ და $\operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = 1$" why="ორივე ერთი და იმავე სამი გვერდის შეფარდებებია.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\operatorname{tg}\alpha = \tfrac{\sin\alpha}{\cos\alpha}$">
+<Step hl="BC AC" tex="\frac{\sin\alpha}{\cos\alpha} = \frac{a/c}{b/c} = \frac{a}{b} = \operatorname{tg}\alpha">გავამარტივოთ შეფარდება.</Step>
+<Step tex="\operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = \frac{a}{b} \cdot \frac{b}{a} = 1 \quad \blacksquare">განმარტებით.</Step>
+</Proof>
+</Property>
+
+<Property id="complementary" title="$\sin(90^\circ - \alpha) = \cos\alpha$ და $\cos(90^\circ - \alpha) = \sin\alpha$" why="მეორე მახვილი კუთხისთვის კათეტები როლებს ცვლის.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\sin\angle B = \cos\alpha$">
+<Step hl="<B" tex="\angle B = 90^\circ - \alpha">მართკუთხა სამკუთხედის მახვილი კუთხეების ჯამი $90^\circ$-ია.</Step>
+<Step hl="AC" tex="\sin(90^\circ - \alpha) = \frac{b}{c} = \cos\alpha">$\angle B$-ს პირდაპირ კათეტი $b = AC$-ა.</Step>
+<Step hl="BC" tex="\cos(90^\circ - \alpha) = \frac{a}{c} = \sin\alpha \quad \blacksquare">$\angle B$-სთან მიმდებარე კათეტი $a = BC$-ა.</Step>
+</Proof>
+</Property>
+
+<Property id="special-values" title="$\sin 30^\circ = \tfrac12$, $\sin 45^\circ = \tfrac{\sqrt2}{2}$, $\sin 60^\circ = \tfrac{\sqrt3}{2}$" why="ტოლგვერდა სამკუთხედის ნახევარი და ტოლფერდა მართკუთხა სამკუთხედი.">
+<Proof given="$\alpha = 30^\circ, 45^\circ, 60^\circ$" prove="ცხრილის მნიშვნელობები">
+<Step set={{ alpha: 30 }} hl="BC" tex="a = \tfrac{c}{2}, \qquad b = \tfrac{c\sqrt3}{2}">$30^\circ$-ის პირდაპირ კათეტი ჰიპოტენუზის ნახევარია; $b$ — პითაგორას თეორემით.</Step>
+<Step tex="\sin 30^\circ = \tfrac12, \qquad \cos 30^\circ = \tfrac{\sqrt3}{2}, \qquad \operatorname{tg} 30^\circ = \tfrac{\sqrt3}{3}">განმარტებით.</Step>
+<Step set={{ alpha: 60 }} tex="\sin 60^\circ = \cos 30^\circ = \tfrac{\sqrt3}{2}, \qquad \cos 60^\circ = \tfrac12">დამატებითი კუთხე: $60^\circ = 90^\circ - 30^\circ$.</Step>
+<Step set={{ alpha: 45 }} hl="BC=AC" tex="\sin 45^\circ = \cos 45^\circ = \frac{a}{a\sqrt2} = \tfrac{\sqrt2}{2} \quad \blacksquare">ტოლფერდა მართკუთხა სამკუთხედი: $a = b$, $c = a\sqrt2$.</Step>
+</Proof>
+</Property>
+
+<Property id="one-plus-tan" title="$1 + \operatorname{tg}^2\alpha = \tfrac{1}{\cos^2\alpha}$" why="ძირითადი იგივეობა, გაყოფილი $\cos^2\alpha$-ზე.">
+<Proof given="$0^\circ < \alpha < 90^\circ$" prove="$1 + \operatorname{tg}^2\alpha = \tfrac{1}{\cos^2\alpha}$">
+<Step tex="1 + \operatorname{tg}^2\alpha = \frac{\cos^2\alpha + \sin^2\alpha}{\cos^2\alpha} = \frac{1}{\cos^2\alpha} \quad \blacksquare">$\operatorname{tg}\alpha = \tfrac{\sin\alpha}{\cos\alpha}$ და $\sin^2\alpha + \cos^2\alpha = 1$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>მართკუთხა სამკუთხედის ამოხსნა: $a = c\sin\alpha$, $b = c\cos\alpha$, $a = b\operatorname{tg}\alpha$. ორი ელემენტი (გვერდი და კიდევ ერთი გვერდი ან მახვილი კუთხე) საკმარისია დანარჩენების საპოვნელად.</Remark>
+
+<Remark kind="mistake">სინუსი და კოსინუსი ყოველთვის $1$-ზე ნაკლებია (კათეტი ჰიპოტენუზაზე მოკლეა), ტანგენსი კი ნებისმიერი დადებითი რიცხვი შეიძლება იყოს. თუ $\sin\alpha > 1$ გამოგივიდა — სადღაც შეცდომაა.</Remark>

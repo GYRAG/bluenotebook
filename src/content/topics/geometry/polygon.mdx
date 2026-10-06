@@ -1,0 +1,48 @@
+---
+title: მრავალკუთხედი
+slug: polygon
+subject: geometry
+section: polygons
+order: 29
+summary: ამოზნექილი მრავალკუთხედის შიგა და გარე კუთხეების ჯამი, დიაგონალების რიცხვი.
+tags: [მრავალკუთხედი, ამოზნექილი, კუთხეების ჯამი, გარე კუთხე, დიაგონალი]
+prerequisites: [triangle]
+status: draft
+figure: polygon
+---
+
+<Definition>**მრავალკუთხედი** შეკრული ტეხილით შემოსაზღვრული ფიგურაა, რომლის მეზობელი რგოლები ერთ წრფეზე არ ძევს. მრავალკუთხედი **ამოზნექილია**, თუ ის მისი ნებისმიერი გვერდის შემცველი წრფის ერთ მხარესაა. **დიაგონალი** არამეზობელი წვეროების შემაერთებელი მონაკვეთია. **გარე კუთხე** შიგა კუთხის მოსაზღვრე კუთხეა.</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="შიგა კუთხეების ჯამი" tex="(n - 2) \cdot 180^\circ" live="Σ" proof="polygon-angle-sum" />
+<Formula id="exterior-sum-formula" name="გარე კუთხეების ჯამი" tex="360^\circ" live="Σ′" proof="exterior-sum" />
+<Formula id="diagonals-formula" name="დიაგონალების რიცხვი" tex="\frac{n(n - 3)}{2}" proof="diagonals-count" />
+</Formulas>
+
+<Properties>
+
+<Property id="polygon-angle-sum" title="ამოზნექილი $n$-კუთხედის შიგა კუთხეების ჯამი $(n - 2)\cdot180^\circ$-ია" why="ერთი წვეროდან გავლებული დიაგონალები მას $n - 2$ სამკუთხედად ყოფს.">
+<Proof given="ამოზნექილი $n$-კუთხედი" prove="კუთხეების ჯამი $(n - 2)\cdot180^\circ$">
+<Step show="AC AD AE" hl="AC AD AE">$A$ წვეროდან გავავლოთ ყველა დიაგონალი: $n - 3$ დიაგონალი მრავალკუთხედს $n - 2$ სამკუთხედად ყოფს (აქ $n = 6$ — ოთხი სამკუთხედი).</Step>
+<Step hl="ABC ACD ADE AEF">სამკუთხედების კუთხეები ერთად ზუსტად მრავალკუთხედის კუთხეებს შეადგენს.</Step>
+<Step tex="(n - 2) \cdot 180^\circ \quad \blacksquare">თითო სამკუთხედი — $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="exterior-sum" title="ამოზნექილი მრავალკუთხედის გარე კუთხეების ჯამი (თითო ყოველ წვეროსთან) $360^\circ$-ია" why="ყოველი გარე კუთხე შიგასთან ერთად გაშლილ კუთხეს ადგენს.">
+<Proof given="ამოზნექილი $n$-კუთხედი" prove="გარე კუთხეების ჯამი $360^\circ$">
+<Step show="AA1 BB1 CC1 DD1 EE1 FF1" hl="<A1AB <B1BC <C1CD <D1DE <E1EF <F1FA">ყოველ წვეროსთან გარე და შიგა კუთხე ერთად $180^\circ$-ია.</Step>
+<Step tex="n \cdot 180^\circ - (n - 2)\cdot 180^\circ = 360^\circ \quad \blacksquare">ყველა გაშლილ კუთხეს გამოვაკლოთ შიგა კუთხეების ჯამი.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-count" title="$n$-კუთხედს $\tfrac{n(n - 3)}{2}$ დიაგონალი აქვს" why="ყოველი წვეროდან $n - 3$ დიაგონალი გამოდის, ყოველი კი ორჯერ ითვლება.">
+<Proof given="$n$-კუთხედი" prove="დიაგონალების რიცხვი $\tfrac{n(n - 3)}{2}$">
+<Step show="AC AD AE" hl="AC AD AE">ყოველი წვეროდან $n - 3$ დიაგონალი გამოდის — ყველა წვეროსკენ, გარდა თავისა და ორი მეზობლისა.</Step>
+<Step tex="\frac{n(n - 3)}{2} \quad \blacksquare">$n$ წვერო, ოღონდ ყოველი დიაგონალი ორჯერ ჩაითვალა — ორივე ბოლოდან.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">$(n - 2)\cdot180^\circ$ შიგა კუთხეების ჯამია. გარე კუთხეების ჯამი $n$-ზე არ არის დამოკიდებული — ყოველთვის $360^\circ$-ია.</Remark>

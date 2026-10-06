@@ -1,0 +1,46 @@
+---
+title: თალესის თეორემა
+slug: thales
+subject: geometry
+section: basics
+order: 4
+summary: პარალელური წრფეები კუთხის გვერდებზე ტოლ, ზოგადად კი პროპორციულ მონაკვეთებს ჩამოჭრის.
+tags: [თალესი, პარალელური წრფეები, პროპორციული მონაკვეთები]
+prerequisites: [angles, congruence, similarity]
+status: draft
+figure: thales
+---
+
+<Definition>მონაკვეთები $a, b$ და $c, d$ **პროპორციულია**, თუ $\tfrac{a}{b} = \tfrac{c}{d}$.</Definition>
+
+<Formulas>
+<Formula id="thales-formula" name="თალესის თეორემა" tex="A_1A_2 = A_2A_3 \;\Rightarrow\; B_1B_2 = B_2B_3" proof="thales" />
+<Formula id="proportional-formula" name="პროპორციული მონაკვეთები" tex="\frac{A_1A_2}{A_2A_3} = \frac{B_1B_2}{B_2B_3}, \qquad \frac{OA_1}{A_1A_2} = \frac{OB_1}{B_1B_2}" live="B₁B₂ : B₂B₃" proof="proportional" />
+</Formulas>
+
+<Properties>
+
+<Property id="thales" title="თალესის თეორემა: თუ კუთხის ერთ გვერდზე გადაზომილია ტოლი მონაკვეთები და მათ ბოლოებზე გავლებულია პარალელური წრფეები, ისინი მეორე გვერდზეც ტოლ მონაკვეთებს ჩამოჭრის" why="ორი პარალელოგრამი გადმოიტანს ტოლობას მეორე გვერდზე, დანარჩენს კი ტოლი სამკუთხედები აკეთებს.">
+<Proof given="$A_1A_2 = A_2A_3$, $A_1B_1 \parallel A_2B_2 \parallel A_3B_3$" prove="$B_1B_2 = B_2B_3$">
+<Step set={{ m: 2, n: 2 }} hl="A1A2=A2A3 A1B1||A2B2||A3B3">$A_1A_2 = A_2A_3$, ხოლო წრფეები $A_1B_1$, $A_2B_2$, $A_3B_3$ პარალელურია.</Step>
+<Step show="B1C2 B2C3 C2 C3" hl="B1C2 B2C3">$B_1$-სა და $B_2$-ზე გავავლოთ $OA_3$-ის პარალელური წრფეები: $B_1C_2 \parallel A_1A_2$, $B_2C_3 \parallel A_2A_3$.</Step>
+<Step hl="A1A2C2B1 A2A3C3B2" tex="B_1C_2 = A_1A_2 = A_2A_3 = B_2C_3">$A_1A_2C_2B_1$ და $A_2A_3C_3B_2$ პარალელოგრამებია — მოპირდაპირე გვერდები ტოლია.</Step>
+<Step hl="B1C2B2 B2C3B3" tex="\triangle B_1C_2B_2 = \triangle B_2C_3B_3">$\angle C_2B_1B_2 = \angle C_3B_2B_3$ და $\angle B_1C_2B_2 = \angle B_2C_3B_3$ — მათი გვერდები შესაბამისად პარალელურია. კგკ.</Step>
+<Step hl="B1B2=B2B3" tex="B_1B_2 = B_2B_3 \quad \blacksquare">შესაბამისი გვერდები.</Step>
+</Proof>
+</Property>
+
+<Property id="proportional" title="კუთხის გვერდების მკვეთი პარალელური წრფეები გვერდებზე პროპორციულ მონაკვეთებს ჩამოჭრის" why="მკვეთი პარალელური წრფე სამკუთხედისგან მსგავს სამკუთხედს ჩამოჭრის.">
+<Proof given="$A_1B_1 \parallel A_2B_2$" prove="$\tfrac{OA_1}{A_1A_2} = \tfrac{OB_1}{B_1B_2}$">
+<Step hl="A1B1||A2B2">$A_1B_1 \parallel A_2B_2$.</Step>
+<Step hl="OA1B1 OA2B2" tex="\frac{OA_1}{OA_2} = \frac{OB_1}{OB_2}">$\triangle OA_1B_1 \sim \triangle OA_2B_2$ — გვერდის პარალელური წრფე მსგავს სამკუთხედს ჩამოჭრის.</Step>
+<Step tex="\frac{OA_1}{A_1A_2} = \frac{OB_1}{B_1B_2}">შეფარდებები გადავაბრუნოთ და ორივეს გამოვაკლოთ $1$: $OA_2 - OA_1 = A_1A_2$, $OB_2 - OB_1 = B_1B_2$.</Step>
+<Step hl="A1A2 A2A3 B1B2 B2B3" tex="\frac{A_1A_2}{A_2A_3} = \frac{B_1B_2}{B_2B_3} \quad \blacksquare">იგივე მსჯელობა $A_2B_2 \parallel A_3B_3$-ისთვის და მიღებული ტოლობების გაყოფა.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">სამკუთხედის შუახაზის თვისება თალესის თეორემიდან გამომდინარეობს: გვერდის შუაწერტილზე გავლებული მეორე გვერდის პარალელური წრფე მესამე გვერდსაც შუაზე ყოფს.</Remark>
+
+<Remark kind="mistake">თეორემა მონაკვეთებს კუთხის ერთსა და იმავე გვერდზე ადარებს. $\tfrac{A_1B_1}{A_2B_2}$ (თვითონ პარალელური მონაკვეთები) $\tfrac{OA_1}{OA_2}$-ს უდრის, და არა $\tfrac{A_1A_2}{A_2A_3}$-ს.</Remark>

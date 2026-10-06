@@ -52,8 +52,7 @@ export class GeoFigure extends HTMLElement {
     try { this.spec = (await mod()).default; } catch { return this.fail('ნახაზი ვერ ჩაიტვირთა'); }
     const defaults = Object.fromEntries(Object.entries(this.spec.params).map(([k, d]) => [k, d.value]));
     this.params = snap(this.spec, { ...defaults, ...load<Params>(`fig:${this.name}`, {}) });
-    this.base = parseRefs(this.spec.base);
-    this.poly = (this.base.find(r => r.k === 'poly') as { ps: string[] } | undefined)?.ps ?? [];
+    this.setBase();
     this.board = boardBounds(this.spec);
     this.svg = this.querySelector('svg')!;
     this.layer = this.svg.querySelector('.layer')!;
@@ -137,8 +136,15 @@ export class GeoFigure extends HTMLElement {
     if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.render(); });
   }
 
+  private setBase() {
+    const b = this.spec.base;
+    this.base = parseRefs(typeof b === 'function' ? b(this.params) : b);
+    this.poly = (this.base.find(r => r.k === 'poly') as { ps: string[] } | undefined)?.ps ?? [];
+  }
+
   private render() {
     if (!this.view.W) return;
+    if (typeof this.spec.base === 'function') this.setBase();
     const pts = this.spec.points(this.params), sc = this.scene;
     const dims = sc ? [] : [...(this.dimsOn ? parseRefs(this.spec.dims) : []), ...(this.hover ? parseRefs(`|${this.hover.join('')}|`) : [])];
     const extra = sc ? [] : [...this.toggles].flatMap(t => parseRefs(this.spec.toggles?.[t]));
@@ -179,7 +185,7 @@ export class GeoFigure extends HTMLElement {
   private updateReadouts(pts: Record<string, V>) {
     if (!this.tools || !this.spec.readouts) return;
     const ro = this.spec.readouts(pts, this.params);
-    const fmt = (r: (typeof ro)[number]) => (r[2] ? `${Math.round(r[1])}${r[2]}` : r[1].toFixed(2));
+    const fmt = (r: (typeof ro)[number]) => (r[2] !== undefined ? `${Math.round(r[1])}${r[2]}` : r[1].toFixed(2));
     this.tools.querySelectorAll<HTMLElement>('[data-ro]').forEach(el => { const r = ro[+el.dataset.ro!]; if (r) el.textContent = fmt(r); });
     document.querySelectorAll<HTMLElement>('[data-ro-label]').forEach(el => { // live values on formula cards
       const r = ro.find(x => x[0] === el.dataset.roLabel);

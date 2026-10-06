@@ -9,7 +9,7 @@ export interface Param {
 }
 export type Params<K extends string = string> = Record<K, number>;
 export type Points = Record<string, V>;
-export type Readout = readonly [label: string, value: number, unit?: '°'];
+export type Readout = readonly [label: string, value: number, unit?: '°' | '']; // a unit (even '') means a whole number: degrees, counts
 
 export interface FigureSpec<K extends string = string, P extends string = string> {
   /** What the figure is, for its aria-label and for the classifier stamp (hidden while it matches). */
@@ -20,7 +20,7 @@ export interface FigureSpec<K extends string = string, P extends string = string
   points: (p: Params<K>) => Record<P, V>;
   /** Which parameters each draggable point moves; the engine inverts `points` numerically. */
   drag?: Record<string, NoInfer<K>[]>;
-  base: string;                        // refs always drawn
+  base: string | ((p: Params<K>) => string); // refs always drawn; a function when the outline depends on the sliders (n-gon)
   unlabeled?: string[];                // helper points that get no letter (line ends etc.)
   boundsOf?: string[];                 // points that size the board (default: all)
   unitPx?: number;                     // fixed scale (px per unit) instead of fitting the board: the blank sheet, one square = 1

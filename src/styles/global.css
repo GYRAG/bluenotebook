@@ -308,7 +308,7 @@ geo-figure.proving .aux { stroke-opacity: .65; }
 .figure-error { position: absolute; left: var(--s4); bottom: var(--s2); }
 
 /* the classifier stamp: appears only when the shape becomes something special */
-.stamp { position: absolute; top: var(--s2); left: var(--s2); display: grid; justify-items: start; pointer-events: none; }
+.stamp { position: absolute; top: var(--s2); left: var(--s2); max-width: calc(100% - 44px - 3 * var(--s2)); display: grid; justify-items: start; pointer-events: none; } /* clear of the pencil */
 .stamp-k { font-size: var(--fs-ui); color: var(--ink-2); }
 .stamp-v {
   margin: 6px 0 var(--s2) 6px; padding: var(--s2) 14px 6px; font: var(--w2) 19px/1 var(--font-head); letter-spacing: .02em;
