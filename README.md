@@ -1,6 +1,6 @@
-# მათემატიკის ბაზა
+# ლურჯი რვეული
 
-A geometry notebook for the Georgian national exam, written in Georgian, where every figure moves.
+**Blue Notebook** — a geometry notebook for the Georgian national exam, written in Georgian, where every figure moves.
 
 Each topic is one page of a blue school notebook: an interactive figure on the left, and on the right the formulas, the properties and their step-by-step proofs. Drag a vertex and every measurement, readout and formula value follows. Open a proof and the figure plays it, one step at a time.
 

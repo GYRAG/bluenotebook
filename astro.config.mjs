@@ -8,7 +8,7 @@ import rehypeGlue from './src/lib/rehype-glue.ts';
 // KaTeX is rendered at build time; Astro 7's default markdown processor (satteri) parses
 // math but does not render it, so markdown + MDX go through unified with remark-math.
 export default defineConfig({
-  site: 'https://matematikis-baza.vercel.app',
+  site: 'https://bluenotebook.vercel.app',
   trailingSlash: 'always',
   devToolbar: { enabled: false },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' }, // a page starts loading when its link is hovered or focused

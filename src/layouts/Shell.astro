@@ -10,6 +10,8 @@ import Palette from '@/components/Palette.astro';
 import Icon from '@/components/Icon.astro';
 import type { SubjectId } from '@/subjects';
 
+const SITE = 'ლურჯი რვეული';
+
 interface Props {
   title: string;
   description?: string;
@@ -26,7 +28,7 @@ const { title, description = 'მათემატიკის პირად�
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>{title} · მათემატიკის ბაზა</title>
+  <title>{title === SITE ? SITE : `${title} · ${SITE}`}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#2657ff" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

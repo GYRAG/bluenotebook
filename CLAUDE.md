@@ -1,4 +1,4 @@
-# მათემატიკის ბაზა — notes for AI sessions
+# ლურჯი რვეული (bluenotebook) — notes for AI sessions
 
 A personal Georgian math reference for a high-school student. Static Astro site; all UI and
 content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGENTS.md` (another project).
