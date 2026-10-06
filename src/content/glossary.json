@@ -80,6 +80,12 @@
     { "ka": "ვექტორი", "en": "vector" },
     { "ka": "კოლინეარული ვექტორები", "en": "collinear vectors" },
     { "ka": "სკალარული ნამრავლი", "en": "dot (scalar) product" },
+    { "ka": "ღერძული სიმეტრია", "en": "reflection (axial symmetry)" },
+    { "ka": "ცენტრული სიმეტრია", "en": "point (central) symmetry" },
+    { "ka": "მობრუნება", "en": "rotation" },
+    { "ka": "პარალელური გადატანა", "en": "translation" },
+    { "ka": "მოძრაობა", "en": "isometry (distance-preserving map)", "note": "verify with the user" },
+    { "ka": "ჰომოთეტია", "en": "homothety (dilation)" },
     { "ka": "ნახევარპერიმეტრი", "en": "semiperimeter", "note": "letter p (S = p·r)" }
   ]
 }

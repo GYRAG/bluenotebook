@@ -1,0 +1,69 @@
+---
+title: სიმეტრია, მობრუნება, პარალელური გადატანა
+slug: isometries
+subject: geometry
+section: transformations
+order: 45
+summary: ღერძული და ცენტრული სიმეტრია, მობრუნება და პარალელური გადატანა — გარდაქმნები, რომლებიც მანძილებს ინარჩუნებს.
+tags: [ღერძული სიმეტრია, ცენტრული სიმეტრია, მობრუნება, პარალელური გადატანა, მოძრაობა]
+prerequisites: [congruence, coordinates, vectors]
+status: draft
+figure: rotation
+figures: [reflection, translation]
+---
+
+<Definition>**ღერძული სიმეტრია** წრფის (ღერძის) მიმართ წერტილ $A$-ს გადაიყვანს $A'$-ში, თუ ღერძი $AA'$-ის შუამართობია. **მობრუნება** ცენტრით $O$ და კუთხით $\varphi$: $OA' = OA$, $\angle AOA' = \varphi$. **ცენტრული სიმეტრია** მობრუნებაა $180^\circ$-ით. **პარალელური გადატანა** ვექტორით $\vec v$: $\overrightarrow{AA'} = \vec v$. გარდაქმნას, რომელიც მანძილებს ინარჩუნებს, **მოძრაობა** ეწოდება.</Definition>
+
+<Formulas>
+<Formula id="isometry-formula" name="მოძრაობა მანძილს ინარჩუნებს" tex="A'B' = AB" live="A'B'" proof="rotation-isometry" />
+<Formula id="rotation-formula" name="მობრუნება" tex="OA' = OA, \qquad \angle AOA' = \varphi" live="OA'" proof="rotation-isometry" />
+<Formula id="central-formula" name="ცენტრული სიმეტრია" tex="\overrightarrow{OA'} = -\overrightarrow{OA}, \qquad A'B' \parallel AB" proof="central-symmetry" />
+<Formula id="reflection-formula" name="სიმეტრია ღერძ $Oy$-ის მიმართ" tex="(x;\, y) \to (-x;\, y)" proof="reflection-isometry" />
+<Formula id="translation-formula" name="პარალელური გადატანა ვექტორით $(a;\, b)$" tex="(x;\, y) \to (x + a;\ y + b)" proof="translation-isometry" />
+</Formulas>
+
+<Properties>
+
+<Property id="rotation-isometry" title="მობრუნება მანძილებს ინარჩუნებს: $A'B' = AB$" why="ორი სხივი ერთი და იმავე კუთხით მობრუნდა — მათ შორის კუთხე არ შეიცვალა.">
+<Proof given="$A'$ და $B'$ — $A$-სა და $B$-ს სახეები $O$-ს გარშემო $\varphi$-ით მობრუნებისას" prove="$A'B' = AB$">
+<Step show="OA OA' OB OB'" hl="<AOA' OA=OA' OB=OB'">$OA' = OA$, $OB' = OB$, $\angle AOA' = \angle BOB' = \varphi$.</Step>
+<Step hl="<AOB=<A'OB'" tex="\angle A'OB' = \angle AOB">ორივე სხივი ერთი და იმავე კუთხით და ერთი მიმართულებით მობრუნდა, ამიტომ მათ შორის კუთხე არ შეიცვალა.</Step>
+<Step hl="AOB A'OB'" tex="\triangle AOB = \triangle A'OB' \;\Rightarrow\; A'B' = AB \quad \blacksquare">გკგ.</Step>
+</Proof>
+</Property>
+
+<Property id="central-symmetry" title="ცენტრული სიმეტრიისას $O$ ყოველი $AA'$ მონაკვეთის შუაწერტილია, ხოლო ყოველი მონაკვეთი მის პარალელურ ტოლ მონაკვეთში გადადის" why="$180^\circ$-ით მობრუნება ვერტიკალურ კუთხეებს და ჯვარედინ კუთხეებს იძლევა.">
+<Proof given="ცენტრული სიმეტრია $O$ ცენტრით" prove="$OA = OA'$ და $A'B' \parallel AB$">
+<Step set={{ phi: 180 }} show="AA' BB'" hl="AA' BB'">$\angle AOA' = 180^\circ$: $A$, $O$, $A'$ ერთ წრფეზეა და $OA = OA'$ — $O$ შუაწერტილია.</Step>
+<Step hl="AOB A'OB'" tex="\triangle AOB = \triangle A'OB'">$OA = OA'$, $OB = OB'$, $\angle AOB = \angle A'OB'$ (ვერტიკალური) — გკგ.</Step>
+<Step hl="AB||A'B'" tex="A'B' = AB, \qquad A'B' \parallel AB \quad \blacksquare">$\angle OAB = \angle OA'B'$ — ჯვარედინი კუთხეები ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="reflection-isometry" title="ღერძული სიმეტრია მანძილებს ინარჩუნებს" why="ღერძად $Oy$ ავიღოთ: სიმეტრია მხოლოდ $x$-ის ნიშანს ცვლის.">
+<Proof figure="reflection" given="$A'$ და $B'$ — $A$-სა და $B$-ს სიმეტრიულები ღერძის მიმართ" prove="$A'B' = AB$">
+<Step show="AA' K" hl="AA'">ღერძი $AA'$-ის შუამართობია: $AA' \perp$ ღერძი და $AK = KA'$.</Step>
+<Step tex="A(x_1;\, y_1) \to A'(-x_1;\, y_1), \qquad B(x_2;\, y_2) \to B'(-x_2;\, y_2)">ავიღოთ კოორდინატთა სისტემა, რომლის ღერძი $Oy$ სიმეტრიის ღერძია.</Step>
+<Step hl="AB A'B'" tex="A'B'^2 = (x_1 - x_2)^2 + (y_2 - y_1)^2 = AB^2 \quad \blacksquare">მანძილის ფორმულა.</Step>
+</Proof>
+</Property>
+
+<Property id="translation-isometry" title="პარალელური გადატანა ყოველ მონაკვეთს მის ტოლ და პარალელურ მონაკვეთში გადაიყვანს" why="მონაკვეთი და მისი სახე პარალელოგრამის მოპირდაპირე გვერდებია.">
+<Proof figure="translation" given="$\overrightarrow{AA'} = \overrightarrow{BB'} = \vec v$" prove="$A'B' = AB$, $A'B' \parallel AB$">
+<Step show="vec:AA' vec:BB'" hl="vec:AA' vec:BB'">$AA'$ და $BB'$ ტოლი და პარალელურია — ორივე ერთი და იგივე ვექტორია.</Step>
+<Step hl="ABB'A'" tex="A'B' = AB, \qquad A'B' \parallel AB \quad \blacksquare">$ABB'A'$ პარალელოგრამია: ორი მოპირდაპირე გვერდი ტოლი და პარალელურია.</Step>
+</Proof>
+</Property>
+
+<Property id="isometry-congruent" title="მოძრაობა ყოველ სამკუთხედს (და ფიგურას) მის ტოლ ფიგურაში გადაიყვანს" why="სამივე გვერდი ინარჩუნებს სიგრძეს.">
+<Proof given="მოძრაობა, $\triangle ABC \to \triangle A'B'C'$" prove="$\triangle A'B'C' = \triangle ABC$">
+<Step hl="ABC A'B'C'" tex="A'B' = AB, \quad B'C' = BC, \quad C'A' = CA">მოძრაობა ყველა მანძილს ინარჩუნებს.</Step>
+<Step tex="\triangle A'B'C' = \triangle ABC \quad \blacksquare">გგგ — ამიტომ კუთხეებიც ტოლია.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>ფიგურას აქვს სიმეტრიის ღერძი (ან ცენტრი), თუ ამ ღერძის (ცენტრის) მიმართ სიმეტრია მას თავის თავში გადაიყვანს. მაგალითად, მართკუთხედს ორი სიმეტრიის ღერძი და სიმეტრიის ცენტრი აქვს, წრეწირს — უამრავი ღერძი.</Remark>
+
+<Remark kind="mistake">ცენტრული სიმეტრია ღერძული არ არის: $O$-ს მიმართ სიმეტრია $180^\circ$-ით მობრუნებაა, ის ფიგურას „არ ატრიალებს სარკისებურად“.</Remark>

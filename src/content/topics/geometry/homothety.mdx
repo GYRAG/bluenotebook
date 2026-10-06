@@ -1,0 +1,49 @@
+---
+title: ჰომოთეტია
+slug: homothety
+subject: geometry
+section: transformations
+order: 46
+summary: ჰომოთეტია ცენტრითა და კოეფიციენტით — ის ფიგურას მსგავს ფიგურაში გადაიყვანს, ფართობს კი კოეფიციენტის კვადრატჯერ ცვლის.
+tags: [ჰომოთეტია, მსგავსება, ჰომოთეტიის კოეფიციენტი]
+prerequisites: [similarity, isometries, vectors]
+status: draft
+figure: homothety
+---
+
+<Definition>**ჰომოთეტია** ცენტრით $O$ და კოეფიციენტით $k \ne 0$ წერტილ $A$-ს გადაიყვანს $A'$-ში, რომლისთვისაც $\overrightarrow{OA'} = k\,\overrightarrow{OA}$. $k > 0$-ზე $A'$ სხივ $OA$-ზეა, $k < 0$-ზე — მის გაგრძელებაზე $O$-ს მეორე მხარეს.</Definition>
+
+<Formulas>
+<Formula id="homothety-formula" name="განმარტება" tex="\overrightarrow{OA'} = k\,\overrightarrow{OA}" live="k" proof="homothety-segment" />
+<Formula id="segment-formula" name="მონაკვეთის სახე" tex="A'B' = |k|\,AB, \qquad A'B' \parallel AB" live="A'B' : AB" proof="homothety-segment" />
+<Formula id="area-formula" name="ფართობი" tex="S' = k^2 S" live="S' : S" proof="homothety-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="homothety-segment" title="ჰომოთეტია მონაკვეთს $|k|$-ჯერ ცვლის და მის პარალელურ მონაკვეთში გადაიყვანს" why="$O$-სა და მონაკვეთის ბოლოებით შედგენილი სამკუთხედები მსგავსია.">
+<Proof given="$\overrightarrow{OA'} = k\,\overrightarrow{OA}$, $\overrightarrow{OB'} = k\,\overrightarrow{OB}$" prove="$A'B' = |k|\,AB$, $A'B' \parallel AB$">
+<Step show="line:OA line:OB" hl="OA OA' OB OB'">$OA' = |k|\,OA$, $OB' = |k|\,OB$; $A'$ და $B'$ სხივებზე $OA$, $OB$ ძევს ($k > 0$) ან მათ გაგრძელებებზე ($k < 0$).</Step>
+<Step hl="OAB OA'B'" tex="\triangle OA'B' \sim \triangle OAB">$\tfrac{OA'}{OA} = \tfrac{OB'}{OB} = |k|$, კუთხე $O$-სთან საერთოა (ან ვერტიკალური) — მსგავსება ორი გვერდითა და მათ შორის კუთხით.</Step>
+<Step hl="AB||A'B'" tex="A'B' = |k|\,AB, \qquad A'B' \parallel AB \quad \blacksquare">მსგავსების კოეფიციენტი $|k|$-ა; $\angle OA'B' = \angle OAB$ — შესაბამისი ($k > 0$) ან ჯვარედინი ($k < 0$) კუთხეები.</Step>
+</Proof>
+</Property>
+
+<Property id="homothety-angles" title="ჰომოთეტია სამკუთხედს მსგავს სამკუთხედში გადაიყვანს — კუთხეები არ იცვლება" why="სამივე გვერდი ერთსა და იმავე $|k|$-ზე მრავლდება.">
+<Proof given="$\triangle ABC \to \triangle A'B'C'$ ჰომოთეტიით" prove="$\triangle A'B'C' \sim \triangle ABC$">
+<Step hl="ABC A'B'C'" tex="\frac{A'B'}{AB} = \frac{B'C'}{BC} = \frac{C'A'}{CA} = |k|">წინა თვისება ყოველი გვერდისთვის.</Step>
+<Step tex="\triangle A'B'C' \sim \triangle ABC \quad \blacksquare">მსგავსება სამი გვერდით — ამიტომ შესაბამისი კუთხეებიც ტოლია.</Step>
+</Proof>
+</Property>
+
+<Property id="homothety-area" title="ჰომოთეტიისას ფართობი $k^2$-ჯერ იცვლება" why="მსგავსი ფიგურების ფართობების შეფარდება მსგავსების კოეფიციენტის კვადრატია.">
+<Proof given="ჰომოთეტია კოეფიციენტით $k$" prove="$S' = k^2 S$">
+<Step hl="ABC A'B'C'" tex="S' = |k|^2 S = k^2 S \quad \blacksquare">სამკუთხედები მსგავსია კოეფიციენტით $|k|$ (წინა თვისება), ფართობების შეფარდება კი მისი კვადრატია.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">$k = -1$ — ცენტრული სიმეტრია; $k = 1$ — ყველა წერტილი ადგილზე რჩება. ჰომოთეტიისა და მოძრაობის შედეგს მსგავსების გარდაქმნა ეწოდება: ორი ფიგურა მსგავსია, თუ ერთი მეორეში მსგავსების გარდაქმნით გადადის.</Remark>
+
+<Remark kind="mistake">$k = -2$-ზე ფიგურა არ მცირდება: სიგრძეები $|k| = 2$-ჯერ იზრდება, ფართობი — $k^2 = 4$-ჯერ; ნიშანი მხოლოდ მხარეს განსაზღვრავს.</Remark>
