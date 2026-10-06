@@ -1,4 +1,4 @@
-import { angleAt, area, circleIntersection, dist, foot, intersect, mid, near, perpendicular, polar, rad, type V } from './engine/geom';
+import { add, angleAt, area, circleIntersection, dist, foot, intersect, mid, near, perp, perpendicular, polar, rad, sub, unit, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // Isosceles ABC with AB = AC = b and apex angle θ at A; at θ = 60° it is equilateral exactly.
@@ -12,10 +12,17 @@ export default figure({
   points: ({ b, theta }) => {
     const a = 2 * b * Math.sin(rad(theta / 2)), h = b * Math.cos(rad(theta / 2));
     const A: V = [0, h / 2], B: V = [-a / 2, -h / 2], C: V = [a / 2, -h / 2];
-    return { A, B, C, H: mid(B, C), G: [0, h / 2 - (2 * h) / 3] as V }; // G: centroid (centre of both circles when equilateral)
+    const N = mid(A, B), X = add(A, unit(sub(A, B))); // X: on BA beyond A
+    return {
+      A, B, C, H: mid(B, C), G: [0, h / 2 - (2 * h) / 3] as V, // G: centroid (centre of both circles when equilateral)
+      // for problems: Q, the foot from B on line AC; K and N, midpoints of AC and AB; E, where the
+      // perpendicular bisector of AB meets line BC; Y on the bisector of the exterior angle XAC
+      Q: foot(B, A, C), K: mid(A, C), N, E: intersect(N, add(N, perp(sub(B, A))), B, C), X, Y: add(A, add(unit(sub(X, A)), unit(sub(C, A)))),
+    };
   },
   drag: { A: ['b'], C: ['b', 'theta'] }, // A only moves up and down: one parameter
   base: 'ABC',
+  boundsOf: ['A', 'B', 'C'],
   dims: '|BC|a |AB|b <A <B <C',
   toggles: {
     'სიმაღლე = მედიანა = ბისექტრისა': 'AH <AHC H',

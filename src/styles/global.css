@@ -212,6 +212,7 @@ summary::-webkit-details-marker { display: none; }
   .nav::backdrop { background: var(--scrim); }
   .stage { padding: 0; }
   .stage > .title, .stage > .status-note, .stage > .lede { display: none; }
+  .step-tex .katex { font-size: 1.1em; } /* a little under KaTeX's 1.21em: proof lines fit a phone */
   .panel { border-left: 0; border-top: 3px double var(--ink); }
   .app.no-panel .stage { padding: var(--s4); overflow: auto; }
   .app.no-panel .stage > .title { display: block; }
@@ -435,6 +436,7 @@ geo-figure.proving .aux { stroke-opacity: .65; }
 .prob .prop-t { font: 16px/1.5 var(--font-body); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .prob.solved .prop-n::after { content: ''; display: block; width: 6px; height: 6px; margin: 6px 0 0 auto; border-radius: 50%; background: var(--ink); }
 .prob .proof-h { font: 17px/1.55 var(--font-body); }
+.book { margin: calc(-1 * var(--s2)) 0 var(--s3); font-size: var(--fs-ui); color: var(--ink-2); }
 .ans { display: grid; gap: var(--s2); margin-bottom: var(--s2); }
 .ans-f { display: flex; align-items: center; gap: var(--s3); }
 .ans-l { flex: none; min-width: 64px; }

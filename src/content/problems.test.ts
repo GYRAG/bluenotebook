@@ -43,6 +43,7 @@ function measurer(pts: Record<string, V>, poly: string[], k: number): Atom {
 
 for (const [path, src] of Object.entries(files)) {
   const main = src.match(/^figure:\s*(\S+)/m)?.[1];
+  const extras = src.match(/^figures:\s*\[([^\]]*)\]/m)?.[1]?.split(',').map(s => s.trim()) ?? [];
   const problems = [...src.matchAll(OPEN)].map(m => ({ a: attrs(m[1]!), set: obj(m[1]!.match(/set=\{\{([^}]*)\}\}/)?.[1]), k: m[1]!.match(/\bk=\{([^}]+)\}/)?.[1], body: m[2]! }));
   if (!problems.length) continue;
 
@@ -51,6 +52,7 @@ for (const [path, src] of Object.entries(files)) {
       it(`problem ${a.id}: consistent, and the answer is right`, () => {
         const spec = specs[`../figures/${a.figure ?? main}.ts`]?.default;
         expect(spec, `figure ${a.figure ?? main}`).toBeDefined();
+        if (a.figure) expect(extras, `figure ${a.figure}: list it under figures: in the frontmatter`).toContain(a.figure);
         const s = spec!, p: Params = { ...Object.fromEntries(Object.entries(s.params).map(([key, d]) => [key, d.value])) };
         for (const [key, v] of Object.entries(set)) {
           const d = s.params[key];
@@ -65,9 +67,13 @@ for (const [path, src] of Object.entries(files)) {
         const k = kAttr ? +kAttr : firstLen ? evaluate(firstLen[1]) / evaluate(firstLen[0], measurer(pts, poly, 1)) : 1;
         const at = measurer(pts, poly, k);
         for (const [l, r] of given) expect(near(evaluate(l, at), evaluate(r, at)), `given ${l}=${r}: the figure has ${evaluate(l, at)}`).toBe(true);
-        const finds = a.find!.split(/\s+/), answers = a.answer!.split(/\s+/);
+        const finds = (a.find ?? '').split(/\s+/).filter(Boolean), answers = (a.answer ?? '').split(/\s+/).filter(Boolean);
         expect(answers.length).toBe(finds.length);
         finds.forEach((f, i) => expect(near(evaluate(f, at), evaluate(answers[i]!)), `${f} = ${answers[i]}: the figure has ${evaluate(f, at)}`).toBe(true));
+        for (const [l, r] of (a.prove ?? '').split(/\s+/).filter(Boolean).map(g => g.split('=') as [string, string])) {
+          expect(near(evaluate(l, at), evaluate(r, at)), `claim ${l}=${r}: the figure has ${evaluate(l, at)} and ${evaluate(r, at)}`).toBe(true);
+        }
+        expect(finds.length > 0 || !!a.prove, 'find + answer, or prove').toBe(true);
         // the solution: at least one step, and every point it draws exists
         expect(body.match(/<Step\b/g)?.length ?? 0, 'a solution with steps').toBeGreaterThan(0);
         const drawn = [a.show ?? '', ...[...body.matchAll(/\b(?:show|hl)="([^"]*)"/g)].map(m => m[1]!)].join(' ');

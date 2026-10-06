@@ -9,6 +9,7 @@ tags: [ტოლობის ნიშანი, გკგ, კგკ, გგგ
 prerequisites: [angles]
 status: draft
 figure: congruence
+figures: [crossing]
 ---
 
 <Definition>ორი სამკუთხედი **ტოლია**, თუ ერთის მეორეზე დადებით ისინი ერთმანეთს ზუსტად ემთხვევა. ტოლ სამკუთხედებში შესაბამისი გვერდები და შესაბამისი კუთხეები ტოლია; ჩაწერა $\triangle ABC = \triangle A_1B_1C_1$ ნიშნავს, რომ $A \leftrightarrow A_1$, $B \leftrightarrow B_1$, $C \leftrightarrow C_1$. **ტოლობის ნიშანი** არის რამდენიმე ელემენტის ტოლობა, რომელიც სამკუთხედების ტოლობისთვის საკმარისია.</Definition>
@@ -64,3 +65,46 @@ figure: congruence
 <Remark>მართკუთხა სამკუთხედები ტოლია აგრეთვე: **ორი კათეტით** (გკგ), **კათეტითა და მახვილი კუთხით** და **ჰიპოტენუზითა და მახვილი კუთხით** — ორ ბოლო შემთხვევაში მეორე მახვილი კუთხეც ტოლია ($90^\circ$-ს გამოკლებული), ასე რომ კგკ გამოიყენება.</Remark>
 
 <Remark kind="mistake">ორი გვერდი და **არა** მათ შორის მდებარე კუთხე ტოლობისთვის არ კმარა: შეიძლება აიგოს ორი განსხვავებული სამკუთხედი იგივე მონაცემებით. „კკკ“ (სამი კუთხე) ტოლობის ნიშანი არ არის — ის მხოლოდ მსგავსებას იძლევა.</Remark>
+
+<Problems>
+
+<Problem id="p-crossing-perimeter" figure="crossing" set={{ a: 3.2, b: 3.2, c: 2.4, d: 2.4, phi: 90 }} show="AC BD" given="AO=OB CO=OD AB=16 CD=12 P(AOC)=24" find="BD" answer="10" book="3.1"
+  q="$AB$ და $CD$ მონაკვეთები $O$ წერტილში იკვეთება და ამ წერტილით შუაზე იყოფა. $AB = 16$, $CD = 12$, $AOC$ სამკუთხედის პერიმეტრი კი $24$-ია. იპოვეთ $BD$."
+  hint="დაამტკიცეთ, რომ $\triangle AOC = \triangle BOD$.">
+<Step hl="AO=OB CO=OD" tex="AO = OB = 8,\qquad CO = OD = 6">$O$ ორივე მონაკვეთის შუაწერტილია.</Step>
+<Step hl="<AOC=<BOD" tex="\angle AOC = \angle BOD">ეს კუთხეები ვერტიკალურია.</Step>
+<Step hl="AOC BOD" tex="\triangle AOC = \triangle BOD">სამკუთხედები ტოლია ორი გვერდისა და მათ შორის მდებარე კუთხის მიხედვით (გკგ).</Step>
+<Step hl="AC=BD" tex="BD = AC = 24 - 8 - 6 = 10">ტოლი სამკუთხედების შესაბამისი გვერდები ტოლია: $BD = AC$, ხოლო $AC$ პერიმეტრიდან გამოითვლება.</Step>
+</Problem>
+
+<Problem id="p-crossing-parallel" figure="crossing" set={{ a: 3, b: 3, c: 2.5, d: 2.5, phi: 101.53695903281547 }} show="AC BD" given="AO=OB <CAO=<DBO AC=7 OD=5" find="BD OC" answer="7 5"
+  q="$AB$ და $CD$ მონაკვეთები $O$ წერტილში იკვეთება, $AO = OB$ და $AC \parallel BD$. $AC = 7$, $OD = 5$. იპოვეთ $BD$ და $OC$."
+  hint="რომელი კუთხეებია ტოლი იმის გამო, რომ $AC \parallel BD$?">
+<Step hl="<CAO=<DBO AC||BD" tex="\angle CAO = \angle DBO">$AC \parallel BD$, ხოლო $AB$ მკვეთია — შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="<AOC=<BOD" tex="\angle AOC = \angle BOD">ეს კუთხეები ვერტიკალურია.</Step>
+<Step hl="AOC BOD AO=OB" tex="\triangle AOC = \triangle BOD">სამკუთხედები ტოლია გვერდისა და მასთან მდებარე ორი კუთხის მიხედვით (კგკ).</Step>
+<Step hl="AC=BD OC=OD" tex="BD = AC = 7,\qquad OC = OD = 5">ტოლი სამკუთხედების შესაბამისი გვერდები ტოლია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-kite" figure="crossing" set={{ a: 2.2, b: 3, c: 2, d: 2, phi: 90 }} show="AC AD BC BD" given="AC=AD BC=BD" prove="<CAB=<DAB <AOC=90" book="3.25"
+  q="$AB$ და $CD$ მონაკვეთები იკვეთება, $AC = AD$ და $BC = BD$. დაამტკიცეთ, რომ $AB$ არის $CAD$ კუთხის ბისექტრისა, ხოლო $AB \perp CD$."
+  hint="ჯერ შეადარეთ სამკუთხედები $ACB$ და $ADB$.">
+<Step hl="ACB ADB AC=AD BC=BD" tex="\triangle ACB = \triangle ADB">$AB$ საერთო გვერდია, ამიტომ სამკუთხედები ტოლია სამი გვერდის მიხედვით (გგგ).</Step>
+<Step hl="<CAB=<DAB" tex="\angle CAB = \angle DAB">ტოლ სამკუთხედებში შესაბამისი კუთხეები ტოლია — $AB$ ბისექტრისაა.</Step>
+<Step hl="ACO ADO" tex="\triangle ACO = \triangle ADO">$AC = AD$, $\angle CAO = \angle DAO$, $AO$ კი საერთოა (გკგ).</Step>
+<Step hl="<AOC=<AOD" tex="\angle AOC = \angle AOD = \frac{180^\circ}{2} = 90^\circ \quad \blacksquare">ეს კუთხეები ტოლი და მოსაზღვრეა.</Step>
+</Problem>
+
+<Problem id="p-equal-crossing" figure="crossing" set={{ a: 2.6, b: 1.6, c: 1.6, d: 2.6, phi: 65 }} show="AC BC BD" given="AB=CD AO=OD" prove="AC=DB <ABC=<DCB" book="3.26"
+  q="ტოლი $AB$ და $CD$ მონაკვეთები $O$ წერტილში იკვეთება ისე, რომ $AO = OD$. დაამტკიცეთ, რომ $\triangle ABC = \triangle DCB$."
+  hint="ჯერ დაამტკიცეთ, რომ $OB = OC$.">
+<Step hl="OB=OC" tex="OB = AB - AO = CD - OD = OC">$AB = CD$ და $AO = OD$.</Step>
+<Step hl="OBC <OBC=<OCB" tex="\angle ABC = \angle DCB">სამკუთხედი $OBC$ ტოლფერდაა, ამიტომ ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+<Step hl="ABC DCB" tex="\triangle ABC = \triangle DCB \quad \blacksquare">$AB = DC$, $BC$ საერთოა, ხოლო მათ შორის მდებარე კუთხეები ტოლია (გკგ).</Step>
+</Problem>
+
+</Problems>

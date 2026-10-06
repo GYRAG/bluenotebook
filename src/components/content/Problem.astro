@@ -7,28 +7,34 @@ import { names } from '@/figures/engine/refs';
 
 // A problem on the topic's figure. The figure takes the problem's shape (`set`) and shows its data
 // (`given`) and the unknowns (`find`, as "?"); the answer is typed and checked on the page.
-// src/content/problems.test.ts rebuilds the figure from `set` and checks every given and the answer.
+// src/content/problems.test.ts rebuilds the figure from `set` and checks every given, the answer
+// and the claim of a proof problem.
 //   given  facts in the figure's terms, "lhs=rhs" each: AB=5  <A=60  AB+BC+CD+DA=46
 //   find   what to find: AB (length), <A or <ABC (angle, degrees), S(ABCD) (area), P(ABCD) (perimeter)
 //   answer one value per find item, as a student would write it: 7  4√3  2,5  16/3
+//   prove  instead of find/answer: the claim, "lhs=rhs" each (a proof problem: no answer to type)
 //   set    figure parameters (figure units); k = problem units per figure unit, by default from
 //          the first given length
+//   book   the book's problems of the same type (Topuria's collection): "6.23 6.27"
 interface Props {
   id: string;
   q: string;
-  find: string;
-  answer: string;
+  find?: string;
+  answer?: string;
+  prove?: string;
   given?: string;
   set?: Record<string, number>;
   k?: number;
   show?: string;
   hint?: string;
+  book?: string;
   figure?: string;
 }
-const { id, q, find, answer, given = '', set, show, hint, figure } = Astro.props;
+const { id, q, find = '', answer = '', given = '', set, show, hint, book, figure } = Astro.props;
 
 const finds = find.split(/\s+/).filter(Boolean), answers = answer.split(/\s+/).filter(Boolean);
 if (finds.length !== answers.length) throw new Error(`problem ${id}: ${finds.length} find items, ${answers.length} answers`);
+if (!finds.length && !Astro.props.prove) throw new Error(`problem ${id}: needs find + answer, or prove`);
 const values = answers.map(a => evaluate(a)); // bad syntax fails the build
 
 // a side or an angle can carry a label on the figure
@@ -38,7 +44,8 @@ const tags = [
     .map(([l, r]) => `${l}=${r}${l!.startsWith('<') ? '°' : ''}`),
   ...finds.filter(labelled).map(f => `${f}=?`),
 ].join(' ');
-const label = (f: string) => (f.startsWith('<') ? `\\angle ${f.slice(1)}` : /^[SP]\(/.test(f) ? f[0]! : f);
+const sub = (s: string) => s.replace(/([A-Z])(\d+)/g, '$1_{$2}'); // R1 → R₁
+const label = (f: string) => (f.startsWith('<') ? `\\angle ${sub(f.slice(1))}` : /^[SP]\(/.test(f) ? f[0]! : sub(f));
 ---
 <li class="prop prob" id={id} data-problem={JSON.stringify({ set, show, tags })}>
   <button class="prop-row" type="button" aria-expanded="false" aria-controls={`${id}--proof`}>
@@ -48,21 +55,24 @@ const label = (f: string) => (f.startsWith('<') ? `\\angle ${f.slice(1)}` : /^[S
   </button>
   <div class="proof" id={`${id}--proof`} hidden>
     <button class="back" type="button" data-proof-close><Icon name="left" /><span>ყველა ამოცანა</span></button>
-    <p class="proof-k">ამოცანა</p>
+    <p class="proof-k">{finds.length ? 'ამოცანა' : 'ამოცანა დამტკიცებაზე'}</p>
     <h3 class="proof-h" set:html={md(q)} />
-    <form class="ans" data-answer={JSON.stringify(values)} data-shown={answers.join(';')}>
-      {finds.map(f => (
-        <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
-      ))}
-      <div class="ans-row">
-        <button class="ans-key" type="button" data-key="√" aria-label="ფესვი">√</button>
-        <button class="ans-key" type="button" data-key="π" aria-label="პი">π</button>
-        <button class="ans-go" type="submit">შემოწმება</button>
-      </div>
-      <p class="ans-msg" aria-live="polite"></p>
-    </form>
+    {book && <p class="book">წიგნში: {book.split(/\s+/).join(', ')}</p>}
+    {finds.length > 0 && (
+      <form class="ans" data-answer={JSON.stringify(values)} data-shown={answers.join(';')}>
+        {finds.map(f => (
+          <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
+        ))}
+        <div class="ans-row">
+          <button class="ans-key" type="button" data-key="√" aria-label="ფესვი">√</button>
+          <button class="ans-key" type="button" data-key="π" aria-label="პი">π</button>
+          <button class="ans-go" type="submit">შემოწმება</button>
+        </div>
+        <p class="ans-msg" aria-live="polite"></p>
+      </form>
+    )}
     {hint && <details class="hint-d"><summary>მინიშნება</summary><p set:html={md(hint)} /></details>}
-    <button class="sol-open" type="button" data-solution>ამოხსნა</button>
+    <button class="sol-open" type="button" data-solution>{finds.length ? 'ამოხსნა' : 'დამტკიცება'}</button>
     <div class="sol" hidden><Proof figure={figure}><slot /></Proof></div>
   </div>
 </li>

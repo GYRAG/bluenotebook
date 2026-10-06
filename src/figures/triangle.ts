@@ -1,4 +1,4 @@
-import { add, angleAt, area, dist, near, scale, sub, triangleSAS, unit, type V } from './engine/geom';
+import { add, angleAt, area, dist, foot, incenter, lerp, near, orthocenter, rad, scale, sub, triangleSAS, unit, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 const angles = (A: V, B: V, C: V) => [angleAt(B, A, C), angleAt(A, B, C), angleAt(A, C, B)] as const;
@@ -19,6 +19,7 @@ export default figure({
       X: add(C, scale(unit(sub(C, A)), 1.6)),                 // on AC beyond C (exterior angle)
       D: add(C, scale(unit(sub(C, A)), dist(C, B))),          // on AC beyond C with CD = CB (triangle inequality)
       K: add(A, scale(u, b)),                                  // on AB with AK = AC (larger side ↔ larger angle)
+      ...helpers(A, B, C),
     };
   },
   drag: { B: ['c'], C: ['b', 'alpha'] },
@@ -50,3 +51,15 @@ export default figure({
     'at-most-one-obtuse': ({ A, B, C }) => angles(A, B, C).filter(x => x >= 90 - 1e-9).length <= 1,
   },
 });
+
+/** For problems: incentre I; feet P (from A) and Q (from C) and the orthocentre H; M and N on AC with
+ *  MA = MB and NB = NC; L, the foot of the bisector from B, and T on AB with LT ∥ BC. */
+function helpers(A: V, B: V, C: V) {
+  const ac = unit(sub(C, A)), cA = Math.cos(rad(angleAt(B, A, C))), cC = Math.cos(rad(angleAt(A, C, B)));
+  const L = lerp(A, C, dist(A, B) / (dist(A, B) + dist(B, C)));
+  return {
+    I: incenter(A, B, C), P: foot(A, B, C), Q: foot(C, A, B), H: orthocenter(A, B, C),
+    M: add(A, scale(ac, dist(A, B) / 2 / cA)), N: sub(C, scale(ac, dist(B, C) / 2 / cC)),
+    L, T: lerp(A, B, dist(A, L) / dist(A, C)),
+  };
+}

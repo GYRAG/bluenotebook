@@ -79,3 +79,58 @@ figure: triangle
 <Remark>შებრუნებულიც სამართლიანია: თუ სამი დადებითი რიცხვიდან უდიდესი დანარჩენი ორის ჯამზე ნაკლებია, ასეთი გვერდებით სამკუთხედი არსებობს. საკმარისია უდიდესი გვერდის შემოწმება.</Remark>
 
 <Remark kind="mistake">„სამი მონაკვეთისგან სამკუთხედი ყოველთვის აიგება“ — არა: მაგალითად, 2, 3 და 6 გვერდებით სამკუთხედი არ არსებობს, რადგან $6 > 2 + 3$.</Remark>
+
+<Problems>
+
+<Problem id="p-angle-ratio" set={{ c: 5, b: 4.396926207859083, alpha: 40 }} given="<A/<B=2/3 <B/<C=3/4" find="<A <B <C" answer="40 60 80" book="4.6 4.7"
+  q="სამკუთხედის კუთხეები ისე შეეფარდება ერთმანეთს, როგორც $2 : 3 : 4$. იპოვეთ ეს კუთხეები."
+  hint="სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.">
+<Step hl="<A <B <C" tex="2x + 3x + 4x = 180^\circ \;\Rightarrow\; x = 20^\circ">კუთხეებია $2x$, $3x$ და $4x$, მათი ჯამი კი $180^\circ$-ია.</Step>
+<Step tex="\angle A = 40^\circ,\quad \angle B = 60^\circ,\quad \angle C = 80^\circ">მაშასადამე, კუთხეებია $2 \cdot 20^\circ$, $3 \cdot 20^\circ$ და $4 \cdot 20^\circ$.</Step>
+</Problem>
+
+<Problem id="p-exterior-ratio" set={{ c: 4.5, b: 5.520067186075548, alpha: 60 }} show="CX" given="<BCX=130 <A/<B=6/7" find="<A <B <C" answer="60 70 50" book="4.37 4.39"
+  q="სამკუთხედის $C$ წვეროსთან მდებარე გარე კუთხე $130^\circ$-ია, ხოლო $A$ და $B$ კუთხეები ისე შეეფარდება ერთმანეთს, როგორც $6 : 7$. იპოვეთ სამკუთხედის კუთხეები."
+  hint="გარე კუთხე მისი არამოსაზღვრე ორი შიგა კუთხის ჯამის ტოლია.">
+<Step hl="<BCX <A <B" tex="\angle A + \angle B = \angle BCX = 130^\circ">გარე კუთხე მისი არამოსაზღვრე ორი შიგა კუთხის ჯამის ტოლია.</Step>
+<Step hl="<A <B" tex="\begin{gathered}6x + 7x = 130^\circ \;\Rightarrow\; x = 10^\circ \\ \angle A = 60^\circ,\quad \angle B = 70^\circ\end{gathered}">$\angle A = 6x$, $\angle B = 7x$.</Step>
+<Step hl="<C" tex="\angle C = 180^\circ - 130^\circ = 50^\circ">$\angle C$ გარე კუთხის მოსაზღვრეა.</Step>
+</Problem>
+
+<Problem id="p-bisectors-angle" set={{ c: 5, b: 4.076037345479524, alpha: 60 }} show="AI BI" given="<C=70" find="<AIB" answer="125" book="4.27 4.34"
+  q="$ABC$ სამკუთხედში $\angle C = 70^\circ$. $A$ და $B$ კუთხეების ბისექტრისები $I$ წერტილში იკვეთება. იპოვეთ $\angle AIB$."
+  hint="იპოვეთ $\angle A + \angle B$, შემდეგ კი მათი ნახევრების ჯამი.">
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ - 70^\circ = 110^\circ">სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step hl="<IAB <IBA" tex="\angle IAB + \angle IBA = \tfrac12 \cdot 110^\circ = 55^\circ">ბისექტრისები კუთხეებს შუაზე ყოფს.</Step>
+<Step hl="AIB <AIB" tex="\angle AIB = 180^\circ - 55^\circ = 125^\circ">სამკუთხედ $AIB$-ში. ზოგადად $\angle AIB = 90^\circ + \tfrac12 \angle C$.</Step>
+</Problem>
+
+<Problem id="p-altitudes-angle" set={{ c: 5, b: 4.608024925534381, alpha: 50 }} show="AP CQ <APC <CQA" given="<A=50 <C=70" find="<AHC" answer="120" book="4.45 4.46"
+  q="$ABC$ სამკუთხედში $\angle A = 50^\circ$, $\angle C = 70^\circ$. $AP$ და $CQ$ სიმაღლეები $H$ წერტილში იკვეთება. იპოვეთ $\angle AHC$."
+  hint="განიხილეთ ოთხკუთხედი $BPHQ$.">
+<Step hl="<B" tex="\angle B = 180^\circ - 50^\circ - 70^\circ = 60^\circ">სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step hl="BPHQ" tex="\angle PHQ = 360^\circ - 90^\circ - 90^\circ - 60^\circ = 120^\circ">ოთხკუთხედ $BPHQ$-ში $P$ და $Q$ კუთხეები მართია, ოთხკუთხედის კუთხეების ჯამი კი $360^\circ$-ია.</Step>
+<Step hl="<AHC" tex="\angle AHC = \angle PHQ = 120^\circ">ეს კუთხეები ვერტიკალურია.</Step>
+</Problem>
+
+<Problem id="p-isosceles-inside" set={{ c: 3.4, b: 5.725736974614548, alpha: 40 }} show="BM BN" given="<A=40 <B=105 <C=35 MA=MB NB=NC" find="<MBN" answer="30" book="3.12"
+  q="$ABC$ სამკუთხედში $\angle A = 40^\circ$, $\angle B = 105^\circ$, $\angle C = 35^\circ$. $AC$ გვერდზე აღებულია $M$ და $N$ წერტილები ისე, რომ $MA = MB$ და $NB = NC$. იპოვეთ $\angle MBN$."
+  hint="ტოლფერდა სამკუთხედებში $AMB$ და $BNC$ ფუძესთან მდებარე კუთხეები ტოლია.">
+<Step hl="AMB <ABM=<A" tex="\angle ABM = \angle A = 40^\circ">სამკუთხედი $AMB$ ტოლფერდაა ($MA = MB$).</Step>
+<Step hl="BNC <CBN=<C" tex="\angle CBN = \angle C = 35^\circ">სამკუთხედი $BNC$ ტოლფერდაა ($NB = NC$).</Step>
+<Step hl="<MBN" tex="\angle MBN = 105^\circ - 40^\circ - 35^\circ = 30^\circ">$\angle B$ ამ სამი კუთხისგან შედგება.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-bisector-parallel" set={{ c: 5.5, b: 4, alpha: 60 }} show="BL LT" given="<ABL=<LBC <ATL=<ABC" prove="TL=TB" book="4.56 4.57"
+  q="$ABC$ სამკუთხედის $B$ კუთხის ბისექტრისა $AC$ გვერდს $L$ წერტილში კვეთს. $L$-ზე $BC$-ს პარალელურად გავლებული წრფე $AB$ გვერდს $T$ წერტილში კვეთს. დაამტკიცეთ, რომ $TL = TB$."
+  hint="იპოვეთ ორი ტოლი კუთხე $TLB$ სამკუთხედში.">
+<Step hl="<TBL=<LBC" tex="\angle TBL = \angle LBC">$BL$ ბისექტრისაა.</Step>
+<Step hl="<TLB=<LBC LT||BC" tex="\angle TLB = \angle LBC">$LT \parallel BC$, ხოლო $BL$ მკვეთია — შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="TLB TL=TB" tex="\angle TBL = \angle TLB \;\Rightarrow\; TL = TB \quad \blacksquare">სამკუთხედ $TLB$-ში ორი კუთხე ტოლია — ის ტოლფერდაა.</Step>
+</Problem>
+
+</Problems>

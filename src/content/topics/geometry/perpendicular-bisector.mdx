@@ -9,7 +9,7 @@ tags: [მანძილი, მართობი, დახრილი, შ�
 prerequisites: [congruence, isosceles-triangle]
 status: draft
 figure: perp-bisector
-figures: [angle-bisector]
+figures: [angle-bisector, triangle]
 ---
 
 <Definition>**მანძილი** წერტილიდან წრფემდე ამ წერტილიდან წრფეზე დაშვებული მართობის სიგრძეა. მონაკვეთის **შუამართობი** მის შუაწერტილზე გავლებული მართობი წრფეა. კუთხის **ბისექტრისა** სხივია, რომელიც კუთხეს შუაზე ყოფს.</Definition>
@@ -66,3 +66,49 @@ figures: [angle-bisector]
 </Properties>
 
 <Remark kind="mistake">მანძილი წერტილიდან წრფემდე მართობის სიგრძეა და არა ნებისმიერი მონაკვეთისა, რომელიც წერტილს წრფესთან აერთებს.</Remark>
+
+<Problems>
+
+<Problem id="p-perp-perimeter" set={{ c: 4, t: 2.6666666666666665 }} given="AB=12 P(ABP)=32" find="PA" answer="10" book="3.14"
+  q="$P$ წერტილი $AB$ მონაკვეთის შუამართობზე ძევს. $ABP$ სამკუთხედის პერიმეტრი $32$-ია, $AB = 12$. იპოვეთ $PA$."
+  hint="შუამართობის ნებისმიერი წერტილი მონაკვეთის ბოლოებიდან თანაბრადაა დაშორებული.">
+<Step hl="PA=PB" tex="PA = PB">$P$ ძევს $AB$-ს შუამართობზე.</Step>
+<Step hl="ABP" tex="2\,PA + 12 = 32 \;\Rightarrow\; PA = 10">ჩავწეროთ პერიმეტრი.</Step>
+</Problem>
+
+<Problem id="p-perp-in-triangle" figure="triangle" k={2.5} set={{ c: 5.2, b: 5.6, alpha: 43.27917520057224 }} show="BM" given="MA=MB P(BMC)=24 P(ABC)=37" find="AB" answer="13" book="3.11"
+  q="$ABC$ სამკუთხედის $AB$ გვერდის შუამართობი $AC$ გვერდს $M$ წერტილში კვეთს. $ABC$ სამკუთხედის პერიმეტრი $37$-ია, $BMC$ სამკუთხედისა კი — $24$. იპოვეთ $AB$."
+  hint="$MA = MB$ — ჩაწერეთ $BMC$ სამკუთხედის პერიმეტრი $AC$-სა და $BC$-ს საშუალებით.">
+<Step hl="MA=MB" tex="MA = MB">$M$ ძევს $AB$-ს შუამართობზე.</Step>
+<Step hl="BMC" tex="\begin{aligned}P_{BMC} &= MB + MC + BC \\ &= MA + MC + BC \\ &= AC + BC = 24\end{aligned}">ჩავსვათ $MB = MA$; $MA + MC = AC$.</Step>
+<Step hl="AB" tex="AB = 37 - 24 = 13">დანარჩენი პერიმეტრი $AB$ გვერდზე მოდის.</Step>
+</Problem>
+
+<Problem id="p-bisector-30" figure="angle-bisector" set={{ phi: 60, d: 4 }} show="OP PK PL <PKO <PLO" given="<XOY=60 OP=12" find="PK" answer="6" book="4.17 4.20"
+  q="$P$ წერტილი $60^\circ$-იანი კუთხის ბისექტრისაზე ძევს, წვეროდან $12$ სმ-ის მანძილზე. იპოვეთ მანძილი $P$ წერტილიდან კუთხის გვერდებამდე."
+  hint="მართკუთხა სამკუთხედში $30^\circ$-იანი კუთხის პირდაპირ მდებარე კათეტი ჰიპოტენუზის ნახევარია.">
+<Step hl="<KOP=<POL" tex="\angle KOP = \angle POL = 30^\circ">$OP$ ბისექტრისაა.</Step>
+<Step hl="OKP <PKO" tex="PK = \tfrac12\, OP = 6">მართკუთხა სამკუთხედ $OKP$-ში $PK$ კათეტი $30^\circ$-იანი კუთხის პირდაპირ მდებარეობს.</Step>
+<Step hl="PK=PL" tex="PL = PK = 6">ბისექტრისის ნებისმიერი წერტილი კუთხის გვერდებიდან თანაბრადაა დაშორებული.</Step>
+</Problem>
+
+<Problem id="p-bisector-quad" figure="angle-bisector" set={{ phi: 70, d: 3.6 }} show="PK PL <PKO <PLO" given="<KPL=110" find="<XOY" answer="70" book="4.14"
+  q="$P$ წერტილიდან $XOY$ კუთხის გვერდებზე დაშვებულია $PK$ და $PL$ მართობები, $\angle KPL = 110^\circ$. იპოვეთ $\angle XOY$."
+  hint="ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია.">
+<Step hl="OKPL <PKO <PLO">ოთხკუთხედ $OKPL$-ში $K$ და $L$ კუთხეები მართია.</Step>
+<Step hl="<XOY" tex="\angle XOY = 360^\circ - 90^\circ - 90^\circ - 110^\circ = 70^\circ">ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-bisector-tangents" figure="angle-bisector" set={{ phi: 80, d: 3.6 }} show="OP PK PL <PKO <PLO" given="<KOP=<POL" prove="OK=OL"
+  q="$P$ წერტილი $XOY$ კუთხის ბისექტრისაზე ძევს, $PK$ და $PL$ კი მართობებია კუთხის გვერდებზე. დაამტკიცეთ, რომ $OK = OL$."
+  hint="შეადარეთ მართკუთხა სამკუთხედები $OKP$ და $OLP$.">
+<Step hl="OKP OLP">$OKP$ და $OLP$ მართკუთხა სამკუთხედებია საერთო ჰიპოტენუზით $OP$.</Step>
+<Step hl="<KOP=<POL" tex="\angle KOP = \angle LOP">$OP$ ბისექტრისაა.</Step>
+<Step hl="OK=OL" tex="\triangle OKP = \triangle OLP \;\Rightarrow\; OK = OL \quad \blacksquare">მართკუთხა სამკუთხედები ტოლია ჰიპოტენუზითა და მახვილი კუთხით.</Step>
+</Problem>
+
+</Problems>

@@ -28,7 +28,7 @@ figures: [cyclic-quad, tangential-quad]
 <Proof given="$ABCD$ — ოთხკუთხედი" prove="$\angle A + \angle B + \angle C + \angle D = 360^\circ$">
 <Step show="AC" hl="AC">გავავლოთ დიაგონალი $AC$ (ჩაზნექილ ოთხკუთხედში — იმ წვეროდან, რომლის კუთხეც $180^\circ$-ზე მეტია; ასეთი დიაგონალი ოთხკუთხედის შიგნით გადის).</Step>
 <Step hl="ABC ACD">დიაგონალი ოთხკუთხედს ორ სამკუთხედად ყოფს — $ABC$ და $ACD$. $\angle A$ და $\angle C$ თითოეული ორ ნაწილად გაიყო, რომლებიც სხვადასხვა სამკუთხედს ეკუთვნის.</Step>
-<Step tex="\angle A + \angle B + \angle C + \angle D = 180^\circ + 180^\circ = 360^\circ \quad \blacksquare">ოთხკუთხედის ოთხივე კუთხე ზუსტად ამ ორი სამკუთხედის ექვს კუთხეს შეადგენს, ხოლო თითოეული სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step tex="\begin{aligned}\angle A + \angle B + \angle C + \angle D &= 180^\circ + 180^\circ \\ &= 360^\circ \quad \blacksquare\end{aligned}">ოთხკუთხედის ოთხივე კუთხე ზუსტად ამ ორი სამკუთხედის ექვს კუთხეს შეადგენს, ხოლო თითოეული სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
 </Proof>
 </Property>
 
@@ -43,8 +43,8 @@ figures: [cyclic-quad, tangential-quad]
 <Property id="area-diagonals" title="ამოზნექილი ოთხკუთხედის ფართობი დიაგონალების და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია" why="დიაგონალები ოთხკუთხედს ოთხ სამკუთხედად ყოფს, ყველას ერთი და იგივე სინუსი აქვს.">
 <Proof given="$ABCD$ ამოზნექილია, $O = AC \cap BD$, $\angle AOB = \varphi$" prove="$S = \tfrac12\, AC \cdot BD \sin\varphi$">
 <Step show="AC BD O" hl="<AOB">გავავლოთ დიაგონალები. $O$-სთან ოთხი კუთხეა: $\varphi$, $180^\circ - \varphi$, $\varphi$, $180^\circ - \varphi$; ყველას სინუსი $\sin\varphi$-ია.</Step>
-<Step hl="ABO BCO CDO DAO" tex="S = \tfrac12 \sin\varphi\,\left(OA\cdot OB + OB \cdot OC + OC \cdot OD + OD \cdot OA\right)">ოთხკუთხედი ოთხ სამკუთხედად დაიყო, თითოეულის ფართობი $\tfrac12 xy\sin\varphi$-ია.</Step>
-<Step tex="S = \tfrac12 \sin\varphi\,(OA + OC)(OB + OD) = \tfrac12\, AC \cdot BD \sin\varphi \quad \blacksquare">ფრჩხილი ჯგუფდება: $OB(OA + OC) + OD(OC + OA)$.</Step>
+<Step hl="ABO BCO CDO DAO" tex="\begin{aligned}S = \tfrac12 \sin\varphi\,\bigl(&OA\cdot OB + OB \cdot OC \\ &+ OC \cdot OD + OD \cdot OA\bigr)\end{aligned}">ოთხკუთხედი ოთხ სამკუთხედად დაიყო, თითოეულის ფართობი $\tfrac12 xy\sin\varphi$-ია.</Step>
+<Step tex="\begin{aligned}S &= \tfrac12 \sin\varphi\,(OA + OC)(OB + OD) \\ &= \tfrac12\, AC \cdot BD \sin\varphi \quad \blacksquare\end{aligned}">ფრჩხილი ჯგუფდება: $OB(OA + OC) + OD(OC + OA)$.</Step>
 </Proof>
 </Property>
 
@@ -68,7 +68,7 @@ figures: [cyclic-quad, tangential-quad]
 <Proof figure="cyclic-quad" given="$A, B, C, D$ წრეწირზე ძევს" prove="$\angle A + \angle C = 180^\circ$">
 <Step hl="<A">ჩახაზული კუთხე $\angle A = \angle BAD$ ეყრდნობა $BCD$ რკალს, ამიტომ მისი ნახევრის ტოლია.</Step>
 <Step hl="<C">$\angle C = \angle BCD$ ეყრდნობა დანარჩენ, $BAD$ რკალს.</Step>
-<Step tex="\angle A + \angle C = \tfrac12\left(\smile BCD + \smile BAD\right) = \tfrac12 \cdot 360^\circ = 180^\circ \quad \blacksquare">ორი რკალი ერთად მთელ წრეწირს შეადგენს.</Step>
+<Step tex="\begin{aligned}\angle A + \angle C &= \tfrac12\left(\smile BCD + \smile BAD\right) \\ &= \tfrac12 \cdot 360^\circ = 180^\circ \quad \blacksquare\end{aligned}">ორი რკალი ერთად მთელ წრეწირს შეადგენს.</Step>
 </Proof>
 </Property>
 
@@ -86,7 +86,7 @@ figures: [cyclic-quad, tangential-quad]
 <Step show="AC BD AE E" hl="<BAE=<CAD">$BD$-ზე ავიღოთ $E$ წერტილი ისე, რომ $\angle BAE = \angle CAD$.</Step>
 <Step hl="ABE ACD" tex="AB \cdot CD = AC \cdot BE">$\angle ABE = \angle ABD = \angle ACD$ — ერთსა და იმავე $AD$ რკალზე დაყრდნობილი ჩახაზული კუთხეები. ამიტომ $\triangle ABE \sim \triangle ACD$ (ორი კუთხით).</Step>
 <Step hl="AED ABC" tex="AD \cdot BC = AC \cdot ED">$\angle BAE = \angle CAD$ ტოლობის ორივე მხარეს დავუმატოთ (ან გამოვაკლოთ) $\angle EAC$: $\angle BAC = \angle EAD$. ასევე $\angle ADE = \angle ADB = \angle ACB$ ($AB$ რკალი). ამიტომ $\triangle AED \sim \triangle ABC$.</Step>
-<Step tex="AB \cdot CD + AD \cdot BC = AC\,(BE + ED) = AC \cdot BD \quad \blacksquare">შევკრიბოთ ორი ტოლობა; $BE + ED = BD$.</Step>
+<Step tex="\begin{aligned}AB \cdot CD + AD \cdot BC &= AC\,(BE + ED) \\ &= AC \cdot BD \quad \blacksquare\end{aligned}">შევკრიბოთ ორი ტოლობა; $BE + ED = BD$.</Step>
 </Proof>
 </Property>
 
@@ -98,7 +98,7 @@ figures: [cyclic-quad, tangential-quad]
 <Proof figure="tangential-quad" given="$ABCD$-ის გვერდები წრეწირს ეხება $T_1, T_2, T_3, T_4$ წერტილებში" prove="$AB + CD = BC + AD$">
 <Step show="T1 T2 T3 T4" hl="AT1=AT4 BT1=BT2 CT2=CT3 DT3=DT4">ერთი წერტილიდან წრეწირისადმი გავლებული ორი მხების მონაკვეთი ტოლია: $AT_1 = AT_4$, $BT_1 = BT_2$, $CT_2 = CT_3$, $DT_3 = DT_4$.</Step>
 <Step tex="AB + CD = (AT_1 + T_1B) + (CT_3 + T_3D)">ყოველი გვერდი შეხების წერტილით ორ მხების მონაკვეთად იყოფა.</Step>
-<Step tex="AB + CD = AT_4 + BT_2 + CT_2 + DT_4 = BC + AD \quad \blacksquare">შევცვალოთ თითოეული მონაკვეთი მისი ტოლით და გადავაჯგუფოთ.</Step>
+<Step tex="\begin{aligned}AB + CD &= AT_4 + BT_2 + CT_2 + DT_4 \\ &= BC + AD \quad \blacksquare\end{aligned}">შევცვალოთ თითოეული მონაკვეთი მისი ტოლით და გადავაჯგუფოთ.</Step>
 </Proof>
 </Property>
 

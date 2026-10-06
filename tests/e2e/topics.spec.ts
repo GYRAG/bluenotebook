@@ -38,3 +38,23 @@ test('relationships: picking facts names the shape; cheat sheet lists every topi
   await page.goto('/cheatsheet/');
   expect(await page.locator('.cheat-topic').count()).toBeGreaterThanOrEqual(15);
 });
+
+test('proof and solution formulas fit a phone screen (shrunk to 80% at most)', async ({ page }) => {
+  test.setTimeout(180_000);
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/');
+  const urls = await page.$$eval('#nav .topics a', as => as.map(a => (a as HTMLAnchorElement).pathname));
+  const wide: string[] = [];
+  for (const url of urls) {
+    await page.goto(url);
+    await page.evaluate(() => document.fonts.ready);
+    wide.push(...await page.$$eval('.prop', lis => lis.flatMap(li => {
+      li.closest<HTMLElement>('[role=tabpanel]')!.hidden = false; // measure every tab's proofs as laid out when open
+      li.querySelector<HTMLElement>('.proof')!.hidden = false;
+      const sol = li.querySelector<HTMLElement>('.sol');
+      if (sol) sol.hidden = false;
+      return [...li.querySelectorAll<HTMLElement>('.step-tex')].filter(t => 0.8 * t.scrollWidth > t.clientWidth + 1).map(t => `${location.pathname}#${li.id}: ${t.scrollWidth} > ${t.clientWidth}`);
+    })));
+  }
+  expect(wide).toEqual([]);
+});

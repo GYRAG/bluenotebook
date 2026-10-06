@@ -25,12 +25,12 @@ parent: triangle
 
 <Property id="sine-law" title="სინუსების თეორემა: სამკუთხედის გვერდები მოპირდაპირე კუთხეების სინუსების პროპორციულია, ხოლო შეფარდება $2R$-ია" why="ფართობი სამნაირად; ხოლო $2R$ — დიამეტრზე აგებული მართკუთხა სამკუთხედიდან.">
 <Proof given="$ABC$ — სამკუთხედი, $R$ — შემოხაზული წრეწირის რადიუსი" prove="$\tfrac{a}{\sin\alpha} = \tfrac{b}{\sin\beta} = \tfrac{c}{\sin\gamma} = 2R$">
-<Step hl="ABC" tex="S = \tfrac12\, bc\sin\alpha = \tfrac12\, ca\sin\beta = \tfrac12\, ab\sin\gamma">ფართობი ორი გვერდითა და მათ შორის კუთხით, სამნაირად.</Step>
+<Step hl="ABC" tex="\begin{aligned}S &= \tfrac12\, bc\sin\alpha \\ &= \tfrac12\, ca\sin\beta = \tfrac12\, ab\sin\gamma\end{aligned}">ფართობი ორი გვერდითა და მათ შორის კუთხით, სამნაირად.</Step>
 <Step tex="\frac{\sin\alpha}{a} = \frac{\sin\beta}{b} = \frac{\sin\gamma}{c}">გავყოთ $\tfrac12 abc$-ზე.</Step>
 <Step show="(OA) O BD D" hl="BD">გავავლოთ დიამეტრი $BD$ ($BD = 2R$).</Step>
 <Step show="CD" hl="BCD <BCD" tex="\angle BCD = 90^\circ">დიამეტრზე დაყრდნობილი ჩახაზული კუთხე მართია.</Step>
 <Step hl="<BDC <A" tex="\sin\angle BDC = \sin\alpha">$\angle BDC$ და $\angle BAC$ ერთსა და იმავე $BC$ რკალს ეყრდნობა: ისინი ან ტოლია, ან მათი ჯამი $180^\circ$-ია — სინუსი ორივე შემთხვევაში ერთია.</Step>
-<Step hl="BC" tex="a = BC = BD\sin\angle BDC = 2R\sin\alpha \;\Rightarrow\; \frac{a}{\sin\alpha} = 2R \quad \blacksquare">მართკუთხა $\triangle BCD$-ში.</Step>
+<Step hl="BC" tex="\begin{gathered}a = BC = BD\sin\angle BDC = 2R\sin\alpha \\ \frac{a}{\sin\alpha} = 2R \quad \blacksquare\end{gathered}">მართკუთხა $\triangle BCD$-ში.</Step>
 </Proof>
 </Property>
 
@@ -39,7 +39,7 @@ parent: triangle
 <Step show="AH H <AHB" hl="AH">$A$-დან $BC$ წრფეზე დავუშვათ სიმაღლე $AH$.</Step>
 <Step hl="AHC" tex="AH = b\sin\gamma, \qquad CH = b\cos\gamma">მართკუთხა $\triangle AHC$-ში ($\gamma$ ბლაგვისთვის $H$ $C$-ს მეორე მხარესაა და $\cos\gamma < 0$ — ფორმულები იგივე რჩება).</Step>
 <Step hl="BH" tex="BH = a - b\cos\gamma">$B$-დან $H$-მდე — $BC$-ს გამოკლებული $CH$ (ნიშნით).</Step>
-<Step hl="AHB" tex="c^2 = b^2\sin^2\gamma + (a - b\cos\gamma)^2 = a^2 + b^2 - 2ab\cos\gamma \quad \blacksquare">პითაგორა $\triangle AHB$-ში და $\sin^2\gamma + \cos^2\gamma = 1$.</Step>
+<Step hl="AHB" tex="\begin{aligned}c^2 &= b^2\sin^2\gamma + (a - b\cos\gamma)^2 \\ &= a^2 + b^2 - 2ab\cos\gamma \quad \blacksquare\end{aligned}">პითაგორა $\triangle AHB$-ში და $\sin^2\gamma + \cos^2\gamma = 1$.</Step>
 </Proof>
 </Property>
 

@@ -88,3 +88,74 @@ parent: triangle
 </Properties>
 
 <Remark kind="mistake">„ბისექტრისა = მედიანა = სიმაღლე“ მხოლოდ ფუძეზე დაშვებულ წრფეს ეხება; ფერდებზე დაშვებული ეს სამი წრფე, საზოგადოდ, განსხვავებულია.</Remark>
+
+<Problems>
+
+<Problem id="p-iso-perimeter" k={3} set={{ b: 4, theta: 49.248636704328156 }} given="P(ABC)=34 AB-BC=2" find="AB BC" answer="12 10" book="3.2 3.3 3.4"
+  q="ტოლფერდა სამკუთხედის პერიმეტრი $34$ სმ-ია, ფუძე კი ფერდზე $2$ სმ-ით მოკლეა. იპოვეთ სამკუთხედის გვერდები."
+  hint="ფერდი აღნიშნეთ $x$-ით და პერიმეტრი მისი საშუალებით ჩაწერეთ.">
+<Step hl="AB=AC" tex="x + x + (x - 2) = 34">ფერდები ტოლია: $AB = AC = x$, ფუძე კი $BC = x - 2$.</Step>
+<Step tex="3x = 36 \;\Rightarrow\; x = 12,\qquad BC = 10">ამოვხსნათ განტოლება.</Step>
+</Problem>
+
+<Problem id="p-median-parts" k={2.5} set={{ b: 4, theta: 40.974630229445324 }} show="BK" given="BC+CK=12 BA+AK=15" find="AB BC" answer="10 7" book="3.6 3.7"
+  q="ტოლფერდა სამკუთხედის ფერდზე გავლებული მედიანა სამკუთხედის პერიმეტრს ორ ნაწილად ყოფს: ფუძის შემცველი ნაწილი $12$ სმ-ია, მეორე კი — $15$ სმ. იპოვეთ სამკუთხედის გვერდები."
+  hint="მედიანა ფერდს შუაზე ყოფს.">
+<Step hl="BK AK=KC" tex="AK = KC = \tfrac{x}{2}">$BK$ მედიანაა, ფერდები კი $AB = AC = x$.</Step>
+<Step hl="AB AK" tex="AB + AK = x + \tfrac{x}{2} = 15 \;\Rightarrow\; x = 10">ფუძეს არ შეიცავს ნაწილი $BA + AK$.</Step>
+<Step hl="BC CK" tex="BC + CK = BC + 5 = 12 \;\Rightarrow\; BC = 7">ფუძის შემცველი ნაწილი.</Step>
+</Problem>
+
+<Problem id="p-iso-perp-bisector" set={{ b: 4, theta: 136.42642140347638 }} show="NE AE <ENA" given="AB=14 P(AEC)=40" find="BC" answer="26" book="3.14 3.15"
+  q="ტოლფერდა $ABC$ სამკუთხედში $AB = AC = 14$. $AB$ ფერდის შუამართობი $BC$ ფუძეს $E$ წერტილში კვეთს, $AEC$ სამკუთხედის პერიმეტრი კი $40$-ია. იპოვეთ $BC$."
+  hint="შუამართობის ნებისმიერი წერტილი მონაკვეთის ბოლოებიდან თანაბრადაა დაშორებული.">
+<Step hl="NE AE=EB" tex="AE = EB">$E$ ძევს $AB$-ს შუამართობზე.</Step>
+<Step hl="AEC" tex="\begin{aligned}P_{AEC} &= AE + EC + AC \\ &= BE + EC + AC \\ &= BC + 14\end{aligned}">ჩავსვათ $AE = BE$.</Step>
+<Step hl="BC" tex="BC + 14 = 40 \;\Rightarrow\; BC = 26">ამოვხსნათ განტოლება.</Step>
+</Problem>
+
+<Problem id="p-iso-height-angle" set={{ b: 4, theta: 36 }} show="BQ <BQC" given="<QBC=18" find="<A <B" answer="36 72" book="4.15 4.16"
+  q="ტოლფერდა სამკუთხედის ფერდზე დაშვებული სიმაღლე ფუძესთან $18^\circ$-იან კუთხეს ადგენს. იპოვეთ სამკუთხედის კუთხეები."
+  hint="განიხილეთ მართკუთხა სამკუთხედი $BQC$.">
+<Step hl="BQC <BQC" tex="\angle C = 90^\circ - 18^\circ = 72^\circ">მართკუთხა სამკუთხედ $BQC$-ში მახვილი კუთხეების ჯამი $90^\circ$-ია.</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C = 72^\circ">ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+<Step hl="<A" tex="\angle A = 180^\circ - 2 \cdot 72^\circ = 36^\circ">სამკუთხედის კუთხეების ჯამი $180^\circ$-ია.</Step>
+</Problem>
+
+<Problem id="p-iso-obtuse-height" set={{ b: 3, theta: 120 }} show="BQ AQ <BQC" given="<B=30" find="<ABQ" answer="30" book="4.12 4.13"
+  q="ტოლფერდა სამკუთხედის ფუძესთან მდებარე კუთხე $30^\circ$-ია. იპოვეთ კუთხე ფერდსა და მეორე ფერდზე დაშვებულ სიმაღლეს შორის."
+  hint="წვეროსთან მდებარე კუთხე ბლაგვია, ამიტომ სიმაღლის ფუძე ფერდის გაგრძელებაზე მოხვდება.">
+<Step hl="<A" tex="\angle A = 180^\circ - 2 \cdot 30^\circ = 120^\circ">ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+<Step hl="<BAQ" tex="\angle BAQ = 180^\circ - 120^\circ = 60^\circ">$Q$ ძევს $CA$-ს გაგრძელებაზე, ამიტომ $\angle BAQ$ სამკუთხედის $A$ წვეროსთან მდებარე გარე კუთხეა.</Step>
+<Step hl="ABQ <ABQ" tex="\angle ABQ = 90^\circ - 60^\circ = 30^\circ">მართკუთხა სამკუთხედ $ABQ$-ში მახვილი კუთხეების ჯამი $90^\circ$-ია.</Step>
+</Problem>
+
+<Problem id="p-iso-exterior" set={{ b: 4, theta: 110 }} given="180-<A=70" find="<A <B" answer="110 35" book="4.36"
+  q="ტოლფერდა სამკუთხედის ერთ-ერთი გარე კუთხე $70^\circ$-ია. იპოვეთ სამკუთხედის კუთხეები."
+  hint="შეიძლება თუ არა, რომ ეს გარე კუთხე ფუძესთან მდებარეობდეს?">
+<Step hl="<B <C">ფუძესთან მდებარე კუთხეები ტოლია და ამიტომ მახვილია; მათთან მდებარე გარე კუთხეები $90^\circ$-ზე მეტია. მაშასადამე, $70^\circ$-იანი გარე კუთხე წვეროსთან მდებარეობს.</Step>
+<Step show="AX" hl="<XAC <A" tex="\angle A = 180^\circ - 70^\circ = 110^\circ">$\angle A$ ამ გარე კუთხის მოსაზღვრეა.</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C = \frac{180^\circ - 110^\circ}{2} = 35^\circ">ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-iso-exterior-bisector" set={{ b: 4, theta: 70 }} show="AX AY" given="<XAY=<YAC" prove="<YAC=<ACB" book="4.54"
+  q="დაამტკიცეთ, რომ ტოლფერდა სამკუთხედის წვეროსთან მდებარე გარე კუთხის ბისექტრისა ფუძის პარალელურია."
+  hint="გარე კუთხე ფუძესთან მდებარე ორი კუთხის ჯამის ტოლია.">
+<Step hl="<XAC <B <C" tex="\angle XAC = \angle B + \angle C = 2\angle C">გარე კუთხე მისი არამოსაზღვრე ორი შიგა კუთხის ჯამის ტოლია, ხოლო $\angle B = \angle C$.</Step>
+<Step hl="<YAC=<ACB" tex="\angle YAC = \tfrac12 \angle XAC = \angle C">$AY$ ბისექტრისაა.</Step>
+<Step hl="AY||BC" tex="AY \parallel BC \quad \blacksquare">$\angle YAC$ და $\angle ACB$ შიგა ჯვარედინი კუთხეებია $AY$ და $BC$ წრფეებისა და $AC$ მკვეთისთვის.</Step>
+</Problem>
+
+<Problem id="p-iso-midpoints" set={{ b: 4, theta: 50 }} show="NK KH HN" prove="HN=HK" book="3.19"
+  q="დაამტკიცეთ, რომ ტოლფერდა სამკუთხედის გვერდების შუაწერტილები ტოლფერდა სამკუთხედის წვეროებია."
+  hint="შეადარეთ სამკუთხედები $BNH$ და $CKH$.">
+<Step hl="BN=CK" tex="BN = \tfrac12 AB = \tfrac12 AC = CK">$N$ და $K$ ფერდების შუაწერტილებია.</Step>
+<Step hl="BNH CKH <B=<C BH=HC" tex="\triangle BNH = \triangle CKH">$BH = HC$ და $\angle B = \angle C$ — სამკუთხედები ტოლია (გკგ).</Step>
+<Step hl="HN=HK" tex="HN = HK \quad \blacksquare">ტოლი სამკუთხედების შესაბამისი გვერდებია — სამკუთხედი $NHK$ ტოლფერდაა.</Step>
+</Problem>
+
+</Problems>

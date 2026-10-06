@@ -1,4 +1,4 @@
-import { add, angleAt, near, parallel, polar, rad, scale, sub, type V } from './engine/geom';
+import { add, angleAt, intersect, near, parallel, polar, rad, scale, sub, unit, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // Two parallel lines (y = ±g/2) and a transversal through the origin at angle θ.
@@ -17,10 +17,12 @@ export default figure({
       E, F,
       L1: [-5, -g / 2] as V, R1: [5, -g / 2] as V, L2: [-5, g / 2] as V, R2: [5, g / 2] as V,
       T1: sub(E, scale(u, 1.8)), T2: add(F, scale(u, 1.8)),
+      ...helpers(E, F, u, g),
     };
   },
   drag: { F: ['theta', 'g'] },
   base: 'L1R1 L2R2 T1T2 E F',
+  boundsOf: ['L1', 'R1', 'L2', 'R2', 'T1', 'T2', 'E', 'F'],
   dims: '<R1EF <FEL1',
   toggles: {
     'ვერტიკალური': '<R1EF=<L1ET1',
@@ -42,3 +44,9 @@ export default figure({
     },
   },
 });
+
+/** For problems: G, where the bisector of ∠R1EF meets the upper line; M, where it meets the bisector of ∠R2FE. */
+function helpers(E: V, F: V, u: V, g: number) {
+  const w = unit(add(u, [1, 0])), v = unit(sub([1, 0], u));
+  return { G: add(E, scale(w, g / w[1])), M: intersect(E, add(E, w), F, add(F, v)) };
+}

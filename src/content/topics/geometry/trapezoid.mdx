@@ -61,7 +61,7 @@ parent: quadrilateral
 <Proof given="$O = AC \cap BD$" prove="$AO : OC = DO : OB = a : b$">
 <Step show="AC BD O" hl="AC BD">გავავლოთ დიაგონალები.</Step>
 <Step hl="<AOD=<COB <OAD=<OCB">$\angle AOD = \angle COB$ (ვერტიკალური), $\angle OAD = \angle OCB$ (ჯვარედინი, $AD \parallel BC$).</Step>
-<Step hl="AOD BOC" tex="\triangle AOD \sim \triangle COB \;\Rightarrow\; \frac{AO}{OC} = \frac{DO}{OB} = \frac{AD}{CB} = \frac{a}{b} \quad \blacksquare">სამკუთხედები მსგავსია ორი კუთხით.</Step>
+<Step hl="AOD BOC" tex="\begin{gathered}\triangle AOD \sim \triangle COB \\ \frac{AO}{OC} = \frac{DO}{OB} = \frac{AD}{CB} = \frac{a}{b} \quad \blacksquare\end{gathered}">სამკუთხედები მსგავსია ორი კუთხით.</Step>
 </Proof>
 </Property>
 
@@ -87,10 +87,10 @@ parent: quadrilateral
 <Property id="diagonal-triangles" title="დიაგონალები ტრაპეციას ოთხ სამკუთხედად ყოფს: ფერდებთან მდებარე სამკუთხედები ტოლდიდია, ხოლო თითოეულის ფართობის კვადრატი ფუძეებთან მდებარე სამკუთხედების ფართობების ნამრავლია" why="ერთი და იმავე ფუძისა და სიმაღლის სამკუთხედები ტოლდიდია.">
 <Proof given="$O = AC \cap BD$" prove="$S_{AOB} = S_{COD},\ S_{AOB}^2 = S_{AOD} \cdot S_{BOC}$">
 <Step show="AC BD O" hl="ABD ACD" tex="S_{ABD} = S_{ACD}">ორ სამკუთხედს საერთო ფუძე $AD$ აქვს, სიმაღლეები კი ტოლია: $B$ და $C$ ერთნაირად არის დაშორებული $AD$-დან.</Step>
-<Step hl="AOB COD" tex="S_{AOB} = S_{ABD} - S_{AOD} = S_{ACD} - S_{AOD} = S_{COD}">ორივეს გამოვაკლოთ $S_{AOD}$.</Step>
+<Step hl="AOB COD" tex="\begin{aligned}S_{AOB} &= S_{ABD} - S_{AOD} \\ &= S_{ACD} - S_{AOD} = S_{COD}\end{aligned}">ორივეს გამოვაკლოთ $S_{AOD}$.</Step>
 <Step hl="AOB AOD" tex="\frac{S_{AOB}}{S_{AOD}} = \frac{OB}{OD}">სამკუთხედებს საერთო წვერო $A$ აქვს, ფუძეები $OB$ და $OD$ კი ერთ წრფეზე ძევს — ფართობები ფუძეების პროპორციულია.</Step>
 <Step hl="BOC COD" tex="\frac{S_{BOC}}{S_{COD}} = \frac{OB}{OD}">იგივე, საერთო წვეროთი $C$.</Step>
-<Step tex="S_{AOB} \cdot S_{COD} = S_{AOD} \cdot S_{BOC} \;\Rightarrow\; S_{AOB}^2 = S_{AOD} \cdot S_{BOC} \quad \blacksquare">ორი შეფარდება ტოლია; ჩავსვათ $S_{COD} = S_{AOB}$.</Step>
+<Step tex="\begin{gathered}S_{AOB} \cdot S_{COD} = S_{AOD} \cdot S_{BOC} \\ S_{AOB}^2 = S_{AOD} \cdot S_{BOC} \quad \blacksquare\end{gathered}">ორი შეფარდება ტოლია; ჩავსვათ $S_{COD} = S_{AOB}$.</Step>
 </Proof>
 </Property>
 

@@ -46,6 +46,7 @@ function go(i: number) {
   const { steps, li } = open;
   open.i = i = Math.max(0, Math.min(steps.length - 1, i));
   steps.forEach((s, j) => { s.hidden = j > i; s.classList.toggle('is-current', j === i); });
+  $$('.step-tex', steps[i]).forEach(fit);
   $$('.dot', li).forEach((d, j) => d.setAttribute('aria-current', String(j === i)));
   $('.count', li)!.textContent = `${i + 1} / ${steps.length}`;
   $<HTMLButtonElement>('[data-step=prev]', li)!.disabled = i === 0;
@@ -55,6 +56,16 @@ function go(i: number) {
   else if (r.top < pb.top) body!.scrollTop += r.top - pb.top - 12;
   play();
 }
+
+/** A formula a little wider than the panel shrinks to fit (down to 80%); a wider one scrolls. */
+function fit(t: HTMLElement) {
+  const k = t.firstElementChild as HTMLElement | null;
+  if (!k) return;
+  k.style.fontSize = '';
+  const r = t.clientWidth / t.scrollWidth;
+  if (r < 1) k.style.fontSize = `${Math.max(0.8, r - 0.005) * 100}%`;
+}
+if (body) new ResizeObserver(() => { if (open) $$('.step:not([hidden]) .step-tex', open.li).forEach(fit); }).observe(body);
 
 function openProof(li: HTMLElement) {
   if (open?.li === li) return;
