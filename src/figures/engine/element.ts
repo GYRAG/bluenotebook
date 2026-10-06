@@ -7,7 +7,7 @@ import { classifyQuad, classifyTriangle, type Verdict } from './classify';
 import { add, dist, mid, segDist, sub, type V } from './geom';
 import { parseRefs, type Ref } from './refs';
 import { renderScene, type View } from './render';
-import { Sketch, type Tool } from './sketch';
+import { Sketch, isSized, type Tool } from './sketch';
 import { snap, solveDrag } from './solve';
 import type { FigureSpec, Params } from './spec';
 
@@ -104,7 +104,7 @@ export class GeoFigure extends HTMLElement {
   private layout(W = this.svg.getBoundingClientRect().width, H = this.svg.getBoundingClientRect().height) {
     const [x0, y0, x1, y1] = this.board;
     const bw = x1 - x0, bh = y1 - y0;
-    const kf = Math.max(4, Math.min((W - Math.min(150, W * 0.24)) / bw, (H - Math.min(110, H * 0.22)) / bh)) * this.zoom;
+    const kf = (this.spec.unitPx ?? Math.max(4, Math.min((W - Math.min(150, W * 0.24)) / bw, (H - Math.min(110, H * 0.22)) / bh))) * this.zoom;
     const n = Math.max(1, Math.ceil(kf / CELL_MAX)), cell = Math.max(1, Math.floor(kf / n)), k = cell * n; // one unit = whole cells
     const [cx, cy] = this.centre ?? [(x0 + x1) / 2, (y0 + y1) / 2];
     this.view = { W, H, k, cell, ox: Math.round(W / 2 - cx * k) + 0.5, oy: Math.round(H / 2 + cy * k) + 0.5 };
@@ -301,12 +301,29 @@ export class GeoFigure extends HTMLElement {
     if (!bar) return;
     const tools = bar.querySelector<HTMLElement>('.sk-tools')!, toggle = bar.querySelector<HTMLButtonElement>('.sk-toggle')!;
     const live = this.querySelector('[data-live]')!;
+    const size = bar.querySelector<HTMLDetailsElement>('.sk-size')!, note = size.querySelector<HTMLElement>('.sk-note')!, hint = note.textContent ?? '';
+    const readSizes = () => {
+      const group = size.querySelector(`[data-for="${this.sketch.tool}"]`);
+      this.sketch.sizes = size.open && group ? [...group.querySelectorAll('input')].map(i => (i.value === '' ? NaN : +i.value)) : null;
+    };
+    this.sketch.onNote = msg => { note.textContent = msg || hint; };
+    size.addEventListener('input', () => { readSizes(); note.textContent = hint; }); // a new number clears an old complaint
+    size.addEventListener('toggle', readSizes);
+    size.addEventListener('submit', e => { // Enter: the shape goes to the middle of the view
+      e.preventDefault();
+      readSizes();
+      this.sketch.place(this.unitsAt([this.view.W / 2, this.view.H / 2]));
+      sync();
+    });
     const sync = () => {
       const on = this.sketch.on;
       toggle.setAttribute('aria-pressed', String(on));
       tools.hidden = !on;
       this.classList.toggle('drawing', on);
       this.dataset.tool = this.sketch.tool ?? '';
+      size.hidden = !isSized(this.sketch.tool);
+      size.querySelectorAll<HTMLElement>('[data-for]').forEach(f => { f.hidden = f.dataset.for !== this.sketch.tool; });
+      readSizes();
       bar.querySelectorAll<HTMLButtonElement>('[data-tool]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.tool === this.sketch.tool)));
       bar.querySelector<HTMLButtonElement>('[data-sk=undo]')!.disabled = !this.sketch.canUndo;
       bar.querySelector<HTMLButtonElement>('[data-sk=clear]')!.disabled = !this.sketch.count;
@@ -329,7 +346,7 @@ export class GeoFigure extends HTMLElement {
     this.addEventListener('keydown', e => {
       if (!this.sketch.on) return;
       if (e.key === 'Escape') { this.sketch.cancel(); e.stopPropagation(); }
-      if (e.key.toLowerCase() === 'z' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.sketch.undo(); sync(); }
+      if (e.key.toLowerCase() === 'z' && (e.ctrlKey || e.metaKey) && !(e.target as Element).matches('input')) { e.preventDefault(); this.sketch.undo(); sync(); }
     });
     sync();
   }

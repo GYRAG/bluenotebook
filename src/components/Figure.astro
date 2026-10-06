@@ -11,6 +11,13 @@ const TOOLS = [
   ['pen', 'ფანქარი', 'pencil'], ['line', 'მონაკვეთი', 'line'], ['circle', 'წრეწირი', 'circle'], ['rect', 'მართკუთხედი', 'rect'],
   ['tri', 'სამკუთხედი (სამი შეხებით)', 'tri'], ['move', 'ნახატის გადატანა', 'move'], ['erase', 'საშლელი', 'erase'], ['pan', 'ფურცლის გადაადგილება', 'hand'],
 ] as const;
+// typed sizes per tool: [label, placeholder]; a = BC, b = CA, c = AB
+const SIZES = [
+  ['line', [['სიგრძე', '5'], ['კუთხე, °', '0']]],
+  ['circle', [['რადიუსი', '3']]],
+  ['rect', [['სიგანე', '4'], ['სიმაღლე', '3']]],
+  ['tri', [['a', '3'], ['b', '4'], ['c', '5']]],
+] as const;
 ---
 <geo-figure class="figure" data-figure={name} data-alt={alt ? '' : undefined} data-draw={draw ? '' : undefined} hidden={alt || undefined}>
   <svg class="fig" role="img" aria-label={spec.label}>
@@ -34,6 +41,18 @@ const TOOLS = [
       <button type="button" class="sk-btn" data-sk="undo" aria-label="გაუქმება (Ctrl+Z)" title="გაუქმება (Ctrl+Z)"><Icon name="undo" /></button>
       <button type="button" class="sk-btn" data-sk="clear" aria-label="ნახატის წაშლა" title="ნახატის წაშლა"><Icon name="trash" /></button>
     </div>
+    <details class="sk-size" hidden>
+      <summary>ზომით</summary>
+      <form>
+        {SIZES.map(([tool, fields]) => (
+          <fieldset data-for={tool}>
+            {fields.map(([label, ph]) => <label><span>{label}</span><input type="number" inputmode="decimal" step="any" min="0" placeholder={ph} /></label>)}
+          </fieldset>
+        ))}
+        <p class="sk-note" aria-live="polite">შეავსე და შეეხე ფურცელს; Enter — ცენტრში.</p>
+        <button type="submit" hidden></button>
+      </form>
+    </details>
   </div>
   <p class="sr-only" aria-live="polite" data-live></p>
 </geo-figure>

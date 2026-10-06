@@ -48,7 +48,7 @@ $('[data-sheet-toggle]')?.addEventListener('click', e => {
 });
 
 // a long contents list: keep the current page in view after navigating
-$('.nav [aria-current="page"]')?.scrollIntoView({ block: 'nearest' });
+$('.nav .topics [aria-current="page"]')?.scrollIntoView({ block: 'center' }); // centre: clear of the pinned links below
 
 // ---------- last-viewed topic ----------
 interface Last { url: string; title: string }

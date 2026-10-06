@@ -111,3 +111,25 @@ test.describe('touch', () => {
     await expect.poll(span).toBeGreaterThan(s0 * 1.5);
   });
 });
+
+test('shapes from typed sizes, with their measurements', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/sheet/');
+  const fig = page.locator('geo-figure'), box = (await fig.locator('svg.fig').boundingBox())!;
+  await fig.getByRole('button', { name: 'წრეწირი' }).click();
+  await fig.getByText('ზომით').click();
+  await fig.getByLabel('რადიუსი').fill('3');
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(fig.locator('.sketch circle.sk-ink')).toHaveCount(1);
+  await expect(fig.locator('.sketch .sk-val')).toHaveText(['r = 3.0']);
+
+  await fig.getByRole('button', { name: /სამკუთხედი/ }).click();
+  for (const [l, v] of [['a', '1'], ['b', '1'], ['c', '5']] as const) await fig.getByLabel(l, { exact: true }).fill(v);
+  await page.mouse.click(box.x + 200, box.y + box.height - 150);
+  await expect(fig.locator('.sk-note')).toContainText('არ არსებობს');
+  await fig.getByLabel('c', { exact: true }).fill('1.5');
+  await fig.getByLabel('c', { exact: true }).press('Enter'); // Enter: in the middle of the view
+  await expect(fig.locator('.sketch polygon.sk-ink')).toHaveCount(1);
+  await expect(fig.locator('.sketch .sk-val')).toHaveText(['r = 3.0', '1.5', '1.0', '1.0']);
+  await page.screenshot({ path: 'test-results/sheet-sizes.png' });
+});

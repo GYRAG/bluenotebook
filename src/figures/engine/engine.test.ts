@@ -5,7 +5,24 @@ import { solveDrag, snap } from './solve';
 import { classifyQuad, classifyTriangle } from './classify';
 import { boardBounds, randomParams, rng } from './bounds';
 import type { FigureSpec } from './spec';
-import { moveShape, shapeSvg, snapTo } from './sketch';
+import { moveShape, shapeFromSizes, shapeSvg, snapTo, type Shape } from './sketch';
+
+describe('sketch from typed sizes', () => {
+  const pts = (s: Shape | string | null) => (s as Shape).p;
+  it('builds each shape at the anchor', () => {
+    expect(pts(shapeFromSizes('rect', [4, 3], [1, 1]))).toEqual([[1, 1], [5, 4]]);
+    const [a, b] = pts(shapeFromSizes('line', [2, 90], [0, 0])) as [V, V];
+    expect(near(b[0] - a[0], 0) && near(b[1] - a[1], 2)).toBe(true);
+    const [A, B, C] = pts(shapeFromSizes('tri', [3, 4, 5], [0, 0])) as [V, V, V]; // a = BC, b = CA, c = AB
+    expect([Math.hypot(C[0] - B[0], C[1] - B[1]), Math.hypot(C[0] - A[0], C[1] - A[1]), B[0]].map(x => +x.toFixed(9))).toEqual([3, 4, 5]);
+  });
+  it('waits for missing numbers and refuses impossible ones', () => {
+    expect(shapeFromSizes('rect', [4, NaN], [0, 0])).toBeNull();
+    expect(shapeFromSizes('line', [5, NaN], [0, 0])).not.toBeNull(); // the angle is optional
+    expect(typeof shapeFromSizes('tri', [1, 1, 5], [0, 0])).toBe('string');
+    expect(typeof shapeFromSizes('circle', [-2], [0, 0])).toBe('string');
+  });
+});
 
 describe('sketch', () => {
   it('snaps to grid crossings and moves shapes', () => {
