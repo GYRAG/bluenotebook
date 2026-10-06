@@ -51,7 +51,8 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - Pagefind has no Georgian stemmer: `src/lib/ka-search.ts` strips case endings before prefix search.
 - Topics without a figure get the text layout (`.app.no-figure`) and no tools tab.
 - KaTeX is pinned to 0.19 for every package (pnpm override): rehype-katex otherwise pulls 0.16, whose markup
-  the 0.19 stylesheet does not style. No Georgian inside `\text{}` in formulas — KaTeX has no Georgian glyphs.
+  the 0.19 stylesheet does not style. KaTeX has no Georgian glyphs: Georgian in `\text{}` falls back to the
+  browser font — fine for short subscripts (`S_{\text{გვ}}`), but keep words in the prose, not in formulas.
 - Shell heredocs on this machine collapse `\\` to `\`: write scripts with the Write tool when they contain LaTeX.
 
 ## Milestone routine
