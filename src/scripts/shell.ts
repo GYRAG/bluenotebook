@@ -55,6 +55,7 @@ interface Last { url: string; title: string }
 const prev = load<Last | null>('last', null); // read before this page replaces it — the palette offers it
 const topic = document.body.dataset.topic;
 if (topic) save('last', { url: topic, title: $('.title')?.textContent ?? '' });
+if (topic) { const seen = load<string[]>('seen', []); if (!seen.includes(topic)) save('seen', [...seen, topic]); } // progress on the home page
 
 // ---------- search (Pagefind, built after `astro build`) ----------
 interface PagefindSub { title: string; url: string; excerpt: string }

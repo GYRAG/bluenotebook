@@ -41,7 +41,7 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
   (`bounds.ts`), whole-cell unit. Proof steps call `setScene({ set, show, hl })`.
 - `src/scripts/shell.ts` (theme, tabs, sheet, search palette, pins in empty search),
   `src/scripts/topic.ts` (proof stepper, deep links `#property-id`, pins).
-- localStorage keys are prefixed `mb:` (`theme`, `last`, `pins`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
+- localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `pins`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
 
 ## Gotchas
 - MDX attribute strings take LaTeX with **single** backslashes: `tex="\frac{a}{b}"`. `\\` is a KaTeX line break.

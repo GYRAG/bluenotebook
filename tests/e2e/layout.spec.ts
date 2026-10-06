@@ -84,3 +84,17 @@ for (const vp of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
     }
   });
 }
+
+test('home: opened topics fill the chapter progress; the last topic and pins come back', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/geometry/rhombus/');
+  await page.goto('/geometry/parallelogram/');
+  await page.evaluate(() => localStorage.setItem('mb:pins', JSON.stringify([{ url: '/geometry/parallelogram/', name: 'ფართობი', html: 'S = ah', topic: 'პარალელოგრამი' }])));
+  await page.goto('/');
+  const quads = page.locator('.chap').filter({ has: page.getByRole('link', { name: 'რომბი' }) });
+  await expect(quads.locator('[data-count]')).toHaveText('2 / 6');
+  await expect(quads.locator('a.seen')).toHaveCount(2);
+  await expect(page.locator('[data-continue]')).toContainText('პარალელოგრამი');
+  await expect(page.locator('[data-pins] a')).toHaveCount(1);
+  await expect(page.locator('[data-day]:not([hidden])')).toHaveCount(1);
+});
