@@ -124,7 +124,7 @@ export function renderScene(s: Scene): string {
     }
     return out;
   };
-  function dimension([a, b]: Seg, sym?: string, off = 28) {
+  function dimension([a, b]: Seg, sym?: string, off = 28, given?: string) {
     const A = P(a), B = P(b), u = unit(sub(B, A));
     let n = perp(u);
     if (cross(sub(B, A), sub(centre, A)) * cross(sub(B, A), n) > 0) n = scale(n, -1); // point away from the figure
@@ -132,7 +132,7 @@ export function renderScene(s: Scene): string {
     let ang = (Math.atan2(u[1], u[0]) * 180) / Math.PI;
     if (ang > 90) ang -= 180;
     if (ang <= -90) ang += 180;
-    const value = fmtLen(dist(s.pts[a]!, s.pts[b]!)), label = sym ? `<tspan class="m">${esc(sym)}</tspan> = ${value}` : value;
+    const value = given ?? fmtLen(dist(s.pts[a]!, s.pts[b]!)), label = given ? esc(given) : sym ? `<tspan class="m">${esc(sym)}</tspan> = ${value}` : value;
     const tp = add(mid(A1, B1), scale(n, 12));
     boxes.push(textBox(tp, (sym ? sym.length + 3 : 0) + value.length));
     return line(add(A, scale(n, 6)), add(A, scale(n, off + 6)), 'dim-ext')
@@ -198,6 +198,8 @@ export function renderScene(s: Scene): string {
           break;
         }
         case 'dim': dims += dimension(r.s, r.sym); break;
+        case 'tag': dims += dimension(r.s, undefined, 28, r.text); break;
+        case 'atag': marks += arc(angleOf(r.ang), 22, 1, 'arc', esc(r.text)); break;
       }
     }
   }

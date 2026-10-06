@@ -18,6 +18,7 @@ test('all topic pages render their figure and proofs without errors', async ({ p
     for (const id of props) {
       await page.evaluate(i => { location.hash = i; }, id);
       await expect(page.locator(`#${id} .proof`), `${url}#${id}`).toBeVisible();
+      if (await page.locator(`#${id}[data-problem]`).count()) await page.locator(`#${id} [data-solution]`).click(); // a problem's solution waits for this
       const n = await page.locator(`#${id} .step`).count();
       for (let i = 1; i < n; i++) await page.locator(`#${id} [data-step=next]`).click();
       const visible = page.locator('geo-figure:not([hidden])');

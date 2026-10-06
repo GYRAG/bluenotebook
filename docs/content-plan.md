@@ -57,4 +57,6 @@ distance and loci (§6–7), solving triangles (§19 cases).
 three perpendiculars, angles, projection area S′ = S cos φ, prism, parallelepiped, pyramid, cylinder, cone,
 sphere, areas and volumes.
 
-**C7** — optional „ტიპური ამოცანა“ block per topic, Topuria-level difficulty.
+**C7** — problems („ამოცანები“ tab): original problems of the types in Topuria's collection, answers typed and
+checked, a hint, a step-by-step solution on the figure; every given and answer verified by `problems.test.ts`.
+◐ engine done; parallelogram pilot (7). Next: the rest of planimetry §1–13, then stereometry (needs 3D measuring).

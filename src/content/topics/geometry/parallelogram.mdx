@@ -172,3 +172,68 @@ parent: quadrilateral
 <Remark kind="special">მართკუთხედი, რომბი და კვადრატი პარალელოგრამის კერძო შემთხვევებია, ამიტომ ყველა ზემოთ ჩამოთვლილი თვისება მათთვისაც სამართლიანია.</Remark>
 
 <Remark kind="mistake">პარალელოგრამის დიაგონალები საზოგადოდ არც ტოლია, არც ურთიერთმართობი და არც კუთხეების ბისექტრისები. ტოლია მხოლოდ მართკუთხედში, ურთიერთმართობი — მხოლოდ რომბში (კვადრატში ორივე ერთად).</Remark>
+
+<Problems>
+
+<Problem id="p-angles-differ" set={{ alpha: 70 }} given="<B-<A=40" find="<A <B" answer="70 110"
+  q="პარალელოგრამის ერთი კუთხე მეორეზე $40^\circ$-ით მეტია. იპოვეთ პარალელოგრამის კუთხეები."
+  hint="პარალელოგრამის ერთ გვერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია.">
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ">$\angle A$ და $\angle B$ ერთ გვერდთან, $AB$-სთან მდებარეობს, ამიტომ მათი ჯამი $180^\circ$-ია.</Step>
+<Step tex="\angle A + (\angle A + 40^\circ) = 180^\circ \;\Rightarrow\; \angle A = 70^\circ">მოპირდაპირე კუთხეები ტოლია, ამიტომ $40^\circ$-ით მეზობელი კუთხეები განსხვავდება: $\angle B = \angle A + 40^\circ$.</Step>
+<Step hl="<A=<C <B=<D" tex="\angle A = \angle C = 70^\circ,\qquad \angle B = \angle D = 110^\circ">მოპირდაპირე კუთხეები ტოლია.</Step>
+</Problem>
+
+<Problem id="p-perimeter-sides" k={4} set={{ a: 3.75, b: 2, alpha: 60 }} given="P(ABCD)=46 AB-AD=7" find="AB AD" answer="15 8"
+  q="პარალელოგრამის პერიმეტრი $46$ სმ-ია, ერთი გვერდი კი მეორეზე $7$ სმ-ით გრძელია. იპოვეთ პარალელოგრამის გვერდები."
+  hint="მოპირდაპირე გვერდები ტოლია, ამიტომ ორი მეზობელი გვერდის ჯამი პერიმეტრის ნახევარია.">
+<Step hl="AB=CD BC=DA" tex="2(AB + AD) = 46 \;\Rightarrow\; AB + AD = 23">მოპირდაპირე გვერდები ტოლია, ამიტომ $P = 2(AB + AD)$.</Step>
+<Step hl="AB AD" tex="AB - AD = 7">ერთი გვერდი მეორეზე $7$-ით გრძელია.</Step>
+<Step tex="AB = \frac{23 + 7}{2} = 15,\qquad AD = \frac{23 - 7}{2} = 8">შევკრიბოთ, შემდეგ კი გამოვაკლოთ ეს ორი ტოლობა.</Step>
+</Problem>
+
+<Problem id="p-bisector-perimeter" set={{ a: 2.4, b: 4, alpha: 70 }} show="AE" given="BE=6 EC=4" find="P(ABCD)" answer="32"
+  q="პარალელოგრამ $ABCD$-ში $A$ კუთხის ბისექტრისა $BC$ გვერდს $E$ წერტილში კვეთს. $BE = 6$, $EC = 4$. იპოვეთ პარალელოგრამის პერიმეტრი."
+  hint="დაამტკიცეთ, რომ სამკუთხედი $ABE$ ტოლფერდაა.">
+<Step hl="<BAE=<EAD">$AE$ ბისექტრისაა: $\angle BAE = \angle EAD$.</Step>
+<Step hl="<AEB=<EAD AD||BC" tex="\angle AEB = \angle EAD">$AD \parallel BC$, ხოლო $AE$ მკვეთია, ამიტომ შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="ABE AB=BE" tex="\angle BAE = \angle AEB \;\Rightarrow\; AB = BE = 6">სამკუთხედ $ABE$-ში ორი კუთხე ტოლია — ის ტოლფერდაა.</Step>
+<Step hl="AB BC" tex="P = 2(AB + BC) = 2(6 + 10) = 32">$BC = BE + EC = 10$.</Step>
+</Problem>
+
+<Problem id="p-second-diagonal" set={{ a: 4, b: 2.5, alpha: 60 }} show="AC BD" given="AB=8 AD=5 BD=7" find="AC" answer="√129"
+  q="პარალელოგრამის გვერდებია $8$ და $5$, ერთ-ერთი დიაგონალი კი $7$-ია. იპოვეთ მეორე დიაგონალი."
+  hint="დიაგონალების კვადრატების ჯამი ოთხივე გვერდის კვადრატების ჯამის ტოლია.">
+<Step hl="AC BD" tex="AC^2 + BD^2 = 2\left(AB^2 + AD^2\right)">პარალელოგრამის დიაგონალების კვადრატების ჯამი ოთხივე გვერდის კვადრატების ჯამის ტოლია.</Step>
+<Step tex="AC^2 = 2\,(64 + 25) - 49 = 129">ჩავსვათ ცნობილი სიდიდეები.</Step>
+<Step hl="AC" tex="AC = \sqrt{129}">მეორე დიაგონალი.</Step>
+</Problem>
+
+<Problem id="p-two-heights" set={{ a: 3, b: 4, alpha: 53.13010235415598 }} show="DH <DHB BG <BGA" given="DH=16 BG=12 P(ABCD)=70" find="S(ABCD)" answer="240"
+  q="პარალელოგრამის სიმაღლეებია $12$ და $16$, პერიმეტრი კი $70$-ია. იპოვეთ პარალელოგრამის ფართობი."
+  hint="ფართობი ჩაწერეთ ორი გზით: თითოეული გვერდისა და მასზე დაშვებული სიმაღლის ნამრავლით.">
+<Step hl="DH BG" tex="S = AB \cdot DH = AD \cdot BG">პარალელოგრამის ფართობი ნებისმიერი გვერდისა და მასზე დაშვებული სიმაღლის ნამრავლის ტოლია.</Step>
+<Step tex="16\,AB = 12\,AD \;\Rightarrow\; AD = \tfrac43\,AB">უფრო დიდ გვერდზე უფრო მცირე სიმაღლე ეშვება.</Step>
+<Step hl="AB AD" tex="AB + AD = 35 \;\Rightarrow\; \tfrac73\,AB = 35,\quad AB = 15,\ AD = 20">პერიმეტრი $70$-ია, ამიტომ ორი მეზობელი გვერდის ჯამი $35$-ია.</Step>
+<Step hl="ABCD" tex="S = AB \cdot DH = 15 \cdot 16 = 240">ფართობი.</Step>
+</Problem>
+
+<Problem id="p-bisectors-meet" set={{ a: 4, b: 2, alpha: 70 }} show="AF BF" given="AB=10 DF+FC=CD" find="AD" answer="5"
+  q="პარალელოგრამ $ABCD$-ში $A$ და $B$ კუთხეების ბისექტრისები $CD$ გვერდის $F$ წერტილში იკვეთება. $AB = 10$. იპოვეთ $AD$."
+  hint="ბისექტრისა პარალელოგრამს ტოლფერდა სამკუთხედს ჩამოაჭრის.">
+<Step hl="<BAF=<FAD">$AF$ ბისექტრისაა: $\angle BAF = \angle FAD$.</Step>
+<Step hl="<AFD=<BAF AB||CD" tex="\angle AFD = \angle BAF = \angle FAD">$AB \parallel CD$, ხოლო $AF$ მკვეთია, ამიტომ შიგა ჯვარედინი კუთხეები ტოლია.</Step>
+<Step hl="ADF AD=DF" tex="AD = DF">სამკუთხედ $ADF$-ში ორი კუთხე ტოლია — ის ტოლფერდაა.</Step>
+<Step hl="BCF BC=CF" tex="BC = CF">იგივე მსჯელობით $BF$ ბისექტრისისთვის: სამკუთხედი $BCF$ ტოლფერდაა.</Step>
+<Step hl="AB CD" tex="AB = CD = DF + FC = AD + BC = 2\,AD \;\Rightarrow\; AD = 5">$CD = AB$ და $BC = AD$.</Step>
+</Problem>
+
+<Problem id="p-heights-angle" set={{ a: 4, b: 3, alpha: 50 }} show="BG BL <BGA <BLC" given="<GBL=50" find="<A <B" answer="50 130"
+  q="პარალელოგრამის ბლაგვი კუთხის წვეროდან გავლებულ სიმაღლეებს შორის კუთხე $50^\circ$-ია. იპოვეთ პარალელოგრამის კუთხეები."
+  hint="ოთხკუთხედ $BGDL$-ში ორი კუთხე მართია.">
+<Step hl="BG BL <BGA <BLC">$BG \perp AD$ და $BL \perp CD$ — ეს ბლაგვი კუთხის წვეროდან, $B$-დან გავლებული სიმაღლეებია.</Step>
+<Step hl="BGDL" tex="\angle GBL + \angle D = 360^\circ - 90^\circ - 90^\circ = 180^\circ">ოთხკუთხედ $BGDL$-ის კუთხეების ჯამი $360^\circ$-ია, მათგან ორი მართია.</Step>
+<Step hl="<D" tex="\angle D = 180^\circ - 50^\circ = 130^\circ">აქედან $\angle D$.</Step>
+<Step hl="<A <B" tex="\angle B = \angle D = 130^\circ,\qquad \angle A = \angle C = 50^\circ">მოპირდაპირე კუთხეები ტოლია, მეზობელი კუთხეების ჯამი კი $180^\circ$-ია.</Step>
+</Problem>
+
+</Problems>

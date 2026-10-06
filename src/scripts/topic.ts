@@ -1,6 +1,7 @@
-// Topic pages: proof stepper (drives the figure), deep links to properties and formulas,
-// pinned formulas.
+// Topic pages: proof stepper (drives the figure), problems (the figure takes the problem's
+// shape and data; answers are checked here), deep links, pinned formulas.
 import type { GeoFigure, ProofScene } from '@/figures/engine/element';
+import { matches } from '@/lib/expr';
 import { load, save } from '@/lib/store';
 
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector<T>(s);
@@ -20,16 +21,24 @@ function useFigure(name: string | undefined) {
   fig = alt ?? mainFig;
 }
 
-// ---------- proof stepper ----------
-let open: { li: HTMLElement; steps: HTMLElement[]; i: number } | null = null;
+// ---------- proof stepper (a problem's solution is one too) ----------
+type Problem = Pick<ProofScene, 'set' | 'show' | 'tags'>;
+// i = -1: a problem before its solution is opened — the figure shows the statement only
+let open: { li: HTMLElement; steps: HTMLElement[]; i: number; prob: Problem | null } | null = null;
 
-function scene(steps: HTMLElement[], i: number): ProofScene {
+function scene(steps: HTMLElement[], i: number, prob: Problem | null): ProofScene {
   const upTo = steps.slice(0, i + 1);
   return {
-    show: upTo.map(s => s.dataset.show ?? '').join(' '),
-    hl: steps[i]!.dataset.hl ?? '',
-    set: Object.assign({}, ...upTo.map(s => (s.dataset.set ? JSON.parse(s.dataset.set) : {}))),
+    show: [prob?.show ?? '', ...upTo.map(s => s.dataset.show ?? '')].join(' '),
+    hl: steps[i]?.dataset.hl ?? '',
+    set: Object.assign({}, prob?.set, ...upTo.map(s => (s.dataset.set ? JSON.parse(s.dataset.set) : {}))),
+    tags: prob?.tags,
   };
+}
+function play() {
+  if (!open) return;
+  const f = fig, sc = scene(open.steps, open.i, open.prob);
+  void ready(f).then(() => f?.setScene(sc));
 }
 
 function go(i: number) {
@@ -44,8 +53,7 @@ function go(i: number) {
   const cur = steps[i]!, r = cur.getBoundingClientRect(), pb = body!.getBoundingClientRect();
   if (r.bottom > pb.bottom - 96) body!.scrollTop += r.bottom - pb.bottom + 96; // keep it above the sticky controls
   else if (r.top < pb.top) body!.scrollTop += r.top - pb.top - 12;
-  const f = fig;
-  void ready(f).then(() => f?.setScene(scene(steps, i)));
+  play();
 }
 
 function openProof(li: HTMLElement) {
@@ -59,7 +67,8 @@ function openProof(li: HTMLElement) {
     b.type = 'button'; b.className = 'dot'; b.dataset.goto = String(j); b.setAttribute('aria-label', `ნაბიჯი ${j + 1}`);
     return b;
   }));
-  open = { li, steps, i: 0 };
+  const prob = li.dataset.problem ? (JSON.parse(li.dataset.problem) as Problem) : null;
+  open = { li, steps, i: prob ? -1 : 0, prob };
   useFigure($<HTMLElement>('.proof-body', li)?.dataset.figure);
   li.classList.add('open');
   panel?.classList.add('proof-open');
@@ -67,7 +76,7 @@ function openProof(li: HTMLElement) {
   $('.prop-row', li)!.setAttribute('aria-expanded', 'true');
   body!.scrollTop = 0;
   history.replaceState(null, '', `#${li.id}`);
-  go(0);
+  if (prob) play(); else go(0);
   $<HTMLElement>('.proof-h', li)!.setAttribute('tabindex', '-1');
   $<HTMLElement>('.proof-h', li)!.focus({ preventScroll: true });
 }
@@ -79,6 +88,7 @@ function closeProof(restoreFocus = true) {
   panel?.classList.remove('proof-open');
   $('.proof', li)!.hidden = true;
   $('.prop-row', li)!.setAttribute('aria-expanded', 'false');
+  if (open.prob) { $('.sol', li)!.hidden = true; $('[data-solution]', li)!.hidden = false; } // next time: try first
   open = null;
   history.replaceState(null, '', location.pathname);
   const f = fig;
@@ -92,6 +102,9 @@ document.addEventListener('click', e => {
   const row = t.closest('.prop-row');
   if (row) return openProof(row.closest<HTMLElement>('.prop')!);
   if (t.closest('[data-proof-close]')) return closeProof();
+  if (t.closest('[data-solution]') && open) { $('.sol', open.li)!.hidden = false; (t.closest('[data-solution]') as HTMLElement).hidden = true; return go(0); }
+  const key = t.closest<HTMLElement>('[data-key]');
+  if (key) return typeKey(key);
   const step = t.closest<HTMLElement>('[data-step]');
   if (step && open) return go(open.i + (step.dataset.step === 'next' ? 1 : -1));
   const dot = t.closest<HTMLElement>('[data-goto]');
@@ -101,10 +114,42 @@ document.addEventListener('click', e => {
 
 document.addEventListener('keydown', e => {
   if (!open || $<HTMLDialogElement>('#palette')?.open) return;
+  if (e.key === 'Escape') return closeProof();
   const t = e.target as Element;
-  if (t.matches?.('input, textarea, [role=tab]') || t.closest?.('.handle')) return;
+  if (t.matches?.('input, textarea, [role=tab]') || t.closest?.('.handle') || open.i < 0) return;
   if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(open.i + (e.key === 'ArrowRight' ? 1 : -1)); }
-  if (e.key === 'Escape') closeProof();
+});
+
+// ---------- problems: type the answer, check it; solved ones are remembered ----------
+const solved = () => load<string[]>('solved', []);
+const keyOf = (li: HTMLElement) => `${location.pathname}#${li.id}`;
+for (const li of $$('.prob')) li.classList.toggle('solved', solved().includes(keyOf(li)));
+
+let lastInput: HTMLInputElement | null = null;
+document.addEventListener('focusin', e => { if ((e.target as Element).matches('.ans-in')) lastInput = e.target as HTMLInputElement; });
+function typeKey(b: HTMLElement) { // √ and π: phone keyboards have neither
+  const form = b.closest('form')!, input = lastInput && form.contains(lastInput) ? lastInput : $<HTMLInputElement>('.ans-in', form)!;
+  const at = input.selectionStart ?? input.value.length;
+  input.setRangeText(b.dataset.key!, at, input.selectionEnd ?? at, 'end');
+  input.focus();
+}
+
+document.addEventListener('submit', e => {
+  const form = (e.target as Element).closest<HTMLFormElement>('.ans');
+  if (!form) return;
+  e.preventDefault();
+  const want = JSON.parse(form.dataset.answer!) as number[], inputs = $$<HTMLInputElement>('.ans-in', form), msg = $('.ans-msg', form)!;
+  if (inputs.some(x => !x.value.trim())) { msg.textContent = 'ჯერ ჩაწერე პასუხი.'; return; }
+  const ok = inputs.map((x, j) => matches(x.value, want[j]!));
+  inputs.forEach((x, j) => x.setAttribute('aria-invalid', String(!ok[j])));
+  if (ok.every(Boolean)) {
+    msg.textContent = `სწორია! პასუხი: ${form.dataset.shown!.split(';').join('; ')}`;
+    const li = form.closest<HTMLElement>('.prob')!;
+    li.classList.add('solved');
+    if (!solved().includes(keyOf(li))) save('solved', [...solved(), keyOf(li)]);
+  } else {
+    msg.textContent = ok.some(Boolean) ? 'ნაწილი სწორია — შეამოწმე მონიშნული.' : 'ჯერ არა. სცადე კიდევ ერთხელ ან ნახე მინიშნება.';
+  }
 });
 
 // ---------- deep links: /geometry/parallelogram/#diagonals-bisect ----------

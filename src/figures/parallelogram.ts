@@ -21,6 +21,7 @@ export default figure({
       A, B, C, D, O: [0, 0], H, K: add(H, sub(B, A)), // K: foot from C, for the area proof
       E: intersect(A, bis(A, B, D), B, C), // bisector of ∠A meets line BC
       F: intersect(A, bis(A, B, D), B, bis(B, A, C)), // bisectors of ∠A and ∠B meet
+      G: foot(B, A, D), L: foot(B, C, D), // heights from B (problems)
     };
   },
   drag: { B: ['a'], D: ['b', 'alpha'] },

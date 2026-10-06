@@ -2,14 +2,14 @@
 import Icon from '../Icon.astro';
 import { md } from '@/lib/math';
 
-interface Props { given: string; prove: string; figure?: string }
+interface Props { given?: string; prove?: string; figure?: string | undefined } // a problem's solution has neither
 const { given, prove, figure } = Astro.props;
 ---
 <div class="proof-body" data-figure={figure}>
-  <dl class="given">
+  {given && prove && <dl class="given">
     <div><dt>მოც.</dt><dd set:html={md(given)} /></div>
     <div><dt>დას.</dt><dd set:html={md(prove)} /></div>
-  </dl>
+  </dl>}
   <ol class="steps"><slot /></ol>
   <div class="stepper">
     <button class="sbtn" type="button" data-step="prev" aria-label="წინა ნაბიჯი"><Icon name="left" /></button>

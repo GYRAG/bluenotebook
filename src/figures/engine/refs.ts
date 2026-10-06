@@ -9,6 +9,8 @@
 //                                           (drawn as a square mark when it is 90°)
 //   AB=CD      equal-length ticks <A=<C     equal-angle arcs  AB||CD parallel arrows
 //   |AB|       dimension line     |AB|a     dimension labelled "a = …"
+//   AB=5       a side labelled with given text (a problem's data; AB=? marks what to find)
+//   <A=60°     an angle labelled with given text
 //
 // Point names: one capital letter, optionally followed by digits or primes (A, A1, B').
 export type Seg = readonly [string, string];
@@ -24,7 +26,9 @@ export type Ref =
   | { k: 'par'; segs: Seg[] }
   | { k: 'circle'; c: string; p: string }
   | { k: 'arc'; c: string; a: string; b: string }
-  | { k: 'dim'; s: Seg; sym?: string };
+  | { k: 'dim'; s: Seg; sym?: string }
+  | { k: 'tag'; s: Seg; text: string }
+  | { k: 'atag'; ang: Ang; text: string };
 
 const NAME = /[A-Z][0-9']*/y;
 
@@ -67,6 +71,9 @@ export function parseRef(tok: string): Ref {
   if (tok.includes('||')) return { k: 'par', segs: tok.split('||').map(seg) };
   if (tok.includes('=')) {
     const parts = tok.split('=');
+    if (parts.length === 2 && !/^[<A-Z]/.test(parts[1]!)) { // a label, not an equality of two marks
+      return parts[0]!.startsWith('<') ? { k: 'atag', ang: ang(parts[0]!), text: parts[1]! } : { k: 'tag', s: seg(parts[0]!), text: parts[1]! };
+    }
     return parts[0]!.startsWith('<') ? { k: 'eqang', angs: parts.map(ang) } : { k: 'eqseg', segs: parts.map(seg) };
   }
   if (tok.startsWith('<')) return { k: 'angle', ang: ang(tok) };
@@ -83,9 +90,9 @@ export function refPoints(r: Ref): string[] {
   const angPts = (a: Ang) => [a.a, a.v, a.b].filter((x): x is string => !!x);
   switch (r.k) {
     case 'point': return [r.p];
-    case 'seg': case 'line': case 'ray': case 'vec': case 'hid': case 'dim': return [...r.s];
+    case 'seg': case 'line': case 'ray': case 'vec': case 'hid': case 'dim': case 'tag': return [...r.s];
     case 'poly': return r.ps;
-    case 'angle': return angPts(r.ang);
+    case 'angle': case 'atag': return angPts(r.ang);
     case 'eqseg': case 'par': return r.segs.flat();
     case 'eqang': return r.angs.flatMap(angPts);
     case 'circle': return [r.c, r.p];

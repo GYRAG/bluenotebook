@@ -55,3 +55,29 @@ test('a formula links to its proof, and pins survive a reload', async ({ page })
   await expect(page).toHaveURL(/\/geometry\/parallelogram\/#perimeter$/);
   await expect(page.locator('#perimeter')).toBeInViewport();
 });
+
+test('a problem: the figure shows its data, the answer is checked, the solution steps through', async ({ page }) => {
+  await page.goto('/geometry/parallelogram/');
+  await page.getByRole('tab', { name: 'ამოცანები' }).click();
+  const li = page.locator('#p-bisector-perimeter');
+  await li.locator('.prop-row').click();
+  await expect(page).toHaveURL(/#p-bisector-perimeter$/);
+  const fig = page.locator('geo-figure:not([data-alt])');
+  await expect(fig.locator('.dim-t')).toHaveText(['6', '4']); // BE = 6, EC = 4 on the figure
+  const input = li.locator('.ans-in'), msg = li.locator('.ans-msg');
+  await input.fill('30');
+  await li.getByRole('button', { name: 'შემოწმება' }).click();
+  await expect(msg).toContainText('ჯერ არა');
+  await input.fill('32');
+  await input.press('Enter');
+  await expect(msg).toContainText('სწორია');
+  await expect(li).toHaveClass(/solved/);
+  await li.getByRole('button', { name: 'ამოხსნა' }).click();
+  await expect(li.locator('.count')).toHaveText('1 / 4');
+  await page.keyboard.press('ArrowRight');
+  await expect(li.locator('.count')).toHaveText('2 / 4');
+  await page.keyboard.press('Escape');
+  await page.reload(); // solved problems are remembered
+  await page.getByRole('tab', { name: 'ამოცანები' }).click();
+  await expect(page.locator('#p-bisector-perimeter')).toHaveClass(/solved/);
+});

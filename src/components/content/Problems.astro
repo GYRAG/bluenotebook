@@ -1,0 +1,8 @@
+---
+interface Props { title?: string }
+const { title = 'ამოცანები გამოთვლაზე' } = Astro.props;
+---
+<section class="props-group">
+  <h2 class="group-h">{title}</h2>
+  <ol class="props"><slot /></ol>
+</section>

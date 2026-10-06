@@ -5,12 +5,12 @@
 import type { V } from './geom';
 import type { FigureSpec, Params } from './spec';
 
-export function snap(spec: FigureSpec, p: Params): Params {
+export function snap(spec: FigureSpec, p: Params, round = true): Params {
   const out = { ...p };
   for (const [k, d] of Object.entries(spec.params)) {
     const v = Math.min(d.max, Math.max(d.min, out[k]!));
     const decimals = (String(d.step).split('.')[1] ?? '').length;
-    out[k] = +(Math.round(v / d.step) * d.step).toFixed(decimals);
+    out[k] = round ? +(Math.round(v / d.step) * d.step).toFixed(decimals) : v;
   }
   return out;
 }

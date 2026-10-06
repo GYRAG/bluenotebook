@@ -15,7 +15,7 @@ const SPECS = import.meta.glob<{ default: FigureSpec }>(['../*.ts', '!../registr
 const CELL_MAX = 24;
 const ZOOM: [number, number] = [0.3, 5];
 
-export interface ProofScene { set?: Partial<Params>; show?: string; hl?: string }
+export interface ProofScene { set?: Partial<Params>; show?: string; hl?: string; tags?: string | undefined } // tags: a problem's data on the figure
 
 export class GeoFigure extends HTMLElement {
   spec!: FigureSpec;
@@ -85,7 +85,7 @@ export class GeoFigure extends HTMLElement {
     if (scene && !this.scene) this.saved = { ...this.params };
     if (!scene && this.saved) { this.params = this.saved; this.saved = null; }
     this.scene = scene;
-    if (scene?.set) this.params = snap(this.spec, { ...this.params, ...scene.set } as Params);
+    if (scene?.set) this.params = snap(this.spec, { ...this.params, ...scene.set } as Params, false); // a problem's exact numbers, off the slider steps
     this.classList.toggle('proving', !!scene);
     if (scene) this.querySelector<HTMLElement>('.hint')?.setAttribute('hidden', '');
     this.syncAll();
@@ -158,7 +158,7 @@ export class GeoFigure extends HTMLElement {
     if (!this.view.W) return;
     if (typeof this.spec.base === 'function') this.setBase();
     const pts = this.spec.points(this.params), sc = this.scene;
-    const dims = sc ? [] : [...(this.dimsOn ? parseRefs(this.spec.dims) : []), ...(this.hover ? parseRefs(`|${this.hover.join('')}|`) : [])];
+    const dims = sc ? parseRefs(sc.tags) : [...(this.dimsOn ? parseRefs(this.spec.dims) : []), ...(this.hover ? parseRefs(`|${this.hover.join('')}|`) : [])];
     const extra = sc ? [] : [...this.toggles].flatMap(t => parseRefs(this.spec.toggles?.[t]));
     this.layer.innerHTML = renderScene({ pts, view: this.view, base: this.base, dims, extra, aux: parseRefs(sc?.show), hl: parseRefs(sc?.hl), poly: this.poly, unlabeled: this.spec.unlabeled ?? [], axes: !!this.spec.axes });
     for (const h of this.handles.querySelectorAll<SVGGElement>('.handle')) {

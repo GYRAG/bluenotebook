@@ -40,8 +40,13 @@ for (const [path, src] of Object.entries(files)) {
       expect([...outside.matchAll(/<Property\s+id="([^"]+)"/g)].map(m => m[1])).toEqual([]);
     });
 
+    it('every <Problem> sits inside <Problems>', () => {
+      const outside = src.replace(/<Problems\b[\s\S]*?<\/Problems>/g, '');
+      expect([...outside.matchAll(/<Problem\s+id="([^"]+)"/g)].map(m => m[1])).toEqual([]);
+    });
+
     it('ids are unique on the page', () => {
-      const ids = [...src.matchAll(/<(?:Property|Formula)\s+id="([^"]+)"/g)].map(m => m[1]!);
+      const ids = [...src.matchAll(/<(?:Property|Formula|Problem)\s+id="([^"]+)"/g)].map(m => m[1]!);
       expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
     });
 

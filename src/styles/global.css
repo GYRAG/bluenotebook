@@ -127,7 +127,8 @@ summary::-webkit-details-marker { display: none; }
   font-size: var(--fs-ui); color: var(--ink-2); text-align: center;
 }
 .tabs [role='tab'][aria-selected='true'] { color: var(--ink); font-weight: var(--w2); }
-.tab-l { position: relative; }
+.tab-l { position: relative; display: inline-flex; }
+.tabs:has(#tab-tools) { grid-template-columns: 52px; } /* the tools tab is an icon: the words get the room */
 .tabs [role='tab'][aria-selected='true'] .tab-l::after {
   content: ''; position: absolute; inset: -9px -12px; border: 1.75px solid var(--ink); border-radius: 50%;
   transform: rotate(-2deg); pointer-events: none;
@@ -430,6 +431,28 @@ geo-figure.proving .aux { stroke-opacity: .65; }
 .dot[aria-current='true']::before { background: var(--ink); border-color: var(--ink); }
 .count { font-size: var(--fs-ui); color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 40px; text-align: center; }
 
+/* problems: the statement, the answer, a hint, the solution on demand */
+.prob .prop-t { font: 16px/1.5 var(--font-body); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.prob.solved .prop-n::after { content: ''; display: block; width: 6px; height: 6px; margin: 6px 0 0 auto; border-radius: 50%; background: var(--ink); }
+.prob .proof-h { font: 17px/1.55 var(--font-body); }
+.ans { display: grid; gap: var(--s2); margin-bottom: var(--s2); }
+.ans-f { display: flex; align-items: center; gap: var(--s3); }
+.ans-l { flex: none; min-width: 64px; }
+.ans-in {
+  flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--s3); border: var(--bw) solid var(--line); border-radius: var(--r);
+  background: transparent; color: var(--ink); font: 17px var(--font-body);
+}
+.ans-in[aria-invalid='true'] { border-style: dashed; }
+.ans-row { display: flex; gap: var(--s2); }
+.ans-key { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: var(--bw) solid var(--line-2); border-radius: var(--r); font-size: 18px; }
+.ans-go { margin-left: auto; min-height: 44px; padding: 0 var(--s4); border-radius: var(--r); background: var(--ink); color: var(--on-ink); font-weight: var(--w2); }
+.ans-msg { font-size: 15px; }
+.ans-msg:empty { display: none; }
+.hint-d summary { display: flex; align-items: center; min-height: 44px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+.hint-d p { margin-bottom: var(--s3); padding: 2px 0 2px 14px; border-left: 2px solid var(--ink); font-size: 15px; }
+.sol-open { min-height: 44px; margin-top: var(--s1); padding: 0 var(--s4); border: var(--bw) solid var(--line); border-radius: var(--r); }
+.sol { margin-top: var(--s3); }
+
 /* ---------- print: one sheet per topic — white paper, blue ink ----------
    Figure on top, formulas and the property list below in two columns; proofs, tools and
    chrome stay on screen. The SVG has a viewBox, so it scales to the print box as drawn. */
@@ -442,7 +465,7 @@ geo-figure.proving .aux { stroke-opacity: .65; }
   }
   html, body { height: auto; overflow: visible; font-size: 9.5pt; line-height: 1.4; }
   .app, .app.no-panel { display: block; height: auto; }
-  .nav, .topbar, .skip, .toast, .pal, .grip, .tabs, #tp-tools, .pin, .fx-proof, .fx-val, .prop-row .ic,
+  .nav, .topbar, .skip, .toast, .pal, .grip, .tabs, #tp-tools, #tp-probs, .pin, .fx-proof, .fx-val, .prop-row .ic,
   .stamp, .hint, .handles, .status-note, .back, .stepper { display: none !important; }
   /* title and lede on the left, the figure as it is on screen to the right */
   .stage { display: grid; grid-template-columns: minmax(0, 1fr) 72mm; align-content: start; column-gap: 6mm; padding: 0; overflow: visible !important; }
