@@ -1,0 +1,68 @@
+---
+title: ვექტორები
+slug: vectors
+subject: geometry
+section: coordinates
+order: 41
+summary: ვექტორის კოორდინატები და სიგრძე, ჯამი, რიცხვზე გამრავლება, სკალარული ნამრავლი და მართობულობა.
+tags: [ვექტორი, ვექტორების ჯამი, კოლინეარული ვექტორები, სკალარული ნამრავლი]
+prerequisites: [coordinates, sine-cosine-laws, parallelogram]
+status: draft
+figure: vectors
+---
+
+<Definition>**ვექტორი** მიმართული მონაკვეთია; $\overrightarrow{AB}$-ს კოორდინატებია $(x_2 - x_1;\ y_2 - y_1)$, სადაც $A(x_1;\, y_1)$ მისი სათავეა, $B(x_2;\, y_2)$ — ბოლო. ვექტორები **კოლინეარულია**, თუ ერთ წრფეზე ან პარალელურ წრფეებზე ძევს. ვექტორების **სკალარული ნამრავლი** $\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi$, სადაც $\varphi$ მათ შორის კუთხეა.</Definition>
+
+<Formulas>
+<Formula id="length-formula" name="ვექტორის სიგრძე" tex="|\vec a| = \sqrt{x^2 + y^2}" live="|a|" proof="vector-length" />
+<Formula id="sum-formula" name="ჯამი" tex="\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2)" proof="vector-addition" />
+<Formula id="scalar-formula" name="რიცხვზე გამრავლება, კოლინეარობა" tex="k\vec a = (kx;\ ky), \qquad \vec a \parallel \vec b \iff \frac{x_1}{x_2} = \frac{y_1}{y_2}" proof="scalar-multiple" />
+<Formula id="dot-formula" name="სკალარული ნამრავლი" tex="\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2" live="a·b" proof="dot-product" />
+<Formula id="angle-formula" name="კუთხე ვექტორებს შორის" tex="\cos\varphi = \frac{x_1x_2 + y_1y_2}{|\vec a|\,|\vec b|}" live="φ" proof="dot-product" />
+<Formula id="perp-formula" name="მართობულობა" tex="\vec a \perp \vec b \iff x_1x_2 + y_1y_2 = 0" proof="perpendicular-vectors" />
+</Formulas>
+
+<Properties>
+
+<Property id="vector-length" title="ვექტორის $(x;\, y)$ სიგრძე $\sqrt{x^2 + y^2}$-ია" why="ეს მანძილია სათავიდან წერტილამდე $(x;\, y)$.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $A(x;\, y)$" prove="$|\vec a| = \sqrt{x^2 + y^2}$">
+<Step hl="vec:OA">$\vec a$ გადავდოთ სათავიდან: ის $\overrightarrow{OA}$-ა, $A(x;\, y)$.</Step>
+<Step tex="|\vec a| = OA = \sqrt{x^2 + y^2} \quad \blacksquare">მანძილის ფორმულა $O(0;\, 0)$-სა და $A$-ს შორის.</Step>
+</Proof>
+</Property>
+
+<Property id="vector-addition" title="ვექტორების ჯამი სამკუთხედისა და პარალელოგრამის წესით ერთი და იგივეა, მისი კოორდინატები კი შესაკრებების კოორდინატების ჯამია" why="$\vec b$-ს გადატანა $\vec a$-ს ბოლოში პარალელოგრამის გვერდს იძლევა.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $\vec b = \overrightarrow{OB}$" prove="$\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2)$">
+<Step show="vec:AC C" hl="vec:OA vec:AC">სამკუთხედის წესი: $\vec b$ გადავდოთ $\vec a$-ს ბოლოდან — $\overrightarrow{AC} = \vec b$; ჯამი $\overrightarrow{OC}$-ა.</Step>
+<Step show="vec:OC BC" hl="OACB">$AC$ ტოლი და პარალელურია $OB$-სი, ამიტომ $OACB$ პარალელოგრამია და $\overrightarrow{OC}$ მისი დიაგონალია — პარალელოგრამის წესი.</Step>
+<Step hl="vec:OC" tex="\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2) \quad \blacksquare">$A$-დან $\vec b$-ით გადაადგილება კოორდინატებს $x_2$-ითა და $y_2$-ით ზრდის.</Step>
+</Proof>
+</Property>
+
+<Property id="scalar-multiple" title="$k\vec a = (kx;\, ky)$ ვექტორ $\vec a$-ს კოლინეარულია, სიგრძე კი $|k|$-ჯერ იცვლება" why="ორივე კოორდინატი ერთი და იმავე რიცხვზე მრავლდება.">
+<Proof given="$\vec a = (x;\, y)$, $k$ — რიცხვი" prove="$|k\vec a| = |k|\,|\vec a|$">
+<Step show="vec:OK K" hl="vec:OK vec:OA">$k > 0$-ზე მიმართულება იგივეა, $k < 0$-ზე — საპირისპირო; ორივე შემთხვევაში ვექტორი ერთ წრფეზეა.</Step>
+<Step tex="|k\vec a| = \sqrt{k^2x^2 + k^2y^2} = |k|\,|\vec a| \quad \blacksquare">სიგრძის ფორმულა.</Step>
+</Proof>
+</Property>
+
+<Property id="dot-product" title="სკალარული ნამრავლი კოორდინატებით: $\vec a \cdot \vec b = x_1x_2 + y_1y_2$" why="კოსინუსების თეორემა $\triangle OAB$-ში, დაწერილი კოორდინატებით.">
+<Proof given="$\vec a = (x_1;\, y_1)$, $\vec b = (x_2;\, y_2)$, $\varphi = \angle AOB$" prove="$|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2$">
+<Step show="vec:BA" hl="OAB <AOB" tex="AB^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a|\,|\vec b|\cos\varphi">$\overrightarrow{BA} = \vec a - \vec b$; კოსინუსების თეორემა $\triangle OAB$-ში.</Step>
+<Step tex="AB^2 = (x_1 - x_2)^2 + (y_1 - y_2)^2">იგივე $AB^2$ მანძილის ფორმულით; ხოლო $|\vec a|^2 = x_1^2 + y_1^2$, $|\vec b|^2 = x_2^2 + y_2^2$.</Step>
+<Step tex="|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 \quad \blacksquare">გავუტოლოთ, გავხსნათ ფრჩხილები და შევამციროთ კვადრატები.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-vectors" title="არანულოვანი ვექტორები ურთიერთმართობია მაშინ და მხოლოდ მაშინ, როცა მათი სკალარული ნამრავლი ნულია" why="$\cos\varphi = 0$ ზუსტად მაშინ, როცა $\varphi = 90^\circ$.">
+<Proof given="$\vec a \ne \vec 0$, $\vec b \ne \vec 0$" prove="$\vec a \perp \vec b \iff \vec a \cdot \vec b = 0$">
+<Step hl="<AOB" tex="\vec a \cdot \vec b = 0 \iff \cos\varphi = 0">$|\vec a|$ და $|\vec b|$ ნული არ არის.</Step>
+<Step tex="\cos\varphi = 0 \iff \varphi = 90^\circ \quad \blacksquare">$0^\circ \le \varphi \le 180^\circ$ შუალედში კოსინუსი მხოლოდ $90^\circ$-ზეა ნული.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>ვექტორები ტოლია, თუ მათი სიგრძეები და მიმართულებები ერთნაირია — ანუ ტოლია მათი კოორდინატები. ამიტომ ვექტორი შეიძლება ნებისმიერი წერტილიდან გადავდოთ.</Remark>
+
+<Remark kind="mistake">სკალარული ნამრავლი რიცხვია და არა ვექტორი. ის უარყოფითია, როცა კუთხე ვექტორებს შორის ბლაგვია.</Remark>

@@ -1,0 +1,68 @@
+---
+title: დეკარტის კოორდინატები
+slug: coordinates
+subject: geometry
+section: coordinates
+order: 40
+summary: მანძილი ორ წერტილს შორის, მონაკვეთის შუაწერტილი, წრეწირისა და წრფის განტოლებები.
+tags: [კოორდინატები, მანძილი, შუაწერტილი, წრეწირის განტოლება, წრფის განტოლება, კუთხური კოეფიციენტი]
+prerequisites: [right-triangle, thales, trigonometry]
+status: draft
+figure: coordinates
+---
+
+<Definition>**დეკარტის მართკუთხა კოორდინატთა სისტემა** ორი ურთიერთმართობი რიცხვითი ღერძია საერთო სათავით $O$: $Ox$ და $Oy$. წერტილის კოორდინატები $A(x;\, y)$ მისი გეგმილებია ღერძებზე: $x$ — **აბსცისა**, $y$ — **ორდინატა**. წრფის განტოლებაში $y = kx + b$ რიცხვს $k$ **კუთხური კოეფიციენტი** ეწოდება.</Definition>
+
+<Formulas>
+<Formula id="distance-formula-card" name="მანძილი ორ წერტილს შორის" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}" live="AB" proof="distance-formula" />
+<Formula id="midpoint-formula-card" name="მონაკვეთის შუაწერტილი" tex="M\left(\frac{x_1 + x_2}{2};\ \frac{y_1 + y_2}{2}\right)" proof="midpoint-formula" />
+<Formula id="circle-formula" name="წრეწირის განტოლება" tex="(x - a)^2 + (y - b)^2 = R^2" proof="circle-equation" />
+<Formula id="line-formula" name="წრფის განტოლება" tex="y = kx + b, \qquad k = \frac{y_2 - y_1}{x_2 - x_1} = \operatorname{tg}\alpha" live="k" proof="line-equation" />
+<Formula id="parallel-formula" name="პარალელური და მართობული წრფეები" tex="k_1 = k_2, \qquad k_1 k_2 = -1" proof="perpendicular-slopes" />
+</Formulas>
+
+<Properties>
+
+<Property id="distance-formula" title="ორ წერტილს შორის მანძილი $\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$-ია" why="კოორდინატების სხვაობები მართკუთხა სამკუთხედის კათეტებია.">
+<Proof given="$A(x_1;\, y_1)$, $B(x_2;\, y_2)$" prove="$AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$">
+<Step show="AC BC C <ACB" hl="ACB">$C(x_2;\, y_1)$: $AC$ ღერძ $Ox$-ის პარალელურია, $BC$ — $Oy$-ის, ამიტომ $\angle C = 90^\circ$.</Step>
+<Step hl="AC BC" tex="AC = |x_2 - x_1|, \qquad BC = |y_2 - y_1|">კათეტები ღერძების პარალელურია.</Step>
+<Step hl="AB" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \quad \blacksquare">პითაგორას თეორემა.</Step>
+</Proof>
+</Property>
+
+<Property id="midpoint-formula" title="მონაკვეთის შუაწერტილის კოორდინატები ბოლოების კოორდინატების საშუალოებია" why="თალესის თეორემა ღერძზე გეგმილებისთვის.">
+<Proof given="$A(x_1;\, y_1)$, $B(x_2;\, y_2)$, $AM = MB$" prove="$M\left(\tfrac{x_1 + x_2}{2};\ \tfrac{y_1 + y_2}{2}\right)$">
+<Step show="AA0 BB0 MM0 A0 B0 M0 M" hl="M">დავუშვათ მართობები $A$-დან, $M$-დან და $B$-დან ღერძ $Ox$-ზე: $AA_0 \parallel MM_0 \parallel BB_0$.</Step>
+<Step hl="A0M0=M0B0" tex="A_0M_0 = M_0B_0">თალესის თეორემა: $AM = MB$.</Step>
+<Step tex="x_M = \frac{x_1 + x_2}{2}, \qquad y_M = \frac{y_1 + y_2}{2} \quad \blacksquare">$M_0$ — $A_0B_0$-ის შუაწერტილი; იგივე ღერძ $Oy$-ზე.</Step>
+</Proof>
+</Property>
+
+<Property id="circle-equation" title="წრეწირის განტოლება ცენტრით $(a;\, b)$ და რადიუსით $R$: $(x - a)^2 + (y - b)^2 = R^2$" why="წრეწირი ცენტრიდან $R$ მანძილზე მდებარე წერტილებია.">
+<Proof given="ცენტრი $A(a;\, b)$, რადიუსი $R$" prove="$(x - a)^2 + (y - b)^2 = R^2$">
+<Step show="(AB) B" hl="(AB)">წერტილი $(x;\, y)$ წრეწირზეა მაშინ და მხოლოდ მაშინ, როცა მისი მანძილი ცენტრამდე $R$-ია.</Step>
+<Step tex="(x - a)^2 + (y - b)^2 = R^2 \quad \blacksquare">მანძილის ფორმულა, აყვანილი კვადრატში (ორივე მხარე არაუარყოფითია).</Step>
+</Proof>
+</Property>
+
+<Property id="line-equation" title="წრფის განტოლებაა $y = kx + b$, სადაც $k = \tfrac{y_2 - y_1}{x_2 - x_1}$ — დახრის კუთხის ტანგენსი" why="წრფის ყველა წერტილისთვის აწევისა და წანაცვლების შეფარდება ერთი და იგივეა (მსგავსი სამკუთხედები).">
+<Proof given="წრფე $AB$, $x_1 \ne x_2$" prove="$y = kx + b$">
+<Step show="line:AB AC BC C <ACB" hl="ACB" tex="k = \frac{y_2 - y_1}{x_2 - x_1}">$\triangle ACB$-ში $\tfrac{|BC|}{|AC|} = \operatorname{tg}\alpha$, სადაც $\alpha$ წრფის დახრის კუთხეა $Ox$-თან; ნიშანი გვიჩვენებს, წრფე ადის თუ ეშვება.</Step>
+<Step show="line:AB" hl="AB" tex="\frac{y - y_1}{x - x_1} = k \;\Rightarrow\; y = kx + (y_1 - kx_1) \quad \blacksquare">წრფის ნებისმიერი სხვა წერტილისთვის $(x;\, y)$ შეფარდება იგივეა — მსგავსი მართკუთხა სამკუთხედები.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-slopes" title="წრფეები $y = k_1x + b_1$ და $y = k_2x + b_2$ ურთიერთმართობია მაშინ და მხოლოდ მაშინ, როცა $k_1k_2 = -1$" why="სათავეზე გადატანილი წრფეებისთვის პითაგორას თეორემა და მისი შებრუნებული.">
+<Proof given="$y = k_1x + b_1$, $y = k_2x + b_2$" prove="მართობია $\iff k_1k_2 = -1$">
+<Step show="line:AB line:AD D" hl="<BAD">დახრა არ იცვლება, თუ წრფეებს სათავეზე გადავიტანთ: $y = k_1x$ და $y = k_2x$. ავიღოთ მათზე წერტილები $P(1;\, k_1)$ და $Q(1;\, k_2)$.</Step>
+<Step tex="OP^2 + OQ^2 = PQ^2 \iff (1 + k_1^2) + (1 + k_2^2) = (k_1 - k_2)^2">კუთხე $O$-სთან მართია მაშინ და მხოლოდ მაშინ, როცა სრულდება პითაგორას ტოლობა.</Step>
+<Step tex="k_1 k_2 = -1 \quad \blacksquare">გავხსნათ ფრჩხილები და შევამციროთ.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>პარალელურ წრფეებს ერთი და იგივე დახრა აქვს: $k_1 = k_2$ (და $b_1 \ne b_2$). ღერძ $Oy$-ის პარალელურ წრფეს ($x = c$) კუთხური კოეფიციენტი არ აქვს.</Remark>
+
+<Remark kind="mistake">შუაწერტილის ფორმულაში კოორდინატები იკრიბება, მანძილის ფორმულაში კი — აკლდება. $AB = \sqrt{(x_1 + x_2)^2 + \dots}$ შეცდომაა.</Remark>

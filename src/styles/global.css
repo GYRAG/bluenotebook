@@ -246,6 +246,9 @@ geo-figure { display: block; position: relative; }
 .fig .arc { fill: none; stroke: var(--ink); stroke-width: 1.4; }
 .fig .arc-hl { stroke-width: 2.8; }
 .fig .dim, .fig .dim-ext { stroke: var(--ink); stroke-width: 1; }
+.fig .axis { stroke: var(--ink-2); stroke-width: 1.25; }
+.fig .axis-t { font: italic 17px var(--font-math); fill: var(--ink-2); }
+.fig .tick { font: 12px var(--font-body); fill: var(--ink-2); }
 .fig .arw { fill: var(--ink); }
 .fig .dim-t { font: 14px var(--font-body); fill: var(--ink); }
 .fig .m { font: italic 16px var(--font-math); }

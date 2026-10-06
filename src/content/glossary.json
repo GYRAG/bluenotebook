@@ -73,6 +73,13 @@
     { "ka": "წესიერი მრავალკუთხედი", "en": "regular polygon" },
     { "ka": "გარე კუთხე", "en": "exterior angle" },
     { "ka": "აპოთემა", "en": "apothem" },
+    { "ka": "დეკარტის მართკუთხა კოორდინატთა სისტემა", "en": "Cartesian coordinate system" },
+    { "ka": "აბსცისა", "en": "abscissa (x-coordinate)" },
+    { "ka": "ორდინატა", "en": "ordinate (y-coordinate)" },
+    { "ka": "კუთხური კოეფიციენტი", "en": "slope (k in y = kx + b)", "note": "verify with the user" },
+    { "ka": "ვექტორი", "en": "vector" },
+    { "ka": "კოლინეარული ვექტორები", "en": "collinear vectors" },
+    { "ka": "სკალარული ნამრავლი", "en": "dot (scalar) product" },
     { "ka": "ნახევარპერიმეტრი", "en": "semiperimeter", "note": "letter p (S = p·r)" }
   ]
 }

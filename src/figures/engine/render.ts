@@ -12,6 +12,7 @@ export interface Scene {
   base: Ref[]; dims: Ref[]; extra: Ref[]; aux: Ref[]; hl: Ref[];
   poly: string[];                    // the base polygon, for interior angles like <A
   unlabeled?: string[];
+  axes?: boolean;                    // coordinate axes through the origin, numbered every unit (or every 2, 5)
 }
 type Box = { x0: number; y0: number; x1: number; y1: number };
 
@@ -45,6 +46,30 @@ export function renderScene(s: Scene): string {
   // the paper: cells aligned to the origin, one unit = whole cells
   for (let x = ((ox % cell) + cell) % cell; x <= W; x += cell) grid += `<line class="grid" x1="${f(x)}" y1="0" x2="${f(x)}" y2="${H}"/>`;
   for (let y = ((oy % cell) + cell) % cell; y <= H; y += cell) grid += `<line class="grid" x1="0" y1="${f(y)}" x2="${W}" y2="${f(y)}"/>`;
+
+  // coordinate axes: drawn on the paper, under the figure
+  let axes = '';
+  if (s.axes) {
+    const step = k >= 28 ? 1 : k >= 14 ? 2 : 5;
+    if (oy > 0 && oy < H) {
+      axes += `<line class="axis" x1="0" y1="${f(oy)}" x2="${f(W - 4)}" y2="${f(oy)}" marker-end="url(#arw)"/>` + text([W - 12, oy - 14], 'x', 'axis-t');
+      segs.push([[0, oy], [W, oy]]); boxes.push(textBox([W - 12, oy - 14], 1));
+      for (let i = Math.ceil(-ox / k / step) * step; ox + i * k < W - 24; i += step) {
+        if (i === 0) continue;
+        const x = ox + i * k;
+        axes += `<line class="axis" x1="${f(x)}" y1="${f(oy - 3)}" x2="${f(x)}" y2="${f(oy + 3)}"/>` + text([x, oy + 13], String(i), 'tick');
+      }
+    }
+    if (ox > 0 && ox < W) {
+      axes += `<line class="axis" x1="${f(ox)}" y1="${H}" x2="${f(ox)}" y2="4" marker-end="url(#arw)"/>` + text([ox + 14, 12], 'y', 'axis-t');
+      segs.push([[ox, 0], [ox, H]]); boxes.push(textBox([ox + 14, 12], 1));
+      for (let i = Math.ceil((oy - H) / k / step) * step; oy - i * k > 24; i += step) {
+        if (i === 0) continue;
+        const y = oy - i * k;
+        axes += `<line class="axis" x1="${f(ox - 3)}" y1="${f(y)}" x2="${f(ox + 3)}" y2="${f(y)}"/>` + text([ox - 12, y], String(i), 'tick');
+      }
+    }
+  }
 
   const polyUnits = s.poly.map(n => s.pts[n]!);
   const orient = Math.sign(polyUnits.reduce((acc, p, i) => acc + cross(p, polyUnits[(i + 1) % polyUnits.length]!), 0)) || 1;
@@ -144,6 +169,15 @@ export function renderScene(s: Scene): string {
         case 'eqseg': eq++; for (const sg of r.segs) { if (c === 'hl') lines += line(P(sg[0]), P(sg[1]), 'hl'); marks += ticks(sg, eq, markC); } break;
         case 'eqang': eqa++; for (const a of r.angs) marks += arc(angleOf(a), 22, eqa, c === 'hl' ? 'arc arc-hl' : 'arc'); break;
         case 'par': par++; for (const sg of r.segs) marks += arrows(sg, par, markC); break;
+        case 'vec': { // an arrow: the shaft stops short so the head ends exactly at the point
+          const A = P(r.s[0]), B = P(r.s[1]);
+          r.s.forEach(p => labelled.add(p));
+          if (dist(A, B) < 2) break; // a zero vector (k = 0): nothing to draw
+          const u = unit(sub(B, A)), end = sub(B, scale(u, 7));
+          segs.push([A, B]);
+          lines += `<line class="${c === 'base' ? 'base' : c} vec" x1="${f(A[0])}" y1="${f(A[1])}" x2="${f(end[0])}" y2="${f(end[1])}" marker-end="url(#vec)"/>`;
+          break;
+        }
         case 'circle': {
           const C = P(r.c), R = dist(C, P(r.p));
           labelled.add(r.c);
@@ -192,7 +226,7 @@ export function renderScene(s: Scene): string {
     labels += text(best, n.replace(/(\d+)/, '<tspan class="sub">$1</tspan>'), 'lbl'); // names are [A-Z][0-9']*: safe
   }
   for (const n of new Set(s.poly)) dots += `<circle class="vtx" cx="${f(P(n)[0])}" cy="${f(P(n)[1])}" r="3.5"/>`;
-  return grid + fills + lines + marks + dims + dots + labels;
+  return grid + axes + fills + lines + marks + dims + dots + labels;
 }
 
 /** Does segment AB cross (or lie inside) box b? */

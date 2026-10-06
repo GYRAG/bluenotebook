@@ -23,6 +23,7 @@ export interface FigureSpec<K extends string = string, P extends string = string
   base: string | ((p: Params<K>) => string); // refs always drawn; a function when the outline depends on the sliders (n-gon)
   unlabeled?: string[];                // helper points that get no letter (line ends etc.)
   boundsOf?: string[];                 // points that size the board (default: all)
+  axes?: boolean;                      // coordinate axes with numbered ticks (coordinates, vectors)
   unitPx?: number;                     // fixed scale (px per unit) instead of fitting the board: the blank sheet, one square = 1
   dims?: string;                       // refs shown while "ზომები" is on (default on)
   toggles?: Record<string, string>;    // switch label → refs

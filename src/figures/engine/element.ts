@@ -148,7 +148,7 @@ export class GeoFigure extends HTMLElement {
     const pts = this.spec.points(this.params), sc = this.scene;
     const dims = sc ? [] : [...(this.dimsOn ? parseRefs(this.spec.dims) : []), ...(this.hover ? parseRefs(`|${this.hover.join('')}|`) : [])];
     const extra = sc ? [] : [...this.toggles].flatMap(t => parseRefs(this.spec.toggles?.[t]));
-    this.layer.innerHTML = renderScene({ pts, view: this.view, base: this.base, dims, extra, aux: parseRefs(sc?.show), hl: parseRefs(sc?.hl), poly: this.poly, unlabeled: this.spec.unlabeled ?? [] });
+    this.layer.innerHTML = renderScene({ pts, view: this.view, base: this.base, dims, extra, aux: parseRefs(sc?.show), hl: parseRefs(sc?.hl), poly: this.poly, unlabeled: this.spec.unlabeled ?? [], axes: !!this.spec.axes });
     for (const h of this.handles.querySelectorAll<SVGGElement>('.handle')) {
       const p = this.px(pts[h.dataset.p!]!);
       h.setAttribute('transform', `translate(${p[0].toFixed(1)} ${p[1].toFixed(1)})`);
