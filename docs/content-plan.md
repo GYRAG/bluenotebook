@@ -67,4 +67,5 @@ Batches (book problem sections → site topics):
 4. ✓ §7–9 → similarity, right triangle (incl. §4's right-triangle angle problems), trigonometry, sine/cosine laws, medians and bisectors (25)
 5. ✓ §10–11 → triangle area, quadrilateral areas, polygons, regular polygons, arcs, sectors, segments (21)
 6. ✓ §13 + §5 touching circles → „სხვადასხვა ამოცანები“ page (section `mixed`), figures tangent-circles and concentric (12)
-7. §14–23 → stereometry (needs 3D measuring in problems.test.ts)
+7. ✓ §14–23 → vectors, coordinates, transformations (§15–16) and stereometry: perpendiculars, dihedral angles,
+   space coordinates, prisms, pyramids, cylinder, cone, sphere (33). problems.test.ts measures solids in 3D.

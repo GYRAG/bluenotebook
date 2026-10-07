@@ -34,7 +34,8 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - `<Problems>` / `<Problem>` (the „ამოცანები“ tab): `set` = figure params (exact, not snapped), `given` =
   `lhs=rhs` facts in figure terms (`AB=5`, `<A=60`, `AB-AD=7`, `S(ABCD)`, `P(ABCD)`), `find` + `answer`
   (one value each; `√`, `π`, `2,5` allowed), `k` = problem units per figure unit (default: first given length).
-  A find item may be an expression (`BC/AB`); `labels="\sin A"` names its answer box. `prove` instead of find
+  Also `x(A)` `y(A)` `z(A)` (coordinates) and `V(SABCD)` (pyramid volume, apex first); solids are measured
+  in 3D (the spec's `space`). A find item may be an expression (`BC/AB`); `labels="\sin A"` names its answer box. `prove` instead of find
   makes a proof problem; `book` lists Topuria's problems of the same type.
   Atomic givens label the figure; finds show as "?". Steps are a hidden solution that drives the figure.
   A page with only problems (no Formula/Property/Definition) gets just the problems tab and is left off the cheat sheet.

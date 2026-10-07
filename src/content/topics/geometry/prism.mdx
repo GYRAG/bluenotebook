@@ -59,3 +59,36 @@ figure: box
 <Remark kind="special">კუბი მართკუთხა პარალელეპიპედია ტოლი წიბოებით: $d = a\sqrt3$, $V = a^3$, $S_{\text{სრ}} = 6a^2$.</Remark>
 
 <Remark kind="mistake">დახრილი პრიზმის სიმაღლე გვერდითი წიბო არ არის — სიმაღლე ფუძეებს შორის მართობია, წიბო კი დახრილი.</Remark>
+
+<Problems>
+
+<Problem id="p-box-diagonal" set={{ a: 3.2, b: 2.4, c: 4, tilt: 0 }} show="AC AC1" given="AB=4 BC=3 CC1=5" find="AC1 <C1AC" answer="5√2 45" book="17.16 17.17"
+  q="მართკუთხა პარალელეპიპედის ფუძის გვერდებია $4$ და $3$, სიმაღლე კი $5$-ია. იპოვეთ პარალელეპიპედის დიაგონალი და კუთხე, რომელსაც ის ფუძის სიბრტყესთან ადგენს."
+  hint="$AC$ არის $AC_1$-ის გეგმილი ფუძეზე.">
+<Step hl="AC" tex="AC = \sqrt{4^2 + 3^2} = 5">ფუძის დიაგონალი.</Step>
+<Step hl="AC1" tex="AC_1 = \sqrt{5^2 + 5^2} = 5\sqrt2">მართკუთხა სამკუთხედ $ACC_1$-ში; ანუ $d^2 = a^2 + b^2 + c^2$.</Step>
+<Step hl="ACC1" tex="\operatorname{tg}\angle C_1AC = \frac{CC_1}{AC} = 1 \;\Rightarrow\; \angle C_1AC = 45^\circ">დიაგონალსა და სიბრტყეს შორის კუთხე დიაგონალსა და მის გეგმილს შორის კუთხეა.</Step>
+</Problem>
+
+<Problem id="p-box-height" set={{ a: 2.4, b: 3.2, c: 4, tilt: 0 }} show="AC AC1" given="AB=12 BC=16 <C1AC=45" find="CC1" answer="20" book="17.18 17.19"
+  q="მართკუთხა პარალელეპიპედის დიაგონალი ფუძის სიბრტყესთან $45^\circ$-იან კუთხეს ადგენს, ფუძის გვერდებია $12$ და $16$. იპოვეთ პარალელეპიპედის სიმაღლე."
+  hint="მართკუთხა სამკუთხედი $ACC_1$ ტოლფერდაა.">
+<Step hl="AC" tex="AC = \sqrt{12^2 + 16^2} = 20">ფუძის დიაგონალი.</Step>
+<Step hl="ACC1" tex="CC_1 = AC\,\operatorname{tg} 45^\circ = 20">მართკუთხა სამკუთხედ $ACC_1$-ში.</Step>
+</Problem>
+
+<Problem id="p-cube-volume" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="AC1" given="AB=BC BC=CC1 AC1=6" find="AB S(ABCD)*CC1" labels="a;V" answer="2√3 24√3" book="20.2"
+  q="კუბის დიაგონალი $6$-ია. იპოვეთ კუბის წიბო და მოცულობა."
+  hint="კუბის დიაგონალი $a\sqrt3$-ია.">
+<Step hl="AC1" tex="a\sqrt3 = 6 \;\Rightarrow\; a = 2\sqrt3">$d^2 = a^2 + a^2 + a^2$.</Step>
+<Step tex="V = a^3 = 24\sqrt3">კუბის მოცულობა.</Step>
+</Problem>
+
+<Problem id="p-box-ratio-volume" k={0.625} set={{ a: 4.8, b: 1.6, c: 3.2, tilt: 0 }} given="2*(S(ABCD)+S(ABB1A1)+S(BCC1B1))=22 AB/BC=3 CC1/BC=2" find="S(ABCD)*CC1" labels="V" answer="6" book="20.7 20.9"
+  q="მართკუთხა პარალელეპიპედის სრული ზედაპირის ფართობი $22$-ია, ერთი წვეროდან გამოსული წიბოები კი ისე შეეფარდება ერთმანეთს, როგორც $1 : 2 : 3$. იპოვეთ პარალელეპიპედის მოცულობა."
+  hint="აღნიშნეთ წიბოები $x$, $2x$ და $3x$-ით.">
+<Step tex="\begin{gathered}2\,(x \cdot 2x + 2x \cdot 3x + x \cdot 3x) = 22x^2 \\ 22x^2 = 22 \;\Rightarrow\; x = 1\end{gathered}">სრული ზედაპირი ექვსი წახნაგის — სამი წყვილი ტოლი მართკუთხედის ფართობების ჯამია.</Step>
+<Step tex="V = 1 \cdot 2 \cdot 3 = 6">მართკუთხა პარალელეპიპედის მოცულობა წიბოების ნამრავლია.</Step>
+</Problem>
+
+</Problems>

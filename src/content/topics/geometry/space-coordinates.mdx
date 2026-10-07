@@ -52,3 +52,21 @@ figure: space-coords
 </Properties>
 
 <Remark kind="mistake">სივრცეში წრფის განტოლება $y = kx + b$ არ არის — ასეთი განტოლება სივრცეში სიბრტყეს აღწერს.</Remark>
+
+<Problems>
+
+<Problem id="p-space-dist" set={{ x: 2, y: 1, z: 2, bx: 0, by: 3, bz: 1 }} show="OA AB B" given="x(A)=2 y(A)=1 z(A)=2 x(B)=0 y(B)=3 z(B)=1" find="OA AB" answer="3 3" book="15.22"
+  q="მოცემულია წერტილები $A(2;\, 1;\, 2)$ და $B(0;\, 3;\, 1)$. იპოვეთ $A$-ს მანძილი სათავემდე და $AB$ მონაკვეთის სიგრძე."
+  hint="სივრცეში მანძილის ფორმულას მესამე წევრიც ემატება.">
+<Step hl="OA" tex="OA = \sqrt{2^2 + 1^2 + 2^2} = 3">წერტილის მანძილი სათავემდე.</Step>
+<Step hl="AB" tex="AB = \sqrt{(0 - 2)^2 + (3 - 1)^2 + (1 - 2)^2} = \sqrt9 = 3">ორ წერტილს შორის მანძილი.</Step>
+</Problem>
+
+<Problem id="p-space-axis" set={{ x: 2, y: 1, z: 2, bx: 0.5, by: 2.5, bz: 1 }} show="AA3 AA4 A3 A4" given="x(A)=2 y(A)=1 z(A)=2" find="AA4 AA3" answer="2 √5"
+  q="იპოვეთ $A(2;\, 1;\, 2)$ წერტილის მანძილი $Oxy$ სიბრტყემდე და $Oz$ ღერძამდე."
+  hint="$A_4(2;\, 1;\, 0)$ არის $A$-ს გეგმილი $Oxy$ სიბრტყეზე, $A_3(0;\, 0;\, 2)$ — $Oz$ ღერძზე.">
+<Step hl="AA4" tex="AA_4 = |z| = 2">$Oxy$ სიბრტყემდე მანძილი აპლიკატის მოდულია.</Step>
+<Step hl="AA3" tex="AA_3 = \sqrt{x^2 + y^2} = \sqrt5">$A_3$-დან $A$-მდე მხოლოდ $x$ და $y$ იცვლება.</Step>
+</Problem>
+
+</Problems>

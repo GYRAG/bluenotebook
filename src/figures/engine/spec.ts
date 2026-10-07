@@ -31,6 +31,8 @@ export interface FigureSpec<K extends string = string, P extends string = string
   toggles?: Record<string, string>;    // switch label → refs
   classify?: 'triangle' | 'quad';      // classifies the first polygon in `base`
   readouts?: (pts: Record<P, V>, p: Params<K>) => Readout[];
+  /** Solids: the true 3D points (problems measure lengths, angles, areas and volumes on these). */
+  space?: (p: Params<K>) => Record<string, readonly [number, number, number]>;
   /** Property id → numeric claim; Vitest runs each on random parameters. */
   checks?: Record<string, (pts: Record<P, V>, p: Params<K>) => boolean>;
 }

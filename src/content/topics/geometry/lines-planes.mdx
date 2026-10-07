@@ -57,3 +57,22 @@ figure: box
 <Remark>აცდენილ წრფეებს შორის კუთხე იზომება ერთის პარალელური გადატანით მეორის წერტილზე; მანძილი მათ შორის — საერთო მართობის სიგრძეა. მაგალითად, $AB$-სა და $CC_1$-ს საერთო მართობია $BC$.</Remark>
 
 <Remark kind="mistake">„არ იკვეთება“ სივრცეში „პარალელურს“ არ ნიშნავს: არგადამკვეთი წრფეები შეიძლება აცდენილი იყოს. პარალელურობისთვის ერთ სიბრტყეში მდებარეობაც საჭიროა.</Remark>
+
+<Problems>
+
+<Problem id="p-cube-face-diagonals" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="B1A B1C AC" given="AB=BC BC=CC1" find="<AB1C" answer="60" book="17.8"
+  q="$ABCDA_1B_1C_1D_1$ კუბია. იპოვეთ კუთხე $B_1A$ და $B_1C$ დიაგონალებს შორის."
+  hint="განიხილეთ სამკუთხედი $AB_1C$.">
+<Step hl="B1A B1C AC" tex="B_1A = B_1C = AC = a\sqrt2">სამივე მონაკვეთი კუბის წახნაგის დიაგონალია.</Step>
+<Step hl="AB1C" tex="\angle AB_1C = 60^\circ">სამკუთხედი $AB_1C$ ტოლგვერდაა.</Step>
+</Problem>
+
+<Problem id="p-cube-diagonal-angle" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="AC1 AC CC1" given="AB=BC BC=CC1" find="CC1/AC" labels="\operatorname{tg}\varphi" answer="√2/2" book="17.7 17.17"
+  q="$ABCDA_1B_1C_1D_1$ კუბში $\varphi$ არის კუთხე $AC_1$ დიაგონალსა და ფუძის სიბრტყეს შორის. იპოვეთ $\operatorname{tg}\varphi$."
+  hint="$AC$ არის $AC_1$-ის გეგმილი ფუძის სიბრტყეზე.">
+<Step hl="AC CC1" tex="\varphi = \angle C_1AC">$CC_1$ ფუძის სიბრტყის მართობია, ამიტომ $AC$ არის $AC_1$-ის გეგმილი.</Step>
+<Step hl="AC" tex="AC = a\sqrt2">ფუძის დიაგონალი.</Step>
+<Step hl="ACC1" tex="\operatorname{tg}\varphi = \frac{CC_1}{AC} = \frac{a}{a\sqrt2} = \frac{\sqrt2}{2}">მართკუთხა სამკუთხედ $ACC_1$-ში.</Step>
+</Problem>
+
+</Problems>

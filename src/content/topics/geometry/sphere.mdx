@@ -51,3 +51,21 @@ figure: sphere
 <Remark>სიბრტყე, რომელიც სფეროს ერთ წერტილში ეხება, **მხები სიბრტყეა**; ის შეხების წერტილში გავლებული რადიუსის მართობია (კვეთის რადიუსი $\rho = 0$, როცა $d = R$).</Remark>
 
 <Remark kind="mistake">„სფერო“ ზედაპირია (ფართობი $4\pi R^2$), „ბირთვი“ — სხეული (მოცულობა $\tfrac43 \pi R^3$).</Remark>
+
+<Problems>
+
+<Problem id="p-sphere-section" set={{ R: 2.5, d: 0.5487804878048781 }} show="OP PK OK P K <OPK" given="OK=41 OP=9" find="PK" answer="40" book="19.28 19.29"
+  q="ბირთვის რადიუსი $41$-ია. მას კვეთს სიბრტყე, რომელიც ცენტრიდან $9$-ითაა დაშორებული. იპოვეთ კვეთის რადიუსი."
+  hint="ცენტრიდან კვეთის სიბრტყეზე დაშვებული მართობის ფუძე კვეთის ცენტრია.">
+<Step hl="OP <OPK" tex="OP \perp PK">$P$ კვეთის ცენტრია, $OP$ კი სიბრტყის მართობი.</Step>
+<Step hl="OPK PK" tex="PK = \sqrt{41^2 - 9^2} = \sqrt{1600} = 40">პითაგორას თეორემით.</Step>
+</Problem>
+
+<Problem id="p-sphere-volume" k={2} set={{ R: 2.5, d: 1.4 }} show="OK" given="4*π*OK^2=100π" find="OK 4*π*OK^3/3" labels="R;V" answer="5 500π/3" book="23.1"
+  q="სფეროს ფართობი $100\pi$-ია. იპოვეთ ბირთვის რადიუსი და მოცულობა."
+  hint="სფეროს ფართობი $4\pi R^2$-ია.">
+<Step hl="OK" tex="4\pi R^2 = 100\pi \;\Rightarrow\; R = 5">სფეროს ფართობის ფორმულა.</Step>
+<Step tex="V = \tfrac43 \pi R^3 = \frac{500\pi}{3}">ბირთვის მოცულობა.</Step>
+</Problem>
+
+</Problems>

@@ -73,3 +73,51 @@ figures: [cone]
 </Properties>
 
 <Remark kind="mistake">კონუსის გვერდითი ზედაპირის ფორმულაში მსახველია ($\pi r l$), მოცულობის ფორმულაში — სიმაღლე ($\tfrac13 \pi r^2 h$). მათი აღრევა ყველაზე ხშირი შეცდომაა.</Remark>
+
+<Problems>
+
+<Problem id="p-cyl-axial-diagonal" set={{ r: 2, h: 3 }} show="AB A1B1 AA1 BB1 AB1" given="O1A=2 O1O2=3" find="AB1" answer="5" book="19.1"
+  q="ცილინდრის ფუძის რადიუსი $2$-ია, სიმაღლე კი $3$. იპოვეთ ცილინდრის ღერძული კვეთის დიაგონალი."
+  hint="ღერძული კვეთა მართკუთხედია, რომლის გვერდებია ფუძის დიამეტრი და სიმაღლე.">
+<Step hl="AB BB1" tex="AB = 2r = 4,\qquad BB_1 = h = 3">ღერძული კვეთის გვერდები.</Step>
+<Step hl="AB1" tex="AB_1 = \sqrt{4^2 + 3^2} = 5">პითაგორას თეორემით.</Step>
+</Problem>
+
+<Problem id="p-cyl-square-section" set={{ r: 2, h: 4 }} show="AB A1B1 AA1 BB1" given="S(ABB1A1)=16 AB=AA1" find="2*π*O1A*O1O2 π*O1A^2*O1O2" labels="S_{\text{გვ}};V" answer="16π 16π" book="19.2 22.1"
+  q="ცილინდრის ღერძული კვეთა კვადრატია, რომლის ფართობი $16$-ია. იპოვეთ ცილინდრის გვერდითი ზედაპირის ფართობი და მოცულობა."
+  hint="კვადრატის გვერდი ერთდროულად ფუძის დიამეტრიცაა და სიმაღლეც.">
+<Step hl="ABB1A1" tex="AB = AA_1 = 4 \;\Rightarrow\; r = 2,\quad h = 4">კვადრატის გვერდი $\sqrt{16} = 4$-ია.</Step>
+<Step tex="S_{\text{გვ}} = 2\pi r h = 16\pi">ცილინდრის გვერდითი ზედაპირი.</Step>
+<Step tex="V = \pi r^2 h = 16\pi">ცილინდრის მოცულობა.</Step>
+</Problem>
+
+<Problem id="p-cyl-volume" set={{ r: 2, h: 3 }} show="AB A1B1 AA1 BB1 AB1" given="AB1=10 O1O2=6" find="π*O1A^2*O1O2" labels="V" answer="96π" book="22.4"
+  q="ცილინდრის ღერძული კვეთის დიაგონალი $10$-ია, სიმაღლე კი $6$. იპოვეთ ცილინდრის მოცულობა."
+  hint="ჯერ იპოვეთ ფუძის დიამეტრი.">
+<Step hl="ABB1" tex="AB = \sqrt{10^2 - 6^2} = 8 \;\Rightarrow\; r = 4">მართკუთხა სამკუთხედ $ABB_1$-ში.</Step>
+<Step tex="V = \pi \cdot 16 \cdot 6 = 96\pi">ცილინდრის მოცულობა.</Step>
+</Problem>
+
+<Problem id="p-cone-345" figure="cone" set={{ r: 2.5, h: 3.3333333333333335 }} show="SO OA SA" given="OA=3 SO=4" find="SA π*OA*SA π*OA^2*SO/3" labels="l;S_{\text{გვ}};V" answer="5 15π 12π" book="19.12 22.15"
+  q="კონუსის ფუძის რადიუსი $3$-ია, სიმაღლე კი $4$. იპოვეთ კონუსის მსახველი, გვერდითი ზედაპირის ფართობი და მოცულობა."
+  hint="სიმაღლე, რადიუსი და მსახველი მართკუთხა სამკუთხედს ადგენს.">
+<Step hl="SOA SA" tex="l = \sqrt{3^2 + 4^2} = 5">მართკუთხა სამკუთხედ $SOA$-ში.</Step>
+<Step tex="S_{\text{გვ}} = \pi r l = 15\pi">კონუსის გვერდითი ზედაპირი.</Step>
+<Step tex="V = \tfrac13 \pi r^2 h = \tfrac13 \pi \cdot 9 \cdot 4 = 12\pi">კონუსის მოცულობა.</Step>
+</Problem>
+
+<Problem id="p-cone-slant-angle" figure="cone" set={{ r: 2, h: 3.4641016151377544 }} show="SO OA SA <SAO" given="SA=8 <SAO=60" find="SO OA" labels="h;r" answer="4√3 4" book="19.13"
+  q="კონუსის მსახველი $8$-ია და ფუძის სიბრტყესთან $60^\circ$-იან კუთხეს ადგენს. იპოვეთ კონუსის სიმაღლე და ფუძის რადიუსი."
+  hint="მსახველსა და ფუძეს შორის კუთხე მსახველსა და რადიუსს შორის კუთხეა.">
+<Step hl="SOA <SAO" tex="SO = 8 \sin 60^\circ = 4\sqrt3">მართკუთხა სამკუთხედ $SOA$-ში.</Step>
+<Step hl="OA" tex="OA = 8 \cos 60^\circ = 4">ფუძის რადიუსი.</Step>
+</Problem>
+
+<Problem id="p-cone-equilateral" figure="cone" set={{ r: 2, h: 3.4641016151377544 }} show="SA SB AB" given="SA=AB SB=AB AB=6" find="π*OA*SA+π*OA^2" labels="S_{\text{სრ}}" answer="27π" book="19.14 19.19"
+  q="კონუსის ღერძული კვეთა ტოლგვერდა სამკუთხედია, რომლის გვერდი $6$-ია. იპოვეთ კონუსის სრული ზედაპირის ფართობი."
+  hint="სრული ზედაპირი გვერდითი ზედაპირისა და ფუძის ფართობების ჯამია.">
+<Step hl="SAB" tex="l = 6,\qquad r = 3">ღერძული კვეთის გვერდები მსახველები და ფუძის დიამეტრია.</Step>
+<Step tex="S_{\text{სრ}} = \pi r l + \pi r^2 = 18\pi + 9\pi = 27\pi">გვერდითი ზედაპირისა და ფუძის ფართობების ჯამი.</Step>
+</Problem>
+
+</Problems>

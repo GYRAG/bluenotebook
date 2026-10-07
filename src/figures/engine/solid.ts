@@ -164,6 +164,7 @@ export function solid<K extends string>(o: SolidOpts<K>): FigureSpec {
     base,
     unlabeled: [...(o.unlabeled ?? []), ...sampleNames],
     orbit: true,
+    space: P3,
     board: [-reach, -reach, reach, reach],
     ...(o.dims ? { dims: o.dims } : {}),
     ...(o.toggles ? { toggles: o.toggles } : {}),

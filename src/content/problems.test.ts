@@ -4,7 +4,8 @@
 // (an attribute, or from the first given length).
 import { describe, expect, it } from 'vitest';
 import { evaluate, type Atom } from '@/lib/expr';
-import { area, angleAt, dist, near, perimeter, type V } from '@/figures/engine/geom';
+import { area, angleAt, dist, near, type V } from '@/figures/engine/geom';
+import { angle3, area3, dist3, tetra, type V3 } from '@/figures/engine/solid';
 import { names, parseRefs, refPoints } from '@/figures/engine/refs';
 import type { FigureSpec, Params } from '@/figures/engine/spec';
 
@@ -16,26 +17,41 @@ const OPEN = /<Problem\s((?:[^>"{]|"[^"]*"|\{\{[^}]*\}\}|\{[^}]*\})*)>([\s\S]*?)
 const attrs = (s: string) => Object.fromEntries([...s.matchAll(/(\w+)="([^"]*)"/g)].map(m => [m[1]!, m[2]!]));
 const obj = (s = '') => Object.fromEntries(s.split(',').filter(x => x.trim()).map(kv => { const [k, v] = kv.split(':'); return [k!.trim(), +v!]; }));
 
-/** Lengths (AB), angles (<ABC, <A in the base polygon), areas S(…) and perimeters P(…), in problem units. */
-function measurer(pts: Record<string, V>, poly: string[], k: number): Atom {
+/** Measuring on a flat figure or (solids) in space. */
+interface Metric<P> { dist(a: P, b: P): number; angle(a: P, v: P, b: P): number; area(ps: P[]): number; coord(p: P, i: number): number }
+const flat: Metric<V> = { dist, angle: angleAt, area, coord: (p, i) => p[i] ?? 0 };
+const space: Metric<V3> = { dist: dist3, angle: angle3, area: area3, coord: (p, i) => p[i]! };
+
+/**
+ * Lengths (AB), angles (<ABC, <A in the base polygon), areas S(…), perimeters P(…), volumes V(S…) of
+ * the pyramid with apex S over the rest (a tetrahedron when three follow), and coordinates x(A),
+ * y(A), z(A) — all in problem units.
+ */
+function measurer<P>(pts: Record<string, P>, m: Metric<P>, poly: string[], k: number): Atom {
   const P = (n: string) => pts[n] ?? (() => { throw new Error(`no point ${n} on the figure`); })();
   return (s, at) => {
     const rest = s.slice(at);
-    let m: RegExpExecArray | null;
-    if ((m = /^([SP])\(((?:[A-Z][0-9']*)+)\)/.exec(rest))) {
-      const ps = names(m[2]!).map(P);
-      return { value: m[1] === 'S' ? area(ps) * k * k : perimeter(ps) * k, end: at + m[0].length };
+    let r: RegExpExecArray | null;
+    if ((r = /^([xyz])\(([A-Z][0-9']*)\)/.exec(rest))) return { value: m.coord(P(r[2]!), 'xyz'.indexOf(r[1]!)) * k, end: at + r[0].length };
+    if ((r = /^([SPV])\(((?:[A-Z][0-9']*)+)\)/.exec(rest))) {
+      const ps = names(r[2]!).map(P), end = at + r[0].length;
+      if (r[1] === 'S') return { value: m.area(ps) * k * k, end };
+      if (r[1] === 'P') return { value: ps.reduce((sum, q, i) => sum + m.dist(q, ps[(i + 1) % ps.length]!), 0) * k, end };
+      const [apex, ...b] = ps as unknown as V3[]; // a fan of tetrahedra over a convex base
+      let v = 0;
+      for (let i = 1; i + 1 < b.length; i++) v += tetra(apex!, b[0]!, b[i]!, b[i + 1]!);
+      return { value: v * k ** 3, end };
     }
-    if ((m = /^<((?:[A-Z][0-9']*)+)/.exec(rest))) {
-      let n = names(m[1]!);
+    if ((r = /^<((?:[A-Z][0-9']*)+)/.exec(rest))) {
+      let n = names(r[1]!);
       if (n.length === 1) { const i = poly.indexOf(n[0]!); if (i < 0) throw new Error(`<${n[0]}: not a vertex of the base polygon`); n = [poly.at(i - 1)!, n[0]!, poly[(i + 1) % poly.length]!]; }
-      if (n.length !== 3) throw new Error(`"<${m[1]}": an angle is <A or <ABC`);
-      return { value: angleAt(P(n[0]!), P(n[1]!), P(n[2]!)), end: at + m[0].length };
+      if (n.length !== 3) throw new Error(`"<${r[1]}": an angle is <A or <ABC`);
+      return { value: m.angle(P(n[0]!), P(n[1]!), P(n[2]!)), end: at + r[0].length };
     }
-    if ((m = /^(?:[A-Z][0-9']*)+/.exec(rest))) {
-      const n = names(m[0]);
-      if (n.length !== 2) throw new Error(`"${m[0]}": write a length as two points; areas as S(${m[0]})`);
-      return { value: dist(P(n[0]!), P(n[1]!)) * k, end: at + m[0].length };
+    if ((r = /^(?:[A-Z][0-9']*)+/.exec(rest))) {
+      const n = names(r[0]);
+      if (n.length !== 2) throw new Error(`"${r[0]}": write a length as two points; areas as S(${r[0]})`);
+      return { value: m.dist(P(n[0]!), P(n[1]!)) * k, end: at + r[0].length };
     }
     return null;
   };
@@ -64,8 +80,10 @@ for (const [path, src] of Object.entries(files)) {
         const poly = (parseRefs(base).find(r => r.k === 'poly') as { ps: string[] } | undefined)?.ps ?? [];
         const given = (a.given ?? '').split(/\s+/).filter(Boolean).map(g => g.split('=') as [string, string]);
         const firstLen = given.find(([l, r]) => /^(?:[A-Z][0-9']*){2}$/.test(l) && names(l).length === 2 && !/[A-Z]/.test(r));
-        const k = kAttr ? +kAttr : firstLen ? evaluate(firstLen[1]) / evaluate(firstLen[0], measurer(pts, poly, 1)) : 1;
-        const at = measurer(pts, poly, k);
+        const P3 = s.space?.(p) as Record<string, V3> | undefined;
+        const at1 = P3 ? measurer(P3, space, poly, 1) : measurer(pts, flat, poly, 1);
+        const k = kAttr ? +kAttr : firstLen ? evaluate(firstLen[1]) / evaluate(firstLen[0], at1) : 1;
+        const at = P3 ? measurer(P3, space, poly, k) : measurer(pts, flat, poly, k);
         for (const [l, r] of given) expect(near(evaluate(l, at), evaluate(r, at)), `given ${l}=${r}: the figure has ${evaluate(l, at)}`).toBe(true);
         const finds = (a.find ?? '').split(/\s+/).filter(Boolean), answers = (a.answer ?? '').split(/\s+/).filter(Boolean);
         expect(answers.length).toBe(finds.length);

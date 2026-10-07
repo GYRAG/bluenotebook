@@ -56,3 +56,38 @@ figure: pyramid
 </Properties>
 
 <Remark kind="mistake">აპოთემა (გვერდითი წახნაგის სიმაღლე, $SM$) და პირამიდის სიმაღლე ($SO$) სხვადასხვა მონაკვეთია: $l > h$.</Remark>
+
+<Problems>
+
+<Problem id="p-pyr-edge" set={{ a: 4, h: 3.5 }} show="SO OA SA O" given="AB=8 SO=7" find="SA" answer="9" book="18.9"
+  q="წესიერი ოთხკუთხა პირამიდის სიმაღლე $7$-ია, ფუძის გვერდი კი $8$. იპოვეთ გვერდითი წიბო."
+  hint="$OA$ ფუძის დიაგონალის ნახევარია.">
+<Step hl="OA" tex="OA = \frac{8\sqrt2}{2} = 4\sqrt2">წესიერი პირამიდის სიმაღლის ფუძე კვადრატის ცენტრია.</Step>
+<Step hl="SOA SA" tex="SA = \sqrt{7^2 + (4\sqrt2)^2} = \sqrt{81} = 9">მართკუთხა სამკუთხედ $SOA$-ში.</Step>
+</Problem>
+
+<Problem id="p-pyr-apothem" set={{ a: 4, h: 1.7638342073763937 }} show="SM SA M" given="AB=6 SA=5" find="SM 4*S(SAB)" labels="l;S_{\text{გვ}}" answer="4 48" book="18.14 18.15"
+  q="წესიერი ოთხკუთხა პირამიდის ფუძის გვერდი $6$-ია, გვერდითი წიბო კი $5$. იპოვეთ პირამიდის აპოთემა და გვერდითი ზედაპირის ფართობი."
+  hint="აპოთემა გვერდითი წახნაგის სიმაღლეა; ის ფუძის გვერდს შუაზე ყოფს.">
+<Step hl="SMA" tex="SM = \sqrt{5^2 - 3^2} = 4">$SAB$ ტოლფერდა სამკუთხედია, $SM$ კი მისი სიმაღლე და მედიანა.</Step>
+<Step tex="S_{\text{გვ}} = \tfrac12\, P\, l = \tfrac12 \cdot 24 \cdot 4 = 48">წესიერი პირამიდის გვერდითი ზედაპირი ფუძის პერიმეტრისა და აპოთემის ნამრავლის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-pyr-angle" set={{ a: 4, h: 3.4641016151377544 }} show="SM OM SO <SOM M O" given="AB=12 <SMO=60" find="4*S(SAB) V(SABCD)" labels="S_{\text{გვ}};V" answer="288 288√3" book="18.10 18.20"
+  q="წესიერი ოთხკუთხა პირამიდის ფუძის გვერდი $12$-ია, ორწახნაგა კუთხე ფუძესთან კი $60^\circ$. იპოვეთ პირამიდის გვერდითი ზედაპირის ფართობი და მოცულობა."
+  hint="$\angle SMO$ ფუძესთან ორწახნაგა კუთხის წრფივი კუთხეა.">
+<Step hl="OM <SMO" tex="OM = 6,\qquad SM = \frac{OM}{\cos 60^\circ} = 12">$SM$ და $OM$ ფუძის გვერდის მართობია, ამიტომ $\angle SMO$ წრფივი კუთხეა.</Step>
+<Step hl="SO" tex="SO = OM \operatorname{tg} 60^\circ = 6\sqrt3">პირამიდის სიმაღლე.</Step>
+<Step tex="S_{\text{გვ}} = \tfrac12 \cdot 48 \cdot 12 = 288">გვერდითი ზედაპირი.</Step>
+<Step tex="V = \tfrac13 \cdot 144 \cdot 6\sqrt3 = 288\sqrt3">პირამიდის მოცულობა ფუძის ფართობისა და სიმაღლის ნამრავლის მესამედია.</Step>
+</Problem>
+
+<Problem id="p-pyr-volume" k={1.5} set={{ a: 4, h: 2.6666666666666665 }} show="SO SM OM <SOM O M" given="SO=4 SM=5" find="AB V(SABCD)" labels="a;V" answer="6 48" book="21.1"
+  q="წესიერი ოთხკუთხა პირამიდის სიმაღლე $4$-ია, აპოთემა კი $5$. იპოვეთ ფუძის გვერდი და პირამიდის მოცულობა."
+  hint="მართკუთხა სამკუთხედ $SOM$-ში $OM$ ფუძის გვერდის ნახევარია.">
+<Step hl="SOM OM" tex="OM = \sqrt{5^2 - 4^2} = 3">მართკუთხა სამკუთხედ $SOM$-ში.</Step>
+<Step hl="AB" tex="AB = 2\,OM = 6">$O$ კვადრატის ცენტრია, $M$ — გვერდის შუაწერტილი.</Step>
+<Step tex="V = \tfrac13 \cdot 36 \cdot 4 = 48">პირამიდის მოცულობა.</Step>
+</Problem>
+
+</Problems>

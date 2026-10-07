@@ -66,3 +66,29 @@ figure: vectors
 <Remark>ვექტორები ტოლია, თუ მათი სიგრძეები და მიმართულებები ერთნაირია — ანუ ტოლია მათი კოორდინატები. ამიტომ ვექტორი შეიძლება ნებისმიერი წერტილიდან გადავდოთ.</Remark>
 
 <Remark kind="mistake">სკალარული ნამრავლი რიცხვია და არა ვექტორი. ის უარყოფითია, როცა კუთხე ვექტორებს შორის ბლაგვია.</Remark>
+
+<Problems>
+
+<Problem id="p-vec-sum-length" set={{ ax: 3, ay: 1, bx: -1, by: 2, k: 1 }} show="vec:OC C" given="x(A)=3 y(A)=1 x(B)=-1 y(B)=2" find="OC" labels="|\vec a + \vec b|" answer="√13" book="15.20 15.23 15.29"
+  q="მოცემულია ვექტორები $\vec a = \overrightarrow{OA}(3;\, 1)$ და $\vec b = \overrightarrow{OB}(-1;\, 2)$. იპოვეთ $|\vec a + \vec b|$."
+  hint="ჯამის კოორდინატები შესაკრებთა კოორდინატების ჯამია.">
+<Step hl="vec:OA vec:OB" tex="\vec a + \vec b = (3 - 1;\; 1 + 2) = (2;\, 3)">ვექტორების შეკრებისას შესაბამისი კოორდინატები იკრიბება.</Step>
+<Step hl="vec:OC" tex="|\vec a + \vec b| = \sqrt{2^2 + 3^2} = \sqrt{13}">ვექტორის სიგრძე კოორდინატების კვადრატების ჯამის ფესვია.</Step>
+</Problem>
+
+<Problem id="p-vec-angle" set={{ ax: 3, ay: 1, bx: 1, by: 2, k: 1 }} given="x(A)=3 y(A)=1 x(B)=1 y(B)=2" find="<AOB" answer="45" book="15.37 15.51"
+  q="იპოვეთ კუთხე ვექტორებს $\vec a(3;\, 1)$ და $\vec b(1;\, 2)$ შორის."
+  hint="$\cos\varphi = \tfrac{\vec a \cdot \vec b}{|\vec a|\,|\vec b|}$.">
+<Step tex="\vec a \cdot \vec b = 3 \cdot 1 + 1 \cdot 2 = 5">სკალარული ნამრავლი კოორდინატებით.</Step>
+<Step hl="OA OB" tex="|\vec a| = \sqrt{10},\qquad |\vec b| = \sqrt5">ვექტორების სიგრძეები.</Step>
+<Step hl="<AOB" tex="\cos\varphi = \frac{5}{\sqrt{10}\cdot\sqrt5} = \frac{\sqrt2}{2} \;\Rightarrow\; \varphi = 45^\circ">კუთხე ვექტორებს შორის.</Step>
+</Problem>
+
+<Problem id="p-vec-perpendicular" set={{ ax: 2, ay: 1, bx: -1, by: 2, k: 1 }} given="x(A)=2 y(A)=1 y(B)=2 <AOB=90" find="x(B)" labels="m" answer="-1" book="15.52"
+  q="$m$-ის რა მნიშვნელობისთვისაა ვექტორები $\vec a(2;\, 1)$ და $\vec b(m;\, 2)$ ურთიერთმართობი?"
+  hint="არანულოვანი ვექტორები ურთიერთმართობია, როცა მათი სკალარული ნამრავლი ნულია.">
+<Step tex="\vec a \cdot \vec b = 2m + 2">სკალარული ნამრავლი კოორდინატებით.</Step>
+<Step hl="<AOB" tex="2m + 2 = 0 \;\Rightarrow\; m = -1">ურთიერთმართობი ვექტორების სკალარული ნამრავლი ნულია.</Step>
+</Problem>
+
+</Problems>
