@@ -25,7 +25,7 @@ test('English pages have no Georgian text', async ({ page }) => {
   const urls = await page.$$eval('#nav .topics a', as => as.map(a => (a as HTMLAnchorElement).pathname));
   expect(urls.every(u => u.startsWith('/en/'))).toBe(true);
   const found: string[] = [];
-  for (const url of ['/en/', '/en/cheatsheet/', '/en/geometry/relationships/', '/en/sheet/', ...urls]) {
+  for (const url of ['/en/', '/en/cheatsheet/', '/en/geometry/relationships/', '/en/sheet/', '/en/practice/', '/en/map/#trapezoid', '/en/glossary/', ...urls]) {
     await page.goto(url);
     const fig = page.locator('geo-figure:not([data-alt])');
     if (await fig.count()) await expect(fig.locator('.layer polygon, .layer line').first(), url).toBeAttached();

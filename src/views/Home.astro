@@ -1,8 +1,8 @@
 ---
 import Shell from '@/layouts/Shell.astro';
-import { allTopics, sectionsOf, topicUrl } from '@/lib/topics';
+import { allTopics, problemsOf, sectionsOf, topicUrl } from '@/lib/topics';
 import { md } from '@/lib/math';
-import { langOf, SITE, t as tr } from '@/i18n';
+import { langOf, localize, SITE, t as tr } from '@/i18n';
 
 const lang = langOf(Astro.url);
 const topics = await allTopics(lang);
@@ -30,7 +30,10 @@ const props = topics.flatMap(t => [...(t.body ?? '').matchAll(/<Property\s([^>]*
 const stride = Math.max(1, Math.floor(props.length / 31));
 const daily = props.filter((_, i) => i % stride === 0).slice(0, 31);
 const formulas = topics.reduce((n, t) => n + [...(t.body ?? '').matchAll(/<Formula\s/g)].length, 0);
-const problems = topics.reduce((n, t) => n + [...(t.body ?? '').matchAll(/<Problem\s/g)].length, 0);
+const probs = problemsOf(topics);
+const problems = probs.length;
+const calc = probs.filter(p => p.calc); // proof problems have no answer to solve
+const calcIn = (id: string) => calc.filter(p => p.section === id).length;
 const counts = [topics.length, props.length, formulas, problems] as const;
 const stats = lang === 'en'
   ? `${counts[0]} topics · ${counts[1]} properties · ${counts[2]} formulas · ${counts[3]} problems`
@@ -54,7 +57,12 @@ const stats = lang === 'en'
               <ol class="chap-l">
                 {s.items.map(t => <li><a href={topicUrl(t, lang)} data-topic={topicUrl(t)}>{t.data.title}</a></li>)}
               </ol>
-              <p class="chap-p"><span class="bar" aria-hidden="true"><span data-bar></span></span><span data-count data-total={s.items.length}>0 / {s.items.length}</span><span class="sr-only"> {tr(lang, 'თემა გავლილია')}</span></p>
+              <dl class="chap-p">
+                <dt>{tr(lang, 'თემები')}</dt><dd class="bar" aria-hidden="true"><span data-bar></span></dd><dd data-count>0 / {s.items.length}</dd>
+                {calcIn(s.id) > 0 && <>
+                  <dt>{tr(lang, 'ამოცანები')}</dt><dd class="bar" aria-hidden="true"><span data-pbar></span></dd><dd data-pcount data-total={calcIn(s.id)}>0 / {calcIn(s.id)}</dd>
+                </>}
+              </dl>
             </section>
           ))}
         </div>
@@ -71,6 +79,12 @@ const stats = lang === 'en'
               <a class="daily-a" href={p.url}>{tr(lang, 'დამტკიცება')}</a>
             </article>
           ))}
+        </section>
+
+        <section class="card" aria-labelledby="practice-h">
+          <h2 id="practice-h" class="home-h">{tr(lang, 'ვარჯიში')}</h2>
+          <p class="prac-p"><b data-solved-all>0</b> / {calc.length} {tr(lang, 'ამოცანა ამოხსნილია')}</p>
+          <a class="daily-a" href={localize(lang, '/practice/')}>{tr(lang, 'ვარჯიშის დაწყება')}</a>
         </section>
 
         <section class="card pins" aria-labelledby="pins-h">
@@ -93,16 +107,22 @@ const stats = lang === 'en'
   const cont = $<HTMLAnchorElement>('[data-continue]');
   if (last && cont) { cont.href = last.url; cont.querySelector('b')!.textContent = last.title; cont.hidden = false; }
 
-  // progress: topics opened at least once
+  // progress: topics opened at least once, problems solved (language-free keys: /geometry/x/#id)
   const seen = new Set(load<string[]>('seen', []));
+  const solved = load<string[]>('solved', []);
+  const fill = (ch: HTMLElement, bar: string, count: string, n: number, total: number) => {
+    ch.querySelector<HTMLElement>(count)!.textContent = `${n} / ${total}`;
+    ch.querySelector<HTMLElement>(bar)!.style.width = `${(100 * n) / total}%`;
+  };
   document.querySelectorAll<HTMLElement>('.chap').forEach(ch => {
     const links = [...ch.querySelectorAll<HTMLAnchorElement>('[data-topic]')];
     const done = links.filter(a => seen.has(a.dataset.topic!));
     done.forEach(a => a.classList.add('seen'));
-    const count = ch.querySelector<HTMLElement>('[data-count]')!;
-    count.textContent = `${done.length} / ${links.length}`;
-    ch.querySelector<HTMLElement>('[data-bar]')!.style.width = `${(100 * done.length) / links.length}%`;
+    fill(ch, '[data-bar]', '[data-count]', done.length, links.length);
+    const pc = ch.querySelector<HTMLElement>('[data-pcount]');
+    if (pc) fill(ch, '[data-pbar]', '[data-pcount]', solved.filter(k => links.some(a => k.startsWith(a.dataset.topic! + '#'))).length, +pc.dataset.total!);
   });
+  $('[data-solved-all]')!.textContent = String(solved.length);
 
   // the property of the day: one of 31, by day of the month
   const days = [...document.querySelectorAll<HTMLElement>('[data-day]')];
@@ -147,8 +167,9 @@ const stats = lang === 'en'
   .chap-l a:hover { color: var(--ink); }
   .chap-l a.seen { color: var(--ink); }
   .chap-l a.seen::after { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-  .chap-p { margin-top: auto; display: flex; align-items: center; gap: var(--s3); font-size: 13px; font-variant-numeric: tabular-nums; }
-  .bar { flex: 1; height: 3px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
+  .chap-p { margin-top: auto; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 2px var(--s3); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .chap-p dd { margin: 0; }
+  .bar { height: 3px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
   .bar span { display: block; width: 0; height: 100%; background: var(--ink); }
 
   /* the margin column */
@@ -165,6 +186,8 @@ const stats = lang === 'en'
   .pin-l :global(.pin-n) { font-size: 13px; color: var(--ink-2); }
   .pin-l :global(.pin-f) { overflow-x: auto; overflow-y: hidden; }
   .pin-empty { font-size: 14px; }
+  .prac-p { font-size: 15px; }
+  .prac-p b { color: var(--ink); font-variant-numeric: tabular-nums; }
   .stats { font-size: 13px; text-align: right; }
 
   @media (max-width: 1199px) { .home-main { grid-template-columns: minmax(0, 1fr); } .side { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); } .stats { text-align: left; } }

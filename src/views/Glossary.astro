@@ -1,0 +1,65 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import glossary from '@/content/glossary.json';
+import { allTopics, readingOrder, topicUrl } from '@/lib/topics';
+import { stemKa } from '@/lib/ka-search';
+import { langOf, t as tr } from '@/i18n';
+
+// Every school term with its English name and the topic that defines it (the bold word in its
+// <Definition>; stems compared, so „სამკუთხედის“ finds „სამკუთხედი“).
+const lang = langOf(Astro.url);
+const order = readingOrder(await allTopics('ka'));
+const local = new Map((await allTopics(lang)).map(tp => [tp.id, tp]));
+const stem = (w: string) => { let v; while ((v = stemKa(w)) !== w) w = v; return w; };
+const words = (s: string) => s.toLowerCase().split(/\s+/).map(stem).join(' ');
+const defined = order.flatMap(tp => [...(tp.body ?? '').matchAll(/<Definition>([\s\S]*?)<\/Definition>/g)]
+  .flatMap(d => [...d[1]!.matchAll(/\*\*([^*]+)\*\*/g)].map(b => ({ term: words(b[1]!), id: tp.id }))));
+const rows = glossary.terms.map(g => {
+  const id = defined.find(d => d.term === words(g.ka))?.id, tp = id ? local.get(id) : undefined;
+  return { ka: g.ka, en: g.en, topic: tp?.data.title, url: tp ? `${topicUrl(tp, lang)}#definition` : undefined };
+}).sort((a, b) => (lang === 'en' ? a.en.localeCompare(b.en, 'en') : a.ka.localeCompare(b.ka, 'ka')));
+const [first, second] = lang === 'en' ? (['en', 'ka'] as const) : (['ka', 'en'] as const);
+---
+<Shell title={tr(lang, 'ტერმინები')} panel={false} lede={tr(lang, 'სასკოლო ტერმინები ქართულად და ინგლისურად; თემის ბმული განმარტებაზე მიგიყვანს.')}>
+  <div class="gl">
+    <label class="filter"><span class="sr-only">{tr(lang, 'ტერმინის ძიება')}</span><input type="search" placeholder={tr(lang, 'ტერმინის ძიება')} autocomplete="off" data-filter /></label>
+    <ul class="terms">
+      {rows.map(r => (
+        <li data-text={`${r.ka} ${r.en}`.toLowerCase()}>
+          <span class="t1" lang={first}>{r[first]}</span>
+          <span class="t2" lang={second}>{r[second]}</span>
+          {r.url ? <a class="t3" href={r.url}>{r.topic}</a> : <span class="t3" />}
+        </li>
+      ))}
+    </ul>
+    <p class="none" data-none hidden>{tr(lang, 'ასეთი ტერმინი არ არის.')}</p>
+  </div>
+</Shell>
+<script>
+  import { stemKa } from '@/lib/ka-search';
+  const input = document.querySelector<HTMLInputElement>('[data-filter]')!;
+  const rows = [...document.querySelectorAll<HTMLElement>('.terms li')];
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean).map(stemKa);
+    let shown = 0;
+    for (const r of rows) { r.hidden = !q.every(w => r.dataset.text!.includes(w)); if (!r.hidden) shown++; }
+    document.querySelector<HTMLElement>('[data-none]')!.hidden = shown > 0;
+  });
+</script>
+<style>
+  .gl { max-width: 900px; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .filter input { width: 100%; max-width: 420px; min-height: 44px; padding: 0 2px; border: 0; border-bottom: var(--bw) solid var(--ink); background: transparent; color: var(--ink); font: 17px var(--font-body); outline: none; }
+  .filter input::placeholder { color: var(--ink-2); opacity: 1; }
+  .terms { list-style: none; padding: 0; margin-top: var(--s4); }
+  .terms li { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, .8fr); gap: var(--s1) var(--s4); align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line-2); }
+  .terms li[hidden] { display: none; }
+  .t1 { color: var(--ink); font-weight: var(--w2); }
+  .t3 { font-size: 14px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+  a.t3:hover { color: var(--ink); }
+  .none { margin-top: var(--s3); }
+  @media (max-width: 699px) {
+    .terms li { grid-template-columns: minmax(0, 1fr) auto; }
+    .t2 { grid-row: 2; font-size: 15px; }
+    .t3 { grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+  }
+</style>

@@ -12,6 +12,7 @@ an English copy of every page at /en/…. This repo is self-contained — ignore
 - `pnpm typecheck` — `astro check` (TypeScript pinned to 6; `astro check` rejects 7)
 - `pnpm new topic <subject>/<slug> [section]` — draft MDX scaffold
 - `pnpm translate extract <slug>…` / `pnpm translate apply <file.json>` — the English copy of a topic (see English below)
+- `pnpm og` — link-preview images: after `pnpm build`, photographs `/card/<lang>/…` into `public/og/` (commit them, build again)
 
 ## Rules
 - **Never invent theorems or terminology.** Unsure Georgian term → ask the user (one question at a time).
@@ -53,8 +54,18 @@ an English copy of every page at /en/…. This repo is self-contained — ignore
 - `src/figures/engine/element.ts` — `<geo-figure>`; renders in screen pixels (fixed text size), fixed board
   (`bounds.ts`), whole-cell unit. Proof steps call `setScene({ set, show, hl })`.
 - `src/scripts/shell.ts` (theme, tabs, sheet, search palette, pins in empty search),
-  `src/scripts/topic.ts` (proof stepper, deep links `#property-id`, pins).
-- localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `solved`, `pins`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
+  `src/scripts/topic.ts` (proof stepper, deep links `#property-id`, pins, answer checking, staged help, the practice bar).
+- Answers: `src/lib/expr.ts` — `matches` (2-decimal rounding; strips „x =“, units, „≈ …“), `slip` names a wrong
+  answer's likely mistake (close, sign, adjacent angle, ×2, ÷2, π, squared, root); messages live in topic.ts.
+- Problem help comes in stages (`[data-help]`): the hint, the solution's first step (stepper locked at 0), all of it.
+- Practice (`/practice/`, `src/lib/practice.ts`): random answer problems from chosen chapters, worked on their
+  topic pages (the bar on top of the panel), scored by the help taken before solving. Problem index: `problemsOf()`.
+- Other pages: `/map/` (prerequisite map; „read first“ comes from frontmatter `prerequisites`), `/glossary/`
+  (glossary.json; each term links to the topic whose `<Definition>` bolds it, `#definition`). Each topic ends with
+  `TopicFoot` (read first, previous/next in `readingOrder()`).
+- Link previews: `Shell.astro` sets Open Graph tags; `og:image` is `public/og/<lang>/<subject>/<slug>.png`, falling
+  back to `/og/<lang>/home.png` for pages without one (a new topic: rerun `pnpm og`).
+- localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `solved`, `pins`, `practice`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
 
 ## English
 - Georgian pages keep their URLs; English lives under `/en/`. Page bodies are shared views in `src/views/`;

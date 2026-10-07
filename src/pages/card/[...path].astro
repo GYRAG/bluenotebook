@@ -1,0 +1,56 @@
+---
+// A link-preview card (1200×630) for every topic and for the site, in both languages. `pnpm og`
+// photographs these into public/og/<lang>/…png; Shell.astro points og:image at them. Not linked.
+import '@fontsource/noto-sans-georgian/400.css';
+import '@fontsource/noto-serif-georgian/600.css';
+import 'katex/dist/katex.min.css';
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import Figure from '@/components/Figure.astro';
+import { allTopics } from '@/lib/topics';
+import { LANGS, SITE, t, type Lang } from '@/i18n';
+
+export async function getStaticPaths() {
+  const out = [];
+  for (const lang of LANGS) {
+    out.push({ params: { path: `${lang}/home` }, props: { lang, title: SITE[lang], summary: t(lang, 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.'), figure: 'parallelogram', home: true } });
+    for (const tp of await allTopics(lang)) {
+      out.push({ params: { path: `${lang}/${tp.data.subject}/${tp.id}` }, props: { lang, title: tp.data.title, summary: tp.data.summary, figure: tp.data.figure, home: false } });
+    }
+  }
+  return out;
+}
+const { lang, title, summary, figure, home } = Astro.props as { lang: Lang; title: string; summary: string; figure?: string; home: boolean };
+---
+<!doctype html>
+<html lang={lang} data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>{title}</title>
+</head>
+<body>
+  <div class:list={['og', { 'no-fig': !figure }]}>
+    <div class="og-text">
+      {!home && <p class="og-site">{SITE[lang]}</p>}
+      <h1 class:list={['og-title', { long: title.length > 34 }]}>{title}</h1>
+      <p class="og-sum">{summary}</p>
+    </div>
+    {figure && <div class="og-fig paper"><Figure name={figure} /></div>}
+  </div>
+</body>
+</html>
+<style is:global>
+  html, body { width: 1200px; height: 630px; overflow: hidden; margin: 0; }
+  .og { box-sizing: border-box; display: grid; grid-template-columns: 560px 1fr; gap: 40px; width: 1200px; height: 630px; padding: 56px 56px 56px 64px; background: var(--paper); color: var(--ink); border-left: 14px double var(--ink); }
+  .og.no-fig { grid-template-columns: 1fr; }
+  .og-text { display: flex; flex-direction: column; justify-content: center; gap: 22px; min-width: 0; }
+  .og-site { font: 600 24px/1.2 var(--font-head); color: var(--ink-2); letter-spacing: .02em; }
+  .og-title { font: 600 62px/1.15 var(--font-head); padding-bottom: 18px; position: relative; }
+  .og-title.long { font-size: 50px; }
+  .og-title::after { content: ''; position: absolute; left: 0; width: 70%; bottom: 0; height: 14px; background: currentColor; -webkit-mask: var(--scribble) 0 0 / 100% 100% no-repeat; mask: var(--scribble) 0 0 / 100% 100% no-repeat; }
+  .og-sum { font: 400 26px/1.45 var(--font-body); color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .og-fig { position: relative; border: 2px solid var(--line-2); border-radius: 6px; }
+  .og-fig .figure { position: absolute; inset: 0; margin: 0; }
+  .og-fig :is(.sk, .hint, .stamp, .handles) { display: none !important; }
+</style>

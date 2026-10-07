@@ -16,7 +16,10 @@ const pageNo = (id: string) => String(sections.flatMap(s => s.items).findIndex(t
 const here = delocalize(Astro.url.pathname);
 const extra = (path: string, label: string) => ({ href: localize(lang, path), label: t(lang, label), on: here === path });
 const links = [
+  extra('/practice/', 'ვარჯიში'),
   ...(subject === 'geometry' ? [extra('/geometry/relationships/', 'ფიგურების კავშირები'), extra('/cheatsheet/', 'შპარგალკა')] : []),
+  extra('/map/', 'თემების რუკა'),
+  extra('/glossary/', 'ტერმინები'),
   extra('/sheet/', 'სუფთა ფურცელი'),
 ];
 ---
@@ -41,10 +44,10 @@ const links = [
       </ul>
     </details>
   ))}
-  <div class="nav-end">
   <ul class="extra">
     {links.map(l => <li><a href={l.href} aria-current={l.on ? 'page' : undefined}>{l.label}</a></li>)}
   </ul>
+  <div class="nav-end">
   <div class="nav-foot">
     <button class="nf" type="button" data-theme-toggle><Icon name="theme" /><span data-theme-label>{t(lang, 'თემა')}</span></button>
     <a class="nf" href={alt} hreflang={lang === 'en' ? 'ka' : 'en'} lang={lang === 'en' ? 'ka' : 'en'} data-lang-switch><Icon name="globe" /><span>{lang === 'en' ? 'ქართული' : 'English'}</span></a>

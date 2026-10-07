@@ -10,6 +10,7 @@ const TABS = ALL.map(([id, label]) => [id, t(lang, label)] as const).filter(([id
 ---
 <aside class="panel" aria-label={t(lang, 'ხელსაწყოები და ცნობები')}>
   <button class="grip" type="button" data-sheet-toggle aria-label={t(lang, 'პანელის გაშლა')} aria-expanded="false"><span></span></button>
+  <slot name="top" />
   <div class="tabs" role="tablist" aria-label={t(lang, 'განყოფილებები')}>
     {TABS.map(([id, label], i) => (
       <button type="button" role="tab" id={`tab-${id}`} aria-controls={`tp-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}
@@ -25,5 +26,6 @@ const TABS = ALL.map(([id, label]) => [id, t(lang, label)] as const).filter(([id
         {id === 'probs' && <slot name="probs" />}
       </section>
     ))}
+    <slot name="foot" />
   </div>
 </aside>

@@ -11,6 +11,7 @@ import Icon from '@/components/Icon.astro';
 import type { SubjectId } from '@/subjects';
 import { delocalize, langOf, localize, SITE, t } from '@/i18n';
 import { allTopics } from '@/lib/topics';
+import { existsSync } from 'node:fs';
 
 interface Props {
   title: string;
@@ -30,6 +31,11 @@ const other = lang === 'en' ? 'ka' : 'en';
 const here = delocalize(Astro.url.pathname);
 const hasOther = !current || other === 'ka' || (await allTopics('en')).some(tp => tp.id === current.slug);
 const alt = hasOther ? localize(other, here) : '/en/';
+
+// link previews: the topic's card from `pnpm og` (public/og), else the site's
+const card = `/og/${lang}/${current ? `${current.subject}/${current.slug}` : 'home'}.png`;
+const image = new URL(existsSync(`public${card}`) ? card : `/og/${lang}/home.png`, Astro.site);
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
 <html lang={lang}>
@@ -38,9 +44,23 @@ const alt = hasOther ? localize(other, here) : '/en/';
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title === site ? site : `${title} · ${site}`}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={image} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'ka_GE'} />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#2657ff" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  {hasOther && <link rel="alternate" hreflang={other} href={alt} />}
+  {hasOther && <>
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={other} href={new URL(alt, Astro.site)} />
+  </>}
   <script is:inline>
     try { const t = JSON.parse(localStorage.getItem('mb:theme')); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
   </script>

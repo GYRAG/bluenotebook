@@ -24,9 +24,13 @@ The syllabus follows S. Topuria's geometry textbook, planimetry and stereometry.
 | Stereometry | lines and planes in space, perpendicularity and the three perpendiculars theorem, dihedral angles, coordinates in space |
 | Solids | prism and parallelepiped, pyramid, cylinder and cone, ball and sphere |
 
-In numbers: 37 topics, 223 properties with proofs, 180 formula cards, 45 interactive figures, and a glossary of 102 school terms.
+In numbers: 38 topics, 223 properties with proofs, 180 formula cards, 176 problems, 49 interactive figures, and a glossary of 102 school terms.
+
+Every topic also has problems, modelled on the problem types of Topuria's collection but written fresh. The figure takes each problem's shape and shows its data; you type the answer and the page checks it, telling you what probably went wrong (rounded too early, the adjacent angle, a diameter instead of a radius). Help comes in stages: a hint, then the solution's first step, then the whole solution, which plays on the figure like a proof.
 
 The site also has:
+- practice: random problems from the chapters you choose, with an optional time limit and a score at the end; the home page shows how many of each chapter's problems you have solved;
+- a topic map that shows what each topic builds on, and a glossary of the school terms in Georgian and English;
 - a cheat sheet with every formula on one page;
 - a page on how the quadrilaterals are related, which can also work out what a shape is from the facts you know;
 - a blank sheet of squared paper for your own drawings;
@@ -123,7 +127,7 @@ pnpm e2e          # Playwright on the production build: layout at four sizes and
 pnpm new topic geometry/my-topic triangles
 ```
 
-This creates a draft page with every building block. Its English copy comes from `pnpm translate extract my-topic`, translated in order and written back with `pnpm translate apply`, so both files keep the same structure. [docs/guide-ka.md](docs/guide-ka.md) is the day-to-day guide in Georgian, and [CLAUDE.md](CLAUDE.md) holds the repository's conventions. A new subject is one entry in `src/subjects.ts`; the first algebra topic was added this way, with no code changes.
+This creates a draft page with every building block. Its English copy comes from `pnpm translate extract my-topic`, translated in order and written back with `pnpm translate apply`, so both files keep the same structure. After a build, `pnpm og` makes the link-preview images for new topics. [docs/guide-ka.md](docs/guide-ka.md) is the day-to-day guide in Georgian, and [CLAUDE.md](CLAUDE.md) holds the repository's conventions. A new subject is one entry in `src/subjects.ts`; the first algebra topic was added this way, with no code changes.
 
 ---
 

@@ -43,12 +43,34 @@ export function evaluate(src: string, atom?: Atom): number {
   return v;
 }
 
+/** What a student writes around the number: "x = 5", "AB=5", "5 სმ", "60 გრადუსი", "4√3 ≈ 6,93". */
+export function clean(typed: string): string {
+  const s = typed.toLowerCase().replace(/[º˚]/g, '°').replace(/÷/g, '/')
+    .split('≈').map(p => p.trim()).find(Boolean) ?? ''; // the exact form when both are given
+  return s.replace(/^[^=]*=/, '') // a name in front
+    .replace(/\s*(სმ|მმ|დმ|კმ|მ|cm|mm|dm|km|m|ერთეული|units?|გრადუსი|degrees?|deg)\.?\s*(\^?[23²³])?$/, '');
+}
+
+const value = (typed: string) => { try { return evaluate(clean(typed)); } catch { return NaN; } };
+const near = (v: number, x: number) => Math.abs(v - x) <= Math.max(0.006, 1e-3 * Math.abs(x));
+
 /** A typed answer against the exact one: rounding to two decimals is accepted. */
-export function matches(typed: string, exact: number): boolean {
-  try {
-    const v = evaluate(typed);
-    return Number.isFinite(v) && Math.abs(v - exact) <= Math.max(0.006, 1e-3 * Math.abs(exact));
-  } catch {
-    return false;
-  }
+export const matches = (typed: string, exact: number) => near(value(typed), exact);
+
+/** Why a wrong answer is wrong, when a common slip explains it (null: no idea, or not wrong). */
+export type Slip = 'unreadable' | 'close' | 'sign' | 'supplement' | 'complement' | 'double' | 'half' | 'pi' | 'square' | 'root';
+export function slip(typed: string, exact: number, angle = false): Slip | null {
+  const v = value(typed), is = (x: number) => near(v, x);
+  if (!Number.isFinite(v)) return 'unreadable';
+  if (is(exact)) return null;
+  if (Math.abs(v - exact) <= 0.02 * Math.abs(exact)) return 'close'; // rounded too early (6,93 → 7)
+  if (exact !== 0 && is(-exact)) return 'sign';
+  if (angle && is(180 - exact)) return 'supplement';
+  if (angle && is(90 - exact)) return 'complement';
+  if (is(2 * exact)) return 'double';
+  if (is(exact / 2)) return 'half';
+  if (is(exact * Math.PI) || is(exact / Math.PI)) return 'pi';
+  if (exact > 0 && exact !== 1 && is(exact * exact)) return 'square';
+  if (exact > 0 && exact !== 1 && is(Math.sqrt(exact))) return 'root';
+  return null;
 }

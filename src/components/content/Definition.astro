@@ -2,4 +2,4 @@
 import { langOf, t } from '@/i18n';
 const lang = langOf(Astro.url);
 ---
-<div class="def"><b class="def-k">{t(lang, 'განმარტება.')}</b> <slot /></div>
+<div class="def" id="definition"><b class="def-k">{t(lang, 'განმარტება.')}</b> <slot /></div>

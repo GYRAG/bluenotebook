@@ -4,9 +4,11 @@ import Shell from '@/layouts/Shell.astro';
 import Panel from '@/components/Panel.astro';
 import Figure from '@/components/Figure.astro';
 import FigureTools from '@/components/FigureTools.astro';
+import TopicFoot from '@/components/TopicFoot.astro';
 import { formulasView, problemsView, propertiesView } from '@/components/content';
 
 import type { Topic } from '@/lib/topics';
+import { langOf, localize, t } from '@/i18n';
 
 // A topic page, in either language (the route files pick the collection).
 const { topic } = Astro.props as { topic: Topic };
@@ -14,15 +16,25 @@ const { Content } = await render(topic);
 const fig = topic.data.figure;
 const problems = !!topic.body?.includes('<Problem ');
 const theory = !!topic.body?.match(/<(Formula|Property|Definition)[\s>]/); // a problems-only page shows just the problems tab
+const lang = langOf(Astro.url);
 ---
 <Shell title={topic.data.title} description={topic.data.summary} current={{ subject: topic.data.subject, slug: topic.id }} draft={topic.data.status === 'draft'} lede={topic.data.summary} figure={!!fig}>
   {fig && <Figure name={fig} />}
   {topic.data.figures.map(name => <Figure name={name} alt />)}
   <Panel slot="panel" tools={!!fig && theory} theory={theory} problems={problems}>
+    {problems && (
+      <div slot="top" class="drill" data-drill hidden data-name={t(lang, 'ვარჯიში')} data-labels={JSON.stringify(['გამოტოვება', 'შემდეგი', 'დასრულება'].map(s => t(lang, s)))}>
+        <a class="drill-n" data-drill-here href="#"></a>
+        <span class="drill-t" role="timer" data-drill-time></span>
+        <a class="drill-end" href={localize(lang, '/practice/')} data-drill-end>{t(lang, 'შეწყვეტა')}</a>
+        <button class="drill-go" type="button" data-drill-next></button>
+      </div>
+    )}
     {fig && <FigureTools slot="tools" name={fig} />}
     <div slot="formulas"><Content components={formulasView} /></div>
     <div slot="props"><Content components={propertiesView} /></div>
     {problems && <div slot="probs"><Content components={problemsView} /></div>}
+    <TopicFoot slot="foot" topic={topic} />
   </Panel>
 </Shell>
 <script>import '@/scripts/topic';</script>

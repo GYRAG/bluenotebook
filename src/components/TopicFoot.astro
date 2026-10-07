@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { allTopics, readingOrder, topicUrl, type Topic } from '@/lib/topics';
+import { langOf, localize, t } from '@/i18n';
+
+// The end of a topic's panel: what to read first (its prerequisites) and the previous and next
+// topics in reading order.
+const { topic } = Astro.props as { topic: Topic };
+const lang = langOf(Astro.url);
+const order = readingOrder(await allTopics(lang));
+const i = order.findIndex(tp => tp.id === topic.id);
+const prev = order[i - 1], next = order[i + 1];
+const before = topic.data.prerequisites.map(id => order.find(tp => tp.id === id)).filter(tp => tp !== undefined);
+---
+<footer class="tfoot" data-pagefind-ignore>
+  {before.length > 0 && (
+    <p class="tf-before">
+      <span class="tf-k">{t(lang, 'ჯერ წაიკითხე:')}</span>{' '}
+      {before.map((tp, j) => <>{j > 0 && ', '}<a href={topicUrl(tp, lang)}>{tp.data.title}</a></>)}{' · '}
+      <a class="tf-map" href={`${localize(lang, '/map/')}#${topic.id}`}>{t(lang, 'რუკაზე')}</a>
+    </p>
+  )}
+  <nav class="tf-pager" aria-label={t(lang, 'წინა და შემდეგი თემა')}>
+    {prev ? <a class="tf-prev" href={topicUrl(prev, lang)} rel="prev"><Icon name="left" /><span><small>{t(lang, 'წინა')}</small>{prev.data.title}</span></a> : <span />}
+    {next && <a class="tf-next" href={topicUrl(next, lang)} rel="next"><span><small>{t(lang, 'შემდეგი')}</small>{next.data.title}</span><Icon name="right" /></a>}
+  </nav>
+</footer>

@@ -48,6 +48,8 @@ const tags = [
     .map(([l, r]) => `${l}=${r}${l!.startsWith('<') ? '°' : ''}`),
   ...finds.filter(labelled).map(f => `${f}=?`),
 ].join(' ');
+// help comes in stages: the hint, then the solution's first step, then all of it
+const stages = [...(hint ? ['მინიშნება'] : []), 'პირველი ნაბიჯი', finds.length ? 'მთელი ამოხსნა' : 'მთელი დამტკიცება'].map(s => t(lang, s));
 const sub = (s: string) => s.replace(/([A-Z])(\d+)/g, '$1_{$2}'); // R1 → R₁
 const label = (f: string, i: number) => labels?.split(';')[i]?.trim() || (f.startsWith('<') ? `\\angle ${sub(f.slice(1))}` : /^[SP]\(/.test(f) ? f[0]! : sub(f));
 ---
@@ -63,7 +65,7 @@ const label = (f: string, i: number) => labels?.split(';')[i]?.trim() || (f.star
     <h3 class="proof-h" set:html={md(q)} />
     {book && <p class="book">{t(lang, 'წიგნში:')} {book.split(/\s+/).join(', ')}</p>}
     {finds.length > 0 && (
-      <form class="ans" data-answer={JSON.stringify(values)} data-shown={answers.join(';')}>
+      <form class="ans" data-answer={JSON.stringify(values)} data-angle={JSON.stringify(finds.map(f => f.startsWith('<')))} data-shown={answers.join(';')}>
         {finds.map((f, i) => (
           <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f, i))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
         ))}
@@ -75,8 +77,8 @@ const label = (f: string, i: number) => labels?.split(';')[i]?.trim() || (f.star
         <p class="ans-msg" aria-live="polite"></p>
       </form>
     )}
-    {hint && <details class="hint-d"><summary>{t(lang, 'მინიშნება')}</summary><p set:html={md(hint)} /></details>}
-    <button class="sol-open" type="button" data-solution>{t(lang, finds.length ? 'ამოხსნა' : 'დამტკიცება')}</button>
+    {hint && <p class="hint-p" data-hint hidden set:html={md(hint)} />}
+    <button class="help" type="button" data-help data-labels={JSON.stringify(stages)}>{stages[0]}</button>
     <div class="sol" hidden><Proof figure={figure}><slot /></Proof></div>
   </div>
 </li>

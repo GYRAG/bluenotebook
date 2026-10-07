@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 // Every topic page in both languages: its figure draws, every proof opens, and nothing logs an error.
 for (const home of ['/', '/en/']) test(`all topic pages under ${home} render their figure and proofs without errors`, async ({ page }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(420_000); // every proof and every problem of every topic, help stages included
   await page.setViewportSize({ width: 1440, height: 900 });
   const errors: string[] = [];
   page.on('console', m => { if (m.type() === 'error') errors.push(`${page.url()}: ${m.text()}`); });
@@ -18,9 +18,12 @@ for (const home of ['/', '/en/']) test(`all topic pages under ${home} render the
     for (const id of props) {
       await page.evaluate(i => { location.hash = i; }, id);
       await expect(page.locator(`#${id} .proof`), `${url}#${id}`).toBeVisible();
-      if (await page.locator(`#${id}[data-problem]`).count()) await page.locator(`#${id} [data-solution]`).click(); // a problem's solution waits for this
-      const n = await page.locator(`#${id} .step`).count();
-      for (let i = 1; i < n; i++) await page.locator(`#${id} [data-step=next]`).click();
+      if (await page.locator(`#${id}[data-problem]`).count()) { // a problem's solution comes in stages: hint, first step, all of it
+        const help = page.locator(`#${id} [data-help]`);
+        while (await help.isVisible()) await help.click();
+      }
+      const next = page.locator(`#${id} [data-step=next]`);
+      while (await next.isEnabled()) await next.click();
       const visible = page.locator('geo-figure:not([hidden])');
       await expect(visible.locator('.layer polygon, .layer line').first(), `${url}#${id}`).toBeAttached();
       await page.keyboard.press('Escape');

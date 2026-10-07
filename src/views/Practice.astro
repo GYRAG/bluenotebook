@@ -1,0 +1,156 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import { allTopics, problemsOf, sectionsOf, subjectsWithContent } from '@/lib/topics';
+import { langOf, t as tr } from '@/i18n';
+
+// Practice: random problems from the chosen chapters, each solved on its own page (topic.ts shows
+// the practice bar there), then the score here. Only problems with an answer to check take part.
+const lang = langOf(Astro.url);
+const topics = await allTopics(lang);
+const probs = problemsOf(topics, lang).filter(p => p.calc);
+const chapters = subjectsWithContent(topics).flatMap(sub => sectionsOf(topics, sub, lang))
+  .map(s => ({ id: s.id, label: s.label, n: probs.filter(p => p.section === s.id).length })).filter(c => c.n);
+const data = probs.map(({ key, url, topic, section, n }) => ({ key, url, topic, section, n }));
+const L = {
+  right: tr(lang, 'სწორია დახმარების გარეშე'), helped: tr(lang, 'მინიშნებით'), shown: tr(lang, 'ამოხსნა ნანახია'), skipped: tr(lang, 'გამოტოვებულია'),
+  problem: tr(lang, 'ამოცანა').toLowerCase(), wrong: tr(lang, 'არასწორი პასუხი'), time: tr(lang, 'დრო:'), pool: tr(lang, 'ამოცანები შესარჩევად:'),
+  empty: tr(lang, 'ამ თავებში ამოუხსნელი ამოცანა აღარ დარჩა.'),
+};
+---
+<Shell title={tr(lang, 'ვარჯიში')} panel={false} lede={tr(lang, 'შემთხვევითი ამოცანები შენ მიერ არჩეული თავებიდან. თითოეულს მის გვერდზე ამოხსნი, ბოლოს კი შედეგს ნახავ.')}>
+  <div class="practice" data-l={JSON.stringify(L)}>
+    <section class="card" data-active hidden aria-labelledby="active-h">
+      <h2 id="active-h" class="home-h">{tr(lang, 'ვარჯიში მიმდინარეობს')}</h2>
+      <p class="big" data-progress></p>
+      <div class="row">
+        <a class="go" data-continue href="/">{tr(lang, 'გაგრძელება')}</a>
+        <button class="btn" type="button" data-stop>{tr(lang, 'დასრულება')}</button>
+      </div>
+    </section>
+
+    <section class="card" data-results hidden aria-labelledby="res-h">
+      <h2 id="res-h" class="home-h">{tr(lang, 'შედეგი')}</h2>
+      <p class="big" data-score></p>
+      <p class="sum" data-sum></p>
+      <ol class="res" data-list></ol>
+    </section>
+
+    <form class="setup" data-setup>
+      <fieldset>
+        <legend class="home-h">{tr(lang, 'თავები')}</legend>
+        <div class="chips">
+          {chapters.map(c => <label class="chip"><input type="checkbox" name="sec" value={c.id} checked /><span>{c.label}</span><span class="n">{c.n}</span></label>)}
+        </div>
+        <button class="link" type="button" data-all>{tr(lang, 'ყველა თავი')}</button>
+      </fieldset>
+      <fieldset>
+        <legend class="home-h">{tr(lang, 'რამდენი ამოცანა')}</legend>
+        <div class="chips">{[5, 10, 20].map(n => <label class="chip"><input type="radio" name="count" value={n} checked={n === 10} /><span>{n}</span></label>)}</div>
+      </fieldset>
+      <fieldset>
+        <legend class="home-h">{tr(lang, 'დრო')}</legend>
+        <div class="chips">{[0, 10, 20, 40].map(m => <label class="chip"><input type="radio" name="time" value={m} checked={m === 0} /><span>{m ? `${m} ${tr(lang, 'წთ')}` : tr(lang, 'დროის გარეშე')}</span></label>)}</div>
+      </fieldset>
+      <div class="chips"><label class="chip"><input type="checkbox" name="fresh" /><span>{tr(lang, 'მხოლოდ ამოუხსნელი')}</span></label></div>
+      <p class="pool" data-pool aria-live="polite"></p>
+      <button class="go" type="submit">{tr(lang, 'დაწყება')}</button>
+    </form>
+  </div>
+</Shell>
+<script type="application/json" id="practice-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+<script>
+  import { pick, resultOf, session, start, store, type Session } from '@/lib/practice';
+  import { load } from '@/lib/store';
+  import { localUrl } from '@/i18n/client';
+
+  interface Item { key: string; url: string; topic: string; section: string; n: number }
+  const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
+  const data = JSON.parse($('#practice-data').textContent!) as Item[];
+  const byKey = new Map(data.map(d => [d.key, d]));
+  const L = JSON.parse($('.practice').dataset.l!) as Record<string, string>;
+  const form = $<HTMLFormElement>('[data-setup]');
+  const mmss = (ms: number) => { const s = Math.round(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  const urlOf = (key: string) => byKey.get(key)?.url ?? localUrl(key);
+
+  function pool() {
+    const secs = new Set(new FormData(form).getAll('sec')), solved = new Set(load<string[]>('solved', []));
+    const fresh = (form.elements.namedItem('fresh') as HTMLInputElement).checked;
+    return data.filter(d => secs.has(d.section) && !(fresh && solved.has(d.key)));
+  }
+  function showPool() {
+    const n = pool().length;
+    $('[data-pool]').textContent = n ? `${L.pool} ${n}` : L.empty!;
+    form.querySelector<HTMLButtonElement>('[type=submit]')!.disabled = !n;
+  }
+  form.addEventListener('change', showPool);
+  $('[data-all]').addEventListener('click', () => {
+    const boxes = [...form.querySelectorAll<HTMLInputElement>('[name=sec]')], on = !boxes.every(b => b.checked);
+    boxes.forEach(b => { b.checked = on; });
+    showPool();
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(form), items = pick(pool(), +f.get('count')!).map(d => d.key);
+    if (!items.length) return;
+    store(start(items, +f.get('time')!));
+    location.href = urlOf(items[0]!);
+  });
+
+  function showActive(s: Session) {
+    $('[data-active]').hidden = false;
+    $('[data-progress]').textContent = `${s.i + 1} / ${s.items.length}`;
+    $<HTMLAnchorElement>('[data-continue]').href = urlOf(s.items[s.i]!);
+    $('[data-stop]').addEventListener('click', () => {
+      store({ ...s, end: Date.now() });
+      location.reload();
+    }, { once: true });
+  }
+  function showResults(s: Session) {
+    const res = s.items.map(k => resultOf(s, k)), count = (r: string) => res.filter(x => x === r).length;
+    $('[data-results]').hidden = false;
+    $('[data-score]').textContent = `${count('right')} / ${s.items.length} ${L.right}`;
+    const spent = Math.min(s.end! - s.start, s.limit ?? Infinity);
+    $('[data-sum]').textContent = [`${count('helped')} ${L.helped}`, `${count('shown')} ${L.shown}`, `${count('skipped')} ${L.skipped}`, `${L.time} ${mmss(spent)}`].join(' · ');
+    $('[data-list]').replaceChildren(...s.items.map((k, i) => {
+      const li = document.createElement('li'), a = document.createElement('a'), r = document.createElement('span'), d = byKey.get(k);
+      a.href = urlOf(k);
+      a.textContent = d ? `${d.topic}, ${L.problem} ${d.n}` : k;
+      r.className = 'r';
+      r.dataset.r = res[i];
+      r.textContent = L[res[i]!]! + (s.tries[k] ? ` · ${s.tries[k]} ${L.wrong}` : '');
+      li.append(a, r);
+      return li;
+    }));
+  }
+
+  const s = session();
+  if (s && !s.end) { showActive(s); form.hidden = true; }
+  else if (s?.end) showResults(s);
+  showPool();
+</script>
+<style>
+  .practice { display: grid; gap: var(--s4); max-width: 720px; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .card { padding: var(--s3) var(--s4) var(--s4); border: var(--bw) solid var(--ink); border-radius: var(--r); }
+  .home-h { font: var(--w2) var(--fs-ui) var(--font-body); color: var(--ink-2); letter-spacing: .02em; margin-bottom: var(--s3); padding: 0; }
+  .big { font: var(--w2) 22px/1.3 var(--font-head); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .sum { font-size: 14px; margin-top: var(--s1); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+  .go { display: inline-flex; align-items: center; justify-self: start; min-height: 44px; padding: 0 var(--s4); border-radius: var(--r); background: var(--ink); color: var(--on-ink); font-weight: var(--w2); }
+  .go:disabled { opacity: .5; cursor: default; }
+  .btn { min-height: 44px; padding: 0 var(--s4); border: var(--bw) solid var(--line); border-radius: var(--r); color: var(--ink); }
+  .res { list-style: none; padding: 0; margin-top: var(--s3); display: grid; }
+  .res :global(li) { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 var(--s3); min-height: 44px; border-top: 1px solid var(--line-2); }
+  .res :global(a) { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .res :global(.r) { font-size: 14px; }
+  .res :global(.r[data-r='right']) { color: var(--ink); font-weight: var(--w2); }
+  .setup { display: grid; gap: var(--s4); }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .chip { position: relative; display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s3); border: var(--bw) solid var(--line-2); border-radius: var(--r); color: var(--ink); cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip:has(:checked) { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+  .chip:has(:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .chip .n { font-size: 13px; opacity: .8; font-variant-numeric: tabular-nums; }
+  .link { min-height: 44px; margin-top: var(--s1); color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+  .pool { font-size: 14px; }
+</style>

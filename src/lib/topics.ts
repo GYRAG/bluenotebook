@@ -18,3 +18,15 @@ export function sectionsOf(topics: Topic[], subject: SubjectId, lang: Lang = 'ka
 }
 
 export const subjectsWithContent = (topics: Topic[]) => SUBJECT_IDS.filter(id => topics.some(tp => tp.data.subject === id));
+
+/** Every topic in reading order: subjects, then their sections, as the nav lists them. */
+export const readingOrder = (topics: Topic[]) => subjectsWithContent(topics).flatMap(sub => sectionsOf(topics, sub).flatMap(s => s.items));
+
+/** Every problem: `key` is language-free (the solved list and practice use it), `n` its number on the page. */
+export interface ProblemRef { key: string; url: string; topic: string; section: string; n: number; calc: boolean }
+const PROBLEM = /<Problem\s((?:[^>"{]|"[^"]*"|\{\{[^}]*\}\}|\{[^}]*\})*?)\/?>/g;
+export const problemsOf = (topics: Topic[], lang: Lang = 'ka'): ProblemRef[] => topics.flatMap(tp =>
+  [...(tp.body ?? '').matchAll(PROBLEM)].map((m, i) => {
+    const id = /(?:^|\s)id="([^"]*)"/.exec(m[1]!)![1]!;
+    return { key: `${topicUrl(tp)}#${id}`, url: `${topicUrl(tp, lang)}#${id}`, topic: tp.data.title, section: tp.data.section, n: i + 1, calc: /\sfind="/.test(m[1]!) };
+  }));

@@ -68,13 +68,27 @@ test('a problem: the figure shows its data, the answer is checked, the solution 
   await input.fill('30');
   await li.getByRole('button', { name: 'შემოწმება' }).click();
   await expect(msg).toContainText('ჯერ არა');
-  await input.fill('32');
+  await input.fill('16');
+  await input.press('Enter');
+  await expect(msg).toContainText('ორჯერ ნაკლები'); // a common slip gets named
+  await input.fill('P = 32 სმ'); // a name and a unit around the number are fine
   await input.press('Enter');
   await expect(msg).toContainText('სწორია');
   await expect(li).toHaveClass(/solved/);
-  await li.getByRole('button', { name: 'ამოხსნა' }).click();
+  // help comes in stages: the hint, the first step only, then the whole solution
+  const help = li.locator('[data-help]');
+  await expect(help).toHaveText('მინიშნება');
+  await help.click();
+  await expect(li.locator('[data-hint]')).toBeVisible();
+  await expect(help).toHaveText('პირველი ნაბიჯი');
+  await help.click();
   await expect(li.locator('.count')).toHaveText('1 / 4');
+  await expect(li.locator('[data-step=next]')).toBeDisabled();
   await page.keyboard.press('ArrowRight');
+  await expect(li.locator('.count')).toHaveText('1 / 4');
+  await expect(help).toHaveText('მთელი ამოხსნა');
+  await help.click();
+  await expect(help).toBeHidden();
   await expect(li.locator('.count')).toHaveText('2 / 4');
   await page.keyboard.press('Escape');
   await page.reload(); // solved problems are remembered

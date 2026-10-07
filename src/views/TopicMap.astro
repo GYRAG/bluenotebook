@@ -1,0 +1,99 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import { allTopics, sectionsOf, subjectsWithContent, topicUrl } from '@/lib/topics';
+import { langOf, t as tr } from '@/i18n';
+
+// The topic map: every topic by chapter. Picking one lights up everything it builds on (its
+// prerequisites, all the way down) and everything that builds on it, and lists a reading order.
+const lang = langOf(Astro.url);
+const topics = await allTopics(lang);
+const chapters = subjectsWithContent(topics).flatMap(sub => sectionsOf(topics, sub, lang));
+const nodes = chapters.flatMap(c => c.items).map(tp => ({ id: tp.id, title: tp.data.title, url: topicUrl(tp, lang), pre: tp.data.prerequisites }));
+const L = { before: tr(lang, 'ჯერ წაიკითხე, ამ რიგით:'), after: tr(lang, 'ამ თემას ეყრდნობა:'), start: tr(lang, 'არაფერი — აქედან შეიძლება დაწყება.'), last: tr(lang, 'ჯერჯერობით არაფერი.') };
+---
+<Shell title={tr(lang, 'თემების რუკა')} panel={false} lede={tr(lang, 'აირჩიე თემა — გამოჩნდება, რას ეყრდნობა ის და რა ეყრდნობა მას.')}>
+  <div class="map" data-l={JSON.stringify(L)}>
+    <section class="pick card" aria-live="polite" data-detail>
+      <p class="hint">{tr(lang, 'აირჩიე თემა ქვემოთ.')}</p>
+    </section>
+    <div class="chaps">
+      {chapters.map(c => (
+        <section class="chap">
+          <h2 class="chap-t">{c.label}</h2>
+          <ul>{c.items.map(tp => <li><button class="node" type="button" data-id={tp.id} aria-pressed="false">{tp.data.title}</button></li>)}</ul>
+        </section>
+      ))}
+    </div>
+    <p class="key" aria-hidden="true"><span class="k k-pre"></span>{tr(lang, 'ჯერ საჭიროა')} <span class="k k-post"></span>{tr(lang, 'მას ეყრდნობა')}</p>
+  </div>
+</Shell>
+<script type="application/json" id="map-data" set:html={JSON.stringify(nodes).replace(/</g, '\\u003c')} />
+<script>
+  interface Node { id: string; title: string; url: string; pre: string[] }
+  const nodes = JSON.parse(document.getElementById('map-data')!.textContent!) as Node[];
+  const L = JSON.parse(document.querySelector<HTMLElement>('.map')!.dataset.l!) as Record<string, string>;
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const order = new Map(nodes.map((n, i) => [n.id, i]));
+  const post = (id: string) => nodes.filter(n => n.pre.includes(id)).map(n => n.id);
+  // everything reachable from a topic one way or the other (a cycle just stops at what was seen)
+  function reach(id: string, next: (id: string) => string[]) {
+    const seen = new Set<string>(), todo = [...next(id)];
+    while (todo.length) { const x = todo.pop()!; if (x !== id && !seen.has(x) && byId.has(x)) { seen.add(x); todo.push(...next(x)); } }
+    return [...seen].sort((a, b) => order.get(a)! - order.get(b)!);
+  }
+  const link = (id: string) => Object.assign(document.createElement('a'), { href: byId.get(id)!.url, textContent: byId.get(id)!.title });
+  function list(label: string, ids: string[], sep: string, none: string) {
+    const p = document.createElement('p');
+    p.append(Object.assign(document.createElement('span'), { className: 'lk', textContent: `${label} ` }));
+    if (!ids.length) p.append(none);
+    ids.forEach((id, i) => { if (i) p.append(sep); p.append(link(id)); });
+    return p;
+  }
+
+  function select(id: string | null) {
+    const n = id ? byId.get(id) : undefined;
+    const before = n ? reach(n.id, x => byId.get(x)?.pre ?? []) : [], after = n ? reach(n.id, post) : [];
+    document.querySelectorAll<HTMLButtonElement>('.node').forEach(b => {
+      const x = b.dataset.id!;
+      b.setAttribute('aria-pressed', String(x === n?.id));
+      b.classList.toggle('is-pre', before.includes(x));
+      b.classList.toggle('is-post', after.includes(x));
+    });
+    document.querySelector('.map')!.classList.toggle('has-pick', !!n);
+    if (!n) return;
+    const box = document.querySelector('[data-detail]')!, h = document.createElement('h2');
+    h.className = 'pick-h';
+    h.append(link(n.id));
+    box.replaceChildren(h, list(L.before!, before, ' → ', L.start!), list(L.after!, post(n.id), ', ', L.last!));
+    history.replaceState(null, '', `#${n.id}`);
+    if (!matchMedia('(min-width: 900px)').matches) box.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); // phones: the card is not pinned
+  }
+  document.querySelector('.chaps')!.addEventListener('click', e => {
+    const b = (e.target as Element).closest<HTMLButtonElement>('.node');
+    if (b) select(b.getAttribute('aria-pressed') === 'true' ? null : b.dataset.id!);
+  });
+  select(decodeURIComponent(location.hash.slice(1)) || null);
+</script>
+<style>
+  .map { display: grid; gap: var(--s4); margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .card { padding: var(--s3) var(--s4); border: var(--bw) solid var(--ink); border-radius: var(--r); }
+  .pick { z-index: 1; background: var(--paper); min-height: 72px; display: grid; gap: var(--s1); font-size: 15px; }
+  .pick :global(.pick-h) { font: var(--w2) 19px/1.3 var(--font-head); }
+  .pick :global(a) { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .pick :global(.lk) { color: var(--ink-2); }
+  .hint { align-self: center; }
+  @media (min-width: 900px) { .pick { position: sticky; top: calc(-1 * var(--s5)); } }
+  .chaps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s4); }
+  .chap { padding: var(--s3) var(--s4); border: var(--bw) solid var(--line-2); border-radius: var(--r); }
+  .chap-t { font: var(--w2) 17px/1.25 var(--font-head); color: var(--ink); margin-bottom: var(--s2); }
+  ul { list-style: none; padding: 0; display: grid; }
+  .node { display: flex; align-items: center; width: 100%; min-height: 44px; padding: 6px var(--s2); margin: 0 calc(-1 * var(--s2)); border-radius: var(--r); text-align: left; font-size: 15px; color: var(--ink); }
+  .node:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .has-pick .node { color: var(--ink-2); }
+  .has-pick .node.is-pre { color: var(--ink); box-shadow: inset 3px 0 0 var(--ink); }
+  .has-pick .node.is-post { color: var(--ink); box-shadow: inset 3px 0 0 var(--line-2); }
+  .node[aria-pressed='true'] { background: var(--ink); color: var(--on-ink) !important; font-weight: var(--w2); }
+  .key { display: flex; align-items: center; gap: var(--s2); font-size: 13px; }
+  .k { width: 3px; height: 16px; background: var(--ink); }
+  .k-post { background: var(--line-2); margin-left: var(--s3); }
+</style>
