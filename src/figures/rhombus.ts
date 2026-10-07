@@ -1,4 +1,4 @@
-import { add, angleAt, area, circleIntersection, dist, foot, near, parallel, perpendicular, polar, rad, sub, type V } from './engine/geom';
+import { add, angleAt, area, circleIntersection, dist, foot, mid, near, parallel, perpendicular, polar, rad, sub, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 export default figure({
@@ -11,7 +11,7 @@ export default figure({
   points: ({ a, alpha }) => {
     const d = polar(a, alpha), c: V = [(a + d[0]) / 2, d[1] / 2];
     const A: V = [-c[0], -c[1]], B: V = [a - c[0], -c[1]], D: V = [d[0] - c[0], d[1] - c[1]], C = add(B, d);
-    return { A, B, C, D, O: [0, 0], T: foot([0, 0], A, B), H: foot(D, A, B) };
+    return { A, B, C, D, O: [0, 0], T: foot([0, 0], A, B), H: foot(D, A, B), K: mid(A, B), L: mid(B, C), M: mid(C, D), N: mid(D, A) }; // K–N: for problems
   },
   drag: { B: ['a'], D: ['a', 'alpha'] },
   base: 'ABCD',

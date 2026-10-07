@@ -1,9 +1,15 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+/** Navigate, then wait until every figure has its spec: its controls are wired by then (a click before that does nothing). */
+async function open(page: Page, url: string) {
+  await page.goto(url);
+  await page.waitForFunction(() => [...document.querySelectorAll('geo-figure')].every(f => (f as unknown as { spec?: unknown }).spec));
+}
 
 // Drawing on the figure's grid: tools, snapping shapes, move, erase, undo, persistence.
 test('draw, move, erase and undo sketches on the grid; they survive a reload', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/geometry/rhombus/');
+  await open(page, '/geometry/rhombus/');
   const fig = page.locator('geo-figure:not([data-alt])'), ink = fig.locator('.sketch .sk-ink');
   await fig.getByRole('button', { name: 'ხატვა ბადეზე' }).click();
   await expect(fig).toHaveClass(/drawing/);
@@ -55,7 +61,7 @@ test('draw, move, erase and undo sketches on the grid; they survive a reload', a
 
 test('the paper moves: drag empty space to pan, wheel to zoom, the reset button brings it back', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/geometry/rhombus/');
+  await open(page, '/geometry/rhombus/');
   const fig = page.locator('geo-figure:not([data-alt])'), A = fig.locator('.handle[data-p="B"]');
   const box = (await fig.locator('svg.fig').boundingBox())!;
   const pos = async () => (await A.boundingBox())!;
@@ -82,7 +88,7 @@ test('the paper moves: drag empty space to pan, wheel to zoom, the reset button 
 
 test('the blank sheet opens ready to draw', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/sheet/');
+  await open(page, '/sheet/');
   const fig = page.locator('geo-figure');
   await expect(fig).toHaveClass(/drawing/);
   const box = (await fig.locator('svg.fig').boundingBox())!;
@@ -95,7 +101,7 @@ test('the blank sheet opens ready to draw', async ({ page }) => {
 test.describe('touch', () => {
   test.use({ hasTouch: true, isMobile: true, viewport: { width: 390, height: 844 } });
   test('two fingers pinch to zoom', async ({ page }) => {
-    await page.goto('/geometry/rhombus/');
+    await open(page, '/geometry/rhombus/');
     const fig = page.locator('geo-figure:not([data-alt])');
     const B = fig.locator('.handle[data-p="B"]'), D = fig.locator('.handle[data-p="D"]');
     const span = async () => Math.abs((await D.boundingBox())!.x - (await B.boundingBox())!.x);
@@ -114,7 +120,7 @@ test.describe('touch', () => {
 
 test('shapes from typed sizes, with their measurements', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/sheet/');
+  await open(page, '/sheet/');
   const fig = page.locator('geo-figure'), box = (await fig.locator('svg.fig').boundingBox())!;
   await fig.getByRole('button', { name: 'წრეწირი' }).click();
   await fig.getByText('ზომით').click();
@@ -136,7 +142,7 @@ test('shapes from typed sizes, with their measurements', async ({ page }) => {
 
 test('a solid turns when the paper is dragged; the reset button turns it back', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/geometry/prism/');
+  await open(page, '/geometry/prism/');
   const fig = page.locator('geo-figure:not([data-alt])'), box = (await fig.locator('svg.fig').boundingBox())!;
   const hidden = () => fig.locator('.layer line.hid').count();
   const svg0 = await fig.locator('.layer').innerHTML();

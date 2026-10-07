@@ -1,4 +1,4 @@
-import { angleAt, area, dist, intersect, near, polar, add, type V } from './engine/geom';
+import { angleAt, area, dist, foot, intersect, mid, near, polar, add, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 const right = (...vs: V[]) => vs.every((_, i) => near(angleAt(vs[(i + 3) % 4]!, vs[i]!, vs[(i + 1) % 4]!), 90));
@@ -10,9 +10,14 @@ export default figure({
     a: { label: 'გვერდი', sym: 'a', min: 2, max: 6, step: 0.1, value: 5 },
     b: { label: 'გვერდი', sym: 'b', min: 1.5, max: 4, step: 0.1, value: 3 },
   },
-  points: ({ a, b }) => ({ A: [-a / 2, -b / 2], B: [a / 2, -b / 2], C: [a / 2, b / 2], D: [-a / 2, b / 2], O: [0, 0] }),
+  points: ({ a, b }) => {
+    const A: V = [-a / 2, -b / 2], B: V = [a / 2, -b / 2], C: V = [a / 2, b / 2], D: V = [-a / 2, b / 2];
+    // for problems: E, where the bisector of ∠A meets line BC; F, the foot from B on AC; K, L, M, N, the side midpoints
+    return { A, B, C, D, O: [0, 0] as V, E: [a / 2, -b / 2 + a] as V, F: foot(B, A, C), K: mid(A, B), L: mid(B, C), M: mid(C, D), N: mid(D, A) };
+  },
   drag: { C: ['a', 'b'] },
   base: 'ABCD',
+  boundsOf: ['A', 'B', 'C', 'D'],
   dims: '|AB|a |BC|b',
   toggles: {
     'დიაგონალები': 'AC BD O',

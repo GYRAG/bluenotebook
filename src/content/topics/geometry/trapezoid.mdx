@@ -204,3 +204,79 @@ parent: quadrilateral
 <Remark kind="special">**მართკუთხა ტრაპეცია**: ერთი ფერდი ფუძეების მართობია; მისი სიმაღლე ამ ფერდის ტოლია. სცადე $s = 0$ — სლაიდერით ნახავ.</Remark>
 
 <Remark kind="mistake">ტოლფერდა ტრაპეციის დიაგონალები ტოლია, მაგრამ, მართკუთხედისგან განსხვავებით, ერთმანეთს შუაზე არ ყოფს — ისინი გადაკვეთის წერტილით $a : b$ შეფარდებით იყოფა.</Remark>
+
+<Problems>
+
+<Problem id="p-trap-iso-angles" set={{ a: 5, b: 3, h: 2.7474774194546216, s: 1 }} given="AB=CD <C-<A=40" find="<A <B" answer="70 110" book="6.76 6.77"
+  q="ტოლფერდა ტრაპეციის მოპირდაპირე კუთხეების სხვაობა $40^\circ$-ია. იპოვეთ ტრაპეციის კუთხეები."
+  hint="ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია, ტოლფერდა ტრაპეციაში კი კუთხეები თითოეულ ფუძესთან ტოლია.">
+<Step hl="<B=<C" tex="\angle C = \angle B">ტოლფერდა ტრაპეციის კუთხეები თითოეულ ფუძესთან ტოლია.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ,\qquad \angle B - \angle A = 40^\circ">ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step tex="\angle A = \angle D = 70^\circ,\qquad \angle B = \angle C = 110^\circ">შევკრიბოთ და გამოვაკლოთ ტოლობები.</Step>
+</Problem>
+
+<Problem id="p-trap-iso-perimeter" set={{ a: 5, b: 2, h: 2.598076211353315, s: 1.5 }} show="BH <BHA" given="AD=20 BC=8 <A=60 AB=CD" find="P(ABCD)" answer="52" book="6.81 6.82"
+  q="ტოლფერდა ტრაპეციის ფუძეებია $8$ და $20$, მახვილი კუთხე კი $60^\circ$-ია. იპოვეთ ტრაპეციის პერიმეტრი."
+  hint="სიმაღლე დიდ ფუძეს $\tfrac{a-b}{2}$ და $\tfrac{a+b}{2}$ ნაწილებად ყოფს.">
+<Step hl="AH" tex="AH = \frac{20 - 8}{2} = 6">ტოლფერდა ტრაპეციაში სიმაღლე დიდი ფუძიდან $\tfrac{a-b}{2}$ მონაკვეთს ჩამოჭრის.</Step>
+<Step hl="ABH <A" tex="AB = 2\,AH = 12">მართკუთხა სამკუთხედ $ABH$-ში $\angle ABH = 30^\circ$, ხოლო $AH$ მის პირდაპირ მდებარეობს.</Step>
+<Step tex="P = 8 + 20 + 2 \cdot 12 = 52">ფერდები ტოლია.</Step>
+</Problem>
+
+<Problem id="p-trap-midline-ratio" set={{ a: 5, b: 3, h: 2.5, s: 0.8 }} show="MN" given="BC/AD=3/5 MN=12" find="BC AD" answer="9 15" book="6.92 6.93 6.94"
+  q="ტრაპეციის ფუძეები ისე შეეფარდება ერთმანეთს, როგორც $3 : 5$, შუახაზი კი $12$-ია. იპოვეთ ფუძეები."
+  hint="შუახაზი ფუძეების ჯამის ნახევარია.">
+<Step hl="MN" tex="\frac{3x + 5x}{2} = 12 \;\Rightarrow\; x = 3">შუახაზი ფუძეების ჯამის ნახევარია; ფუძეებია $3x$ და $5x$.</Step>
+<Step hl="BC AD" tex="BC = 9,\qquad AD = 15">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-trap-diag-midline" set={{ a: 6, b: 2.6666666666666665, h: 2.5, s: 0.8 }} show="MN AC X" given="MX=4 XN=9" find="BC AD" answer="8 18" book="6.86 6.87 6.88"
+  q="ტრაპეციის $AC$ დიაგონალი შუახაზს $4$ და $9$ სიგრძის მონაკვეთებად ყოფს. იპოვეთ ფუძეები."
+  hint="შუახაზის ნაწილები სამკუთხედების $ABC$ და $ACD$ შუახაზებია.">
+<Step hl="MX BC" tex="BC = 2\,MX = 8">$MX$ სამკუთხედ $ABC$-ის შუახაზია.</Step>
+<Step hl="XN AD" tex="AD = 2\,XN = 18">$XN$ სამკუთხედ $ACD$-ის შუახაზია.</Step>
+</Problem>
+
+<Problem id="p-trap-diag-midpoints" set={{ a: 5, b: 1.9230769230769231, h: 2.5, s: 0.8 }} show="AC BD X Y" given="AD=13 BC=5" find="XY" answer="4" book="6.97"
+  q="ტრაპეციის ფუძეებია $13$ და $5$. იპოვეთ მანძილი დიაგონალების შუაწერტილებს შორის."
+  hint="დიაგონალების შუაწერტილები შუახაზზე ძევს.">
+<Step show="MN" hl="MX MY" tex="MY = \tfrac12\, AD = 6{,}5,\qquad MX = \tfrac12\, BC = 2{,}5">$MY$ სამკუთხედ $ABD$-ის შუახაზია, $MX$ კი — სამკუთხედ $ABC$-ისა.</Step>
+<Step hl="XY" tex="XY = MY - MX = \frac{13 - 5}{2} = 4">$X$ და $Y$ ერთ წრფეზე — შუახაზზე ძევს.</Step>
+</Problem>
+
+<Problem id="p-trap-leg-bisectors" set={{ a: 6, b: 3, h: 3.36, s: 0.98 }} show="AL BL" given="AL=8 BL=6" find="AB" answer="10" book="6.157"
+  q="ტრაპეციის $AB$ ფერდთან მდებარე კუთხეების ბისექტრისები $L$ წერტილში იკვეთება, $AL = 8$, $BL = 6$. იპოვეთ $AB$."
+  hint="ერთ ფერდთან მდებარე კუთხეების ჯამი $180^\circ$-ია. რას უდრის მათი ნახევრების ჯამი?">
+<Step hl="<LAB <LBA" tex="\angle LAB + \angle LBA = \tfrac12 \cdot 180^\circ = 90^\circ">$\angle A + \angle B = 180^\circ$, ბისექტრისები კი ამ კუთხეებს შუაზე ყოფს.</Step>
+<Step hl="ALB <ALB" tex="\angle ALB = 90^\circ">სამკუთხედ $ALB$-ის კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step hl="AB" tex="AB = \sqrt{8^2 + 6^2} = 10">პითაგორას თეორემით.</Step>
+</Problem>
+
+<Problem id="p-trap-iso-height-parts" set={{ a: 5.5, b: 3, h: 2.5, s: 1.25 }} show="BH <BHA" given="AH=5 HD=17 AB=CD" find="BC AD" answer="12 22" book="6.84"
+  q="ტოლფერდა ტრაპეციის ბლაგვი კუთხის $B$ წვეროდან დაშვებული $BH$ სიმაღლე დიდ ფუძეს $5$ და $17$ სიგრძის მონაკვეთებად ყოფს. იპოვეთ ფუძეები."
+  hint="ტოლფერდა ტრაპეციაში $AH = \tfrac{a-b}{2}$, $HD = \tfrac{a+b}{2}$.">
+<Step hl="AH HD" tex="\frac{a - b}{2} = 5,\qquad \frac{a + b}{2} = 17">ტოლფერდა ტრაპეციაში სიმაღლე დიდ ფუძეს $\tfrac{a-b}{2}$ და $\tfrac{a+b}{2}$ ნაწილებად ყოფს.</Step>
+<Step hl="AD BC" tex="a = 22,\qquad b = 12">შევკრიბოთ და გამოვაკლოთ ტოლობები.</Step>
+</Problem>
+
+<Problem id="p-trap-tangential" set={{ a: 4, b: 1, h: 2, s: 1.5 }} show="BH (IT) <BHA" given="BC=4 AD=16 AB=CD AB+CD=AD+BC" find="BH" answer="8" book="6.122 6.123 6.124"
+  q="ტოლფერდა ტრაპეციაში, რომლის ფუძეებია $4$ და $16$, წრეწირია ჩახაზული. იპოვეთ ტრაპეციის სიმაღლე."
+  hint="ტრაპეციაში წრეწირი მაშინ ჩაიხაზება, როცა ფერდების ჯამი ფუძეების ჯამის ტოლია.">
+<Step hl="AB CD" tex="2\,AB = 4 + 16 \;\Rightarrow\; AB = 10">წრეწირი ჩაიხაზება, ამიტომ ფერდების ჯამი ფუძეების ჯამის ტოლია; ფერდები კი ტოლია.</Step>
+<Step hl="AH" tex="AH = \frac{16 - 4}{2} = 6">ტოლფერდა ტრაპეციაში სიმაღლე დიდი ფუძიდან $\tfrac{a-b}{2}$ მონაკვეთს ჩამოჭრის.</Step>
+<Step hl="ABH BH" tex="BH = \sqrt{10^2 - 6^2} = 8">პითაგორას თეორემით.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-trap-half-base" set={{ a: 5, b: 2.5, h: 2.5, s: 0.8 }} show="DF <DFA" given="AD=2*BC" prove="FC=DC" book="6.158"
+  q="$ABCD$ ტრაპეციაში $AD \parallel BC$ და $AD = 2\,BC$. $F$ არის $D$-დან $AB$ წრფეზე დაშვებული მართობის ფუძე. დაამტკიცეთ, რომ $FC = DC$."
+  hint="გააგრძელეთ ფერდები გადაკვეთამდე.">
+<Step show="BG CG" hl="AGD">გავაგრძელოთ $AB$ და $DC$ ფერდები; ისინი $G$ წერტილში იკვეთება.</Step>
+<Step hl="BC AD" tex="GC = CD">$BC \parallel AD$ და $BC = \tfrac12\, AD$, ამიტომ $BC$ სამკუთხედ $AGD$-ის შუახაზია და $C$ არის $GD$-ს შუაწერტილი.</Step>
+<Step show="FC" hl="GFD FC" tex="FC = \tfrac12\, GD = DC \quad \blacksquare">სამკუთხედი $GFD$ მართკუთხაა, $FC$ კი მისი ჰიპოტენუზისადმი გავლებული მედიანაა — ის ჰიპოტენუზის ნახევარია.</Step>
+</Problem>
+
+</Problems>

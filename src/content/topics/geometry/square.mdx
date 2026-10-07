@@ -79,3 +79,34 @@ parent: rectangle
 </Property>
 
 </Properties>
+
+<Problems>
+
+<Problem id="p-square-diagonal" set={{ a: 4 }} show="AC" given="AC=12" find="AB S(ABCD)" answer="6√2 72" book="6.52 6.53"
+  q="კვადრატის დიაგონალი $12$-ია. იპოვეთ კვადრატის გვერდი და ფართობი."
+  hint="$d = a\sqrt2$, ფართობი კი $\tfrac{d^2}{2}$-ის ტოლიცაა.">
+<Step hl="ABC" tex="\begin{gathered}AC^2 = AB^2 + BC^2 = 2\,AB^2 \\ AB = \frac{12}{\sqrt2} = 6\sqrt2\end{gathered}">პითაგორას თეორემა სამკუთხედ $ABC$-ში.</Step>
+<Step hl="ABCD" tex="S = AB^2 = 72">კვადრატის ფართობი.</Step>
+</Problem>
+
+<Problem id="p-square-outer" set={{ a: 2 }} show="EF FG GH HE AC BD" given="AC=12" find="P(EFGH)" answer="48" book="6.54"
+  q="კვადრატის დიაგონალი $12$-ია. კვადრატის თითოეულ წვეროზე გავლებულია იმ დიაგონალის პარალელური წრფე, რომელიც ამ წვეროზე არ გადის. იპოვეთ მიღებული $EFGH$ ოთხკუთხედის პერიმეტრი."
+  hint="ახალი ოთხკუთხედის ყოველი გვერდი ერთ-ერთი დიაგონალის პარალელურია.">
+<Step hl="EF||AC AE||CF" tex="EF \parallel AC,\qquad AE \parallel CF">ყოველი ახალი წრფე ერთ-ერთი დიაგონალის პარალელურია.</Step>
+<Step hl="ACFE" tex="EF = AC = 12">$ACFE$ პარალელოგრამია, ამიტომ მისი მოპირდაპირე გვერდები ტოლია.</Step>
+<Step hl="EFGH" tex="P = 4 \cdot 12 = 48">ასევე $FG = GH = HE = 12$, რადგან კვადრატის დიაგონალები ტოლია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-square-inner" set={{ a: 4 }} show="A1B1 B1C1 C1D1 D1A1" prove="A1B1=B1C1 B1C1=C1D1 <D1A1B1=90" book="6.143"
+  q="კვადრატის $AB$, $BC$, $CD$ და $DA$ გვერდებზე გადაზომილია ტოლი მონაკვეთები $AA_1 = BB_1 = CC_1 = DD_1$. დაამტკიცეთ, რომ $A_1B_1C_1D_1$ კვადრატია."
+  hint="შეადარეთ კუთხეებთან ჩამოჭრილი ოთხი მართკუთხა სამკუთხედი.">
+<Step hl="A1BB1 D1AA1" tex="\begin{aligned}\triangle D_1AA_1 &= \triangle A_1BB_1 \\ &= \triangle B_1CC_1 = \triangle C_1DD_1\end{aligned}">ოთხივე მართკუთხაა და მათი კათეტებია $x$ და $a - x$, სადაც $x = AA_1$, $a$ კი კვადრატის გვერდია (გკგ).</Step>
+<Step hl="A1B1=B1C1 C1D1=D1A1" tex="A_1B_1 = B_1C_1 = C_1D_1 = D_1A_1">ეს ტოლი სამკუთხედების ჰიპოტენუზებია — $A_1B_1C_1D_1$ რომბია.</Step>
+<Step hl="<AA1D1 <BA1B1 <D1A1B1" tex="\begin{aligned}\angle D_1A_1B_1 &= 180^\circ - (\angle AA_1D_1 + \angle BA_1B_1) \\ &= 90^\circ \quad \blacksquare\end{aligned}">$\angle AA_1D_1 = \angle BB_1A_1$, ხოლო $\angle BB_1A_1 + \angle BA_1B_1 = 90^\circ$. რომბი, რომლის კუთხე მართია, კვადრატია.</Step>
+</Problem>
+
+</Problems>

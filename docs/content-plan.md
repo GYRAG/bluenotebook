@@ -63,7 +63,7 @@ checked, a hint, a step-by-step solution on the figure; every given and answer v
 Batches (book problem sections → site topics):
 1. ✓ §1–4 → angles, congruence, perpendicular bisector, triangle, isosceles triangle (29) + parallelogram pilot (7)
 2. ✓ §5 → circle, inscribed angle, circle angles, triangle centres (circum/incircle radii) (19)
-3. §6 → quadrilaterals, trapezoid, Thales
+3. ✓ §6 → quadrilateral (incl. cyclic, tangential), rectangle, rhombus, square, trapezoid, Thales, triangle midline (30)
 4. §7–9 → similarity, right triangle (incl. §4's right-triangle angle problems), trigonometry, sine/cosine laws
 5. §10–11 → areas, polygons, regular polygons, circumference
 6. §13 → mixed problems (own page, own figures)

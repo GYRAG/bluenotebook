@@ -25,10 +25,12 @@ export default figure({
       X: mid(A, C), Y: mid(B, D), // diagonal midpoints
       L: intersect(A, add(A, add(unit(sub(B, A)), unit(sub(D, A)))), B, add(B, add(unit(sub(A, B)), unit(sub(C, B))))), // bisectors at leg AB
       I: [x0 + a / 2, 0] as V, T: [x0 + a / 2, -h / 2] as V, // incircle centre and its touch point on AD (isosceles + tangential only)
+      F: foot(D, A, B), G: intersect(A, B, D, C), // for problems: the foot from D on line AB; where the legs meet
     };
   },
   drag: { B: ['s', 'h'], C: ['b', 'h'], D: ['a'] },
   base: 'ABCD',
+  boundsOf: ['A', 'B', 'C', 'D', 'O', 'M', 'N', 'H', 'K', 'E', 'P', 'Q', 'X', 'Y', 'L', 'I', 'T'], // F and G (problems) may run far
   dims: '|AD|a |BC|b <A <D',
   toggles: {
     'სიმაღლე': 'BH <BHD',

@@ -122,3 +122,48 @@ figures: [cyclic-quad, tangential-quad]
 </Properties>
 
 <Remark kind="mistake">ყველა ოთხკუთხედში წრეწირის ჩახაზვა ან შემოხაზვა არ შეიძლება. მაგალითად, რომბს (რომელიც კვადრატი არ არის) ჩახაზული წრეწირი აქვს, შემოხაზული — არა; მართკუთხედს (რომელიც კვადრატი არ არის) — პირიქით.</Remark>
+
+<Problems>
+
+<Problem id="p-quad-angles-ratio" set={{ Ax: -2, Ay: -1.4285254037844386, Bx: 2, By: -1.4285254037844386, Cx: 2, Cy: 0.0714745962155614, Dx: -0.350480947161671, Dy: 1.4285254037844386 }} given="<A/<B=2/3 <B/<C=3/4 <C/<D=4/3" find="<A <B <C <D" answer="60 90 120 90" book="6.1 6.2"
+  q="ოთხკუთხედის კუთხეები ისე შეეფარდება ერთმანეთს, როგორც $2 : 3 : 4 : 3$. იპოვეთ ეს კუთხეები."
+  hint="ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია.">
+<Step hl="<A <B <C <D" tex="2x + 3x + 4x + 3x = 360^\circ \;\Rightarrow\; x = 30^\circ">ოთხკუთხედის კუთხეების ჯამი $360^\circ$-ია; კუთხეებია $2x$, $3x$, $4x$ და $3x$.</Step>
+<Step tex="\angle A = 60^\circ,\quad \angle B = \angle D = 90^\circ,\quad \angle C = 120^\circ">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-varignon-perimeter" set={{ Ax: -3, Ay: -2, Bx: 3.5, By: -2.5, Cx: 3, Cy: 2, Dx: -3.5, Dy: 2.58723893679076 }} show="KL LM MN NK AC BD" given="AC=10 BD=12" find="P(KLMN)" answer="22" book="6.70 6.71"
+  q="ოთხკუთხედის დიაგონალებია $10$ და $12$. იპოვეთ იმ ოთხკუთხედის პერიმეტრი, რომლის წვეროები მოცემული ოთხკუთხედის გვერდების შუაწერტილებია."
+  hint="$KL$ სამკუთხედ $ABC$-ის შუახაზია.">
+<Step hl="KL MN AC" tex="KL = MN = \tfrac12\, AC = 5">$KL$ და $MN$ სამკუთხედების $ABC$ და $ACD$ შუახაზებია, შუახაზი კი მესამე გვერდის ნახევარია.</Step>
+<Step hl="LM NK BD" tex="LM = NK = \tfrac12\, BD = 6">ანალოგიურად სამკუთხედებში $BCD$ და $ABD$.</Step>
+<Step hl="KLMN" tex="P_{KLMN} = 2\,(5 + 6) = 22">ანუ პერიმეტრი დიაგონალების ჯამის ტოლია.</Step>
+</Problem>
+
+<Problem id="p-cyclic-angles" figure="cyclic-quad" set={{ R: 3, tA: 218.1982196423237, tB: 296.9185347226705, tC: 58.1982196423234, tD: 156.9185347226705 }} given="<A=110 <B=80" find="<C <D" answer="70 100" book="6.110 6.111"
+  q="წრეწირში ჩახაზული $ABCD$ ოთხკუთხედის ორი კუთხეა $\angle A = 110^\circ$ და $\angle B = 80^\circ$. იპოვეთ დანარჩენი ორი კუთხე."
+  hint="წრეწირში ჩახაზული ოთხკუთხედის მოპირდაპირე კუთხეების ჯამი $180^\circ$-ია.">
+<Step hl="<A <C" tex="\angle C = 180^\circ - 110^\circ = 70^\circ">წრეწირში ჩახაზული ოთხკუთხედის მოპირდაპირე კუთხეების ჯამი $180^\circ$-ია.</Step>
+<Step hl="<B <D" tex="\angle D = 180^\circ - 80^\circ = 100^\circ">იგივე მოპირდაპირე კუთხეების მეორე წყვილისთვის.</Step>
+</Problem>
+
+<Problem id="p-pitot-side" figure="tangential-quad" set={{ r: 1.8, t1: 278.3822630718111, t2: -28.75368468847776, t3: 84.90873955185106, t4: 184.00265188201308 }} given="AB=7 BC=9 CD=12" find="DA" answer="10" book="6.120 6.121"
+  q="წრეწირზე შემოხაზული $ABCD$ ოთხკუთხედის სამი გვერდია $AB = 7$, $BC = 9$ და $CD = 12$. იპოვეთ მეოთხე გვერდი."
+  hint="წრეწირზე შემოხაზულ ოთხკუთხედში მოპირდაპირე გვერდების ჯამები ტოლია.">
+<Step hl="AB CD BC DA" tex="AB + CD = BC + DA">წრეწირზე შემოხაზულ ოთხკუთხედში მოპირდაპირე გვერდების ჯამები ტოლია.</Step>
+<Step hl="DA" tex="DA = 7 + 12 - 9 = 10">ჩავსვათ ცნობილი გვერდები.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-varignon-rhombus" set={{ Ax: -3, Ay: -2, Bx: 3.5, By: -2.5, Cx: 3, Cy: 2, Dx: -3.5, Dy: -0.7679491924311228 }} show="KL LM MN NK AC BD" given="AC=BD" prove="KL=LM LM=MN MN=NK" book="6.149"
+  q="დაამტკიცეთ, რომ თუ ოთხკუთხედის დიაგონალები ტოლია, მისი გვერდების შუაწერტილები რომბის წვეროებია."
+  hint="გვერდების შუაწერტილების შემაერთებელი მონაკვეთები სამკუთხედების შუახაზებია.">
+<Step hl="KL MN AC" tex="KL = MN = \tfrac12\, AC">$KL$ და $MN$ შუახაზებია სამკუთხედებში $ABC$ და $ACD$.</Step>
+<Step hl="LM NK BD" tex="LM = NK = \tfrac12\, BD">$LM$ და $NK$ შუახაზებია სამკუთხედებში $BCD$ და $ABD$.</Step>
+<Step hl="KLMN" tex="AC = BD \;\Rightarrow\; KL = LM = MN = NK \quad \blacksquare">ოთხკუთხედი, რომლის ოთხივე გვერდი ტოლია, რომბია.</Step>
+</Problem>
+
+</Problems>

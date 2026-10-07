@@ -1,4 +1,4 @@
-import { angleAt, area, dist, mid, near, perpendicular, polar, add, sub, type V } from './engine/geom';
+import { angleAt, area, dist, lerp, mid, near, perpendicular, polar, add, sub, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 export default figure({
@@ -7,10 +7,18 @@ export default figure({
   params: { a: { label: 'გვერდი', sym: 'a', min: 2, max: 5, step: 0.1, value: 4 } },
   points: ({ a }) => {
     const A: V = [-a / 2, -a / 2], B: V = [a / 2, -a / 2];
-    return { A, B, C: [a / 2, a / 2], D: [-a / 2, a / 2], O: [0, 0], T: mid(A, B) };
+    const C: V = [a / 2, a / 2], D: V = [-a / 2, a / 2];
+    return {
+      A, B, C, D, O: [0, 0] as V, T: mid(A, B),
+      // for problems: EFGH, the square cut out by lines through the vertices parallel to the diagonals;
+      // A1B1C1D1, points one third along each side
+      E: [0, -a] as V, F: [a, 0] as V, G: [0, a] as V, H: [-a, 0] as V,
+      A1: lerp(A, B, 1 / 3), B1: lerp(B, C, 1 / 3), C1: lerp(C, D, 1 / 3), D1: lerp(D, A, 1 / 3),
+    };
   },
   drag: { C: ['a'] },
   base: 'ABCD',
+  boundsOf: ['A', 'B', 'C', 'D'],
   dims: '|AB|a',
   toggles: {
     'დიაგონალები': 'AC BD O',

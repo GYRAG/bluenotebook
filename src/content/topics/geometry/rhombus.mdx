@@ -105,3 +105,50 @@ parent: parallelogram
 <Remark kind="mistake">ურთიერთმართობი დიაგონალები თავისთავად რომბს არ იძლევა — ნიშანი მხოლოდ პარალელოგრამს ეხება. მაგალითად, ოთხკუთხედი, რომლის დიაგონალები მართობია, მაგრამ ერთმანეთს შუაზე არ ყოფს, რომბი არ არის.</Remark>
 
 <Remark kind="special">რომბი, რომლის ერთი კუთხე მართია, კვადრატია.</Remark>
+
+<Problems>
+
+<Problem id="p-rhombus-half-angles" set={{ a: 4, alpha: 40 }} show="AC BD" given="<OAB/<OBA=2/7" find="<A <B" answer="40 140" book="6.43 6.44"
+  q="რომბის დიაგონალები მის გვერდთან კუთხეებს ადგენს, რომლებიც ისე შეეფარდება ერთმანეთს, როგორც $2 : 7$. იპოვეთ რომბის კუთხეები."
+  hint="რომბის დიაგონალები ურთიერთმართობია და მისი კუთხეების ბისექტრისებია.">
+<Step hl="AOB <AOB" tex="\angle OAB + \angle OBA = 90^\circ">დიაგონალები ურთიერთმართობია, ამიტომ სამკუთხედი $AOB$ მართკუთხაა.</Step>
+<Step tex="2x + 7x = 90^\circ \;\Rightarrow\; x = 10^\circ">ეს კუთხეებია $2x$ და $7x$.</Step>
+<Step hl="<A <B" tex="\angle A = 2 \cdot 20^\circ = 40^\circ,\qquad \angle B = 2 \cdot 70^\circ = 140^\circ">დიაგონალები რომბის კუთხეების ბისექტრისებია.</Step>
+</Problem>
+
+<Problem id="p-rhombus-height-mid" set={{ a: 4, alpha: 60 }} show="DH BD <DHB" given="AH=HB BD=20" find="<A P(ABCD)" answer="60 80" book="6.48"
+  q="რომბის ბლაგვი კუთხის $D$ წვეროდან დაშვებული $DH$ სიმაღლე $AB$ გვერდს შუაზე ყოფს, მცირე დიაგონალი $BD$ კი $20$-ია. იპოვეთ რომბის მახვილი კუთხე და პერიმეტრი."
+  hint="$DH$ სამკუთხედ $ABD$-ში სიმაღლეცაა და მედიანაც.">
+<Step hl="DH AH=HB" tex="DA = DB">$DH$ სამკუთხედ $ABD$-ში სიმაღლეცაა და მედიანაც, ამიტომ სამკუთხედი ტოლფერდაა.</Step>
+<Step hl="ABD" tex="AB = AD = DB = 20,\qquad \angle A = 60^\circ">რომბის გვერდებიც ტოლია: სამკუთხედი $ABD$ ტოლგვერდაა.</Step>
+<Step tex="P = 4 \cdot 20 = 80">რომბის ოთხივე გვერდი ტოლია.</Step>
+</Problem>
+
+<Problem id="p-rhombus-diagonal" set={{ a: 4, alpha: 45.23972989608086 }} show="AC BD" given="AB=13 AC=24" find="BD" answer="10"
+  q="რომბის გვერდი $13$-ია, ერთ-ერთი დიაგონალი კი — $24$. იპოვეთ მეორე დიაგონალი."
+  hint="დიაგონალები ურთიერთმართობია და გადაკვეთის წერტილით შუაზე იყოფა.">
+<Step hl="AOB <AOB" tex="AO = 12">დიაგონალები შუაზე იყოფა და ურთიერთმართობია — სამკუთხედი $AOB$ მართკუთხაა.</Step>
+<Step hl="BO" tex="BO = \sqrt{13^2 - 12^2} = 5">პითაგორას თეორემით.</Step>
+<Step hl="BD" tex="BD = 2\,BO = 10">დიაგონალი ორი ასეთი ნახევრისგან შედგება.</Step>
+</Problem>
+
+<Problem id="p-rhombus-inradius" set={{ a: 4, alpha: 53.13010235415599 }} show="OT (OT) <OTA" given="AB=10 S(ABCD)=80" find="OT" answer="4" book="6.117 6.119"
+  q="რომბის გვერდი $10$-ია, ფართობი კი — $80$. იპოვეთ რომბში ჩახაზული წრეწირის რადიუსი."
+  hint="ჩახაზული წრეწირის დიამეტრი რომბის სიმაღლის ტოლია.">
+<Step tex="h = \frac{S}{a} = \frac{80}{10} = 8">რომბი პარალელოგრამია: $S = a\,h$.</Step>
+<Step hl="OT" tex="r = \tfrac12\, h = 4">ჩახაზული წრეწირის ცენტრი დიაგონალების გადაკვეთის წერტილია და მოპირდაპირე გვერდებს შორის შუაზე მდებარეობს.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-rhombus-midpoints" set={{ a: 4, alpha: 65 }} show="KL LM MN NK AC BD" prove="<NKL=90 <KLM=90 <LMN=90" book="6.148"
+  q="დაამტკიცეთ, რომ რომბის გვერდების შუაწერტილები მართკუთხედის წვეროებია."
+  hint="შუახაზები დიაგონალების პარალელურია, რომბის დიაგონალები კი ურთიერთმართობია.">
+<Step hl="KL MN AC" tex="KL \parallel AC \parallel MN">$KL$ და $MN$ შუახაზებია სამკუთხედებში $ABC$ და $ACD$.</Step>
+<Step hl="LM NK BD" tex="LM \parallel BD \parallel NK">ანალოგიურად სამკუთხედებში $BCD$ და $ABD$.</Step>
+<Step hl="<NKL <KLM <LMN" tex="KL \perp LM,\quad LM \perp MN,\quad MN \perp NK \quad \blacksquare">რომბის დიაგონალები ურთიერთმართობია, ამიტომ $KLMN$-ის ყველა კუთხე მართია.</Step>
+</Problem>
+
+</Problems>
