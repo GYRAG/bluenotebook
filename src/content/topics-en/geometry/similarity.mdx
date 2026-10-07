@@ -1,0 +1,124 @@
+---
+title: Similarity
+slug: similarity
+subject: geometry
+section: basics
+order: 5
+summary: Similar triangles, the three similarity criteria, and the ratios of areas and perimeters.
+tags: [similarity, scale factor, proportional segments]
+prerequisites: [congruence, angles]
+status: draft
+figure: similarity
+figures: [trapezoid]
+---
+
+<Definition>Triangles are **similar** ($\triangle ABC \sim \triangle A_1B_1C_1$) if their corresponding angles are equal and their corresponding sides are proportional: $\tfrac{A_1B_1}{AB} = \tfrac{B_1C_1}{BC} = \tfrac{C_1A_1}{CA} = k$. The number $k$ is the **scale factor**.</Definition>
+
+<Formulas>
+<Formula id="aa-formula" name="Criterion: two angles" tex="\angle A = \angle A_1,\ \angle B = \angle B_1" proof="aa" />
+<Formula id="sas-formula" name="Criterion: two sides and an angle" tex="\frac{A_1B_1}{AB} = \frac{A_1C_1}{AC},\ \angle A = \angle A_1" proof="sas-similarity" />
+<Formula id="sss-formula" name="Criterion: three sides" tex="\frac{A_1B_1}{AB} = \frac{B_1C_1}{BC} = \frac{C_1A_1}{CA}" proof="sss-similarity" />
+<Formula id="area-formula" name="Ratio of areas" tex="\frac{S_1}{S} = k^2" live="S₁ : S" proof="area-ratio" />
+<Formula id="perimeter-formula" name="Ratio of perimeters" tex="\frac{P_1}{P} = k" live="P₁ : P" proof="perimeter-ratio" />
+</Formulas>
+
+<Properties>
+
+<Property id="parallel-lemma" title="A line parallel to a side of a triangle cuts off a similar triangle" why="Areas with the same height give the ratio of the sides.">
+<Proof given="$B_2 \in AB$, $C_2 \in AC$, $B_2C_2 \parallel BC$" prove="$\tfrac{AB_2}{AB} = \tfrac{AC_2}{AC} = \tfrac{B_2C_2}{BC}$">
+<Step set={{ k: 0.6 }} show="B2C2 B2 C2" hl="B2C2||BC">$B_2C_2 \parallel BC$.</Step>
+<Step show="BC2 CB2" hl="B2C2B B2C2C" tex="S_{B_2C_2B} = S_{B_2C_2C}">The two triangles share the base $B_2C_2$, and their heights are equal: $B$ and $C$ are equally far from $B_2C_2$, since $BC$ is parallel to it.</Step>
+<Step hl="ABC2 AB2C" tex="S_{ABC_2} = S_{AB_2C}">Add $S_{AB_2C_2}$ to both sides.</Step>
+<Step tex="\frac{AB_2}{AB} = \frac{S_{AB_2C}}{S_{ABC}} = \frac{S_{ABC_2}}{S_{ABC}} = \frac{AC_2}{AC}">Triangles with a common vertex and bases on one line have areas proportional to the bases.</Step>
+<Step tex="\frac{B_2C_2}{BC} = \frac{AB_2}{AB} \quad \blacksquare">For the third ratio draw a line through $C_2$ parallel to $AB$ and repeat the argument for angle $C$. The angles are equal because they are corresponding.</Step>
+</Proof>
+</Property>
+
+<Property id="aa" kind="criterion" title="If two angles of one triangle equal two angles of another, the triangles are similar" why="A copy of the second triangle fits inside the first, parallel to a side.">
+<Proof given="$\angle A = \angle A_1,\ \angle B = \angle B_1$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step hl="<BAC=<B1A1C1 <ABC=<A1B1C1">two pairs of equal angles</Step>
+<Step show="B2C2 B2 C2" hl="AB2C2">On ray $AB$ mark $AB_2 = A_1B_1$ and draw $B_2C_2 \parallel BC$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1">$AB_2 = A_1B_1$, $\angle A = \angle A_1$, $\angle AB_2C_2 = \angle B = \angle B_1$ (corresponding angles): ASA.</Step>
+<Step hl="ABC" tex="\triangle ABC \sim \triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">By the previous property.</Step>
+</Proof>
+</Property>
+
+<Property id="sas-similarity" kind="criterion" title="If two sides are proportional and the angles between them are equal, the triangles are similar" why="The same fitting: the copy matches by the first criterion.">
+<Proof given="$\tfrac{A_1B_1}{AB} = \tfrac{A_1C_1}{AC} = k,\ \angle A = \angle A_1$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step show="B2C2 B2 C2" hl="AB2C2">On $AB$ mark $AB_2 = A_1B_1$ and draw $B_2C_2 \parallel BC$.</Step>
+<Step hl="AC2" tex="AC_2 = k \cdot AC = A_1C_1">$\triangle AB_2C_2 \sim \triangle ABC$ with scale factor $k$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">SAS: $AB_2 = A_1B_1$, $AC_2 = A_1C_1$, $\angle A = \angle A_1$.</Step>
+</Proof>
+</Property>
+
+<Property id="sss-similarity" kind="criterion" title="If three sides are proportional, the triangles are similar" why="All three sides of the fitted copy match the other triangle's sides.">
+<Proof given="$\tfrac{A_1B_1}{AB} = \tfrac{B_1C_1}{BC} = \tfrac{C_1A_1}{CA} = k$" prove="$\triangle ABC \sim \triangle A_1B_1C_1$">
+<Step show="B2C2 B2 C2" hl="AB2C2">Again $AB_2 = A_1B_1$ and $B_2C_2 \parallel BC$.</Step>
+<Step tex="\begin{gathered}AC_2 = k \cdot AC = A_1C_1 \\ B_2C_2 = k \cdot BC = B_1C_1\end{gathered}">$\triangle AB_2C_2 \sim \triangle ABC$ with scale factor $k$.</Step>
+<Step hl="AB2C2 A1B1C1" tex="\triangle AB_2C_2 = \triangle A_1B_1C_1 \quad \blacksquare">SSS.</Step>
+</Proof>
+</Property>
+
+<Property id="area-ratio" title="The ratio of the areas of similar triangles is the square of the scale factor" why="An area multiplies two lengths, and each grows $k$ times.">
+<Proof given="$\triangle A_1B_1C_1 \sim \triangle ABC$ with scale factor $k$" prove="$S_1 : S = k^2$">
+<Step hl="<BAC=<B1A1C1" tex="S = \tfrac12\, AB \cdot AC \sin A">The area from two sides and an angle.</Step>
+<Step hl="A1B1C1" tex="S_1 = \tfrac12\,(k\,AB)(k\,AC)\sin A = k^2 S \quad \blacksquare">The angle is the same; two sides grow $k$ times.</Step>
+</Proof>
+</Property>
+
+<Property id="perimeter-ratio" title="The ratio of the perimeters of similar triangles equals the scale factor" why="Each side grows $k$ times.">
+<Proof given="$\triangle A_1B_1C_1 \sim \triangle ABC$ with scale factor $k$" prove="$P_1 : P = k$">
+<Step hl="A1B1C1" tex="P_1 = k\,AB + k\,BC + k\,CA = k\,P \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">Under similarity the sides are proportional, but the areas are proportional to $k^2$. Doubling the sides multiplies the area by 4.</Remark>
+
+<Problems>
+
+<Problem id="p-sim-sides" set={{ c: 3, b: 2.5, alpha: 41.40962210927086, k: 1.5 }} given="AB=12 AC=10 BC=8 P(A1B1C1)=45" find="A1B1 A1C1 B1C1" answer="18 15 12" book="7.1 7.2 7.3"
+  q="The sides of a triangle are $AB = 12$, $AC = 10$ and $BC = 8$. A similar triangle $A_1B_1C_1$ has perimeter $45$. Find the sides of the second triangle."
+  hint="The ratio of the perimeters of similar triangles equals the scale factor.">
+<Step hl="ABC A1B1C1" tex="k = \frac{P_{A_1B_1C_1}}{P_{ABC}} = \frac{45}{30} = \frac32">The ratio of the perimeters of similar triangles equals the scale factor.</Step>
+<Step hl="A1B1 A1C1 B1C1" tex="A_1B_1 = 18,\quad A_1C_1 = 15,\quad B_1C_1 = 12">Each side grows $\tfrac32$ times.</Step>
+</Problem>
+
+<Problem id="p-sim-parallel-cut" set={{ c: 2.5, b: 2.5, alpha: 97.18075578145829, k: 0.6 }} show="B2C2" given="AB2=6 B2B=4 BC=15" find="B2C2" answer="9" book="7.10 7.14"
+  q="A line parallel to side $BC$ of triangle $ABC$ meets sides $AB$ and $AC$ at $B_2$ and $C_2$. $AB_2 = 6$, $B_2B = 4$, $BC = 15$. Find $B_2C_2$."
+  hint="A line parallel to a side of a triangle cuts off a similar triangle.">
+<Step hl="AB2C2 B2C2||BC" tex="\triangle AB_2C_2 \sim \triangle ABC">A line parallel to a side of a triangle cuts off a similar triangle.</Step>
+<Step tex="\frac{B_2C_2}{BC} = \frac{AB_2}{AB} = \frac{6}{10}">$AB = 6 + 4 = 10$.</Step>
+<Step hl="B2C2" tex="B_2C_2 = 15 \cdot \frac{6}{10} = 9">Therefore.</Step>
+</Problem>
+
+<Problem id="p-sim-trap-diagonals" figure="trapezoid" set={{ a: 4.5, b: 3, h: 3.5, s: -0.2712718584653483 }} show="AC BD O" given="AO=9 OC=6 BD=20" find="OB OD" answer="8 12" book="7.44 7.45"
+  q="In trapezoid $ABCD$, $AD \parallel BC$ and the diagonals meet at $O$. $AO = 9$, $OC = 6$, $BD = 20$. Find $OB$ and $OD$."
+  hint="The diagonals of a trapezoid form two similar triangles: $AOD$ and $COB$.">
+<Step hl="<OAD=<OCB AD||BC" tex="\angle OAD = \angle OCB,\qquad \angle AOD = \angle COB">$AD \parallel BC$, so the alternate interior angles are equal; the angles at $O$ are vertical.</Step>
+<Step hl="AOD COB" tex="\triangle AOD \sim \triangle COB \;\Rightarrow\; \frac{OD}{OB} = \frac{AO}{OC} = \frac32">The triangles are similar by two angles.</Step>
+<Step hl="OB OD" tex="OB = \tfrac25 \cdot 20 = 8,\qquad OD = 12">$BD$ is divided in the ratio $2 : 3$.</Step>
+</Problem>
+
+<Problem id="p-sim-legs-meet" figure="trapezoid" set={{ a: 5, b: 3, h: 1.984313483298443, s: -0.25 }} show="BG CG" given="AB=4 BC=6 CD=6 AD=10" find="GA GD" answer="10 15" book="7.42 7.43"
+  q="The legs $AB$ and $CD$ of trapezoid $ABCD$, extended, meet at $G$. $AB = 4$, $BC = 6$, $CD = 6$, $AD = 10$. Find $GA$ and $GD$."
+  hint="$BC \parallel AD$, so $\triangle GBC \sim \triangle GAD$.">
+<Step hl="GBC BC||AD" tex="\triangle GBC \sim \triangle GAD,\qquad k = \frac{BC}{AD} = \frac35">$BC \parallel AD$: a parallel line cuts off a similar triangle.</Step>
+<Step hl="GA" tex="\frac{GA - 4}{GA} = \frac35 \;\Rightarrow\; GA = 10">$GB = GA - AB$.</Step>
+<Step hl="GD" tex="\frac{GD - 6}{GD} = \frac35 \;\Rightarrow\; GD = 15">Likewise $GC = GD - CD$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-sim-trap-products" figure="trapezoid" set={{ a: 6, b: 3, h: 2.5, s: 0.8 }} show="AC BD O" prove="AO*OB=DO*OC" book="7.71"
+  q="In trapezoid $ABCD$, $AD \parallel BC$ and $O$ is where the diagonals meet. Prove that $AO \cdot OB = DO \cdot OC$."
+  hint="Find two similar triangles with the common vertex $O$.">
+<Step hl="AOD COB <OAD=<OCB" tex="\triangle AOD \sim \triangle COB">By two angles: alternate interior angles ($AD \parallel BC$) and vertical angles.</Step>
+<Step tex="\frac{AO}{CO} = \frac{DO}{BO}">Corresponding sides of similar triangles are proportional.</Step>
+<Step tex="AO \cdot OB = DO \cdot OC \quad \blacksquare">Multiply both sides of the proportion by $CO \cdot BO$.</Step>
+</Problem>
+
+</Problems>

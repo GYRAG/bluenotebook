@@ -1,12 +1,15 @@
 ---
 import { FIGURES } from '@/figures/registry';
 import Icon from './Icon.astro';
+import { langOf } from '@/i18n';
+import { tfIn } from '@/i18n/figures';
 
 interface Props { name: string; alt?: boolean; draw?: boolean } // alt: a second figure used only by some proofs; draw: open in drawing mode
 const { name, alt = false, draw = false } = Astro.props;
 const spec = FIGURES[name];
 if (!spec) throw new Error(`figure "${name}" not found in src/figures/`);
 const drag = Object.keys(spec.drag ?? {});
+const lang = langOf(Astro.url), f = (s: string) => tfIn(lang, s);
 const TOOLS = [
   ['pen', 'ფანქარი', 'pencil'], ['line', 'მონაკვეთი', 'line'], ['circle', 'წრეწირი', 'circle'], ['rect', 'მართკუთხედი', 'rect'],
   ['tri', 'სამკუთხედი (სამი შეხებით)', 'tri'], ['move', 'ნახატის გადატანა', 'move'], ['erase', 'საშლელი', 'erase'], ['pan', 'ფურცლის გადაადგილება', 'hand'],
@@ -20,7 +23,7 @@ const SIZES = [
 ] as const;
 ---
 <geo-figure class="figure" data-figure={name} data-alt={alt ? '' : undefined} data-draw={draw ? '' : undefined} hidden={alt || undefined}>
-  <svg class="fig" role="img" aria-label={spec.label}>
+  <svg class="fig" role="img" aria-label={f(spec.label)}>
     <defs>
       <marker id="arw" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path class="arw" d="M0 1.8L10 5L0 8.2z" /></marker>
       <marker id="vec" viewBox="0 0 12 10" refX="12" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="12" orient="auto"><path class="arw" d="M0 0.5L12 5L0 9.5L3 5z" /></marker>
@@ -30,28 +33,28 @@ const SIZES = [
     <g class="sketch"></g>
     <g class="handles"></g>
   </svg>
-  <div class="stamp" hidden><span class="stamp-k">ახლა</span><b class="stamp-v"></b><span class="stamp-why"></span></div>
+  <div class="stamp" hidden><span class="stamp-k">{f('ახლა')}</span><b class="stamp-v"></b><span class="stamp-why"></span></div>
   {drag.length > 0 && (
-    <p class="hint" hidden>გადაათრიე {drag.map((p, i) => <>{i > 0 && ' ან '}<i>{p}</i></>)} · შეეხე გვერდს</p>
+    <p class="hint" hidden>{f('გადაათრიე')} {drag.map((p, i) => <>{i > 0 && ` ${f('ან')} `}<i>{p}</i></>)} · {f('შეეხე გვერდს')}</p>
   )}
-  {spec.orbit && <p class="hint" hidden>გადაათრიე ფურცელი — სხეული დატრიალდება</p>}
+  {spec.orbit && <p class="hint" hidden>{f('გადაათრიე ფურცელი — სხეული დატრიალდება')}</p>}
   <div class="sk">
-    <button type="button" class="sk-btn sk-toggle" aria-pressed="false" aria-label="ხატვა ბადეზე" title="ხატვა ბადეზე"><Icon name="pencil" /></button>
-    <button type="button" class="sk-btn sk-fit" aria-label="ხედის დაბრუნება" title="ხედის დაბრუნება" hidden><Icon name="fit" /></button>
-    <div class="sk-tools" role="toolbar" aria-label="ხატვის ხელსაწყოები" hidden>
-      {TOOLS.map(([id, label, icon]) => <button type="button" class="sk-btn" data-tool={id} aria-pressed="false" aria-label={label} title={label}><Icon name={icon} /></button>)}
-      <button type="button" class="sk-btn" data-sk="undo" aria-label="გაუქმება (Ctrl+Z)" title="გაუქმება (Ctrl+Z)"><Icon name="undo" /></button>
-      <button type="button" class="sk-btn" data-sk="clear" aria-label="ნახატის წაშლა" title="ნახატის წაშლა"><Icon name="trash" /></button>
+    <button type="button" class="sk-btn sk-toggle" aria-pressed="false" aria-label={f('ხატვა ბადეზე')} title={f('ხატვა ბადეზე')}><Icon name="pencil" /></button>
+    <button type="button" class="sk-btn sk-fit" aria-label={f('ხედის დაბრუნება')} title={f('ხედის დაბრუნება')} hidden><Icon name="fit" /></button>
+    <div class="sk-tools" role="toolbar" aria-label={f('ხატვის ხელსაწყოები')} hidden>
+      {TOOLS.map(([id, label, icon]) => <button type="button" class="sk-btn" data-tool={id} aria-pressed="false" aria-label={f(label)} title={f(label)}><Icon name={icon} /></button>)}
+      <button type="button" class="sk-btn" data-sk="undo" aria-label={f('გაუქმება (Ctrl+Z)')} title={f('გაუქმება (Ctrl+Z)')}><Icon name="undo" /></button>
+      <button type="button" class="sk-btn" data-sk="clear" aria-label={f('ნახატის წაშლა')} title={f('ნახატის წაშლა')}><Icon name="trash" /></button>
     </div>
     <details class="sk-size" hidden>
-      <summary>ზომით</summary>
+      <summary>{f('ზომით')}</summary>
       <form>
         {SIZES.map(([tool, fields]) => (
           <fieldset data-for={tool}>
-            {fields.map(([label, ph]) => <label><span>{label}</span><input type="number" inputmode="decimal" step="any" min="0" placeholder={ph} /></label>)}
+            {fields.map(([label, ph]) => <label><span>{f(label)}</span><input type="number" inputmode="decimal" step="any" min="0" placeholder={ph} /></label>)}
           </fieldset>
         ))}
-        <p class="sk-note" aria-live="polite">შეავსე და შეეხე ფურცელს; Enter — ცენტრში.</p>
+        <p class="sk-note" aria-live="polite">{f('შეავსე და შეეხე ფურცელს; Enter — ცენტრში.')}</p>
         <button type="submit" hidden></button>
       </form>
     </details>

@@ -1,6 +1,8 @@
 ---
 import Shell from '@/layouts/Shell.astro';
+// One 404 for both languages: Georgian first, then English.
 ---
 <Shell title="გვერდი ვერ მოიძებნა" panel={false}>
   <p class="empty">ასეთი გვერდი არ არსებობს. სცადე ძიება (<kbd>/</kbd>) ან <a href="/" style="text-decoration:underline">მთავარი</a>.</p>
+  <p class="empty" lang="en">Page not found. Try search (<kbd>/</kbd>) or the <a href="/en/" style="text-decoration:underline">English home page</a>.</p>
 </Shell>

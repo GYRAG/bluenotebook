@@ -1,22 +1,25 @@
 ---
 import { FIGURES } from '@/figures/registry';
 import Icon from './Icon.astro';
+import { langOf } from '@/i18n';
+import { tfIn } from '@/i18n/figures';
 
 interface Props { name: string }
 const { name } = Astro.props;
+const lang = langOf(Astro.url), f = (s: string) => tfIn(lang, s);
 const spec = FIGURES[name]!;
 const pts = spec.points(Object.fromEntries(Object.entries(spec.params).map(([k, d]) => [k, d.value])));
 const readouts = spec.readouts?.(pts, Object.fromEntries(Object.entries(spec.params).map(([k, d]) => [k, d.value]))) ?? [];
 const SUB: Record<string, string> = { 'ₐ': 'a', '₁': '1', '₂': '2', '₃': '3', 'ᵦ': 'b' };
 const sym = (s: string) => s.replace(/[ₐ₁₂₃ᵦ]/g, c => `<sub>${SUB[c]}</sub>`);
-const switches = [['__dims', 'ზომები', true], ...Object.keys(spec.toggles ?? {}).map(t => [t, t, false])] as const;
+const switches = [['__dims', f('ზომები'), true], ...Object.keys(spec.toggles ?? {}).map(t => [t, f(t), false])] as const;
 ---
 <div class="tools" data-figure-tools={name}>
   {Object.entries(spec.params).filter(([, d]) => !d.hidden).map(([key, d]) => (
     <div class="ctl" data-param={key}>
-      <label class="ctl-l" for={`r-${key}`}>{d.label} <i>{d.sym}</i></label>
-      <button class="reset" type="button" aria-label={`${d.sym} — საწყისზე დაბრუნება`} hidden><Icon name="reset" /></button>
-      <input class="num" type="number" inputmode="decimal" min={d.min} max={d.max} step={d.step} value={d.value} aria-label={`${d.label} ${d.sym}`} />
+      <label class="ctl-l" for={`r-${key}`}>{f(d.label)} <i>{d.sym}</i></label>
+      <button class="reset" type="button" aria-label={`${d.sym} — ${f('საწყისზე დაბრუნება')}`} hidden><Icon name="reset" /></button>
+      <input class="num" type="number" inputmode="decimal" min={d.min} max={d.max} step={d.step} value={d.value} aria-label={`${f(d.label)} ${d.sym}`} />
       <input class="rng" id={`r-${key}`} type="range" min={d.min} max={d.max} step={d.step} value={d.value} />
     </div>
   ))}

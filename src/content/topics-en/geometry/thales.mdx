@@ -1,0 +1,66 @@
+---
+title: Thales' theorem
+slug: thales
+subject: geometry
+section: basics
+order: 4
+summary: Parallel lines cut equal segments, and in general proportional ones, on the sides of an angle.
+tags: [Thales, parallel lines, proportional segments]
+prerequisites: [angles, congruence, similarity]
+status: draft
+figure: thales
+---
+
+<Definition>Segments $a, b$ and $c, d$ are **proportional** if $\tfrac{a}{b} = \tfrac{c}{d}$.</Definition>
+
+<Formulas>
+<Formula id="thales-formula" name="Thales' theorem" tex="A_1A_2 = A_2A_3 \;\Rightarrow\; B_1B_2 = B_2B_3" proof="thales" />
+<Formula id="proportional-formula" name="Proportional segments" tex="\frac{A_1A_2}{A_2A_3} = \frac{B_1B_2}{B_2B_3}, \qquad \frac{OA_1}{A_1A_2} = \frac{OB_1}{B_1B_2}" live="B₁B₂ : B₂B₃" proof="proportional" />
+</Formulas>
+
+<Properties>
+
+<Property id="thales" title="Thales' theorem: if equal segments are marked off on one side of an angle and parallel lines are drawn through their ends, the lines cut equal segments on the other side too" why="Two parallelograms carry the equality to the other side; congruent triangles do the rest.">
+<Proof given="$A_1A_2 = A_2A_3$, $A_1B_1 \parallel A_2B_2 \parallel A_3B_3$" prove="$B_1B_2 = B_2B_3$">
+<Step set={{ m: 2, n: 2 }} hl="A1A2=A2A3 A1B1||A2B2||A3B3">$A_1A_2 = A_2A_3$, and the lines $A_1B_1$, $A_2B_2$, $A_3B_3$ are parallel.</Step>
+<Step show="B1C2 B2C3 C2 C3" hl="B1C2 B2C3">Through $B_1$ and $B_2$ draw lines parallel to $OA_3$: $B_1C_2 \parallel A_1A_2$, $B_2C_3 \parallel A_2A_3$.</Step>
+<Step hl="A1A2C2B1 A2A3C3B2" tex="B_1C_2 = A_1A_2 = A_2A_3 = B_2C_3">$A_1A_2C_2B_1$ and $A_2A_3C_3B_2$ are parallelograms, so their opposite sides are equal.</Step>
+<Step hl="B1C2B2 B2C3B3" tex="\triangle B_1C_2B_2 = \triangle B_2C_3B_3">$\angle C_2B_1B_2 = \angle C_3B_2B_3$ and $\angle B_1C_2B_2 = \angle B_2C_3B_3$, since their sides are parallel in pairs. ASA.</Step>
+<Step hl="B1B2=B2B3" tex="B_1B_2 = B_2B_3 \quad \blacksquare">Corresponding sides.</Step>
+</Proof>
+</Property>
+
+<Property id="proportional" title="Parallel lines crossing the sides of an angle cut proportional segments on them" why="A parallel line cuts off a similar triangle.">
+<Proof given="$A_1B_1 \parallel A_2B_2$" prove="$\tfrac{OA_1}{A_1A_2} = \tfrac{OB_1}{B_1B_2}$">
+<Step hl="A1B1||A2B2">$A_1B_1 \parallel A_2B_2$.</Step>
+<Step hl="OA1B1 OA2B2" tex="\frac{OA_1}{OA_2} = \frac{OB_1}{OB_2}">$\triangle OA_1B_1 \sim \triangle OA_2B_2$: a line parallel to a side cuts off a similar triangle.</Step>
+<Step tex="\frac{OA_1}{A_1A_2} = \frac{OB_1}{B_1B_2}">Flip the ratios and subtract $1$ from both: $OA_2 - OA_1 = A_1A_2$, $OB_2 - OB_1 = B_1B_2$.</Step>
+<Step hl="A1A2 A2A3 B1B2 B2B3" tex="\frac{A_1A_2}{A_2A_3} = \frac{B_1B_2}{B_2B_3} \quad \blacksquare">The same argument for $A_2B_2 \parallel A_3B_3$, then divide the equalities.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">The midline property of a triangle follows from Thales' theorem: a line through the midpoint of one side parallel to another side bisects the third side.</Remark>
+
+<Remark kind="mistake">The theorem compares segments on the same side of the angle. $\tfrac{A_1B_1}{A_2B_2}$ (the parallel segments themselves) equals $\tfrac{OA_1}{OA_2}$, not $\tfrac{A_1A_2}{A_2A_3}$.</Remark>
+
+<Problems>
+
+<Problem id="p-thales-proportional" set={{ m: 3, n: 2, theta: 60, psi: 100.8933946491309 }} given="OA1=4 A1A2=6 OB1=6" find="B1B2" answer="9"
+  q="On one side of angle $O$ points $A_1$ and $A_2$ are taken, on the other $B_1$ and $B_2$, so that $A_1B_1 \parallel A_2B_2$. $OA_1 = 4$, $A_1A_2 = 6$, $OB_1 = 6$. Find $B_1B_2$."
+  hint="Parallel lines crossing the sides of an angle cut proportional segments on them.">
+<Step hl="A1B1||A2B2" tex="\frac{OA_1}{A_1A_2} = \frac{OB_1}{B_1B_2}">Parallel lines crossing the sides of an angle cut proportional segments on them.</Step>
+<Step hl="B1B2" tex="\frac46 = \frac{6}{B_1B_2} \;\Rightarrow\; B_1B_2 = 9">Substitute the known segments.</Step>
+</Problem>
+
+<Problem id="p-thales-equal-parts" set={{ m: 2, n: 2, theta: 40, psi: 115 }} given="OA1=A1A2 A1A2=A2A3 A3B3=12" find="A1B1 A2B2" answer="4 8" book="6.95 6.96"
+  q="Equal segments $OA_1 = A_1A_2 = A_2A_3$ are marked off from the vertex on one side of angle $O$. Parallel lines through $A_1$, $A_2$, $A_3$ meet the other side at $B_1$, $B_2$, $B_3$, and $A_3B_3 = 12$. Find $A_1B_1$ and $A_2B_2$."
+  hint="By Thales' theorem $OB_1 = B_1B_2 = B_2B_3$; then use midlines.">
+<Step hl="OB1=B1B2 B1B2=B2B3" tex="OB_1 = B_1B_2 = B_2B_3">Thales' theorem: parallel lines through the ends of equal segments cut equal segments on the other side too.</Step>
+<Step hl="OA2B2 A1B1" tex="A_2B_2 = 2\,A_1B_1">$A_1B_1$ is a midline of triangle $OA_2B_2$.</Step>
+<Step hl="A1B1B3A3 A2B2" tex="A_2B_2 = \frac{A_1B_1 + A_3B_3}{2}">$A_2B_2$ is the midline of trapezoid $A_1B_1B_3A_3$.</Step>
+<Step tex="\begin{gathered}2x = \frac{x + 12}{2} \;\Rightarrow\; x = 4 \\ A_1B_1 = 4,\qquad A_2B_2 = 8\end{gathered}">Let $A_1B_1 = x$.</Step>
+</Problem>
+
+</Problems>

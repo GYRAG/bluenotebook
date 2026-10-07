@@ -1,0 +1,136 @@
+---
+title: Triangle
+slug: triangle
+subject: geometry
+section: triangles
+order: 10
+summary: Three vertices and three sides. The angle sum, the exterior angle, the triangle inequality.
+tags: [angle sum, exterior angle, inequality]
+prerequisites: [angles, congruence]
+status: draft
+figure: triangle
+---
+
+<Definition>A triangle consists of three points not on one line (its **vertices**) and the three segments joining them (its **sides**). By its sides a triangle is **equilateral** (all three sides equal), **isosceles** (two sides equal) or **scalene**; by its angles it is **acute** (all angles acute), **right** (one angle right) or **obtuse** (one angle obtuse).</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="Angle sum" tex="\alpha + \beta + \gamma = 180^\circ" live="∑" proof="angle-sum" />
+<Formula id="exterior-formula" name="Exterior angle" tex="\gamma' = 180^\circ - \gamma = \alpha + \beta" proof="exterior-angle" />
+<Formula id="inequality-formula" name="Triangle inequality" tex="|b - c| < a < b + c" live="a" proof="triangle-inequality" />
+<Formula id="perimeter" name="Perimeter" tex="P = a + b + c" live="P" />
+</Formulas>
+
+<Properties>
+
+<Property id="angle-sum" title="The angles of a triangle add up to $180^\circ$" why="A parallel line through $C$ gathers all three angles into one straight angle.">
+<Proof given="$ABC$ a triangle" prove="$\angle A + \angle B + \angle C = 180^\circ$">
+<Step show="EF" hl="EF AB||EF">Through vertex $C$ draw the line $EF$ parallel to $AB$ ($E$ on the side of $A$).</Step>
+<Step hl="<ECA=<CAB" tex="\angle ECA = \angle A">$EF \parallel AB$ and $AC$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="<FCB=<CBA" tex="\angle FCB = \angle B">The same for the transversal $BC$.</Step>
+<Step hl="<ECA <ACB <BCF" tex="\angle A + \angle B + \angle C = 180^\circ \quad \blacksquare">Together, the three angles at $C$ make up the straight angle $ECF$.</Step>
+</Proof>
+</Property>
+
+<Property id="exterior-angle" title="An exterior angle of a triangle equals the sum of the two interior angles not adjacent to it" why="The exterior and interior angles make $180^\circ$, and so do the other two angles with the third.">
+<Proof given="$X$ on the extension of $AC$ beyond $C$" prove="$\angle BCX = \angle A + \angle B$">
+<Step show="CX" hl="<BCX">$\angle BCX$ is the exterior angle at vertex $C$.</Step>
+<Step hl="<BCX <ACB" tex="\angle BCX = 180^\circ - \angle C">The exterior and interior angles are adjacent.</Step>
+<Step hl="<A <B" tex="\angle BCX = 180^\circ - \angle C = \angle A + \angle B \quad \blacksquare">By the angle sum, $\angle A + \angle B = 180^\circ - \angle C$.</Step>
+</Proof>
+</Property>
+
+<Remark>It follows that an exterior angle is greater than each interior angle not adjacent to it.</Remark>
+
+<Property id="at-most-one-obtuse" title="A triangle can have only one right or obtuse angle" why="Two such angles would already make $180^\circ$.">
+<Proof given="$ABC$ a triangle" prove="at most one angle is $\ge 90^\circ$">
+<Step hl="<A <B">Suppose two angles, say $\angle A$ and $\angle B$, are each at least $90^\circ$.</Step>
+<Step hl="<C" tex="\angle C = 180^\circ - \angle A - \angle B \le 0^\circ">Then the third angle would come out zero or negative, which is impossible. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="larger-side-larger-angle" title="In a triangle the larger angle lies opposite the larger side" why="Marking the smaller side off on the larger one gives an isosceles triangle and an exterior angle.">
+<Proof given="$AB > AC$" prove="$\angle C > \angle B$">
+<Step set={{ c: 6, b: 3.5, alpha: 55 }} show="CK K" hl="AK=AC">On $AB$ mark $AK = AC$. Since $AC < AB$, $K$ lies between $A$ and $B$.</Step>
+<Step hl="ACK <AKC=<ACK" tex="\angle AKC = \angle ACK">$\triangle AKC$ is isosceles.</Step>
+<Step hl="<AKC <B" tex="\angle AKC > \angle B">$\angle AKC$ is an exterior angle of $\triangle KBC$, so it is greater than the non-adjacent $\angle B$.</Step>
+<Step hl="<C" tex="\angle C = \angle ACB > \angle ACK = \angle AKC > \angle B \quad \blacksquare">The ray $CK$ runs inside $\angle ACB$.</Step>
+</Proof>
+</Property>
+
+<Property id="larger-angle-larger-side" kind="converse" title="In a triangle the larger side lies opposite the larger angle" why="The two other possibilities contradict the previous property or the isosceles triangle.">
+<Proof given="$\angle C > \angle B$" prove="$AB > AC$">
+<Step hl="<C <B">Suppose $AB > AC$ is false. Then either $AB = AC$ or $AB < AC$.</Step>
+<Step hl="AB AC">If $AB = AC$, the triangle is isosceles and $\angle C = \angle B$, which contradicts the hypothesis.</Step>
+<Step>If $AB < AC$, then by the previous property $\angle C < \angle B$, again a contradiction. Therefore $AB > AC$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="triangle-inequality" title="Each side of a triangle is less than the sum of the other two" why="The shortest path between two points is a segment; the proof uses the larger angle opposite the larger side.">
+<Proof given="$ABC$ a triangle" prove="$AB < AC + CB$">
+<Step set={{ c: 4.5, b: 2.5, alpha: 70 }} show="CD D BD" hl="CD=CB" tex="AD = AC + CD = AC + CB">On the extension of $AC$ beyond $C$ mark $CD = CB$.</Step>
+<Step hl="BCD <CBD=<CDB" tex="\angle CBD = \angle CDB">$\triangle BCD$ is isosceles.</Step>
+<Step hl="<ABD <ADB" tex="\angle ABD = \angle ABC + \angle CBD > \angle CBD = \angle ADB">$C$ lies on $AD$, so the ray $BC$ runs inside $\angle ABD$.</Step>
+<Step hl="ABD" tex="AD > AB \;\Rightarrow\; AB < AC + CB \quad \blacksquare">In $\triangle ABD$ the larger side lies opposite the larger angle.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>The converse holds too: if the largest of three positive numbers is less than the sum of the other two, a triangle with these sides exists. Checking the largest side is enough.</Remark>
+
+<Remark kind="mistake">“Three segments always make a triangle”: no. For example, there is no triangle with sides 2, 3 and 6, since $6 > 2 + 3$.</Remark>
+
+<Problems>
+
+<Problem id="p-angle-ratio" set={{ c: 5, b: 4.396926207859083, alpha: 40 }} given="<A/<B=2/3 <B/<C=3/4" find="<A <B <C" answer="40 60 80" book="4.6 4.7"
+  q="The angles of a triangle are in the ratio $2 : 3 : 4$. Find the angles."
+  hint="The angles of a triangle add up to $180^\circ$.">
+<Step hl="<A <B <C" tex="2x + 3x + 4x = 180^\circ \;\Rightarrow\; x = 20^\circ">The angles are $2x$, $3x$ and $4x$, and they add up to $180^\circ$.</Step>
+<Step tex="\angle A = 40^\circ,\quad \angle B = 60^\circ,\quad \angle C = 80^\circ">So the angles are $2 \cdot 20^\circ$, $3 \cdot 20^\circ$ and $4 \cdot 20^\circ$.</Step>
+</Problem>
+
+<Problem id="p-exterior-ratio" set={{ c: 4.5, b: 5.520067186075548, alpha: 60 }} show="CX" given="<BCX=130 <A/<B=6/7" find="<A <B <C" answer="60 70 50" book="4.37 4.39"
+  q="The exterior angle at vertex $C$ of a triangle is $130^\circ$, and angles $A$ and $B$ are in the ratio $6 : 7$. Find the angles of the triangle."
+  hint="An exterior angle equals the sum of the two interior angles not adjacent to it.">
+<Step hl="<BCX <A <B" tex="\angle A + \angle B = \angle BCX = 130^\circ">An exterior angle equals the sum of the two interior angles not adjacent to it.</Step>
+<Step hl="<A <B" tex="\begin{gathered}6x + 7x = 130^\circ \;\Rightarrow\; x = 10^\circ \\ \angle A = 60^\circ,\quad \angle B = 70^\circ\end{gathered}">$\angle A = 6x$, $\angle B = 7x$.</Step>
+<Step hl="<C" tex="\angle C = 180^\circ - 130^\circ = 50^\circ">$\angle C$ is adjacent to the exterior angle.</Step>
+</Problem>
+
+<Problem id="p-bisectors-angle" set={{ c: 5, b: 4.076037345479524, alpha: 60 }} show="AI BI" given="<C=70" find="<AIB" answer="125" book="4.27 4.34"
+  q="In triangle $ABC$, $\angle C = 70^\circ$. The bisectors of angles $A$ and $B$ meet at $I$. Find $\angle AIB$."
+  hint="Find $\angle A + \angle B$, then the sum of their halves.">
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ - 70^\circ = 110^\circ">The angles of a triangle add up to $180^\circ$.</Step>
+<Step hl="<IAB <IBA" tex="\angle IAB + \angle IBA = \tfrac12 \cdot 110^\circ = 55^\circ">The bisectors halve the angles.</Step>
+<Step hl="AIB <AIB" tex="\angle AIB = 180^\circ - 55^\circ = 125^\circ">In triangle $AIB$. In general $\angle AIB = 90^\circ + \tfrac12 \angle C$.</Step>
+</Problem>
+
+<Problem id="p-altitudes-angle" set={{ c: 5, b: 4.608024925534381, alpha: 50 }} show="AP CQ <APC <CQA" given="<A=50 <C=70" find="<AHC" answer="120" book="4.45 4.46"
+  q="In triangle $ABC$, $\angle A = 50^\circ$, $\angle C = 70^\circ$. The altitudes $AP$ and $CQ$ meet at $H$. Find $\angle AHC$."
+  hint="Look at the quadrilateral $BPHQ$.">
+<Step hl="<B" tex="\angle B = 180^\circ - 50^\circ - 70^\circ = 60^\circ">The angles of a triangle add up to $180^\circ$.</Step>
+<Step hl="BPHQ" tex="\angle PHQ = 360^\circ - 90^\circ - 90^\circ - 60^\circ = 120^\circ">In quadrilateral $BPHQ$ the angles at $P$ and $Q$ are right, and the angles of a quadrilateral add up to $360^\circ$.</Step>
+<Step hl="<AHC" tex="\angle AHC = \angle PHQ = 120^\circ">These angles are vertical.</Step>
+</Problem>
+
+<Problem id="p-isosceles-inside" set={{ c: 3.4, b: 5.725736974614548, alpha: 40 }} show="BM BN" given="<A=40 <B=105 <C=35 MA=MB NB=NC" find="<MBN" answer="30" book="3.12"
+  q="In triangle $ABC$, $\angle A = 40^\circ$, $\angle B = 105^\circ$, $\angle C = 35^\circ$. Points $M$ and $N$ are taken on side $AC$ so that $MA = MB$ and $NB = NC$. Find $\angle MBN$."
+  hint="In the isosceles triangles $AMB$ and $BNC$ the base angles are equal.">
+<Step hl="AMB <ABM=<A" tex="\angle ABM = \angle A = 40^\circ">Triangle $AMB$ is isosceles ($MA = MB$).</Step>
+<Step hl="BNC <CBN=<C" tex="\angle CBN = \angle C = 35^\circ">Triangle $BNC$ is isosceles ($NB = NC$).</Step>
+<Step hl="<MBN" tex="\angle MBN = 105^\circ - 40^\circ - 35^\circ = 30^\circ">$\angle B$ is made up of these three angles.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-bisector-parallel" set={{ c: 5.5, b: 4, alpha: 60 }} show="BL LT" given="<ABL=<LBC <ATL=<ABC" prove="TL=TB" book="4.56 4.57"
+  q="The bisector of angle $B$ of triangle $ABC$ meets side $AC$ at $L$. The line through $L$ parallel to $BC$ meets side $AB$ at $T$. Prove that $TL = TB$."
+  hint="Find two equal angles in triangle $TLB$.">
+<Step hl="<TBL=<LBC" tex="\angle TBL = \angle LBC">$BL$ is a bisector.</Step>
+<Step hl="<TLB=<LBC LT||BC" tex="\angle TLB = \angle LBC">$LT \parallel BC$ and $BL$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="TLB TL=TB" tex="\angle TBL = \angle TLB \;\Rightarrow\; TL = TB \quad \blacksquare">Triangle $TLB$ has two equal angles, so it is isosceles.</Step>
+</Problem>
+
+</Problems>

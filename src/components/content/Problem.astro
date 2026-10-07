@@ -4,6 +4,7 @@ import Proof from './Proof.astro';
 import { md, tex } from '@/lib/math';
 import { evaluate } from '@/lib/expr';
 import { names } from '@/figures/engine/refs';
+import { langOf, t } from '@/i18n';
 
 // A problem on the topic's figure. The figure takes the problem's shape (`set`) and shows its data
 // (`given`) and the unknowns (`find`, as "?"); the answer is typed and checked on the page.
@@ -33,6 +34,7 @@ interface Props {
   figure?: string;
 }
 const { id, q, find = '', answer = '', given = '', set, show, hint, book, labels, figure } = Astro.props;
+const lang = langOf(Astro.url);
 
 const finds = find.split(/\s+/).filter(Boolean), answers = answer.split(/\s+/).filter(Boolean);
 if (finds.length !== answers.length) throw new Error(`problem ${id}: ${finds.length} find items, ${answers.length} answers`);
@@ -56,25 +58,25 @@ const label = (f: string, i: number) => labels?.split(';')[i]?.trim() || (f.star
     <Icon name="right" />
   </button>
   <div class="proof" id={`${id}--proof`} hidden>
-    <button class="back" type="button" data-proof-close><Icon name="left" /><span>ყველა ამოცანა</span></button>
-    <p class="proof-k">{finds.length ? 'ამოცანა' : 'ამოცანა დამტკიცებაზე'}</p>
+    <button class="back" type="button" data-proof-close><Icon name="left" /><span>{t(lang, 'ყველა ამოცანა')}</span></button>
+    <p class="proof-k">{t(lang, finds.length ? 'ამოცანა' : 'ამოცანა დამტკიცებაზე')}</p>
     <h3 class="proof-h" set:html={md(q)} />
-    {book && <p class="book">წიგნში: {book.split(/\s+/).join(', ')}</p>}
+    {book && <p class="book">{t(lang, 'წიგნში:')} {book.split(/\s+/).join(', ')}</p>}
     {finds.length > 0 && (
       <form class="ans" data-answer={JSON.stringify(values)} data-shown={answers.join(';')}>
         {finds.map((f, i) => (
           <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f, i))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
         ))}
         <div class="ans-row">
-          <button class="ans-key" type="button" data-key="√" aria-label="ფესვი">√</button>
-          <button class="ans-key" type="button" data-key="π" aria-label="პი">π</button>
-          <button class="ans-go" type="submit">შემოწმება</button>
+          <button class="ans-key" type="button" data-key="√" aria-label={t(lang, 'ფესვი')}>√</button>
+          <button class="ans-key" type="button" data-key="π" aria-label={t(lang, 'პი')}>π</button>
+          <button class="ans-go" type="submit">{t(lang, 'შემოწმება')}</button>
         </div>
         <p class="ans-msg" aria-live="polite"></p>
       </form>
     )}
-    {hint && <details class="hint-d"><summary>მინიშნება</summary><p set:html={md(hint)} /></details>}
-    <button class="sol-open" type="button" data-solution>{finds.length ? 'ამოხსნა' : 'დამტკიცება'}</button>
+    {hint && <details class="hint-d"><summary>{t(lang, 'მინიშნება')}</summary><p set:html={md(hint)} /></details>}
+    <button class="sol-open" type="button" data-solution>{t(lang, finds.length ? 'ამოხსნა' : 'დამტკიცება')}</button>
     <div class="sol" hidden><Proof figure={figure}><slot /></Proof></div>
   </div>
 </li>

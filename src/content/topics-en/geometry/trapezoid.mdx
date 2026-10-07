@@ -1,0 +1,291 @@
+---
+title: Trapezoid
+slug: trapezoid
+subject: geometry
+section: quadrilaterals
+order: 24
+summary: A quadrilateral with exactly one pair of parallel opposite sides.
+tags: [base, leg, midline, isosceles trapezoid]
+prerequisites: [quadrilateral, triangle-centers, similarity]
+status: draft
+figure: trapezoid
+parent: quadrilateral
+---
+
+<Definition>A trapezoid is a quadrilateral with two parallel opposite sides while the other two are not parallel. The parallel sides ($AD \parallel BC$) are the **bases**, the other two are the **legs**. The segment joining the midpoints of the legs is the **midline** of the trapezoid.</Definition>
+
+<Remark kind="convention">In Georgian schools a trapezoid has exactly one pair of parallel sides, so a parallelogram is not a trapezoid. Some textbooks (especially in English) count every quadrilateral with *at least* one pair of parallel sides as a trapezoid; then a parallelogram is a trapezoid too.</Remark>
+
+<Formulas>
+<Formula id="midline-formula" name="Midline" tex="m = \frac{a + b}{2}" live="m" proof="midline" />
+<Formula id="area-formula" name="Area" tex="S = \frac{a + b}{2}\, h = m\,h" live="S" proof="area" />
+<Formula id="ratio-formula" name="Where the diagonals meet" tex="AO : OC = BO : OD \;\text{—}\; a : b" live="AO:OC" proof="diagonals-ratio" />
+<Formula id="segment-formula" name="The segment through the intersection of the diagonals, parallel to the bases" tex="PQ = \frac{2ab}{a + b}" live="PQ" proof="segment-through-o" />
+<Formula id="diag-midpoints-formula" name="The segment between the midpoints of the diagonals" tex="XY = \frac{a - b}{2}" live="XY" proof="diagonal-midpoints" />
+<Formula id="diag-triangles-formula" name="Triangles formed by the diagonals" tex="S_{AOB} = S_{COD}, \qquad S_{AOB}^2 = S_{AOD} \cdot S_{BOC}" proof="diagonal-triangles" />
+<Formula id="iso-projections-formula" name="Isosceles: the foot of the height and the diagonal" tex="AH = \frac{a - b}{2},\quad HD = \frac{a + b}{2},\quad d^2 = h^2 + \left(\frac{a + b}{2}\right)^2" proof="isosceles-projections" />
+<Formula id="iso-perp-formula" name="Isosceles, with perpendicular diagonals" tex="h = \frac{a + b}{2}, \qquad S = h^2" proof="isosceles-perpendicular-diagonals" />
+<Formula id="iso-tangential-formula" name="Isosceles, with an inscribed circle" tex="c = \frac{a + b}{2}, \qquad h = 2r = \sqrt{ab}" proof="isosceles-tangential" />
+</Formulas>
+
+<Properties>
+
+<Property id="angles-on-legs" title="The angles at one leg add up to $180^\circ$" why="These are co-interior angles at the parallel bases.">
+<Proof given="$ABCD$ a trapezoid, $AD \parallel BC$" prove="$\angle A + \angle B = 180^\circ,\ \angle C + \angle D = 180^\circ$">
+<Step hl="AD||BC AB">$AD \parallel BC$, and the leg $AB$ is a transversal.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ">$\angle A$ and $\angle B$ are co-interior angles.</Step>
+<Step hl="<C <D" tex="\angle C + \angle D = 180^\circ \quad \blacksquare">The same for the other leg (transversal $CD$).</Step>
+</Proof>
+</Property>
+
+<Property id="midline" title="The midline is parallel to the bases and equal to half their sum" why="The trapezoid turns into a triangle with the same midline.">
+<Proof given="$M, N$ the midpoints of the legs $AB$ and $CD$" prove="$MN \parallel AD,\ MN = \tfrac{a + b}{2}$">
+<Step show="M N" hl="M N">$M$ and $N$ are the midpoints of the legs.</Step>
+<Step show="BE DE E" hl="BE">Draw $BN$ and extend it until it meets line $AD$ at $E$.</Step>
+<Step hl="BCN EDN CN=DN" tex="\triangle BCN = \triangle EDN">$CN = DN$, $\angle BNC = \angle END$ (vertical), $\angle BCN = \angle EDN$ (alternate, $BC \parallel AE$): the triangles are congruent (ASA).</Step>
+<Step hl="BN=NE BC=DE" tex="BN = NE, \qquad DE = BC = b">Corresponding sides of congruent triangles.</Step>
+<Step show="MN" hl="MN ABE" tex="MN = \tfrac12 AE = \tfrac{a + b}{2} \quad \blacksquare">$MN$ joins the midpoints of the sides $AB$ and $BE$ of $\triangle ABE$, so it is a midline of that triangle; $AE = AD + DE = a + b$.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="The area of a trapezoid is half the sum of the bases times the height" why="A diagonal cuts it into two triangles with the same height.">
+<Proof given="$AD = a,\ BC = b$, height $h$" prove="$S = \tfrac{a + b}{2}\, h$">
+<Step show="BD BH <BHD" hl="BD">Draw the diagonal $BD$ and the height $BH$.</Step>
+<Step hl="ABD" tex="S_{ABD} = \tfrac12\, a\,h">The base of $\triangle ABD$ is $AD = a$, its height $h$.</Step>
+<Step hl="BCD" tex="S_{BCD} = \tfrac12\, b\,h">The base of $\triangle BCD$ is $BC = b$; the distance from $D$ to line $BC$ is also $h$ (the distance between parallel lines).</Step>
+<Step tex="S = \tfrac12 a h + \tfrac12 b h = \frac{a + b}{2}\, h = m\,h \quad \blacksquare">Add them up.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-ratio" title="The point where the diagonals meet divides each diagonal in the ratio of the bases" why="The two triangles on the bases are similar.">
+<Proof given="$O = AC \cap BD$" prove="$AO : OC = DO : OB = a : b$">
+<Step show="AC BD O" hl="AC BD">Draw the diagonals.</Step>
+<Step hl="<AOD=<COB <OAD=<OCB">$\angle AOD = \angle COB$ (vertical), $\angle OAD = \angle OCB$ (alternate, $AD \parallel BC$).</Step>
+<Step hl="AOD BOC" tex="\begin{gathered}\triangle AOD \sim \triangle COB \\ \frac{AO}{OC} = \frac{DO}{OB} = \frac{AD}{CB} = \frac{a}{b} \quad \blacksquare\end{gathered}">The triangles are similar by two angles.</Step>
+</Proof>
+</Property>
+
+<Property id="segment-through-o" title="The segment through the intersection of the diagonals, parallel to the bases, is $\tfrac{2ab}{a+b}$, and $O$ bisects it" why="Two pairs of similar triangles give the same $\tfrac{ab}{a+b}$.">
+<Proof given="$PQ \parallel AD$, $O \in PQ$, $P \in AB$, $Q \in CD$" prove="$PQ = \tfrac{2ab}{a + b}$">
+<Step show="AC BD O PQ P Q" hl="PQ" tex="\frac{AO}{AC} = \frac{a}{a + b}">From the previous property $AO : OC = a : b$.</Step>
+<Step hl="APO ABC" tex="\frac{PO}{BC} = \frac{AO}{AC} \;\Rightarrow\; PO = \frac{ab}{a + b}">$PO \parallel BC$, so $\triangle APO \sim \triangle ABC$.</Step>
+<Step hl="DQO DCB" tex="\frac{OQ}{BC} = \frac{DO}{DB} = \frac{a}{a + b} \;\Rightarrow\; OQ = \frac{ab}{a + b}">$OQ \parallel BC$, so $\triangle DQO \sim \triangle DCB$.</Step>
+<Step hl="PO=OQ" tex="PQ = PO + OQ = \frac{2ab}{a + b} \quad \blacksquare">$PO = OQ$: $O$ is the midpoint of this segment.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-midpoints" title="The midpoints of the diagonals lie on the midline, and the distance between them is half the difference of the bases ($a > b$)" why="Two triangle midlines pass through $M$: $\tfrac{b}{2}$ and $\tfrac{a}{2}$.">
+<Proof given="$X, Y$ the midpoints of the diagonals $AC$ and $BD$, $a > b$" prove="$X, Y \in MN,\ XY = \tfrac{a - b}{2}$">
+<Step show="AC BD X Y M" hl="X Y">$X$ and $Y$ are the midpoints of the diagonals, $M$ the midpoint of the leg $AB$.</Step>
+<Step show="MX" hl="MX ABC" tex="MX \parallel BC, \qquad MX = \tfrac{b}{2}">$MX$ joins the midpoints of two sides of $\triangle ABC$, so it is a midline of that triangle.</Step>
+<Step show="MY" hl="MY ABD" tex="MY \parallel AD, \qquad MY = \tfrac{a}{2}">$MY$ is a midline of $\triangle ABD$.</Step>
+<Step show="MN N" hl="MN">$MX$ and $MY$ pass through $M$ and are parallel to the bases. Only one line through $M$ is parallel to the bases, the line of the midline, so $X$ and $Y$ lie on it.</Step>
+<Step hl="XY" tex="XY = MY - MX = \frac{a - b}{2} \quad \blacksquare">$X$ and $Y$ are on the same side of $M$, and $MX < MY$.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-triangles" title="The diagonals divide a trapezoid into four triangles: the triangles at the legs have equal areas, and the square of each area is the product of the areas of the triangles at the bases" why="Triangles with the same base and height have equal areas.">
+<Proof given="$O = AC \cap BD$" prove="$S_{AOB} = S_{COD},\ S_{AOB}^2 = S_{AOD} \cdot S_{BOC}$">
+<Step show="AC BD O" hl="ABD ACD" tex="S_{ABD} = S_{ACD}">The two triangles share the base $AD$, and their heights are equal: $B$ and $C$ are equally far from $AD$.</Step>
+<Step hl="AOB COD" tex="\begin{aligned}S_{AOB} &= S_{ABD} - S_{AOD} \\ &= S_{ACD} - S_{AOD} = S_{COD}\end{aligned}">Subtract $S_{AOD}$ from both.</Step>
+<Step hl="AOB AOD" tex="\frac{S_{AOB}}{S_{AOD}} = \frac{OB}{OD}">The triangles share the vertex $A$, and their bases $OB$ and $OD$ lie on one line, so the areas are proportional to the bases.</Step>
+<Step hl="BOC COD" tex="\frac{S_{BOC}}{S_{COD}} = \frac{OB}{OD}">The same with the common vertex $C$.</Step>
+<Step tex="\begin{gathered}S_{AOB} \cdot S_{COD} = S_{AOD} \cdot S_{BOC} \\ S_{AOB}^2 = S_{AOD} \cdot S_{BOC} \quad \blacksquare\end{gathered}">The two ratios are equal; substitute $S_{COD} = S_{AOB}$.</Step>
+</Proof>
+</Property>
+
+<Property id="leg-bisectors" title="The bisectors of the angles at one leg meet at a right angle, and the meeting point lies on the line of the midline" why="The halves add up to $90^\circ$; the median to the hypotenuse is half of it.">
+<Proof given="$AL$, $BL$ the bisectors of $\angle A$ and $\angle B$" prove="$\angle ALB = 90^\circ$, $L \in MN$">
+<Step show="AL BL L" hl="AL BL">$AL$ and $BL$ bisect the angles at the leg $AB$.</Step>
+<Step hl="<ALB" tex="\angle LAB + \angle LBA = \tfrac12(\angle A + \angle B) = 90^\circ">The angles at one leg add up to $180^\circ$, so in $\triangle ALB$, $\angle ALB = 90^\circ$.</Step>
+<Step show="ML M" hl="ML=AM" tex="ML = \tfrac12 AB = AM">$LM$ is the median to the hypotenuse of the right triangle $ALB$.</Step>
+<Step hl="<MLA=<LAD" tex="\angle MLA = \angle MAL = \angle LAD">$\triangle AML$ is isosceles, and $AL$ is a bisector.</Step>
+<Step show="MN N" hl="ML||AD">$\angle MLA$ and $\angle LAD$ are alternate angles, so $ML \parallel AD$. Only the line of the midline passes through $M$ parallel to $AD$, so $L$ lies on it. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>$\tfrac{2ab}{a+b}$ is the harmonic mean of $a$ and $b$. It is always less than the midline ($\tfrac{a+b}{2}$) when $a \ne b$.</Remark>
+
+<Properties title="Isosceles trapezoid (equal legs)">
+
+<Property id="isosceles-base-angles" title="The angles of an isosceles trapezoid at each base are equal" why="Two heights cut off two congruent right triangles.">
+<Proof given="$AB = CD$" prove="$\angle A = \angle D,\ \angle B = \angle C$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH CK">Drop the heights $BH$ and $CK$; $BH = CK$ (the distance between the parallel bases).</Step>
+<Step hl="ABH DCK AB=CD BH=CK" tex="\triangle ABH = \triangle DCK">The right triangles are congruent by the hypotenuse ($AB = DC$) and a leg ($BH = CK$).</Step>
+<Step hl="<A=<D" tex="\angle A = \angle D">Corresponding angles are equal.</Step>
+<Step hl="<B=<C" tex="\angle B = 180^\circ - \angle A = 180^\circ - \angle D = \angle C \quad \blacksquare">The angles at one leg add up to $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-diagonals" title="The diagonals of an isosceles trapezoid are equal" why="Two triangles with a common base and equal legs.">
+<Proof given="$AB = CD$" prove="$AC = BD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="AC BD" hl="AC BD">Draw the diagonals.</Step>
+<Step hl="ABD AB=DC <A=<D" tex="AB = DC,\quad AD = DA,\quad \angle A = \angle D">Look at $\triangle ABD$ and $\triangle DCA$: the legs are equal, $AD$ is common, and the base angles are equal (previous property).</Step>
+<Step hl="AC=BD" tex="\triangle ABD = \triangle DCA \;\Rightarrow\; BD = CA \quad \blacksquare">SAS.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-projections" title="In an isosceles trapezoid the height divides the longer base into segments $\tfrac{a-b}{2}$ and $\tfrac{a+b}{2}$, and the diagonal is $d^2 = h^2 + \left(\tfrac{a+b}{2}\right)^2$" why="Two heights cut off two congruent right triangles, with a rectangle left in the middle.">
+<Proof given="$AB = CD$, $BH$ and $CK$ the heights" prove="$AH = \tfrac{a-b}{2},\ HD = \tfrac{a+b}{2}$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH CK">Drop the heights $BH$ and $CK$.</Step>
+<Step hl="AH KD" tex="AH = KD">$\triangle ABH = \triangle DCK$ (by the hypotenuse and a leg).</Step>
+<Step hl="HK" tex="HK = BC = b">$HBCK$ is a rectangle.</Step>
+<Step hl="AH HD" tex="AH = \frac{a - b}{2}, \qquad HD = HK + KD = \frac{a + b}{2}">$AD = AH + HK + KD = 2\,AH + b = a$.</Step>
+<Step show="BD" hl="BHD" tex="d^2 = BD^2 = h^2 + \left(\frac{a + b}{2}\right)^2 \quad \blacksquare">Pythagoras' theorem in the right triangle $BHD$.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-perpendicular-diagonals" title="If the diagonals of an isosceles trapezoid are perpendicular, its height equals the midline: $h = \tfrac{a+b}{2}$, $S = h^2$" why="A diagonal makes $45^\circ$ with the base, so the height equals the base segment next to it.">
+<Proof given="$AB = CD$, $AC \perp BD$" prove="$h = \tfrac{a+b}{2},\ S = h^2$">
+<Step set={{ a: 4, b: 2, h: 3, s: 1 }} show="AC BD O" hl="<AOD">The diagonals meet at $O$ at a right angle.</Step>
+<Step hl="AOD" tex="\angle OAD = \angle ODA = 45^\circ">$\triangle ABD = \triangle DCA$ (see the equal diagonals), so $\angle ODA = \angle OAD$; they add up to $90^\circ$.</Step>
+<Step show="BH <BHD" hl="BHD" tex="h = BH = HD = \frac{a + b}{2}">In the right triangle $BHD$, $\angle BDH = 45^\circ$, so it is isosceles; $HD = \tfrac{a+b}{2}$ by the previous property.</Step>
+<Step tex="S = \frac{a + b}{2} \cdot h = h \cdot h = h^2 \quad \blacksquare">The area formula.</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-cyclic" title="A circle can be drawn through the vertices of an isosceles trapezoid" why="The opposite angles come out at $180^\circ$.">
+<Proof given="$AB = CD$" prove="$A, B, C, D$ lie on one circle">
+<Step set={{ a: 6, b: 3, s: 1.5 }} hl="<A <B" tex="\angle A + \angle B = 180^\circ">The angles at one leg.</Step>
+<Step hl="<B=<C" tex="\angle A + \angle C = \angle A + \angle B = 180^\circ">$\angle C = \angle B$ (an isosceles trapezoid).</Step>
+<Step hl="ABCD">The opposite angles add up to $180^\circ$, so a circle can be drawn through the vertices of the quadrilateral. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-base-angles" kind="converse" title="If the base angles of a trapezoid are equal, it is isosceles" why="The same two right triangles, now by a leg and an angle.">
+<Proof given="$\angle A = \angle D$" prove="$AB = CD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="BH CK <BHA <CKD" hl="BH=CK">Drop the heights: $BH = CK$.</Step>
+<Step hl="ABH DCK <A=<D" tex="\triangle ABH = \triangle DCK">The right triangles are congruent by a leg and an acute angle.</Step>
+<Step hl="AB=CD" tex="AB = DC \quad \blacksquare">The hypotenuses are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonals" kind="converse" title="If the diagonals of a trapezoid are equal, it is isosceles" why="Translating one diagonal forms an isosceles triangle.">
+<Proof given="$AC = BD$" prove="$AB = CD$">
+<Step set={{ a: 6, b: 3, s: 1.5 }} show="AC BD CE DE E" hl="CE">Through $C$ draw a line parallel to $BD$; it meets line $AD$ at $E$. $BCED$ is a parallelogram, so $CE = BD = AC$.</Step>
+<Step hl="ACE AC=CE" tex="\angle CAE = \angle CEA">$\triangle ACE$ is isosceles.</Step>
+<Step hl="<CEA=<BDA" tex="\angle CAD = \angle CEA = \angle BDA">$CE \parallel BD$: corresponding angles.</Step>
+<Step hl="ACD ABD" tex="\triangle ACD = \triangle DBA \;\Rightarrow\; CD = BA \quad \blacksquare">$AC = DB$, $AD$ is common, $\angle CAD = \angle BDA$: SAS.</Step>
+</Proof>
+</Property>
+
+<Property id="cyclic-is-isosceles" kind="converse" title="If a circle can be drawn through the vertices of a trapezoid, it is isosceles" why="Being cyclic and the co-interior angles together give equal base angles.">
+<Proof given="$ABCD$ inscribed in a circle" prove="$AB = CD$">
+<Step hl="<A <C" tex="\angle A + \angle C = 180^\circ">Opposite angles of a cyclic quadrilateral.</Step>
+<Step hl="<C <D" tex="\angle C + \angle D = 180^\circ">The angles at one leg.</Step>
+<Step hl="<A=<D" tex="\angle A = \angle D">Hence the base angles are equal, so (by the previous criterion) the trapezoid is isosceles. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Inscribed circle">
+
+<Property id="incircle-condition" title="A circle can be inscribed in a trapezoid if and only if the sum of the bases equals the sum of the legs" why="This is the general criterion for quadrilaterals (Pitot's theorem and its converse).">
+<Proof given="$ABCD$ a trapezoid, $AD = a,\ BC = b,\ AB = c,\ CD = d$" prove="has an inscribed circle $\Leftrightarrow\ a + b = c + d$">
+<Step hl="AD BC">A trapezoid is a convex quadrilateral; its opposite sides are $AD, BC$ and $AB, CD$.</Step>
+<Step hl="AB CD" tex="a + b = c + d">In a quadrilateral circumscribed about a circle the sums of opposite sides are equal, and conversely, when they are equal a circle can be inscribed (see the quadrilateral). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="isosceles-tangential" title="If a circle can be inscribed in an isosceles trapezoid, its leg is $\tfrac{a+b}{2}$ and its height is $h = 2r = \sqrt{ab}$" why="The previous criterion gives the leg, Pythagoras' theorem the height.">
+<Proof given="$AB = CD = c$, a circle of radius $r$ inscribed in the trapezoid" prove="$c = \tfrac{a+b}{2},\ h = 2r = \sqrt{ab}$">
+<Step set={{ a: 6, b: 1.5, h: 3, s: 2.25 }} show="(IT) I" hl="(IT)">The circle touches all four sides.</Step>
+<Step hl="AB CD" tex="2c = a + b \;\Rightarrow\; c = \frac{a + b}{2}">By the previous property the legs add up to the sum of the bases.</Step>
+<Step show="BH <BHA" hl="ABH" tex="h^2 = c^2 - \left(\frac{a - b}{2}\right)^2 = ab">$AH = \tfrac{a-b}{2}$ (the foot of the height), Pythagoras' theorem in $\triangle ABH$; $c = \tfrac{a+b}{2}$ and $\left(\tfrac{a+b}{2}\right)^2 - \left(\tfrac{a-b}{2}\right)^2 = ab$.</Step>
+<Step show="IT T" hl="IT" tex="h = 2r \quad \blacksquare">The bases are parallel tangents to the circle, so the distance between them is a diameter.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">**Right trapezoid**: one leg is perpendicular to the bases; its height equals that leg. Try $s = 0$ on the slider to see one.</Remark>
+
+<Remark kind="mistake">The diagonals of an isosceles trapezoid are equal, but unlike a rectangle's they do not bisect each other: their meeting point divides them in the ratio $a : b$.</Remark>
+
+<Problems>
+
+<Problem id="p-trap-iso-angles" set={{ a: 5, b: 3, h: 2.7474774194546216, s: 1 }} given="AB=CD <C-<A=40" find="<A <B" answer="70 110" book="6.76 6.77"
+  q="In an isosceles trapezoid the difference of two opposite angles is $40^\circ$. Find the angles of the trapezoid."
+  hint="The angles at one leg add up to $180^\circ$, and in an isosceles trapezoid the angles at each base are equal.">
+<Step hl="<B=<C" tex="\angle C = \angle B">The angles of an isosceles trapezoid at each base are equal.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ,\qquad \angle B - \angle A = 40^\circ">The angles at one leg add up to $180^\circ$.</Step>
+<Step tex="\angle A = \angle D = 70^\circ,\qquad \angle B = \angle C = 110^\circ">Add the equalities and subtract them.</Step>
+</Problem>
+
+<Problem id="p-trap-iso-perimeter" set={{ a: 5, b: 2, h: 2.598076211353315, s: 1.5 }} show="BH <BHA" given="AD=20 BC=8 <A=60 AB=CD" find="P(ABCD)" answer="52" book="6.81 6.82"
+  q="The bases of an isosceles trapezoid are $8$ and $20$, and its acute angle is $60^\circ$. Find the perimeter of the trapezoid."
+  hint="The height divides the longer base into parts $\tfrac{a-b}{2}$ and $\tfrac{a+b}{2}$.">
+<Step hl="AH" tex="AH = \frac{20 - 8}{2} = 6">In an isosceles trapezoid the height cuts a segment $\tfrac{a-b}{2}$ off the longer base.</Step>
+<Step hl="ABH <A" tex="AB = 2\,AH = 12">In the right triangle $ABH$, $\angle ABH = 30^\circ$, and $AH$ is opposite it.</Step>
+<Step tex="P = 8 + 20 + 2 \cdot 12 = 52">The legs are equal.</Step>
+</Problem>
+
+<Problem id="p-trap-midline-ratio" set={{ a: 5, b: 3, h: 2.5, s: 0.8 }} show="MN" given="BC/AD=3/5 MN=12" find="BC AD" answer="9 15" book="6.92 6.93 6.94"
+  q="The bases of a trapezoid are in the ratio $3 : 5$, and the midline is $12$. Find the bases."
+  hint="The midline is half the sum of the bases.">
+<Step hl="MN" tex="\frac{3x + 5x}{2} = 12 \;\Rightarrow\; x = 3">The midline is half the sum of the bases; the bases are $3x$ and $5x$.</Step>
+<Step hl="BC AD" tex="BC = 9,\qquad AD = 15">Therefore.</Step>
+</Problem>
+
+<Problem id="p-trap-diag-midline" set={{ a: 6, b: 2.6666666666666665, h: 2.5, s: 0.8 }} show="MN AC X" given="MX=4 XN=9" find="BC AD" answer="8 18" book="6.86 6.87 6.88"
+  q="The diagonal $AC$ of a trapezoid divides the midline into segments of length $4$ and $9$. Find the bases."
+  hint="The parts of the midline are midlines of triangles $ABC$ and $ACD$.">
+<Step hl="MX BC" tex="BC = 2\,MX = 8">$MX$ is a midline of triangle $ABC$.</Step>
+<Step hl="XN AD" tex="AD = 2\,XN = 18">$XN$ is a midline of triangle $ACD$.</Step>
+</Problem>
+
+<Problem id="p-trap-diag-midpoints" set={{ a: 5, b: 1.9230769230769231, h: 2.5, s: 0.8 }} show="AC BD X Y" given="AD=13 BC=5" find="XY" answer="4" book="6.97"
+  q="The bases of a trapezoid are $13$ and $5$. Find the distance between the midpoints of the diagonals."
+  hint="The midpoints of the diagonals lie on the midline.">
+<Step show="MN" hl="MX MY" tex="MY = \tfrac12\, AD = 6.5,\qquad MX = \tfrac12\, BC = 2.5">$MY$ is a midline of triangle $ABD$, and $MX$ of triangle $ABC$.</Step>
+<Step hl="XY" tex="XY = MY - MX = \frac{13 - 5}{2} = 4">$X$ and $Y$ lie on one line, the midline.</Step>
+</Problem>
+
+<Problem id="p-trap-leg-bisectors" set={{ a: 6, b: 3, h: 3.36, s: 0.98 }} show="AL BL" given="AL=8 BL=6" find="AB" answer="10" book="6.157"
+  q="The bisectors of the angles at the leg $AB$ of a trapezoid meet at $L$, $AL = 8$, $BL = 6$. Find $AB$."
+  hint="The angles at one leg add up to $180^\circ$. What do their halves add up to?">
+<Step hl="<LAB <LBA" tex="\angle LAB + \angle LBA = \tfrac12 \cdot 180^\circ = 90^\circ">$\angle A + \angle B = 180^\circ$, and the bisectors halve these angles.</Step>
+<Step hl="ALB <ALB" tex="\angle ALB = 90^\circ">The angles of triangle $ALB$ add up to $180^\circ$.</Step>
+<Step hl="AB" tex="AB = \sqrt{8^2 + 6^2} = 10">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-trap-iso-height-parts" set={{ a: 5.5, b: 3, h: 2.5, s: 1.25 }} show="BH <BHA" given="AH=5 HD=17 AB=CD" find="BC AD" answer="12 22" book="6.84"
+  q="The height $BH$ from $B$, the vertex of an obtuse angle of an isosceles trapezoid, divides the longer base into segments of length $5$ and $17$. Find the bases."
+  hint="In an isosceles trapezoid $AH = \tfrac{a-b}{2}$, $HD = \tfrac{a+b}{2}$.">
+<Step hl="AH HD" tex="\frac{a - b}{2} = 5,\qquad \frac{a + b}{2} = 17">In an isosceles trapezoid the height divides the longer base into parts $\tfrac{a-b}{2}$ and $\tfrac{a+b}{2}$.</Step>
+<Step hl="AD BC" tex="a = 22,\qquad b = 12">Add the equalities and subtract them.</Step>
+</Problem>
+
+<Problem id="p-trap-tangential" set={{ a: 4, b: 1, h: 2, s: 1.5 }} show="BH (IT) <BHA" given="BC=4 AD=16 AB=CD AB+CD=AD+BC" find="BH" answer="8" book="6.122 6.123 6.124"
+  q="A circle is inscribed in an isosceles trapezoid with bases $4$ and $16$. Find the height of the trapezoid."
+  hint="A circle can be inscribed in a trapezoid when the legs add up to the sum of the bases.">
+<Step hl="AB CD" tex="2\,AB = 4 + 16 \;\Rightarrow\; AB = 10">A circle is inscribed, so the legs add up to the sum of the bases; and the legs are equal.</Step>
+<Step hl="AH" tex="AH = \frac{16 - 4}{2} = 6">In an isosceles trapezoid the height cuts a segment $\tfrac{a-b}{2}$ off the longer base.</Step>
+<Step hl="ABH BH" tex="BH = \sqrt{10^2 - 6^2} = 8">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-trap-area-legs" set={{ a: 6, b: 2.5, h: 3, s: 1.25 }} show="BH CK <BHA <CKD" given="AD=24 BC=10 AB=13 CD=15" find="S(ABCD)" answer="204" book="10.144 10.145"
+  q="The bases of a trapezoid are $24$ and $10$, and its legs are $13$ and $15$. Find the area of the trapezoid."
+  hint="The heights divide the longer base into three parts; the two right triangles share the height.">
+<Step hl="BH CK" tex="AH + KD = 24 - 10 = 14">The heights from $B$ and $C$; $HK = BC$.</Step>
+<Step hl="ABH DCK" tex="13^2 - AH^2 = 15^2 - (14 - AH)^2 \;\Rightarrow\; AH = 5">The height is the same in both right triangles.</Step>
+<Step hl="BH" tex="h = \sqrt{13^2 - 5^2} = 12">By Pythagoras' theorem.</Step>
+<Step hl="ABCD" tex="S = \frac{24 + 10}{2} \cdot 12 = 204">The area of the trapezoid.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-trap-half-base" set={{ a: 5, b: 2.5, h: 2.5, s: 0.8 }} show="DF <DFA" given="AD=2*BC" prove="FC=DC" book="6.158"
+  q="In trapezoid $ABCD$, $AD \parallel BC$ and $AD = 2\,BC$. $F$ is the foot of the perpendicular from $D$ to line $AB$. Prove that $FC = DC$."
+  hint="Extend the legs until they meet.">
+<Step show="BG CG" hl="AGD">Extend the legs $AB$ and $DC$; they meet at $G$.</Step>
+<Step hl="BC AD" tex="GC = CD">$BC \parallel AD$ and $BC = \tfrac12\, AD$, so $BC$ is a midline of triangle $AGD$ and $C$ is the midpoint of $GD$.</Step>
+<Step show="FC" hl="GFD FC" tex="FC = \tfrac12\, GD = DC \quad \blacksquare">Triangle $GFD$ is right, and $FC$ is the median to its hypotenuse, so it is half the hypotenuse.</Step>
+</Problem>
+
+</Problems>

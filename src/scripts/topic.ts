@@ -2,6 +2,7 @@
 // shape and data; answers are checked here), deep links, pinned formulas.
 import type { GeoFigure, ProofScene } from '@/figures/engine/element';
 import { matches } from '@/lib/expr';
+import { tc } from '@/i18n/client';
 import { load, save } from '@/lib/store';
 
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector<T>(s);
@@ -75,7 +76,7 @@ function openProof(li: HTMLElement) {
   const dots = $('.dots', li)!;
   if (!dots.childElementCount) dots.append(...steps.map((_, j) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'dot'; b.dataset.goto = String(j); b.setAttribute('aria-label', `ნაბიჯი ${j + 1}`);
+    b.type = 'button'; b.className = 'dot'; b.dataset.goto = String(j); b.setAttribute('aria-label', `${tc('ნაბიჯი')} ${j + 1}`);
     return b;
   }));
   const prob = li.dataset.problem ? (JSON.parse(li.dataset.problem) as Problem) : null;
@@ -133,7 +134,7 @@ document.addEventListener('keydown', e => {
 
 // ---------- problems: type the answer, check it; solved ones are remembered ----------
 const solved = () => load<string[]>('solved', []);
-const keyOf = (li: HTMLElement) => `${location.pathname}#${li.id}`;
+const keyOf = (li: HTMLElement) => `${location.pathname.replace(/^\/en(?=\/)/, '')}#${li.id}`; // one progress for both languages
 for (const li of $$('.prob')) li.classList.toggle('solved', solved().includes(keyOf(li)));
 
 let lastInput: HTMLInputElement | null = null;
@@ -150,16 +151,16 @@ document.addEventListener('submit', e => {
   if (!form) return;
   e.preventDefault();
   const want = JSON.parse(form.dataset.answer!) as number[], inputs = $$<HTMLInputElement>('.ans-in', form), msg = $('.ans-msg', form)!;
-  if (inputs.some(x => !x.value.trim())) { msg.textContent = 'ჯერ ჩაწერე პასუხი.'; return; }
+  if (inputs.some(x => !x.value.trim())) { msg.textContent = tc('ჯერ ჩაწერე პასუხი.'); return; }
   const ok = inputs.map((x, j) => matches(x.value, want[j]!));
   inputs.forEach((x, j) => x.setAttribute('aria-invalid', String(!ok[j])));
   if (ok.every(Boolean)) {
-    msg.textContent = `სწორია! პასუხი: ${form.dataset.shown!.split(';').join('; ')}`;
+    msg.textContent = `${tc('სწორია! პასუხი:')} ${form.dataset.shown!.split(';').join('; ')}`;
     const li = form.closest<HTMLElement>('.prob')!;
     li.classList.add('solved');
     if (!solved().includes(keyOf(li))) save('solved', [...solved(), keyOf(li)]);
   } else {
-    msg.textContent = ok.some(Boolean) ? 'ნაწილი სწორია — შეამოწმე მონიშნული.' : 'ჯერ არა. სცადე კიდევ ერთხელ ან ნახე მინიშნება.';
+    msg.textContent = tc(ok.some(Boolean) ? 'ნაწილი სწორია — შეამოწმე მონიშნული.' : 'ჯერ არა. სცადე კიდევ ერთხელ ან ნახე მინიშნება.');
   }
 });
 
@@ -195,7 +196,7 @@ for (const b of $$<HTMLButtonElement>('[data-pin]')) {
       ? [...list, { key, url: key, name: $('h3', card)!.textContent ?? '', html: $('.fx-tex .katex', card)?.outerHTML ?? '', topic: topicTitle }]
       : list.filter(p => p.key !== key));
     sync();
-    toast(on ? 'ჩამაგრდა — იპოვი ძიებაში' : 'ჩამაგრება მოიხსნა');
+    toast(tc(on ? 'ჩამაგრდა — იპოვი ძიებაში' : 'ჩამაგრება მოიხსნა'));
   });
 }
 let tt = 0;

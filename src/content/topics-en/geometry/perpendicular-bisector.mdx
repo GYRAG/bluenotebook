@@ -1,0 +1,114 @@
+---
+title: Perpendicular bisector and angle bisector
+slug: perpendicular-bisector
+subject: geometry
+section: basics
+order: 3
+summary: Distance from a point to a line; points on a perpendicular bisector and on an angle bisector, and the converses.
+tags: [distance, perpendicular, oblique, perpendicular bisector, bisector]
+prerequisites: [congruence, isosceles-triangle]
+status: draft
+figure: perp-bisector
+figures: [angle-bisector, triangle]
+---
+
+<Definition>The **distance** from a point to a line is the length of the perpendicular dropped from the point to the line. The **perpendicular bisector** of a segment is the line perpendicular to it through its midpoint. The **bisector** of an angle is the ray that halves it.</Definition>
+
+<Formulas>
+<Formula id="shortest-formula" name="Perpendicular and oblique" tex="PX^2 = PM^2 + MX^2 \;\Rightarrow\; PX > PM" live="PX" proof="perpendicular-shortest" />
+<Formula id="perp-bisector-formula" name="A point on the perpendicular bisector" tex="PM \perp AB,\ AM = MB \;\Rightarrow\; PA = PB" live="PA" proof="perp-bisector" />
+<Formula id="bisector-formula" name="A point on the angle bisector" tex="\angle XOP = \angle POY \;\Rightarrow\; PK = PL" proof="bisector-equidistant" />
+</Formulas>
+
+<Properties>
+
+<Property id="perpendicular-shortest" title="Of all segments from a point to a line, the perpendicular is the shortest" why="Every other segment (an oblique) is the hypotenuse of a right triangle.">
+<Proof given="$PM \perp AB$, $X$ another point of the line" prove="$PX > PM$">
+<Step show="PM PX X <PMB" hl="PMX" tex="PX^2 = PM^2 + MX^2">Pythagoras in the right triangle $PMX$.</Step>
+<Step hl="PM" tex="PX > PM \quad \blacksquare">$X \ne M$, so $MX > 0$.</Step>
+</Proof>
+</Property>
+
+<Property id="perp-bisector" title="Every point of the perpendicular bisector is equidistant from the ends of the segment" why="The perpendicular bisector sees the segment as two congruent right triangles.">
+<Proof given="$P$ a point of the perpendicular bisector of $AB$" prove="$PA = PB$">
+<Step show="PM <PMA" hl="AM=MB">$M$ is the midpoint of $AB$ and $PM \perp AB$.</Step>
+<Step hl="PMA PMB" tex="\triangle PMA = \triangle PMB">$PM$ is common, $AM = MB$, and the angles between them are right: SAS.</Step>
+<Step hl="PA=PB" tex="PA = PB \quad \blacksquare">Corresponding sides of congruent triangles.</Step>
+</Proof>
+</Property>
+
+<Property id="perp-bisector-converse" kind="converse" title="A point equidistant from the ends of a segment lies on its perpendicular bisector" why="Such a point is the apex of an isosceles triangle, and its median turns out to be an altitude.">
+<Proof given="$PA = PB$" prove="$P$ lies on the perpendicular bisector of $AB$">
+<Step hl="PAB PA=PB">$\triangle PAB$ is isosceles.</Step>
+<Step show="PM" hl="PM">$M$ is the midpoint of $AB$, so $PM$ is the median to the base.</Step>
+<Step hl="<PMB">In an isosceles triangle the median to the base is also an altitude: $PM \perp AB$, so $PM$ is the perpendicular bisector. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>So the perpendicular bisector is the set of points equidistant from the ends of the segment (their locus).</Remark>
+
+<Property id="bisector-equidistant" title="Every point of an angle bisector is equidistant from the sides of the angle" why="Two right triangles with a common hypotenuse and equal acute angles.">
+<Proof figure="angle-bisector" given="$OP$ bisects $\angle XOY$, $PK \perp OX$, $PL \perp OY$" prove="$PK = PL$">
+<Step show="OP" hl="<XOP=<POY">$OP$ halves the angle.</Step>
+<Step show="PK PL K L <PKO <PLO" hl="OKP OLP" tex="\triangle OKP = \triangle OLP">Right triangles with a common hypotenuse $OP$ and equal acute angles.</Step>
+<Step hl="PK=PL" tex="PK = PL \quad \blacksquare">Corresponding legs.</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-converse" kind="converse" title="A point inside an angle that is equidistant from its sides lies on the bisector" why="The same two right triangles, now by the hypotenuse and a leg.">
+<Proof figure="angle-bisector" given="$P$ inside the angle, $PK \perp OX$, $PL \perp OY$, $PK = PL$" prove="$\angle XOP = \angle POY$">
+<Step show="OP PK PL K L <PKO <PLO" hl="PK=PL">The distances from $P$ to the sides are equal.</Step>
+<Step hl="OKP OLP" tex="\triangle OKP = \triangle OLP">The hypotenuse $OP$ is common, the legs $PK = PL$.</Step>
+<Step hl="<XOP=<POY" tex="\angle KOP = \angle LOP \quad \blacksquare">Corresponding angles: $OP$ is the bisector.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">The distance from a point to a line is the length of the perpendicular, not of just any segment joining the point to the line.</Remark>
+
+<Problems>
+
+<Problem id="p-perp-perimeter" set={{ c: 4, t: 2.6666666666666665 }} given="AB=12 P(ABP)=32" find="PA" answer="10" book="3.14"
+  q="Point $P$ lies on the perpendicular bisector of segment $AB$. The perimeter of triangle $ABP$ is $32$ and $AB = 12$. Find $PA$."
+  hint="Every point of the perpendicular bisector is equidistant from the ends of the segment.">
+<Step hl="PA=PB" tex="PA = PB">$P$ lies on the perpendicular bisector of $AB$.</Step>
+<Step hl="ABP" tex="2\,PA + 12 = 32 \;\Rightarrow\; PA = 10">Write out the perimeter.</Step>
+</Problem>
+
+<Problem id="p-perp-in-triangle" figure="triangle" k={2.5} set={{ c: 5.2, b: 5.6, alpha: 43.27917520057224 }} show="BM" given="MA=MB P(BMC)=24 P(ABC)=37" find="AB" answer="13" book="3.11"
+  q="The perpendicular bisector of side $AB$ of triangle $ABC$ meets side $AC$ at $M$. The perimeter of triangle $ABC$ is $37$, and that of triangle $BMC$ is $24$. Find $AB$."
+  hint="$MA = MB$: write the perimeter of triangle $BMC$ in terms of $AC$ and $BC$.">
+<Step hl="MA=MB" tex="MA = MB">$M$ lies on the perpendicular bisector of $AB$.</Step>
+<Step hl="BMC" tex="\begin{aligned}P_{BMC} &= MB + MC + BC \\ &= MA + MC + BC \\ &= AC + BC = 24\end{aligned}">Substitute $MB = MA$; $MA + MC = AC$.</Step>
+<Step hl="AB" tex="AB = 37 - 24 = 13">The rest of the perimeter is side $AB$.</Step>
+</Problem>
+
+<Problem id="p-bisector-30" figure="angle-bisector" set={{ phi: 60, d: 4 }} show="OP PK PL <PKO <PLO" given="<XOY=60 OP=12" find="PK" answer="6" book="4.17 4.20"
+  q="Point $P$ lies on the bisector of a $60^\circ$ angle, $12$ cm from the vertex. Find the distance from $P$ to the sides of the angle."
+  hint="In a right triangle the leg opposite a $30^\circ$ angle is half the hypotenuse.">
+<Step hl="<KOP=<POL" tex="\angle KOP = \angle POL = 30^\circ">$OP$ is the bisector.</Step>
+<Step hl="OKP <PKO" tex="PK = \tfrac12\, OP = 6">In the right triangle $OKP$ the leg $PK$ is opposite the $30^\circ$ angle.</Step>
+<Step hl="PK=PL" tex="PL = PK = 6">Every point of the bisector is equidistant from the sides of the angle.</Step>
+</Problem>
+
+<Problem id="p-bisector-quad" figure="angle-bisector" set={{ phi: 70, d: 3.6 }} show="PK PL <PKO <PLO" given="<KPL=110" find="<XOY" answer="70" book="4.14"
+  q="From point $P$ the perpendiculars $PK$ and $PL$ are dropped to the sides of angle $XOY$, and $\angle KPL = 110^\circ$. Find $\angle XOY$."
+  hint="The angles of a quadrilateral add up to $360^\circ$.">
+<Step hl="OKPL <PKO <PLO">In quadrilateral $OKPL$ the angles at $K$ and $L$ are right.</Step>
+<Step hl="<XOY" tex="\angle XOY = 360^\circ - 90^\circ - 90^\circ - 110^\circ = 70^\circ">The angles of a quadrilateral add up to $360^\circ$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-bisector-tangents" figure="angle-bisector" set={{ phi: 80, d: 3.6 }} show="OP PK PL <PKO <PLO" given="<KOP=<POL" prove="OK=OL"
+  q="Point $P$ lies on the bisector of angle $XOY$, and $PK$ and $PL$ are perpendiculars to the sides. Prove that $OK = OL$."
+  hint="Compare the right triangles $OKP$ and $OLP$.">
+<Step hl="OKP OLP">$OKP$ and $OLP$ are right triangles with the common hypotenuse $OP$.</Step>
+<Step hl="<KOP=<POL" tex="\angle KOP = \angle LOP">$OP$ is the bisector.</Step>
+<Step hl="OK=OL" tex="\triangle OKP = \triangle OLP \;\Rightarrow\; OK = OL \quad \blacksquare">Right triangles are congruent by the hypotenuse and an acute angle.</Step>
+</Problem>
+
+</Problems>

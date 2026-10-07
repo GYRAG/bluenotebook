@@ -1,0 +1,172 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import { allTopics, sectionsOf, topicUrl } from '@/lib/topics';
+import { md } from '@/lib/math';
+import { langOf, SITE, t as tr } from '@/i18n';
+
+const lang = langOf(Astro.url);
+const topics = await allTopics(lang);
+const sections = sectionsOf(topics, 'geometry', lang);
+
+// Small line drawings for the chapters, in the figures' own drafting style (dashed = hidden or construction).
+const GLYPH: Record<string, string> = {
+  basics: '<path d="M4 15h56M4 33h56M19 45L45 3"/><path d="M41.5 15a5.5 5.5 0 0 0-2.2-4.3"/>',
+  triangles: '<path d="M8 42L30 6L56 42Z"/><path d="M30 6V42" class="d"/><path d="M30 37h5v5"/>',
+  quadrilaterals: '<path d="M6 40L18 8H58L46 40Z"/><path d="M6 40L58 8M18 8L46 40" class="d"/>',
+  circles: '<circle cx="27" cy="24" r="18"/><path d="M12 34H42"/><path d="M45 4V44"/><circle cx="27" cy="24" r="1.2"/>',
+  polygons: '<path d="M51 24L41.5 40.5H22.5L13 24L22.5 7.5H41.5Z"/><path d="M32 24L51 24M32 24L41.5 7.5" class="d"/>',
+  coordinates: '<path d="M4 40H60M12 46V2"/><path d="M56 37l4 3-4 3M9 6l3-4 3 4"/><path d="M12 40L42 16"/><path d="M36 16.5l6-.5-1.6 5.8"/>',
+  transformations: '<path d="M8 42H26L14 26Z"/><path d="M38 6V24L52 14Z" class="d"/><path d="M27 31a15 15 0 0 1 8-14"/><path d="M31 16l4 1-1 4"/>',
+  mixed: '<path d="M4 42H60"/><circle cx="20" cy="26" r="16"/><circle cx="42.6" cy="34" r="8"/>',
+  stereo: '<path d="M4 40L18 28H60L46 40Z"/><path d="M33 34V4"/><path d="M33 29l4-2v5"/>',
+  solids: '<path d="M8 18H34V44H8Z"/><path d="M8 18L22 6H48L34 18M48 6V32L34 44"/><path d="M22 6V32H48M22 32L8 44" class="d"/>',
+};
+
+// Every property of every topic, with its page — for the daily one (31 spread over the book, by day of the month).
+const props = topics.flatMap(t => [...(t.body ?? '').matchAll(/<Property\s([^>]*)>/g)].map(m => {
+  const a = Object.fromEntries([...m[1]!.matchAll(/(\w+)="([^"]*)"/g)].map(x => [x[1], x[2]]));
+  return { id: a.id!, title: a.title!, why: a.why!, url: `${topicUrl(t, lang)}#${a.id}`, topic: t.data.title };
+}));
+const stride = Math.max(1, Math.floor(props.length / 31));
+const daily = props.filter((_, i) => i % stride === 0).slice(0, 31);
+const formulas = topics.reduce((n, t) => n + [...(t.body ?? '').matchAll(/<Formula\s/g)].length, 0);
+const problems = topics.reduce((n, t) => n + [...(t.body ?? '').matchAll(/<Problem\s/g)].length, 0);
+const counts = [topics.length, props.length, formulas, problems] as const;
+const stats = lang === 'en'
+  ? `${counts[0]} topics · ${counts[1]} properties · ${counts[2]} formulas · ${counts[3]} problems`
+  : `${counts[0]} თემა · ${counts[1]} თვისება · ${counts[2]} ფორმულა · ${counts[3]} ამოცანა`;
+---
+<Shell title={SITE[lang]} panel={false}>
+  <div class="home">
+    <p class="lede">{tr(lang, 'ფორმულები, თვისებები და დამტკიცებები — ყველაფერი ნახაზზე. აირჩიე თავი ან დააჭირე')} <kbd>/</kbd> {tr(lang, 'ძიებისთვის.')}</p>
+    <a class="continue" href="/" data-continue hidden>{tr(lang, 'გააგრძელე:')} <b></b></a>
+
+    <h2 id="toc-h" class="home-h">{tr(lang, 'სარჩევი')}</h2>
+    <div class="home-main">
+      <section class="chapters" aria-labelledby="toc-h">
+        <div class="chap-grid">
+          {sections.map(s => (
+            <section class="chap">
+              <a class="chap-h" href={topicUrl(s.items[0]!, lang)}>
+                <svg class="glyph" viewBox="0 0 64 48" aria-hidden="true" set:html={GLYPH[s.id] ?? ''} />
+                <span class="chap-t">{s.label}</span>
+              </a>
+              <ol class="chap-l">
+                {s.items.map(t => <li><a href={topicUrl(t, lang)} data-topic={topicUrl(t)}>{t.data.title}</a></li>)}
+              </ol>
+              <p class="chap-p"><span class="bar" aria-hidden="true"><span data-bar></span></span><span data-count data-total={s.items.length}>0 / {s.items.length}</span><span class="sr-only"> {tr(lang, 'თემა გავლილია')}</span></p>
+            </section>
+          ))}
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="card daily" aria-labelledby="daily-h">
+          <h2 id="daily-h" class="home-h">{tr(lang, 'დღის თვისება')}</h2>
+          {daily.map((p, i) => (
+            <article data-day={i} hidden={i !== 0 || undefined}>
+              <p class="daily-k">{p.topic}</p>
+              <h3 set:html={md(p.title)} />
+              <p class="daily-w" set:html={md(p.why)} />
+              <a class="daily-a" href={p.url}>{tr(lang, 'დამტკიცება')}</a>
+            </article>
+          ))}
+        </section>
+
+        <section class="card pins" aria-labelledby="pins-h">
+          <h2 id="pins-h" class="home-h">{tr(lang, 'ჩამაგრებული ფორმულები')}</h2>
+          <ul class="pin-l" data-pins></ul>
+          <p class="pin-empty" data-pins-empty>{tr(lang, 'ფორმულის ბარათზე ვარსკვლავით ჩამაგრებული ფორმულები აქ გამოჩნდება.')}</p>
+        </section>
+
+        <p class="stats">{stats}</p>
+      </aside>
+    </div>
+  </div>
+</Shell>
+<script>
+  import { load } from '@/lib/store';
+  import { sameLang } from '@/i18n/client';
+  const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s);
+
+  const saved = load<{ url: string; title: string } | null>('last', null), last = saved && sameLang(saved.url) ? saved : null;
+  const cont = $<HTMLAnchorElement>('[data-continue]');
+  if (last && cont) { cont.href = last.url; cont.querySelector('b')!.textContent = last.title; cont.hidden = false; }
+
+  // progress: topics opened at least once
+  const seen = new Set(load<string[]>('seen', []));
+  document.querySelectorAll<HTMLElement>('.chap').forEach(ch => {
+    const links = [...ch.querySelectorAll<HTMLAnchorElement>('[data-topic]')];
+    const done = links.filter(a => seen.has(a.dataset.topic!));
+    done.forEach(a => a.classList.add('seen'));
+    const count = ch.querySelector<HTMLElement>('[data-count]')!;
+    count.textContent = `${done.length} / ${links.length}`;
+    ch.querySelector<HTMLElement>('[data-bar]')!.style.width = `${(100 * done.length) / links.length}%`;
+  });
+
+  // the property of the day: one of 31, by day of the month
+  const days = [...document.querySelectorAll<HTMLElement>('[data-day]')];
+  const today = (new Date().getDate() - 1) % days.length;
+  days.forEach((d, i) => { d.hidden = i !== today; });
+
+  // pinned formulas (saved on the topic pages, rendered markup included)
+  const pins = load<{ url: string; name: string; html: string; topic: string }[]>('pins', []).filter(p => sameLang(p.url));
+  const list = $('[data-pins]')!;
+  for (const p of pins.slice(0, 5)) {
+    const li = document.createElement('li'), a = document.createElement('a');
+    a.href = p.url;
+    a.innerHTML = `<span class="pin-n"></span><span class="pin-f">${p.html}</span>`; // our own KaTeX markup
+    a.querySelector('.pin-n')!.textContent = p.name;
+    li.append(a);
+    list.append(li);
+  }
+  $('[data-pins-empty]')!.hidden = pins.length > 0;
+</script>
+<style>
+  .home { display: grid; gap: var(--s4); margin-top: var(--s3); color: var(--ink-2); padding-bottom: var(--s5); }
+  .lede { max-width: 60ch; }
+  .continue { justify-self: start; display: inline-flex; gap: var(--s2); align-items: center; min-height: 44px; padding: 0 var(--s4); border: var(--bw) solid var(--line); border-radius: var(--r); color: var(--ink); }
+  .continue:hover { background: var(--ink); color: var(--on-ink); }
+  kbd { border: 1px solid var(--line-2); border-radius: var(--r); padding: 0 6px; color: var(--ink); }
+
+  .home-main { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s5) 40px; align-items: start; margin-top: calc(-1 * var(--s1)); }
+  .home-h { font: var(--w2) var(--fs-ui) var(--font-body); color: var(--ink-2); letter-spacing: .02em; margin-bottom: var(--s3); }
+
+  /* the contents spread: one card per chapter */
+  .chap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s4); }
+  .chap { position: relative; display: flex; flex-direction: column; padding: var(--s3) var(--s4) var(--s3); border: var(--bw) solid var(--line-2); border-radius: var(--r); }
+  .chap:hover { border-color: var(--line); }
+  .chap-h { display: grid; justify-items: start; gap: var(--s2); color: var(--ink); } /* glyph over the title: long one-word titles keep the full width */
+  .glyph { width: 48px; height: 36px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .glyph :global(.d) { stroke-dasharray: 3 3; opacity: .8; }
+  .chap-t { font: var(--w2) 19px/1.25 var(--font-head); }
+  .chap-h:hover .chap-t { text-decoration: underline 1.5px; text-underline-offset: 5px; }
+  .chap-l { list-style: none; padding: 0; margin: var(--s2) 0 var(--s3); display: grid; }
+  .chap-l a { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: 15px; color: var(--ink-2); }
+  @media (pointer: coarse) { .chap-l a { min-height: 44px; } }
+  .chap-l a:hover { color: var(--ink); }
+  .chap-l a.seen { color: var(--ink); }
+  .chap-l a.seen::after { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .chap-p { margin-top: auto; display: flex; align-items: center; gap: var(--s3); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bar { flex: 1; height: 3px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
+  .bar span { display: block; width: 0; height: 100%; background: var(--ink); }
+
+  /* the margin column */
+  .side { display: grid; gap: var(--s4); }
+  .card { padding: var(--s3) var(--s4) var(--s4); border: var(--bw) solid var(--ink); border-radius: var(--r); }
+  .daily-k { font-size: 13px; }
+  .daily h3 { font: var(--w2) 17px/1.45 var(--font-head); color: var(--ink); margin: var(--s1) 0 var(--s2); }
+  .daily-w { font-size: 15px; padding-left: var(--s3); border-left: 2px solid var(--line-2); }
+  .daily-a { display: inline-flex; align-items: center; min-height: 44px; margin-top: var(--s1); color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .pin-l { list-style: none; padding: 0; display: grid; gap: var(--s1); }
+  /* the pins are built by the script: scoped styles do not reach them */
+  .pin-l :global(a) { display: grid; min-height: 44px; padding: var(--s2) 0; color: var(--ink); }
+  .pin-l :global(a:hover .pin-n) { text-decoration: underline; text-underline-offset: 3px; }
+  .pin-l :global(.pin-n) { font-size: 13px; color: var(--ink-2); }
+  .pin-l :global(.pin-f) { overflow-x: auto; overflow-y: hidden; }
+  .pin-empty { font-size: 14px; }
+  .stats { font-size: 13px; text-align: right; }
+
+  @media (max-width: 1199px) { .home-main { grid-template-columns: minmax(0, 1fr); } .side { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); } .stats { text-align: left; } }
+  @media (max-width: 899px) { .chap-l a { min-height: 44px; font-size: 16px; } }
+</style>

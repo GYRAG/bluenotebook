@@ -1,0 +1,92 @@
+---
+title: A line perpendicular to a plane
+slug: perpendicularity
+subject: geometry
+section: stereo
+order: 51
+summary: The criterion for a line perpendicular to a plane, the theorem of three perpendiculars and its converse, the distance from a point to a plane.
+tags: [perpendicular, oblique, projection, theorem of three perpendiculars]
+prerequisites: [lines-planes, perpendicular-bisector, congruence]
+status: draft
+figure: perp-plane
+---
+
+<Definition>A line is perpendicular to a plane if it is perpendicular to every line of the plane. If $AH \perp \alpha$, $H \in \alpha$, then $AH$ is the **perpendicular**, any other segment $AB$ ($B \in \alpha$) is an **oblique**, and $HB$ is the **projection** of the oblique. The distance from a point to a plane is the length of the perpendicular.</Definition>
+
+<Formulas>
+<Formula id="criterion-formula" name="Criterion for perpendicularity" tex="a \perp b,\ a \perp c,\ b, c \subset \alpha,\ b \cap c \ne \varnothing \;\Rightarrow\; a \perp \alpha" proof="line-plane-perpendicular" />
+<Formula id="three-perp-formula" name="Theorem of three perpendiculars" tex="c \subset \alpha,\ c \perp HB \iff c \perp AB" proof="three-perpendiculars" />
+<Formula id="slant-formula" name="Perpendicular and oblique" tex="AB^2 = AH^2 + HB^2" live="AB" proof="perpendicular-shortest-3d" />
+</Formulas>
+
+<Properties>
+
+<Property id="line-plane-perpendicular" kind="criterion" title="If a line is perpendicular to two intersecting lines of a plane, it is perpendicular to the plane" why="A chain of congruent triangles makes any line of the plane a perpendicular bisector.">
+<Proof given="$AH \perp b$, $AH \perp c$, $b = HE$ and $c = HF$ lines of $\alpha$" prove="$AH \perp x$ for any line $x$ of $\alpha$">
+<Step show="HE HF E F" hl="AH HE HF">$AH$ is perpendicular to two lines of $\alpha$, $b = HE$ and $c = HF$.</Step>
+<Step show="A'H A' AE A'E AF A'F" hl="AE=A'E AF=A'F">On the extension of $AH$ mark off $HA' = AH$. $b$ and $c$ are perpendicular bisectors of $AA'$, so $AE = A'E$, $AF = A'F$.</Step>
+<Step show="EF HX X" hl="AEF A'EF">Take any line $x$ of $\alpha$ through $H$ and a line $EF$ that cuts it at $X$. $\triangle AEF = \triangle A'EF$ (SSS).</Step>
+<Step show="AX A'X" hl="AEX A'EX">So $\angle AEX = \angle A'EX$, and $\triangle AEX = \triangle A'EX$ (SAS): $AX = A'X$.</Step>
+<Step hl="AXA' HX">$\triangle AXA'$ is isosceles and $XH$ is its median, hence also a height: $AH \perp x$. $x$ was arbitrary, so $AH \perp \alpha$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="three-perpendiculars" title="The theorem of three perpendiculars: a line of the plane perpendicular to the projection of an oblique is perpendicular to the oblique itself" why="This line turns out to be perpendicular to the plane of the perpendicular and the projection.">
+<Proof given="$AH \perp \alpha$, $AB$ an oblique, $c = C_1C_2 \subset \alpha$, $B \in c$, $c \perp HB$" prove="$c \perp AB$">
+<Step show="AB HB B C1C2 C1 C2" hl="C1C2 HB">$c$ passes through $B$ and is perpendicular to the projection $HB$.</Step>
+<Step hl="C1C2 AH">$AH \perp \alpha$, so $AH \perp c$.</Step>
+<Step hl="AHB">$c$ is perpendicular to two intersecting lines of the plane $AHB$, $HB$ and $AH$: by the previous criterion $c \perp (AHB)$.</Step>
+<Step hl="C1C2 AB" tex="c \perp AB \quad \blacksquare">$AB$ lies in this plane.</Step>
+</Proof>
+</Property>
+
+<Property id="three-perpendiculars-converse" kind="converse" title="The converse: a line of the plane perpendicular to an oblique is perpendicular to its projection as well" why="The same argument: the line is perpendicular to $AB$ and to $AH$.">
+<Proof given="$AH \perp \alpha$, $c \subset \alpha$, $B \in c$, $c \perp AB$" prove="$c \perp HB$">
+<Step show="AB HB B C1C2 C1 C2" hl="C1C2 AB">$c \perp AB$ and $c \perp AH$ ($AH$ is perpendicular to the whole of $\alpha$).</Step>
+<Step hl="AHB" tex="c \perp (AHB) \;\Rightarrow\; c \perp HB \quad \blacksquare">$c$ is perpendicular to two intersecting lines of the plane $AHB$, and $HB$ lies in this plane.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-shortest-3d" title="The perpendicular from a point to a plane is shorter than any oblique" why="The oblique is the hypotenuse of a right triangle.">
+<Proof given="$AH \perp \alpha$, $AB$ an oblique" prove="$AB > AH$">
+<Step show="AB HB B" hl="AHB" tex="AB^2 = AH^2 + HB^2">$AH \perp HB$: $\triangle AHB$ is right.</Step>
+<Step tex="AB > AH \quad \blacksquare">$HB > 0$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Of two obliques drawn from one point, the one with the longer projection is longer; equal obliques have equal projections.</Remark>
+
+<Remark kind="mistake">For a line to be perpendicular to a plane, being perpendicular to one line is not enough: two intersecting lines are needed.</Remark>
+
+<Problems>
+
+<Problem id="p-perp-oblique" set={{ h: 2.6832815729997477, t: 0.4, th: -25 }} show="AB HB B" given="AH=6 AB=9" find="HB" answer="3√5" book="14.6"
+  q="From a point $A$ outside a plane the perpendicular $AH$ and the oblique $AB$ are drawn to the plane, $AH = 6$, $AB = 9$. Find the projection $HB$ of the oblique."
+  hint="$AH$ is perpendicular to every line of the plane, so triangle $AHB$ is right.">
+<Step hl="AHB" tex="\angle AHB = 90^\circ">$AH$ is perpendicular to the plane, and $HB$ lies in this plane.</Step>
+<Step hl="HB" tex="HB = \sqrt{9^2 - 6^2} = \sqrt{45} = 3\sqrt5">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-perp-two-obliques" set={{ h: 2.25, t: 0.45230537068153553, th: -25 }} show="AB HB AX HX B X" given="AB=20 AX=15 HB=16" find="AH HX" answer="12 9" book="14.7 14.8"
+  q="From a point $A$ the perpendicular $AH$ and two obliques are drawn to a plane: $AB = 20$ and $AX = 15$. The projection of $AB$ is $16$. Find the length of the perpendicular and the projection of $AX$."
+  hint="Each oblique forms a right triangle with its projection and the perpendicular.">
+<Step hl="AHB" tex="AH = \sqrt{20^2 - 16^2} = 12">In the right triangle $AHB$.</Step>
+<Step hl="AHX HX" tex="HX = \sqrt{15^2 - 12^2} = 9">In the right triangle $AHX$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-perp-three" set={{ h: 2.6, t: 0.4, th: -25 }} show="AB HB C1C2 C1 C2" prove="<HBC1=90 <ABC1=90" book="14.78"
+  q="$AH$ is perpendicular to a plane, the line $C_1C_2$ lies in this plane and $HB \perp C_1C_2$. Prove that $AB \perp C_1C_2$."
+  hint="$C_1C_2$ is perpendicular to two intersecting lines of the plane $AHB$.">
+<Step hl="AH C1C2" tex="AH \perp C_1C_2">$AH$ is perpendicular to the plane, so it is perpendicular to every line lying in it.</Step>
+<Step hl="HB C1C2" tex="HB \perp C_1C_2">Given.</Step>
+<Step hl="AHB" tex="C_1C_2 \perp (AHB)">$C_1C_2$ is perpendicular to two intersecting lines of the plane $AHB$, $AH$ and $HB$.</Step>
+<Step hl="AB C1C2" tex="AB \perp C_1C_2 \quad \blacksquare">$AB$ lies in this plane: this is the theorem of three perpendiculars.</Step>
+</Problem>
+
+</Problems>

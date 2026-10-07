@@ -1,0 +1,93 @@
+---
+title: Pyramid
+slug: pyramid
+subject: geometry
+section: solids
+order: 55
+summary: The volume of a pyramid, the apothem and lateral surface of a regular pyramid, a pyramid with equal lateral edges.
+tags: [pyramid, regular pyramid, apothem, volume]
+prerequisites: [prism, perpendicularity, regular-polygon]
+status: draft
+figure: pyramid
+---
+
+<Definition>A **pyramid** is a polyhedron one face of which (the base) is a polygon, while the others are triangles with a common vertex. A pyramid is **regular** if its base is a regular polygon and the foot of its height is the centre of the base. The height of a lateral face of a regular pyramid is its **apothem** $l$.</Definition>
+
+<Formulas>
+<Formula id="volume-formula" name="Volume" tex="V = \tfrac13\, S\,h" live="V" proof="pyramid-volume" />
+<Formula id="lateral-formula" name="The lateral surface of a regular pyramid" tex="S_{\text{lat}} = \tfrac12\, P\, l" proof="regular-lateral-area" />
+<Formula id="apothem-formula" name="Apothem and lateral edge" tex="l^2 = h^2 + r^2, \qquad SA^2 = h^2 + R^2" live="l" proof="apothem-relations" />
+<Formula id="frustum-formula" name="The volume of a frustum" tex="V = \tfrac{h}{3}\left(S_1 + S_2 + \sqrt{S_1S_2}\right)" />
+</Formulas>
+
+<Properties>
+
+<Property id="equal-edges-circumcenter" title="If all the lateral edges of a pyramid are equal, the foot of the height is the centre of the circle circumscribed about the base" why="The height and the edges form congruent right triangles.">
+<Proof given="$SA = SB = SC = SD$, $SO$ the height" prove="$OA = OB = OC = OD$">
+<Step show="SO O" hl="SO">$SO \perp$ the base.</Step>
+<Step show="OA OB OC OD" hl="SOA SOB SOC SOD">$\triangle SOA$, $\triangle SOB$, $\triangle SOC$, $\triangle SOD$ are right, with the common leg $SO$ and equal hypotenuses: congruent by the hypotenuse and a leg.</Step>
+<Step tex="OA = OB = OC = OD \quad \blacksquare">$O$ is equally far from all the vertices of the base.</Step>
+</Proof>
+</Property>
+
+<Property id="apothem-relations" title="In a regular pyramid $l^2 = h^2 + r^2$ and $SA^2 = h^2 + R^2$" why="The height, the apothem and the lateral edge form right triangles.">
+<Proof given="A regular pyramid, $SO = h$, $SM = l$" prove="$l^2 = h^2 + r^2$, $SA^2 = h^2 + R^2$">
+<Step show="SO SM OM O M <SOM" hl="SOM" tex="l^2 = h^2 + r^2">The right triangle $\triangle SOM$: $OM = r$, the radius of the circle inscribed in the base ($\tfrac a2$ for a square).</Step>
+<Step show="SO OA" hl="SOA" tex="SA^2 = h^2 + R^2 \quad \blacksquare">The right triangle $\triangle SOA$: $OA = R$, the radius of the circumscribed circle ($\tfrac{a\sqrt2}{2}$).</Step>
+</Proof>
+</Property>
+
+<Property id="regular-lateral-area" title="The lateral surface of a regular pyramid is the semiperimeter of the base times the apothem" why="The lateral faces are congruent isosceles triangles with height $l$.">
+<Proof given="A regular pyramid, base perimeter $P$, apothem $l$" prove="$S_{\text{lat}} = \tfrac12 P l$">
+<Step show="SM M" hl="SAB SBC SCD SDA">The lateral edges are equal, and so are the sides of the base: the faces are congruent isosceles triangles, all with height $l$.</Step>
+<Step tex="S_{\text{lat}} = 4 \cdot \tfrac12\, a\,l = \tfrac12\, P\,l \quad \blacksquare">The sum of the areas of the triangles.</Step>
+</Proof>
+</Property>
+
+<Property id="pyramid-volume" title="The volume of a pyramid is one third of the area of the base times the height" why="A triangular prism splits into three pyramids of equal volume.">
+<Proof given="A pyramid, base area $S$, height $h$" prove="$V = \tfrac13 S h$">
+<Step>Two pyramids with bases of equal area and equal heights have equal volumes: at every height their cross-sections have equal areas (Cavalieri's principle).</Step>
+<Step>The triangular prism $ABCA_1B_1C_1$ splits into three pyramids: $A_1ABC$, $A_1BB_1C_1$, $A_1BCC_1$. The first two have congruent bases ($ABC$ and $A_1B_1C_1$) and equal heights; the last two have the common apex $A_1$, and their bases are the halves of the parallelogram $BCC_1B_1$.</Step>
+<Step tex="V = \tfrac13\, S\,h">All three are equal, and the volume of the prism is $Sh$.</Step>
+<Step show="AC" hl="SABC SACD" tex="V_{SABCD} = \tfrac13\, S\,h \quad \blacksquare">The diagonals of the base split any pyramid into triangular pyramids with a common height.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">The apothem (the height of a lateral face, $SM$) and the height of the pyramid ($SO$) are different segments: $l > h$.</Remark>
+
+<Problems>
+
+<Problem id="p-pyr-edge" set={{ a: 4, h: 3.5 }} show="SO OA SA O" given="AB=8 SO=7" find="SA" answer="9" book="18.9"
+  q="The height of a regular quadrilateral pyramid is $7$, and the side of its base is $8$. Find the lateral edge."
+  hint="$OA$ is half the diagonal of the base.">
+<Step hl="OA" tex="OA = \frac{8\sqrt2}{2} = 4\sqrt2">The foot of the height of a regular pyramid is the centre of the square.</Step>
+<Step hl="SOA SA" tex="SA = \sqrt{7^2 + (4\sqrt2)^2} = \sqrt{81} = 9">In the right triangle $SOA$.</Step>
+</Problem>
+
+<Problem id="p-pyr-apothem" set={{ a: 4, h: 1.7638342073763937 }} show="SM SA M" given="AB=6 SA=5" find="SM 4*S(SAB)" labels="l;S_{\text{lat}}" answer="4 48" book="18.14 18.15"
+  q="The side of the base of a regular quadrilateral pyramid is $6$, and its lateral edge is $5$. Find the apothem of the pyramid and the area of its lateral surface."
+  hint="The apothem is the height of a lateral face; it bisects the side of the base.">
+<Step hl="SMA" tex="SM = \sqrt{5^2 - 3^2} = 4">$SAB$ is an isosceles triangle, and $SM$ is its height and median.</Step>
+<Step tex="S_{\text{lat}} = \tfrac12\, P\, l = \tfrac12 \cdot 24 \cdot 4 = 48">The lateral surface of a regular pyramid is half the perimeter of the base times the apothem.</Step>
+</Problem>
+
+<Problem id="p-pyr-angle" set={{ a: 4, h: 3.4641016151377544 }} show="SM OM SO <SOM M O" given="AB=12 <SMO=60" find="4*S(SAB) V(SABCD)" labels="S_{\text{lat}};V" answer="288 288√3" book="18.10 18.20"
+  q="The side of the base of a regular quadrilateral pyramid is $12$, and the dihedral angle at the base is $60^\circ$. Find the area of the lateral surface and the volume of the pyramid."
+  hint="$\angle SMO$ is the linear angle of the dihedral angle at the base.">
+<Step hl="OM <SMO" tex="OM = 6,\qquad SM = \frac{OM}{\cos 60^\circ} = 12">$SM$ and $OM$ are perpendicular to the side of the base, so $\angle SMO$ is a linear angle.</Step>
+<Step hl="SO" tex="SO = OM \tan 60^\circ = 6\sqrt3">The height of the pyramid.</Step>
+<Step tex="S_{\text{lat}} = \tfrac12 \cdot 48 \cdot 12 = 288">The lateral surface.</Step>
+<Step tex="V = \tfrac13 \cdot 144 \cdot 6\sqrt3 = 288\sqrt3">The volume of a pyramid is one third of the area of the base times the height.</Step>
+</Problem>
+
+<Problem id="p-pyr-volume" k={1.5} set={{ a: 4, h: 2.6666666666666665 }} show="SO SM OM <SOM O M" given="SO=4 SM=5" find="AB V(SABCD)" labels="a;V" answer="6 48" book="21.1"
+  q="The height of a regular quadrilateral pyramid is $4$, and its apothem is $5$. Find the side of the base and the volume of the pyramid."
+  hint="In the right triangle $SOM$, $OM$ is half the side of the base.">
+<Step hl="SOM OM" tex="OM = \sqrt{5^2 - 4^2} = 3">In the right triangle $SOM$.</Step>
+<Step hl="AB" tex="AB = 2\,OM = 6">$O$ is the centre of the square, $M$ the midpoint of a side.</Step>
+<Step tex="V = \tfrac13 \cdot 36 \cdot 4 = 48">The volume of the pyramid.</Step>
+</Problem>
+
+</Problems>

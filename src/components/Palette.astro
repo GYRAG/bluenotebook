@@ -1,14 +1,16 @@
 ---
 import Icon from './Icon.astro';
+import { langOf, t } from '@/i18n';
+const lang = langOf(Astro.url);
 ---
-<dialog id="palette" class="pal" aria-label="ძიება">
+<dialog id="palette" class="pal" aria-label={t(lang, 'ძიება')}>
   <label class="pal-in">
     <Icon name="search" />
-    <input type="search" placeholder="თემა, თვისება ან ფორმულა…" autocomplete="off" spellcheck="false" aria-describedby="pal-status" />
+    <input type="search" placeholder={t(lang, 'თემა, თვისება ან ფორმულა…')} autocomplete="off" spellcheck="false" aria-describedby="pal-status" />
     <kbd>Esc</kbd>
   </label>
   <div class="pal-body">
-    <p class="pal-status" id="pal-status" aria-live="polite">დაწერე რამდენიმე ასო.</p>
+    <p class="pal-status" id="pal-status" aria-live="polite">{t(lang, 'დაწერე რამდენიმე ასო.')}</p>
     <ul class="pal-res"></ul>
   </div>
 </dialog>

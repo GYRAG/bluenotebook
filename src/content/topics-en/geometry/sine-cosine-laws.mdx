@@ -1,0 +1,109 @@
+---
+title: The laws of sines and cosines
+slug: sine-cosine-laws
+subject: geometry
+section: triangles
+order: 16
+summary: "Solving any triangle: the sides are proportional to the sines of the angles, c² = a² + b² − 2ab·cos γ."
+tags: [sine, cosine, circumscribed circle]
+prerequisites: [right-triangle, triangle-area]
+status: draft
+figure: sine-cosine-laws
+parent: triangle
+---
+
+<Definition>Notation: $a = BC$, $b = CA$, $c = AB$; $\alpha, \beta, \gamma$ the angles opposite them; $R$ the radius of the circumscribed circle.</Definition>
+
+<Formulas>
+<Formula id="sine-law-formula" name="Law of sines" tex="\frac{a}{\sin\alpha} = \frac{b}{\sin\beta} = \frac{c}{\sin\gamma} = 2R" live="2R" proof="sine-law" />
+<Formula id="cosine-law-formula" name="Law of cosines" tex="c^2 = a^2 + b^2 - 2ab\cos\gamma" proof="cosine-law" />
+<Formula id="cosine-angle-formula" name="An angle from three sides" tex="\cos\gamma = \frac{a^2 + b^2 - c^2}{2ab}" proof="cosine-law" />
+<Formula id="angle-type-formula" name="Kind of angle" tex="c^2 < a^2 + b^2 \iff \gamma < 90^\circ" proof="angle-type" />
+</Formulas>
+
+<Properties>
+
+<Property id="sine-law" title="The law of sines: the sides of a triangle are proportional to the sines of the opposite angles, and the ratio is $2R$" why="The area three ways; and $2R$ from the right triangle on a diameter.">
+<Proof given="$ABC$ a triangle, $R$ the radius of the circumscribed circle" prove="$\tfrac{a}{\sin\alpha} = \tfrac{b}{\sin\beta} = \tfrac{c}{\sin\gamma} = 2R$">
+<Step hl="ABC" tex="\begin{aligned}S &= \tfrac12\, bc\sin\alpha \\ &= \tfrac12\, ca\sin\beta = \tfrac12\, ab\sin\gamma\end{aligned}">The area from two sides and the angle between them, three ways.</Step>
+<Step tex="\frac{\sin\alpha}{a} = \frac{\sin\beta}{b} = \frac{\sin\gamma}{c}">Divide by $\tfrac12 abc$.</Step>
+<Step show="(OA) O BD D" hl="BD">Draw the diameter $BD$ ($BD = 2R$).</Step>
+<Step show="CD" hl="BCD <BCD" tex="\angle BCD = 90^\circ">An inscribed angle on a diameter is right.</Step>
+<Step hl="<BDC <A" tex="\sin\angle BDC = \sin\alpha">$\angle BDC$ and $\angle BAC$ stand on the same arc $BC$: they are either equal or add up to $180^\circ$, and in both cases the sine is the same.</Step>
+<Step hl="BC" tex="\begin{gathered}a = BC = BD\sin\angle BDC = 2R\sin\alpha \\ \frac{a}{\sin\alpha} = 2R \quad \blacksquare\end{gathered}">In the right triangle $BCD$.</Step>
+</Proof>
+</Property>
+
+<Property id="cosine-law" title="The law of cosines: $c^2 = a^2 + b^2 - 2ab\cos\gamma$" why="An altitude and Pythagoras; $\cos\gamma$ is just the correction to Pythagoras.">
+<Proof given="$BC = a,\ CA = b,\ \angle C = \gamma$" prove="$AB^2 = a^2 + b^2 - 2ab\cos\gamma$">
+<Step show="AH H <AHB" hl="AH">From $A$ drop the altitude $AH$ to line $BC$.</Step>
+<Step hl="AHC" tex="AH = b\sin\gamma, \qquad CH = b\cos\gamma">In the right triangle $AHC$ (for an obtuse $\gamma$, $H$ is on the other side of $C$ and $\cos\gamma < 0$; the formulas stay the same).</Step>
+<Step hl="BH" tex="BH = a - b\cos\gamma">From $B$ to $H$: $BC$ minus $CH$ (with sign).</Step>
+<Step hl="AHB" tex="\begin{aligned}c^2 &= b^2\sin^2\gamma + (a - b\cos\gamma)^2 \\ &= a^2 + b^2 - 2ab\cos\gamma \quad \blacksquare\end{aligned}">Pythagoras in $\triangle AHB$ and $\sin^2\gamma + \cos^2\gamma = 1$.</Step>
+</Proof>
+</Property>
+
+<Property id="angle-type" title="The angle $\gamma$ is acute, right or obtuse according as $c^2$ is less than, equal to or greater than $a^2 + b^2$" why="The sign of $\cos\gamma$ and the sign of $a^2 + b^2 - c^2$ are the same.">
+<Proof given="$a, b, c$ the sides of a triangle" prove="$\gamma < 90^\circ \iff c^2 < a^2 + b^2$">
+<Step tex="a^2 + b^2 - c^2 = 2ab\cos\gamma">The law of cosines.</Step>
+<Step hl="<C" tex="\cos\gamma > 0 \iff \gamma < 90^\circ">$2ab > 0$, so both sides have the same sign; $\cos\gamma$ is positive for an acute angle, zero for a right one, negative for an obtuse one. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">For $\gamma = 90^\circ$, $\cos\gamma = 0$ and the law of cosines becomes Pythagoras' theorem.</Remark>
+
+<Remark>Four cases of solving a triangle. **Three sides:** the angles by the law of cosines. **Two sides and the angle between them:** the third side by the law of cosines, then the angles. **A side and two angles:** the third angle from $180^\circ$, the sides by the law of sines. **Two sides and an angle not between them:** by the law of sines; in this case there may be two triangles, one, or none.</Remark>
+
+<Remark kind="mistake">When the law of sines gives an angle, there may be two answers: $\sin\alpha = \sin(180^\circ - \alpha)$. Check whether both fit in the triangle.</Remark>
+
+<Problems>
+
+<Problem id="p-cos-law-60" set={{ c: 5.714285714285714, b: 2.142857142857143, alpha: 60 }} given="AB=8 AC=3 <A=60" find="BC" answer="7" book="9.1"
+  q="Two sides of a triangle are $8$ and $3$, and the angle between them is $60^\circ$. Find the third side."
+  hint="The law of cosines.">
+<Step hl="BC <A" tex="BC^2 = 8^2 + 3^2 - 2 \cdot 8 \cdot 3 \cos 60^\circ = 49">By the law of cosines.</Step>
+<Step hl="BC" tex="BC = 7">Therefore.</Step>
+</Problem>
+
+<Problem id="p-cos-law-120" set={{ c: 4, b: 3.5, alpha: 120 }} given="AB=8 AC=7 <A=120" find="BC" answer="13" book="9.2"
+  q="Two sides of a triangle are $8$ and $7$, and the angle between them is $120^\circ$. Find the third side."
+  hint="$\cos 120^\circ = -\tfrac12$.">
+<Step hl="BC <A" tex="\begin{aligned}BC^2 &= 8^2 + 7^2 - 2 \cdot 8 \cdot 7 \cos 120^\circ \\ &= 64 + 49 + 56 = 169\end{aligned}">By the law of cosines.</Step>
+<Step hl="BC" tex="BC = 13">Therefore.</Step>
+</Problem>
+
+<Problem id="p-cos-law-angle" set={{ c: 5, b: 3.125, alpha: 60 }} given="AB=8 AC=5 BC=7" find="<A" answer="60"
+  q="The sides of a triangle are $AB = 8$, $AC = 5$ and $BC = 7$. Find angle $A$."
+  hint="Get $\cos A$ from the law of cosines.">
+<Step hl="BC <A" tex="\begin{aligned}\cos A &= \frac{AB^2 + AC^2 - BC^2}{2 \cdot AB \cdot AC} \\ &= \frac{64 + 25 - 49}{80} = \frac12\end{aligned}">By the law of cosines.</Step>
+<Step hl="<A" tex="\angle A = 60^\circ">Therefore.</Step>
+</Problem>
+
+<Problem id="p-sine-law-radius" set={{ c: 7, b: 4, alpha: 30 }} show="(OA) O OB OC" given="BC=12 <A=30" find="OA" answer="12"
+  q="Side $BC$ of a triangle is $12$, and the angle opposite it is $30^\circ$. Find the radius of the circumscribed circle."
+  hint="The law of sines: $\tfrac{a}{\sin A} = 2R$.">
+<Step hl="BC <A" tex="\frac{BC}{\sin A} = 2R">The law of sines.</Step>
+<Step hl="OA" tex="R = \frac{12}{2 \cdot \tfrac12} = 12">Therefore.</Step>
+</Problem>
+
+<Problem id="p-sine-law-side" set={{ c: 5, b: 4.482877360840267, alpha: 45 }} given="<A=45 <B=60 BC=6√2" find="AC" answer="6√3"
+  q="In triangle $ABC$, $\angle A = 45^\circ$, $\angle B = 60^\circ$, $BC = 6\sqrt2$. Find $AC$."
+  hint="The law of sines.">
+<Step hl="BC AC <A <B" tex="\frac{AC}{\sin B} = \frac{BC}{\sin A}">The law of sines: the sides are proportional to the sines of the opposite angles.</Step>
+<Step hl="AC" tex="AC = \frac{6\sqrt2 \cdot \tfrac{\sqrt3}{2}}{\tfrac{\sqrt2}{2}} = 6\sqrt3">Substitute the sines.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-sine-30-radius" set={{ c: 6.5, b: 4.5, alpha: 30 }} show="(OA) O OB OC" given="<A=30" prove="BC=OB" book="9.75"
+  q="One angle of a triangle is $30^\circ$. Prove that the side opposite it equals the radius of the circumscribed circle."
+  hint="What is the central angle on the arc $BC$?">
+<Step hl="<BOC" tex="\angle BOC = 2\angle A = 60^\circ">An inscribed angle is half the central angle on the same arc.</Step>
+<Step hl="OBC OB=OC" tex="BC = OB = R \quad \blacksquare">Triangle $OBC$ is isosceles with a $60^\circ$ apex angle, so it is equilateral.</Step>
+</Problem>
+
+</Problems>

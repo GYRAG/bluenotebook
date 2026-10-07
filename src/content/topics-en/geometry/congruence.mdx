@@ -1,0 +1,110 @@
+---
+title: Congruent triangles
+slug: congruence
+subject: geometry
+section: basics
+order: 2
+summary: The three congruence criteria (SAS, ASA, SSS) and the criteria for right triangles.
+tags: [congruence criterion, SAS, ASA, SSS, hypotenuse, leg]
+prerequisites: [angles]
+status: draft
+figure: congruence
+figures: [crossing]
+---
+
+<Definition>Two triangles are **congruent** if one, placed on the other, matches it exactly. In congruent triangles the corresponding sides and the corresponding angles are equal; writing $\triangle ABC = \triangle A_1B_1C_1$ means $A \leftrightarrow A_1$, $B \leftrightarrow B_1$, $C \leftrightarrow C_1$. A **congruence criterion** is a set of equal elements that is enough for the triangles to be congruent.</Definition>
+
+<Formulas>
+<Formula id="sas-formula" name="Criterion 1: SAS" tex="AB = A_1B_1,\ AC = A_1C_1,\ \angle A = \angle A_1" proof="sas" />
+<Formula id="asa-formula" name="Criterion 2: ASA" tex="AB = A_1B_1,\ \angle A = \angle A_1,\ \angle B = \angle B_1" proof="asa" />
+<Formula id="sss-formula" name="Criterion 3: SSS" tex="AB = A_1B_1,\ BC = B_1C_1,\ CA = C_1A_1" proof="sss" />
+<Formula id="hl-formula" name="Right triangles: hypotenuse and leg" tex="\angle C = \angle C_1 = 90^\circ,\ AB = A_1B_1,\ AC = A_1C_1" proof="right-criteria" />
+</Formulas>
+
+<Properties title="Congruence criteria">
+
+<Property id="sas" kind="criterion" title="If two sides and the angle between them are equal, the triangles are congruent (SAS)" why="Placed on each other, the equal angle covers the angle and the equal sides cover the sides.">
+<Proof given="$AB = A_1B_1,\ AC = A_1C_1,\ \angle A = \angle A_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 AC=A1C1 <BAC=<B1A1C1">two sides and the angle between them are given</Step>
+<Step hl="A1B1C1">Place $\triangle A_1B_1C_1$ on $\triangle ABC$ so that $A_1$ falls on $A$ and the ray $A_1B_1$ on the ray $AB$.</Step>
+<Step hl="AB=A1B1">$A_1B_1 = AB$, so $B_1$ lands exactly on $B$.</Step>
+<Step hl="<BAC=<B1A1C1">$\angle A_1 = \angle A$, so the ray $A_1C_1$ falls on the ray $AC$, and since $A_1C_1 = AC$, $C_1$ lands on $C$.</Step>
+<Step hl="ABC A1B1C1">All three vertices coincide, so the triangles are congruent. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="asa" kind="criterion" title="If a side and the two angles at its ends are equal, the triangles are congruent (ASA)" why="Placed on each other, two rays meet at one and the same point.">
+<Proof given="$AB = A_1B_1,\ \angle A = \angle A_1,\ \angle B = \angle B_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 <BAC=<B1A1C1 <ABC=<A1B1C1">a side and the two angles next to it are given</Step>
+<Step hl="A1B1C1">Place them so that $A_1 \to A$, $B_1 \to B$ (the sides are equal) and $C_1$ is on the same side as $C$.</Step>
+<Step>$\angle A_1 = \angle A$, so the ray $A_1C_1$ falls on $AC$; $\angle B_1 = \angle B$, so $B_1C_1$ falls on $BC$. Two rays meet at only one point, so $C_1 = C$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="sss" kind="criterion" title="If the three sides are equal in pairs, the triangles are congruent (SSS)" why="Putting the two triangles side by side gives two isosceles triangles.">
+<Proof given="$AB = A_1B_1,\ BC = B_1C_1,\ CA = C_1A_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 BC=B1C1 CA=C1A1">three pairs of equal sides are given</Step>
+<Step>Put $\triangle A_1B_1C_1$ next to $\triangle ABC$ so that $A_1B_1$ matches $AB$ and $C_1$ ends up on the other side of $AB$, at the point $C_2$.</Step>
+<Step>$AC = AC_2$ and $BC = BC_2$, so $\triangle ACC_2$ and $\triangle BCC_2$ are isosceles and their base angles are equal: $\angle ACC_2 = \angle AC_2C$, $\angle BCC_2 = \angle BC_2C$.</Step>
+<Step hl="<ACB=<A1C1B1" tex="\angle ACB = \angle AC_2B">Add these equalities (or subtract them, if $CC_2$ passes outside $AB$).</Step>
+<Step hl="ABC A1B1C1">Now $\triangle ABC$ and $\triangle ABC_2$ are congruent by the first criterion (SAS: $CA = C_2A$, $CB = C_2B$ and the angles between them). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="right-criteria" kind="criterion" title="Right triangles are congruent if the hypotenuse and a leg are equal" why="The two triangles together form an isosceles triangle.">
+<Proof given="$\angle C = \angle C_1 = 90^\circ,\ AB = A_1B_1,\ AC = A_1C_1$" prove="$\triangle ABC = \triangle A_1B_1C_1$">
+<Step hl="AB=A1B1 AC=A1C1">the hypotenuse and a leg are given</Step>
+<Step>Put the triangles side by side so that $A_1C_1$ matches $AC$ and $B_1$ lies on line $BC$ on the other side of $C$ (both angles at $C$ are right, so $B, C, B_1$ are on one line).</Step>
+<Step>$AB = AB_1$, so $\triangle ABB_1$ is isosceles and $\angle B = \angle B_1$. Then the third angles of the right triangles are equal too: $\angle BAC = \angle B_1AC$.</Step>
+<Step hl="ABC A1B1C1">$AB = AB_1$, $AC$ is common and the angles between them are equal: SAS. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Right triangles are also congruent by **two legs** (SAS), by **a leg and an acute angle** and by **the hypotenuse and an acute angle**; in the last two cases the other acute angle is equal too ($90^\circ$ minus the first), so ASA applies.</Remark>
+
+<Remark kind="mistake">Two sides and an angle that is **not** between them are not enough: two different triangles can be built from the same data. “AAA” (three angles) is not a congruence criterion; it gives only similarity.</Remark>
+
+<Problems>
+
+<Problem id="p-crossing-perimeter" figure="crossing" set={{ a: 3.2, b: 3.2, c: 2.4, d: 2.4, phi: 90 }} show="AC BD" given="AO=OB CO=OD AB=16 CD=12 P(AOC)=24" find="BD" answer="10" book="3.1"
+  q="Segments $AB$ and $CD$ meet at $O$, and $O$ bisects both. $AB = 16$, $CD = 12$, and the perimeter of triangle $AOC$ is $24$. Find $BD$."
+  hint="Prove that $\triangle AOC = \triangle BOD$.">
+<Step hl="AO=OB CO=OD" tex="AO = OB = 8,\qquad CO = OD = 6">$O$ is the midpoint of both segments.</Step>
+<Step hl="<AOC=<BOD" tex="\angle AOC = \angle BOD">These angles are vertical.</Step>
+<Step hl="AOC BOD" tex="\triangle AOC = \triangle BOD">The triangles are congruent by two sides and the angle between them (SAS).</Step>
+<Step hl="AC=BD" tex="BD = AC = 24 - 8 - 6 = 10">Corresponding sides of congruent triangles are equal: $BD = AC$, and $AC$ comes from the perimeter.</Step>
+</Problem>
+
+<Problem id="p-crossing-parallel" figure="crossing" set={{ a: 3, b: 3, c: 2.5, d: 2.5, phi: 101.53695903281547 }} show="AC BD" given="AO=OB <CAO=<DBO AC=7 OD=5" find="BD OC" answer="7 5"
+  q="Segments $AB$ and $CD$ meet at $O$, $AO = OB$ and $AC \parallel BD$. $AC = 7$, $OD = 5$. Find $BD$ and $OC$."
+  hint="Which angles are equal because $AC \parallel BD$?">
+<Step hl="<CAO=<DBO AC||BD" tex="\angle CAO = \angle DBO">$AC \parallel BD$ and $AB$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="<AOC=<BOD" tex="\angle AOC = \angle BOD">These angles are vertical.</Step>
+<Step hl="AOC BOD AO=OB" tex="\triangle AOC = \triangle BOD">The triangles are congruent by a side and the two angles next to it (ASA).</Step>
+<Step hl="AC=BD OC=OD" tex="BD = AC = 7,\qquad OC = OD = 5">Corresponding sides of congruent triangles are equal.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-kite" figure="crossing" set={{ a: 2.2, b: 3, c: 2, d: 2, phi: 90 }} show="AC AD BC BD" given="AC=AD BC=BD" prove="<CAB=<DAB <AOC=90" book="3.25"
+  q="Segments $AB$ and $CD$ cross, $AC = AD$ and $BC = BD$. Prove that $AB$ bisects angle $CAD$ and that $AB \perp CD$."
+  hint="First compare triangles $ACB$ and $ADB$.">
+<Step hl="ACB ADB AC=AD BC=BD" tex="\triangle ACB = \triangle ADB">$AB$ is a common side, so the triangles are congruent by three sides (SSS).</Step>
+<Step hl="<CAB=<DAB" tex="\angle CAB = \angle DAB">Corresponding angles of congruent triangles are equal, so $AB$ is the bisector.</Step>
+<Step hl="ACO ADO" tex="\triangle ACO = \triangle ADO">$AC = AD$, $\angle CAO = \angle DAO$, and $AO$ is common (SAS).</Step>
+<Step hl="<AOC=<AOD" tex="\angle AOC = \angle AOD = \frac{180^\circ}{2} = 90^\circ \quad \blacksquare">These angles are equal and adjacent.</Step>
+</Problem>
+
+<Problem id="p-equal-crossing" figure="crossing" set={{ a: 2.6, b: 1.6, c: 1.6, d: 2.6, phi: 65 }} show="AC BC BD" given="AB=CD AO=OD" prove="AC=DB <ABC=<DCB" book="3.26"
+  q="Equal segments $AB$ and $CD$ meet at $O$ so that $AO = OD$. Prove that $\triangle ABC = \triangle DCB$."
+  hint="First prove that $OB = OC$.">
+<Step hl="OB=OC" tex="OB = AB - AO = CD - OD = OC">$AB = CD$ and $AO = OD$.</Step>
+<Step hl="OBC <OBC=<OCB" tex="\angle ABC = \angle DCB">Triangle $OBC$ is isosceles, so its base angles are equal.</Step>
+<Step hl="ABC DCB" tex="\triangle ABC = \triangle DCB \quad \blacksquare">$AB = DC$, $BC$ is common, and the angles between them are equal (SAS).</Step>
+</Problem>
+
+</Problems>

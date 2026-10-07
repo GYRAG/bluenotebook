@@ -1,0 +1,112 @@
+---
+title: Square
+slug: square
+subject: geometry
+section: quadrilaterals
+order: 23
+summary: A rectangle with equal sides, or a rhombus with right angles.
+tags: [rectangle, rhombus, diagonal]
+prerequisites: [rectangle, rhombus]
+status: draft
+figure: square
+parent: rectangle
+---
+
+<Definition>A square is a rectangle whose sides are all equal. Put differently, a square is a rhombus whose angles are all right. So it has every property of a parallelogram, a rectangle and a rhombus.</Definition>
+
+<Formulas>
+<Formula id="area-formula" name="Area" tex="S = a^2 = \tfrac{d^2}{2}" live="S" proof="area" />
+<Formula id="diagonal-formula" name="Diagonal" tex="d = a\sqrt2" live="d" proof="diagonal-length" />
+<Formula id="circumradius" name="Circumradius" tex="R = \tfrac{a\sqrt2}{2}" live="R" proof="circles" />
+<Formula id="inradius" name="Inradius" tex="r = \tfrac{a}{2}" live="r" proof="circles" />
+<Formula id="perimeter" name="Perimeter" tex="P = 4a" live="P" />
+</Formulas>
+
+<Properties>
+
+<Property id="diagonals" title="The diagonals of a square are equal, perpendicular and bisect each other" why="It is both a rectangle and a rhombus.">
+<Proof given="$ABCD$ a square" prove="$AC = BD,\ AC \perp BD,\ AO = OC,\ BO = OD$">
+<Step show="AC BD O" hl="AO=OC BO=OD">A square is a parallelogram: the diagonals bisect each other.</Step>
+<Step hl="AC=BD">A square is a rectangle: the diagonals are equal.</Step>
+<Step hl="<AOB">A square is a rhombus: the diagonals are perpendicular (and bisect the angles). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-angle" title="A diagonal makes a $45^\circ$ angle with a side" why="A diagonal cuts a square into two isosceles right triangles.">
+<Proof given="$ABCD$ a square" prove="$\angle BAC = 45^\circ$">
+<Step show="AC" hl="ABC AB=BC <B">In $\triangle ABC$, $AB = BC$ and $\angle B = 90^\circ$.</Step>
+<Step hl="<BAC=<BCA" tex="\angle BAC = \angle BCA = \tfrac{180^\circ - 90^\circ}{2} = 45^\circ \quad \blacksquare">The base angles of an isosceles triangle are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-length" title="The diagonal of a square equals $a\sqrt2$" why="Pythagoras with two equal legs.">
+<Proof given="$AB = BC = a$" prove="$AC = a\sqrt2$">
+<Step show="AC" hl="ABC <B" tex="AC^2 = a^2 + a^2 = 2a^2">Pythagoras' theorem in $\triangle ABC$.</Step>
+<Step tex="AC = a\sqrt2 \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="area" title="The area of a square is $a^2$, or $\tfrac{d^2}{2}$" why="The rectangle formula with $b = a$; and $d^2 = 2a^2$.">
+<Proof given="$AB = a,\ AC = d$" prove="$S = a^2 = \tfrac{d^2}{2}$">
+<Step hl="ABCD" tex="S = a \cdot a = a^2">The area of a rectangle is the product of its sides.</Step>
+<Step show="AC" hl="AC" tex="d^2 = 2a^2 \;\Rightarrow\; S = a^2 = \tfrac{d^2}{2} \quad \blacksquare">From the previous property.</Step>
+</Proof>
+</Property>
+
+<Property id="circles" title="A square has a circumscribed and an inscribed circle with the same centre" why="It is a rectangle (circumscribed) and a rhombus (inscribed).">
+<Proof given="$ABCD$ a square, $O = AC \cap BD$" prove="$R = \tfrac{a\sqrt2}{2},\ r = \tfrac{a}{2}$">
+<Step show="AC BD O (OA)" hl="(OA)" tex="R = \tfrac{d}{2} = \tfrac{a\sqrt2}{2}">As for a rectangle, the centre of the circumscribed circle is $O$ and the radius is half the diagonal.</Step>
+<Step show="OT T (OT)" hl="(OT) OT" tex="r = \tfrac{a}{2} \quad \blacksquare">As for a rhombus, the centre of the inscribed circle is $O$ too and the radius is half the height, and here the height is the side $a$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Criteria">
+
+<Property id="criterion-rectangle" kind="criterion" title="If the diagonals of a rectangle are perpendicular, it is a square" why="A parallelogram with perpendicular diagonals is a rhombus.">
+<Proof given="$ABCD$ a rectangle, $AC \perp BD$" prove="$ABCD$ a square">
+<Step show="AC BD O" hl="<AOB">A rectangle is a parallelogram, and a parallelogram with perpendicular diagonals is a rhombus.</Step>
+<Step hl="AB=BC=CD=DA">It is both a rectangle and a rhombus, that is, a square. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-rhombus" kind="criterion" title="If one angle of a rhombus is right (or its diagonals are equal), it is a square" why="Such a parallelogram is a rectangle.">
+<Proof given="$ABCD$ a rhombus, $\angle A = 90^\circ$ or $AC = BD$" prove="$ABCD$ a square">
+<Step hl="<A">A rhombus is a parallelogram. A parallelogram with a right angle (or equal diagonals) is a rectangle.</Step>
+<Step hl="AB=BC=CD=DA">It is both a rhombus and a rectangle, that is, a square. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Problems>
+
+<Problem id="p-square-diagonal" set={{ a: 4 }} show="AC" given="AC=12" find="AB S(ABCD)" answer="6√2 72" book="6.52 6.53"
+  q="The diagonal of a square is $12$. Find the side and the area of the square."
+  hint="$d = a\sqrt2$, and the area also equals $\tfrac{d^2}{2}$.">
+<Step hl="ABC" tex="\begin{gathered}AC^2 = AB^2 + BC^2 = 2\,AB^2 \\ AB = \frac{12}{\sqrt2} = 6\sqrt2\end{gathered}">Pythagoras' theorem in triangle $ABC$.</Step>
+<Step hl="ABCD" tex="S = AB^2 = 72">The area of the square.</Step>
+</Problem>
+
+<Problem id="p-square-outer" set={{ a: 2 }} show="EF FG GH HE AC BD" given="AC=12" find="P(EFGH)" answer="48" book="6.54"
+  q="The diagonal of a square is $12$. Through each vertex of the square a line is drawn parallel to the diagonal that does not pass through that vertex. Find the perimeter of the resulting quadrilateral $EFGH$."
+  hint="Each side of the new quadrilateral is parallel to one of the diagonals.">
+<Step hl="EF||AC AE||CF" tex="EF \parallel AC,\qquad AE \parallel CF">Each new line is parallel to one of the diagonals.</Step>
+<Step hl="ACFE" tex="EF = AC = 12">$ACFE$ is a parallelogram, so its opposite sides are equal.</Step>
+<Step hl="EFGH" tex="P = 4 \cdot 12 = 48">Likewise $FG = GH = HE = 12$, since the diagonals of a square are equal.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-square-inner" set={{ a: 4 }} show="A1B1 B1C1 C1D1 D1A1" prove="A1B1=B1C1 B1C1=C1D1 <D1A1B1=90" book="6.143"
+  q="Equal segments $AA_1 = BB_1 = CC_1 = DD_1$ are marked off on the sides $AB$, $BC$, $CD$ and $DA$ of a square. Prove that $A_1B_1C_1D_1$ is a square."
+  hint="Compare the four right triangles cut off at the corners.">
+<Step hl="A1BB1 D1AA1" tex="\begin{aligned}\triangle D_1AA_1 &= \triangle A_1BB_1 \\ &= \triangle B_1CC_1 = \triangle C_1DD_1\end{aligned}">All four are right triangles with legs $x$ and $a - x$, where $x = AA_1$ and $a$ is the side of the square (SAS).</Step>
+<Step hl="A1B1=B1C1 C1D1=D1A1" tex="A_1B_1 = B_1C_1 = C_1D_1 = D_1A_1">These are the hypotenuses of congruent triangles, so $A_1B_1C_1D_1$ is a rhombus.</Step>
+<Step hl="<AA1D1 <BA1B1 <D1A1B1" tex="\begin{aligned}\angle D_1A_1B_1 &= 180^\circ - (\angle AA_1D_1 + \angle BA_1B_1) \\ &= 90^\circ \quad \blacksquare\end{aligned}">$\angle AA_1D_1 = \angle BB_1A_1$, and $\angle BB_1A_1 + \angle BA_1B_1 = 90^\circ$. A rhombus with a right angle is a square.</Step>
+</Problem>
+
+</Problems>

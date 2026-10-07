@@ -9,11 +9,12 @@ import { stemKa } from '@/lib/ka-search';
 import glossary from './glossary.json';
 
 const files = import.meta.glob<string>('./topics/**/*.mdx', { query: '?raw', import: 'default', eager: true });
+const filesEn = import.meta.glob<string>('./topics-en/**/*.mdx', { query: '?raw', import: 'default', eager: true }); // per-topic checks only
 const specs = import.meta.glob<{ default: FigureSpec }>(['../figures/*.ts', '!../figures/registry.ts'], { eager: true });
 const spec = (name: string) => specs[`../figures/${name}.ts`]?.default;
 const pointsOf = (s: FigureSpec) => Object.keys(s.points(Object.fromEntries(Object.entries(s.params).map(([k, d]) => [k, d.value]))));
 
-for (const [path, src] of Object.entries(files)) {
+for (const [path, src] of Object.entries({ ...files, ...filesEn })) {
   const main = src.match(/^figure:\s*(\S+)/m)?.[1];
   const extras = src.match(/^figures:\s*\[([^\]]*)\]/m)?.[1]?.split(',').map(s => s.trim()).filter(Boolean) ?? [];
   const props = [...src.matchAll(/<Property\s+id="([^"]+)"[\s\S]*?<\/Property>/g)].map(m => ({

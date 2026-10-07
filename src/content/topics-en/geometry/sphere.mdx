@@ -1,0 +1,71 @@
+---
+title: Ball and sphere
+slug: sphere
+subject: geometry
+section: solids
+order: 57
+summary: A plane section of a ball, the volume of a ball and the area of a sphere.
+tags: [ball, sphere, section, volume, surface area]
+prerequisites: [cylinder-cone, perpendicularity]
+status: draft
+figure: sphere
+---
+
+<Definition>A **sphere** is the set of all points of space at distance $R$ from a given point (the centre). A **ball** is the solid bounded by a sphere.</Definition>
+
+<Formulas>
+<Formula id="section-formula" name="Radius of a section" tex="\rho = \sqrt{R^2 - d^2}" live="ρ" proof="section-radius" />
+<Formula id="volume-formula" name="Volume of a ball" tex="V = \tfrac43\,\pi R^3" live="V" proof="sphere-volume" />
+<Formula id="area-formula" name="Area of a sphere" tex="S = 4\pi R^2" proof="sphere-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="section-radius" title="A plane section of a ball is a disc whose centre is the foot of the perpendicular from the centre of the ball to the plane, and whose radius is $\sqrt{R^2 - d^2}$" why="Every point of the section is at distance $R$ from the centre, so all are equally far from the foot of the perpendicular.">
+<Proof given="A ball with centre $O$, a plane at distance $d$ from $O$, $OP$ the perpendicular" prove="The points of the section are at distance $\sqrt{R^2 - d^2}$ from $P$">
+<Step show="OP P" hl="OP">$OP \perp$ the plane, $OP = d$.</Step>
+<Step show="PK OK K <OPK" hl="OPK" tex="PK^2 = OK^2 - OP^2 = R^2 - d^2">For any point $K$ of the section: $\triangle OPK$ is right, $OK = R$.</Step>
+<Step tex="PK = \sqrt{R^2 - d^2} \quad \blacksquare">The distance does not depend on $K$: the section is a disc bounded by a circle with centre $P$.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-volume" title="The volume of a ball is $\tfrac43\pi R^3$" why="At every height the section of a half-ball equals the difference of the sections of a cylinder and a cone (Archimedes).">
+<Proof given="A ball of radius $R$" prove="$V = \tfrac43 \pi R^3$">
+<Step tex="\pi(R^2 - z^2) = \pi R^2 - \pi z^2">At height $z$ from the centre the area of the section of the ball is $\pi(R^2 - z^2)$ (previous property).</Step>
+<Step>Take a cylinder with radius and height $R$, with a cone cut out of it that has the same base and its apex at the centre of the lower base. At height $z$ its section is a ring of area $\pi R^2 - \pi z^2$, exactly equal to the section of the half-ball.</Step>
+<Step tex="V_{1/2} = \pi R^2 \cdot R - \tfrac13\,\pi R^2 \cdot R = \tfrac23\,\pi R^3">By Cavalieri's principle the volumes are equal too.</Step>
+<Step tex="V = \tfrac43\,\pi R^3 \quad \blacksquare">Two half-balls.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-area" title="The area of a sphere is $4\pi R^2$" why="The ball splits into thin pyramids with apex at the centre and height $R$.">
+<Proof given="A sphere of radius $R$" prove="$S = 4\pi R^2$">
+<Step>Divide the sphere into small pieces and join each to the centre: the ball becomes a sum of pyramids whose height in the limit is $R$, and the sum of the areas of their bases is $S$.</Step>
+<Step tex="V = \tfrac13\, S\, R">The sum of the volumes of the pyramids.</Step>
+<Step tex="S = \frac{3V}{R} = \frac{3}{R} \cdot \tfrac43\,\pi R^3 = 4\pi R^2 \quad \blacksquare">By the previous property $V = \tfrac43 \pi R^3$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>A plane that touches a sphere at one point is a **tangent plane**; it is perpendicular to the radius drawn to the point of tangency (the radius of the section is $\rho = 0$ when $d = R$).</Remark>
+
+<Remark kind="mistake">A "sphere" is a surface (area $4\pi R^2$), a "ball" is a solid (volume $\tfrac43 \pi R^3$).</Remark>
+
+<Problems>
+
+<Problem id="p-sphere-section" set={{ R: 2.5, d: 0.5487804878048781 }} show="OP PK OK P K <OPK" given="OK=41 OP=9" find="PK" answer="40" book="19.28 19.29"
+  q="The radius of a ball is $41$. A plane at distance $9$ from the centre cuts it. Find the radius of the section."
+  hint="The foot of the perpendicular from the centre to the plane of the section is the centre of the section.">
+<Step hl="OP <OPK" tex="OP \perp PK">$P$ is the centre of the section, and $OP$ is perpendicular to the plane.</Step>
+<Step hl="OPK PK" tex="PK = \sqrt{41^2 - 9^2} = \sqrt{1600} = 40">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-sphere-volume" k={2} set={{ R: 2.5, d: 1.4 }} show="OK" given="4*π*OK^2=100π" find="OK 4*π*OK^3/3" labels="R;V" answer="5 500π/3" book="23.1"
+  q="The area of a sphere is $100\pi$. Find the radius and the volume of the ball."
+  hint="The area of a sphere is $4\pi R^2$.">
+<Step hl="OK" tex="4\pi R^2 = 100\pi \;\Rightarrow\; R = 5">The formula for the area of a sphere.</Step>
+<Step tex="V = \tfrac43 \pi R^3 = \frac{500\pi}{3}">The volume of the ball.</Step>
+</Problem>
+
+</Problems>

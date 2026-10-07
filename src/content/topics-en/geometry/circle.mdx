@@ -1,0 +1,164 @@
+---
+title: Circle, chord and tangent
+slug: circle
+subject: geometry
+section: circles
+order: 25
+summary: Properties of chords and tangents, two tangents from one point, common tangents of two circles.
+tags: [circle, radius, diameter, chord, tangent, secant, common tangent]
+prerequisites: [congruence, isosceles-triangle, right-triangle]
+status: draft
+figure: circle
+figures: [two-circles]
+---
+
+<Definition>A **circle** is the set of all points of the plane at the same distance $R$ from a given point (the **centre**); $R$ is the **radius**. A segment joining two points of the circle is a **chord**, and a chord through the centre is a **diameter** ($2R$). A line with exactly one common point with the circle is a **tangent**; a line that cuts the circle at two points is a **secant**.</Definition>
+
+<Formulas>
+<Formula id="chord-length-formula" name="A chord and its distance from the centre" tex="AB = 2\sqrt{R^2 - d^2}" live="AB" proof="chord-length" />
+<Formula id="tangent-length-formula" name="The tangent segment" tex="PT^2 = OP^2 - R^2" live="PT" proof="tangent-length" />
+<Formula id="two-tangents-formula" name="Two tangents from one point" tex="PT_1 = PT_2, \qquad \angle OPT_1 = \angle OPT_2" proof="two-tangents" />
+<Formula id="outer-tangent-formula" name="An external common tangent of two circles" tex="K_1K_2 = \sqrt{d^2 - (R - r)^2}" proof="outer-tangent" />
+<Formula id="inner-tangent-formula" name="An internal common tangent of two circles" tex="L_1L_2 = \sqrt{d^2 - (R + r)^2}" proof="inner-tangent" />
+</Formulas>
+
+<Properties title="Chord">
+
+<Property id="chord-perpendicular" title="The perpendicular from the centre to a chord bisects the chord" why="$OA = OB$, so $\triangle OAB$ is isosceles, and the height to its base is also a median.">
+<Proof given="$AB$ a chord, $OM \perp AB$" prove="$AM = MB$">
+<Step show="OA OB OM M <OMB" hl="OA=OB">$OA = OB = R$: $\triangle OAB$ is isosceles.</Step>
+<Step hl="OM <OMB">$OM$ is the height to the base.</Step>
+<Step hl="AM=MB" tex="AM = MB \quad \blacksquare">In an isosceles triangle the height to the base is also a median.</Step>
+</Proof>
+</Property>
+
+<Remark>Conversely, the diameter through the midpoint of a chord is perpendicular to the chord (unless the chord is itself a diameter).</Remark>
+
+<Property id="chord-length" title="The length of a chord is $AB = 2\sqrt{R^2 - d^2}$, where $d$ is the distance from the centre to the chord" why="The radius, half the chord and $d$ form a right triangle.">
+<Proof given="$OM = d$, $OM \perp AB$" prove="$AB = 2\sqrt{R^2 - d^2}$">
+<Step show="OA OM M <OMA" hl="OAM" tex="AM^2 = OA^2 - OM^2 = R^2 - d^2">Pythagoras' theorem in the right triangle $\triangle OMA$.</Step>
+<Step hl="AB" tex="AB = 2\,AM = 2\sqrt{R^2 - d^2} \quad \blacksquare">By the previous property $M$ is the midpoint of the chord.</Step>
+</Proof>
+</Property>
+
+<Property id="equal-chords" title="Equal chords are equally far from the centre; conversely, chords equally far from the centre are equal" why="The length of a chord depends only on $R$ and its distance from the centre.">
+<Proof given="$AB$ and $CD$ chords, $OM \perp AB$, $ON \perp CD$" prove="$AB = CD \iff OM = ON$">
+<Step show="CD C D OA OB OC OD" hl="OAB OCD">Two chords and the radii to their ends: $OA = OB = OC = OD = R$.</Step>
+<Step show="OM ON M N" hl="OM ON" tex="OM^2 = R^2 - \tfrac14 AB^2, \qquad ON^2 = R^2 - \tfrac14 CD^2">By the previous property.</Step>
+<Step hl="OM=ON AB=CD" tex="AB = CD \iff OM = ON \quad \blacksquare">Distances and lengths are positive, so each equality is equivalent to the other.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Tangent">
+
+<Property id="tangent-radius" title="A tangent is perpendicular to the radius drawn to the point of tangency" why="The radius is the shortest distance from the centre to the tangent: every other point of the tangent lies outside the circle.">
+<Proof given="$PT_1$ a tangent, $T_1$ the point of tangency" prove="$OT_1 \perp PT_1$">
+<Step show="OT1" hl="OT1 PT1">Every point of the tangent apart from $T_1$ lies outside the circle, so its distance from the centre is greater than $R$.</Step>
+<Step tex="OH < OT_1 = R">Suppose $OT_1$ is not perpendicular to the tangent, and let $OH$ be the perpendicular from $O$ to the tangent, $H \ne T_1$. In the right triangle $\triangle OHT_1$ a leg is shorter than the hypotenuse.</Step>
+<Step hl="<OT1P">Then $H$ would lie inside the circle and the line would cut the circle at two points, so it would not be a tangent. Hence $OT_1 \perp PT_1$. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>Conversely, a line through the end of a radius and perpendicular to that radius is a tangent.</Remark>
+
+<Property id="two-tangents" title="The tangent segments from one point to a circle are equal, and the centre lies on the bisector of the angle between them" why="Two right triangles with a common hypotenuse and equal legs.">
+<Proof given="$PT_1$, $PT_2$ tangents" prove="$PT_1 = PT_2,\ \angle OPT_1 = \angle OPT_2$">
+<Step show="OT1 OT2 OP <OT1P <OT2P" hl="<OT1P <OT2P">A tangent is perpendicular to the radius: $\angle OT_1P = \angle OT_2P = 90^\circ$.</Step>
+<Step hl="OT1P OT2P OT1=OT2" tex="\triangle OT_1P = \triangle OT_2P">$OP$ is a common hypotenuse and $OT_1 = OT_2 = R$: congruent by the hypotenuse and a leg.</Step>
+<Step hl="PT1=PT2 <OPT1=<OPT2" tex="PT_1 = PT_2, \qquad \angle OPT_1 = \angle OPT_2 \quad \blacksquare">Corresponding parts of congruent triangles.</Step>
+</Proof>
+</Property>
+
+<Property id="tangent-length" title="The tangent segment: $PT^2 = OP^2 - R^2$" why="Pythagoras' theorem in the right triangle $\triangle OTP$.">
+<Proof given="$PT_1$ a tangent" prove="$PT_1^2 = OP^2 - R^2$">
+<Step show="OT1 OP <OT1P" hl="OT1P" tex="PT_1^2 = OP^2 - OT_1^2 = OP^2 - R^2 \quad \blacksquare">$\angle OT_1P = 90^\circ$: Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Two circles">
+
+<Property id="outer-tangent" title="The external common tangent segment of two circles is $\sqrt{d^2 - (R - r)^2}$" why="Translating the tangent to a centre forms a right triangle with a leg $R - r$.">
+<Proof figure="two-circles" given="Circles $(O_1, R)$ and $(O_2, r)$, $O_1O_2 = d$; $K_1K_2$ an external common tangent" prove="$K_1K_2 = \sqrt{d^2 - (R - r)^2}$">
+<Step show="O1K1 O2K2" hl="O1K1 O2K2 <O1K1K2 <O2K2K1">The radii to the points of tangency are perpendicular to the tangent, so $O_1K_1 \parallel O_2K_2$.</Step>
+<Step show="O2F F" hl="O2F K1K2">From $O_2$ draw $O_2F \parallel K_2K_1$, $F \in O_1K_1$. $FK_1K_2O_2$ is a rectangle: $O_2F = K_1K_2$, $FK_1 = r$.</Step>
+<Step show="O1O2" hl="O1FO2 <O1FO2" tex="O_1F = R - r, \qquad O_1O_2 = d">$\triangle O_1FO_2$ has a right angle at $F$.</Step>
+<Step tex="K_1K_2 = O_2F = \sqrt{d^2 - (R - r)^2} \quad \blacksquare">Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Property id="inner-tangent" title="The internal common tangent segment of two circles is $\sqrt{d^2 - (R + r)^2}$" why="The same translation, but the radii are on different sides of the tangent, so the leg is $R + r$.">
+<Proof figure="two-circles" given="$L_1L_2$ an internal common tangent, $O_1O_2 = d$" prove="$L_1L_2 = \sqrt{d^2 - (R + r)^2}$">
+<Step show="O1L1 O2L2" hl="O1L1 O2L2 <O1L1L2 <O2L2L1">The radii are perpendicular to the tangent; $O_1L_1 \parallel O_2L_2$, but they are on different sides of the tangent.</Step>
+<Step show="L1G O2G G" hl="O2G L1L2">Extend $O_1L_1$ and mark off $L_1G = r$. $L_1GO_2L_2$ is a rectangle: $GO_2 = L_1L_2$.</Step>
+<Step show="O1O2" hl="O1GO2 <O1GO2" tex="O_1G = R + r, \qquad O_1O_2 = d">$\triangle O_1GO_2$ has a right angle at $G$.</Step>
+<Step tex="L_1L_2 = GO_2 = \sqrt{d^2 - (R + r)^2} \quad \blacksquare">Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Remark>How two circles can lie ($d$ the distance between the centres, $R \ge r$): $d > R + r$, each outside the other (4 common tangents); $d = R + r$, touching externally (3); $R - r < d < R + r$, intersecting (2); $d = R - r$, touching internally (1); $d < R - r$, one inside the other (0).</Remark>
+
+</Properties>
+
+<Remark kind="mistake">In $PT^2 = OP^2 - R^2$, $OP$ is the distance to the centre, not to the circle. The shortest distance from $P$ to the circle is $OP - R$.</Remark>
+
+<Problems>
+
+<Problem id="p-point-circle" set={{ R: 2.8, p: 4.2, tP: 20 }} show="OA PQ2 Q1 Q2" given="OA=10 OP=15" find="PQ1 PQ2" answer="5 25" book="5.1"
+  q="The radius of a circle is $10$ cm, and the point $P$ is $15$ cm from the centre. The line $OP$ cuts the circle at $Q_1$ and $Q_2$. Find $PQ_1$ and $PQ_2$."
+  hint="One point of intersection is between $P$ and $O$, the other beyond $O$.">
+<Step hl="OQ1 OQ2" tex="OQ_1 = OQ_2 = 10">Both points lie on the circle, so they are one radius away from the centre.</Step>
+<Step hl="PQ1" tex="PQ_1 = OP - OQ_1 = 15 - 10 = 5">$Q_1$ lies between $P$ and $O$.</Step>
+<Step hl="PQ2" tex="PQ_2 = OP + OQ_2 = 15 + 10 = 25">$Q_2$ lies beyond $O$.</Step>
+</Problem>
+
+<Problem id="p-chord-arc" set={{ R: 2.8, tA: 210, tB: 330 }} show="OA OB OM <OMB" given="OA=14 <AOB=120" find="OM" answer="7" book="5.10 5.11"
+  q="A chord $AB$ of a circle of radius $14$ cm subtends a $120^\circ$ arc. Find the distance from the centre to the chord."
+  hint="The perpendicular from the centre to a chord bisects both the chord and the central angle.">
+<Step hl="<AOB" tex="\angle AOB = 120^\circ">A central angle equals the arc it stands on.</Step>
+<Step hl="OM <AOM=<MOB <OMB" tex="\angle AOM = 60^\circ,\qquad \angle OAM = 30^\circ">$OA = OB$, so the perpendicular $OM$ is also a bisector of the isosceles triangle $AOB$.</Step>
+<Step hl="OAM OM" tex="OM = \tfrac12\, OA = 7">In the right triangle $OAM$ the leg $OM$ is opposite the $30^\circ$ angle.</Step>
+</Problem>
+
+<Problem id="p-chord-length" set={{ R: 2.6, tA: 200, tB: 334.76027010391914 }} show="OA OM <OMB" given="OA=13 OM=5" find="AB" answer="24" book="5.5 5.6"
+  q="A chord of a circle of radius $13$ cm is $5$ cm from the centre. Find the length of the chord."
+  hint="The perpendicular from the centre to a chord bisects the chord.">
+<Step hl="OM AM=MB <OMB">The perpendicular from the centre to a chord bisects the chord: $AM = MB$.</Step>
+<Step hl="OAM" tex="AM = \sqrt{OA^2 - OM^2} = \sqrt{169 - 25} = 12">Pythagoras' theorem in the right triangle $OAM$.</Step>
+<Step hl="AB" tex="AB = 2\,AM = 24">The chord is made of two such halves.</Step>
+</Problem>
+
+<Problem id="p-tangents-angle" set={{ R: 2.5, p: 5, tP: 10 }} show="OT1 OT2 OP <OT1P <OT2P" given="OT1=6 <T1PT2=60" find="OP PT1" answer="12 6√3"
+  q="The angle between the tangents drawn from a point $P$ outside a circle is $60^\circ$, and the radius of the circle is $6$. Find the distance from $P$ to the centre and the tangent segment $PT_1$."
+  hint="The radius at the point of tangency is perpendicular to the tangent, and the centre lies on the bisector of the angle between the tangents.">
+<Step hl="<OT1P <OT2P">The radii $OT_1$ and $OT_2$ are perpendicular to the tangents.</Step>
+<Step hl="<T1PO=<OPT2" tex="\angle OPT_1 = 30^\circ">The centre lies on the bisector of the angle between the tangents.</Step>
+<Step hl="OT1P OP" tex="OP = 2\,OT_1 = 12">In the right triangle $OT_1P$ the leg $OT_1$ is opposite the $30^\circ$ angle.</Step>
+<Step hl="PT1" tex="PT_1 = \sqrt{OP^2 - OT_1^2} = \sqrt{144 - 36} = 6\sqrt3">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-common-tangents" figure="two-circles" set={{ R: 2.3333333333333335, r: 0.6666666666666666, d: 4.333333333333333 }} show="O1O2" given="O1K1=7 O2K2=2 O1O2=13" find="K1K2 L1L2" answer="12 2√22"
+  q="The radii of two circles are $7$ and $2$, and the distance between their centres is $13$. Find the segments of their external common tangent $K_1K_2$ and internal common tangent $L_1L_2$."
+  hint="Translate the tangent through one of the centres: you get a right triangle.">
+<Step show="O1K1 O2K2 O2F" hl="O1F O2F" tex="O_1F = 7 - 2 = 5">Through $O_2$ draw a line parallel to $K_1K_2$; it cuts $O_1K_1$ at $F$, and $O_2F = K_1K_2$.</Step>
+<Step hl="O1FO2" tex="K_1K_2 = O_2F = \sqrt{13^2 - 5^2} = 12">Triangle $O_1FO_2$ is right: the radii are perpendicular to the tangent.</Step>
+<Step show="O1L1 O2L2 O2G" hl="O1G O2G" tex="O_1G = 7 + 2 = 9">For the internal tangent: the line through $O_2$ parallel to $L_1L_2$ cuts the extension of $O_1L_1$ at $G$.</Step>
+<Step hl="O1GO2" tex="L_1L_2 = O_2G = \sqrt{13^2 - 9^2} = \sqrt{88} = 2\sqrt{22}">In the right triangle $O_1GO_2$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-tangents-chord-perp" set={{ R: 2.5, p: 4.6, tP: 10 }} show="OP T1T2 OT1 OT2" prove="<PHT1=90 T1H=HT2" book="5.67"
+  q="Tangents $PT_1$ and $PT_2$ are drawn from a point $P$ outside a circle. The line $OP$ cuts the chord $T_1T_2$ at $H$. Prove that $OP \perp T_1T_2$ and $T_1H = HT_2$."
+  hint="What kind of triangle is $T_1PT_2$, and what role does $PH$ play in it?">
+<Step hl="PT1=PT2" tex="PT_1 = PT_2">The tangent segments from one point are equal, so triangle $T_1PT_2$ is isosceles.</Step>
+<Step hl="<T1PH=<HPT2" tex="\angle T_1PH = \angle HPT_2">The centre lies on the bisector of the angle between the tangents, so $PH$ is a bisector.</Step>
+<Step hl="<PHT1 T1H=HT2" tex="PH \perp T_1T_2,\qquad T_1H = HT_2 \quad \blacksquare">In an isosceles triangle the bisector from the apex is also a height and a median.</Step>
+</Problem>
+
+</Problems>

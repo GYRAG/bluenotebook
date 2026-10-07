@@ -1,0 +1,161 @@
+---
+title: Isosceles triangle
+slug: isosceles-triangle
+subject: geometry
+section: triangles
+order: 11
+summary: "Two equal sides: equal base angles, one line in three roles. The equilateral triangle."
+tags: [base, leg, equilateral, bisector, median, altitude]
+prerequisites: [triangle, congruence]
+status: draft
+figure: isosceles-triangle
+parent: triangle
+---
+
+<Definition>A triangle is **isosceles** if two of its sides are equal. The equal sides are the **legs**, the third is the **base**. A triangle with all three sides equal is **equilateral**, a special case of an isosceles triangle.</Definition>
+
+<Formulas>
+<Formula id="height-formula" name="Altitude to the base" tex="h = \sqrt{b^2 - \tfrac{a^2}{4}}" live="h" proof="three-in-one" />
+<Formula id="equilateral-height-formula" name="Equilateral: altitude" tex="h = \frac{a\sqrt3}{2}" proof="equilateral-height" />
+<Formula id="equilateral-area-formula" name="Equilateral: area" tex="S = \frac{a^2\sqrt3}{4}" proof="equilateral-height" />
+<Formula id="equilateral-radii-formula" name="Equilateral: radii of the circles" tex="R = \frac{a}{\sqrt3} = \frac{a\sqrt3}{3}, \qquad r = \frac{a\sqrt3}{6}, \qquad R = 2r" proof="equilateral-radii" />
+<Formula id="equilateral-angles-formula" name="Equilateral: angles" tex="\alpha = \beta = \gamma = 60^\circ" proof="equilateral-angles" />
+</Formulas>
+
+<Properties>
+
+<Property id="base-angles-equal" title="The base angles of an isosceles triangle are equal" why="The bisector of the apex angle cuts the triangle into two congruent halves.">
+<Proof given="$AB = AC$" prove="$\angle B = \angle C$">
+<Step show="AH H" hl="AH">Draw the bisector $AH$ of angle $A$ ($H$ on $BC$).</Step>
+<Step hl="ABH ACH AB=AC" tex="\triangle ABH = \triangle ACH">$AB = AC$, $AH$ is common, $\angle BAH = \angle CAH$: the triangles are congruent by two sides and the angle between them (SAS).</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C \quad \blacksquare">Corresponding angles are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="three-in-one" title="In an isosceles triangle the bisector to the base is also a median and an altitude" why="The same two congruent triangles: the base is halved and the angles at $H$ are equal.">
+<Proof given="$AB = AC$, $AH$ a bisector" prove="$BH = HC,\ AH \perp BC$">
+<Step show="AH H" hl="ABH ACH" tex="\triangle ABH = \triangle ACH">From the proof of the previous property.</Step>
+<Step hl="BH=HC" tex="BH = HC">Corresponding sides: $AH$ is a median.</Step>
+<Step hl="<AHB=<AHC" tex="\angle AHB = \angle AHC = \tfrac{180^\circ}{2} = 90^\circ \quad \blacksquare">These equal angles together form a straight angle, so $AH$ is also an altitude.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-base-angles" kind="converse" title="If two angles of a triangle are equal, it is isosceles" why="The altitude from the vertex of the equal angles forms two congruent right triangles.">
+<Proof given="$\angle B = \angle C$" prove="$AB = AC$">
+<Step show="AH H <AHC" hl="AH">Draw the altitude $AH$. $\angle B$ and $\angle C$ are equal and add up to less than $180^\circ$, so both are acute and $H$ lies on $BC$.</Step>
+<Step hl="ABH ACH <B=<C" tex="\triangle ABH = \triangle ACH">The right triangles share the leg $AH$, and the acute angles opposite it are equal.</Step>
+<Step hl="AB=AC" tex="AB = AC \quad \blacksquare">The hypotenuses are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-median-altitude" kind="converse" title="If a median of a triangle is also an altitude, the triangle is isosceles" why="A median perpendicular to the base is the perpendicular bisector of the base.">
+<Proof given="$BH = HC$, $AH \perp BC$" prove="$AB = AC$">
+<Step show="AH H <AHC" hl="BH=HC">$AH$ is both a median and an altitude.</Step>
+<Step hl="ABH ACH" tex="\triangle ABH = \triangle ACH">$BH = HC$, $AH$ is common, the angles at $H$ are right: SAS.</Step>
+<Step hl="AB=AC" tex="AB = AC \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Equilateral triangle">
+
+<Property id="equilateral-angles" title="All angles of an equilateral triangle are $60^\circ$" why="Every pair of sides is equal, so every pair of angles is too.">
+<Proof given="$AB = BC = CA$" prove="$\angle A = \angle B = \angle C = 60^\circ$">
+<Step set={{ theta: 60 }} hl="AB=AC <B=<C">$AB = AC$, so $\angle B = \angle C$.</Step>
+<Step hl="BA=BC <A=<C">$BA = BC$, so $\angle A = \angle C$.</Step>
+<Step hl="<A <B <C" tex="3\angle A = 180^\circ \;\Rightarrow\; \angle A = \angle B = \angle C = 60^\circ \quad \blacksquare">All three angles are equal and add up to $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="equilateral-height" title="The altitude of an equilateral triangle is $\tfrac{a\sqrt3}{2}$, its area $\tfrac{a^2\sqrt3}{4}$" why="The altitude is also a median, so Pythagoras with sides $a$ and $\tfrac{a}{2}$.">
+<Proof given="$AB = BC = CA = a$, $AH \perp BC$" prove="$AH = \tfrac{a\sqrt3}{2},\ S = \tfrac{a^2\sqrt3}{4}$">
+<Step set={{ theta: 60 }} show="AH H <AHC" hl="BH=HC" tex="BH = \tfrac{a}{2}">The altitude is also a median.</Step>
+<Step hl="ABH" tex="AH^2 = a^2 - \tfrac{a^2}{4} = \tfrac{3a^2}{4} \;\Rightarrow\; AH = \tfrac{a\sqrt3}{2}">Pythagoras in $\triangle ABH$.</Step>
+<Step hl="ABC" tex="S = \tfrac12 \cdot a \cdot \tfrac{a\sqrt3}{2} = \tfrac{a^2\sqrt3}{4} \quad \blacksquare">The area of a triangle: half the product of the base and the height.</Step>
+</Proof>
+</Property>
+
+<Property id="equilateral-radii" title="In an equilateral triangle the centres of the inscribed and circumscribed circles coincide, and $R = 2r = \tfrac{a\sqrt3}{3}$" why="Every altitude is also a median and a bisector, and the medians divide each other in the ratio $2 : 1$.">
+<Proof given="$\triangle ABC$ equilateral with side $a$, $G$ where the medians meet" prove="$R = \tfrac{a\sqrt3}{3},\ r = \tfrac{a\sqrt3}{6}$">
+<Step set={{ theta: 60 }} show="AH H G" hl="AH">$AH$ is an altitude, a median and a bisector; the same holds from all three vertices.</Step>
+<Step hl="GA GB GC">So $G$ is at once where the bisectors meet (the incentre) and where the perpendicular bisectors meet (the circumcentre).</Step>
+<Step show="(GA)" hl="AG" tex="R = AG = \tfrac23 h = \tfrac23 \cdot \frac{a\sqrt3}{2} = \frac{a\sqrt3}{3}">The point where the medians meet divides a median from the vertex in the ratio $2 : 1$.</Step>
+<Step show="(GH)" hl="GH" tex="r = GH = \tfrac13 h = \frac{a\sqrt3}{6} = \frac{R}{2} \quad \blacksquare">$GH \perp BC$, so $GH$ is the radius of the inscribed circle.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">“Bisector = median = altitude” holds only for the line to the base; for the lines to the legs these three are in general different.</Remark>
+
+<Problems>
+
+<Problem id="p-iso-perimeter" k={3} set={{ b: 4, theta: 49.248636704328156 }} given="P(ABC)=34 AB-BC=2" find="AB BC" answer="12 10" book="3.2 3.3 3.4"
+  q="The perimeter of an isosceles triangle is $34$ cm, and the base is $2$ cm shorter than a leg. Find the sides of the triangle."
+  hint="Call a leg $x$ and write the perimeter in terms of it.">
+<Step hl="AB=AC" tex="x + x + (x - 2) = 34">The legs are equal: $AB = AC = x$, and the base is $BC = x - 2$.</Step>
+<Step tex="3x = 36 \;\Rightarrow\; x = 12,\qquad BC = 10">Solve the equation.</Step>
+</Problem>
+
+<Problem id="p-median-parts" k={2.5} set={{ b: 4, theta: 40.974630229445324 }} show="BK" given="BC+CK=12 BA+AK=15" find="AB BC" answer="10 7" book="3.6 3.7"
+  q="The median to a leg of an isosceles triangle divides its perimeter into two parts: the part containing the base is $12$ cm, the other $15$ cm. Find the sides of the triangle."
+  hint="The median halves the leg.">
+<Step hl="BK AK=KC" tex="AK = KC = \tfrac{x}{2}">$BK$ is a median, and the legs are $AB = AC = x$.</Step>
+<Step hl="AB AK" tex="AB + AK = x + \tfrac{x}{2} = 15 \;\Rightarrow\; x = 10">The part without the base is $BA + AK$.</Step>
+<Step hl="BC CK" tex="BC + CK = BC + 5 = 12 \;\Rightarrow\; BC = 7">The part containing the base.</Step>
+</Problem>
+
+<Problem id="p-iso-perp-bisector" set={{ b: 4, theta: 136.42642140347638 }} show="NE AE <ENA" given="AB=14 P(AEC)=40" find="BC" answer="26" book="3.14 3.15"
+  q="In isosceles triangle $ABC$, $AB = AC = 14$. The perpendicular bisector of the leg $AB$ meets the base $BC$ at $E$, and the perimeter of triangle $AEC$ is $40$. Find $BC$."
+  hint="Every point of a perpendicular bisector is equidistant from the ends of the segment.">
+<Step hl="NE AE=EB" tex="AE = EB">$E$ lies on the perpendicular bisector of $AB$.</Step>
+<Step hl="AEC" tex="\begin{aligned}P_{AEC} &= AE + EC + AC \\ &= BE + EC + AC \\ &= BC + 14\end{aligned}">Substitute $AE = BE$.</Step>
+<Step hl="BC" tex="BC + 14 = 40 \;\Rightarrow\; BC = 26">Solve the equation.</Step>
+</Problem>
+
+<Problem id="p-iso-height-angle" set={{ b: 4, theta: 36 }} show="BQ <BQC" given="<QBC=18" find="<A <B" answer="36 72" book="4.15 4.16"
+  q="The altitude to a leg of an isosceles triangle makes an $18^\circ$ angle with the base. Find the angles of the triangle."
+  hint="Look at the right triangle $BQC$.">
+<Step hl="BQC <BQC" tex="\angle C = 90^\circ - 18^\circ = 72^\circ">In the right triangle $BQC$ the acute angles add up to $90^\circ$.</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C = 72^\circ">The base angles are equal.</Step>
+<Step hl="<A" tex="\angle A = 180^\circ - 2 \cdot 72^\circ = 36^\circ">The angles of a triangle add up to $180^\circ$.</Step>
+</Problem>
+
+<Problem id="p-iso-obtuse-height" set={{ b: 3, theta: 120 }} show="BQ AQ <BQC" given="<B=30" find="<ABQ" answer="30" book="4.12 4.13"
+  q="The base angle of an isosceles triangle is $30^\circ$. Find the angle between a leg and the altitude to the other leg."
+  hint="The apex angle is obtuse, so the foot of the altitude lands on the extension of the leg.">
+<Step hl="<A" tex="\angle A = 180^\circ - 2 \cdot 30^\circ = 120^\circ">The base angles are equal.</Step>
+<Step hl="<BAQ" tex="\angle BAQ = 180^\circ - 120^\circ = 60^\circ">$Q$ lies on the extension of $CA$, so $\angle BAQ$ is the exterior angle of the triangle at vertex $A$.</Step>
+<Step hl="ABQ <ABQ" tex="\angle ABQ = 90^\circ - 60^\circ = 30^\circ">In the right triangle $ABQ$ the acute angles add up to $90^\circ$.</Step>
+</Problem>
+
+<Problem id="p-iso-exterior" set={{ b: 4, theta: 110 }} given="180-<A=70" find="<A <B" answer="110 35" book="4.36"
+  q="One exterior angle of an isosceles triangle is $70^\circ$. Find the angles of the triangle."
+  hint="Can this exterior angle be at the base?">
+<Step hl="<B <C">The base angles are equal and therefore acute; the exterior angles next to them exceed $90^\circ$. So the $70^\circ$ exterior angle is at the apex.</Step>
+<Step show="AX" hl="<XAC <A" tex="\angle A = 180^\circ - 70^\circ = 110^\circ">$\angle A$ is adjacent to this exterior angle.</Step>
+<Step hl="<B=<C" tex="\angle B = \angle C = \frac{180^\circ - 110^\circ}{2} = 35^\circ">The base angles are equal.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-iso-exterior-bisector" set={{ b: 4, theta: 70 }} show="AX AY" given="<XAY=<YAC" prove="<YAC=<ACB" book="4.54"
+  q="Prove that the bisector of the exterior angle at the apex of an isosceles triangle is parallel to the base."
+  hint="The exterior angle equals the sum of the two base angles.">
+<Step hl="<XAC <B <C" tex="\angle XAC = \angle B + \angle C = 2\angle C">An exterior angle equals the sum of the two interior angles not adjacent to it, and $\angle B = \angle C$.</Step>
+<Step hl="<YAC=<ACB" tex="\angle YAC = \tfrac12 \angle XAC = \angle C">$AY$ is a bisector.</Step>
+<Step hl="AY||BC" tex="AY \parallel BC \quad \blacksquare">$\angle YAC$ and $\angle ACB$ are alternate interior angles for the lines $AY$ and $BC$ and the transversal $AC$.</Step>
+</Problem>
+
+<Problem id="p-iso-midpoints" set={{ b: 4, theta: 50 }} show="NK KH HN" prove="HN=HK" book="3.19"
+  q="Prove that the midpoints of the sides of an isosceles triangle are the vertices of an isosceles triangle."
+  hint="Compare triangles $BNH$ and $CKH$.">
+<Step hl="BN=CK" tex="BN = \tfrac12 AB = \tfrac12 AC = CK">$N$ and $K$ are the midpoints of the legs.</Step>
+<Step hl="BNH CKH <B=<C BH=HC" tex="\triangle BNH = \triangle CKH">$BH = HC$ and $\angle B = \angle C$: the triangles are congruent (SAS).</Step>
+<Step hl="HN=HK" tex="HN = HK \quad \blacksquare">These are corresponding sides of congruent triangles, so triangle $NHK$ is isosceles.</Step>
+</Problem>
+
+</Problems>

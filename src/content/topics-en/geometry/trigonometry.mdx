@@ -1,0 +1,113 @@
+---
+title: Sine, cosine and tangent in a right triangle
+slug: trigonometry
+subject: geometry
+section: triangles
+order: 13
+summary: The sine, cosine, tangent and cotangent of an acute angle; the basic identities and the values at 30, 45 and 60 degrees.
+tags: [sine, cosine, tangent, cotangent, right triangle]
+prerequisites: [right-triangle, similarity]
+status: draft
+figure: trig-triangle
+---
+
+<Definition>In a right triangle ($\angle C = 90^\circ$) the **sine** of the acute angle $\alpha = \angle A$ is the ratio of the opposite leg to the hypotenuse, the **cosine** is the adjacent leg over the hypotenuse, the **tangent** is the opposite leg over the adjacent one, and the **cotangent** is the adjacent leg over the opposite one.</Definition>
+
+<Formulas>
+<Formula id="sin-formula" name="Sine" tex="\sin\alpha = \frac{a}{c}" live="sin α" proof="trig-angle-only" />
+<Formula id="cos-formula" name="Cosine" tex="\cos\alpha = \frac{b}{c}" live="cos α" proof="trig-angle-only" />
+<Formula id="tg-formula" name="Tangent and cotangent" tex="\tan\alpha = \frac{a}{b}, \qquad \cot\alpha = \frac{b}{a}" live="tg α" proof="tan-ratio" />
+<Formula id="identity-formula" name="The basic identity" tex="\sin^2\alpha + \cos^2\alpha = 1" proof="pythagorean-identity" />
+<Formula id="ratio-formula" name="Tangent from sine and cosine" tex="\tan\alpha = \frac{\sin\alpha}{\cos\alpha}, \qquad \tan\alpha \cdot \cot\alpha = 1" proof="tan-ratio" />
+<Formula id="complementary-formula" name="Complementary angle" tex="\sin(90^\circ - \alpha) = \cos\alpha, \qquad \cos(90^\circ - \alpha) = \sin\alpha" proof="complementary" />
+<Formula id="one-plus-tan-formula" name="Tangent and cosine" tex="1 + \tan^2\alpha = \frac{1}{\cos^2\alpha}" proof="one-plus-tan" />
+<Formula id="values-formula" name="Values" tex="\begin{array}{c|ccc} & 30^\circ & 45^\circ & 60^\circ \\ \hline \sin & \tfrac12 & \tfrac{\sqrt2}{2} & \tfrac{\sqrt3}{2} \\ \cos & \tfrac{\sqrt3}{2} & \tfrac{\sqrt2}{2} & \tfrac12 \\ \tan & \tfrac{\sqrt3}{3} & 1 & \sqrt3 \end{array}" proof="special-values" />
+</Formulas>
+
+<Properties>
+
+<Property id="trig-angle-only" title="The sine, cosine and tangent of an acute angle depend only on the angle, not on the size of the triangle" why="Right triangles with the same acute angle are similar.">
+<Proof given="$\triangle ABC$ and $\triangle AB_1C_1$: $\angle C = \angle C_1 = 90^\circ$, $\angle A$ common" prove="$\tfrac{BC}{AB} = \tfrac{B_1C_1}{AB_1}$">
+<Step show="B1C1 B1 C1 <B1C1A" hl="AB1C1">Take another right triangle with the same angle $\alpha$.</Step>
+<Step hl="AB1C1 ABC" tex="\triangle AB_1C_1 \sim \triangle ABC">By two angles: $\angle A$ is common, $\angle C_1 = \angle C = 90^\circ$.</Step>
+<Step tex="\frac{B_1C_1}{AB_1} = \frac{BC}{AB} \quad \blacksquare">In similar triangles the ratios of corresponding sides are equal; the same goes for the other ratios.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagorean-identity" title="$\sin^2\alpha + \cos^2\alpha = 1$" why="Pythagoras' theorem divided by $c^2$.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\sin^2\alpha + \cos^2\alpha = 1$">
+<Step hl="ABC" tex="a^2 + b^2 = c^2">Pythagoras' theorem.</Step>
+<Step tex="\sin^2\alpha + \cos^2\alpha = \frac{a^2 + b^2}{c^2} = 1 \quad \blacksquare">Divide by $c^2$.</Step>
+</Proof>
+</Property>
+
+<Property id="tan-ratio" title="$\tan\alpha = \tfrac{\sin\alpha}{\cos\alpha}$ and $\tan\alpha \cdot \cot\alpha = 1$" why="Both are ratios of the same three sides.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\tan\alpha = \tfrac{\sin\alpha}{\cos\alpha}$">
+<Step hl="BC AC" tex="\frac{\sin\alpha}{\cos\alpha} = \frac{a/c}{b/c} = \frac{a}{b} = \tan\alpha">Simplify the ratio.</Step>
+<Step tex="\tan\alpha \cdot \cot\alpha = \frac{a}{b} \cdot \frac{b}{a} = 1 \quad \blacksquare">By definition.</Step>
+</Proof>
+</Property>
+
+<Property id="complementary" title="$\sin(90^\circ - \alpha) = \cos\alpha$ and $\cos(90^\circ - \alpha) = \sin\alpha$" why="For the other acute angle the legs swap roles.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = \alpha$" prove="$\sin\angle B = \cos\alpha$">
+<Step hl="<B" tex="\angle B = 90^\circ - \alpha">The acute angles of a right triangle add up to $90^\circ$.</Step>
+<Step hl="AC" tex="\sin(90^\circ - \alpha) = \frac{b}{c} = \cos\alpha">The leg opposite $\angle B$ is $b = AC$.</Step>
+<Step hl="BC" tex="\cos(90^\circ - \alpha) = \frac{a}{c} = \sin\alpha \quad \blacksquare">The leg adjacent to $\angle B$ is $a = BC$.</Step>
+</Proof>
+</Property>
+
+<Property id="special-values" title="$\sin 30^\circ = \tfrac12$, $\sin 45^\circ = \tfrac{\sqrt2}{2}$, $\sin 60^\circ = \tfrac{\sqrt3}{2}$" why="Half an equilateral triangle, and the isosceles right triangle.">
+<Proof given="$\alpha = 30^\circ, 45^\circ, 60^\circ$" prove="the values in the table">
+<Step set={{ alpha: 30 }} hl="BC" tex="a = \tfrac{c}{2}, \qquad b = \tfrac{c\sqrt3}{2}">The leg opposite $30^\circ$ is half the hypotenuse; $b$ by Pythagoras' theorem.</Step>
+<Step tex="\sin 30^\circ = \tfrac12, \qquad \cos 30^\circ = \tfrac{\sqrt3}{2}, \qquad \tan 30^\circ = \tfrac{\sqrt3}{3}">By definition.</Step>
+<Step set={{ alpha: 60 }} tex="\sin 60^\circ = \cos 30^\circ = \tfrac{\sqrt3}{2}, \qquad \cos 60^\circ = \tfrac12">Complementary angle: $60^\circ = 90^\circ - 30^\circ$.</Step>
+<Step set={{ alpha: 45 }} hl="BC=AC" tex="\sin 45^\circ = \cos 45^\circ = \frac{a}{a\sqrt2} = \tfrac{\sqrt2}{2} \quad \blacksquare">The isosceles right triangle: $a = b$, $c = a\sqrt2$.</Step>
+</Proof>
+</Property>
+
+<Property id="one-plus-tan" title="$1 + \tan^2\alpha = \tfrac{1}{\cos^2\alpha}$" why="The basic identity divided by $\cos^2\alpha$.">
+<Proof given="$0^\circ < \alpha < 90^\circ$" prove="$1 + \tan^2\alpha = \tfrac{1}{\cos^2\alpha}$">
+<Step tex="1 + \tan^2\alpha = \frac{\cos^2\alpha + \sin^2\alpha}{\cos^2\alpha} = \frac{1}{\cos^2\alpha} \quad \blacksquare">$\tan\alpha = \tfrac{\sin\alpha}{\cos\alpha}$ and $\sin^2\alpha + \cos^2\alpha = 1$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Solving a right triangle: $a = c\sin\alpha$, $b = c\cos\alpha$, $a = b\tan\alpha$. Two elements (a side and one more side or an acute angle) are enough to find the rest.</Remark>
+
+<Remark kind="mistake">The sine and cosine are always less than $1$ (a leg is shorter than the hypotenuse), while the tangent can be any positive number. If you get $\sin\alpha > 1$, there is a mistake somewhere.</Remark>
+
+<Problems>
+
+<Problem id="p-trig-sin-sides" set={{ c: 5, alpha: 36.86989764584402 }} given="AB=10 BC/AB=3/5" find="BC AC" answer="6 8"
+  q="The hypotenuse of right triangle $ABC$ is $AB = 10$, and $\sin A = 0.6$. Find the legs."
+  hint="$\sin A = \tfrac{BC}{AB}$, and the other leg by Pythagoras' theorem.">
+<Step hl="BC" tex="BC = AB \sin A = 10 \cdot 0.6 = 6">The sine is the opposite leg over the hypotenuse.</Step>
+<Step hl="AC" tex="AC = \sqrt{10^2 - 6^2} = 8">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-trig-ratios" set={{ c: 5, alpha: 16.26020470831196 }} given="BC=7 AC=24" find="BC/AB AC/AB BC/AC" labels="\sin A;\cos A;\tan A" answer="7/25 24/25 7/24"
+  q="The legs of right triangle $ABC$ are $BC = 7$ and $AC = 24$. Find $\sin A$, $\cos A$ and $\tan A$."
+  hint="Find the hypotenuse first.">
+<Step hl="AB" tex="AB = \sqrt{7^2 + 24^2} = 25">By Pythagoras' theorem.</Step>
+<Step hl="BC AB" tex="\sin A = \frac{BC}{AB} = \frac{7}{25}">The opposite leg over the hypotenuse.</Step>
+<Step hl="AC AB" tex="\cos A = \frac{AC}{AB} = \frac{24}{25}">The adjacent leg over the hypotenuse.</Step>
+<Step hl="BC AC" tex="\tan A = \frac{BC}{AC} = \frac{7}{24}">The opposite leg over the adjacent leg.</Step>
+</Problem>
+
+<Problem id="p-trig-tan-perimeter" k={3} set={{ c: 5, alpha: 36.86989764584402 }} given="BC/AC=3/4 P(ABC)=36" find="BC AC AB" answer="9 12 15" book="9.62"
+  q="In right triangle $ABC$, $\angle C = 90^\circ$, $\tan A = 0.75$ and the perimeter is $36$. Find the sides of the triangle."
+  hint="$\tan A = \tfrac{BC}{AC} = \tfrac34$: call the legs $3x$ and $4x$.">
+<Step hl="BC AC AB" tex="BC = 3x,\quad AC = 4x,\quad AB = 5x">$\tan A = \tfrac{BC}{AC} = \tfrac34$; the hypotenuse by Pythagoras' theorem.</Step>
+<Step tex="3x + 4x + 5x = 36 \;\Rightarrow\; x = 3">Write out the perimeter.</Step>
+<Step tex="BC = 9,\quad AC = 12,\quad AB = 15">Therefore.</Step>
+</Problem>
+
+<Problem id="p-trig-identity" set={{ c: 5, alpha: 22.61986494804043 }} given="BC/AB=5/13" find="AC/AB BC/AC" labels="\cos A;\tan A" answer="12/13 5/12"
+  q="For an acute angle $A$, $\sin A = \tfrac{5}{13}$. Find $\cos A$ and $\tan A$."
+  hint="$\sin^2 A + \cos^2 A = 1$.">
+<Step tex="\cos A = \sqrt{1 - \tfrac{25}{169}} = \frac{12}{13}">$\sin^2 A + \cos^2 A = 1$, and the cosine of an acute angle is positive.</Step>
+<Step tex="\tan A = \frac{\sin A}{\cos A} = \frac{5}{12}">The tangent is the sine over the cosine.</Step>
+</Problem>
+
+</Problems>

@@ -1,0 +1,78 @@
+---
+title: Lines and planes in space
+slug: lines-planes
+subject: geometry
+section: stereo
+order: 50
+summary: Criteria for a line parallel to a plane and for two parallel planes, a plane cutting parallel planes, skew lines.
+tags: [solid geometry, plane, parallel planes, skew lines]
+prerequisites: [angles]
+status: draft
+figure: box
+---
+
+<Definition>In space two lines either intersect, or are **parallel** (lie in one plane and do not intersect), or are **skew**: no plane contains both. A line and a plane are parallel if they have no common point; two planes are parallel if they do not intersect. The model for the figure is the parallelepiped $ABCDA_1B_1C_1D_1$; the plane of its base is $\alpha$.</Definition>
+
+<Formulas>
+<Formula id="line-plane-formula" name="Criterion for a line parallel to a plane" tex="a \parallel b,\ b \subset \alpha,\ a \not\subset \alpha \;\Rightarrow\; a \parallel \alpha" proof="line-plane-parallel" />
+<Formula id="planes-formula" name="Criterion for parallel planes" tex="a, b \subset \beta,\ a \cap b \ne \varnothing,\ a \parallel \alpha,\ b \parallel \alpha \;\Rightarrow\; \beta \parallel \alpha" proof="planes-parallel" />
+<Formula id="cuts-formula" name="A plane cutting parallel planes" tex="\alpha \parallel \beta \;\Rightarrow\; \gamma \cap \alpha \parallel \gamma \cap \beta" proof="parallel-cuts" />
+</Formulas>
+
+<Properties>
+
+<Property id="line-plane-parallel" kind="criterion" title="If a line outside a plane is parallel to some line of the plane, it is parallel to the plane" why="Otherwise two parallel lines would intersect.">
+<Proof given="$A_1B_1 \parallel AB$, $AB \subset \alpha$, $A_1B_1 \not\subset \alpha$" prove="$A_1B_1 \parallel \alpha$">
+<Step hl="A1B1 AB">$A_1B_1 \parallel AB$; $AB$ lies in the base plane $\alpha$, $A_1B_1$ outside it.</Step>
+<Step hl="ABB1A1">Two parallel lines determine one plane, $\beta = (ABB_1A_1)$; $\beta$ and $\alpha$ meet in the line $AB$.</Step>
+<Step hl="A1B1">If $A_1B_1$ met $\alpha$ at some point, that point would belong to both planes, that is, it would be on $AB$: $A_1B_1$ and $AB$ would intersect, contrary to their being parallel. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="planes-parallel" kind="criterion" title="If two intersecting lines of one plane are parallel to another plane, the planes are parallel" why="Otherwise two parallels to one line would pass through one point.">
+<Proof given="$A_1B_1, A_1D_1 \subset \beta$, both parallel to $\alpha$" prove="$\beta \parallel \alpha$">
+<Step hl="A1B1 A1D1">In the plane of the top base $\beta$ the lines $A_1B_1$ and $A_1D_1$ meet at $A_1$; both are parallel to $\alpha$ (previous criterion).</Step>
+<Step>Suppose $\beta$ and $\alpha$ meet in a line $c$. $A_1B_1$ is in $\beta$ and does not meet $\alpha$, so it does not meet $c$ either: $A_1B_1 \parallel c$. Likewise $A_1D_1 \parallel c$.</Step>
+<Step hl="A1B1 A1D1">Then two lines parallel to $c$ would pass through $A_1$, which is impossible. Hence $\beta \parallel \alpha$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="parallel-cuts" title="If a third plane cuts two parallel planes, the lines of intersection are parallel" why="The lines are in one plane and do not intersect.">
+<Proof given="$\alpha \parallel \beta$, the plane $\gamma = (ACC_1A_1)$ cuts them in $AC$ and $A_1C_1$" prove="$AC \parallel A_1C_1$">
+<Step show="AC A1C1 AA1 CC1" hl="ACC1A1">$AC$ and $A_1C_1$ lie in one plane $\gamma$.</Step>
+<Step hl="AC A1C1">They are in parallel planes, so they have no common point. Lines that lie in one plane and do not intersect are parallel. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="skew-lines" kind="criterion" title="If one line lies in a plane and the other cuts that plane at a point not on the first line, the lines are skew" why="A line and a point outside it determine exactly one plane.">
+<Proof given="$AB \subset \alpha$, $CC_1 \cap \alpha = C$, $C \notin AB$" prove="$AB$ and $CC_1$ are skew">
+<Step hl="AB CC1">$AB$ lies in $\alpha$, and $CC_1$ cuts $\alpha$ at the point $C$, which is not on $AB$.</Step>
+<Step>Suppose $AB$ and $CC_1$ lie in one plane $\gamma$. $\gamma$ contains $AB$ and $C$, so $\gamma = \alpha$ (a line and a point outside it determine exactly one plane).</Step>
+<Step hl="CC1">Then $CC_1$ would lie wholly in $\alpha$, but $C_1$ is not in $\alpha$. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>The angle between skew lines is measured by moving one of them parallel to itself to a point of the other; the distance between them is the length of their common perpendicular. For example, the common perpendicular of $AB$ and $CC_1$ is $BC$.</Remark>
+
+<Remark kind="mistake">In space "do not intersect" does not mean "parallel": lines that do not intersect may be skew. To be parallel they must also lie in one plane.</Remark>
+
+<Problems>
+
+<Problem id="p-cube-face-diagonals" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="B1A B1C AC" given="AB=BC BC=CC1" find="<AB1C" answer="60" book="17.8"
+  q="$ABCDA_1B_1C_1D_1$ is a cube. Find the angle between the diagonals $B_1A$ and $B_1C$."
+  hint="Look at triangle $AB_1C$.">
+<Step hl="B1A B1C AC" tex="B_1A = B_1C = AC = a\sqrt2">All three segments are diagonals of faces of the cube.</Step>
+<Step hl="AB1C" tex="\angle AB_1C = 60^\circ">Triangle $AB_1C$ is equilateral.</Step>
+</Problem>
+
+<Problem id="p-cube-diagonal-angle" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="AC1 AC CC1" given="AB=BC BC=CC1" find="CC1/AC" labels="\tan\varphi" answer="√2/2" book="17.7 17.17"
+  q="In the cube $ABCDA_1B_1C_1D_1$, $\varphi$ is the angle between the diagonal $AC_1$ and the plane of the base. Find $\tan\varphi$."
+  hint="$AC$ is the projection of $AC_1$ on the plane of the base.">
+<Step hl="AC CC1" tex="\varphi = \angle C_1AC">$CC_1$ is perpendicular to the plane of the base, so $AC$ is the projection of $AC_1$.</Step>
+<Step hl="AC" tex="AC = a\sqrt2">The diagonal of the base.</Step>
+<Step hl="ACC1" tex="\tan\varphi = \frac{CC_1}{AC} = \frac{a}{a\sqrt2} = \frac{\sqrt2}{2}">In the right triangle $ACC_1$.</Step>
+</Problem>
+
+</Problems>

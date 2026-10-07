@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import Shell from '@/layouts/Shell.astro';
+import { cheatView } from '@/components/content';
+import { allTopics, sectionsOf, topicUrl } from '@/lib/topics';
+import { langOf, t as tr } from '@/i18n';
+
+// Every topic's formulas, rendered from the same MDX (formulas-only view). Prints one topic per block.
+const lang = langOf(Astro.url);
+const topics = sectionsOf(await allTopics(lang), 'geometry', lang).flatMap(s => s.items).filter(t => t.body?.includes('<Formula ')); // a problems-only page has no formulas
+const blocks = await Promise.all(topics.map(async t => ({ t, Content: (await render(t)).Content })));
+---
+<Shell title={tr(lang, 'შპარგალკა')} panel={false} description={tr(lang, 'გეომეტრიის ყველა ფორმულა ერთ გვერდზე — დასაბეჭდად.')}>
+  <p class="lede">{tr(lang, 'ყველა ფორმულა ერთად. თემის სახელზე დაჭერით მის გვერდზე გადახვალ, დასაბეჭდად —')} <kbd>Ctrl</kbd> + <kbd>P</kbd>.</p>
+  <div class="cheat">
+    {blocks.map(({ t, Content }) => (
+      <section class="cheat-topic">
+        <h2><a href={topicUrl(t, lang)}>{t.data.title}</a></h2>
+        <Content components={cheatView} />
+      </section>
+    ))}
+  </div>
+</Shell>
+<style>
+  .lede { color: var(--ink-2); margin: 6px 0 var(--s4); }
+  kbd { border: 1px solid var(--line-2); border-radius: var(--r); padding: 0 6px; color: var(--ink); }
+  .cheat { columns: 2 340px; column-gap: 40px; padding-bottom: var(--s5); }
+  .cheat-topic { break-inside: avoid; margin-bottom: var(--s5); }
+  .cheat-topic h2 { font: var(--w2) 19px var(--font-head); margin-bottom: var(--s2); border-bottom: var(--bw) solid var(--line-2); padding-bottom: var(--s1); }
+  .cheat-topic h2 a:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .cheat-topic :global(.fx-list) { display: grid; gap: var(--s2); }
+  .cheat-topic :global(.cf) { display: grid; gap: 2px; }
+  .cheat-topic :global(.cf-n) { font-size: var(--fs-ui); color: var(--ink-2); }
+  .cheat-topic :global(.cf-t) { overflow-x: auto; overflow-y: hidden; }
+</style>

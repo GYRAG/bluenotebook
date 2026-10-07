@@ -1,0 +1,174 @@
+---
+import Shell from '@/layouts/Shell.astro';
+import { FACTS } from '@/lib/quad-facts';
+import { langOf, localize } from '@/i18n';
+
+const lang = langOf(Astro.url);
+// Each shape's own key properties; a shape inherits everything above it in the tree.
+const SHAPES_KA = {
+  quadrilateral: { name: 'ოთხკუთხედი', parents: [], own: ['კუთხეების ჯამი 360°', 'ყოველი გვერდი დანარჩენი სამის ჯამზე ნაკლებია'] },
+  parallelogram: { name: 'პარალელოგრამი', parents: ['quadrilateral'], own: ['მოპირდაპირე გვერდები ტოლი და პარალელურია', 'მოპირდაპირე კუთხეები ტოლია', 'დიაგონალები ერთმანეთს შუაზე ყოფს', 'd₁² + d₂² = 2(a² + b²)'] },
+  rectangle: { name: 'მართკუთხედი', parents: ['parallelogram'], own: ['ყველა კუთხე მართია', 'დიაგონალები ტოლია', 'აქვს შემოხაზული წრეწირი'] },
+  rhombus: { name: 'რომბი', parents: ['parallelogram'], own: ['ყველა გვერდი ტოლია', 'დიაგონალები ურთიერთმართობია და კუთხეების ბისექტრისებია', 'აქვს ჩახაზული წრეწირი'] },
+  square: { name: 'კვადრატი', parents: ['rectangle', 'rhombus'], own: ['დიაგონალი გვერდთან 45°-ს ადგენს'] },
+  trapezoid: { name: 'ტრაპეცია', parents: ['quadrilateral'], own: ['ზუსტად ერთი წყვილი გვერდია პარალელური', 'შუახაზი = (a + b)/2', 'ფერდთან მდებარე კუთხეების ჯამი 180°'] },
+  'isosceles-trapezoid': { name: 'ტოლფერდა ტრაპეცია', parents: ['trapezoid'], own: ['ფუძესთან კუთხეები ტოლია', 'დიაგონალები ტოლია', 'აქვს შემოხაზული წრეწირი'] },
+  'right-trapezoid': { name: 'მართკუთხა ტრაპეცია', parents: ['trapezoid'], own: ['ერთი ფერდი ფუძეების მართობია'] },
+} as const;
+type Id = keyof typeof SHAPES_KA;
+type Shape = { name: string; parents: readonly Id[]; own: readonly string[] };
+const SHAPES_EN: Record<Id, Shape> = {
+  quadrilateral: { name: 'Quadrilateral', parents: [], own: ['the angles add up to 360°', 'each side is less than the sum of the other three'] },
+  parallelogram: { name: 'Parallelogram', parents: ['quadrilateral'], own: ['opposite sides are equal and parallel', 'opposite angles are equal', 'the diagonals bisect each other', 'd₁² + d₂² = 2(a² + b²)'] },
+  rectangle: { name: 'Rectangle', parents: ['parallelogram'], own: ['all angles are right', 'the diagonals are equal', 'it has a circumscribed circle'] },
+  rhombus: { name: 'Rhombus', parents: ['parallelogram'], own: ['all sides are equal', 'the diagonals are perpendicular and bisect the angles', 'it has an inscribed circle'] },
+  square: { name: 'Square', parents: ['rectangle', 'rhombus'], own: ['a diagonal makes 45° with a side'] },
+  trapezoid: { name: 'Trapezoid', parents: ['quadrilateral'], own: ['exactly one pair of sides is parallel', 'midline = (a + b)/2', 'the angles at a leg add up to 180°'] },
+  'isosceles-trapezoid': { name: 'Isosceles trapezoid', parents: ['trapezoid'], own: ['the base angles are equal', 'the diagonals are equal', 'it has a circumscribed circle'] },
+  'right-trapezoid': { name: 'Right trapezoid', parents: ['trapezoid'], own: ['one leg is perpendicular to the bases'] },
+};
+const SHAPES: Record<Id, Shape> = lang === 'en' ? SHAPES_EN : SHAPES_KA;
+const X = lang === 'en' ? {
+  title: 'How shapes relate', desc: 'The quadrilateral family tree, inherited properties and “which shape is it?”',
+  lede: 'Every shape gets all the properties of its “parent”. Choose a shape to see what it inherits.',
+  tree: 'Family tree', treeLabel: 'The quadrilateral family tree', alsoRhombus: '— also a rhombus', alsoRect: '— also a rectangle',
+  own: 'Its own:', from: (names: string) => `Inherited from ${names}:`, choose: 'Choose a shape in the tree.',
+  which: 'Which shape is it?', factsLede: 'Mark what you know about a quadrilateral; the conclusion uses only proved criteria.',
+  conclusion: 'Conclusion', start: 'quadrilateral', pick: 'choose the facts you know',
+} : {
+  title: 'ფიგურების კავშირები', desc: 'ოთხკუთხედების იერარქია, მემკვიდრეობით მიღებული თვისებები და „რა ფიგურაა?“',
+  lede: 'ყოველი ფიგურა თავისი „მშობლის“ ყველა თვისებას იღებს. აირჩიე ფიგურა — ნახავ, რას იღებს მემკვიდრეობით.',
+  tree: 'იერარქია', treeLabel: 'ოთხკუთხედების იერარქია', alsoRhombus: '— ასევე რომბი', alsoRect: '— ასევე მართკუთხედი',
+  own: 'საკუთარი:', from: (names: string) => `მემკვიდრეობით — ${names}-იდან:`, choose: 'აირჩიე ფიგურა იერარქიაში.',
+  which: 'რა ფიგურაა?', factsLede: 'მონიშნე, რა იცი ოთხკუთხედზე — დასკვნა მხოლოდ დამტკიცებულ ნიშნებს ეყრდნობა.',
+  conclusion: 'დასკვნა', start: 'ოთხკუთხედი', pick: 'აირჩიე ცნობილი ფაქტები',
+};
+const href = (id: Id) => localize(lang, `/geometry/${id.includes('trapezoid') ? 'trapezoid' : id}/`);
+const node = (id: Id) => ({ id, ...SHAPES[id] });
+const TREE: [Id, [Id, Id[]][]][] = [
+  ['parallelogram', [['rectangle', ['square']], ['rhombus', ['square']]]],
+  ['trapezoid', [['isosceles-trapezoid', []], ['right-trapezoid', []]]],
+];
+---
+<Shell title={X.title} panel={false} description={X.desc}>
+  <p class="lede">{X.lede}</p>
+  <div class="rel" data-pagefind-body>
+    <section class="tree-wrap" aria-labelledby="tree-h">
+      <h2 id="tree-h" class="rel-h">{X.tree}</h2>
+      <ul class="tree" role="tree" aria-label={X.treeLabel}>
+        <li role="treeitem" aria-expanded="true">
+          <button class="node" data-shape="quadrilateral" aria-pressed="false">{SHAPES.quadrilateral.name}</button>
+          <ul role="group">
+            {TREE.map(([id, kids]) => (
+              <li role="treeitem" aria-expanded="true">
+                <button class="node" data-shape={id} aria-pressed="false">{SHAPES[id].name}</button>
+                <ul role="group">
+                  {kids.map(([kid, grand]) => (
+                    <li role="treeitem">
+                      <button class="node" data-shape={kid} aria-pressed="false">{SHAPES[kid].name}</button>
+                      {grand.length > 0 && (
+                        <ul role="group">{grand.map(g => <li role="treeitem"><button class="node" data-shape={g} aria-pressed="false">{SHAPES[g].name}</button><span class="also">{kid === 'rectangle' ? X.alsoRhombus : X.alsoRect}</span></li>)}</ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+      <div class="inherit" aria-live="polite">
+        {(Object.keys(SHAPES) as Id[]).map(id => {
+          const chain: Id[] = [];
+          const walk = (x: Id) => { for (const p of SHAPES[x].parents as readonly Id[]) { walk(p); if (!chain.includes(p)) chain.push(p); } };
+          walk(id);
+          return (
+            <div class="inherit-card" data-for={id} hidden>
+              <h3><a href={href(id)}>{SHAPES[id].name}</a></h3>
+              <p class="inherit-k">{X.own}</p>
+              <ul>{node(id).own.map(p => <li>{p}</li>)}</ul>
+              {chain.length > 0 && <>
+                <p class="inherit-k">{X.from(chain.map(c => SHAPES[c].name).join(', '))}</p>
+                <ul class="inh">{chain.flatMap(c => SHAPES[c].own.map(p => <li>{p}</li>))}</ul>
+              </>}
+            </div>
+          );
+        })}
+        <p class="empty" data-for="none">{X.choose}</p>
+      </div>
+    </section>
+
+    <section class="facts-wrap" aria-labelledby="facts-h">
+      <h2 id="facts-h" class="rel-h">{X.which}</h2>
+      <p class="facts-lede">{X.factsLede}</p>
+      <div class="facts">
+        {Object.entries(FACTS[lang]).map(([key, label]) => (
+          <button class="sw" type="button" role="switch" aria-checked="false" data-fact={key}><span>{label}</span><span class="sw-t" aria-hidden="true"></span></button>
+        ))}
+      </div>
+      <div class="answer" aria-live="polite">
+        <p class="answer-k">{X.conclusion}</p>
+        <a class="answer-v" href={localize(lang, '/geometry/quadrilateral/')}>{X.start}</a>
+        <ol class="answer-steps"><li>{X.pick}</li></ol>
+      </div>
+    </section>
+  </div>
+</Shell>
+
+<script>
+  import { deduce, type Fact } from '@/lib/quad-facts';
+  import { pageLang } from '@/i18n/client';
+  const lang = pageLang(), base = lang === 'en' ? '/en' : '';
+  const nodes = [...document.querySelectorAll<HTMLButtonElement>('.node')];
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-for]')];
+  function pick(id: string) {
+    nodes.forEach(n => n.setAttribute('aria-pressed', String(n.dataset.shape === id)));
+    cards.forEach(c => { c.hidden = c.dataset.for !== id; });
+  }
+  nodes.forEach(n => n.addEventListener('click', () => pick(n.dataset.shape!)));
+
+  const facts = new Set<Fact>();
+  const v = document.querySelector<HTMLAnchorElement>('.answer-v')!, steps = document.querySelector('.answer-steps')!;
+  document.querySelectorAll<HTMLButtonElement>('[data-fact]').forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.fact as Fact, on = !facts.has(f);
+    if (on) facts.add(f); else facts.delete(f);
+    b.setAttribute('aria-checked', String(on));
+    const a = deduce(facts, lang);
+    v.textContent = a.shape;
+    v.href = a.slug ? `${base}/geometry/${a.slug}/` : '#';
+    v.classList.toggle('bad', !!a.contradiction);
+    steps.replaceChildren(...a.steps.map(s => Object.assign(document.createElement('li'), { textContent: s })));
+  }));
+</script>
+
+<style>
+  .lede { color: var(--ink-2); margin: 6px 0 var(--s4); max-width: 64ch; }
+  .rel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) 40px; align-items: start; padding-bottom: var(--s5); }
+  .rel-h { font: var(--w2) var(--fs-h2)/1.3 var(--font-head); margin-bottom: var(--s3); }
+  .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+  .tree ul { margin-left: 14px; padding-left: 14px; border-left: var(--bw) solid var(--line-2); }
+  .tree li { position: relative; }
+  .tree ul > li::before { content: ''; position: absolute; left: -14px; top: 22px; width: 12px; border-top: var(--bw) solid var(--line-2); }
+  .node { min-height: 44px; padding: 0 var(--s3); font: var(--w2) 16px var(--font-head); border: var(--bw) solid transparent; border-radius: var(--r); }
+  .node:hover { border-color: var(--line-2); }
+  .node[aria-pressed='true'] { border-color: var(--ink); outline: 1px solid var(--ink); outline-offset: 2px; }
+  .also { font-size: var(--fs-ui); color: var(--ink-2); }
+  .inherit { margin-top: var(--s4); padding-left: 14px; border-left: 2px solid var(--ink); }
+  .inherit-card h3 { font: var(--w2) 19px var(--font-head); }
+  .inherit-card h3 a { text-decoration: underline; text-underline-offset: 5px; }
+  .inherit-k { font-size: var(--fs-ui); color: var(--ink-2); margin-top: var(--s3); }
+  .inherit-card li { padding: 3px 0 3px 22px; position: relative; }
+  .inherit-card li::before { content: '—'; position: absolute; left: 0; color: var(--ink-2); }
+  .inh li { color: var(--ink-2); }
+  .facts-lede { color: var(--ink-2); font-size: 15px; margin-bottom: var(--s2); }
+  .answer { margin-top: var(--s4); }
+  .answer-k { font-size: var(--fs-ui); color: var(--ink-2); }
+  .answer-v {
+    display: inline-block; margin: var(--s2) 0 var(--s3) 6px; padding: var(--s2) 14px 6px; font: var(--w2) 21px/1 var(--font-head);
+    border: 2px solid currentColor; outline: 1px solid currentColor; outline-offset: 3px; border-radius: 3px; transform: rotate(-2deg);
+  }
+  .answer-v.bad { border-style: dashed; outline-style: dashed; }
+  .answer-steps { list-style: none; padding: 0; display: grid; gap: var(--s1); font-size: 15px; }
+  .answer-steps li::before { content: '⇒ '; color: var(--ink-2); }
+  @media (max-width: 899px) { .rel { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -30,3 +30,12 @@ describe('what quadrilateral is it', () => {
     expect(shape('rightAngle', 'legsEqual')).toBe('ოთხკუთხედი');
   });
 });
+
+describe('in English', () => {
+  it('names the same shapes', () => {
+    const en = (...f: Fact[]) => deduce(new Set(f), 'en').shape;
+    expect(en('diagBisect', 'diagEqual', 'diagPerp')).toBe('square');
+    expect(en('oneParallel', 'legsEqual')).toBe('isosceles trapezoid');
+    expect(en('diagEqual')).toBe('quadrilateral');
+  });
+});

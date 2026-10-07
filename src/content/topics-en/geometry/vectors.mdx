@@ -1,0 +1,94 @@
+---
+title: Vectors
+slug: vectors
+subject: geometry
+section: coordinates
+order: 41
+summary: The coordinates and length of a vector, the sum, multiplication by a number, the dot product and perpendicularity.
+tags: [vector, sum of vectors, collinear vectors, dot product]
+prerequisites: [coordinates, sine-cosine-laws, parallelogram]
+status: draft
+figure: vectors
+---
+
+<Definition>A **vector** is a directed segment; the coordinates of $\overrightarrow{AB}$ are $(x_2 - x_1;\ y_2 - y_1)$, where $A(x_1;\, y_1)$ is its start and $B(x_2;\, y_2)$ its end. Vectors are **collinear** if they lie on one line or on parallel lines. The **dot product** of vectors is $\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi$, where $\varphi$ is the angle between them.</Definition>
+
+<Formulas>
+<Formula id="length-formula" name="Length of a vector" tex="|\vec a| = \sqrt{x^2 + y^2}" live="|a|" proof="vector-length" />
+<Formula id="sum-formula" name="Sum" tex="\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2)" proof="vector-addition" />
+<Formula id="scalar-formula" name="Multiplication by a number, collinearity" tex="k\vec a = (kx;\ ky), \qquad \vec a \parallel \vec b \iff \frac{x_1}{x_2} = \frac{y_1}{y_2}" proof="scalar-multiple" />
+<Formula id="dot-formula" name="Dot product" tex="\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2" live="a·b" proof="dot-product" />
+<Formula id="angle-formula" name="The angle between vectors" tex="\cos\varphi = \frac{x_1x_2 + y_1y_2}{|\vec a|\,|\vec b|}" live="φ" proof="dot-product" />
+<Formula id="perp-formula" name="Perpendicularity" tex="\vec a \perp \vec b \iff x_1x_2 + y_1y_2 = 0" proof="perpendicular-vectors" />
+</Formulas>
+
+<Properties>
+
+<Property id="vector-length" title="The length of the vector $(x;\, y)$ is $\sqrt{x^2 + y^2}$" why="It is the distance from the origin to the point $(x;\, y)$.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $A(x;\, y)$" prove="$|\vec a| = \sqrt{x^2 + y^2}$">
+<Step hl="vec:OA">Lay $\vec a$ off from the origin: it is $\overrightarrow{OA}$, $A(x;\, y)$.</Step>
+<Step tex="|\vec a| = OA = \sqrt{x^2 + y^2} \quad \blacksquare">The distance formula between $O(0;\, 0)$ and $A$.</Step>
+</Proof>
+</Property>
+
+<Property id="vector-addition" title="The sum of vectors is the same by the triangle rule and the parallelogram rule, and its coordinates are the sums of the coordinates of the terms" why="Moving $\vec b$ to the end of $\vec a$ gives a side of a parallelogram.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $\vec b = \overrightarrow{OB}$" prove="$\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2)$">
+<Step show="vec:AC C" hl="vec:OA vec:AC">The triangle rule: lay $\vec b$ off from the end of $\vec a$, $\overrightarrow{AC} = \vec b$; the sum is $\overrightarrow{OC}$.</Step>
+<Step show="vec:OC BC" hl="OACB">$AC$ is equal and parallel to $OB$, so $OACB$ is a parallelogram and $\overrightarrow{OC}$ is its diagonal: the parallelogram rule.</Step>
+<Step hl="vec:OC" tex="\vec a + \vec b = (x_1 + x_2;\ y_1 + y_2) \quad \blacksquare">Moving from $A$ by $\vec b$ increases the coordinates by $x_2$ and $y_2$.</Step>
+</Proof>
+</Property>
+
+<Property id="scalar-multiple" title="$k\vec a = (kx;\, ky)$ is collinear with $\vec a$, and its length changes by a factor of $|k|$" why="Both coordinates are multiplied by the same number.">
+<Proof given="$\vec a = (x;\, y)$, $k$ a number" prove="$|k\vec a| = |k|\,|\vec a|$">
+<Step show="vec:OK K" hl="vec:OK vec:OA">For $k > 0$ the direction is the same, for $k < 0$ the opposite; in both cases the vector is on the same line.</Step>
+<Step tex="|k\vec a| = \sqrt{k^2x^2 + k^2y^2} = |k|\,|\vec a| \quad \blacksquare">The length formula.</Step>
+</Proof>
+</Property>
+
+<Property id="dot-product" title="The dot product in coordinates: $\vec a \cdot \vec b = x_1x_2 + y_1y_2$" why="The cosine law in $\triangle OAB$, written in coordinates.">
+<Proof given="$\vec a = (x_1;\, y_1)$, $\vec b = (x_2;\, y_2)$, $\varphi = \angle AOB$" prove="$|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2$">
+<Step show="vec:BA" hl="OAB <AOB" tex="AB^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a|\,|\vec b|\cos\varphi">$\overrightarrow{BA} = \vec a - \vec b$; the cosine law in $\triangle OAB$.</Step>
+<Step tex="AB^2 = (x_1 - x_2)^2 + (y_1 - y_2)^2">The same $AB^2$ by the distance formula; and $|\vec a|^2 = x_1^2 + y_1^2$, $|\vec b|^2 = x_2^2 + y_2^2$.</Step>
+<Step tex="|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 \quad \blacksquare">Set them equal, expand the brackets and cancel the squares.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-vectors" title="Non-zero vectors are perpendicular if and only if their dot product is zero" why="$\cos\varphi = 0$ exactly when $\varphi = 90^\circ$.">
+<Proof given="$\vec a \ne \vec 0$, $\vec b \ne \vec 0$" prove="$\vec a \perp \vec b \iff \vec a \cdot \vec b = 0$">
+<Step hl="<AOB" tex="\vec a \cdot \vec b = 0 \iff \cos\varphi = 0">$|\vec a|$ and $|\vec b|$ are not zero.</Step>
+<Step tex="\cos\varphi = 0 \iff \varphi = 90^\circ \quad \blacksquare">On the interval $0^\circ \le \varphi \le 180^\circ$ the cosine is zero only at $90^\circ$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Vectors are equal if their lengths and directions are the same, that is, if their coordinates are equal. So a vector can be laid off from any point.</Remark>
+
+<Remark kind="mistake">The dot product is a number, not a vector. It is negative when the angle between the vectors is obtuse.</Remark>
+
+<Problems>
+
+<Problem id="p-vec-sum-length" set={{ ax: 3, ay: 1, bx: -1, by: 2, k: 1 }} show="vec:OC C" given="x(A)=3 y(A)=1 x(B)=-1 y(B)=2" find="OC" labels="|\vec a + \vec b|" answer="√13" book="15.20 15.23 15.29"
+  q="The vectors $\vec a = \overrightarrow{OA}(3;\, 1)$ and $\vec b = \overrightarrow{OB}(-1;\, 2)$ are given. Find $|\vec a + \vec b|$."
+  hint="The coordinates of the sum are the sums of the coordinates of the terms.">
+<Step hl="vec:OA vec:OB" tex="\vec a + \vec b = (3 - 1;\; 1 + 2) = (2;\, 3)">When vectors are added, the corresponding coordinates are added.</Step>
+<Step hl="vec:OC" tex="|\vec a + \vec b| = \sqrt{2^2 + 3^2} = \sqrt{13}">The length of a vector is the square root of the sum of the squares of its coordinates.</Step>
+</Problem>
+
+<Problem id="p-vec-angle" set={{ ax: 3, ay: 1, bx: 1, by: 2, k: 1 }} given="x(A)=3 y(A)=1 x(B)=1 y(B)=2" find="<AOB" answer="45" book="15.37 15.51"
+  q="Find the angle between the vectors $\vec a(3;\, 1)$ and $\vec b(1;\, 2)$."
+  hint="$\cos\varphi = \tfrac{\vec a \cdot \vec b}{|\vec a|\,|\vec b|}$.">
+<Step tex="\vec a \cdot \vec b = 3 \cdot 1 + 1 \cdot 2 = 5">The dot product in coordinates.</Step>
+<Step hl="OA OB" tex="|\vec a| = \sqrt{10},\qquad |\vec b| = \sqrt5">The lengths of the vectors.</Step>
+<Step hl="<AOB" tex="\cos\varphi = \frac{5}{\sqrt{10}\cdot\sqrt5} = \frac{\sqrt2}{2} \;\Rightarrow\; \varphi = 45^\circ">The angle between the vectors.</Step>
+</Problem>
+
+<Problem id="p-vec-perpendicular" set={{ ax: 2, ay: 1, bx: -1, by: 2, k: 1 }} given="x(A)=2 y(A)=1 y(B)=2 <AOB=90" find="x(B)" labels="m" answer="-1" book="15.52"
+  q="For what value of $m$ are the vectors $\vec a(2;\, 1)$ and $\vec b(m;\, 2)$ perpendicular?"
+  hint="Non-zero vectors are perpendicular when their dot product is zero.">
+<Step tex="\vec a \cdot \vec b = 2m + 2">The dot product in coordinates.</Step>
+<Step hl="<AOB" tex="2m + 2 = 0 \;\Rightarrow\; m = -1">The dot product of perpendicular vectors is zero.</Step>
+</Problem>
+
+</Problems>

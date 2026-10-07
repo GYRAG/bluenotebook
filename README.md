@@ -1,6 +1,6 @@
 # ლურჯი რვეული
 
-**Blue Notebook** — a geometry notebook for the Georgian national exam, written in Georgian, where every figure moves.
+**Blue Notebook** — a geometry notebook for the Georgian national exam, written in Georgian, with every page also in English, where every figure moves.
 
 Each topic is one page of a blue school notebook: an interactive figure on the left, and on the right the formulas, the properties and their step-by-step proofs. Drag a vertex and every measurement, readout and formula value follows. Open a proof and the figure plays it, one step at a time.
 
@@ -29,7 +29,8 @@ In numbers: 37 topics, 223 properties with proofs, 180 formula cards, 45 interac
 The site also has:
 - a cheat sheet with every formula on one page;
 - a page on how the quadrilaterals are related, which can also work out what a shape is from the facts you know;
-- a blank sheet of squared paper for your own drawings.
+- a blank sheet of squared paper for your own drawings;
+- an English version of every page, topics and problems included, at `/en/` (the globe link in the menu switches language).
 
 ---
 
@@ -113,7 +114,7 @@ Search only works after a build.
 pnpm check        # content: frontmatter, links, glossary, proofs against their figures
 pnpm test         # geometry engine and every figure's checks on random shapes
 pnpm typecheck
-pnpm e2e          # Playwright on the production build: layout at four sizes and two themes, proofs, search, drawing
+pnpm e2e          # Playwright on the production build: layout at four sizes and two themes, proofs, search, drawing, English pages
 ```
 
 ### Adding a topic
@@ -122,7 +123,7 @@ pnpm e2e          # Playwright on the production build: layout at four sizes and
 pnpm new topic geometry/my-topic triangles
 ```
 
-This creates a draft page with every building block. [docs/guide-ka.md](docs/guide-ka.md) is the day-to-day guide in Georgian, and [CLAUDE.md](CLAUDE.md) holds the repository's conventions. A new subject is one entry in `src/subjects.ts`; the first algebra topic was added this way, with no code changes.
+This creates a draft page with every building block. Its English copy comes from `pnpm translate extract my-topic`, translated in order and written back with `pnpm translate apply`, so both files keep the same structure. [docs/guide-ka.md](docs/guide-ka.md) is the day-to-day guide in Georgian, and [CLAUDE.md](CLAUDE.md) holds the repository's conventions. A new subject is one entry in `src/subjects.ts`; the first algebra topic was added this way, with no code changes.
 
 ---
 
@@ -142,10 +143,13 @@ This creates a draft page with every building block. [docs/guide-ka.md](docs/gui
 ```
 src/
   content/topics/   one MDX file per topic, glossary.json
+  content/topics-en/ the English translation of each topic, block for block
+  i18n/             English for the interface and the figures
+  views/            page bodies shared by the Georgian and English routes
   figures/          one file per figure; engine/ is the renderer, solver and 3D projection
   components/       page parts: panel, figure, proof blocks
   scripts/          proof stepper, search, theme
-  pages/            topic pages, cheat sheet, relationships, blank sheet
+  pages/            routes: Georgian at the root, English under en/
 tests/e2e/          browser tests
 ```
 

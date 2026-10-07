@@ -1,0 +1,67 @@
+---
+title: Polygon
+slug: polygon
+subject: geometry
+section: polygons
+order: 29
+summary: The sums of the interior and exterior angles of a convex polygon, the number of diagonals.
+tags: [polygon, convex, angle sum, exterior angle, diagonal]
+prerequisites: [triangle]
+status: draft
+figure: polygon
+figures: [regular-polygon]
+---
+
+<Definition>A **polygon** is a figure bounded by a closed broken line whose neighbouring links do not lie on one line. A polygon is **convex** if it lies on one side of the line containing any of its sides. A **diagonal** is a segment joining two non-adjacent vertices. An **exterior angle** is the angle adjacent to an interior angle.</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="Sum of the interior angles" tex="(n - 2) \cdot 180^\circ" live="Σ" proof="polygon-angle-sum" />
+<Formula id="exterior-sum-formula" name="Sum of the exterior angles" tex="360^\circ" live="Σ′" proof="exterior-sum" />
+<Formula id="diagonals-formula" name="Number of diagonals" tex="\frac{n(n - 3)}{2}" proof="diagonals-count" />
+</Formulas>
+
+<Properties>
+
+<Property id="polygon-angle-sum" title="The sum of the interior angles of a convex $n$-gon is $(n - 2)\cdot180^\circ$" why="The diagonals from one vertex divide it into $n - 2$ triangles.">
+<Proof given="A convex $n$-gon" prove="Angle sum $(n - 2)\cdot180^\circ$">
+<Step show="AC AD AE" hl="AC AD AE">Draw all the diagonals from vertex $A$: $n - 3$ diagonals divide the polygon into $n - 2$ triangles (here $n = 6$, four triangles).</Step>
+<Step hl="ABC ACD ADE AEF">Together the angles of the triangles make up exactly the angles of the polygon.</Step>
+<Step tex="(n - 2) \cdot 180^\circ \quad \blacksquare">Each triangle gives $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="exterior-sum" title="The sum of the exterior angles of a convex polygon (one at each vertex) is $360^\circ$" why="Each exterior angle forms a straight angle with the interior one.">
+<Proof given="A convex $n$-gon" prove="Exterior angle sum $360^\circ$">
+<Step show="AA1 BB1 CC1 DD1 EE1 FF1" hl="<A1AB <B1BC <C1CD <D1DE <E1EF <F1FA">At each vertex the exterior and interior angles add up to $180^\circ$.</Step>
+<Step tex="n \cdot 180^\circ - (n - 2)\cdot 180^\circ = 360^\circ \quad \blacksquare">Subtract the sum of the interior angles from all the straight angles.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-count" title="An $n$-gon has $\tfrac{n(n - 3)}{2}$ diagonals" why="$n - 3$ diagonals leave each vertex, and each is counted twice.">
+<Proof given="An $n$-gon" prove="Number of diagonals $\tfrac{n(n - 3)}{2}$">
+<Step show="AC AD AE" hl="AC AD AE">$n - 3$ diagonals leave each vertex: to every vertex except itself and its two neighbours.</Step>
+<Step tex="\frac{n(n - 3)}{2} \quad \blacksquare">$n$ vertices, but each diagonal was counted twice, once from each end.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">$(n - 2)\cdot180^\circ$ is the sum of the interior angles. The sum of the exterior angles does not depend on $n$: it is always $360^\circ$.</Remark>
+
+<Problems>
+
+<Problem id="p-poly-sides-from-sum" figure="regular-polygon" set={{ n: 12, R: 3 }} given="360*<A/(180-<A)=1800" find="360/(180-<A)" labels="n" answer="12"
+  q="The interior angles of a convex polygon add up to $1800^\circ$. How many sides does it have?"
+  hint="The interior angles of a convex $n$-gon add up to $(n - 2) \cdot 180^\circ$.">
+<Step tex="(n - 2) \cdot 180^\circ = 1800^\circ">The interior angles of a convex $n$-gon add up to $(n - 2) \cdot 180^\circ$.</Step>
+<Step tex="n - 2 = 10 \;\Rightarrow\; n = 12">Therefore.</Step>
+</Problem>
+
+<Problem id="p-poly-twice-exterior" figure="regular-polygon" set={{ n: 6, R: 3 }} given="360*<A/(180-<A)=720" find="360/(180-<A)" labels="n" answer="6"
+  q="The sum of the interior angles of a convex polygon is twice the sum of its exterior angles. How many sides does the polygon have?"
+  hint="The exterior angles of a convex polygon add up to $360^\circ$.">
+<Step tex="(n - 2) \cdot 180^\circ = 2 \cdot 360^\circ">The exterior angles add up to $360^\circ$, so the interior angles add up to $720^\circ$.</Step>
+<Step tex="n - 2 = 4 \;\Rightarrow\; n = 6">Therefore.</Step>
+</Problem>
+
+</Problems>

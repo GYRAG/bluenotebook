@@ -1,0 +1,209 @@
+---
+title: Triangle centres
+slug: triangle-centers
+subject: geometry
+section: triangles
+order: 14
+summary: Midlines, medians, bisectors, perpendicular bisectors, altitudes, and where they meet.
+tags: [median, bisector, altitude, perpendicular bisector, midline, inscribed circle, circumscribed circle]
+prerequisites: [triangle, isosceles-triangle, similarity]
+status: draft
+figure: triangle-centers
+parent: triangle
+---
+
+<Definition>A **median** joins a vertex to the midpoint of the opposite side; a **bisector** halves an angle; an **altitude** is the perpendicular from a vertex to the line containing the opposite side; a **perpendicular bisector** is the line perpendicular to a side through its midpoint; a **midline** joins the midpoints of two sides.</Definition>
+
+<Formulas>
+<Formula id="midline-formula" name="Midline" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC" proof="midline" />
+<Formula id="medians-formula" name="Where the medians meet" tex="AG : GA_1 = 2 : 1" live="AG:GA₁" proof="medians" />
+<Formula id="bisector-formula" name="Bisector property" tex="\frac{BL}{LC} = \frac{AB}{AC}" proof="bisector-theorem" />
+<Formula id="median-length-formula" name="Length of a median" tex="m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}" proof="median-length" />
+<Formula id="bisector-length-formula" name="Length of a bisector" tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c}" proof="bisector-length" />
+<Formula id="stewart-formula" name="Stewart's theorem" tex="b^2 m + c^2 n = a\left(d^2 + mn\right)" proof="stewart" />
+<Formula id="six-triangles-formula" name="Triangles formed by the medians" tex="S_{GBA_1} = S_{GA_1C} = \ldots = \tfrac16 S" proof="six-triangles" />
+<Formula id="angle-bic-formula" name="Angle between two bisectors" tex="\angle BIC = 90^\circ + \frac{\alpha}{2}" proof="angle-bic" />
+<Formula id="angle-bhc-formula" name="Angle between two altitudes (acute triangle)" tex="\angle BHC = 180^\circ - \alpha" proof="angle-bhc" />
+</Formulas>
+
+<Properties>
+
+<Property id="midline" title="A midline of a triangle is parallel to the third side and equal to half of it" why="The small triangle is an exact half-size copy of the large one.">
+<Proof given="$B_1, C_1$ the midpoints of $AC$ and $AB$" prove="$B_1C_1 \parallel BC,\ B_1C_1 = \tfrac12 BC$">
+<Step show="B1C1 B1 C1" hl="B1C1">Join the midpoints.</Step>
+<Step hl="AC1B1 ABC" tex="\frac{AC_1}{AB} = \frac{AB_1}{AC} = \frac12">$\triangle AC_1B_1$ and $\triangle ABC$ share $\angle A$, and the sides next to it are proportional, so the triangles are similar.</Step>
+<Step hl="<AC1B1=<ABC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12\, BC \quad \blacksquare">From the similarity, $\angle AC_1B_1 = \angle ABC$ are corresponding angles, so the lines are parallel; the scale factor is $\tfrac12$.</Step>
+</Proof>
+</Property>
+
+<Property id="medians" title="The medians of a triangle meet at one point, which divides each median in the ratio $2 : 1$ from the vertex" why="A midline makes a half-size similar triangle.">
+<Proof given="$A_1, B_1, C_1$ the midpoints of the sides" prove="the medians meet at $G$, $AG : GA_1 = 2 : 1$">
+<Step show="BB1 CC1 G" hl="BB1 CC1">Two medians $BB_1$ and $CC_1$ meet at $G$.</Step>
+<Step show="B1C1" hl="B1C1 BC" tex="B_1C_1 \parallel BC, \qquad B_1C_1 = \tfrac12 BC">$B_1C_1$ is a midline.</Step>
+<Step hl="GB1C1 GBC" tex="\frac{GB_1}{GB} = \frac{GC_1}{GC} = \frac{B_1C_1}{BC} = \frac12">$\triangle GB_1C_1 \sim \triangle GBC$: vertical angles at $G$ and alternate angles ($B_1C_1 \parallel BC$).</Step>
+<Step show="AA1" hl="AA1">Likewise the median $AA_1$ meets $BB_1$ at the point dividing $BB_1$ in the ratio $2 : 1$ from $B$, which is the same $G$. So all three medians pass through $G$. ∎</Step>
+</Proof>
+</Property>
+
+<Remark>$G$ is called the **centroid** of the triangle: a uniform triangular plate balances exactly on this point.</Remark>
+
+<Property id="six-triangles" title="The medians divide a triangle into six triangles of equal area" why="A median divides a triangle into two parts of equal area: equal bases, a common height.">
+<Proof given="$AA_1, BB_1, CC_1$ the medians, $G$ where they meet" prove="each of the six triangles has area $\tfrac16 S$">
+<Step show="AA1 BB1 CC1 G" hl="AA1 BB1 CC1">The three medians divide the triangle into six parts.</Step>
+<Step hl="GBA1 GA1C">Equal bases and a common height: $S_{GBA_1} = S_{GA_1C} = x$, likewise $S_{GCB_1} = S_{GB_1A} = y$ and $S_{GAC_1} = S_{GC_1B} = z$.</Step>
+<Step hl="ABA1 AA1C" tex="2z + x = 2y + x \;\Rightarrow\; z = y">Median $AA_1$: $S_{ABA_1} = S_{AA_1C}$ (equal bases $BA_1 = A_1C$, a common height).</Step>
+<Step hl="BCB1 BB1A" tex="2x + y = 2z + y \;\Rightarrow\; x = z">The same for the median $BB_1$.</Step>
+<Step tex="x = y = z = \tfrac16 S \quad \blacksquare">The six equal parts make up the whole area.</Step>
+</Proof>
+</Property>
+
+<Property id="median-length" title="Length of a median: $m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}$" why="Doubling the median gives a parallelogram with diagonals $2m_a$ and $a$.">
+<Proof given="$AA_1 = m_a$ a median, $BC = a,\ CA = b,\ AB = c$" prove="$4m_a^2 = 2b^2 + 2c^2 - a^2$">
+<Step set={{ c: 3.6, b: 3.2, alpha: 65 }} show="AA1 A1" hl="AA1">$AA_1$ is a median.</Step>
+<Step show="A1A3 BA3 CA3 A3" hl="ABA3C">Extend it: $A_1A_3 = AA_1$. The diagonals $AA_3$ and $BC$ of $ABA_3C$ bisect each other, so it is a parallelogram.</Step>
+<Step hl="AA3 BC" tex="AA_3^2 + BC^2 = 2\left(AB^2 + AC^2\right)">The sum of the squares of the diagonals of a parallelogram equals the sum of the squares of its four sides.</Step>
+<Step tex="4m_a^2 = 2b^2 + 2c^2 - a^2 \quad \blacksquare">$AA_3 = 2m_a$, $BC = a$.</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-theorem" title="A bisector divides the opposite side in the ratio of the adjacent sides" why="A line parallel to the bisector forms an isosceles triangle.">
+<Proof given="$AL$ bisects $\angle A$, $L \in BC$" prove="$\tfrac{BL}{LC} = \tfrac{AB}{AC}$">
+<Step show="AL L" hl="AL <BAL=<LAC">$AL$ halves $\angle A$.</Step>
+<Step show="CE E AE" hl="CE">Through $C$ draw a line parallel to $AL$; it meets line $BA$ at $E$.</Step>
+<Step hl="<ACE=<LAC <AEC=<BAL" tex="\angle ACE = \angle AEC">$\angle ACE = \angle LAC$ (alternate), $\angle AEC = \angle BAL$ (corresponding), and $\angle LAC = \angle BAL$.</Step>
+<Step hl="ACE AE=AC" tex="AE = AC">$\triangle ACE$ is isosceles.</Step>
+<Step hl="BAL BEC" tex="\frac{BL}{LC} = \frac{BA}{AE} = \frac{AB}{AC} \quad \blacksquare">$AL \parallel EC$, so $\triangle BAL \sim \triangle BEC$, and the parallel lines cut the sides $BC$ and $BE$ proportionally.</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-length" title="Length of a bisector: $l_a = \tfrac{2bc\cos(\alpha/2)}{b + c}$" why="The bisector cuts the triangle in two, and the areas add up.">
+<Proof given="$AL = l_a$ the bisector of $\angle A$, $AC = b,\ AB = c$" prove="$l_a = \tfrac{2bc\cos(\alpha/2)}{b + c}$">
+<Step show="AL L" hl="<BAL=<LAC">$AL$ splits the angle into two parts of $\tfrac{\alpha}{2}$.</Step>
+<Step hl="ABL ALC" tex="S_{ABC} = S_{ABL} + S_{ALC}">The bisector cuts the triangle in two.</Step>
+<Step tex="bc\sin\alpha = (b + c)\, l_a \sin\tfrac{\alpha}{2}">All three areas from two sides and the angle between them, doubled: $bc\sin\alpha = c\,l_a\sin\tfrac{\alpha}{2} + b\,l_a\sin\tfrac{\alpha}{2}$.</Step>
+<Step tex="l_a = \frac{2bc\cos\frac{\alpha}{2}}{b + c} \quad \blacksquare">$\sin\alpha = 2\sin\tfrac{\alpha}{2}\cos\tfrac{\alpha}{2}$; divide by $\sin\tfrac{\alpha}{2}$.</Step>
+</Proof>
+</Property>
+
+<Property id="stewart" title="Stewart's theorem: if $D \in BC$, $BD = m$, $DC = n$ and $AD = d$, then $b^2 m + c^2 n = a\left(d^2 + mn\right)$" why="The law of cosines twice: the cosines of the adjacent angles at $D$ are opposite numbers.">
+<Proof given="$D \in BC$, $BD = m,\ DC = n,\ AD = d$, $m + n = a$" prove="$b^2 m + c^2 n = a\left(d^2 + mn\right)$">
+<Step show="AD D" hl="AD">$AD$ a segment from $A$ to any point of $BC$.</Step>
+<Step hl="ABD" tex="c^2 = d^2 + m^2 - 2dm\cos\angle ADB">The law of cosines in $\triangle ABD$.</Step>
+<Step hl="ADC" tex="b^2 = d^2 + n^2 + 2dn\cos\angle ADB">In $\triangle ADC$: $\angle ADC = 180^\circ - \angle ADB$, so $\cos\angle ADC = -\cos\angle ADB$.</Step>
+<Step tex="b^2 m + c^2 n = (m + n)\left(d^2 + mn\right)">Multiply the first by $n$, the second by $m$, and add: the cosine terms cancel.</Step>
+<Step tex="b^2 m + c^2 n = a\left(d^2 + mn\right) \quad \blacksquare">$m + n = a$.</Step>
+</Proof>
+</Property>
+
+<Remark kind="special">For $m = n = \tfrac{a}{2}$ Stewart's theorem gives the median length formula. For a bisector ($\tfrac{m}{n} = \tfrac{c}{b}$) it gives $l_a^2 = bc - mn$.</Remark>
+
+<Property id="incenter" title="The bisectors of a triangle meet at one point, the centre of the inscribed circle" why="Every point of an angle bisector is equidistant from the sides of the angle.">
+<Proof given="$I$ where the bisectors of $\angle A$ and $\angle B$ meet" prove="$I$ lies on the bisector of $\angle C$ too and is equidistant from all sides">
+<Step show="AL BI I" hl="AL BI">$I$ lies on the bisector of $\angle A$, so it is equidistant from $AB$ and $AC$; on the bisector of $\angle B$, so from $BA$ and $BC$.</Step>
+<Step show="T IT" hl="IT">So $I$ is the same distance ($r$) from all three sides.</Step>
+<Step show="CI" hl="CI">A point inside an angle that is equidistant from its sides lies on the bisector, so $I$ lies on the bisector of $\angle C$ too.</Step>
+<Step show="(IT)" hl="(IT)">The circle with centre $I$ and radius $r$ touches all three sides: it is the inscribed circle. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="angle-bic" title="Two bisectors meet at an angle of $90^\circ + \tfrac{\alpha}{2}$: $\angle BIC = 90^\circ + \tfrac{\alpha}{2}$" why="In $\triangle BIC$ two angles are halves of $\beta$ and $\gamma$.">
+<Proof given="$BI$, $CI$ the bisectors of $\angle B$ and $\angle C$" prove="$\angle BIC = 90^\circ + \tfrac{\alpha}{2}$">
+<Step show="BI CI I" hl="<BIC">$I$ is where the bisectors meet.</Step>
+<Step hl="BIC" tex="\angle IBC + \angle ICB = \tfrac12(\beta + \gamma) = 90^\circ - \tfrac{\alpha}{2}">$\beta + \gamma = 180^\circ - \alpha$.</Step>
+<Step tex="\angle BIC = 90^\circ + \frac{\alpha}{2} \quad \blacksquare">The angles of $\triangle BIC$ add up to $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="circumcenter" title="The perpendicular bisectors of the sides of a triangle meet at one point, the centre of the circumscribed circle" why="Every point of a perpendicular bisector is equidistant from the ends of the segment.">
+<Proof given="$O$ where the perpendicular bisectors of $AB$ and $AC$ meet" prove="$OA = OB = OC$">
+<Step show="OC1 OB1 O" hl="OC1" tex="OA = OB">$O$ lies on the perpendicular bisector of $AB$.</Step>
+<Step hl="OB1" tex="OA = OC">$O$ lies on the perpendicular bisector of $AC$.</Step>
+<Step show="OA1" hl="OA1">Hence $OB = OC$, so $O$ lies on the perpendicular bisector of $BC$ too.</Step>
+<Step show="(OA)" hl="(OA)">The circle with centre $O$ and radius $R = OA$ passes through all three vertices. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="orthocenter" title="The altitudes of a triangle (or their extensions) meet at one point" why="The altitudes are the perpendicular bisectors of a larger triangle.">
+<Proof given="$AA_2, BB_2, CC_2$ the altitudes" prove="they pass through one point">
+<Step set={{ c: 3.6, b: 3.2, alpha: 65 }} show="A3B3C3 A3 B3 C3" hl="A3B3C3">Through each vertex draw a line parallel to the opposite side: this gives triangle $A_3B_3C_3$.</Step>
+<Step hl="AB3=AC3">$ABCB_3$ and $AC_3BC$ are parallelograms, so $AB_3 = BC = AC_3$ and $A$ is the midpoint of $B_3C_3$. Likewise $B$ and $C$ are the midpoints of the other sides.</Step>
+<Step show="AA2" hl="AA2">$AA_2 \perp BC$ and $BC \parallel B_3C_3$, so $AA_2$ is the perpendicular bisector of $B_3C_3$. The same holds for the other two altitudes.</Step>
+<Step show="BB2 CC2 H" hl="H">The perpendicular bisectors of the large triangle meet at one point (previous property), so the altitudes do too. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="angle-bhc" title="In an acute triangle two altitudes meet at an angle of $180^\circ - \alpha$: $\angle BHC = 180^\circ - \alpha$" why="The quadrilateral formed by the altitudes and angle $A$ has two right angles.">
+<Proof given="$BB_2$, $CC_2$ the altitudes, $H$ where they meet, $\triangle ABC$ acute" prove="$\angle BHC = 180^\circ - \alpha$">
+<Step show="BB2 CC2 H B2 C2" hl="<BB2A <CC2A">$BB_2 \perp AC$, $CC_2 \perp AB$.</Step>
+<Step hl="AC2HB2" tex="\angle C_2HB_2 = 180^\circ - \alpha">The angles of quadrilateral $AC_2HB_2$ add up to $360^\circ$: $360^\circ - 90^\circ - 90^\circ - \alpha$.</Step>
+<Step hl="<BHC" tex="\angle BHC = \angle C_2HB_2 = 180^\circ - \alpha \quad \blacksquare">Vertical angles.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Four points: $G$ (medians), $I$ (bisectors), $O$ (perpendicular bisectors), $H$ (altitudes). In an obtuse triangle $O$ and $H$ lie outside it; in a right triangle $O$ is the midpoint of the hypotenuse and $H$ the right-angle vertex. In an equilateral triangle all four coincide.</Remark>
+
+<Problems>
+
+<Problem id="p-circumradius-120" set={{ c: 5.196152422706632, b: 3, alpha: 30 }} show="(OA) O OA OC" given="AC=6 BC=6 <ACB=120" find="OA" answer="6" book="5.52 5.53"
+  q="In isosceles triangle $ABC$, $AC = BC = 6$ and $\angle ACB = 120^\circ$. Find the radius of the circumscribed circle."
+  hint="Find the central angle on the arc $AC$.">
+<Step hl="<A=<B" tex="\angle A = \angle B = \frac{180^\circ - 120^\circ}{2} = 30^\circ">The base angles are equal.</Step>
+<Step hl="<AOC" tex="\angle AOC = 2\angle ABC = 60^\circ">An inscribed angle is half the central angle on the same arc.</Step>
+<Step hl="AOC" tex="R = OA = AC = 6">$OA = OC$ and the angle between them is $60^\circ$, so triangle $AOC$ is equilateral.</Step>
+</Problem>
+
+<Problem id="p-incircle-tangents" set={{ c: 3, b: 4.5, alpha: 70.52877936550931 }} show="(IT) I IT" given="AB=6 AC=9 BC=9" find="BT CT" answer="3 6" book="5.50 5.51"
+  q="The base of an isosceles triangle is $AB = 6$ and the legs are $AC = BC = 9$. The inscribed circle touches the leg $BC$ at $T$. Find $BT$ and $CT$."
+  hint="Tangent segments from one point to a circle are equal.">
+<Step hl="IT">The inscribed circle touches all three sides, and the two tangent segments from a vertex are equal.</Step>
+<Step tex="BT = \tfrac12\, AB = 3">By symmetry the inscribed circle touches the base at its midpoint, so both tangent segments from $B$ are $3$.</Step>
+<Step hl="CT" tex="CT = BC - BT = 9 - 3 = 6">The rest.</Step>
+</Problem>
+
+<Problem id="p-inradius-right" set={{ c: 4, b: 3, alpha: 90 }} show="(IT) I IT" given="AB=8 AC=6 <A=90" find="IT" answer="2"
+  q="The legs of a right triangle are $AB = 8$ and $AC = 6$. Find the radius of the inscribed circle."
+  hint="In a right triangle $r = \tfrac{a + b - c}{2}$, where $c$ is the hypotenuse.">
+<Step hl="BC" tex="BC = \sqrt{8^2 + 6^2} = 10">The hypotenuse by Pythagoras' theorem.</Step>
+<Step hl="IT" tex="r = \frac{8 + 6 - 10}{2} = 2">In a right triangle the inradius is half the difference between the sum of the legs and the hypotenuse.</Step>
+</Problem>
+
+<Problem id="p-midline-triangle" set={{ c: 5.5, b: 4.5, alpha: 33.030151604636686 }} show="A1B1 B1C1 C1A1" given="BC=6 CA=9 AB=11" find="P(A1B1C1)" answer="13" book="6.64 6.65 6.66"
+  q="The sides of a triangle are $6$, $9$ and $11$. Find the perimeter of the triangle whose vertices are the midpoints of the sides."
+  hint="A midline of a triangle is half the third side.">
+<Step hl="A1B1 B1C1 C1A1" tex="B_1C_1 = 3,\quad C_1A_1 = 4.5,\quad A_1B_1 = 5.5">Each of them is a midline and half of the side it is parallel to.</Step>
+<Step tex="P = \tfrac12\,(6 + 9 + 11) = 13">That is, half the perimeter of the given triangle.</Step>
+</Problem>
+
+<Problem id="p-median-third-side" set={{ c: 4.5, b: 3.5, alpha: 58.411864494798834 }} show="AA1" given="AB=9 AC=7 AA1=7" find="BC" answer="8" book="9.7 9.10"
+  q="Two sides of a triangle are $AB = 9$ and $AC = 7$, and the median $AA_1$ to the third side is $7$. Find the third side."
+  hint="Length of a median: $m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}$.">
+<Step hl="AA1" tex="4\,m_a^2 = 2b^2 + 2c^2 - a^2">The median length formula.</Step>
+<Step tex="4 \cdot 49 = 2 \cdot 49 + 2 \cdot 81 - a^2 \;\Rightarrow\; a^2 = 64">Substitute the known values.</Step>
+<Step hl="BC" tex="BC = 8">Therefore.</Step>
+</Problem>
+
+<Problem id="p-bisector-segments" set={{ c: 6, b: 4, alpha: 95.07971579273348 }} show="AL" given="AB=12 AC=8 BC=15" find="BL LC" answer="9 6" book="9.13 9.14 9.15"
+  q="The sides of triangle $ABC$ are $AB = 12$, $AC = 8$ and $BC = 15$. The bisector of angle $A$ meets side $BC$ at $L$. Find $BL$ and $LC$."
+  hint="A bisector divides the opposite side in the ratio of the adjacent sides.">
+<Step hl="AL" tex="\frac{BL}{LC} = \frac{AB}{AC} = \frac32">The bisector property.</Step>
+<Step hl="BL LC" tex="BL = \tfrac35 \cdot 15 = 9,\qquad LC = 6">$BC$ is divided in the ratio $3 : 2$.</Step>
+</Problem>
+
+<Problem id="p-bisector-perimeter-2" set={{ c: 3, b: 4.5, alpha: 80.94355522136416 }} show="AL" given="BL=4 LC=6 P(ABC)=25" find="AB AC" answer="6 9" book="9.16 9.17"
+  q="The bisector of angle $A$ of triangle $ABC$ divides side $BC$ into $BL = 4$ and $LC = 6$, and the perimeter of the triangle is $25$. Find $AB$ and $AC$."
+  hint="$AB : AC = BL : LC$.">
+<Step hl="AL BL LC" tex="AB : AC = 4 : 6 = 2 : 3">The bisector property.</Step>
+<Step tex="AB + AC = 25 - 10 = 15">$BC = BL + LC = 10$.</Step>
+<Step hl="AB AC" tex="AB = 6,\qquad AC = 9">$15$ is divided in the ratio $2 : 3$.</Step>
+</Problem>
+
+<Problem id="p-midline-area" k={2} set={{ c: 6, b: 5, alpha: 53.13010235415599 }} show="A1B1 B1C1 C1A1" given="S(ABC)=48" find="S(A1B1C1)" answer="12" book="10.90"
+  q="The area of a triangle is $48$. Find the area of the triangle whose vertices are the midpoints of the sides."
+  hint="The midlines divide a triangle into four congruent triangles.">
+<Step hl="A1B1 B1C1 C1A1" tex="B_1C_1 = \tfrac12\, BC,\quad C_1A_1 = \tfrac12\, CA,\quad A_1B_1 = \tfrac12\, AB">Each side is a midline and half of the parallel side.</Step>
+<Step hl="A1B1C1" tex="S_{A_1B_1C_1} = \tfrac14 \cdot 48 = 12">The new triangle is similar to the given one with scale factor $\tfrac12$, so the area changes by a factor of $\tfrac14$.</Step>
+</Problem>
+
+</Problems>

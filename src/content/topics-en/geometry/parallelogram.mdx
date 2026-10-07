@@ -1,0 +1,247 @@
+---
+title: Parallelogram
+slug: parallelogram
+subject: geometry
+section: quadrilaterals
+order: 20
+summary: A quadrilateral whose opposite sides are parallel in pairs.
+tags: [quadrilateral, diagonal, area]
+prerequisites: [quadrilateral]
+status: draft
+figure: parallelogram
+parent: quadrilateral
+---
+
+<Definition>A parallelogram is a quadrilateral whose opposite sides are parallel in pairs: $AB \parallel CD$ and $BC \parallel AD$.</Definition>
+
+<Formulas>
+<Formula id="area-height" name="Area: a side and its height" tex="S = a\,h_a" live="S" proof="area-base-height" />
+<Formula id="area-two-sides" name="Area: two sides and an angle" tex="S = ab\sin\alpha" live="S" proof="area-sine" />
+<Formula id="height" name="Height" tex="h_a = b\sin\alpha" live="hₐ" proof="area-sine" />
+<Formula id="perimeter" name="Perimeter" tex="P = 2(a+b)" live="P" proof="opposite-sides-equal" />
+<Formula id="adjacent-angles" name="Adjacent angles" tex="\alpha + \beta = 180^\circ" live="β" proof="adjacent-angles-sum" />
+<Formula id="diagonals" name="Diagonals" tex="d_1^2 + d_2^2 = 2\left(a^2 + b^2\right)" proof="diagonal-squares" />
+<Formula id="area-diagonals-formula" name="Area: the diagonals and the angle between them" tex="S = \tfrac12\, d_1 d_2 \sin\varphi" live="S" proof="area-diagonals" />
+<Formula id="four-triangles-formula" name="Triangles formed by the diagonals" tex="S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S" proof="four-triangles" />
+<Formula id="bisector-formula" name="Angle bisector" tex="\angle BAE = \angle EAD \;\Rightarrow\; BE = AB" proof="bisector-isosceles" />
+</Formulas>
+
+<Properties>
+
+<Property id="opposite-sides-equal" title="Opposite sides are equal" why="A diagonal cuts a parallelogram into two congruent triangles.">
+<Proof given="$ABCD$ a parallelogram" prove="$AB = CD,\ BC = DA$">
+<Step show="AC" hl="AC">Draw the diagonal $AC$. It cuts the parallelogram into two triangles, $ABC$ and $CDA$.</Step>
+<Step hl="<BAC=<DCA AB||CD" tex="\angle BAC = \angle DCA">$AB \parallel CD$ and $AC$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="<BCA=<DAC BC||AD" tex="\angle BCA = \angle DAC">$BC \parallel AD$ and $AC$ is again a transversal: one more pair of equal alternate angles.</Step>
+<Step hl="ABC CDA" tex="\triangle ABC = \triangle CDA">$AC$ is a side of both triangles, so they are congruent by a side and the two angles next to it (ASA).</Step>
+<Step hl="AB=CD BC=DA" tex="AB = CD,\qquad BC = DA \quad \blacksquare">In congruent triangles the corresponding sides are equal too.</Step>
+</Proof>
+</Property>
+
+<Property id="opposite-angles-equal" title="Opposite angles are equal" why="The same two congruent triangles.">
+<Proof given="$ABCD$ a parallelogram" prove="$\angle A = \angle C,\ \angle B = \angle D$">
+<Step show="AC" hl="ABC CDA" tex="\triangle ABC = \triangle CDA">In the proof of the first property we saw that the diagonal $AC$ cuts the parallelogram into two congruent triangles.</Step>
+<Step hl="<B=<D" tex="\angle B = \angle D">In the congruent triangles the angles opposite $AC$ are equal.</Step>
+<Step hl="<BAC=<DCA <DAC=<BCA" tex="\begin{aligned}\angle A &= \angle BAC + \angle DAC \\ &= \angle DCA + \angle BCA = \angle C \quad \blacksquare\end{aligned}">$\angle A$ and $\angle C$ each consist of two parts, and these parts are equal alternate angles in pairs.</Step>
+</Proof>
+</Property>
+
+<Property id="adjacent-angles-sum" title="The angles at one side add up to $180^\circ$" why="These are co-interior angles at parallel lines.">
+<Proof given="$ABCD$ a parallelogram" prove="$\angle A + \angle B = 180^\circ$">
+<Step hl="AD||BC AB">$AD \parallel BC$, and $AB$ is a transversal.</Step>
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ \quad \blacksquare">$\angle A$ and $\angle B$ are co-interior angles, and co-interior angles at parallel lines add up to $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Remark>The same holds for every side: $\angle B + \angle C = \angle C + \angle D = \angle D + \angle A = 180^\circ$.</Remark>
+
+<Property id="diagonals-bisect" title="The diagonals bisect each other" why="A half turn about $O$ maps the parallelogram onto itself.">
+<Proof given="$ABCD$ a parallelogram, $O = AC \cap BD$" prove="$AO = OC,\ BO = OD$">
+<Step show="AC BD O" hl="AC BD">Draw the diagonals $AC$ and $BD$; call the point where they meet $O$.</Step>
+<Step hl="AB=CD" tex="AB = CD">The opposite sides of a parallelogram are equal (property 1).</Step>
+<Step hl="<BAO=<DCO <ABO=<CDO" tex="\begin{gathered}\angle BAO = \angle DCO \\ \angle ABO = \angle CDO\end{gathered}">$AB \parallel CD$, and $AC$ and $BD$ are transversals, so the alternate interior angles are equal.</Step>
+<Step hl="ABO CDO" tex="\triangle ABO = \triangle CDO">The triangles are congruent by a side and the two angles next to it (ASA).</Step>
+<Step hl="AO=OC BO=OD" tex="AO = OC,\qquad BO = OD \quad \blacksquare">In congruent triangles the sides opposite equal angles are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-squares" title="The sum of the squares of the diagonals equals the sum of the squares of all four sides" why="The law of cosines twice: the cosines of adjacent angles are opposite numbers.">
+<Proof given="$AB = a,\ AD = b,\ \angle A = \alpha$" prove="$AC^2 + BD^2 = 2(a^2 + b^2)$">
+<Step show="BD" hl="ABD" tex="BD^2 = a^2 + b^2 - 2ab\cos\alpha">In $\triangle ABD$, by the law of cosines:</Step>
+<Step show="AC" hl="ABC" tex="AC^2 = a^2 + b^2 - 2ab\cos(180^\circ - \alpha)">In $\triangle ABC$, $BC = b$ (property 1) and $\angle B = 180^\circ - \alpha$ (property 3):</Step>
+<Step tex="AC^2 = a^2 + b^2 + 2ab\cos\alpha">Since $\cos(180^\circ - \alpha) = -\cos\alpha$:</Step>
+<Step hl="AC BD" tex="AC^2 + BD^2 = 2\left(a^2 + b^2\right) \quad \blacksquare">Add the two equalities: $2ab\cos\alpha$ cancels.</Step>
+</Proof>
+</Property>
+
+<Property id="area-base-height" title="The area equals a side times the height to it" why="Cut a triangle off one end and put it on the other: you get a rectangle.">
+<Proof given="$ABCD$ a parallelogram, $DH \perp AB$" prove="$S = AB \cdot DH = a\,h_a$">
+<Step set={{ alpha: 65 }} show="DH <DHB" hl="DH">From $D$ drop the height $DH$ to $AB$.</Step>
+<Step show="BK CK <CKA" hl="AHD BKC">From $C$ drop the height $CK$ to the extension of $AB$. This gives two right triangles, $AHD$ and $BKC$.</Step>
+<Step hl="AD=BC DH=CK" tex="\triangle AHD = \triangle BKC">$AD = BC$ (property 1), and $DH = CK$, the distance between the parallel lines. The triangles are congruent by the hypotenuse and a leg.</Step>
+<Step hl="HKCD" tex="S_{ABCD} = S_{HKCD} = a\,h_a \quad \blacksquare">Cut off $\triangle AHD$ and put it in the place of $\triangle BKC$: the parallelogram becomes the rectangle $HKCD$ with side $HK = AB = a$.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="The area is the product of two adjacent sides and the sine of the angle between them" why="The height equals $b\sin\alpha$.">
+<Proof given="$AB = a,\ AD = b,\ \angle A = \alpha$" prove="$S = ab\sin\alpha$">
+<Step set={{ alpha: 65 }} show="DH <DHB" hl="AHD" tex="h_a = DH = b\sin\alpha">$\triangle AHD$ is right: $AD = b$ is the hypotenuse, $DH$ the leg opposite the angle $\alpha$.</Step>
+<Step hl="DH AB" tex="S = a\,h_a = ab\sin\alpha \quad \blacksquare">Substitute into $S = a\,h_a$ (property 6).</Step>
+</Proof>
+</Property>
+
+
+<Property id="four-triangles" title="The diagonals divide a parallelogram into four triangles of equal area" why="$O$ is the midpoint of the diagonals: neighbouring triangles have equal bases and a common height.">
+<Proof given="$O = AC \cap BD$" prove="$S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S$">
+<Step show="AC BD O" hl="AO=OC">The diagonals bisect each other: $AO = OC$, $BO = OD$.</Step>
+<Step hl="AOB BOC" tex="S_{AOB} = S_{BOC}">The two triangles share the vertex $B$, and their bases $AO = OC$ lie on one line, so the height is common.</Step>
+<Step hl="BOC COD" tex="S_{BOC} = S_{COD}">The same with vertex $C$ and bases $BO = OD$.</Step>
+<Step hl="COD DOA" tex="S_{AOB} = S_{BOC} = S_{COD} = S_{DOA} = \tfrac14 S \quad \blacksquare">Likewise $S_{COD} = S_{DOA}$; the four equal parts make up the whole area.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="The area is half the product of the diagonals and the sine of the angle between them" why="Each of the four triangles has area $\tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} \sin\varphi$.">
+<Proof given="$AC = d_1,\ BD = d_2,\ \angle AOB = \varphi$" prove="$S = \tfrac12\, d_1 d_2 \sin\varphi$">
+<Step show="AC BD O" hl="<AOB" tex="S_{AOB} = \tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} \sin\varphi">$AO = \tfrac{d_1}{2}$, $BO = \tfrac{d_2}{2}$; the area from two sides and the angle between them.</Step>
+<Step hl="AOB BOC COD DOA" tex="S = 4\,S_{AOB} = \tfrac12\, d_1 d_2 \sin\varphi \quad \blacksquare">By the previous property all four triangles have equal areas (adjacent angles have equal sines).</Step>
+</Proof>
+</Property>
+
+<Property id="bisector-isosceles" title="The bisector of an angle of a parallelogram cuts off an isosceles triangle" why="The bisector makes two equal angles, and the parallel side makes a third, alternate one.">
+<Proof given="$AE$ bisects $\angle A$, $E \in BC$" prove="$BE = AB$">
+<Step set={{ a: 3, b: 4, alpha: 70 }} show="AE E" hl="<BAE=<EAD">$AE$ splits $\angle A$ into two equal parts.</Step>
+<Step hl="<EAD=<AEB" tex="\angle EAD = \angle AEB">$AD \parallel BC$ and $AE$ is a transversal: these are alternate angles.</Step>
+<Step hl="ABE AB=BE" tex="BE = AB \quad \blacksquare">$\angle BAE = \angle AEB$: $\triangle ABE$ has two equal angles, so it is isosceles.</Step>
+</Proof>
+</Property>
+
+<Property id="adjacent-bisectors" title="The bisectors of the two angles at one side meet at a right angle" why="The angles add up to $180^\circ$, their halves to $90^\circ$.">
+<Proof given="$AF$, $BF$ the bisectors of $\angle A$ and $\angle B$" prove="$\angle AFB = 90^\circ$">
+<Step set={{ a: 5, b: 3, alpha: 60 }} show="AF BF F" hl="AF BF">Draw the two bisectors.</Step>
+<Step hl="<AFB" tex="\angle FAB + \angle FBA = 90^\circ">These are halves of $\angle A$ and $\angle B$, and $\angle A + \angle B = 180^\circ$. So in $\triangle AFB$, $\angle AFB = 90^\circ$. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>If $\alpha$ is obtuse, the foot of the height falls on the extension of $AB$, but the formula stays the same, since $\sin(180^\circ - \alpha) = \sin\alpha$.</Remark>
+
+<Properties title="Criteria: when is a quadrilateral a parallelogram">
+
+<Property id="criterion-sides" kind="criterion" title="If the opposite sides of a quadrilateral are equal in pairs, it is a parallelogram" why="Triangles congruent by three sides give equal alternate angles.">
+<Proof given="$ABCD$ a quadrilateral, $AB = CD,\ BC = DA$" prove="$ABCD$ a parallelogram">
+<Step show="AC" hl="AC">Draw the diagonal $AC$.</Step>
+<Step hl="AB=CD BC=DA ABC CDA" tex="\triangle ABC = \triangle CDA">$AB = CD$, $BC = DA$ and $AC$ is common, so the triangles are congruent by three sides (SSS).</Step>
+<Step hl="<BAC=<DCA" tex="AB \parallel CD">Corresponding angles are equal: $\angle BAC = \angle DCA$. These are alternate interior angles for the lines $AB$ and $CD$ and the transversal $AC$.</Step>
+<Step hl="<BCA=<DAC" tex="BC \parallel AD">Likewise $\angle BCA = \angle DAC$.</Step>
+<Step hl="AB||CD BC||AD">Both pairs of opposite sides are parallel, so $ABCD$ is a parallelogram. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-equal-parallel" kind="criterion" title="If two opposite sides of a quadrilateral are equal and parallel, it is a parallelogram" why="Triangles congruent by two sides and the angle between them.">
+<Proof given="$ABCD$ a quadrilateral, $AB = CD,\ AB \parallel CD$" prove="$ABCD$ a parallelogram">
+<Step show="AC" hl="AC AB||CD">Draw the diagonal $AC$.</Step>
+<Step hl="<BAC=<DCA" tex="\angle BAC = \angle DCA">$AB \parallel CD$, so the alternate interior angles are equal.</Step>
+<Step hl="AB=CD ABC CDA" tex="\triangle ABC = \triangle CDA">$AB = CD$ and $AC$ is common, so the triangles are congruent by two sides and the angle between them (SAS).</Step>
+<Step hl="<BCA=<DAC" tex="BC \parallel AD">The corresponding angles $\angle BCA = \angle DAC$ are alternate interior angles for the lines $BC$ and $AD$.</Step>
+<Step hl="AB||CD BC||AD">Both pairs of opposite sides are parallel, so $ABCD$ is a parallelogram. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonals" kind="criterion" title="If the diagonals of a quadrilateral bisect each other, it is a parallelogram" why="Vertical angles and two pairs of equal halves.">
+<Proof given="$O = AC \cap BD,\ AO = OC,\ BO = OD$" prove="$ABCD$ a parallelogram">
+<Step show="AC BD O" hl="AO=OC BO=OD">The diagonals meet at $O$ and bisect each other.</Step>
+<Step hl="<AOB=<COD" tex="\angle AOB = \angle COD">These angles are vertical.</Step>
+<Step hl="ABO CDO" tex="\triangle AOB = \triangle COD">The triangles are congruent by two sides and the angle between them (SAS).</Step>
+<Step hl="AB=CD <BAO=<DCO" tex="AB = CD,\qquad AB \parallel CD">Hence $AB = CD$ and $\angle BAO = \angle DCO$; these are alternate interior angles, so $AB \parallel CD$.</Step>
+<Step hl="AB||CD">Two opposite sides are equal and parallel, so $ABCD$ is a parallelogram (previous criterion). ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-angles" kind="criterion" title="If the opposite angles of a quadrilateral are equal in pairs, it is a parallelogram" why="The angles add up to $360^\circ$, so adjacent angles come out at $180^\circ$.">
+<Proof given="$\angle A = \angle C,\ \angle B = \angle D$" prove="$ABCD$ a parallelogram">
+<Step hl="<A=<C <B=<D" tex="\angle A + \angle B + \angle C + \angle D = 360^\circ">The angles of a quadrilateral add up to $360^\circ$.</Step>
+<Step tex="2\angle A + 2\angle B = 360^\circ \;\Rightarrow\; \angle A + \angle B = 180^\circ">Substitute $\angle C = \angle A$ and $\angle D = \angle B$.</Step>
+<Step hl="<A <B AD||BC" tex="AD \parallel BC">$\angle A$ and $\angle B$ are co-interior angles for the lines $AD$ and $BC$ and the transversal $AB$, and they add up to $180^\circ$.</Step>
+<Step hl="<A <D AB||DC" tex="AB \parallel DC">Likewise $\angle A + \angle D = \angle A + \angle B = 180^\circ$, so $AB \parallel DC$. Both pairs are parallel, so $ABCD$ is a parallelogram. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">The rectangle, the rhombus and the square are special cases of the parallelogram, so every property above holds for them too.</Remark>
+
+<Remark kind="mistake">The diagonals of a parallelogram are in general neither equal, nor perpendicular, nor angle bisectors. They are equal only in a rectangle and perpendicular only in a rhombus (in a square, both).</Remark>
+
+<Problems>
+
+<Problem id="p-angles-differ" set={{ alpha: 70 }} given="<B-<A=40" find="<A <B" answer="70 110" book="6.7 6.8 6.10"
+  q="One angle of a parallelogram is $40^\circ$ larger than another. Find the angles of the parallelogram."
+  hint="The angles at one side of a parallelogram add up to $180^\circ$.">
+<Step hl="<A <B" tex="\angle A + \angle B = 180^\circ">$\angle A$ and $\angle B$ lie at the same side, $AB$, so they add up to $180^\circ$.</Step>
+<Step tex="\angle A + (\angle A + 40^\circ) = 180^\circ \;\Rightarrow\; \angle A = 70^\circ">Opposite angles are equal, so it is adjacent angles that differ by $40^\circ$: $\angle B = \angle A + 40^\circ$.</Step>
+<Step hl="<A=<C <B=<D" tex="\angle A = \angle C = 70^\circ,\qquad \angle B = \angle D = 110^\circ">Opposite angles are equal.</Step>
+</Problem>
+
+<Problem id="p-perimeter-sides" k={4} set={{ a: 3.75, b: 2, alpha: 60 }} given="P(ABCD)=46 AB-AD=7" find="AB AD" answer="15 8" book="6.18 6.19"
+  q="The perimeter of a parallelogram is $46$ cm, and one side is $7$ cm longer than the other. Find the sides of the parallelogram."
+  hint="Opposite sides are equal, so two adjacent sides add up to half the perimeter.">
+<Step hl="AB=CD BC=DA" tex="2(AB + AD) = 46 \;\Rightarrow\; AB + AD = 23">Opposite sides are equal, so $P = 2(AB + AD)$.</Step>
+<Step hl="AB AD" tex="AB - AD = 7">One side is $7$ longer than the other.</Step>
+<Step tex="AB = \frac{23 + 7}{2} = 15,\qquad AD = \frac{23 - 7}{2} = 8">Add the two equalities, then subtract them.</Step>
+</Problem>
+
+<Problem id="p-bisector-perimeter" set={{ a: 2.4, b: 4, alpha: 70 }} show="AE" given="BE=6 EC=4" find="P(ABCD)" answer="32" book="6.23 6.29"
+  q="In parallelogram $ABCD$ the bisector of angle $A$ meets side $BC$ at $E$. $BE = 6$, $EC = 4$. Find the perimeter of the parallelogram."
+  hint="Prove that triangle $ABE$ is isosceles.">
+<Step hl="<BAE=<EAD">$AE$ is the bisector: $\angle BAE = \angle EAD$.</Step>
+<Step hl="<AEB=<EAD AD||BC" tex="\angle AEB = \angle EAD">$AD \parallel BC$ and $AE$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="ABE AB=BE" tex="\angle BAE = \angle AEB \;\Rightarrow\; AB = BE = 6">Triangle $ABE$ has two equal angles, so it is isosceles.</Step>
+<Step hl="AB BC" tex="P = 2(AB + BC) = 2(6 + 10) = 32">$BC = BE + EC = 10$.</Step>
+</Problem>
+
+<Problem id="p-second-diagonal" set={{ a: 4, b: 2.5, alpha: 60 }} show="AC BD" given="AB=8 AD=5 BD=7" find="AC" answer="√129"
+  q="The sides of a parallelogram are $8$ and $5$, and one diagonal is $7$. Find the other diagonal."
+  hint="The sum of the squares of the diagonals equals the sum of the squares of all four sides.">
+<Step hl="AC BD" tex="AC^2 + BD^2 = 2\left(AB^2 + AD^2\right)">The sum of the squares of the diagonals of a parallelogram equals the sum of the squares of all four sides.</Step>
+<Step tex="AC^2 = 2\,(64 + 25) - 49 = 129">Substitute the known values.</Step>
+<Step hl="AC" tex="AC = \sqrt{129}">The other diagonal.</Step>
+</Problem>
+
+<Problem id="p-two-heights" set={{ a: 3, b: 4, alpha: 53.13010235415598 }} show="DH <DHB BG <BGA" given="DH=16 BG=12 P(ABCD)=70" find="S(ABCD)" answer="240"
+  q="The heights of a parallelogram are $12$ and $16$, and its perimeter is $70$. Find the area of the parallelogram."
+  hint="Write the area two ways: each side times the height to it.">
+<Step hl="DH BG" tex="S = AB \cdot DH = AD \cdot BG">The area of a parallelogram is any side times the height to it.</Step>
+<Step tex="16\,AB = 12\,AD \;\Rightarrow\; AD = \tfrac43\,AB">The larger side gets the smaller height.</Step>
+<Step hl="AB AD" tex="\begin{gathered}AB + AD = 35 \;\Rightarrow\; \tfrac73\,AB = 35 \\ AB = 15,\quad AD = 20\end{gathered}">The perimeter is $70$, so two adjacent sides add up to $35$.</Step>
+<Step hl="ABCD" tex="S = AB \cdot DH = 15 \cdot 16 = 240">The area.</Step>
+</Problem>
+
+<Problem id="p-bisectors-meet" set={{ a: 4, b: 2, alpha: 70 }} show="AF BF" given="AB=10 DF+FC=CD" find="AD" answer="5" book="6.27"
+  q="In parallelogram $ABCD$ the bisectors of angles $A$ and $B$ meet at point $F$ of side $CD$. $AB = 10$. Find $AD$."
+  hint="A bisector cuts an isosceles triangle off a parallelogram.">
+<Step hl="<BAF=<FAD">$AF$ is the bisector: $\angle BAF = \angle FAD$.</Step>
+<Step hl="<AFD=<BAF AB||CD" tex="\angle AFD = \angle BAF = \angle FAD">$AB \parallel CD$ and $AF$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="ADF AD=DF" tex="AD = DF">Triangle $ADF$ has two equal angles, so it is isosceles.</Step>
+<Step hl="BCF BC=CF" tex="BC = CF">By the same argument for the bisector $BF$: triangle $BCF$ is isosceles.</Step>
+<Step hl="AB CD" tex="\begin{aligned}AB = CD &= DF + FC \\ &= AD + BC = 2\,AD \\ AD &= 10 : 2 = 5\end{aligned}">$CD = AB$ and $BC = AD$.</Step>
+</Problem>
+
+<Problem id="p-heights-angle" set={{ a: 4, b: 3, alpha: 50 }} show="BG BL <BGA <BLC" given="<GBL=50" find="<A <B" answer="50 130" book="6.15 6.16"
+  q="The angle between the heights drawn from the vertex of an obtuse angle of a parallelogram is $50^\circ$. Find the angles of the parallelogram."
+  hint="Quadrilateral $BGDL$ has two right angles.">
+<Step hl="BG BL <BGA <BLC">$BG \perp AD$ and $BL \perp CD$: these are the heights from $B$, the vertex of the obtuse angle.</Step>
+<Step hl="BGDL" tex="\angle GBL + \angle D = 360^\circ - 90^\circ - 90^\circ = 180^\circ">The angles of quadrilateral $BGDL$ add up to $360^\circ$, and two of them are right.</Step>
+<Step hl="<D" tex="\angle D = 180^\circ - 50^\circ = 130^\circ">Hence $\angle D$.</Step>
+<Step hl="<A <B" tex="\angle B = \angle D = 130^\circ,\qquad \angle A = \angle C = 50^\circ">Opposite angles are equal, and adjacent angles add up to $180^\circ$.</Step>
+</Problem>
+
+<Problem id="p-par-heights-ratio" k={4} set={{ a: 4.5, b: 3, alpha: 60 }} show="DH BG <DHB <BGA" given="DH/BG=2/3 P(ABCD)=60" find="AB AD" answer="18 12" book="10.22 10.23"
+  q="The perimeter of a parallelogram is $60$, and its heights are in the ratio $2 : 3$. Find the sides of the parallelogram."
+  hint="$AB \cdot DH = AD \cdot BG$: the sides are inversely proportional to the heights.">
+<Step hl="DH BG" tex="AB \cdot DH = AD \cdot BG \;\Rightarrow\; \frac{AB}{AD} = \frac{BG}{DH} = \frac32">The area with each side and the height to it.</Step>
+<Step tex="AB + AD = 30">Half the perimeter.</Step>
+<Step hl="AB AD" tex="AB = 18,\qquad AD = 12">$30$ is divided in the ratio $3 : 2$.</Step>
+</Problem>
+
+</Problems>

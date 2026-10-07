@@ -9,8 +9,8 @@ import Nav from '@/components/Nav.astro';
 import Palette from '@/components/Palette.astro';
 import Icon from '@/components/Icon.astro';
 import type { SubjectId } from '@/subjects';
-
-const SITE = 'ლურჯი რვეული';
+import { delocalize, langOf, localize, SITE, t } from '@/i18n';
+import { allTopics } from '@/lib/topics';
 
 interface Props {
   title: string;
@@ -21,34 +21,43 @@ interface Props {
   draft?: boolean;
   lede?: string;
 }
-const { title, description = 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.', current, panel = true, figure = true, draft = false, lede } = Astro.props;
+const lang = langOf(Astro.url);
+const { title, description = t(lang, 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.'), current, panel = true, figure = true, draft = false, lede } = Astro.props;
+const site = SITE[lang];
+
+// the same page in the other language (a topic not translated yet falls back to the English home)
+const other = lang === 'en' ? 'ka' : 'en';
+const here = delocalize(Astro.url.pathname);
+const hasOther = !current || other === 'ka' || (await allTopics('en')).some(tp => tp.id === current.slug);
+const alt = hasOther ? localize(other, here) : '/en/';
 ---
 <!doctype html>
-<html lang="ka">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>{title === SITE ? SITE : `${title} · ${SITE}`}</title>
+  <title>{title === site ? site : `${title} · ${site}`}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#2657ff" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  {hasOther && <link rel="alternate" hreflang={other} href={alt} />}
   <script is:inline>
     try { const t = JSON.parse(localStorage.getItem('mb:theme')); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
   </script>
 </head>
 <body data-topic={current ? `/${current.subject}/${current.slug}/` : undefined}>
-  <a class="skip" href="#main">შინაარსზე გადასვლა</a>
+  <a class="skip" href="#main">{t(lang, 'შინაარსზე გადასვლა')}</a>
   <div class:list={['app', { 'no-panel': !panel, 'no-figure': panel && !figure }]}>
     <header class="topbar">
-      <button class="icon-btn" type="button" popovertarget="nav" aria-label="თემების სია"><Icon name="menu" /></button>
+      <button class="icon-btn" type="button" popovertarget="nav" aria-label={t(lang, 'თემების სია')}><Icon name="menu" /></button>
       <span class="topbar-title">{title}</span>
-      <button class="icon-btn" type="button" data-open-palette aria-label="ძიება"><Icon name="search" /></button>
+      <button class="icon-btn" type="button" data-open-palette aria-label={t(lang, 'ძიება')}><Icon name="search" /></button>
     </header>
-    <Nav current={current} />
+    <Nav current={current} alt={alt} />
     <main class="stage" id="main" tabindex="-1">
       <h1 class="title" data-pagefind-meta="title">{title}</h1>
       {lede && <p class="lede">{lede}</p>}
-      {draft && <p class="status-note">დრაფტი — შესამოწმებელია</p>}
+      {draft && <p class="status-note">{t(lang, 'დრაფტი — შესამოწმებელია')}</p>}
       <slot />
     </main>
     <slot name="panel" />

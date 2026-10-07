@@ -1,0 +1,86 @@
+---
+title: Cartesian coordinates
+slug: coordinates
+subject: geometry
+section: coordinates
+order: 40
+summary: The distance between two points, the midpoint of a segment, the equations of a circle and a line.
+tags: [coordinates, distance, midpoint, equation of a circle, equation of a line, slope]
+prerequisites: [right-triangle, thales, trigonometry]
+status: draft
+figure: coordinates
+---
+
+<Definition>A **Cartesian coordinate system** is two perpendicular number axes with a common origin $O$: $Ox$ and $Oy$. The coordinates of a point $A(x;\, y)$ are its projections on the axes: $x$ is the **abscissa**, $y$ the **ordinate**. In the equation of a line $y = kx + b$ the number $k$ is called the **slope**.</Definition>
+
+<Formulas>
+<Formula id="distance-formula-card" name="Distance between two points" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}" live="AB" proof="distance-formula" />
+<Formula id="midpoint-formula-card" name="Midpoint of a segment" tex="M\left(\frac{x_1 + x_2}{2};\ \frac{y_1 + y_2}{2}\right)" proof="midpoint-formula" />
+<Formula id="circle-formula" name="Equation of a circle" tex="(x - a)^2 + (y - b)^2 = R^2" proof="circle-equation" />
+<Formula id="line-formula" name="Equation of a line" tex="y = kx + b, \qquad k = \frac{y_2 - y_1}{x_2 - x_1} = \tan\alpha" live="k" proof="line-equation" />
+<Formula id="parallel-formula" name="Parallel and perpendicular lines" tex="k_1 = k_2, \qquad k_1 k_2 = -1" proof="perpendicular-slopes" />
+</Formulas>
+
+<Properties>
+
+<Property id="distance-formula" title="The distance between two points is $\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$" why="The differences of the coordinates are the legs of a right triangle.">
+<Proof given="$A(x_1;\, y_1)$, $B(x_2;\, y_2)$" prove="$AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$">
+<Step show="AC BC C <ACB" hl="ACB">$C(x_2;\, y_1)$: $AC$ is parallel to the axis $Ox$, $BC$ to $Oy$, so $\angle C = 90^\circ$.</Step>
+<Step hl="AC BC" tex="AC = |x_2 - x_1|, \qquad BC = |y_2 - y_1|">The legs are parallel to the axes.</Step>
+<Step hl="AB" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \quad \blacksquare">Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Property id="midpoint-formula" title="The coordinates of the midpoint of a segment are the averages of the coordinates of its ends" why="Thales' theorem for the projections on an axis.">
+<Proof given="$A(x_1;\, y_1)$, $B(x_2;\, y_2)$, $AM = MB$" prove="$M\left(\tfrac{x_1 + x_2}{2};\ \tfrac{y_1 + y_2}{2}\right)$">
+<Step show="AA0 BB0 MM0 A0 B0 M0 M" hl="M">Drop perpendiculars from $A$, $M$ and $B$ to the axis $Ox$: $AA_0 \parallel MM_0 \parallel BB_0$.</Step>
+<Step hl="A0M0=M0B0" tex="A_0M_0 = M_0B_0">Thales' theorem: $AM = MB$.</Step>
+<Step tex="x_M = \frac{x_1 + x_2}{2}, \qquad y_M = \frac{y_1 + y_2}{2} \quad \blacksquare">$M_0$ is the midpoint of $A_0B_0$; the same on the axis $Oy$.</Step>
+</Proof>
+</Property>
+
+<Property id="circle-equation" title="The equation of a circle with centre $(a;\, b)$ and radius $R$: $(x - a)^2 + (y - b)^2 = R^2$" why="A circle is the set of points at distance $R$ from the centre.">
+<Proof given="Centre $A(a;\, b)$, radius $R$" prove="$(x - a)^2 + (y - b)^2 = R^2$">
+<Step show="(AB) B" hl="(AB)">A point $(x;\, y)$ is on the circle if and only if its distance from the centre is $R$.</Step>
+<Step tex="(x - a)^2 + (y - b)^2 = R^2 \quad \blacksquare">The distance formula, squared (both sides are non-negative).</Step>
+</Proof>
+</Property>
+
+<Property id="line-equation" title="The equation of a line is $y = kx + b$, where $k = \tfrac{y_2 - y_1}{x_2 - x_1}$ is the tangent of the angle of inclination" why="For all points of a line the ratio of rise to run is the same (similar triangles).">
+<Proof given="The line $AB$, $x_1 \ne x_2$" prove="$y = kx + b$">
+<Step show="line:AB AC BC C <ACB" hl="ACB" tex="k = \frac{y_2 - y_1}{x_2 - x_1}">In $\triangle ACB$, $\tfrac{|BC|}{|AC|} = \tan\alpha$, where $\alpha$ is the angle of the line with $Ox$; the sign shows whether the line goes up or down.</Step>
+<Step show="line:AB" hl="AB" tex="\frac{y - y_1}{x - x_1} = k \;\Rightarrow\; y = kx + (y_1 - kx_1) \quad \blacksquare">For any other point $(x;\, y)$ of the line the ratio is the same: similar right triangles.</Step>
+</Proof>
+</Property>
+
+<Property id="perpendicular-slopes" title="The lines $y = k_1x + b_1$ and $y = k_2x + b_2$ are perpendicular if and only if $k_1k_2 = -1$" why="Pythagoras' theorem and its converse for the lines moved to the origin.">
+<Proof given="$y = k_1x + b_1$, $y = k_2x + b_2$" prove="Perpendicular $\iff k_1k_2 = -1$">
+<Step show="line:AB line:AD D" hl="<BAD">The slope does not change if we move the lines to the origin: $y = k_1x$ and $y = k_2x$. Take the points $P(1;\, k_1)$ and $Q(1;\, k_2)$ on them.</Step>
+<Step tex="\begin{gathered}OP^2 + OQ^2 = PQ^2 \\ \iff (1 + k_1^2) + (1 + k_2^2) = (k_1 - k_2)^2\end{gathered}">The angle at $O$ is right if and only if Pythagoras' equality holds.</Step>
+<Step tex="k_1 k_2 = -1 \quad \blacksquare">Expand the brackets and simplify.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Parallel lines have the same slope: $k_1 = k_2$ (and $b_1 \ne b_2$). A line parallel to the axis $Oy$ ($x = c$) has no slope.</Remark>
+
+<Remark kind="mistake">In the midpoint formula the coordinates are added, in the distance formula they are subtracted. $AB = \sqrt{(x_1 + x_2)^2 + \dots}$ is a mistake.</Remark>
+
+<Problems>
+
+<Problem id="p-coord-distance-mid" set={{ x1: -2, y1: -1, x2: 1, y2: 3 }} show="M" given="x(A)=-2 y(A)=-1 x(B)=1 y(B)=3" find="AB x(M) y(M)" labels="AB;x_M;y_M" answer="5 -0.5 1" book="15.22"
+  q="The points $A(-2;\, -1)$ and $B(1;\, 3)$ are given. Find the length of the segment $AB$ and the coordinates of its midpoint $M$."
+  hint="Distance: the square root of the sum of the squares of the coordinate differences; midpoint: the averages of the coordinates of the ends.">
+<Step hl="AB" tex="AB = \sqrt{(1 + 2)^2 + (3 + 1)^2} = \sqrt{9 + 16} = 5">The distance between two points.</Step>
+<Step hl="M" tex="x_M = \frac{-2 + 1}{2} = -0.5,\qquad y_M = \frac{-1 + 3}{2} = 1">The coordinates of the midpoint.</Step>
+</Problem>
+
+<Problem id="p-coord-other-end" set={{ x1: -3, y1: 2, x2: 4, y2: -2 }} show="M" given="x(A)=-3 y(A)=2 x(M)=0.5 y(M)=0" find="x(B) y(B)" labels="x_B;y_B" answer="4 -2" book="15.15 15.16"
+  q="One end of a segment $AB$ is $A(-3;\, 2)$, and its midpoint is $M(0.5;\, 0)$. Find the coordinates of the other end $B$."
+  hint="$x_M = \tfrac{x_A + x_B}{2}$: express $x_B$ from it.">
+<Step tex="x_B = 2x_M - x_A = 1 + 3 = 4">From the midpoint formula.</Step>
+<Step hl="B" tex="y_B = 2y_M - y_A = 0 - 2 = -2">The same for the ordinate.</Step>
+</Problem>
+
+</Problems>

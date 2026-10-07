@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test';
 
-// Every topic page: its figure draws, every proof opens, and nothing logs an error.
-test('all topic pages render their figure and proofs without errors', async ({ page }) => {
+// Every topic page in both languages: its figure draws, every proof opens, and nothing logs an error.
+for (const home of ['/', '/en/']) test(`all topic pages under ${home} render their figure and proofs without errors`, async ({ page }) => {
   test.setTimeout(180_000);
   await page.setViewportSize({ width: 1440, height: 900 });
   const errors: string[] = [];
   page.on('console', m => { if (m.type() === 'error') errors.push(`${page.url()}: ${m.text()}`); });
   page.on('pageerror', e => errors.push(`${page.url()}: ${e.message}`));
-  await page.goto('/');
+  await page.goto(home);
   const urls = await page.$$eval('#nav .topics a', as => as.map(a => (a as HTMLAnchorElement).pathname));
   expect(urls.length).toBeGreaterThan(5);
   for (const url of urls) {

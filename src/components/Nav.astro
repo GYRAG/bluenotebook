@@ -1,48 +1,53 @@
 ---
 import { SUBJECTS, type SubjectId } from '@/subjects';
 import { allTopics, sectionsOf, subjectsWithContent, topicUrl } from '@/lib/topics';
+import { delocalize, langOf, localize, SITE, t } from '@/i18n';
 import Icon from './Icon.astro';
 
-interface Props { current?: { subject: SubjectId; slug: string } | undefined }
-const { current } = Astro.props;
+interface Props { current?: { subject: SubjectId; slug: string } | undefined; alt: string }
+const { current, alt } = Astro.props;
 
-const topics = await allTopics();
+const lang = langOf(Astro.url);
+const topics = await allTopics(lang);
 const subject: SubjectId = current?.subject ?? 'geometry';
 const subjects = subjectsWithContent(topics);
-const sections = sectionsOf(topics, subject);
-const pageNo = (id: string) => String(sections.flatMap(s => s.items).findIndex(t => t.id === id) + 1).padStart(2, '0');
+const sections = sectionsOf(topics, subject, lang);
+const pageNo = (id: string) => String(sections.flatMap(s => s.items).findIndex(tp => tp.id === id) + 1).padStart(2, '0');
+const here = delocalize(Astro.url.pathname);
+const extra = (path: string, label: string) => ({ href: localize(lang, path), label: t(lang, label), on: here === path });
+const links = [
+  ...(subject === 'geometry' ? [extra('/geometry/relationships/', 'ფიგურების კავშირები'), extra('/cheatsheet/', 'შპარგალკა')] : []),
+  extra('/sheet/', 'სუფთა ფურცელი'),
+];
 ---
-<nav id="nav" class="nav" popover aria-label="თემები">
-  <a class="brand" href="/"><span class="brand-t">ლურჯი რვეული</span><span class="brand-s">მათემატიკის ბაზა</span></a>
-  <button class="search" type="button" data-open-palette><Icon name="search" /><span>ძიება</span><kbd>/</kbd></button>
+<nav id="nav" class="nav" popover aria-label={t(lang, 'თემები')}>
+  <a class="brand" href={localize(lang, '/')}><span class="brand-t">{SITE[lang]}</span><span class="brand-s">{t(lang, 'მათემატიკის ბაზა')}</span></a>
+  <button class="search" type="button" data-open-palette><Icon name="search" /><span>{t(lang, 'ძიება')}</span><kbd>/</kbd></button>
   {subjects.length > 1 ? (
     <details class="subject">
-      <summary>{SUBJECTS[subject].label}<Icon name="chev" /></summary>
+      <summary>{t(lang, SUBJECTS[subject].label)}<Icon name="chev" /></summary>
       <ul>
         {subjects.map(id => (
-          <li><a href={topicUrl(topics.find(t => t.data.subject === id)!)} aria-current={id === subject ? 'true' : undefined}>{SUBJECTS[id].label}</a></li>
+          <li><a href={topicUrl(topics.find(tp => tp.data.subject === id)!, lang)} aria-current={id === subject ? 'true' : undefined}>{t(lang, SUBJECTS[id].label)}</a></li>
         ))}
       </ul>
     </details>
-  ) : <p class="subject-name">{SUBJECTS[subject].label}</p>}
+  ) : <p class="subject-name">{t(lang, SUBJECTS[subject].label)}</p>}
   {sections.map(s => (
-    <details class="sec" open={!current || s.items.some(t => t.id === current.slug)}>
+    <details class="sec" open={!current || s.items.some(tp => tp.id === current.slug)}>
       <summary>{s.label}<Icon name="chev" /></summary>
       <ul class="topics">
-        {s.items.map(t => <li><a href={topicUrl(t)} aria-current={t.id === current?.slug ? 'page' : undefined}><span class="t-t">{t.data.title}</span><span class="t-n">{pageNo(t.id)}</span></a></li>)}
+        {s.items.map(tp => <li><a href={topicUrl(tp, lang)} aria-current={tp.id === current?.slug ? 'page' : undefined}><span class="t-t">{tp.data.title}</span><span class="t-n">{pageNo(tp.id)}</span></a></li>)}
       </ul>
     </details>
   ))}
   <div class="nav-end">
   <ul class="extra">
-    {subject === 'geometry' && <>
-      <li><a href="/geometry/relationships/" aria-current={Astro.url.pathname === '/geometry/relationships/' ? 'page' : undefined}>ფიგურების კავშირები</a></li>
-      <li><a href="/cheatsheet/" aria-current={Astro.url.pathname === '/cheatsheet/' ? 'page' : undefined}>შპარგალკა</a></li>
-    </>}
-    <li><a href="/sheet/" aria-current={Astro.url.pathname === '/sheet/' ? 'page' : undefined}>სუფთა ფურცელი</a></li>
+    {links.map(l => <li><a href={l.href} aria-current={l.on ? 'page' : undefined}>{l.label}</a></li>)}
   </ul>
   <div class="nav-foot">
-    <button class="nf" type="button" data-theme-toggle><Icon name="theme" /><span data-theme-label>თემა</span></button>
+    <button class="nf" type="button" data-theme-toggle><Icon name="theme" /><span data-theme-label>{t(lang, 'თემა')}</span></button>
+    <a class="nf" href={alt} hreflang={lang === 'en' ? 'ka' : 'en'} lang={lang === 'en' ? 'ka' : 'en'} data-lang-switch><Icon name="globe" /><span>{lang === 'en' ? 'ქართული' : 'English'}</span></a>
   </div>
   </div>
 </nav>

@@ -1,0 +1,94 @@
+---
+title: Prism and parallelepiped
+slug: prism
+subject: geometry
+section: solids
+order: 54
+summary: The lateral surface and volume of a prism, the diagonals of a parallelepiped, the diagonal of a cuboid.
+tags: [prism, parallelepiped, volume, lateral surface, diagonal]
+prerequisites: [lines-planes, perpendicularity, parallelogram]
+status: draft
+figure: box
+---
+
+<Definition>A **prism** is a polyhedron two of whose faces (the bases) are congruent polygons in parallel planes, while the others (the lateral faces) are parallelograms. A prism is right if its lateral edges are perpendicular to the base. A **parallelepiped** is a prism whose base is a parallelogram; all faces of a **cuboid** (rectangular parallelepiped) are rectangles.</Definition>
+
+<Formulas>
+<Formula id="diagonal-formula" name="The diagonal of a cuboid" tex="d^2 = a^2 + b^2 + c^2" live="d" proof="box-diagonal" />
+<Formula id="lateral-formula" name="The lateral surface of a right prism" tex="S_{\text{lat}} = P\,h" proof="prism-lateral" />
+<Formula id="full-formula" name="Total surface" tex="S_{\text{tot}} = S_{\text{lat}} + 2S" />
+<Formula id="volume-formula" name="Volume" tex="V = S\,h, \qquad V = abc" live="V" proof="prism-volume" />
+</Formulas>
+
+<Properties>
+
+<Property id="parallelepiped-diagonals" title="All four diagonals of a parallelepiped meet at one point and are bisected by it" why="Every two diagonals are the diagonals of one parallelogram.">
+<Proof given="$ABCDA_1B_1C_1D_1$ a parallelepiped" prove="$AC_1, BD_1, CA_1, DB_1$ meet at $O$ and are bisected">
+<Step show="AC1 CA1 AC A1C1" hl="ACC1A1">$AA_1$ and $CC_1$ are equal and parallel (both to $BB_1$), so $ACC_1A_1$ is a parallelogram.</Step>
+<Step hl="AC1 CA1">The diagonals $AC_1$ and $CA_1$ of a parallelogram bisect each other.</Step>
+<Step show="BD1 AD1 BC1" hl="ABC1D1">$AB$ and $D_1C_1$ are equal and parallel, so $ABC_1D_1$ is a parallelogram too: $AC_1$ and $BD_1$ have a common midpoint.</Step>
+<Step show="DB1 O" hl="AC1 BD1 CA1 DB1">Likewise for $DB_1$. All four diagonals have the common midpoint $O$. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="box-diagonal" title="The square of the diagonal of a cuboid is the sum of the squares of its three dimensions" why="Pythagoras' theorem twice: in the base and in the diagonal section.">
+<Proof given="A cuboid, $AB = a$, $BC = b$, $CC_1 = c$" prove="$AC_1^2 = a^2 + b^2 + c^2$">
+<Step set={{ tilt: 0 }} show="AC" hl="ABC" tex="AC^2 = a^2 + b^2">The right triangle $\triangle ABC$ in the base.</Step>
+<Step show="AC1" hl="ACC1" tex="AC_1^2 = AC^2 + CC_1^2">$CC_1$ is perpendicular to the base, so $CC_1 \perp AC$: $\triangle ACC_1$ is right.</Step>
+<Step tex="d^2 = a^2 + b^2 + c^2 \quad \blacksquare">Substitute.</Step>
+</Proof>
+</Property>
+
+<Property id="prism-lateral" title="The lateral surface of a right prism is the perimeter of the base times the height" why="The lateral faces are rectangles of the same height.">
+<Proof given="A right prism, base perimeter $P$, height $h$" prove="$S_{\text{lat}} = P\,h$">
+<Step set={{ tilt: 0 }} hl="ABB1A1 BCC1B1 CDD1C1 DAA1D1">In a right prism the lateral faces are rectangles, all with height $h$.</Step>
+<Step tex="\begin{aligned}S_{\text{lat}} &= AB\cdot h + BC\cdot h + CD\cdot h + DA\cdot h \\ &= P\,h \quad \blacksquare\end{aligned}">The sum of the areas of the rectangles.</Step>
+</Proof>
+</Property>
+
+<Property id="prism-volume" title="The volume of a prism is the area of the base times the height" why="An oblique prism has the same cross-section at every height as a right one.">
+<Proof given="A prism, base area $S$, height $h$" prove="$V = S\,h$">
+<Step set={{ tilt: 0 }} tex="V = abc = S\,h">The volume of a cuboid is $abc$: it holds $a \cdot b \cdot c$ unit cubes.</Step>
+<Step set={{ tilt: 25 }} show="A1H H" hl="A1H">In an oblique prism the height is $h = A_1H$, the distance between the bases.</Step>
+<Step tex="V = S\,h \quad \blacksquare">Every cross-section parallel to the base is congruent to the base, just as in a right prism with the same base and height. By Cavalieri's principle, solids whose cross-sections at every height have equal areas have equal volumes.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">A cube is a cuboid with equal edges: $d = a\sqrt3$, $V = a^3$, $S_{\text{tot}} = 6a^2$.</Remark>
+
+<Remark kind="mistake">The height of an oblique prism is not its lateral edge: the height is perpendicular to the bases, the edge is oblique.</Remark>
+
+<Problems>
+
+<Problem id="p-box-diagonal" set={{ a: 3.2, b: 2.4, c: 4, tilt: 0 }} show="AC AC1" given="AB=4 BC=3 CC1=5" find="AC1 <C1AC" answer="5√2 45" book="17.16 17.17"
+  q="The sides of the base of a cuboid are $4$ and $3$, and its height is $5$. Find the diagonal of the cuboid and the angle it makes with the plane of the base."
+  hint="$AC$ is the projection of $AC_1$ on the base.">
+<Step hl="AC" tex="AC = \sqrt{4^2 + 3^2} = 5">The diagonal of the base.</Step>
+<Step hl="AC1" tex="AC_1 = \sqrt{5^2 + 5^2} = 5\sqrt2">In the right triangle $ACC_1$; that is, $d^2 = a^2 + b^2 + c^2$.</Step>
+<Step hl="ACC1" tex="\tan\angle C_1AC = \frac{CC_1}{AC} = 1 \;\Rightarrow\; \angle C_1AC = 45^\circ">The angle between a diagonal and a plane is the angle between the diagonal and its projection.</Step>
+</Problem>
+
+<Problem id="p-box-height" set={{ a: 2.4, b: 3.2, c: 4, tilt: 0 }} show="AC AC1" given="AB=12 BC=16 <C1AC=45" find="CC1" answer="20" book="17.18 17.19"
+  q="The diagonal of a cuboid makes a $45^\circ$ angle with the plane of the base, and the sides of the base are $12$ and $16$. Find the height of the cuboid."
+  hint="The right triangle $ACC_1$ is isosceles.">
+<Step hl="AC" tex="AC = \sqrt{12^2 + 16^2} = 20">The diagonal of the base.</Step>
+<Step hl="ACC1" tex="CC_1 = AC\,\tan 45^\circ = 20">In the right triangle $ACC_1$.</Step>
+</Problem>
+
+<Problem id="p-cube-volume" set={{ a: 3, b: 3, c: 3, tilt: 0 }} show="AC1" given="AB=BC BC=CC1 AC1=6" find="AB S(ABCD)*CC1" labels="a;V" answer="2√3 24√3" book="20.2"
+  q="The diagonal of a cube is $6$. Find the edge and the volume of the cube."
+  hint="The diagonal of a cube is $a\sqrt3$.">
+<Step hl="AC1" tex="a\sqrt3 = 6 \;\Rightarrow\; a = 2\sqrt3">$d^2 = a^2 + a^2 + a^2$.</Step>
+<Step tex="V = a^3 = 24\sqrt3">The volume of a cube.</Step>
+</Problem>
+
+<Problem id="p-box-ratio-volume" k={0.625} set={{ a: 4.8, b: 1.6, c: 3.2, tilt: 0 }} given="2*(S(ABCD)+S(ABB1A1)+S(BCC1B1))=22 AB/BC=3 CC1/BC=2" find="S(ABCD)*CC1" labels="V" answer="6" book="20.7 20.9"
+  q="The total surface area of a cuboid is $22$, and the edges from one vertex are in the ratio $1 : 2 : 3$. Find the volume of the cuboid."
+  hint="Call the edges $x$, $2x$ and $3x$.">
+<Step tex="\begin{gathered}2\,(x \cdot 2x + 2x \cdot 3x + x \cdot 3x) = 22x^2 \\ 22x^2 = 22 \;\Rightarrow\; x = 1\end{gathered}">The total surface is the sum of the areas of six faces: three pairs of congruent rectangles.</Step>
+<Step tex="V = 1 \cdot 2 \cdot 3 = 6">The volume of a cuboid is the product of its edges.</Step>
+</Problem>
+
+</Problems>

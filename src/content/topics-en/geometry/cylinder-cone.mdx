@@ -1,0 +1,123 @@
+---
+title: Cylinder and cone
+slug: cylinder-cone
+subject: geometry
+section: solids
+order: 56
+summary: The lateral surface and volume of a cylinder and a cone, the axial section, the slant height of a cone.
+tags: [cylinder, cone, slant height, axial section, solid of revolution]
+prerequisites: [prism, pyramid, circle-length]
+status: draft
+figure: cylinder
+figures: [cone]
+---
+
+<Definition>A **cylinder** is obtained by rotating a rectangle about one of its sides, a **cone** by rotating a right triangle about a leg. The bases of a cylinder are congruent discs, the base of a cone is a disc; a segment joining the apex of a cone to a point of the base circle is a **generator**, and its length is the slant height $l$. The section by a plane through the axis is the axial section.</Definition>
+
+<Formulas>
+<Formula id="cyl-lateral-formula" name="Lateral surface of a cylinder" tex="S_{\text{lat}} = 2\pi r h" live="S₁" proof="cylinder-lateral" />
+<Formula id="cyl-volume-formula" name="Volume of a cylinder" tex="V = \pi r^2 h" live="V" proof="cylinder-volume" />
+<Formula id="generator-formula" name="Slant height of a cone" tex="l^2 = r^2 + h^2" proof="cone-generator" />
+<Formula id="cone-lateral-formula" name="Lateral surface of a cone" tex="S_{\text{lat}} = \pi r l" proof="cone-lateral" />
+<Formula id="cone-volume-formula" name="Volume of a cone" tex="V = \tfrac13\,\pi r^2 h" proof="cone-volume" />
+</Formulas>
+
+<Properties title="Cylinder">
+
+<Property id="axial-section" title="The axial section of a cylinder is a rectangle with sides $2r$ and $h$" why="The generators are parallel to the axis and perpendicular to the base.">
+<Proof given="A cylinder, $AB$ a diameter of the lower base" prove="$ABB_1A_1$ a rectangle, $AB = 2r$, $AA_1 = h$">
+<Step show="AB A1B1 AA1 BB1" hl="ABB1A1">A plane through the axis cuts the bases in the diameters $AB$ and $A_1B_1$, and the lateral surface in the generators $AA_1$ and $BB_1$.</Step>
+<Step hl="AA1 BB1" tex="AB = 2r, \qquad AA_1 = h \quad \blacksquare">The generators are perpendicular to the bases, so the section is a rectangle.</Step>
+</Proof>
+</Property>
+
+<Property id="cylinder-lateral" title="The lateral surface of a cylinder is $2\pi rh$" why="Unrolled, the lateral surface is a rectangle with sides $2\pi r$ and $h$.">
+<Proof given="A cylinder, radius $r$, height $h$" prove="$S_{\text{lat}} = 2\pi r h$">
+<Step show="O1B BB1" hl="BB1">Cut the lateral surface along the generator $BB_1$ and unroll it onto the plane.</Step>
+<Step tex="S_{\text{lat}} = 2\pi r \cdot h \quad \blacksquare">The result is a rectangle: one side is the circumference of the base, $2\pi r$, the other the height $h$.</Step>
+</Proof>
+</Property>
+
+<Property id="cylinder-volume" title="The volume of a cylinder is the area of the base times the height: $V = \pi r^2 h$" why="Inscribed regular prisms give the cylinder in the limit.">
+<Proof given="A cylinder, radius $r$, height $h$" prove="$V = \pi r^2 h$">
+<Step>Inscribe a regular $n$-gonal prism in the cylinder; its volume is $S_n h$.</Step>
+<Step tex="V = \pi r^2 h \quad \blacksquare">As $n \to \infty$, $S_n \to \pi r^2$: the prism fills the cylinder.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Cone">
+
+<Property id="cone-generator" title="The slant height of a cone is $l = \sqrt{r^2 + h^2}$" why="The height, the radius and the slant height form a right triangle.">
+<Proof figure="cone" given="A cone, $SO = h$, $OA = r$" prove="$SA^2 = r^2 + h^2$">
+<Step show="SA OA SO" hl="SOA" tex="SA^2 = SO^2 + OA^2 = h^2 + r^2 \quad \blacksquare">$SO \perp$ the base, so $\triangle SOA$ is right.</Step>
+</Proof>
+</Property>
+
+<Property id="cone-lateral" title="The lateral surface of a cone is $\pi rl$" why="Unrolled, the lateral surface is a sector of radius $l$ with arc $2\pi r$.">
+<Proof figure="cone" given="A cone, radius $r$, slant height $l$" prove="$S_{\text{lat}} = \pi r l$">
+<Step show="SA" hl="SA">Cut the lateral surface along the generator $SA$ and unroll it.</Step>
+<Step>The result is a sector of radius $l$ whose arc length is the circumference of the base, $2\pi r$.</Step>
+<Step tex="S_{\text{lat}} = \tfrac12 \cdot 2\pi r \cdot l = \pi r l \quad \blacksquare">The area of a sector is half the product of the arc and the radius.</Step>
+</Proof>
+</Property>
+
+<Property id="cone-volume" title="The volume of a cone is $\tfrac13 \pi r^2 h$" why="Inscribed regular pyramids give the cone in the limit.">
+<Proof figure="cone" given="A cone, radius $r$, height $h$" prove="$V = \tfrac13 \pi r^2 h$">
+<Step>Inscribe a regular $n$-gonal pyramid in the cone; its volume is $\tfrac13 S_n h$.</Step>
+<Step tex="V = \tfrac13\,\pi r^2 h \quad \blacksquare">As $n \to \infty$, $S_n \to \pi r^2$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">The formula for the lateral surface of a cone has the slant height ($\pi r l$), the volume formula has the height ($\tfrac13 \pi r^2 h$). Mixing them up is the most common mistake.</Remark>
+
+<Problems>
+
+<Problem id="p-cyl-axial-diagonal" set={{ r: 2, h: 3 }} show="AB A1B1 AA1 BB1 AB1" given="O1A=2 O1O2=3" find="AB1" answer="5" book="19.1"
+  q="The radius of the base of a cylinder is $2$, and its height is $3$. Find the diagonal of the axial section of the cylinder."
+  hint="The axial section is a rectangle whose sides are the diameter of the base and the height.">
+<Step hl="AB BB1" tex="AB = 2r = 4,\qquad BB_1 = h = 3">The sides of the axial section.</Step>
+<Step hl="AB1" tex="AB_1 = \sqrt{4^2 + 3^2} = 5">By Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-cyl-square-section" set={{ r: 2, h: 4 }} show="AB A1B1 AA1 BB1" given="S(ABB1A1)=16 AB=AA1" find="2*π*O1A*O1O2 π*O1A^2*O1O2" labels="S_{\text{lat}};V" answer="16π 16π" book="19.2 22.1"
+  q="The axial section of a cylinder is a square of area $16$. Find the area of the lateral surface and the volume of the cylinder."
+  hint="The side of the square is both the diameter of the base and the height.">
+<Step hl="ABB1A1" tex="AB = AA_1 = 4 \;\Rightarrow\; r = 2,\quad h = 4">The side of the square is $\sqrt{16} = 4$.</Step>
+<Step tex="S_{\text{lat}} = 2\pi r h = 16\pi">The lateral surface of the cylinder.</Step>
+<Step tex="V = \pi r^2 h = 16\pi">The volume of the cylinder.</Step>
+</Problem>
+
+<Problem id="p-cyl-volume" set={{ r: 2, h: 3 }} show="AB A1B1 AA1 BB1 AB1" given="AB1=10 O1O2=6" find="π*O1A^2*O1O2" labels="V" answer="96π" book="22.4"
+  q="The diagonal of the axial section of a cylinder is $10$, and its height is $6$. Find the volume of the cylinder."
+  hint="First find the diameter of the base.">
+<Step hl="ABB1" tex="AB = \sqrt{10^2 - 6^2} = 8 \;\Rightarrow\; r = 4">In the right triangle $ABB_1$.</Step>
+<Step tex="V = \pi \cdot 16 \cdot 6 = 96\pi">The volume of the cylinder.</Step>
+</Problem>
+
+<Problem id="p-cone-345" figure="cone" set={{ r: 2.5, h: 3.3333333333333335 }} show="SO OA SA" given="OA=3 SO=4" find="SA π*OA*SA π*OA^2*SO/3" labels="l;S_{\text{lat}};V" answer="5 15π 12π" book="19.12 22.15"
+  q="The radius of the base of a cone is $3$, and its height is $4$. Find the slant height, the area of the lateral surface and the volume of the cone."
+  hint="The height, the radius and the slant height form a right triangle.">
+<Step hl="SOA SA" tex="l = \sqrt{3^2 + 4^2} = 5">In the right triangle $SOA$.</Step>
+<Step tex="S_{\text{lat}} = \pi r l = 15\pi">The lateral surface of the cone.</Step>
+<Step tex="V = \tfrac13 \pi r^2 h = \tfrac13 \pi \cdot 9 \cdot 4 = 12\pi">The volume of the cone.</Step>
+</Problem>
+
+<Problem id="p-cone-slant-angle" figure="cone" set={{ r: 2, h: 3.4641016151377544 }} show="SO OA SA <SAO" given="SA=8 <SAO=60" find="SO OA" labels="h;r" answer="4√3 4" book="19.13"
+  q="The slant height of a cone is $8$ and makes a $60^\circ$ angle with the plane of the base. Find the height of the cone and the radius of its base."
+  hint="The angle between a generator and the base is the angle between the generator and the radius.">
+<Step hl="SOA <SAO" tex="SO = 8 \sin 60^\circ = 4\sqrt3">In the right triangle $SOA$.</Step>
+<Step hl="OA" tex="OA = 8 \cos 60^\circ = 4">The radius of the base.</Step>
+</Problem>
+
+<Problem id="p-cone-equilateral" figure="cone" set={{ r: 2, h: 3.4641016151377544 }} show="SA SB AB" given="SA=AB SB=AB AB=6" find="π*OA*SA+π*OA^2" labels="S_{\text{tot}}" answer="27π" book="19.14 19.19"
+  q="The axial section of a cone is an equilateral triangle with side $6$. Find the total surface area of the cone."
+  hint="The total surface is the sum of the areas of the lateral surface and the base.">
+<Step hl="SAB" tex="l = 6,\qquad r = 3">The sides of the axial section are generators and the diameter of the base.</Step>
+<Step tex="S_{\text{tot}} = \pi r l + \pi r^2 = 18\pi + 9\pi = 27\pi">The sum of the areas of the lateral surface and the base.</Step>
+</Problem>
+
+</Problems>

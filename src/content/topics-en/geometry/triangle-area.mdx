@@ -1,0 +1,109 @@
+---
+title: Area of a triangle
+slug: triangle-area
+subject: geometry
+section: triangles
+order: 15
+summary: "Five formulas: by the height, the sine, Heron, the inradius and the circumradius."
+tags: [area, Heron, semiperimeter, inscribed circle, circumscribed circle]
+prerequisites: [triangle, right-triangle, triangle-centers, sine-cosine-laws]
+status: draft
+figure: triangle-area
+parent: triangle
+---
+
+<Definition>Notation: sides $a = BC$, $b = CA$, $c = AB$; angles $\alpha, \beta, \gamma$; the **semiperimeter** $p = \tfrac{a + b + c}{2}$; $r$ the radius of the inscribed circle, $R$ of the circumscribed one.</Definition>
+
+<Formulas>
+<Formula id="height-formula" name="Base and height" tex="S = \tfrac12\, c\, h_c" live="S" proof="area-height" />
+<Formula id="sine-formula" name="Two sides and an angle" tex="S = \tfrac12\, bc \sin\alpha" live="S" proof="area-sine" />
+<Formula id="heron-formula" name="Heron's formula" tex="S = \sqrt{p(p - a)(p - b)(p - c)}" live="S" proof="heron" />
+<Formula id="inradius-formula" name="By the inscribed circle" tex="S = p\,r, \qquad r = \frac{S}{p}" live="r" proof="area-inradius" />
+<Formula id="circumradius-formula" name="By the circumscribed circle" tex="S = \frac{abc}{4R}, \qquad R = \frac{abc}{4S}" live="R" proof="area-circumradius" />
+</Formulas>
+
+<Properties>
+
+<Property id="area-height" title="The area of a triangle is half the product of a base and its height" why="The height splits the triangle into two right triangles, each half a rectangle.">
+<Proof given="$CH \perp AB$, $CH = h_c$" prove="$S = \tfrac12\, c\, h_c$">
+<Step set={{ alpha: 60 }} show="CH H <CHB" hl="CH">Drop the height $CH$ (in an acute triangle $H$ lies on $AB$).</Step>
+<Step hl="AHC CHB" tex="S = \tfrac12\, AH \cdot h_c + \tfrac12\, HB \cdot h_c">Each right triangle is half of the rectangle built on its legs.</Step>
+<Step tex="S = \tfrac12\,(AH + HB)\, h_c = \tfrac12\, c\, h_c \quad \blacksquare">If $H$ falls on the extension of $AB$ (obtuse $\alpha$ or $\beta$), the areas are subtracted instead of added, with the same result.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="The area is half the product of two sides and the sine of the angle between them" why="The height is $h_c = b\sin\alpha$.">
+<Proof given="$CA = b,\ AB = c,\ \angle A = \alpha$" prove="$S = \tfrac12\, bc\sin\alpha$">
+<Step show="CH H <CHB" hl="AHC" tex="h_c = CH = b\sin\alpha">In the right triangle $AHC$, $CH$ is the leg opposite $\alpha$ (for an obtuse $\alpha$, opposite $180^\circ - \alpha$; the sine is the same).</Step>
+<Step tex="S = \tfrac12\, c \cdot b\sin\alpha \quad \blacksquare">Substitute into the previous formula.</Step>
+</Proof>
+</Property>
+
+<Property id="heron" title="Heron's formula: $S = \sqrt{p(p-a)(p-b)(p-c)}$" why="Take the sine from the law of cosines and substitute it into $\tfrac12 ab\sin\gamma$.">
+<Proof given="sides $a, b, c$" prove="$S = \sqrt{p(p - a)(p - b)(p - c)}$">
+<Step tex="\cos\gamma = \frac{a^2 + b^2 - c^2}{2ab}">By the law of cosines.</Step>
+<Step tex="4a^2b^2 \sin^2\gamma = (2ab)^2 - (a^2 + b^2 - c^2)^2">$\sin^2\gamma = 1 - \cos^2\gamma$.</Step>
+<Step tex="= \big(c^2 - (a - b)^2\big)\big((a + b)^2 - c^2\big)">A difference of squares, twice.</Step>
+<Step tex="\begin{aligned}&= (c - a + b)(c + a - b)(a + b - c)(a + b + c) \\ &= 16\,p(p - a)(p - b)(p - c)\end{aligned}">Again a difference of squares; each bracket is written with $2p$, e.g. $a + b - c = 2(p - c)$.</Step>
+<Step tex="S = \tfrac12\, ab\sin\gamma = \sqrt{p(p - a)(p - b)(p - c)} \quad \blacksquare">$S^2 = \tfrac14 a^2b^2\sin^2\gamma$.</Step>
+</Proof>
+</Property>
+
+<Property id="area-inradius" title="The area is the semiperimeter times the inradius" why="The incentre splits the triangle into three triangles, each with height $r$.">
+<Proof given="$I$ the centre of the inscribed circle, radius $r$" prove="$S = p\,r$">
+<Step show="(IT1) I IT1 IT2 IT3 T1 T2 T3" hl="IT1 IT2 IT3">The distance from $I$ to each side is $r$ (at the points of tangency the radius is perpendicular to the side).</Step>
+<Step show="IA IB IC" hl="AIB BIC CIA" tex="S = \tfrac12\, c\,r + \tfrac12\, a\,r + \tfrac12\, b\,r">Join $I$ to the vertices: three triangles of height $r$.</Step>
+<Step tex="S = \tfrac12\,(a + b + c)\, r = p\,r \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="area-circumradius" title="The area equals $\tfrac{abc}{4R}$" why="The law of sines writes $\sin\gamma$ in terms of $R$.">
+<Proof given="$R$ the radius of the circumscribed circle" prove="$S = \tfrac{abc}{4R}$">
+<Step show="(OA) O" hl="(OA)" tex="\frac{c}{\sin\gamma} = 2R \;\Rightarrow\; \sin\gamma = \frac{c}{2R}">By the law of sines.</Step>
+<Step tex="S = \tfrac12\, ab\sin\gamma = \frac{abc}{4R} \quad \blacksquare">Substitute into the area formula.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">$p$ is the semiperimeter, not the perimeter: putting $P$ into Heron's formula makes the area roughly four times too big.</Remark>
+
+<Problems>
+
+<Problem id="p-area-heights" set={{ c: 6, b: 4.5, alpha: 41.810314895778596 }} show="CH <CHA" given="AB=12 AC=9 CH=6" find="2*S(ABC)/AC" labels="h_b" answer="8" book="10.15 10.16"
+  q="In triangle $ABC$, $AB = 12$, $AC = 9$, and the height to side $AB$ is $CH = 6$. Find the height to side $AC$."
+  hint="Write the area two ways: with each side and the height to it.">
+<Step hl="AB CH" tex="S = \tfrac12\, AB \cdot CH = \tfrac12 \cdot 12 \cdot 6 = 36">The area of a triangle is half the product of a base and its height.</Step>
+<Step hl="AC" tex="h_b = \frac{2S}{AC} = \frac{72}{9} = 8">The same area with base $AC$.</Step>
+</Problem>
+
+<Problem id="p-area-sine" set={{ c: 5, b: 4, alpha: 30 }} given="AB=10 AC=8 <A=30" find="S(ABC)" answer="20"
+  q="Two sides of a triangle are $10$ and $8$, and the angle between them is $30^\circ$. Find the area of the triangle."
+  hint="The area is half the product of two sides and the sine of the angle between them.">
+<Step hl="ABC <A" tex="S = \tfrac12 \cdot 10 \cdot 8 \cdot \sin 30^\circ = 20">The area is half the product of two sides and the sine of the angle between them.</Step>
+</Problem>
+
+<Problem id="p-heron-height" set={{ c: 7, b: 5.666666666666667, alpha: 28.07248693585296 }} given="AB=21 AC=17 BC=10" find="S(ABC) 2*S(ABC)/BC" labels="S;h_a" answer="84 16.8" book="10.96 10.97"
+  q="The sides of a triangle are $10$, $17$ and $21$. Find its area and its largest height."
+  hint="Heron's formula; the largest height falls on the shortest side.">
+<Step tex="p = \frac{10 + 17 + 21}{2} = 24">The semiperimeter.</Step>
+<Step hl="ABC" tex="S = \sqrt{24 \cdot 14 \cdot 7 \cdot 3} = 84">By Heron's formula.</Step>
+<Step hl="BC" tex="h_a = \frac{2S}{BC} = \frac{168}{10} = 16.8">The largest height falls on the shortest side.</Step>
+</Problem>
+
+<Problem id="p-radii-from-area" set={{ c: 7, b: 5.666666666666667, alpha: 28.07248693585296 }} show="(IT1) I IT1" given="AB=21 AC=17 BC=10" find="IT1 OA" labels="r;R" answer="3.5 85/8" book="10.109 10.110"
+  q="The sides of a triangle are $10$, $17$ and $21$. Find the radii of its inscribed and circumscribed circles."
+  hint="$S = p\,r$ and $S = \tfrac{abc}{4R}$; find the area by Heron's formula.">
+<Step hl="ABC" tex="p = 24,\qquad S = \sqrt{24 \cdot 14 \cdot 7 \cdot 3} = 84">By Heron's formula.</Step>
+<Step hl="IT1" tex="r = \frac{S}{p} = \frac{84}{24} = 3.5">The area is the semiperimeter times the inradius.</Step>
+<Step show="(OA) O" hl="OA" tex="R = \frac{abc}{4S} = \frac{10 \cdot 17 \cdot 21}{4 \cdot 84} = \frac{85}{8}">The area equals $\tfrac{abc}{4R}$.</Step>
+</Problem>
+
+<Problem id="p-area-same-height" set={{ c: 7, b: 5.938459911664722, alpha: 60 }} show="BD" given="DC=2*AD S(ABC)=18" find="S(ABD) S(DBC)" answer="6 12" book="10.58 10.59"
+  q="The area of triangle $ABC$ is $18$. Point $D$ is taken on side $AC$ so that $DC = 2\,AD$. Find the areas of triangles $ABD$ and $DBC$."
+  hint="The two triangles share the height from vertex $B$.">
+<Step hl="ABD DBC" tex="\frac{S_{ABD}}{S_{DBC}} = \frac{AD}{DC} = \frac12">The triangles have a common height, so their areas are proportional to their bases.</Step>
+<Step tex="S_{ABD} = \tfrac13 \cdot 18 = 6,\qquad S_{DBC} = 12">The area is divided in the ratio $1 : 2$.</Step>
+</Problem>
+
+</Problems>

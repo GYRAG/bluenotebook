@@ -1,6 +1,7 @@
 ---
 interface Props { title?: string }
-const { title = 'თვისებები' } = Astro.props;
+import { langOf, t } from '@/i18n';
+const { title = t(langOf(Astro.url), 'თვისებები') } = Astro.props;
 ---
 <section class="props-group">
   <h2 class="group-h">{title}</h2>

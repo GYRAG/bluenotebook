@@ -1,0 +1,100 @@
+---
+title: Central and inscribed angles
+slug: inscribed-angle
+subject: geometry
+section: circles
+order: 26
+summary: An inscribed angle is half the central angle; an angle on a diameter is right; a chord and an inscribed angle.
+tags: [central angle, inscribed angle, arc, diameter, chord]
+prerequisites: [circle, isosceles-triangle, triangle]
+status: draft
+figure: inscribed-angle
+---
+
+<Definition>A **central angle** is an angle with its vertex at the centre of the circle. An **inscribed angle** is an angle whose vertex lies on the circle and whose sides cut the circle. Two points of a circle divide it into two **arcs**; the degree measure of an arc equals the central angle standing on it: ${\smile}AB = \angle AOB$.</Definition>
+
+<Formulas>
+<Formula id="inscribed-formula" name="Inscribed angle" tex="\angle ACB = \tfrac12\,\angle AOB = \tfrac12 {\smile}AB" live="∠ACB" proof="inscribed-angle" />
+<Formula id="same-arc-formula" name="Angles on the same arc" tex="\angle ACB = \angle ADB" proof="same-arc" />
+<Formula id="diameter-formula" name="An angle on a diameter" tex="AF = 2R \;\Rightarrow\; \angle ABF = 90^\circ" proof="diameter-right" />
+<Formula id="chord-formula" name="A chord and an inscribed angle" tex="AB = 2R\sin\angle ACB" live="AB" proof="chord-sine" />
+</Formulas>
+
+<Properties>
+
+<Property id="inscribed-angle" title="An inscribed angle is half the central angle on the same arc" why="A diameter splits the inscribed angle in two; each part is half an exterior angle of an isosceles triangle.">
+<Proof given="$\angle ACB$ inscribed, $\angle AOB$ central, both on ${\smile}AB$" prove="$\angle ACB = \tfrac12\angle AOB$">
+<Step hl="<ACB <AOB arc:OAB">Both angles stand on the same arc $AB$.</Step>
+<Step show="CE E" hl="CE">Draw the diameter $CE$.</Step>
+<Step show="OC" hl="AOC <OCA=<OAC" tex="\angle AOE = 2\angle ACE">$OA = OC$: $\triangle AOC$ is isosceles, and $\angle AOE$ is its exterior angle: $\angle AOE = \angle OAC + \angle OCA$.</Step>
+<Step hl="BOC <OCB=<OBC" tex="\angle EOB = 2\angle ECB">The same in the isosceles $\triangle BOC$.</Step>
+<Step hl="<ACB" tex="\angle ACB = \tfrac12\angle AOB \quad \blacksquare">Add up: $\angle ACE + \angle ECB = \tfrac12(\angle AOE + \angle EOB)$. If $O$ is outside the angle, the same argument works with subtraction; if $O$ lies on a side of the angle, step 3 is enough.</Step>
+</Proof>
+</Property>
+
+<Property id="same-arc" title="Inscribed angles on the same arc are equal" why="Both are half of the same central angle.">
+<Proof given="$C$ and $D$ points of one arc" prove="$\angle ACB = \angle ADB$">
+<Step show="DA DB D" hl="arc:OAB">Both angles stand on the arc $AB$.</Step>
+<Step hl="<ACB=<ADB" tex="\angle ACB = \tfrac12\angle AOB = \angle ADB \quad \blacksquare">By the previous property.</Step>
+</Proof>
+</Property>
+
+<Property id="diameter-right" title="An inscribed angle on a diameter is a right angle" why="The corresponding central angle is a straight angle, $180^\circ$.">
+<Proof given="$AF$ a diameter, $B$ a point of the circle" prove="$\angle ABF = 90^\circ$">
+<Step show="AF F BF AB" hl="AF">$AF$ passes through the centre, so it is a diameter, $\angle AOF = 180^\circ$.</Step>
+<Step hl="<ABF" tex="\angle ABF = \tfrac12 \cdot 180^\circ = 90^\circ \quad \blacksquare">An inscribed angle is half the central angle.</Step>
+</Proof>
+</Property>
+
+<Remark>The converse holds as well: the hypotenuse of a right triangle is a diameter of its circumscribed circle.</Remark>
+
+<Property id="chord-sine" title="A chord equals $2R$ times the sine of an inscribed angle standing on it: $AB = 2R\sin\angle ACB$" why="The diameter $AF$ forms a right triangle containing the same angle.">
+<Proof given="$\angle ACB$ inscribed, on the arc $AB$" prove="$AB = 2R\sin\angle ACB$">
+<Step show="AF F BF AB" hl="AF">Draw the diameter $AF = 2R$.</Step>
+<Step hl="<AFB=<ACB" tex="\angle AFB = \angle ACB">Both stand on the arc $AB$.</Step>
+<Step hl="ABF <ABF">$\angle ABF = 90^\circ$: an angle on a diameter.</Step>
+<Step tex="AB = AF\sin\angle AFB = 2R\sin\angle ACB \quad \blacksquare">In the right triangle $\triangle ABF$.</Step>
+</Proof>
+</Property>
+
+<Remark>This is the sine law: every side of a triangle equals $2R$ times the sine of the opposite angle, $\tfrac{a}{\sin\alpha} = 2R$.</Remark>
+
+</Properties>
+
+<Remark kind="convention">${\smile}AB$ is always the arc the angle stands on, the one lying inside the angle.</Remark>
+
+<Remark kind="mistake">If $C$ and $D$ are on different sides of the chord $AB$, $\angle ACB$ and $\angle ADB$ are not equal: they add up to $180^\circ$ (the inscribed quadrilateral $ACBD$).</Remark>
+
+<Problems>
+
+<Problem id="p-arcs-ratio" set={{ R: 2.8, tA: 220, tB: 340, tC: 70 }} show="AB" given="<BOC/<AOB=3/4 <AOB/<AOC=4/5" find="<ABC" answer="75" book="5.33"
+  q="Points $A$, $B$ and $C$ on a circle divide it into three arcs whose degree measures are in the ratio $3 : 4 : 5$. Find the largest angle of triangle $ABC$."
+  hint="The arcs add up to $360^\circ$, and an inscribed angle is half the arc it stands on.">
+<Step tex="3x + 4x + 5x = 360^\circ \;\Rightarrow\; x = 30^\circ">The three arcs make up the whole circle.</Step>
+<Step show="OC" hl="<AOC" tex="\smile AC = 5 \cdot 30^\circ = 150^\circ">The largest arc is $AC$; the angle $B$ stands on it.</Step>
+<Step hl="<ABC" tex="\angle ABC = \tfrac12 \cdot 150^\circ = 75^\circ">An inscribed angle is half the central angle on the same arc.</Step>
+</Problem>
+
+<Problem id="p-inscribed-chord" set={{ R: 2.8, tA: 240, tB: 300, tC: 100 }} show="AB CE" given="<ACB=30 CE=10" find="AB" answer="5" book="5.29"
+  q="Points $A$, $B$ and $C$ lie on a circle, $\angle ACB = 30^\circ$, and the diameter of the circle is $10$. Find the length of the chord $AB$."
+  hint="Find the central angle on the arc $AB$.">
+<Step hl="<AOB" tex="\angle AOB = 2\angle ACB = 60^\circ">An inscribed angle is half the central angle on the same arc.</Step>
+<Step hl="AOB OA=OB" tex="AB = OA = 5">$OA = OB$ and the angle between them is $60^\circ$, so triangle $AOB$ is equilateral; $OA$ is half the diameter.</Step>
+</Problem>
+
+<Problem id="p-chord-radius-angle" set={{ R: 2.8, tA: 224, tB: 300, tC: 100 }} show="AB" given="<AOB=76" find="<OAB" answer="52" book="5.23 5.24"
+  q="A chord $AB$ subtends a $76^\circ$ arc. Find the angle between the chord and the radius $OA$ drawn to its end."
+  hint="Triangle $AOB$ is isosceles.">
+<Step hl="<AOB" tex="\angle AOB = 76^\circ">A central angle equals the arc it stands on.</Step>
+<Step hl="AOB <OAB=<OBA" tex="\angle OAB = \frac{180^\circ - 76^\circ}{2} = 52^\circ">$OA = OB$, so the base angles are equal.</Step>
+</Problem>
+
+<Problem id="p-central-inscribed-sum" set={{ R: 2.8, tA: 220, tB: 310, tC: 100 }} given="<AOB+<ACB=135" find="<AOB <ACB" answer="90 45"
+  q="A central angle and an inscribed angle on the same arc add up to $135^\circ$. Find these angles."
+  hint="The central angle is twice the inscribed one.">
+<Step hl="<AOB <ACB" tex="\angle AOB = 2\angle ACB">An inscribed angle is half the central angle on the same arc.</Step>
+<Step tex="2x + x = 135^\circ \;\Rightarrow\; x = 45^\circ">Let $\angle ACB = x$.</Step>
+<Step hl="<AOB <ACB" tex="\angle ACB = 45^\circ,\qquad \angle AOB = 90^\circ">Therefore.</Step>
+</Problem>
+
+</Problems>

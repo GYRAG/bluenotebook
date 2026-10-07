@@ -1,0 +1,147 @@
+---
+title: Rectangle
+slug: rectangle
+subject: geometry
+section: quadrilaterals
+order: 21
+summary: A parallelogram whose angles are all right.
+tags: [parallelogram, diagonal, circumscribed circle]
+prerequisites: [parallelogram, right-triangle]
+status: draft
+figure: rectangle
+parent: parallelogram
+---
+
+<Definition>A rectangle is a parallelogram whose angles are all right.</Definition>
+
+<Formulas>
+<Formula id="area-formula" name="Area" tex="S = ab" live="S" proof="area" />
+<Formula id="perimeter" name="Perimeter" tex="P = 2(a + b)" live="P" />
+<Formula id="diagonal-formula" name="Diagonal" tex="d = \sqrt{a^2 + b^2}" live="d" proof="diagonal-length" />
+<Formula id="circumradius" name="Circumradius" tex="R = \tfrac{d}{2}" live="R" proof="circumcircle" />
+</Formulas>
+
+<Remark kind="special">A rectangle is a parallelogram, so it has every property of a parallelogram: opposite sides are equal and the diagonals bisect each other.</Remark>
+
+<Properties>
+
+<Property id="diagonals-equal" title="The diagonals of a rectangle are equal" why="Two right triangles with a common leg.">
+<Proof given="$ABCD$ a rectangle" prove="$AC = BD$">
+<Step show="AC BD" hl="AC BD">Draw the diagonals.</Step>
+<Step hl="ABD">Look at $\triangle ABD$ and $\triangle BAC$.</Step>
+<Step hl="AD=BC <A=<B" tex="AB = BA,\qquad AD = BC,\qquad \angle A = \angle B = 90^\circ">$AB$ is common, $AD = BC$ (opposite sides), and both angles are right.</Step>
+<Step hl="AC=BD" tex="\triangle ABD = \triangle BAC \;\Rightarrow\; BD = AC \quad \blacksquare">The triangles are congruent by two sides and the angle between them (SAS).</Step>
+</Proof>
+</Property>
+
+<Property id="circumcircle" title="A circle can be drawn through the vertices of a rectangle; its centre is where the diagonals meet" why="The diagonals are equal and bisect each other, so all four halves are equal.">
+<Proof given="$ABCD$ a rectangle, $O = AC \cap BD$" prove="$OA = OB = OC = OD = \tfrac{d}{2}$">
+<Step show="AC BD O" hl="AO=CO BO=DO">The diagonals bisect each other (a parallelogram).</Step>
+<Step hl="AO=BO=CO=DO" tex="OA = OB = OC = OD = \tfrac{d}{2}">The diagonals are equal, so their halves are equal too.</Step>
+<Step show="(OA)" hl="(OA)">$O$ is equally far from all four vertices: the circle with centre $O$ and radius $\tfrac{d}{2}$ passes through all four. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="diagonal-length" title="The diagonal equals $\sqrt{a^2 + b^2}$" why="The diagonal is the hypotenuse of a right triangle.">
+<Proof given="$AB = a,\ AD = b$" prove="$BD = \sqrt{a^2 + b^2}$">
+<Step show="BD" hl="ABD <A">$\triangle ABD$ is right ($\angle A = 90^\circ$), and $BD$ is its hypotenuse.</Step>
+<Step tex="BD^2 = AB^2 + AD^2 = a^2 + b^2 \quad \blacksquare">By Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="The area equals the product of two adjacent sides" why="The height is simply the other side.">
+<Proof given="$AB = a,\ AD = b$" prove="$S = ab$">
+<Step hl="AD <A">$AD \perp AB$, so $AD$ is the height to $AB$: $h_a = b$.</Step>
+<Step tex="S = a\,h_a = ab \quad \blacksquare">By the area formula of a parallelogram.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Criteria: when is a parallelogram a rectangle">
+
+<Property id="criterion-right-angle" kind="criterion" title="If one angle of a parallelogram is right, it is a rectangle" why="Opposite angles are equal, and adjacent ones add up to $180^\circ$.">
+<Proof given="$ABCD$ a parallelogram, $\angle A = 90^\circ$" prove="$ABCD$ a rectangle">
+<Step hl="<A <C" tex="\angle C = \angle A = 90^\circ">Opposite angles of a parallelogram are equal.</Step>
+<Step hl="<B <D" tex="\angle B = \angle D = 180^\circ - 90^\circ = 90^\circ">Adjacent angles add up to $180^\circ$.</Step>
+<Step>All four angles are right, so $ABCD$ is a rectangle. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-equal-diagonals" kind="criterion" title="If the diagonals of a parallelogram are equal, it is a rectangle" why="Equal diagonals give equal adjacent angles, which add up to $180^\circ$.">
+<Proof given="$ABCD$ a parallelogram, $AC = BD$" prove="$ABCD$ a rectangle">
+<Step show="AC BD" hl="AC=BD">Draw the equal diagonals.</Step>
+<Step hl="ABD" tex="\triangle ABD = \triangle BAC">$AB$ is common, $AD = BC$, $BD = AC$: the triangles are congruent by three sides (SSS).</Step>
+<Step hl="<A=<B" tex="\angle A = \angle B">Corresponding angles of congruent triangles are equal.</Step>
+<Step tex="\angle A + \angle B = 180^\circ \;\Rightarrow\; \angle A = 90^\circ">Adjacent angles add up to $180^\circ$. By the previous criterion $ABCD$ is a rectangle. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-three-right-angles" kind="criterion" title="If three angles of a quadrilateral are right, it is a rectangle" why="The fourth angle is forced to be $90^\circ$.">
+<Proof given="$\angle A = \angle B = \angle C = 90^\circ$" prove="$ABCD$ a rectangle">
+<Step hl="<A <B <C" tex="\angle D = 360^\circ - 3 \cdot 90^\circ = 90^\circ">The angles of a quadrilateral add up to $360^\circ$.</Step>
+<Step hl="<A=<C <B=<D">The opposite angles are equal in pairs, so $ABCD$ is a parallelogram; all its angles are right, so it is a rectangle. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">A quadrilateral with equal diagonals need not be a rectangle at all: an isosceles trapezoid, for example. The criterion is about parallelograms only.</Remark>
+
+<Remark kind="special">A rectangle with equal adjacent sides is a square.</Remark>
+
+<Problems>
+
+<Problem id="p-rect-diag-angle" set={{ a: 3.4641016151377544, b: 2 }} show="AC BD" given="<BOC=60 BC=7" find="AC" answer="14" book="6.30 6.37"
+  q="The angle between the diagonals of a rectangle is $60^\circ$, and the shorter side is $7$. Find the diagonal."
+  hint="The diagonals of a rectangle are equal and bisect each other.">
+<Step hl="OB=OC" tex="OB = OC">The diagonals of a rectangle are equal and bisect each other.</Step>
+<Step hl="BOC" tex="OB = OC = BC = 7">The isosceles triangle $BOC$ with a $60^\circ$ apex angle is equilateral.</Step>
+<Step hl="AC" tex="AC = 2\,OC = 14">The diagonal consists of two such halves.</Step>
+</Problem>
+
+<Problem id="p-rect-bisector" set={{ a: 2.5, b: 4 }} show="AE" given="BE=5 EC=3" find="P(ABCD)" answer="26" book="6.26 6.27"
+  q="In rectangle $ABCD$ the bisector of angle $A$ meets side $BC$ at $E$, $BE = 5$, $EC = 3$. Find the perimeter of the rectangle."
+  hint="What kind of triangle is $ABE$?">
+<Step hl="<BAE <ABE" tex="\angle BAE = 45^\circ">$AE$ bisects a right angle.</Step>
+<Step hl="ABE AB=BE" tex="AB = BE = 5">In the right triangle $ABE$ the other acute angle is $45^\circ$ too, so it is isosceles.</Step>
+<Step tex="P = 2\,(AB + BC) = 2\,(5 + 8) = 26">$BC = BE + EC = 8$.</Step>
+</Problem>
+
+<Problem id="p-rect-perp-diag" set={{ a: 2, b: 3.4641016151377544 }} show="AC BD BF <BFA" given="AF/FC=1/3 AC=12" find="AB <AOB" answer="6 60" book="6.32 6.39"
+  q="In rectangle $ABCD$ the perpendicular $BF$ from $B$ to the diagonal $AC$ divides the diagonal in the ratio $1 : 3$ counting from $A$, and $AC = 12$. Find $AB$ and the angle $\angle AOB$ between the diagonals."
+  hint="$F$ is the midpoint of $AO$.">
+<Step hl="AF FC" tex="AF = 3,\qquad AO = 6 = 2\,AF">$O$ is the midpoint of the diagonal, so $F$ bisects $AO$.</Step>
+<Step hl="BF AF=FO" tex="AB = BO">In triangle $ABO$, $BF$ is both an altitude and a median, so the triangle is isosceles.</Step>
+<Step hl="ABO" tex="AB = BO = AO = 6,\qquad \angle AOB = 60^\circ">$BO = AO$ are halves of the diagonals; triangle $ABO$ is equilateral.</Step>
+</Problem>
+
+<Problem id="p-rect-circumradius" set={{ a: 3, b: 1.7320508075688772 }} show="AC BD (OA)" given="AB=9 <BOC=60" find="OA" answer="3√3" book="6.118"
+  q="The longer side of a rectangle is $9$, and the acute angle between the diagonals is $60^\circ$. Find the radius of the circle circumscribed about the rectangle."
+  hint="The centre of the circumscribed circle is where the diagonals meet; the obtuse angle between the diagonals is opposite the longer side.">
+<Step hl="<AOB" tex="\angle AOB = 180^\circ - 60^\circ = 120^\circ">The obtuse angle between the diagonals is opposite the longer side.</Step>
+<Step hl="AOB <OAB=<OBA" tex="\angle OAB = 30^\circ">Triangle $AOB$ is isosceles: $OA = OB$.</Step>
+<Step show="OK" hl="OK AK <OKA" tex="\begin{gathered}OA^2 = AK^2 + OK^2 = 4.5^2 + \tfrac14\, OA^2 \\ OA^2 = 27\end{gathered}">$OK \perp AB$, $AK = 4.5$, and $OK = \tfrac12\, OA$, the leg opposite the $30^\circ$ angle.</Step>
+<Step hl="OA" tex="R = OA = 3\sqrt3">The circumradius is half the diagonal.</Step>
+</Problem>
+
+<Problem id="p-rect-area-ratio" k={3} set={{ a: 5, b: 3 }} given="BC/AB=3/5 S(ABCD)=135" find="AB BC" answer="15 9" book="10.1 10.2"
+  q="The sides of a rectangle are in the ratio $3 : 5$, and its area is $135$. Find the sides of the rectangle."
+  hint="Call the sides $3x$ and $5x$.">
+<Step tex="3x \cdot 5x = 135 \;\Rightarrow\; x^2 = 9,\quad x = 3">The area equals the product of two adjacent sides.</Step>
+<Step hl="AB BC" tex="AB = 15,\qquad BC = 9">Therefore.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-rect-midpoints" set={{ a: 5, b: 3 }} show="KL LM MN NK AC BD" prove="KL=LM LM=MN MN=NK" book="6.148"
+  q="Prove that the midpoints of the sides of a rectangle are the vertices of a rhombus."
+  hint="The diagonals of a rectangle are equal.">
+<Step hl="KL MN AC" tex="KL = MN = \tfrac12\, AC">$KL$ and $MN$ are midlines of triangles $ABC$ and $ACD$.</Step>
+<Step hl="LM NK BD" tex="LM = NK = \tfrac12\, BD">Likewise in triangles $BCD$ and $ABD$.</Step>
+<Step hl="AC=BD KLMN" tex="KL = LM = MN = NK \quad \blacksquare">The diagonals of a rectangle are equal, so all four segments are equal and $KLMN$ is a rhombus.</Step>
+</Problem>
+
+</Problems>

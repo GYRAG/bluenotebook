@@ -1,0 +1,169 @@
+---
+title: Quadrilateral
+slug: quadrilateral
+subject: geometry
+section: quadrilaterals
+order: 19
+summary: Four vertices, four sides. Convex and concave, cyclic and tangential.
+tags: [quadrilateral, diagonal, cyclic, tangential, Ptolemy]
+prerequisites: [triangle, triangle-area, triangle-centers]
+status: draft
+figure: quadrilateral
+figures: [cyclic-quad, tangential-quad]
+---
+
+<Definition>A quadrilateral consists of four points (vertices), no three on one line, and the four segments joining them in order, which do not cross each other. A quadrilateral is **convex** if it lies entirely on one side of the line through each of its sides; otherwise it is **concave** (one of its angles is greater than $180^\circ$).</Definition>
+
+<Formulas>
+<Formula id="angle-sum-formula" name="Angle sum" tex="\angle A + \angle B + \angle C + \angle D = 360^\circ" live="∑" proof="angle-sum" />
+<Formula id="area-diagonals-formula" name="Area by the diagonals (convex)" tex="S = \tfrac12\, d_1 d_2 \sin\varphi" live="S" proof="area-diagonals" />
+<Formula id="cyclic-formula" name="Cyclic quadrilateral" tex="\angle A + \angle C = \angle B + \angle D = 180^\circ" proof="cyclic-opposite-angles" />
+<Formula id="ptolemy-formula" name="Ptolemy's theorem" tex="AC \cdot BD = AB \cdot CD + AD \cdot BC" proof="ptolemy" />
+<Formula id="pitot-formula" name="Tangential quadrilateral" tex="AB + CD = BC + AD" proof="pitot" />
+</Formulas>
+
+<Properties>
+
+<Property id="angle-sum" title="The angles of a quadrilateral add up to $360^\circ$" why="A diagonal cuts it into two triangles.">
+<Proof given="$ABCD$ a quadrilateral" prove="$\angle A + \angle B + \angle C + \angle D = 360^\circ$">
+<Step show="AC" hl="AC">Draw the diagonal $AC$ (in a concave quadrilateral, from the vertex whose angle exceeds $180^\circ$; that diagonal runs inside the quadrilateral).</Step>
+<Step hl="ABC ACD">The diagonal cuts the quadrilateral into two triangles, $ABC$ and $ACD$. $\angle A$ and $\angle C$ are each split into two parts belonging to different triangles.</Step>
+<Step tex="\begin{aligned}\angle A + \angle B + \angle C + \angle D &= 180^\circ + 180^\circ \\ &= 360^\circ \quad \blacksquare\end{aligned}">The four angles of the quadrilateral make up exactly the six angles of these two triangles, and the angles of each triangle add up to $180^\circ$.</Step>
+</Proof>
+</Property>
+
+<Property id="side-inequality" title="Each side of a quadrilateral is less than the sum of the other three" why="The triangle inequality twice.">
+<Proof given="$ABCD$ a quadrilateral" prove="$AB < BC + CD + DA$">
+<Step show="AC" hl="ABC" tex="AB < AC + CB">In $\triangle ABC$, by the triangle inequality:</Step>
+<Step hl="ACD" tex="AC < AD + DC">In $\triangle ACD$:</Step>
+<Step tex="AB < AC + CB < AD + DC + CB \quad \blacksquare">Substitute the second inequality into the first.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="The area of a convex quadrilateral is half the product of its diagonals and the sine of the angle between them" why="The diagonals split the quadrilateral into four triangles, all with the same sine.">
+<Proof given="$ABCD$ convex, $O = AC \cap BD$, $\angle AOB = \varphi$" prove="$S = \tfrac12\, AC \cdot BD \sin\varphi$">
+<Step show="AC BD O" hl="<AOB">Draw the diagonals. The four angles at $O$ are $\varphi$, $180^\circ - \varphi$, $\varphi$, $180^\circ - \varphi$; all have sine $\sin\varphi$.</Step>
+<Step hl="ABO BCO CDO DAO" tex="\begin{aligned}S = \tfrac12 \sin\varphi\,\bigl(&OA\cdot OB + OB \cdot OC \\ &+ OC \cdot OD + OD \cdot OA\bigr)\end{aligned}">The quadrilateral is split into four triangles, each of area $\tfrac12 xy\sin\varphi$.</Step>
+<Step tex="\begin{aligned}S &= \tfrac12 \sin\varphi\,(OA + OC)(OB + OD) \\ &= \tfrac12\, AC \cdot BD \sin\varphi \quad \blacksquare\end{aligned}">The bracket groups as $OB(OA + OC) + OD(OC + OA)$.</Step>
+</Proof>
+</Property>
+
+<Property id="varignon" title="The midpoints of the sides are always the vertices of a parallelogram (Varignon's parallelogram)" why="Its sides are midlines over the two diagonals.">
+<Proof given="$K, L, M, N$ the midpoints of the sides $AB$, $BC$, $CD$, $DA$" prove="$KLMN$ a parallelogram">
+<Step show="K L M N AC" hl="AC">Draw the diagonal $AC$.</Step>
+<Step show="KL" hl="KL ABC" tex="KL \parallel AC, \qquad KL = \tfrac12 AC">$KL$ is a midline of $\triangle ABC$.</Step>
+<Step show="NM" hl="NM ACD" tex="NM \parallel AC, \qquad NM = \tfrac12 AC">$NM$ is a midline of $\triangle ACD$.</Step>
+<Step show="LM KN" hl="KL=NM KL||NM">So $KL \parallel NM$ and $KL = NM$: two opposite sides are equal and parallel, so $KLMN$ is a parallelogram. ∎</Step>
+<Step show="BD" hl="KLMN" tex="P_{KLMN} = AC + BD">Likewise $LM = KN = \tfrac12 BD$, so its perimeter equals the sum of the diagonals.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Varignon's parallelogram exists in a concave quadrilateral too: the proof never used convexity.</Remark>
+
+<Properties title="Quadrilateral inscribed in a circle">
+
+<Property id="cyclic-opposite-angles" title="The opposite angles of a quadrilateral inscribed in a circle add up to $180^\circ$" why="Two opposite angles together stand on the whole circle.">
+<Proof figure="cyclic-quad" given="$A, B, C, D$ on a circle" prove="$\angle A + \angle C = 180^\circ$">
+<Step hl="<A">The inscribed angle $\angle A = \angle BAD$ stands on the arc $BCD$, so it equals half of it.</Step>
+<Step hl="<C">$\angle C = \angle BCD$ stands on the rest, the arc $BAD$.</Step>
+<Step tex="\begin{aligned}\angle A + \angle C &= \tfrac12\left(\smile BCD + \smile BAD\right) \\ &= \tfrac12 \cdot 360^\circ = 180^\circ \quad \blacksquare\end{aligned}">The two arcs together make the whole circle.</Step>
+</Proof>
+</Property>
+
+<Property id="cyclic-criterion" kind="converse" title="If the opposite angles of a quadrilateral add up to $180^\circ$, a circle can be drawn through its vertices" why="Otherwise a vertex would be inside or outside the circle and the angle would change.">
+<Proof figure="cyclic-quad" given="$\angle A + \angle C = 180^\circ$" prove="$A, B, C, D$ lie on one circle">
+<Step hl="ABD">Draw the circle through $A$, $B$, $D$ (there always is one through three points). Suppose $C$ is not on it.</Step>
+<Step hl="<C">If $C$ is inside the circle, the ray $DC$ meets the circle at a point $C'$ beyond $C$. $ABC'D$ is cyclic, so $\angle BC'D = 180^\circ - \angle A = \angle BCD$.</Step>
+<Step>But $\angle BCD$ is an exterior angle of $\triangle BCC'$, so it is greater than $\angle BC'C = \angle BC'D$, a contradiction. If $C$ is outside the circle, we get $\angle BCD < \angle BC'D$ in the same way.</Step>
+<Step hl="ABCD">So $C$ lies on the circle. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="ptolemy" title="Ptolemy's theorem: in a cyclic quadrilateral the product of the diagonals equals the sum of the products of opposite sides" why="One well-chosen point on a diagonal gives two pairs of similar triangles.">
+<Proof figure="cyclic-quad" given="$ABCD$ inscribed in a circle" prove="$AC \cdot BD = AB \cdot CD + AD \cdot BC$">
+<Step show="AC BD AE E" hl="<BAE=<CAD">On $BD$ take the point $E$ with $\angle BAE = \angle CAD$.</Step>
+<Step hl="ABE ACD" tex="AB \cdot CD = AC \cdot BE">$\angle ABE = \angle ABD = \angle ACD$ are inscribed angles on the same arc $AD$. So $\triangle ABE \sim \triangle ACD$ (by two angles).</Step>
+<Step hl="AED ABC" tex="AD \cdot BC = AC \cdot ED">Add $\angle EAC$ to (or subtract it from) both sides of $\angle BAE = \angle CAD$: $\angle BAC = \angle EAD$. Also $\angle ADE = \angle ADB = \angle ACB$ (arc $AB$). So $\triangle AED \sim \triangle ABC$.</Step>
+<Step tex="\begin{aligned}AB \cdot CD + AD \cdot BC &= AC\,(BE + ED) \\ &= AC \cdot BD \quad \blacksquare\end{aligned}">Add the two equalities; $BE + ED = BD$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Quadrilateral circumscribed about a circle">
+
+<Property id="pitot" title="In a quadrilateral circumscribed about a circle the sums of opposite sides are equal" why="Tangent segments from one vertex are equal.">
+<Proof figure="tangential-quad" given="the sides of $ABCD$ touch the circle at $T_1, T_2, T_3, T_4$" prove="$AB + CD = BC + AD$">
+<Step show="T1 T2 T3 T4" hl="AT1=AT4 BT1=BT2 CT2=CT3 DT3=DT4">The two tangent segments from one point to a circle are equal: $AT_1 = AT_4$, $BT_1 = BT_2$, $CT_2 = CT_3$, $DT_3 = DT_4$.</Step>
+<Step tex="AB + CD = (AT_1 + T_1B) + (CT_3 + T_3D)">Each side is split by its point of tangency into two tangent segments.</Step>
+<Step tex="\begin{aligned}AB + CD &= AT_4 + BT_2 + CT_2 + DT_4 \\ &= BC + AD \quad \blacksquare\end{aligned}">Replace each segment by its equal and regroup.</Step>
+</Proof>
+</Property>
+
+<Property id="pitot-converse" kind="converse" title="If the sums of the opposite sides of a convex quadrilateral are equal, a circle can be inscribed in it" why="Otherwise in one triangle a side would equal the difference of the other two.">
+<Proof figure="tangential-quad" given="$AB + CD = BC + AD$" prove="there is a circle touching all four sides">
+<Step hl="AB BC AD">Build the circle touching three sides, $AB$, $BC$ and $AD$: its centre is where the bisectors of angles $A$ and $B$ meet.</Step>
+<Step>Suppose $CD$ does not touch this circle. From $C$ draw a tangent to the circle meeting line $AD$ at $D'$. $ABCD'$ is tangential, so $AB + CD' = BC + AD'$.</Step>
+<Step tex="CD - CD' = AD - AD' = \pm DD'">Subtract this equality from the given one.</Step>
+<Step>In $\triangle CDD'$ one side ($DD'$) came out equal to the difference of the other two, which contradicts the triangle inequality. So $D' = D$ and the circle touches $CD$ too. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="center-on-bisectors" title="The centre of the inscribed circle lies on the bisectors of all the angles of the quadrilateral" why="The centre is equidistant from all sides.">
+<Proof figure="tangential-quad" given="the circle $(I, r)$ touches all four sides of $ABCD$" prove="$I$ lies on the bisectors of angles $A, B, C, D$">
+<Step show="T1 T4 IT1 IT4" hl="IT1=IT4">The distance from $I$ to $AB$ and to $AD$ equals the radius: $IT_1 = IT_4 = r$.</Step>
+<Step hl="AT1I AT4I">The right triangles $AT_1I$ and $AT_4I$ are congruent by the hypotenuse ($AI$) and a leg, so $\angle T_1AI = \angle T_4AI$ and $AI$ is the bisector.</Step>
+<Step>The same argument works at every vertex. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">Not every quadrilateral has an inscribed or a circumscribed circle. For example, a rhombus that is not a square has an inscribed circle but no circumscribed one; a rectangle that is not a square, the other way round.</Remark>
+
+<Problems>
+
+<Problem id="p-quad-angles-ratio" set={{ Ax: -2, Ay: -1.4285254037844386, Bx: 2, By: -1.4285254037844386, Cx: 2, Cy: 0.0714745962155614, Dx: -0.350480947161671, Dy: 1.4285254037844386 }} given="<A/<B=2/3 <B/<C=3/4 <C/<D=4/3" find="<A <B <C <D" answer="60 90 120 90" book="6.1 6.2"
+  q="The angles of a quadrilateral are in the ratio $2 : 3 : 4 : 3$. Find the angles."
+  hint="The angles of a quadrilateral add up to $360^\circ$.">
+<Step hl="<A <B <C <D" tex="2x + 3x + 4x + 3x = 360^\circ \;\Rightarrow\; x = 30^\circ">The angles of a quadrilateral add up to $360^\circ$; the angles are $2x$, $3x$, $4x$ and $3x$.</Step>
+<Step tex="\angle A = 60^\circ,\quad \angle B = \angle D = 90^\circ,\quad \angle C = 120^\circ">Therefore.</Step>
+</Problem>
+
+<Problem id="p-varignon-perimeter" set={{ Ax: -3, Ay: -2, Bx: 3.5, By: -2.5, Cx: 3, Cy: 2, Dx: -3.5, Dy: 2.58723893679076 }} show="KL LM MN NK AC BD" given="AC=10 BD=12" find="P(KLMN)" answer="22" book="6.70 6.71"
+  q="The diagonals of a quadrilateral are $10$ and $12$. Find the perimeter of the quadrilateral whose vertices are the midpoints of the sides."
+  hint="$KL$ is a midline of triangle $ABC$.">
+<Step hl="KL MN AC" tex="KL = MN = \tfrac12\, AC = 5">$KL$ and $MN$ are midlines of triangles $ABC$ and $ACD$, and a midline is half the third side.</Step>
+<Step hl="LM NK BD" tex="LM = NK = \tfrac12\, BD = 6">Likewise in triangles $BCD$ and $ABD$.</Step>
+<Step hl="KLMN" tex="P_{KLMN} = 2\,(5 + 6) = 22">That is, the perimeter equals the sum of the diagonals.</Step>
+</Problem>
+
+<Problem id="p-cyclic-angles" figure="cyclic-quad" set={{ R: 3, tA: 218.1982196423237, tB: 296.9185347226705, tC: 58.1982196423234, tD: 156.9185347226705 }} given="<A=110 <B=80" find="<C <D" answer="70 100" book="6.110 6.111"
+  q="Two angles of quadrilateral $ABCD$ inscribed in a circle are $\angle A = 110^\circ$ and $\angle B = 80^\circ$. Find the other two angles."
+  hint="The opposite angles of a quadrilateral inscribed in a circle add up to $180^\circ$.">
+<Step hl="<A <C" tex="\angle C = 180^\circ - 110^\circ = 70^\circ">The opposite angles of a quadrilateral inscribed in a circle add up to $180^\circ$.</Step>
+<Step hl="<B <D" tex="\angle D = 180^\circ - 80^\circ = 100^\circ">The same for the other pair of opposite angles.</Step>
+</Problem>
+
+<Problem id="p-pitot-side" figure="tangential-quad" set={{ r: 1.8, t1: 278.3822630718111, t2: -28.75368468847776, t3: 84.90873955185106, t4: 184.00265188201308 }} given="AB=7 BC=9 CD=12" find="DA" answer="10" book="6.120 6.121"
+  q="Three sides of quadrilateral $ABCD$ circumscribed about a circle are $AB = 7$, $BC = 9$ and $CD = 12$. Find the fourth side."
+  hint="In a quadrilateral circumscribed about a circle the sums of opposite sides are equal.">
+<Step hl="AB CD BC DA" tex="AB + CD = BC + DA">In a quadrilateral circumscribed about a circle the sums of opposite sides are equal.</Step>
+<Step hl="DA" tex="DA = 7 + 12 - 9 = 10">Substitute the known sides.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-varignon-rhombus" set={{ Ax: -3, Ay: -2, Bx: 3.5, By: -2.5, Cx: 3, Cy: 2, Dx: -3.5, Dy: -0.7679491924311228 }} show="KL LM MN NK AC BD" given="AC=BD" prove="KL=LM LM=MN MN=NK" book="6.149"
+  q="Prove that if the diagonals of a quadrilateral are equal, the midpoints of its sides are the vertices of a rhombus."
+  hint="The segments joining the midpoints of the sides are midlines of triangles.">
+<Step hl="KL MN AC" tex="KL = MN = \tfrac12\, AC">$KL$ and $MN$ are midlines of triangles $ABC$ and $ACD$.</Step>
+<Step hl="LM NK BD" tex="LM = NK = \tfrac12\, BD">$LM$ and $NK$ are midlines of triangles $BCD$ and $ABD$.</Step>
+<Step hl="KLMN" tex="AC = BD \;\Rightarrow\; KL = LM = MN = NK \quad \blacksquare">A quadrilateral with all four sides equal is a rhombus.</Step>
+</Problem>
+
+</Problems>

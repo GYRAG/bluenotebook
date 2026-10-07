@@ -1,0 +1,28 @@
+---
+import { render } from 'astro:content';
+import Shell from '@/layouts/Shell.astro';
+import Panel from '@/components/Panel.astro';
+import Figure from '@/components/Figure.astro';
+import FigureTools from '@/components/FigureTools.astro';
+import { formulasView, problemsView, propertiesView } from '@/components/content';
+
+import type { Topic } from '@/lib/topics';
+
+// A topic page, in either language (the route files pick the collection).
+const { topic } = Astro.props as { topic: Topic };
+const { Content } = await render(topic);
+const fig = topic.data.figure;
+const problems = !!topic.body?.includes('<Problem ');
+const theory = !!topic.body?.match(/<(Formula|Property|Definition)[\s>]/); // a problems-only page shows just the problems tab
+---
+<Shell title={topic.data.title} description={topic.data.summary} current={{ subject: topic.data.subject, slug: topic.id }} draft={topic.data.status === 'draft'} lede={topic.data.summary} figure={!!fig}>
+  {fig && <Figure name={fig} />}
+  {topic.data.figures.map(name => <Figure name={name} alt />)}
+  <Panel slot="panel" tools={!!fig && theory} theory={theory} problems={problems}>
+    {fig && <FigureTools slot="tools" name={fig} />}
+    <div slot="formulas"><Content components={formulasView} /></div>
+    <div slot="props"><Content components={propertiesView} /></div>
+    {problems && <div slot="probs"><Content components={problemsView} /></div>}
+  </Panel>
+</Shell>
+<script>import '@/scripts/topic';</script>

@@ -1,0 +1,109 @@
+---
+title: Circumference and area of a circle
+slug: circle-length
+subject: geometry
+section: circles
+order: 28
+summary: The number pi, the length of a circle and of an arc, the area of a disc, a sector and a segment.
+tags: [circumference, arc length, area of a circle, sector, segment, pi]
+prerequisites: [circle, inscribed-angle]
+status: draft
+figure: circle-sector
+---
+
+<Definition>A **disc** is the part of the plane bounded by a circle. A **circular sector** is the part of a disc between two radii and an arc; a **circular segment** is the part of a disc between a chord and an arc. The ratio of the circumference to the diameter is the number $\pi$: $\pi \approx 3.14159$.</Definition>
+
+<Formulas>
+<Formula id="circumference-formula" name="Circumference" tex="C = 2\pi R" live="C" proof="circumference" />
+<Formula id="arc-formula" name="Arc length" tex="l = \frac{\pi R \alpha}{180^\circ}" live="l" proof="arc-length" />
+<Formula id="area-formula" name="Area of a disc" tex="S = \pi R^2" live="S" proof="circle-area" />
+<Formula id="sector-formula" name="Area of a sector" tex="S_1 = \frac{\pi R^2 \alpha}{360^\circ} = \tfrac12\, l R" live="S₁" proof="sector-area" />
+<Formula id="segment-formula" name="Area of a segment" tex="S_2 = \frac{R^2}{2}\left(\frac{\pi\alpha}{180^\circ} - \sin\alpha\right)" live="S₂" proof="segment-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="circumference" title="The ratio of the circumference to the diameter is the same for every circle, so $C = 2\pi R$" why="The perimeters of regular $n$-gons inscribed in circles are proportional to the radii.">
+<Proof given="A circle of radius $R$" prove="$\tfrac{C}{2R}$ does not depend on $R$">
+<Step show="(OA)" hl="(OA)">The circumference is the limit of the perimeters of the regular $n$-gons inscribed in the circle as $n$ grows without bound.</Step>
+<Step tex="a_n = 2R\sin\frac{180^\circ}{n}, \qquad P_n = 2nR\sin\frac{180^\circ}{n}">A side of the $n$-gon is a chord on which a central angle of $\tfrac{360^\circ}{n}$ stands.</Step>
+<Step tex="\frac{P_n}{2R} = n\sin\frac{180^\circ}{n}">This ratio depends only on $n$, not on $R$.</Step>
+<Step tex="\frac{C}{2R} = \pi \;\Rightarrow\; C = 2\pi R \quad \blacksquare">In the limit every circle gives the same number: that is $\pi$.</Step>
+</Proof>
+</Property>
+
+<Property id="arc-length" title="The length of an arc of $\alpha$ degrees is $\tfrac{\pi R\alpha}{180^\circ}$" why="The arc length is proportional to the central angle; $360^\circ$ corresponds to the whole circle.">
+<Proof given="An arc with central angle $\alpha$" prove="$l = \tfrac{\pi R\alpha}{180^\circ}$">
+<Step hl="arc:OAB <AOB">Equal central angles have equal arcs, so the arc length is proportional to $\alpha$.</Step>
+<Step show="(OA)" tex="l = 2\pi R \cdot \frac{\alpha}{360^\circ} = \frac{\pi R\alpha}{180^\circ} \quad \blacksquare">$\alpha = 360^\circ$ is the whole circle, $2\pi R$.</Step>
+</Proof>
+</Property>
+
+<Property id="circle-area" title="The area of a disc is $\pi R^2$" why="The area of an inscribed regular polygon is $\tfrac12 P_n r_n$, and in the limit $\tfrac12\, C R$.">
+<Proof given="A disc of radius $R$" prove="$S = \pi R^2$">
+<Step show="(OA)" hl="(OA)">Inscribe a regular $n$-gon in the disc. From the centre it splits into $n$ congruent isosceles triangles; their height is $r_n$ (the apothem).</Step>
+<Step tex="S_n = n \cdot \tfrac12\, a_n r_n = \tfrac12\, P_n r_n">The sum of the areas of the triangles.</Step>
+<Step tex="S = \tfrac12 \cdot 2\pi R \cdot R = \pi R^2 \quad \blacksquare">As $n \to \infty$: $P_n \to 2\pi R$, $r_n \to R$, $S_n \to S$.</Step>
+</Proof>
+</Property>
+
+<Property id="sector-area" title="The area of a sector is $\tfrac{\pi R^2\alpha}{360^\circ} = \tfrac12\, lR$" why="The area of a sector is also proportional to the central angle.">
+<Proof given="A sector with central angle $\alpha$" prove="$S_1 = \tfrac{\pi R^2\alpha}{360^\circ}$">
+<Step hl="OA OB arc:OAB">Equal central angles have equal sectors: the area is proportional to $\alpha$.</Step>
+<Step tex="S_1 = \pi R^2 \cdot \frac{\alpha}{360^\circ}">At $\alpha = 360^\circ$ the sector is the whole disc.</Step>
+<Step tex="S_1 = \tfrac12 \cdot \frac{\pi R\alpha}{180^\circ} \cdot R = \tfrac12\, lR \quad \blacksquare">The arc length is $l = \tfrac{\pi R\alpha}{180^\circ}$.</Step>
+</Proof>
+</Property>
+
+<Property id="segment-area" title="The area of a segment is the difference of the areas of a sector and a triangle" why="Cut the isosceles triangle $OAB$ off the sector.">
+<Proof given="A segment with chord $AB$, $\angle AOB = \alpha \le 180^\circ$" prove="$S_2 = \tfrac{R^2}{2}\left(\tfrac{\pi\alpha}{180^\circ} - \sin\alpha\right)$">
+<Step show="AB" hl="AB arc:OAB">The segment lies between the chord $AB$ and the arc.</Step>
+<Step hl="OAB" tex="S_{OAB} = \tfrac12 R^2\sin\alpha">The area from two sides and the angle between them.</Step>
+<Step tex="S_2 = \frac{\pi R^2\alpha}{360^\circ} - \frac{R^2}{2}\sin\alpha \quad \blacksquare">Subtract the triangle from the sector.</Step>
+</Proof>
+</Property>
+
+<Remark>If $\alpha > 180^\circ$, the segment is the union of the sector and the triangle; the formula stays the same, because then $\sin\alpha < 0$.</Remark>
+
+</Properties>
+
+<Remark kind="mistake">In the arc and sector formulas $\alpha$ is in degrees. In radians the same formulas read $l = R\alpha$, $S_1 = \tfrac12 R^2\alpha$.</Remark>
+
+<Problems>
+
+<Problem id="p-arc-degrees" set={{ R: 3, alpha: 150 }} given="OA=6 π*OA*<AOB/180=5π" find="<AOB" answer="150" book="11.27 11.28"
+  q="An arc of a circle of radius $6$ has length $5\pi$. Find the degree measure of the arc."
+  hint="$l = \tfrac{\pi R \alpha}{180^\circ}$.">
+<Step tex="\frac{\pi \cdot 6 \cdot \alpha}{180^\circ} = 5\pi">The formula for the length of an arc of $\alpha$ degrees.</Step>
+<Step hl="<AOB" tex="\alpha = \frac{5 \cdot 180^\circ}{6} = 150^\circ">Solve for $\alpha$.</Step>
+</Problem>
+
+<Problem id="p-arc-circle" k={6} set={{ R: 3, alpha: 40 }} given="<AOB=40 π*OA*<AOB/180=4π" find="2*π*OA OA" labels="C;R" answer="36π 18" book="11.29"
+  q="A $40^\circ$ arc of a circle has length $4\pi$. Find the circumference and the radius of the circle."
+  hint="$40^\circ$ is $\tfrac{40}{360} = \tfrac19$ of the whole circle.">
+<Step tex="C = 4\pi \cdot \frac{360^\circ}{40^\circ} = 36\pi">The length of an arc is proportional to its degree measure.</Step>
+<Step hl="OA" tex="R = \frac{C}{2\pi} = 18">$C = 2\pi R$.</Step>
+</Problem>
+
+<Problem id="p-sector-area" set={{ R: 3, alpha: 120 }} given="OA=6 <AOB=120" find="π*OA^2*<AOB/360" labels="S_1" answer="12π" book="11.69"
+  q="The radius of a sector is $6$, and its central angle is $120^\circ$. Find the area of the sector."
+  hint="$S_1 = \tfrac{\pi R^2 \alpha}{360^\circ}$.">
+<Step tex="S_1 = \frac{\pi \cdot 36 \cdot 120^\circ}{360^\circ} = 12\pi">The sector is $\tfrac{120}{360} = \tfrac13$ of the disc.</Step>
+</Problem>
+
+<Problem id="p-sector-angle" set={{ R: 3, alpha: 150 }} given="OA=6 π*OA^2*<AOB/360=15π" find="<AOB" answer="150" book="11.72 11.73"
+  q="The area of a sector is $15\pi$, and its radius is $6$. Find the central angle of the sector."
+  hint="$S_1 = \tfrac{\pi R^2 \alpha}{360^\circ}$.">
+<Step tex="\frac{\pi \cdot 36 \cdot \alpha}{360^\circ} = 15\pi">The formula for the area of a sector.</Step>
+<Step hl="<AOB" tex="\alpha = \frac{15 \cdot 360^\circ}{36} = 150^\circ">Solve for $\alpha$.</Step>
+</Problem>
+
+<Problem id="p-segment-area" set={{ R: 3, alpha: 90 }} show="AB" given="OA=6 <AOB=90" find="π*OA^2/4-S(OAB)" labels="S_2" answer="9π-18" book="11.82 11.83"
+  q="The radius of a disc is $6$. Find the area of the segment bounded by a $90^\circ$ arc and its chord."
+  hint="The area of a segment is the difference of the areas of a sector and a triangle.">
+<Step tex="S_1 = \frac{\pi \cdot 36}{4} = 9\pi">The sector is a quarter of the disc.</Step>
+<Step hl="OAB" tex="S_{OAB} = \tfrac12 \cdot 6 \cdot 6 = 18">Triangle $OAB$ is right.</Step>
+<Step tex="S_2 = 9\pi - 18">The area of a segment is the difference of the areas of a sector and a triangle.</Step>
+</Problem>
+
+</Problems>

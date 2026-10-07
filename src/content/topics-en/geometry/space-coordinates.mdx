@@ -1,0 +1,72 @@
+---
+title: Coordinates and vectors in space
+slug: space-coordinates
+subject: geometry
+section: stereo
+order: 53
+summary: The distance between two points in space, the midpoint, the equation of a sphere, the dot product of vectors.
+tags: [coordinates in space, distance, equation of a sphere, dot product]
+prerequisites: [coordinates, vectors, perpendicularity]
+status: draft
+figure: space-coords
+---
+
+<Definition>In space a coordinate system is formed by three mutually perpendicular axes: $Ox$, $Oy$, $Oz$. A point is $A(x;\, y;\, z)$; the coordinates of a vector are the differences of the coordinates of its end and its start.</Definition>
+
+<Formulas>
+<Formula id="distance-formula" name="Distance between two points" tex="AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}" live="|OA|" proof="distance-3d" />
+<Formula id="midpoint-formula" name="Midpoint" tex="M\left(\frac{x_1 + x_2}{2};\ \frac{y_1 + y_2}{2};\ \frac{z_1 + z_2}{2}\right)" proof="midpoint-3d" />
+<Formula id="sphere-formula" name="Equation of a sphere" tex="(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2" proof="sphere-equation" />
+<Formula id="dot-formula" name="Dot product" tex="\vec a \cdot \vec b = x_1x_2 + y_1y_2 + z_1z_2 = |\vec a|\,|\vec b|\cos\varphi" live="OA·OB" proof="dot-3d" />
+</Formulas>
+
+<Properties>
+
+<Property id="distance-3d" title="The distance from a point $A(x;\, y;\, z)$ to the origin is $\sqrt{x^2 + y^2 + z^2}$" why="Pythagoras' theorem twice: in the plane $Oxy$ and then vertically.">
+<Proof given="$A(x;\, y;\, z)$, $A_4(x;\, y;\, 0)$ its projection on $Oxy$" prove="$OA^2 = x^2 + y^2 + z^2$">
+<Step show="OA4 A1A4 A2A4" hl="OA4" tex="OA_4^2 = x^2 + y^2">The distance formula in the plane $Oxy$.</Step>
+<Step show="OA A4A <OA4A" hl="OA4A" tex="OA^2 = OA_4^2 + A_4A^2 = x^2 + y^2 + z^2 \quad \blacksquare">$A_4A \perp Oxy$, so $\triangle OA_4A$ is right, $A_4A = z$. For two points the coordinates are replaced by their differences.</Step>
+</Proof>
+</Property>
+
+<Property id="midpoint-3d" title="Each coordinate of the midpoint is the average of the coordinates of the ends" why="Projections on the axes: Thales' theorem, as in the plane.">
+<Proof given="$O(0;\, 0;\, 0)$, $A(x;\, y;\, z)$, $M$ the midpoint of $OA$" prove="$M\left(\tfrac x2;\ \tfrac y2;\ \tfrac z2\right)$">
+<Step show="OA M" hl="OA">Drop perpendiculars from $O$, $M$ and $A$ to each axis.</Step>
+<Step tex="\begin{gathered}x_M = \frac{x_1 + x_2}{2}, \quad y_M = \frac{y_1 + y_2}{2} \\ z_M = \frac{z_1 + z_2}{2} \quad \blacksquare\end{gathered}">Parallel planes cut off equal segments on an axis (Thales), so on each axis the projection of $M$ is the midpoint.</Step>
+</Proof>
+</Property>
+
+<Property id="sphere-equation" title="The equation of a sphere with centre $(a;\, b;\, c)$ and radius $R$: $(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2$" why="A sphere is the set of points at distance $R$ from the centre.">
+<Proof given="Centre $(a;\, b;\, c)$, radius $R$" prove="$(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2$">
+<Step tex="(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2 \quad \blacksquare">A point $(x;\, y;\, z)$ is on the sphere if and only if its distance from the centre is $R$: the distance formula, squared.</Step>
+</Proof>
+</Property>
+
+<Property id="dot-3d" title="In space the dot product is $x_1x_2 + y_1y_2 + z_1z_2$" why="The cosine law in $\triangle OAB$, as in the plane, but with three coordinates.">
+<Proof given="$\vec a = \overrightarrow{OA}$, $\vec b = \overrightarrow{OB}$, $\varphi = \angle AOB$" prove="$|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 + z_1z_2$">
+<Step show="vec:OA vec:OB B AB" hl="OAB <AOB" tex="AB^2 = |\vec a|^2 + |\vec b|^2 - 2|\vec a|\,|\vec b|\cos\varphi">The cosine law in $\triangle OAB$.</Step>
+<Step tex="|\vec a|\,|\vec b|\cos\varphi = x_1x_2 + y_1y_2 + z_1z_2 \quad \blacksquare">Write $AB^2$, $|\vec a|^2$, $|\vec b|^2$ in coordinates and simplify.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">In space $y = kx + b$ is not the equation of a line: in space such an equation describes a plane.</Remark>
+
+<Problems>
+
+<Problem id="p-space-dist" set={{ x: 2, y: 1, z: 2, bx: 0, by: 3, bz: 1 }} show="OA AB B" given="x(A)=2 y(A)=1 z(A)=2 x(B)=0 y(B)=3 z(B)=1" find="OA AB" answer="3 3" book="15.22"
+  q="The points $A(2;\, 1;\, 2)$ and $B(0;\, 3;\, 1)$ are given. Find the distance from $A$ to the origin and the length of the segment $AB$."
+  hint="In space the distance formula gets a third term.">
+<Step hl="OA" tex="OA = \sqrt{2^2 + 1^2 + 2^2} = 3">The distance from a point to the origin.</Step>
+<Step hl="AB" tex="AB = \sqrt{(0 - 2)^2 + (3 - 1)^2 + (1 - 2)^2} = \sqrt9 = 3">The distance between two points.</Step>
+</Problem>
+
+<Problem id="p-space-axis" set={{ x: 2, y: 1, z: 2, bx: 0.5, by: 2.5, bz: 1 }} show="AA3 AA4 A3 A4" given="x(A)=2 y(A)=1 z(A)=2" find="AA4 AA3" answer="2 √5"
+  q="Find the distance from the point $A(2;\, 1;\, 2)$ to the plane $Oxy$ and to the axis $Oz$."
+  hint="$A_4(2;\, 1;\, 0)$ is the projection of $A$ on the plane $Oxy$, $A_3(0;\, 0;\, 2)$ its projection on the axis $Oz$.">
+<Step hl="AA4" tex="AA_4 = |z| = 2">The distance to the plane $Oxy$ is the absolute value of the $z$-coordinate.</Step>
+<Step hl="AA3" tex="AA_3 = \sqrt{x^2 + y^2} = \sqrt5">From $A_3$ to $A$ only $x$ and $y$ change.</Step>
+</Problem>
+
+</Problems>

@@ -1,0 +1,162 @@
+---
+title: Rhombus
+slug: rhombus
+subject: geometry
+section: quadrilaterals
+order: 22
+summary: A parallelogram whose sides are all equal.
+tags: [parallelogram, diagonal, inscribed circle]
+prerequisites: [parallelogram, isosceles-triangle, right-triangle]
+status: draft
+figure: rhombus
+parent: parallelogram
+---
+
+<Definition>A rhombus is a parallelogram whose sides are all equal.</Definition>
+
+<Formulas>
+<Formula id="area-diagonals-formula" name="Area by the diagonals" tex="S = \tfrac12\, d_1 d_2" live="S" proof="area-diagonals" />
+<Formula id="area-sine-formula" name="Area by a side and an angle" tex="S = a^2 \sin\alpha" live="S" proof="area-sine" />
+<Formula id="area-height-formula" name="Area by the height" tex="S = a\,h" live="S" proof="area-sine" />
+<Formula id="side-formula" name="The side from the diagonals" tex="a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2" proof="side-from-diagonals" />
+<Formula id="inradius" name="Inradius" tex="r = \tfrac{h}{2}" live="r" proof="incircle" />
+<Formula id="perimeter" name="Perimeter" tex="P = 4a" live="P" />
+</Formulas>
+
+<Remark kind="special">A rhombus is a parallelogram: its opposite angles are equal and its diagonals bisect each other.</Remark>
+
+<Properties>
+
+<Property id="diagonals-perpendicular" title="The diagonals of a rhombus are perpendicular" why="A diagonal is the median of an isosceles triangle, and so also an altitude.">
+<Proof given="$ABCD$ a rhombus, $O = AC \cap BD$" prove="$AC \perp BD$">
+<Step show="AC BD O" hl="AC BD">Draw the diagonals.</Step>
+<Step hl="ABD AB=AD">$AB = AD$, so $\triangle ABD$ is isosceles with base $BD$.</Step>
+<Step hl="BO=OD AO">$O$ is the midpoint of $BD$ (the diagonals of a parallelogram bisect each other), so $AO$ is a median of this triangle.</Step>
+<Step hl="<AOB" tex="AC \perp BD \quad \blacksquare">In an isosceles triangle the median to the base is also an altitude.</Step>
+</Proof>
+</Property>
+
+<Property id="diagonals-bisect-angles" title="The diagonals of a rhombus bisect its angles" why="The same median is also a bisector.">
+<Proof given="$ABCD$ a rhombus" prove="$\angle BAC = \angle DAC$">
+<Step show="AC BD O" hl="ABD AO">In $\triangle ABD$ ($AB = AD$), $AO$ is the median to the base.</Step>
+<Step hl="<BAO=<DAO" tex="\angle BAO = \angle DAO \quad \blacksquare">In an isosceles triangle this median is also a bisector. The same holds at every vertex.</Step>
+</Proof>
+</Property>
+
+<Property id="area-diagonals" title="The area of a rhombus is half the product of its diagonals" why="The diagonals cut it into four congruent right triangles.">
+<Proof given="$AC = d_1,\ BD = d_2$" prove="$S = \tfrac12 d_1 d_2$">
+<Step show="AC BD O" hl="<AOB">The diagonals are perpendicular and bisect each other.</Step>
+<Step hl="ABO BCO CDO DAO" tex="S_{AOB} = \tfrac12 \cdot \tfrac{d_1}{2} \cdot \tfrac{d_2}{2} = \tfrac{d_1 d_2}{8}">This gives four right triangles with legs $\tfrac{d_1}{2}$ and $\tfrac{d_2}{2}$.</Step>
+<Step tex="S = 4 \cdot \tfrac{d_1 d_2}{8} = \tfrac12\, d_1 d_2 \quad \blacksquare">Four such triangles make up the whole rhombus.</Step>
+</Proof>
+</Property>
+
+<Property id="side-from-diagonals" title="The square of a side is the sum of the squares of the half-diagonals" why="A side is the hypotenuse of a right triangle.">
+<Proof given="$AC = d_1,\ BD = d_2$" prove="$a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2$">
+<Step show="AC BD O" hl="ABO <AOB">$\triangle AOB$ is right, $AO = \tfrac{d_1}{2}$, $BO = \tfrac{d_2}{2}$, hypotenuse $AB = a$.</Step>
+<Step tex="a^2 = \left(\tfrac{d_1}{2}\right)^2 + \left(\tfrac{d_2}{2}\right)^2 \quad \blacksquare">By Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Property id="area-sine" title="The area of a rhombus equals $a^2 \sin\alpha$" why="The parallelogram formula with $b = a$.">
+<Proof given="$AB = AD = a,\ \angle A = \alpha$" prove="$S = a^2 \sin\alpha$">
+<Step show="DH <DHB" hl="DH" tex="h = DH = a \sin\alpha">The height from $D$ to $AB$ is the leg of $\triangle AHD$ opposite $\alpha$.</Step>
+<Step tex="S = a\,h = a^2 \sin\alpha \quad \blacksquare">By the area formula of a parallelogram.</Step>
+</Proof>
+</Property>
+
+<Property id="incircle" title="A circle can be inscribed in a rhombus; its centre is where the diagonals meet, $r = \tfrac{h}{2}$" why="The diagonals are bisectors, so $O$ is equidistant from all sides.">
+<Proof given="$ABCD$ a rhombus, $O = AC \cap BD$" prove="$O$ is at distance $\tfrac{h}{2}$ from every side">
+<Step show="AC BD O" hl="AC BD">The diagonals bisect the angles.</Step>
+<Step show="OT T <OTB" hl="OT">Every point of an angle bisector is equidistant from the sides of the angle; $O$ lies on all the bisectors, so it is the same distance from all four sides.</Step>
+<Step show="(OT)" hl="(OT)" tex="r = \tfrac{h}{2} \quad \blacksquare">$O$ lies exactly halfway between $AB$ and $CD$ (it is the midpoint of $AC$), and the distance between them is the height $h$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Criteria: when is a parallelogram a rhombus">
+
+<Property id="criterion-perpendicular-diagonals" kind="criterion" title="If the diagonals of a parallelogram are perpendicular, it is a rhombus" why="One diagonal turns out to be the perpendicular bisector of the other.">
+<Proof given="$ABCD$ a parallelogram, $AC \perp BD$" prove="$AB = AD$">
+<Step show="AC BD O" hl="BO=OD <AOB">$O$ is the midpoint of $BD$ and $AO \perp BD$.</Step>
+<Step hl="ABO ADO" tex="\triangle ABO = \triangle ADO">$BO = DO$, $AO$ is common, the angles at $O$ are right: the triangles are congruent (SAS).</Step>
+<Step hl="AB=AD" tex="AB = AD">Adjacent sides are equal, and opposite sides of a parallelogram are equal anyway, so all four sides are equal. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-diagonal-bisects-angle" kind="criterion" title="If a diagonal of a parallelogram bisects an angle, it is a rhombus" why="The bisector and the alternate angles form an isosceles triangle.">
+<Proof given="$ABCD$ a parallelogram, $\angle BAC = \angle DAC$" prove="$AB = BC$">
+<Step show="AC" hl="<BAC=<DAC">$AC$ halves $\angle A$.</Step>
+<Step hl="<DAC=<BCA" tex="\angle DAC = \angle BCA">$AD \parallel BC$: alternate interior angles.</Step>
+<Step hl="ABC <BAC=<BCA" tex="\angle BAC = \angle BCA \;\Rightarrow\; AB = BC \quad \blacksquare">$\triangle ABC$ has two equal angles, so it is isosceles.</Step>
+</Proof>
+</Property>
+
+<Property id="criterion-four-sides" kind="criterion" title="A quadrilateral with all four sides equal is a rhombus" why="Equal opposite sides already mean a parallelogram.">
+<Proof given="$AB = BC = CD = DA$" prove="$ABCD$ a rhombus">
+<Step hl="AB=CD BC=DA">The opposite sides are equal in pairs, so $ABCD$ is a parallelogram (a parallelogram criterion).</Step>
+<Step hl="AB=BC=CD=DA">A parallelogram with all sides equal is a rhombus by definition. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">Perpendicular diagonals alone do not give a rhombus: the criterion is about parallelograms only. For example, a quadrilateral whose diagonals are perpendicular but do not bisect each other is not a rhombus.</Remark>
+
+<Remark kind="special">A rhombus with one right angle is a square.</Remark>
+
+<Problems>
+
+<Problem id="p-rhombus-half-angles" set={{ a: 4, alpha: 40 }} show="AC BD" given="<OAB/<OBA=2/7" find="<A <B" answer="40 140" book="6.43 6.44"
+  q="The diagonals of a rhombus make angles with a side that are in the ratio $2 : 7$. Find the angles of the rhombus."
+  hint="The diagonals of a rhombus are perpendicular and bisect its angles.">
+<Step hl="AOB <AOB" tex="\angle OAB + \angle OBA = 90^\circ">The diagonals are perpendicular, so triangle $AOB$ is right.</Step>
+<Step tex="2x + 7x = 90^\circ \;\Rightarrow\; x = 10^\circ">These angles are $2x$ and $7x$.</Step>
+<Step hl="<A <B" tex="\angle A = 2 \cdot 20^\circ = 40^\circ,\qquad \angle B = 2 \cdot 70^\circ = 140^\circ">The diagonals bisect the angles of the rhombus.</Step>
+</Problem>
+
+<Problem id="p-rhombus-height-mid" set={{ a: 4, alpha: 60 }} show="DH BD <DHB" given="AH=HB BD=20" find="<A P(ABCD)" answer="60 80" book="6.48"
+  q="The height $DH$ from $D$, the vertex of an obtuse angle of a rhombus, bisects side $AB$, and the shorter diagonal $BD$ is $20$. Find the acute angle and the perimeter of the rhombus."
+  hint="In triangle $ABD$, $DH$ is both an altitude and a median.">
+<Step hl="DH AH=HB" tex="DA = DB">In triangle $ABD$, $DH$ is both an altitude and a median, so the triangle is isosceles.</Step>
+<Step hl="ABD" tex="AB = AD = DB = 20,\qquad \angle A = 60^\circ">The sides of the rhombus are equal too: triangle $ABD$ is equilateral.</Step>
+<Step tex="P = 4 \cdot 20 = 80">All four sides of a rhombus are equal.</Step>
+</Problem>
+
+<Problem id="p-rhombus-diagonal" set={{ a: 4, alpha: 45.23972989608086 }} show="AC BD" given="AB=13 AC=24" find="BD" answer="10"
+  q="The side of a rhombus is $13$, and one diagonal is $24$. Find the other diagonal."
+  hint="The diagonals are perpendicular and bisect each other.">
+<Step hl="AOB <AOB" tex="AO = 12">The diagonals bisect each other and are perpendicular, so triangle $AOB$ is right.</Step>
+<Step hl="BO" tex="BO = \sqrt{13^2 - 12^2} = 5">By Pythagoras' theorem.</Step>
+<Step hl="BD" tex="BD = 2\,BO = 10">The diagonal consists of two such halves.</Step>
+</Problem>
+
+<Problem id="p-rhombus-inradius" set={{ a: 4, alpha: 53.13010235415599 }} show="OT (OT) <OTA" given="AB=10 S(ABCD)=80" find="OT" answer="4" book="6.117 6.119"
+  q="The side of a rhombus is $10$, and its area is $80$. Find the radius of the inscribed circle."
+  hint="The diameter of the inscribed circle equals the height of the rhombus.">
+<Step tex="h = \frac{S}{a} = \frac{80}{10} = 8">A rhombus is a parallelogram: $S = a\,h$.</Step>
+<Step hl="OT" tex="r = \tfrac12\, h = 4">The centre of the inscribed circle is where the diagonals meet, halfway between opposite sides.</Step>
+</Problem>
+
+<Problem id="p-rhombus-area-sum" k={2.5} set={{ a: 4, alpha: 73.73979529168804 }} show="AC BD" given="P(ABCD)=40 AC+BD=28" find="S(ABCD)" answer="96" book="10.31 10.32"
+  q="The perimeter of a rhombus is $40$, and its diagonals add up to $28$. Find the area of the rhombus."
+  hint="$d_1^2 + d_2^2 = 4a^2$ and $(d_1 + d_2)^2 = d_1^2 + d_2^2 + 2d_1d_2$.">
+<Step hl="AOB" tex="d_1^2 + d_2^2 = 4a^2 = 400">The side is $10$; the half-diagonals and the side form a right triangle.</Step>
+<Step tex="2\,d_1 d_2 = 28^2 - 400 = 384">$(d_1 + d_2)^2 = d_1^2 + d_2^2 + 2d_1d_2$.</Step>
+<Step hl="ABCD" tex="S = \tfrac12\, d_1 d_2 = 96">The area of a rhombus is half the product of its diagonals.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-rhombus-midpoints" set={{ a: 4, alpha: 65 }} show="KL LM MN NK AC BD" prove="<NKL=90 <KLM=90 <LMN=90" book="6.148"
+  q="Prove that the midpoints of the sides of a rhombus are the vertices of a rectangle."
+  hint="The midlines are parallel to the diagonals, and the diagonals of a rhombus are perpendicular.">
+<Step hl="KL MN AC" tex="KL \parallel AC \parallel MN">$KL$ and $MN$ are midlines of triangles $ABC$ and $ACD$.</Step>
+<Step hl="LM NK BD" tex="LM \parallel BD \parallel NK">Likewise in triangles $BCD$ and $ABD$.</Step>
+<Step hl="<NKL <KLM <LMN" tex="KL \perp LM,\quad LM \perp MN,\quad MN \perp NK \quad \blacksquare">The diagonals of a rhombus are perpendicular, so every angle of $KLMN$ is right.</Step>
+</Problem>
+
+</Problems>

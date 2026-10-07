@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import Topic from '@/views/Topic.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('topicsEn')).map(topic => ({ params: { subject: topic.data.subject, slug: topic.id }, props: { topic } }));
+}
+---
+<Topic topic={Astro.props.topic} />

@@ -1,0 +1,66 @@
+---
+title: Dihedral angle and the area of a projection
+slug: space-angles
+subject: geometry
+section: stereo
+order: 52
+summary: The angle between a line and a plane, a dihedral angle and its linear angle, perpendicular planes, the area of the orthogonal projection of a polygon.
+tags: [dihedral angle, linear angle, projection, perpendicular planes]
+prerequisites: [perpendicularity, trigonometry]
+status: draft
+figure: dihedral
+---
+
+<Definition>The **angle between a line and a plane** is the angle between the line and its projection. A **dihedral angle** is a figure made of two half-planes bounded by one line (the edge). Its **linear angle** is the angle formed by the rays drawn from one point of the edge, in both half-planes, perpendicular to the edge. Planes are perpendicular if the dihedral angle between them is right.</Definition>
+
+<Formulas>
+<Formula id="projection-formula" name="Area of a projection" tex="S' = S\cos\varphi" live="S'" proof="projection-area" />
+<Formula id="perp-planes-formula" name="Criterion for perpendicular planes" tex="a \perp \alpha,\ a \subset \beta \;\Rightarrow\; \beta \perp \alpha" proof="planes-perpendicular" />
+</Formulas>
+
+<Properties>
+
+<Property id="linear-angle-equal" title="All linear angles of a dihedral angle are equal" why="A translation along the edge lays one linear angle onto another.">
+<Proof given="$\angle TKT'$ and $\angle M_2M_1M_3$ linear angles" prove="$\angle TKT' = \angle M_2M_1M_3$">
+<Step show="KT KT' K M1M2 M1M3 M1 M2 M3" hl="<TKT' <M2M1M3">The sides of both angles are perpendicular to the edge and lie in the corresponding half-planes.</Step>
+<Step hl="KT M1M2">$KT \parallel M_1M_2$: in one plane, lines perpendicular to one line are parallel; likewise $KT' \parallel M_1M_3$.</Step>
+<Step>The translation by $\overrightarrow{KM_1}$ takes $K$ to $M_1$ and the rays to the corresponding parallel rays: one angle lies on the other. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="projection-area" title="The area of the orthogonal projection of a polygon equals its area times the cosine of the angle between the planes" why="The height, perpendicular to the edge, is multiplied by $\cos\varphi$, and the base does not change.">
+<Proof given="$\triangle E_1E_2T$, $E_1E_2$ on the edge, $T'$ the projection of $T$" prove="$S' = S\cos\varphi$">
+<Step show="E1E2T E1T' E2T' TT' T' KT KT' K" hl="<TKT'">$TK \perp E_1E_2$ (the height), and by the converse of the theorem of three perpendiculars $T'K \perp E_1E_2$. So $\angle TKT' = \varphi$ is a linear angle.</Step>
+<Step hl="TKT'" tex="T'K = TK\cos\varphi">The right triangle $\triangle TT'K$.</Step>
+<Step hl="E1E2T'" tex="S' = \tfrac12\,E_1E_2 \cdot TK\cos\varphi = S\cos\varphi \quad \blacksquare">The base is the same, the height is multiplied by $\cos\varphi$. Any polygon can be cut by lines parallel to the edge into such triangles (and their differences).</Step>
+</Proof>
+</Property>
+
+<Property id="planes-perpendicular" kind="criterion" title="If a plane passes through a line perpendicular to another plane, the planes are perpendicular" why="This line itself forms a linear angle, a right one.">
+<Proof given="$KT \perp$ the lower plane, $KT \subset$ the upper plane" prove="The planes are perpendicular">
+<Step set={{ phi: 90 }} show="KT K" hl="KT">$KT$ is perpendicular to the lower plane and lies in the upper plane, and $K$ is on the edge.</Step>
+<Step show="KT'" hl="<TKT'">In the lower plane draw $KT' \perp E_1E_2$. $KT$ is perpendicular to the whole lower plane, so $KT \perp KT'$: the linear angle is right. ∎</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">A dihedral angle is measured between rays perpendicular to the edge. Any two other rays in the two faces (not perpendicular to the edge) give a different angle.</Remark>
+
+<Problems>
+
+<Problem id="p-dihedral-distance" set={{ phi: 30, tx: 0.4, d: 3.5 }} show="KT KT' TT' T'" given="TK=10 <TKT'=30" find="TT'" answer="5" book="14.53 14.54"
+  q="A point $T$ is taken on one face of a $30^\circ$ dihedral angle, at distance $10$ from the edge. Find the distance from $T$ to the plane of the other face."
+  hint="$TKT'$ is a linear angle of the dihedral angle.">
+<Step hl="KT KT' <TKT'" tex="\angle TKT' = 30^\circ">$TK$ and $KT'$ are perpendicular to the edge, so $\angle TKT'$ is a linear angle.</Step>
+<Step hl="TT'" tex="TT' = TK \sin 30^\circ = 5">In the right triangle $TT'K$, $TT'$ is opposite the $30^\circ$ angle.</Step>
+</Problem>
+
+<Problem id="p-projection-area" k={2.581988897471611} set={{ phi: 60, tx: 0.4, d: 3 }} show="E1E2T E1T' E2T' TT' T'" given="S(E1E2T)=40 <TKT'=60" find="S(E1E2T')" answer="20" book="18.59"
+  q="The area of triangle $E_1E_2T$ is $40$, and its plane makes a $60^\circ$ angle with another plane. Find the area of the orthogonal projection of this triangle."
+  hint="$S' = S\cos\varphi$.">
+<Step hl="E1E2T E1E2T'" tex="S' = S\cos\varphi">The area of the orthogonal projection of a polygon is its area times the cosine of the angle between the planes.</Step>
+<Step tex="S' = 40 \cdot \tfrac12 = 20">Substitute.</Step>
+</Problem>
+
+</Problems>

@@ -1,7 +1,7 @@
 # ლურჯი რვეული (bluenotebook) — notes for AI sessions
 
-A personal Georgian math reference for a high-school student. Static Astro site; all UI and
-content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGENTS.md` (another project).
+A personal Georgian math reference for a high-school student. Static Astro site; Georgian first, with
+an English copy of every page at /en/…. This repo is self-contained — ignore `C:\Users\kinkl\AGENTS.md` (another project).
 
 ## Commands
 - `pnpm dev` (4321) · `pnpm build` (Astro + Pagefind index; search works only after a build) · `pnpm preview`
@@ -11,6 +11,7 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - `pnpm e2e` — Playwright on a production build at 4322 (system Chrome)
 - `pnpm typecheck` — `astro check` (TypeScript pinned to 6; `astro check` rejects 7)
 - `pnpm new topic <subject>/<slug> [section]` — draft MDX scaffold
+- `pnpm translate extract <slug>…` / `pnpm translate apply <file.json>` — the English copy of a topic (see English below)
 
 ## Rules
 - **Never invent theorems or terminology.** Unsure Georgian term → ask the user (one question at a time).
@@ -54,6 +55,23 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - `src/scripts/shell.ts` (theme, tabs, sheet, search palette, pins in empty search),
   `src/scripts/topic.ts` (proof stepper, deep links `#property-id`, pins).
 - localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `solved`, `pins`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
+
+## English
+- Georgian pages keep their URLs; English lives under `/en/`. Page bodies are shared views in `src/views/`;
+  `src/pages/…` and `src/pages/en/…` are thin routes. Language comes from the URL: `langOf(Astro.url)` on the
+  server, `pageLang()` (`<html lang>`) in the browser.
+- UI strings: `t(lang, 'ქართული')` looks the Georgian original up in `src/i18n/ui.ts` (server), `client.ts`
+  (browser scripts, `tc()`), `figures.ts` (figure engine, `tf()`/`tfPhrase()`). A missing key falls back to Georgian,
+  which the e2e test „English pages have no Georgian text“ catches.
+- Content: `src/content/topics-en/<subject>/<slug>.mdx` (collection `topicsEn`) is a translation of the Georgian
+  file with the identical structure. `src/content/i18n.test.ts` checks the same blocks, ids, figure data, givens
+  and answers, no Georgian left, and that every topic has its English file.
+- A new topic: write the Georgian file, then `pnpm translate extract <slug> > x.json`, replace each string with
+  its English translation in order (keep the math), `pnpm translate apply x.json`. It also converts decimal
+  commas, `\text{გვ}`→`lat`, `\text{სრ}`→`tot`, `tg`/`ctg`→`\tan`/`\cot`. Small edits later: edit both files by hand.
+- English style: British spelling (centre), plain school English, SAS/SSS for გკგ/გგგ; the Georgian convention
+  stays where it differs (a trapezoid has exactly one pair of parallel sides; the remark says so).
+- Saved state: pins and the last topic are per language (`sameLang`); solved/seen are shared (language-free key).
 
 ## Gotchas
 - MDX attribute strings take LaTeX with **single** backslashes: `tex="\frac{a}{b}"`. `\\` is a KaTeX line break.

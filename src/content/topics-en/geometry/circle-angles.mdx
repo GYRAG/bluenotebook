@@ -1,0 +1,144 @@
+---
+title: Angles and segments in a circle
+slug: circle-angles
+subject: geometry
+section: circles
+order: 27
+summary: The angle between a tangent and a chord, angles between chords and secants, products of the segments of chords and secants.
+tags: [tangent, chord, secant, arc, product of segments]
+prerequisites: [inscribed-angle, similarity]
+status: draft
+figure: circle-chords
+figures: [circle-secants]
+---
+
+<Definition>Here every angle is expressed through arcs: ${\smile}AB$ is the degree measure of the arc, that is, the central angle standing on it. The main tool is the inscribed angle, which is half its arc.</Definition>
+
+<Formulas>
+<Formula id="tangent-chord-formula" name="The angle between a tangent and a chord" tex="\angle XAB = \tfrac12 {\smile}AB" proof="tangent-chord" />
+<Formula id="chords-angle-formula" name="The angle between two chords" tex="\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right)" live="∠AEB" proof="chords-angle" />
+<Formula id="secants-angle-formula" name="The angle between two secants" tex="\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right)" proof="secants-angle" />
+<Formula id="chords-product-formula" name="Segments of chords" tex="AE \cdot EC = BE \cdot ED" live="AE·EC" proof="intersecting-chords" />
+<Formula id="secants-product-formula" name="Two secants from one point" tex="PA \cdot PB = PC \cdot PD" proof="secant-secant" />
+<Formula id="tangent-secant-formula" name="A tangent and a secant from one point" tex="PT^2 = PA \cdot PB" proof="tangent-secant" />
+</Formulas>
+
+<Properties title="Angles">
+
+<Property id="tangent-chord" title="The angle between a tangent and a chord is half the arc lying inside it" why="A tangent is perpendicular to the radius, and $\triangle OAB$ is isosceles.">
+<Proof given="$AX$ the tangent at $A$, $AB$ a chord" prove="$\angle XAB = \tfrac12 {\smile}AB$">
+<Step show="line:AX X AB" hl="<XAB arc:OAB">The angle between the tangent $AX$ and the chord $AB$; the arc $AB$ lies inside it.</Step>
+<Step show="OA OB" hl="OAB" tex="\angle OAB = 90^\circ - \tfrac12\angle AOB">$\triangle OAB$ is isosceles: $\angle OAB = \tfrac12(180^\circ - \angle AOB)$.</Step>
+<Step hl="<OAX" tex="\angle XAB = \tfrac12\angle AOB = \tfrac12 {\smile}AB \quad \blacksquare">A tangent is perpendicular to the radius, so $\angle XAB = 90^\circ - \angle OAB$.</Step>
+</Proof>
+</Property>
+
+<Property id="chords-angle" title="The angle between two intersecting chords is half the sum of the arcs enclosed by it and by its vertical angle" why="This angle is an exterior angle of a triangle whose two interior angles are inscribed.">
+<Proof given="Chords $AC$ and $BD$ meet at $E$" prove="$\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right)$">
+<Step hl="<AEB arc:OAB arc:OCD">$\angle AEB$ and its vertical angle $\angle CED$ stand on the arcs $AB$ and $CD$.</Step>
+<Step show="BC" hl="BEC" tex="\angle AEB = \angle EBC + \angle ECB">$\angle AEB$ is an exterior angle of $\triangle BEC$.</Step>
+<Step hl="<DBC <ACB" tex="\begin{gathered} \angle DBC = \tfrac12 {\smile}CD \\ \angle ACB = \tfrac12 {\smile}AB \end{gathered}">Inscribed angles.</Step>
+<Step tex="\angle AEB = \tfrac12\left({\smile}AB + {\smile}CD\right) \quad \blacksquare">Add them up.</Step>
+</Proof>
+</Property>
+
+<Property id="secants-angle" title="The angle between two secants drawn from a point outside a circle is half the difference of the arcs they enclose" why="The inscribed angle on the near arc is subtracted from the one on the far arc.">
+<Proof figure="circle-secants" given="$PAB$ and $PCD$ secants, $A$ and $C$ the near points" prove="$\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right)$">
+<Step hl="<BPD arc:ODB arc:OAC">From $P$ one sees the far arc $BD$ and the near arc $AC$.</Step>
+<Step show="AD" hl="PAD" tex="\angle BAD = \angle APD + \angle ADP">$\angle BAD$ is an exterior angle of $\triangle PAD$.</Step>
+<Step hl="<BAD <ADC" tex="\begin{gathered} \angle BAD = \tfrac12 {\smile}BD \\ \angle ADC = \tfrac12 {\smile}AC \end{gathered}">Inscribed angles.</Step>
+<Step tex="\angle P = \tfrac12\left({\smile}BD - {\smile}AC\right) \quad \blacksquare">$\angle APD = \angle BAD - \angle ADP$.</Step>
+</Proof>
+</Property>
+
+<Remark>The same rule works for tangents: the angle between a tangent and a secant, or between two tangents, is half the difference of the arcs they enclose.</Remark>
+
+</Properties>
+
+<Properties title="Segments">
+
+<Property id="intersecting-chords" title="If two chords intersect, the product of the segments of one equals the product of the segments of the other" why="Joining the ends of the chords gives two similar triangles.">
+<Proof given="Chords $AC$ and $BD$ meet at $E$" prove="$AE \cdot EC = BE \cdot ED$">
+<Step hl="AE EC BE ED">The chords $AC$ and $BD$ meet at $E$.</Step>
+<Step show="AD BC" hl="<DAC=<DBC" tex="\angle DAE = \angle CBE">Both stand on the arc $CD$.</Step>
+<Step hl="AED BEC" tex="\triangle AED \sim \triangle BEC">$\angle AED = \angle BEC$ (vertical): similar by two angles.</Step>
+<Step tex="\frac{AE}{BE} = \frac{ED}{EC} \;\Rightarrow\; AE \cdot EC = BE \cdot ED \quad \blacksquare">Ratios of corresponding sides.</Step>
+</Proof>
+</Property>
+
+<Property id="secant-secant" title="For two secants from one point, $PA \cdot PB = PC \cdot PD$" why="The same similarity, but the point is outside the circle.">
+<Proof figure="circle-secants" given="$PAB$ and $PCD$ secants" prove="$PA \cdot PB = PC \cdot PD$">
+<Step hl="PA PB PC PD">Two secants from $P$: $PAB$ and $PCD$.</Step>
+<Step show="AD CB" hl="<PDA=<PBC" tex="\angle PDA = \angle PBC">Both stand on the arc $AC$.</Step>
+<Step hl="PAD PCB" tex="\triangle PAD \sim \triangle PCB">$\angle P$ is common: similar by two angles.</Step>
+<Step tex="\frac{PA}{PC} = \frac{PD}{PB} \;\Rightarrow\; PA \cdot PB = PC \cdot PD \quad \blacksquare">Ratios of corresponding sides.</Step>
+</Proof>
+</Property>
+
+<Property id="tangent-secant" title="For a tangent and a secant from one point, $PT^2 = PA \cdot PB$" why="The angle between a tangent and a chord equals an inscribed angle, so again similar triangles.">
+<Proof figure="circle-secants" given="$PT$ a tangent, $PAB$ a secant" prove="$PT^2 = PA \cdot PB$">
+<Step show="TA TB" hl="PT PA PB">The tangent $PT$ and the secant $PAB$.</Step>
+<Step hl="<PTA=<TBA arc:OAT" tex="\angle PTA = \tfrac12 {\smile}AT = \angle TBA">The angle between a tangent and a chord (the first property) and an inscribed angle on the same arc.</Step>
+<Step hl="PTA PBT" tex="\triangle PTA \sim \triangle PBT">$\angle P$ is common: similar by two angles.</Step>
+<Step tex="\frac{PT}{PB} = \frac{PA}{PT} \;\Rightarrow\; PT^2 = PA \cdot PB \quad \blacksquare">Ratios of corresponding sides.</Step>
+</Proof>
+</Property>
+
+<Remark>All three are one fact: if a line through $P$ cuts the circle at $A$ and $B$, the product $PA \cdot PB$ does not depend on the choice of the line and equals $|OP^2 - R^2|$.</Remark>
+
+</Properties>
+
+<Remark kind="mistake">In $PA \cdot PB = PC \cdot PD$ every segment is measured from $P$: $PB$ is the whole secant, not its inner part $AB$.</Remark>
+
+<Problems>
+
+<Problem id="p-chords-angle" set={{ R: 2.8, tA: 150, tB: 245, tC: 330, tD: 35 }} show="OA OB OC OD" given="<AOB=95 <COD=65" find="<AEB <AED" answer="80 100" book="5.42 5.43"
+  q="Chords $AC$ and $BD$ meet at $E$. The arc $AB$ measures $95^\circ$, and the arc $CD$ measures $65^\circ$. Find $\angle AEB$ and $\angle AED$."
+  hint="The angle between two intersecting chords is half the sum of the arcs enclosed by it and by its vertical angle.">
+<Step hl="<AEB <AOB <COD" tex="\angle AEB = \frac{\smile AB + \smile CD}{2} = \frac{95^\circ + 65^\circ}{2} = 80^\circ">$\angle AEB$ encloses the arc $AB$, and its vertical angle $\angle CED$ encloses the arc $CD$.</Step>
+<Step hl="<AED" tex="\angle AED = 180^\circ - 80^\circ = 100^\circ">$\angle AED$ and $\angle AEB$ are adjacent angles.</Step>
+</Problem>
+
+<Problem id="p-chord-products" set={{ R: 2.8, tA: 163.92470222375448, tB: 217.97749677654807, tC: 290.00046570249833, tD: 60.681077807412606 }} given="AE=4 EC=6 BD=11" find="BE ED" answer="3 8"
+  q="Chords $AC$ and $BD$ meet at $E$, $AE = 4$, $EC = 6$, $BD = 11$. Find $BE$ and $ED$ if $BE \lt ED$."
+  hint="The product of the segments of one chord equals the product of the segments of the other.">
+<Step hl="AE EC BE ED" tex="BE \cdot ED = AE \cdot EC = 24">If two chords intersect, the product of the segments of one equals the product of the segments of the other.</Step>
+<Step tex="x\,(11 - x) = 24 \;\Rightarrow\; x^2 - 11x + 24 = 0">Let $BE = x$; then $ED = 11 - x$.</Step>
+<Step hl="BE ED" tex="x_1 = 3,\quad x_2 = 8 \;\Rightarrow\; BE = 3,\quad ED = 8">$BE \lt ED$, so $BE = 3$.</Step>
+</Problem>
+
+<Problem id="p-tangent-chord-ratio" set={{ R: 2.8, tA: 150, tB: 235, tC: 310, tD: 60 }} show="AX" given="<AOC/(360-<AOC)=4/5" find="<XAC" answer="80" book="5.45 5.46"
+  q="A chord $AC$ divides a circle into two arcs whose degree measures are in the ratio $4 : 5$. Find the acute angle between the chord and the tangent $AX$ drawn at its end $A$."
+  hint="The angle between a tangent and a chord is half the arc lying inside it.">
+<Step tex="4x + 5x = 360^\circ \;\Rightarrow\; x = 40^\circ">The two arcs make up the whole circle: they are $160^\circ$ and $200^\circ$.</Step>
+<Step hl="<XAC" tex="\angle XAC = \tfrac12 \cdot 160^\circ = 80^\circ">The acute angle encloses the smaller arc, and the angle between a tangent and a chord is half the arc lying inside it.</Step>
+</Problem>
+
+<Problem id="p-secants-angle" figure="circle-secants" set={{ R: 2.6, p: 5.263549017118914, s1: 17.5, s2: 17.5 }} show="OA OC OB OD" given="<AOC=40 <BOD=110" find="<BPD" answer="35" book="5.39 5.44"
+  q="Secants $PAB$ and $PCD$ are drawn from a point $P$ outside a circle. The arcs they enclose are $\smile AC = 40^\circ$ and $\smile BD = 110^\circ$. Find $\angle BPD$."
+  hint="The angle between the secants is half the difference of the arcs they enclose.">
+<Step hl="<AOC <BOD" tex="\smile BD - \smile AC = 110^\circ - 40^\circ = 70^\circ">The larger arc is $BD$, the smaller $AC$.</Step>
+<Step hl="<BPD" tex="\angle BPD = \tfrac12 \cdot 70^\circ = 35^\circ">The angle between two secants drawn from a point outside a circle is half the difference of the arcs they enclose.</Step>
+</Problem>
+
+<Problem id="p-tangent-secant" figure="circle-secants" set={{ R: 2.6, p: 4.2, s1: 10.98057542761218, s2: 11 }} given="PA=4 AB=12" find="PT" answer="8"
+  q="A tangent $PT$ and a secant $PAB$ are drawn from a point $P$ to a circle, $PA = 4$, $AB = 12$. Find $PT$."
+  hint="$PT^2 = PA \cdot PB$.">
+<Step hl="PA PB" tex="PB = PA + AB = 16">Add the inner part of the secant to its outer part.</Step>
+<Step hl="PT" tex="PT^2 = PA \cdot PB = 4 \cdot 16 = 64 \;\Rightarrow\; PT = 8">For a tangent and a secant from one point, $PT^2 = PA \cdot PB$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-equal-chords-parts" set={{ R: 2.8, tA: 150, tB: 235, tC: 310, tD: 35 }} given="AC=BD" prove="AE=DE EC=EB" book="5.62"
+  q="Equal chords $AC$ and $BD$ meet at $E$. Prove that $AE = DE$ and $EC = EB$."
+  hint="Equal chords have equal arcs; what can you say about the arcs $AB$ and $CD$?">
+<Step hl="AC=BD" tex="\smile ABC = \smile BCD">Equal chords subtend equal arcs.</Step>
+<Step tex="\smile AB = \smile CD">Subtract the common arc $BC$ from both.</Step>
+<Step hl="<ADB=<DAC AED" tex="\angle ADB = \angle DAC \;\Rightarrow\; AE = DE">Inscribed angles on equal arcs are equal, so triangle $AED$ is isosceles.</Step>
+<Step hl="EC=EB" tex="EC = AC - AE = BD - DE = EB \quad \blacksquare">Equal segments were subtracted from equal chords.</Step>
+</Problem>
+
+</Problems>

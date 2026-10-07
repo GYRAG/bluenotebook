@@ -1,0 +1,140 @@
+---
+title: Angles and parallel lines
+slug: angles
+subject: geometry
+section: basics
+order: 1
+summary: Kinds of angles, adjacent and vertical angles, parallel lines and a transversal.
+tags: [angle, vertical, adjacent, parallel, transversal, alternate, co-interior, corresponding]
+prerequisites: []
+status: draft
+figure: angles
+---
+
+<Definition>An angle is **acute** if it is less than $90^\circ$, **right** if it equals $90^\circ$, **obtuse** if it lies between $90^\circ$ and $180^\circ$, and **straight** if it equals $180^\circ$. Two angles are **adjacent** if they share one side and their other two sides form a line; they are **vertical** if the sides of one extend the sides of the other. A **transversal** of two lines forms pairs of **corresponding**, **alternate interior** and **co-interior** angles.</Definition>
+
+<Formulas>
+<Formula id="adjacent-formula" name="Adjacent angles" tex="\angle 1 + \angle 2 = 180^\circ" proof="adjacent-angles" />
+<Formula id="vertical-formula" name="Vertical angles" tex="\angle 1 = \angle 3" proof="vertical-angles" />
+<Formula id="alternate-formula" name="Parallel lines: alternate interior" tex="a \parallel b \iff \angle 1 = \angle 2" proof="alternate-angles" />
+<Formula id="corresponding-formula" name="Parallel lines: corresponding" tex="a \parallel b \iff \angle 1 = \angle 2" proof="corresponding-angles" />
+<Formula id="co-interior-formula" name="Parallel lines: co-interior" tex="a \parallel b \iff \angle 1 + \angle 2 = 180^\circ" proof="co-interior-angles" />
+</Formulas>
+
+<Properties>
+
+<Property id="adjacent-angles" title="Adjacent angles add up to $180^\circ$" why="Together they form a straight angle.">
+<Proof given="$\angle R_1EF$ and $\angle FEL_1$ are adjacent" prove="$\angle R_1EF + \angle FEL_1 = 180^\circ$">
+<Step hl="<R1EF <FEL1">The two angles share the side $EF$, and the rays $ER_1$ and $EL_1$ form a line.</Step>
+<Step tex="\angle R_1EF + \angle FEL_1 = \angle R_1EL_1 = 180^\circ \quad \blacksquare">Together the two angles make up the straight angle $R_1EL_1$.</Step>
+</Proof>
+</Property>
+
+<Property id="vertical-angles" title="Vertical angles are equal" why="Both are adjacent to the same angle.">
+<Proof given="$\angle R_1EF$ and $\angle L_1ET_1$ are vertical" prove="$\angle R_1EF = \angle L_1ET_1$">
+<Step hl="<R1EF <FEL1" tex="\angle R_1EF + \angle FEL_1 = 180^\circ">Adjacent angles.</Step>
+<Step hl="<L1ET1 <FEL1" tex="\angle L_1ET_1 + \angle FEL_1 = 180^\circ">$EF$ and $ET_1$ form a line, so these are adjacent angles too.</Step>
+<Step hl="<R1EF=<L1ET1" tex="\angle R_1EF = 180^\circ - \angle FEL_1 = \angle L_1ET_1 \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Properties title="Parallel lines and a transversal">
+
+<Property id="criterion-alternate" kind="criterion" title="If a transversal makes equal alternate interior angles with two lines, the lines are parallel" why="Otherwise the two lines would have two common points.">
+<Proof given="lines $a$ and $b$, transversal $EF$, $\angle L_1EF = \angle R_2FE$" prove="$a \parallel b$">
+<Step hl="<L1EF=<R2FE">Suppose $a$ and $b$ meet at some point $K$, say to the right of $EF$.</Step>
+<Step hl="EF">On the other side of $EF$, on line $a$, mark $EK' = FK$. Triangles $EFK'$ and $FEK$ are congruent (SAS): $EF$ is common, $EK' = FK$, and $\angle FEK' = \angle EFK$, the given equal alternate angles.</Step>
+<Step>Hence $\angle EFK' = \angle FEK$. Then $\angle EFK' + \angle EFK = \angle FEK + \angle FEK' = 180^\circ$ (adjacent angles at $E$), so $K'$ lies on line $b$.</Step>
+<Step>So lines $a$ and $b$ both pass through $K$ and $K'$. Only one line passes through two points, a contradiction. Therefore $a \parallel b$. ∎</Step>
+</Proof>
+</Property>
+
+<Remark kind="convention">**The parallel postulate**: through a point not on a given line there is exactly one line parallel to it. It is not proved; it is one of the starting statements of Euclidean geometry.</Remark>
+
+<Property id="alternate-angles" title="If a transversal cuts two parallel lines, the alternate interior angles are equal" why="A line drawn at an equal angle is parallel, and there is only one parallel.">
+<Proof given="$a \parallel b$, transversal $EF$" prove="$\angle L_1EF = \angle R_2FE$">
+<Step hl="<L1EF">Through $F$ draw a line $b'$ that makes with $EF$ an alternate angle equal to $\angle L_1EF$.</Step>
+<Step hl="L2R2">By the previous criterion $b' \parallel a$. But only one line through $F$ is parallel to $a$, namely $b$. So $b' = b$.</Step>
+<Step hl="<L1EF=<R2FE" tex="\angle L_1EF = \angle R_2FE \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="corresponding-angles" title="A transversal of parallel lines makes equal corresponding angles" why="A corresponding angle is vertical to an alternate one.">
+<Proof given="$a \parallel b$" prove="$\angle R_1EF = \angle R_2FT_2$">
+<Step hl="<R1EF=<L2FE" tex="\angle R_1EF = \angle L_2FE">Alternate interior angles are equal.</Step>
+<Step hl="<L2FE=<R2FT2" tex="\angle L_2FE = \angle R_2FT_2">Vertical angles.</Step>
+<Step hl="<R1EF=<R2FT2" tex="\angle R_1EF = \angle R_2FT_2 \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="co-interior-angles" title="A transversal of parallel lines makes co-interior angles that add up to $180^\circ$" why="A co-interior angle is adjacent to an alternate one.">
+<Proof given="$a \parallel b$" prove="$\angle R_1EF + \angle R_2FE = 180^\circ$">
+<Step hl="<R1EF=<L2FE" tex="\angle R_1EF = \angle L_2FE">Alternate interior angles.</Step>
+<Step hl="<L2FE <R2FE" tex="\angle R_2FE = 180^\circ - \angle L_2FE">Adjacent angles at $F$.</Step>
+<Step hl="<R1EF <R2FE" tex="\angle R_1EF + \angle R_2FE = 180^\circ \quad \blacksquare" />
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>The converse holds too: if corresponding angles are equal, or co-interior angles add up to $180^\circ$, the lines are parallel. Both cases reduce, through vertical or adjacent angles, to equal alternate angles.</Remark>
+
+<Remark kind="mistake">These equalities hold only for parallel lines. If the lines are not parallel, the alternate angles made by a transversal are not equal.</Remark>
+
+<Problems>
+
+<Problem id="p-adjacent-ratio" set={{ theta: 80 }} given="<R1EF/<FEL1=4/5" find="<R1EF <FEL1" answer="80 100" book="2.4 2.5"
+  q="Two adjacent angles are in the ratio $4 : 5$. Find the angles."
+  hint="Adjacent angles add up to $180^\circ$.">
+<Step hl="<R1EF <FEL1" tex="\angle R_1EF + \angle FEL_1 = 180^\circ">Adjacent angles add up to $180^\circ$.</Step>
+<Step tex="4x + 5x = 180^\circ \;\Rightarrow\; x = 20^\circ">Let one part be $x$: the angles are $4x$ and $5x$.</Step>
+<Step hl="<R1EF <FEL1" tex="\angle R_1EF = 80^\circ,\qquad \angle FEL_1 = 100^\circ">So the angles are $4 \cdot 20^\circ$ and $5 \cdot 20^\circ$.</Step>
+</Problem>
+
+<Problem id="p-vertical-sum" set={{ theta: 55 }} given="<R1EF+<L1ET1=110" find="<R1EF <FEL1" answer="55 125" book="2.9 2.10"
+  q="Two intersecting lines make four angles; two of them add up to $110^\circ$. Find all four angles."
+  hint="Adjacent angles add up to $180^\circ$. Can these two angles be adjacent?">
+<Step hl="<R1EF <FEL1">Two adjacent angles add up to $180^\circ$, not $110^\circ$, so these angles are vertical.</Step>
+<Step hl="<R1EF=<L1ET1" tex="\angle R_1EF = \angle L_1ET_1 = \frac{110^\circ}{2} = 55^\circ">Vertical angles are equal.</Step>
+<Step hl="<FEL1=<R1ET1" tex="\angle FEL_1 = \angle R_1ET_1 = 180^\circ - 55^\circ = 125^\circ">The other two angles are adjacent to them.</Step>
+</Problem>
+
+<Problem id="p-co-interior-ratio" set={{ theta: 40 }} given="<R1EF/<R2FE=2/7" find="<R1EF <R2FE" answer="40 140" book="4.1"
+  q="A transversal cuts two parallel lines; the co-interior angles are in the ratio $2 : 7$. Find the angles."
+  hint="Co-interior angles add up to $180^\circ$.">
+<Step hl="<R1EF <R2FE L1R1||L2R2" tex="\angle R_1EF + \angle R_2FE = 180^\circ">The lines are parallel, so the co-interior angles add up to $180^\circ$.</Step>
+<Step tex="2x + 7x = 180^\circ \;\Rightarrow\; x = 20^\circ">Let one part be $x$: the angles are $2x$ and $7x$.</Step>
+<Step hl="<R1EF <R2FE" tex="\angle R_1EF = 40^\circ,\qquad \angle R_2FE = 140^\circ">So the angles are $2 \cdot 20^\circ$ and $7 \cdot 20^\circ$.</Step>
+</Problem>
+
+<Problem id="p-alternate-sum" set={{ theta: 65 }} given="<R1EF+<L2FE=130" find="<R1EF <L1EF" answer="65 115" book="4.2 4.3"
+  q="A transversal cuts two parallel lines; two alternate interior angles add up to $130^\circ$. Find each of the eight angles."
+  hint="Alternate interior angles are equal, and each of the other angles is either equal to them or adjacent to them.">
+<Step hl="<R1EF=<L2FE L1R1||L2R2" tex="\angle R_1EF = \angle L_2FE = \frac{130^\circ}{2} = 65^\circ">The lines are parallel, so the alternate interior angles are equal.</Step>
+<Step hl="<L1EF" tex="\angle L_1EF = 180^\circ - 65^\circ = 115^\circ">$\angle L_1EF$ is adjacent to it.</Step>
+<Step hl="<R1EF=<L1ET1 <L1EF=<R1ET1" tex="4 \times 65^\circ,\qquad 4 \times 115^\circ">Vertical, corresponding and alternate angles are equal, so four of the eight angles are $65^\circ$ and four are $115^\circ$.</Step>
+</Problem>
+
+<Problem id="p-bisector-cut" set={{ theta: 50 }} show="EG" given="<R1EF=50 EF=7" find="FG <EGF" answer="7 25" book="4.4 4.23"
+  q="A transversal cuts two parallel lines at $E$ and $F$, $EF = 7$ cm, $\angle R_1EF = 50^\circ$. The bisector of this angle meets the upper line at $G$. Find $FG$ and $\angle EGF$."
+  hint="Compare $\angle EGF$ and $\angle GEF$.">
+<Step hl="<R1EG=<GEF" tex="\angle R_1EG = \angle GEF = 25^\circ">$EG$ is a bisector.</Step>
+<Step hl="<EGF=<R1EG L1R1||L2R2" tex="\angle EGF = \angle R_1EG = 25^\circ">The lines are parallel and $EG$ is a transversal, so the alternate interior angles are equal.</Step>
+<Step hl="EFG FG=EF" tex="\angle GEF = \angle EGF \;\Rightarrow\; FG = EF = 7">Triangle $EFG$ has two equal angles, so it is isosceles.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-co-interior-bisectors" set={{ theta: 70 }} show="EM FM" prove="<EMF=90" book="4.51 4.52"
+  q="Prove that the bisectors of the co-interior angles made by a transversal of two parallel lines are perpendicular."
+  hint="Find the sum of the halves of these two angles.">
+<Step hl="<R1EF <R2FE" tex="\angle R_1EF + \angle R_2FE = 180^\circ">Co-interior angles add up to $180^\circ$.</Step>
+<Step hl="<MEF <MFE" tex="\angle MEF + \angle MFE = \tfrac12 \cdot 180^\circ = 90^\circ">The bisectors halve these angles, so their halves add up to $90^\circ$.</Step>
+<Step hl="EMF <EMF" tex="\angle EMF = 180^\circ - 90^\circ = 90^\circ \quad \blacksquare">The angles of triangle $EMF$ add up to $180^\circ$.</Step>
+</Problem>
+
+</Problems>

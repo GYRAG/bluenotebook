@@ -1,6 +1,7 @@
 ---
 import Icon from '../Icon.astro';
 import { md } from '@/lib/math';
+import { langOf, t } from '@/i18n';
 
 interface Props {
   id: string;                              // stable deep link; also the figure's numeric check id
@@ -10,6 +11,7 @@ interface Props {
 }
 const { id, title, why, kind = 'property' } = Astro.props;
 const KIND = { property: 'თვისება', criterion: 'ნიშანი', converse: 'შებრუნებული თეორემა' } as const;
+const lang = langOf(Astro.url);
 ---
 <li class="prop" id={id} data-kind={kind}>
   <button class="prop-row" type="button" aria-expanded="false" aria-controls={`${id}--proof`}>
@@ -18,10 +20,10 @@ const KIND = { property: 'თვისება', criterion: 'ნიშანი
     <Icon name="right" />
   </button>
   <div class="proof" id={`${id}--proof`} hidden>
-    <button class="back" type="button" data-proof-close><Icon name="left" /><span>ყველა თვისება</span></button>
-    <p class="proof-k">{KIND[kind]} · დამტკიცება</p>
+    <button class="back" type="button" data-proof-close><Icon name="left" /><span>{t(lang, 'ყველა თვისება')}</span></button>
+    <p class="proof-k">{t(lang, KIND[kind])} · {t(lang, 'დამტკიცება')}</p>
     <h3 class="proof-h" set:html={md(title)} />
-    <p class="why"><b>იდეა.</b> <span set:html={md(why)} /></p>
+    <p class="why"><b>{t(lang, 'იდეა.')}</b> <span set:html={md(why)} /></p>
     <slot />
   </div>
 </li>

@@ -1,14 +1,16 @@
 ---
 import Icon from './Icon.astro';
+import { langOf, t } from '@/i18n';
 
 // The right-hand panel (a bottom sheet on phones): up to four tabs, one scrolling body.
 const ALL = [['tools', 'ხელსაწყოები'], ['formulas', 'ფორმულები'], ['props', 'თვისებები'], ['probs', 'ამოცანები']] as const;
 const { tools = true, theory = true, problems = false } = Astro.props as { tools?: boolean; theory?: boolean; problems?: boolean }; // no figure → no tools tab
-const TABS = ALL.filter(([id]) => (id !== 'tools' || tools) && (id === 'probs' ? problems : id === 'tools' || theory));
+const lang = langOf(Astro.url);
+const TABS = ALL.map(([id, label]) => [id, t(lang, label)] as const).filter(([id]) => (id !== 'tools' || tools) && (id === 'probs' ? problems : id === 'tools' || theory));
 ---
-<aside class="panel" aria-label="ხელსაწყოები და ცნობები">
-  <button class="grip" type="button" data-sheet-toggle aria-label="პანელის გაშლა" aria-expanded="false"><span></span></button>
-  <div class="tabs" role="tablist" aria-label="განყოფილებები">
+<aside class="panel" aria-label={t(lang, 'ხელსაწყოები და ცნობები')}>
+  <button class="grip" type="button" data-sheet-toggle aria-label={t(lang, 'პანელის გაშლა')} aria-expanded="false"><span></span></button>
+  <div class="tabs" role="tablist" aria-label={t(lang, 'განყოფილებები')}>
     {TABS.map(([id, label], i) => (
       <button type="button" role="tab" id={`tab-${id}`} aria-controls={`tp-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}
         {...(id === 'tools' ? { 'aria-label': label, title: label } : {})}><span class="tab-l">{id === 'tools' ? <Icon name="sliders" /> : label}</span></button>

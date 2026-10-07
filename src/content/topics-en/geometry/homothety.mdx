@@ -1,0 +1,60 @@
+---
+title: Homothety
+slug: homothety
+subject: geometry
+section: transformations
+order: 46
+summary: A homothety with a centre and a ratio takes a figure to a similar figure and multiplies the area by the square of the ratio.
+tags: [homothety, similarity, ratio of a homothety]
+prerequisites: [similarity, isometries, vectors]
+status: draft
+figure: homothety
+---
+
+<Definition>A **homothety** with centre $O$ and ratio $k \ne 0$ takes a point $A$ to the point $A'$ for which $\overrightarrow{OA'} = k\,\overrightarrow{OA}$. For $k > 0$, $A'$ is on the ray $OA$; for $k < 0$, on its extension on the other side of $O$.</Definition>
+
+<Formulas>
+<Formula id="homothety-formula" name="Definition" tex="\overrightarrow{OA'} = k\,\overrightarrow{OA}" live="k" proof="homothety-segment" />
+<Formula id="segment-formula" name="The image of a segment" tex="A'B' = |k|\,AB, \qquad A'B' \parallel AB" live="A'B' : AB" proof="homothety-segment" />
+<Formula id="area-formula" name="Area" tex="S' = k^2 S" live="S' : S" proof="homothety-area" />
+</Formulas>
+
+<Properties>
+
+<Property id="homothety-segment" title="A homothety multiplies a segment by $|k|$ and takes it to a parallel segment" why="The triangles formed by $O$ and the ends of the segment are similar.">
+<Proof given="$\overrightarrow{OA'} = k\,\overrightarrow{OA}$, $\overrightarrow{OB'} = k\,\overrightarrow{OB}$" prove="$A'B' = |k|\,AB$, $A'B' \parallel AB$">
+<Step show="line:OA line:OB" hl="OA OA' OB OB'">$OA' = |k|\,OA$, $OB' = |k|\,OB$; $A'$ and $B'$ lie on the rays $OA$, $OB$ ($k > 0$) or on their extensions ($k < 0$).</Step>
+<Step hl="OAB OA'B'" tex="\triangle OA'B' \sim \triangle OAB">$\tfrac{OA'}{OA} = \tfrac{OB'}{OB} = |k|$, and the angle at $O$ is common (or vertical): similar by two sides and the angle between them.</Step>
+<Step hl="AB||A'B'" tex="A'B' = |k|\,AB, \qquad A'B' \parallel AB \quad \blacksquare">The similarity ratio is $|k|$; $\angle OA'B' = \angle OAB$: corresponding ($k > 0$) or alternate ($k < 0$) angles.</Step>
+</Proof>
+</Property>
+
+<Property id="homothety-angles" title="A homothety takes a triangle to a similar triangle; the angles do not change" why="All three sides are multiplied by the same $|k|$.">
+<Proof given="$\triangle ABC \to \triangle A'B'C'$ under a homothety" prove="$\triangle A'B'C' \sim \triangle ABC$">
+<Step hl="ABC A'B'C'" tex="\frac{A'B'}{AB} = \frac{B'C'}{BC} = \frac{C'A'}{CA} = |k|">The previous property for each side.</Step>
+<Step tex="\triangle A'B'C' \sim \triangle ABC \quad \blacksquare">Similar by three sides, so the corresponding angles are equal as well.</Step>
+</Proof>
+</Property>
+
+<Property id="homothety-area" title="A homothety multiplies the area by $k^2$" why="The ratio of the areas of similar figures is the square of the similarity ratio.">
+<Proof given="A homothety with ratio $k$" prove="$S' = k^2 S$">
+<Step hl="ABC A'B'C'" tex="S' = |k|^2 S = k^2 S \quad \blacksquare">The triangles are similar with ratio $|k|$ (previous property), and the ratio of the areas is its square.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="special">$k = -1$ is a point reflection; with $k = 1$ every point stays in place. A homothety followed by an isometry is called a similarity transformation: two figures are similar if one goes to the other under a similarity transformation.</Remark>
+
+<Remark kind="mistake">With $k = -2$ the figure does not shrink: lengths grow $|k| = 2$ times, the area $k^2 = 4$ times; the sign only decides the side.</Remark>
+
+<Problems>
+
+<Problem id="p-hom-area" set={{ k: 1.5, ax: 1, ay: 0, bx: 3.6, by: 1, cx: 2.3, cy: 2.8076923076923075 }} show="line:OA" given="OA=2 AA'=1 S(ABC)=12" find="OA'/OA S(A'B'C')" labels="k;S_{A'B'C'}" answer="1.5 27" book="16.24 16.27"
+  q="A homothety with centre $O$ takes the point $A$ to $A'$, which lies on the ray $OA$ beyond $A$; $OA = 2$, $AA' = 1$. The area of triangle $ABC$ is $12$. Find the ratio of the homothety and the area of triangle $A'B'C'$."
+  hint="A homothety multiplies the area by $k^2$.">
+<Step hl="OA OA'" tex="k = \frac{OA'}{OA} = \frac{2 + 1}{2} = 1.5">$A'$ lies on the ray $OA$, so the ratio is positive.</Step>
+<Step hl="ABC A'B'C'" tex="S_{A'B'C'} = k^2\, S_{ABC} = 2.25 \cdot 12 = 27">A homothety multiplies the area by $k^2$.</Step>
+</Problem>
+
+</Problems>

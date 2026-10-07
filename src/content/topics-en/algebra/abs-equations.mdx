@@ -1,0 +1,62 @@
+---
+title: Equations with absolute values
+slug: abs-equations
+subject: algebra
+section: equations
+order: 1
+summary: The definition of the absolute value and the three basic types of equations containing it.
+tags: [absolute value, modulus, equation, extraneous root]
+prerequisites: []
+status: draft
+---
+
+<Definition>The **absolute value** $|x|$ of a number equals $x$ if $x \ge 0$, and $-x$ if $x < 0$. Geometrically $|x|$ is the distance on the number line from $x$ to $0$, and $|x - a|$ is the distance from $x$ to $a$.</Definition>
+
+<Formulas>
+<Formula id="abs-def" name="Definition of the absolute value" tex="|x| = \begin{cases} x, & x \ge 0 \\ -x, & x < 0 \end{cases}" />
+<Formula id="abs-a" name="The simplest equation" tex="|x| = a \iff x = \pm a \quad (a \ge 0)" proof="simplest" />
+<Formula id="abs-abs" name="An absolute value equal to an absolute value" tex="|f(x)| = |g(x)| \iff f(x) = \pm g(x)" proof="abs-equals-abs" />
+<Formula id="abs-g" name="An absolute value equal to an expression" tex="|f(x)| = g(x) \iff \begin{cases} g(x) \ge 0 \\ f(x) = \pm g(x) \end{cases}" proof="abs-equals-expr" />
+<Formula id="midpoint" name="Equal distances" tex="|x - a| = |x - b|,\ a \ne b \iff x = \frac{a + b}{2}" proof="distance" />
+</Formulas>
+
+<Properties>
+
+<Property id="simplest" title="The equation $|x| = a$ has two solutions $x = \pm a$ if $a > 0$; one, $x = 0$, if $a = 0$; none if $a < 0$" why="The absolute value is a distance: it cannot be negative, and two points are at distance $a$ from $0$.">
+<Proof given="$|x| = a$" prove="Solutions by the sign of $a$">
+<Step tex="|x| \ge 0">If $a < 0$: for every $x$, $|x| \ge 0 > a$, so there is no solution.</Step>
+<Step tex="x \ge 0:\ |x| = x = a">If $x \ge 0$, then $|x| = x$, that is, $x = a$; this works when $a \ge 0$.</Step>
+<Step tex="x < 0:\ |x| = -x = a">If $x < 0$, then $|x| = -x$, that is, $x = -a$; this works when $a > 0$.</Step>
+<Step tex="x = \pm a \quad \blacksquare">For $a > 0$ there are two different solutions; for $a = 0$ both cases give the same $x = 0$.</Step>
+</Proof>
+</Property>
+
+<Property id="abs-equals-abs" title="$|f(x)| = |g(x)|$ if and only if $f(x) = g(x)$ or $f(x) = -g(x)$" why="The absolute values of two numbers are equal when the numbers are either equal or opposite.">
+<Proof given="$|u| = |v|$" prove="$u = v$ or $u = -v$">
+<Step tex="|u| = |v| \iff u^2 = v^2">Both sides are non-negative, so squaring gives an equivalent equation; and $|u|^2 = u^2$.</Step>
+<Step tex="u^2 - v^2 = (u - v)(u + v) = 0">Move everything to one side and factorise.</Step>
+<Step tex="u = v \quad \text{or} \quad u = -v \quad \blacksquare">A product is zero if and only if one of the factors is zero.</Step>
+</Proof>
+</Property>
+
+<Property id="abs-equals-expr" title="$|f(x)| = g(x)$ is equivalent to the system: $g(x) \ge 0$ and $f(x) = \pm g(x)$" why="An absolute value cannot equal a negative number, so first $g(x) \ge 0$, then the previous property.">
+<Proof given="$|f(x)| = g(x)$" prove="$g(x) \ge 0$ and $f(x) = \pm g(x)$">
+<Step>If $g(x) < 0$, the equality is impossible, because $|f(x)| \ge 0$. So a solution must satisfy $g(x) \ge 0$.</Step>
+<Step tex="g(x) = |g(x)|">If $g(x) \ge 0$, then $g(x)$ equals its own absolute value and the equation becomes $|f(x)| = |g(x)|$.</Step>
+<Step tex="f(x) = \pm g(x),\quad g(x) \ge 0 \quad \blacksquare">By the previous property $f(x) = g(x)$ or $f(x) = -g(x)$; of the roots obtained we keep only those where $g(x) \ge 0$.</Step>
+</Proof>
+</Property>
+
+<Property id="distance" title="If $a \ne b$, the equation $|x - a| = |x - b|$ has the single solution $x = \tfrac{a + b}{2}$" why="$x$ is equally far from $a$ and $b$, that is, it is their midpoint.">
+<Proof given="$|x - a| = |x - b|$, $a \ne b$" prove="$x = \tfrac{a + b}{2}$">
+<Step tex="x - a = \pm(x - b)">By property 2.</Step>
+<Step tex="x - a = x - b \Rightarrow a = b">The first case contradicts the condition $a \ne b$.</Step>
+<Step tex="2x = a + b \Rightarrow x = \frac{a + b}{2} \quad \blacksquare">From the second.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>Example: $|2x - 1| = 5$ ⇒ $2x - 1 = 5$ or $2x - 1 = -5$ ⇒ $x = 3$ or $x = -2$.</Remark>
+
+<Remark kind="mistake">$|x - 3| = x - 5$: $x - 3 = \pm(x - 5)$ gives $x = 4$, but then $x - 5 = -1 < 0$. This is an **extraneous root**, and the equation has no solution. Always check the condition $g(x) \ge 0$.</Remark>

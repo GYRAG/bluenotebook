@@ -1,0 +1,89 @@
+---
+title: Symmetry, rotation, translation
+slug: isometries
+subject: geometry
+section: transformations
+order: 45
+summary: "Reflection in a line, point reflection, rotation and translation: transformations that preserve distances."
+tags: [reflection, point reflection, rotation, translation, isometry]
+prerequisites: [congruence, coordinates, vectors]
+status: draft
+figure: rotation
+figures: [reflection, translation]
+---
+
+<Definition>A **reflection** in a line (the axis) takes a point $A$ to $A'$ if the axis is the perpendicular bisector of $AA'$. A **rotation** with centre $O$ and angle $\varphi$: $OA' = OA$, $\angle AOA' = \varphi$. A **point reflection** (central symmetry) is a rotation by $180^\circ$. A **translation** by a vector $\vec v$: $\overrightarrow{AA'} = \vec v$. A transformation that preserves distances is called an **isometry**.</Definition>
+
+<Formulas>
+<Formula id="isometry-formula" name="An isometry preserves distance" tex="A'B' = AB" live="A'B'" proof="rotation-isometry" />
+<Formula id="rotation-formula" name="Rotation" tex="OA' = OA, \qquad \angle AOA' = \varphi" live="OA'" proof="rotation-isometry" />
+<Formula id="central-formula" name="Point reflection" tex="\overrightarrow{OA'} = -\overrightarrow{OA}, \qquad A'B' \parallel AB" proof="central-symmetry" />
+<Formula id="reflection-formula" name="Reflection in the axis $Oy$" tex="(x;\, y) \to (-x;\, y)" proof="reflection-isometry" />
+<Formula id="translation-formula" name="Translation by the vector $(a;\, b)$" tex="(x;\, y) \to (x + a;\ y + b)" proof="translation-isometry" />
+</Formulas>
+
+<Properties>
+
+<Property id="rotation-isometry" title="A rotation preserves distances: $A'B' = AB$" why="Two rays turned by the same angle, so the angle between them did not change.">
+<Proof given="$A'$ and $B'$ the images of $A$ and $B$ under a rotation about $O$ by $\varphi$" prove="$A'B' = AB$">
+<Step show="OA OA' OB OB'" hl="<AOA' OA=OA' OB=OB'">$OA' = OA$, $OB' = OB$, $\angle AOA' = \angle BOB' = \varphi$.</Step>
+<Step hl="<AOB=<A'OB'" tex="\angle A'OB' = \angle AOB">Both rays turned by the same angle in the same direction, so the angle between them did not change.</Step>
+<Step hl="AOB A'OB'" tex="\triangle AOB = \triangle A'OB' \;\Rightarrow\; A'B' = AB \quad \blacksquare">SAS.</Step>
+</Proof>
+</Property>
+
+<Property id="central-symmetry" title="Under a point reflection $O$ is the midpoint of every segment $AA'$, and every segment goes to an equal segment parallel to it" why="A rotation by $180^\circ$ gives vertical angles and alternate angles.">
+<Proof given="A point reflection with centre $O$" prove="$OA = OA'$ and $A'B' \parallel AB$">
+<Step set={{ phi: 180 }} show="AA' BB'" hl="AA' BB'">$\angle AOA' = 180^\circ$: $A$, $O$, $A'$ are on one line and $OA = OA'$, so $O$ is the midpoint.</Step>
+<Step hl="AOB A'OB'" tex="\triangle AOB = \triangle A'OB'">$OA = OA'$, $OB = OB'$, $\angle AOB = \angle A'OB'$ (vertical): SAS.</Step>
+<Step hl="AB||A'B'" tex="A'B' = AB, \qquad A'B' \parallel AB \quad \blacksquare">$\angle OAB = \angle OA'B'$: the alternate angles are equal.</Step>
+</Proof>
+</Property>
+
+<Property id="reflection-isometry" title="A reflection in a line preserves distances" why="Take $Oy$ as the axis: the reflection only changes the sign of $x$.">
+<Proof figure="reflection" given="$A'$ and $B'$ the reflections of $A$ and $B$ in the axis" prove="$A'B' = AB$">
+<Step show="AA' K" hl="AA'">The axis is the perpendicular bisector of $AA'$: $AA' \perp$ axis and $AK = KA'$.</Step>
+<Step tex="\begin{gathered}A(x_1;\, y_1) \to A'(-x_1;\, y_1) \\ B(x_2;\, y_2) \to B'(-x_2;\, y_2)\end{gathered}">Take a coordinate system whose axis $Oy$ is the axis of symmetry.</Step>
+<Step hl="AB A'B'" tex="A'B'^2 = (x_1 - x_2)^2 + (y_2 - y_1)^2 = AB^2 \quad \blacksquare">The distance formula.</Step>
+</Proof>
+</Property>
+
+<Property id="translation-isometry" title="A translation takes every segment to an equal and parallel segment" why="A segment and its image are opposite sides of a parallelogram.">
+<Proof figure="translation" given="$\overrightarrow{AA'} = \overrightarrow{BB'} = \vec v$" prove="$A'B' = AB$, $A'B' \parallel AB$">
+<Step show="vec:AA' vec:BB'" hl="vec:AA' vec:BB'">$AA'$ and $BB'$ are equal and parallel: both are the same vector.</Step>
+<Step hl="ABB'A'" tex="A'B' = AB, \qquad A'B' \parallel AB \quad \blacksquare">$ABB'A'$ is a parallelogram: two opposite sides are equal and parallel.</Step>
+</Proof>
+</Property>
+
+<Property id="isometry-congruent" title="An isometry takes every triangle (and every figure) to a congruent figure" why="All three sides keep their lengths.">
+<Proof given="An isometry, $\triangle ABC \to \triangle A'B'C'$" prove="$\triangle A'B'C' = \triangle ABC$">
+<Step hl="ABC A'B'C'" tex="A'B' = AB, \quad B'C' = BC, \quad C'A' = CA">An isometry preserves all distances.</Step>
+<Step tex="\triangle A'B'C' = \triangle ABC \quad \blacksquare">SSS, so the angles are equal as well.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>A figure has an axis (or centre) of symmetry if the reflection in that axis (centre) takes it to itself. For example, a rectangle has two axes of symmetry and a centre of symmetry, and a circle has infinitely many axes.</Remark>
+
+<Remark kind="mistake">A point reflection is not a reflection in a line: the reflection in $O$ is a rotation by $180^\circ$, and it does not "flip" the figure as a mirror does.</Remark>
+
+<Problems>
+
+<Problem id="p-rot-90" set={{ phi: 90, ax: 2, ay: 1, bx: 3.6, by: 1, cx: 2.3, cy: 2.6 }} show="OA OA'" given="x(A)=2 y(A)=1 <AOA'=90" find="x(A') y(A')" labels="x_{A'};y_{A'}" answer="-1 2" book="16.20 16.21"
+  q="Under a rotation by $90^\circ$ about the origin (anticlockwise) the point $A(2;\, 1)$ goes to the point $A'$. Find the coordinates of $A'$."
+  hint="Under a rotation by $90^\circ$ the point $(x;\, y)$ goes to the point $(-y;\, x)$.">
+<Step hl="OA=OA' <AOA'" tex="OA' = OA,\qquad \angle AOA' = 90^\circ">A rotation preserves the distance to the origin.</Step>
+<Step tex="(x;\, y) \to (-y;\, x)">A right triangle with legs $|x|$ and $|y|$ swaps its legs under a rotation by $90^\circ$.</Step>
+<Step hl="A'" tex="A'(-1;\, 2)">Therefore.</Step>
+</Problem>
+
+<Problem id="p-rot-chord" set={{ phi: 120, ax: 2, ay: 0, bx: 3.6, by: 1, cx: 2.3, cy: 2.6 }} show="OA OA' AA'" given="x(A)=2 y(A)=0 <AOA'=120" find="AA'" answer="2√3" book="16.17"
+  q="Under a rotation by $120^\circ$ about the origin the point $A(2;\, 0)$ goes to the point $A'$. Find $AA'$."
+  hint="Triangle $AOA'$ is isosceles.">
+<Step hl="OA=OA'" tex="OA = OA' = 2">A rotation preserves the distance to the origin.</Step>
+<Step hl="AOA'" tex="AA'^2 = 2^2 + 2^2 - 2 \cdot 2 \cdot 2\cos 120^\circ = 12">By the cosine law.</Step>
+<Step hl="AA'" tex="AA' = 2\sqrt3">Therefore.</Step>
+</Problem>
+
+</Problems>

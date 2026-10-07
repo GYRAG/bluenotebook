@@ -1,0 +1,179 @@
+---
+title: Right triangle
+slug: right-triangle
+subject: geometry
+section: triangles
+order: 12
+summary: Pythagoras' theorem (two proofs) and its converse, the median to the hypotenuse, 30–60–90 and 45–45–90.
+tags: [Pythagoras, leg, hypotenuse, altitude, median]
+prerequisites: [triangle, isosceles-triangle, similarity, rectangle]
+status: draft
+figure: right-triangle
+figures: [pythagoras-squares]
+parent: triangle
+---
+
+<Definition>A triangle is **right** if one of its angles is right. The sides next to the right angle are the **legs** ($a = BC$, $b = AC$); the side opposite the right angle is the **hypotenuse** ($c = AB$).</Definition>
+
+<Formulas>
+<Formula id="pythagoras-formula" name="Pythagoras' theorem" tex="a^2 + b^2 = c^2" live="c" proof="pythagoras" />
+<Formula id="area-formula" name="Area" tex="S = \tfrac12\, ab" live="S" proof="area" />
+<Formula id="altitude-formula" name="Altitude to the hypotenuse" tex="h = \frac{ab}{c}, \qquad h^2 = AH \cdot HB" live="h" proof="altitude-relations" />
+<Formula id="projection-formula" name="A leg and its projection" tex="b^2 = c \cdot AH, \qquad a^2 = c \cdot BH" proof="leg-projection" />
+<Formula id="median-formula" name="Median to the hypotenuse" tex="m_c = \tfrac{c}{2}" proof="median-hypotenuse" />
+<Formula id="circumradius-formula" name="Circumradius" tex="R = \tfrac{c}{2}" proof="median-hypotenuse" />
+<Formula id="inradius-formula" name="Inradius" tex="r = \frac{a + b - c}{2}" live="r" proof="inradius" />
+<Formula id="thirty-formula" name="The leg opposite 30°" tex="\angle A = 30^\circ \;\Rightarrow\; a = \tfrac{c}{2}" proof="thirty-sixty" />
+<Formula id="forty-five-formula" name="Isosceles right triangle" tex="c = a\sqrt2" proof="forty-five" />
+</Formulas>
+
+<Properties>
+
+<Property id="leg-projection" title="A leg is the geometric mean of the hypotenuse and its projection on the hypotenuse" why="The altitude splits the triangle into two triangles similar to it.">
+<Proof given="$\angle C = 90^\circ$, $CH \perp AB$" prove="$AC^2 = AB \cdot AH,\ BC^2 = AB \cdot BH$">
+<Step show="CH H <CHB" hl="CH">Draw the altitude $CH$.</Step>
+<Step hl="ACH ABC" tex="\frac{AC}{AB} = \frac{AH}{AC} \;\Rightarrow\; AC^2 = AB \cdot AH">$\triangle ACH \sim \triangle ABC$: $\angle A$ is common, $\angle AHC = \angle ACB = 90^\circ$.</Step>
+<Step hl="BCH ABC" tex="\frac{BC}{AB} = \frac{BH}{BC} \;\Rightarrow\; BC^2 = AB \cdot BH \quad \blacksquare">$\triangle CBH \sim \triangle ABC$: $\angle B$ is common, and the right angles.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras" title="Pythagoras' theorem: the square of the hypotenuse equals the sum of the squares of the legs" why="(1) Two similar triangles after drawing the altitude.">
+<Proof given="$\angle C = 90^\circ$" prove="$AB^2 = AC^2 + BC^2$">
+<Step show="CH H <CHB" hl="CH">Draw the altitude $CH$; $H$ splits the hypotenuse into $AH$ and $HB$.</Step>
+<Step hl="ACH BCH" tex="AC^2 = AB \cdot AH, \qquad BC^2 = AB \cdot BH">By the previous property.</Step>
+<Step hl="AB" tex="AC^2 + BC^2 = AB\,(AH + HB) = AB^2 \quad \blacksquare">Add them up.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras-areas" title="Pythagoras' theorem: a second proof by areas" why="(2) Four identical triangles in a large square, and the square of side $c$ left inside.">
+<Proof figure="pythagoras-squares" given="legs $a, b$, hypotenuse $c$" prove="$a^2 + b^2 = c^2$">
+<Step hl="PQRS" tex="S_{PQRS} = (a + b)^2">Build a square of side $a + b$.</Step>
+<Step hl="PKN QLK RML SNM" tex="4 \cdot \tfrac12 ab = 2ab">In its corners are four congruent right triangles with legs $a$ and $b$.</Step>
+<Step hl="KLMN" tex="S_{KLMN} = c^2">The middle part $KLMN$ is a square: its sides are hypotenuses ($c$), and each of its angles is $180^\circ$ minus the two acute angles of a triangle, which add up to $90^\circ$.</Step>
+<Step tex="(a + b)^2 = 2ab + c^2 \;\Rightarrow\; a^2 + b^2 = c^2 \quad \blacksquare">The area of the large square is the sum of the areas of its parts.</Step>
+</Proof>
+</Property>
+
+<Property id="pythagoras-converse" kind="converse" title="If $a^2 + b^2 = c^2$ in a triangle, the angle opposite $c$ is right" why="Build a right triangle with the same legs: its hypotenuse is $c$ too.">
+<Proof given="$BC^2 + AC^2 = AB^2$" prove="$\angle C = 90^\circ$">
+<Step hl="BC AC">Build a right triangle $A'B'C'$ with legs $B'C' = BC = a$ and $A'C' = AC = b$.</Step>
+<Step tex="A'B'^2 = a^2 + b^2 = AB^2 \;\Rightarrow\; A'B' = AB">By Pythagoras' theorem.</Step>
+<Step hl="<C" tex="\triangle ABC = \triangle A'B'C' \;\Rightarrow\; \angle C = \angle C' = 90^\circ \quad \blacksquare">The triangles are congruent by three sides (SSS).</Step>
+</Proof>
+</Property>
+
+<Property id="altitude-relations" title="The altitude to the hypotenuse: $h^2 = AH \cdot HB$ and $h = \tfrac{ab}{c}$" why="The two small triangles are similar; the area two ways.">
+<Proof given="$\angle C = 90^\circ$, $CH \perp AB$, $CH = h$" prove="$h^2 = AH \cdot HB,\ h = \tfrac{ab}{c}$">
+<Step show="CH H <CHB" hl="ACH CBH" tex="\frac{AH}{CH} = \frac{CH}{HB} \;\Rightarrow\; h^2 = AH \cdot HB">$\triangle ACH \sim \triangle CBH$: both are right and $\angle ACH = 90^\circ - \angle A = \angle B$.</Step>
+<Step hl="ABC" tex="\tfrac12\, ab = \tfrac12\, c\,h \;\Rightarrow\; h = \frac{ab}{c} \quad \blacksquare">The area two ways: from the legs, and from the hypotenuse and the altitude.</Step>
+</Proof>
+</Property>
+
+<Property id="median-hypotenuse" title="The median to the hypotenuse is half the hypotenuse" why="The triangle is half a rectangle, and the diagonals of a rectangle are equal.">
+<Proof given="$\angle C = 90^\circ$, $M$ the midpoint of $AB$" prove="$CM = \tfrac{AB}{2}$">
+<Step show="CM M" hl="CM">Draw the median $CM$.</Step>
+<Step show="MD D AD BD" hl="CM=MD">Extend it to $MD = CM$. The diagonals of $ACBD$ bisect each other, so it is a parallelogram, and with $\angle C = 90^\circ$ a rectangle.</Step>
+<Step hl="CD AB" tex="CD = AB \;\Rightarrow\; CM = \tfrac{CD}{2} = \tfrac{AB}{2} \quad \blacksquare">The diagonals of a rectangle are equal.</Step>
+</Proof>
+</Property>
+
+<Remark>Hence the centre of the circle circumscribed about a right triangle is the midpoint of the hypotenuse, $R = \tfrac{c}{2}$.</Remark>
+
+<Property id="thirty-sixty" title="The leg opposite a $30^\circ$ angle is half the hypotenuse" why="The median to the hypotenuse cuts off an equilateral triangle.">
+<Proof given="$\angle C = 90^\circ$, $\angle A = 30^\circ$" prove="$BC = \tfrac{AB}{2}$">
+<Step set={{ a: 2, b: 3.5 }} show="CM M" hl="CM=MB" tex="\angle B = 60^\circ,\qquad CM = MB = \tfrac{AB}{2}">$\angle B = 90^\circ - 30^\circ$; the median to the hypotenuse equals half of it (on the figure $\angle A \approx 30^\circ$).</Step>
+<Step hl="CMB">$\triangle CMB$ is isosceles with a $60^\circ$ angle, so it is equilateral.</Step>
+<Step hl="BC" tex="BC = MB = \tfrac{AB}{2} \quad \blacksquare" />
+</Proof>
+</Property>
+
+<Property id="forty-five" title="The acute angles of an isosceles right triangle are $45^\circ$, and its hypotenuse is $a\sqrt2$" why="Equal legs, equal acute angles.">
+<Proof given="$\angle C = 90^\circ$, $BC = AC = a$" prove="$\angle A = \angle B = 45^\circ,\ AB = a\sqrt2$">
+<Step set={{ a: 3, b: 3 }} hl="BC=AC <A=<B" tex="\angle A = \angle B = \tfrac{90^\circ}{2} = 45^\circ">In an isosceles triangle the base angles are equal, and here they add up to $90^\circ$.</Step>
+<Step hl="AB" tex="AB^2 = a^2 + a^2 \;\Rightarrow\; AB = a\sqrt2 \quad \blacksquare">By Pythagoras' theorem.</Step>
+</Proof>
+</Property>
+
+<Property id="area" title="The area of a right triangle is half the product of its legs" why="It is half of the rectangle built on its legs.">
+<Proof given="$\angle C = 90^\circ$" prove="$S = \tfrac12 ab$">
+<Step show="M D AD BD" hl="ACBD">Complete the triangle to the rectangle $ACBD$; its area is $ab$.</Step>
+<Step hl="ABC" tex="S = \tfrac12\, ab \quad \blacksquare">The diagonal $AB$ cuts the rectangle into two congruent triangles (SSS).</Step>
+</Proof>
+</Property>
+
+<Property id="inradius" title="The inradius of a right triangle is $r = \tfrac{a + b - c}{2}$" why="From the right-angle vertex to the points of tangency is $r$; from the other vertices, equal tangent segments.">
+<Proof given="$\angle C = 90^\circ$; the circle touches $BC$ at $K$, $AC$ at $L$, $AB$ at $T$" prove="$r = \tfrac{a + b - c}{2}$">
+<Step show="(IT) I K L T" hl="(IT)">The inscribed circle touches all three sides.</Step>
+<Step show="IK IL" hl="CKIL" tex="CK = CL = r">$CKIL$ is a square: the angles at $C$, $K$ and $L$ are right, and $IK = IL = r$.</Step>
+<Step hl="BK=BT AL=AT" tex="\begin{gathered} BT = BK = a - r \\ AT = AL = b - r \end{gathered}">Tangent segments from one point to a circle are equal.</Step>
+<Step hl="AB" tex="r = \frac{a + b - c}{2} \quad \blacksquare">$c = AT + TB = (b - r) + (a - r)$.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark kind="mistake">Pythagoras' theorem holds only in a right triangle. In a general triangle $c^2 = a^2 + b^2 - 2ab\cos\gamma$ (the law of cosines).</Remark>
+
+<Problems>
+
+<Problem id="p-rt-30-sum" k={6} set={{ a: 1.5, b: 2.598076211353316 }} given="<ABC=60 AB+BC=27" find="AB" answer="18" book="4.17 4.21"
+  q="One acute angle of a right triangle is $60^\circ$, and the hypotenuse plus the shorter leg is $27$. Find the hypotenuse."
+  hint="The shorter leg is opposite the $30^\circ$ angle.">
+<Step hl="<A" tex="\angle A = 90^\circ - 60^\circ = 30^\circ">The acute angles of a right triangle add up to $90^\circ$.</Step>
+<Step hl="BC AB" tex="BC = \tfrac12\, AB">The leg opposite the $30^\circ$ angle is half the hypotenuse, and that is the shorter leg.</Step>
+<Step tex="AB + \tfrac12\, AB = 27 \;\Rightarrow\; AB = 18">Substitute into the sum.</Step>
+</Problem>
+
+<Problem id="p-rt-altitude-median" set={{ a: 2.800830152838839, b: 4 }} show="CH CM <CHA" given="<CAB=35" find="<HCM" answer="20" book="4.31 4.32"
+  q="In right triangle $ABC$, $\angle C = 90^\circ$, $\angle A = 35^\circ$. Find the angle between the altitude $CH$ and the median $CM$ drawn from vertex $C$."
+  hint="The median to the hypotenuse is half the hypotenuse.">
+<Step hl="CM AM=MC" tex="\angle ACM = \angle A = 35^\circ">$CM = AM$, since the median is half the hypotenuse, so triangle $AMC$ is isosceles.</Step>
+<Step hl="ACH <CHA" tex="\angle ACH = 90^\circ - 35^\circ = 55^\circ">In the right triangle $ACH$.</Step>
+<Step hl="<HCM" tex="\angle HCM = 55^\circ - 35^\circ = 20^\circ">Both angles are measured from the leg $CA$.</Step>
+</Problem>
+
+<Problem id="p-rt-projections" set={{ a: 2, b: 3 }} show="CH <CHB" given="AH=9 HB=4" find="CH AC BC" answer="6 3√13 2√13" book="8.17 8.20 8.21"
+  q="The altitude $CH$ from the right-angle vertex splits the hypotenuse into $AH = 9$ and $HB = 4$. Find the altitude and the legs."
+  hint="$h^2 = AH \cdot HB$; a leg is the geometric mean of the hypotenuse and its projection.">
+<Step hl="CH" tex="CH^2 = AH \cdot HB = 36 \;\Rightarrow\; CH = 6">The square of the altitude to the hypotenuse equals the product of the projections.</Step>
+<Step hl="AC AH" tex="AC^2 = AB \cdot AH = 13 \cdot 9 \;\Rightarrow\; AC = 3\sqrt{13}">A leg is the geometric mean of the hypotenuse and its projection on the hypotenuse.</Step>
+<Step hl="BC HB" tex="BC^2 = AB \cdot HB = 13 \cdot 4 \;\Rightarrow\; BC = 2\sqrt{13}">The same for the other leg.</Step>
+</Problem>
+
+<Problem id="p-rt-median-angles" set={{ a: 1.5, b: 2.598076211353316 }} show="CM" given="CM=5 <ACM/<MCB=1/2" find="AB BC AC" answer="10 5 5√3" book="8.30"
+  q="The median $CM$ to the hypotenuse of a right triangle is $5$ and divides the right angle in the ratio $1 : 2$. Find the sides of the triangle."
+  hint="The median is half the hypotenuse, so it splits the triangle into two isosceles triangles.">
+<Step hl="<ACM <MCB" tex="\angle ACM = 30^\circ,\qquad \angle MCB = 60^\circ">The right angle is divided in the ratio $1 : 2$.</Step>
+<Step hl="AM=MC MC=MB" tex="AB = 2\,CM = 10,\qquad \angle A = \angle ACM = 30^\circ">The median is half the hypotenuse, so triangle $AMC$ is isosceles.</Step>
+<Step hl="BC AC" tex="BC = \tfrac12\, AB = 5,\qquad AC = \sqrt{100 - 25} = 5\sqrt3">$BC$ is opposite the $30^\circ$ angle; $AC$ by Pythagoras' theorem.</Step>
+</Problem>
+
+<Problem id="p-rt-incircle-tangents" set={{ a: 1.6666666666666667, b: 4 }} show="(IT) IT IK IL" given="AT=10 TB=3" find="BC AC" answer="5 12" book="8.34 8.35"
+  q="The circle inscribed in right triangle $ABC$ touches the hypotenuse at $T$ and divides it into $AT = 10$ and $TB = 3$. Find the legs."
+  hint="Tangent segments from one point are equal; from the right-angle vertex both tangent segments equal $r$.">
+<Step hl="IK IL" tex="AC = 10 + r,\qquad BC = 3 + r">The tangent segments from $A$ and from $B$ are equal, and from $C$ both are $r$, so $CKIL$ is a square.</Step>
+<Step tex="(10 + r)^2 + (3 + r)^2 = 13^2 \;\Rightarrow\; r^2 + 13r - 30 = 0">By Pythagoras' theorem.</Step>
+<Step hl="BC AC" tex="r = 2 \;\Rightarrow\; BC = 5,\qquad AC = 12">The positive root of the equation.</Step>
+</Problem>
+
+<Problem id="p-rt-altitude-ratio" set={{ a: 3, b: 1.5 }} show="CH <CHB" given="CH=12 AH/HB=1/4" find="AB" answer="30" book="8.18 8.20"
+  q="The altitude from the right-angle vertex of a right triangle is $12$ and divides the hypotenuse in the ratio $1 : 4$. Find the hypotenuse."
+  hint="$h^2 = AH \cdot HB$.">
+<Step tex="AH = x,\qquad HB = 4x">Name the parts of the hypotenuse.</Step>
+<Step hl="CH" tex="12^2 = x \cdot 4x \;\Rightarrow\; x = 6">The square of the altitude to the hypotenuse equals the product of the projections.</Step>
+<Step hl="AB" tex="AB = 5x = 30">The hypotenuse is the sum of the two parts.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-rt-legs-projections" set={{ a: 3, b: 4 }} show="CH <CHB" prove="AC^2/BC^2=AH/HB" book="8.109"
+  q="Prove that the squares of the legs of a right triangle are in the same ratio as their projections on the hypotenuse."
+  hint="A leg is the geometric mean of the hypotenuse and its projection.">
+<Step hl="AC AH" tex="AC^2 = AB \cdot AH">A leg is the geometric mean of the hypotenuse and its projection on the hypotenuse.</Step>
+<Step hl="BC HB" tex="BC^2 = AB \cdot HB">The same for the other leg.</Step>
+<Step tex="\frac{AC^2}{BC^2} = \frac{AB \cdot AH}{AB \cdot HB} = \frac{AH}{HB} \quad \blacksquare">Divide the equalities.</Step>
+</Problem>
+
+</Problems>

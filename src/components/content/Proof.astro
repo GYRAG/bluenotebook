@@ -1,20 +1,22 @@
 ---
 import Icon from '../Icon.astro';
 import { md } from '@/lib/math';
+import { langOf, t } from '@/i18n';
 
 interface Props { given?: string; prove?: string; figure?: string | undefined } // a problem's solution has neither
 const { given, prove, figure } = Astro.props;
+const lang = langOf(Astro.url);
 ---
 <div class="proof-body" data-figure={figure}>
   {given && prove && <dl class="given">
-    <div><dt>მოც.</dt><dd set:html={md(given)} /></div>
-    <div><dt>დას.</dt><dd set:html={md(prove)} /></div>
+    <div><dt>{t(lang, 'მოც.')}</dt><dd set:html={md(given)} /></div>
+    <div><dt>{t(lang, 'დას.')}</dt><dd set:html={md(prove)} /></div>
   </dl>}
   <ol class="steps"><slot /></ol>
   <div class="stepper">
-    <button class="sbtn" type="button" data-step="prev" aria-label="წინა ნაბიჯი"><Icon name="left" /></button>
+    <button class="sbtn" type="button" data-step="prev" aria-label={t(lang, 'წინა ნაბიჯი')}><Icon name="left" /></button>
     <div class="dots"></div>
     <span class="count" aria-live="polite"></span>
-    <button class="sbtn sbtn-next" type="button" data-step="next" aria-label="შემდეგი ნაბიჯი"><Icon name="right" /></button>
+    <button class="sbtn sbtn-next" type="button" data-step="next" aria-label={t(lang, 'შემდეგი ნაბიჯი')}><Icon name="right" /></button>
   </div>
 </div>

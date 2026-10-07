@@ -1,6 +1,9 @@
 ---
+import { langOf, t } from '@/i18n';
+
 interface Props { kind?: 'note' | 'special' | 'mistake' | 'convention' }
 const { kind = 'note' } = Astro.props;
+const lang = langOf(Astro.url);
 const LABEL = { note: 'შენიშვნა', special: 'კერძო შემთხვევა', mistake: 'გავრცელებული შეცდომა', convention: 'შეთანხმება' } as const;
 ---
-<aside class="remark" data-kind={kind}><b class="remark-k">{LABEL[kind]}.</b> <slot /></aside>
+<aside class="remark" data-kind={kind}><b class="remark-k">{t(lang, LABEL[kind])}.</b> <slot /></aside>

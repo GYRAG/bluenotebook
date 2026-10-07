@@ -1,0 +1,111 @@
+---
+title: Mixed problems
+slug: mixed
+subject: geometry
+section: mixed
+order: 47
+summary: "Problems that use several topics at once: touching circles, inscribed and circumscribed figures."
+tags: [problems, circle, triangle, trapezoid]
+prerequisites: [circle, triangle-centers]
+status: draft
+figure: tangent-circles
+figures: [concentric, square, trapezoid, triangle-centers, triangle-area, right-triangle]
+---
+
+<Problems>
+
+<Problem id="p-mx-touch-angle" set={{ R: 3, r: 1 }} given="O1C=6 O2C=2" find="<ACB AB" answer="90 4√3" book="5.20 13.31"
+  q="Circles of radii $6$ and $2$ touch each other externally at $C$. Their external common tangent touches the circles at $A$ and $B$. Find $\angle ACB$ and $AB$."
+  hint="Draw the internal common tangent at $C$; it cuts $AB$ at $M$.">
+<Step show="CM" hl="MA=MC MC=MB" tex="MA = MC = MB">The tangent segments from one point to a circle are equal: from $M$ to the large circle, $MA = MC$; to the small one, $MB = MC$.</Step>
+<Step hl="AMC BMC" tex="\angle MCA + \angle MCB = \tfrac12 \cdot 180^\circ = 90^\circ">Triangles $AMC$ and $BMC$ are isosceles, so $\angle ACB$ equals the sum of the other two angles of triangle $ACB$.</Step>
+<Step show="O1A O2B O2F" hl="O1F O2F" tex="AB = O_2F = \sqrt{8^2 - 4^2} = 4\sqrt3">The radii at the points of tangency are perpendicular to the tangent, $O_2F \parallel AB$. In the right triangle $O_1FO_2$, $O_1O_2 = 6 + 2 = 8$, $O_1F = 6 - 2 = 4$.</Step>
+</Problem>
+
+<Problem id="p-mx-touch-sides" set={{ R: 3, r: 1 }} show="AC BC" given="O1C=6 O2C=2" find="AC BC" answer="6 2√3" book="13.31"
+  q="Circles of radii $6$ and $2$ touch each other externally at $C$, and $AB$ is their external common tangent. By the previous problem $\angle ACB = 90^\circ$ and $AB = 4\sqrt3$. Find $AC$ and $BC$."
+  hint="Find $\angle AO_1C$, then the angle $BAC$ between the tangent and the chord.">
+<Step show="O1A O2F" hl="O1FO2" tex="\angle O_1O_2F = 30^\circ,\qquad \angle AO_1C = 60^\circ">In the right triangle $O_1FO_2$ the leg $O_1F = 4$ is half the hypotenuse $O_1O_2 = 8$.</Step>
+<Step hl="<BAC" tex="\angle BAC = \tfrac12 \cdot 60^\circ = 30^\circ">The angle between a tangent and a chord is half the arc lying inside it; the arc $AC$ is $60^\circ$.</Step>
+<Step hl="BC AC" tex="BC = \tfrac12\, AB = 2\sqrt3,\qquad AC = \sqrt{48 - 12} = 6">In the right triangle $ACB$, $BC$ is opposite the $30^\circ$ angle.</Step>
+</Problem>
+
+<Problem id="p-mx-touch-radii" set={{ R: 3, r: 2 }} given="O1C/O2C=3/2 O1O2=10" find="O1C O2C" labels="R;r" answer="6 4" book="5.18 5.19"
+  q="Two circles touch each other externally. Their radii are in the ratio $3 : 2$, and the distance between the centres is $10$. Find the radii."
+  hint="When circles touch externally, the point of tangency lies on the segment joining the centres.">
+<Step hl="O1C O2C" tex="O_1O_2 = R + r = 10">The point of tangency lies on the segment joining the centres.</Step>
+<Step tex="3x + 2x = 10 \;\Rightarrow\; x = 2,\qquad R = 6,\quad r = 4">The radii are $3x$ and $2x$.</Step>
+</Problem>
+
+<Problem id="p-mx-ring-chord" figure="concentric" set={{ R: 3, q: 0.6 }} show="AB OA OT <OTB" given="AB=10" find="π*(OA^2-OT^2)" labels="S" answer="25π" book="11.61 11.111"
+  q="Of two concentric circles, a chord $AB$ of the larger one touches the smaller one, $AB = 10$. Find the area of the ring between the circles."
+  hint="The area of the ring is $\pi(R^2 - r^2)$; find $R^2 - r^2$ from the right triangle $OTA$.">
+<Step hl="OT <OTB AT=TB" tex="AT = TB = 5">The radius $OT$ at the point of tangency is perpendicular to the tangent and bisects the chord.</Step>
+<Step hl="OTA" tex="R^2 - r^2 = OA^2 - OT^2 = AT^2 = 25">Pythagoras' theorem in triangle $OTA$.</Step>
+<Step tex="S = \pi\,(R^2 - r^2) = 25\pi">The area of the ring is the difference of the areas of the large and the small disc.</Step>
+</Problem>
+
+<Problem id="p-mx-concentric-diameter" figure="concentric" set={{ R: 2.6, q: 0.6153846153846154 }} show="P1P2" given="P1Q1=5 Q1Q2=16 Q2P2=5" find="OP1 OQ1" labels="R;r" answer="13 8" book="5.14 5.15"
+  q="Of two concentric circles, the smaller one divides a diameter of the larger one into three parts: $5$, $16$ and $5$. Find the radii of the circles."
+  hint="The diameter passes through the centre, so its middle part is a diameter of the small circle.">
+<Step hl="Q1Q2" tex="r = \tfrac12\, Q_1Q_2 = 8">$Q_1Q_2$ passes through the centre: it is a diameter of the small circle.</Step>
+<Step hl="P1P2" tex="R = \tfrac12\,(5 + 16 + 5) = 13">$P_1P_2$ is a diameter of the large circle.</Step>
+</Problem>
+
+<Problem id="p-mx-square-point" figure="square" set={{ a: 4 }} show="AM BM CM" given="<MAB=60 <MCD=15" find="<MBC" answer="30" book="13.3"
+  q="A point $M$ is taken inside the square $ABCD$ so that $\angle MAB = 60^\circ$ and $\angle MCD = 15^\circ$. Find $\angle MBC$."
+  hint="Consider the vertex of the equilateral triangle built on the side $AB$ inside the square.">
+<Step hl="ABM">Consider the point $M'$ inside the square for which triangle $ABM'$ is equilateral.</Step>
+<Step hl="BM=BC" tex="\begin{gathered}BM' = AB = BC \\ \angle M'BC = 90^\circ - 60^\circ = 30^\circ\end{gathered}">Triangle $BM'C$ is isosceles.</Step>
+<Step hl="<BCM <MCD" tex="\begin{gathered}\angle BCM' = \frac{180^\circ - 30^\circ}{2} = 75^\circ \\ \angle M'CD = 90^\circ - 75^\circ = 15^\circ\end{gathered}">The base angles are equal.</Step>
+<Step hl="<MBC" tex="M' = M,\qquad \angle MBC = 30^\circ">$M'$ lies both on the ray from $A$ at $60^\circ$ to $AB$ and on the ray from $C$ at $15^\circ$ to $CD$. Two rays meet at one point, so $M' = M$.</Step>
+</Problem>
+
+<Problem id="p-mx-trap-circumradius" figure="trapezoid" set={{ a: 4, b: 3, h: 3.5, s: 0.5 }} show="(UA) U UA UB BH <BHA" given="AD=16 BC=12 BH=14 AB=CD" find="UA" labels="R" answer="10" book="13.19"
+  q="The bases of an isosceles trapezoid are $16$ and $12$, and its height is $14$. Find the radius of the circle circumscribed about the trapezoid."
+  hint="The centre lies on the axis of symmetry of the trapezoid. Call its distance from the longer base $x$.">
+<Step hl="UT">The centre $U$ of the circumscribed circle lies on the common perpendicular bisector of the bases, the axis of symmetry of the trapezoid. Let it be at distance $x$ from the longer base.</Step>
+<Step hl="UA UB" tex="UA^2 = 8^2 + x^2,\qquad UB^2 = 6^2 + (14 - x)^2">Half the bases are $8$ and $6$.</Step>
+<Step tex="64 + x^2 = 36 + (14 - x)^2 \;\Rightarrow\; x = 6">$UA = UB$: both are radii.</Step>
+<Step hl="UA" tex="R = \sqrt{64 + 36} = 10">Therefore.</Step>
+</Problem>
+
+<Problem id="p-mx-double-angle" figure="triangle-centers" set={{ c: 4, b: 3.2, alpha: 82.81924421854173 }} show="AL" given="<BAC=2*<ABC AC=4 AB=5" find="BC" answer="6" book="13.1"
+  q="In triangle $ABC$, $\angle A = 2\angle B$, $AC = 4$, $AB = 5$. Find $BC$."
+  hint="Draw the bisector $AL$ of angle $A$ and look for isosceles and similar triangles.">
+<Step hl="<LAB=<ABC ALB" tex="AL = LB">$\angle LAB = \tfrac12 \angle A = \angle B$: triangle $ALB$ is isosceles.</Step>
+<Step hl="CAL <CAL=<ABC" tex="\triangle CAL \sim \triangle CBA">$\angle CAL = \angle B$, and $\angle C$ is common.</Step>
+<Step tex="\begin{gathered}AL = \frac{AB \cdot CA}{CB} = \frac{20}{a},\qquad CL = \frac{CA^2}{CB} = \frac{16}{a} \\ \frac{20}{a} = a - \frac{16}{a} \;\Rightarrow\; a^2 = 36\end{gathered}">Let $BC = a$. From the similarity $\tfrac{AL}{AB} = \tfrac{CA}{CB} = \tfrac{CL}{CA}$, and $AL = LB = a - CL$.</Step>
+<Step hl="BC" tex="BC = 6">Therefore.</Step>
+</Problem>
+
+<Problem id="p-mx-height-third" figure="triangle-area" set={{ c: 3, b: 3.605551275463989, alpha: 56.309932474020215 }} show="CH <CHA" given="AC=√13 BC=√10 CH=3" find="AB" answer="3" book="13.9"
+  q="In the acute triangle $ABC$, $AC = \sqrt{13}$, $BC = \sqrt{10}$, and the height to the side $AB$ is $CH = 3$. Find $AB$."
+  hint="The height divides the triangle into two right triangles.">
+<Step hl="ACH" tex="AH = \sqrt{13 - 9} = 2">Pythagoras' theorem in triangle $ACH$.</Step>
+<Step hl="BCH" tex="HB = \sqrt{10 - 9} = 1">The same in triangle $BCH$.</Step>
+<Step hl="AB" tex="AB = AH + HB = 3">The triangle is acute, so $H$ lies between $A$ and $B$.</Step>
+</Problem>
+
+<Problem id="p-mx-right-radii" figure="right-triangle" set={{ a: 3, b: 4 }} show="CM (IK) IK" given="AB=10 CM/IK=5/2" find="BC AC" answer="6 8" book="13.4"
+  q="The hypotenuse of the right triangle $ABC$ is $AB = 10$, and the radii of its circumscribed and inscribed circles are in the ratio $5 : 2$. Find the legs if $BC \lt AC$."
+  hint="In a right triangle $R = \tfrac{c}{2}$ and $r = \tfrac{a + b - c}{2}$.">
+<Step hl="CM" tex="R = \frac{AB}{2} = 5 \;\Rightarrow\; r = 2">The centre of the circumscribed circle is the midpoint of the hypotenuse.</Step>
+<Step hl="IK" tex="a + b = c + 2r = 14">$r = \tfrac{a + b - c}{2}$.</Step>
+<Step tex="a^2 + b^2 = 100 \;\Rightarrow\; 2ab = 14^2 - 100 = 96">By Pythagoras' theorem.</Step>
+<Step hl="BC AC" tex="ab = 48,\quad a + b = 14 \;\Rightarrow\; BC = 6,\quad AC = 8">The legs are the roots of the equation $t^2 - 14t + 48 = 0$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-mx-touch-midpoint" set={{ R: 2.6, r: 1.4 }} show="CM" prove="MA=MB"
+  q="Two circles touch each other externally at $C$, and $AB$ is their external common tangent. The common tangent at $C$ cuts $AB$ at $M$. Prove that $M$ is the midpoint of $AB$."
+  hint="Two tangents are drawn from $M$ to each circle.">
+<Step hl="MA=MC" tex="MA = MC">The tangent segments from $M$ to the large circle are equal.</Step>
+<Step hl="MC=MB" tex="MC = MB">The same for the small circle.</Step>
+<Step hl="MA=MB" tex="MA = MB \quad \blacksquare">Both equal $MC$.</Step>
+</Problem>
+
+</Problems>

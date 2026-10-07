@@ -1,1 +1,5 @@
-<div class="def"><b class="def-k">განმარტება.</b> <slot /></div>
+---
+import { langOf, t } from '@/i18n';
+const lang = langOf(Astro.url);
+---
+<div class="def"><b class="def-k">{t(lang, 'განმარტება.')}</b> <slot /></div>

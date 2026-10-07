@@ -9,7 +9,7 @@ import { angle3, area3, dist3, tetra, type V3 } from '@/figures/engine/solid';
 import { names, parseRefs, refPoints } from '@/figures/engine/refs';
 import type { FigureSpec, Params } from '@/figures/engine/spec';
 
-const files = import.meta.glob<string>('./topics/**/*.mdx', { query: '?raw', import: 'default', eager: true });
+const files = import.meta.glob<string>(['./topics/**/*.mdx', './topics-en/**/*.mdx'], { query: '?raw', import: 'default', eager: true });
 const specs = import.meta.glob<{ default: FigureSpec }>(['../figures/*.ts', '!../figures/registry.ts'], { eager: true });
 
 // the opening tag's attributes: "strings", {{ objects }} and {numbers} (a quoted value may hold ">")

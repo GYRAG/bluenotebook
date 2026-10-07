@@ -109,6 +109,8 @@ pnpm check
 | `every property has a numeric check` | ნახაზში ამ თვისების შემოწმება აკლია |
 | `proof steps only use points` | ნაბიჯში ნახსენები წერტილი ნახაზზე არ არის |
 | `formula proof links` | `proof="..."` არარსებულ თვისებას უთითებს |
+| `every topic is translated` | ახალ თემას ინგლისური ვერსია (`src/content/topics-en/`) აკლია — `pnpm translate` (იხ. CLAUDE.md) |
+| `English topics mirror the Georgian ones` | ქართულ ფაილში ბლოკი, id, რიცხვი ან `status` შეიცვალა — იგივე შეცვალე ინგლისურ ფაილშიც |
 
 ფორმულის სინტაქსის შეცდომას (`KaTeX parse error`) `pnpm dev` ან `pnpm build` აჩვენებს.
 

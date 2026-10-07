@@ -1,0 +1,114 @@
+---
+title: Regular polygon
+slug: regular-polygon
+subject: geometry
+section: polygons
+order: 30
+summary: The angles of a regular polygon, the inscribed and circumscribed circles, the side, the apothem and the area.
+tags: [regular polygon, hexagon, apothem, inscribed circle, circumscribed circle]
+prerequisites: [polygon, inscribed-angle, trigonometry]
+status: draft
+figure: regular-polygon
+parent: polygon
+---
+
+<Definition>A **regular polygon** is a convex polygon with all sides equal and all angles equal. The distance from the centre to a side, the radius $r$ of the inscribed circle, is its **apothem**.</Definition>
+
+<Formulas>
+<Formula id="angle-formula" name="Interior and central angle" tex="\alpha_n = \frac{(n - 2)\cdot 180^\circ}{n}, \qquad \angle AOB = \frac{360^\circ}{n}" live="∠AOB" proof="regular-angles" />
+<Formula id="side-formula" name="Side and apothem" tex="a_n = 2R\sin\frac{180^\circ}{n}, \qquad r = R\cos\frac{180^\circ}{n}" live="a" proof="regular-side" />
+<Formula id="area-formula" name="Area" tex="S = \tfrac12\, P r" live="S" proof="regular-area" />
+<Formula id="special-formula" name="Triangle, square, hexagon" tex="a_3 = R\sqrt3, \qquad a_4 = R\sqrt2, \qquad a_6 = R" proof="special-sides" />
+</Formulas>
+
+<Properties>
+
+<Property id="regular-circles" title="A regular polygon has a circumscribed and an inscribed circle with a common centre" why="The bisectors of two neighbouring angles form an isosceles triangle, and it repeats on every side.">
+<Proof given="A regular polygon" prove="The centre $O$ is equally far from all vertices and from all sides">
+<Step show="OA OB O" hl="OAB">The bisectors of the angles $A$ and $B$ meet at $O$. $\angle OAB = \angle OBA$ (halves of equal angles), so $OA = OB$.</Step>
+<Step show="OC" hl="OAB OBC" tex="\triangle OAB = \triangle OBC">$AB = BC$, $OB$ is common, $\angle OBA = \angle OBC$: SAS. So $OC = OA$, and $OC$ is a bisector.</Step>
+<Step show="(OA)" hl="(OA)">And so on from vertex to vertex: $O$ is equally far from all vertices, so it is the centre of the circumscribed circle.</Step>
+<Step show="OM M (OM)" hl="(OM)">The heights of congruent triangles to their bases are equal: $O$ is also equally far from all sides, so it is the centre of the inscribed circle as well. ∎</Step>
+</Proof>
+</Property>
+
+<Property id="regular-angles" title="An angle of a regular $n$-gon is $\tfrac{(n-2)\cdot180^\circ}{n}$, the central angle $\tfrac{360^\circ}{n}$" why="The sum is split into $n$ equal parts.">
+<Proof given="A regular $n$-gon" prove="$\alpha_n = \tfrac{(n - 2)\cdot180^\circ}{n}$">
+<Step hl="<A" tex="\alpha_n = \frac{(n - 2)\cdot 180^\circ}{n}">The angles of a convex $n$-gon add up to $(n - 2)\cdot180^\circ$, and all the angles are equal.</Step>
+<Step show="OA OB" hl="<AOB" tex="\angle AOB = \frac{360^\circ}{n} \quad \blacksquare">The angles of $n$ congruent triangles at $O$ make up a full angle.</Step>
+</Proof>
+</Property>
+
+<Property id="regular-side" title="The side of a regular $n$-gon is $2R\sin\tfrac{180^\circ}{n}$, the apothem $R\cos\tfrac{180^\circ}{n}$" why="The apothem divides the isosceles triangle $AOB$ into two right triangles.">
+<Proof given="$OA = R$, $OM \perp AB$" prove="$a = 2R\sin\tfrac{180^\circ}{n}$, $r = R\cos\tfrac{180^\circ}{n}$">
+<Step show="OA OB OM M <OMB" hl="OMA" tex="\angle AOM = \frac{180^\circ}{n}">$OM$ is the height and the bisector of the isosceles $\triangle AOB$.</Step>
+<Step tex="\begin{gathered} a = 2\,AM = 2R\sin\frac{180^\circ}{n} \\ r = OM = R\cos\frac{180^\circ}{n} \end{gathered} \quad \blacksquare">In the right triangle $\triangle OMA$.</Step>
+</Proof>
+</Property>
+
+<Property id="regular-area" title="The area of a regular polygon is the semiperimeter times the apothem: $S = \tfrac12 Pr$" why="$n$ congruent triangles from the centre, all with height $r$.">
+<Proof given="A regular $n$-gon, side $a$, apothem $r$" prove="$S = \tfrac12\, P r$">
+<Step show="OA OB OM M" hl="OAB" tex="S_{OAB} = \tfrac12\, a r">Base $a$, height $r$.</Step>
+<Step tex="S = n \cdot \tfrac12\, a r = \tfrac12\, P r \quad \blacksquare">$n$ such triangles, $P = na$.</Step>
+</Proof>
+</Property>
+
+<Property id="special-sides" title="The side of a regular hexagon equals the radius of the circumscribed circle; of a square, $R\sqrt2$; of a triangle, $R\sqrt3$" why="The previous formula for $n = 6, 4, 3$.">
+<Proof given="$n = 6, 4, 3$" prove="$a_6 = R,\ a_4 = R\sqrt2,\ a_3 = R\sqrt3$">
+<Step set={{ n: 6 }} show="OA OB" hl="OAB" tex="a_6 = 2R\sin 30^\circ = R">$\angle AOB = 60^\circ$: $\triangle AOB$ is equilateral.</Step>
+<Step set={{ n: 4 }} tex="a_4 = 2R\sin 45^\circ = R\sqrt2">The square.</Step>
+<Step set={{ n: 3 }} tex="a_3 = 2R\sin 60^\circ = R\sqrt3 \quad \blacksquare">The equilateral triangle.</Step>
+</Proof>
+</Property>
+
+</Properties>
+
+<Remark>The main diagonals divide a regular hexagon into six equilateral triangles, so $S_6 = 6 \cdot \tfrac{a^2\sqrt3}{4} = \tfrac{3a^2\sqrt3}{2}$.</Remark>
+
+<Remark kind="mistake">"All sides equal" is not enough for a polygon to be regular: a rhombus has all sides equal but (unless it is a square) is not regular. The angles must be equal too.</Remark>
+
+<Problems>
+
+<Problem id="p-reg-exterior" set={{ n: 12, R: 3 }} given="180-<A=30" find="360/(180-<A) <A" labels="n;\angle A" answer="12 150"
+  q="The exterior angle of a regular polygon is $30^\circ$. How many sides does it have, and what is its interior angle?"
+  hint="The exterior angles of a regular polygon are equal, and they add up to $360^\circ$.">
+<Step tex="n = \frac{360^\circ}{30^\circ} = 12">The exterior angles add up to $360^\circ$ and are all equal.</Step>
+<Step hl="<A" tex="\angle A = 180^\circ - 30^\circ = 150^\circ">The interior angle is adjacent to the exterior one.</Step>
+</Problem>
+
+<Problem id="p-reg-hexagon-radii" k={2} set={{ n: 6, R: 3 }} show="OA OM <OMA" given="P(ABCDEF)=36" find="OA OM" labels="R;r" answer="6 3√3" book="11.9 11.18"
+  q="The perimeter of a regular hexagon is $36$. Find the radii of its circumscribed and inscribed circles."
+  hint="The side of a regular hexagon equals the radius of the circumscribed circle.">
+<Step hl="AB" tex="AB = \frac{36}{6} = 6">All six sides of a regular hexagon are equal.</Step>
+<Step hl="OAB OA" tex="R = OA = AB = 6">The central angle is $60^\circ$, so triangle $OAB$ is equilateral.</Step>
+<Step hl="OM" tex="r = OM = \frac{\sqrt3}{2} \cdot 6 = 3\sqrt3">$OM$ is a height of the equilateral triangle $OAB$.</Step>
+</Problem>
+
+<Problem id="p-reg-triangle-radii" k={1.3333333333333333} set={{ n: 3, R: 3 }} show="OA OM <OMA" given="OA-OM=2" find="AB" answer="4√3" book="11.1"
+  q="The difference between the radii of the circumscribed and inscribed circles of an equilateral triangle is $2$. Find the side of the triangle."
+  hint="In an equilateral triangle $R = 2r$.">
+<Step hl="OM OA" tex="R = 2r">The centre divides the medians in the ratio $2 : 1$.</Step>
+<Step tex="2r - r = 2 \;\Rightarrow\; r = 2,\quad R = 4">Substitute into the difference.</Step>
+<Step hl="AB" tex="AB = R\sqrt3 = 4\sqrt3">The side of an equilateral triangle is $R\sqrt3$.</Step>
+</Problem>
+
+<Problem id="p-reg-hexagon-area" set={{ n: 6, R: 3 }} show="OM OA OB <OMA" given="OM=3" find="S(ABCDEF)" answer="18√3" book="11.3 11.7"
+  q="A regular hexagon is circumscribed about a circle of radius $3$. Find the area of the hexagon."
+  hint="The hexagon splits into six equilateral triangles whose height is $r$.">
+<Step hl="OAB OM" tex="AB = \frac{2r}{\sqrt3} = 2\sqrt3">The height of the equilateral triangle $OAB$ is $r = OM = 3$.</Step>
+<Step hl="ABCDEF" tex="S = 6 \cdot \tfrac12 \cdot AB \cdot OM = 3 \cdot 2\sqrt3 \cdot 3 = 18\sqrt3">The area is the sum of the areas of six congruent triangles.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="Proof problems">
+
+<Problem id="p-reg-triangle-half-radius" set={{ n: 3, R: 3 }} show="OA OB OM <OMA" prove="2*OM=OA" book="11.94"
+  q="Prove that a side of an equilateral triangle inscribed in a circle bisects the radius perpendicular to it."
+  hint="Find $\angle AOM$.">
+<Step hl="<AOB" tex="\angle AOB = \frac{360^\circ}{3} = 120^\circ">The central angle of an equilateral triangle.</Step>
+<Step hl="<AOM <OMA" tex="\angle AOM = 60^\circ,\qquad \angle OAM = 30^\circ">The radius perpendicular to $AB$ is also a bisector of the isosceles triangle $AOB$.</Step>
+<Step hl="OAM OM" tex="OM = \tfrac12\, OA \quad \blacksquare">The leg $OM$ is opposite the $30^\circ$ angle, so it is half the radius.</Step>
+</Problem>
+
+</Problems>

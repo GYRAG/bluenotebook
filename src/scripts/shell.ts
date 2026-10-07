@@ -2,6 +2,7 @@
 // last-viewed topic. The nav drawer is a native popover and needs no script.
 import { kaQuery } from '@/lib/ka-search';
 import { load, save } from '@/lib/store';
+import { pageLang, sameLang, tc } from '@/i18n/client';
 
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector<T>(s);
 const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => [...r.querySelectorAll<T>(s)];
@@ -13,7 +14,7 @@ const NEXT: Record<Theme, Theme> = { system: 'light', light: 'dark', dark: 'syst
 function applyTheme(t: Theme) {
   if (t === 'system') delete document.documentElement.dataset.theme;
   else document.documentElement.dataset.theme = t;
-  $$('[data-theme-label]').forEach(el => { el.textContent = THEME_LABEL[t]; });
+  $$('[data-theme-label]').forEach(el => { el.textContent = tc(THEME_LABEL[t]); });
 }
 let theme = load<Theme>('theme', 'system');
 applyTheme(theme);
@@ -54,7 +55,7 @@ $('.nav .topics [aria-current="page"]')?.scrollIntoView({ block: 'center' }); //
 interface Last { url: string; title: string }
 const prev = load<Last | null>('last', null); // read before this page replaces it — the palette offers it
 const topic = document.body.dataset.topic;
-if (topic) save('last', { url: topic, title: $('.title')?.textContent ?? '' });
+if (topic) save('last', { url: location.pathname, title: $('.title')?.textContent ?? '' }); // the page in its own language
 if (topic) { const seen = load<string[]>('seen', []); if (!seen.includes(topic)) save('seen', [...seen, topic]); } // progress on the home page
 
 // ---------- search (Pagefind, built after `astro build`) ----------
@@ -77,11 +78,11 @@ const loadPagefind = () => (pagefind ??= import(/* @vite-ignore */ `${'/pagefind
 // Empty query: pinned formulas and the last topic — two taps from anywhere.
 interface Pin { url: string; name: string; html: string; topic: string }
 function showHome() {
-  const pins = load<Pin[]>('pins', []), last = prev;
+  const pins = load<Pin[]>('pins', []).filter(p => sameLang(p.url)), last = prev && sameLang(prev.url) ? prev : null; // each language its own
   const head = (t: string) => Object.assign(document.createElement('li'), { className: 'pal-h', textContent: t });
   const rows: HTMLLIElement[] = [];
   if (pins.length) {
-    rows.push(head('ჩამაგრებული ფორმულები'));
+    rows.push(head(tc('ჩამაგრებული ფორმულები')));
     for (const p of pins) {
       const li = item(p.url, p.name, '');
       const ex = $('.pal-ex', li)!;
@@ -90,9 +91,9 @@ function showHome() {
       rows.push(li);
     }
   }
-  if (last && last.url !== location.pathname) rows.push(head('ბოლოს ნანახი'), item(last.url, last.title, ''));
+  if (last && last.url !== location.pathname) rows.push(head(tc('ბოლოს ნანახი')), item(last.url, last.title, ''));
   list.replaceChildren(...rows);
-  status.textContent = pins.length ? '' : 'დაწერე რამდენიმე ასო. ★-ით ჩამაგრებული ფორმულები აქ გამოჩნდება.';
+  status.textContent = pins.length ? '' : tc('დაწერე რამდენიმე ასო. ★-ით ჩამაგრებული ფორმულები აქ გამოჩნდება.');
 }
 
 function openPalette() {
@@ -114,20 +115,20 @@ document.addEventListener('keydown', e => {
 
 let seq = 0;
 async function runSearch() {
-  const q = kaQuery(input.value);
+  const q = pageLang() === 'en' ? input.value.trim().toLowerCase() : kaQuery(input.value); // Pagefind stems English itself
   const my = ++seq;
   if (!q) return showHome();
-  status.textContent = 'ვეძებ…';
+  status.textContent = tc('ვეძებ…');
   let pf: Pagefind;
   try { pf = await loadPagefind(); } catch {
-    status.textContent = 'ძიების ინდექსი ვერ ჩაიტვირთა. ლოკალურად ის მხოლოდ pnpm build-ის შემდეგ მუშაობს.';
+    status.textContent = tc('ძიების ინდექსი ვერ ჩაიტვირთა. ლოკალურად ის მხოლოდ pnpm build-ის შემდეგ მუშაობს.');
     return;
   }
   const res = await pf.search(q);
   if (my !== seq || !res) return; // a newer keystroke won
   const pages = await Promise.all(res.results.slice(0, 8).map(r => r.data()));
   if (my !== seq) return;
-  status.textContent = pages.length ? '' : 'ვერაფერი ვიპოვე. სცადე სიტყვის დასაწყისი — მაგ. „სამკუთხ“.';
+  status.textContent = pages.length ? '' : tc('ვერაფერი ვიპოვე. სცადე სიტყვის დასაწყისი — მაგ. „სამკუთხ“.');
   list.replaceChildren(...pages.flatMap(p => {
     const title = p.meta.title ?? p.url;
     const subs = p.sub_results.filter(s => s.title !== title).slice(0, 3);

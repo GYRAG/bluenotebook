@@ -2,6 +2,7 @@
 // Figure.astro (svg shell, stamp, hint) and FigureTools.astro (sliders, switches, readouts);
 // this wires them to a figure spec. One figure per page owns the panel controls.
 import { load, save } from '@/lib/store';
+import { tf, tfPhrase } from '@/i18n/figures';
 import { boardBounds } from './bounds';
 import { classifyQuad, classifyTriangle, type Verdict } from './classify';
 import { add, dist, mid, segDist, sub, type V } from './geom';
@@ -48,8 +49,8 @@ export class GeoFigure extends HTMLElement {
   async connectedCallback() {
     this.name = this.dataset.figure!;
     const mod = SPECS[`../${this.name}.ts`];
-    if (!mod) return this.fail(`ნახაზი "${this.name}" ვერ მოიძებნა`);
-    try { this.spec = (await mod()).default; } catch { return this.fail('ნახაზი ვერ ჩაიტვირთა'); }
+    if (!mod) return this.fail(`${tf('ნახაზი ვერ მოიძებნა')}: ${this.name}`);
+    try { this.spec = (await mod()).default; } catch { return this.fail(tf('ნახაზი ვერ ჩაიტვირთა')); }
     const defaults = Object.fromEntries(Object.entries(this.spec.params).map(([k, d]) => [k, d.value]));
     this.params = snap(this.spec, { ...defaults, ...load<Params>(`fig:${this.name}`, {}) });
     this.setBase();
@@ -183,15 +184,15 @@ export class GeoFigure extends HTMLElement {
     const v: Verdict = c === 'quad' ? classifyQuad(poly) : classifyTriangle(poly);
     const stamp = this.querySelector<HTMLElement>('.stamp')!;
     stamp.hidden = v.name === this.spec.kind || !!this.scene; // the stamp is an event, not furniture
-    stamp.querySelector('.stamp-v')!.textContent = v.name;
-    stamp.querySelector('.stamp-why')!.textContent = v.why;
+    stamp.querySelector('.stamp-v')!.textContent = tfPhrase(v.name);
+    stamp.querySelector('.stamp-why')!.textContent = tfPhrase(v.why);
     if (v.name !== this.lastVerdict) {
       if (this.lastVerdict && !stamp.hidden) { stamp.classList.remove('bump'); void stamp.offsetWidth; stamp.classList.add('bump'); }
-      this.querySelector('[data-live]')!.textContent = `ახლა: ${v.name}`;
+      this.querySelector('[data-live]')!.textContent = `${tf('ახლა')}: ${tfPhrase(v.name)}`;
       this.lastVerdict = v.name;
     }
     const vals = Object.entries(this.spec.params).map(([k, d]) => `${d.sym} = ${this.params[k]}${d.unit ?? ''}`).join(', ');
-    this.svg.setAttribute('aria-label', `${this.spec.label}: ${vals}. ახლა: ${v.name}.`);
+    this.svg.setAttribute('aria-label', `${tf(this.spec.label)}: ${vals}. ${tf('ახლა')}: ${tfPhrase(v.name)}.`);
   }
 
   private updateReadouts(pts: Record<string, V>) {
@@ -214,7 +215,7 @@ export class GeoFigure extends HTMLElement {
       g.dataset.p = p;
       g.setAttribute('tabindex', '0');
       g.setAttribute('role', 'button');
-      g.setAttribute('aria-label', `წვერო ${p}: გადაათრიე ან გადაადგილე ისრებით`);
+      g.setAttribute('aria-label', `${tf('წვერო')} ${p}: ${tf('გადაათრიე ან გადაადგილე ისრებით')}`);
       g.innerHTML = '<circle class="hit" r="22"/><circle class="ring" r="13"/><circle class="knob" r="6"/>';
       this.handles.append(g);
     }
@@ -324,7 +325,7 @@ export class GeoFigure extends HTMLElement {
       const group = size.querySelector(`[data-for="${this.sketch.tool}"]`);
       this.sketch.sizes = size.open && group ? [...group.querySelectorAll('input')].map(i => (i.value === '' ? NaN : +i.value)) : null;
     };
-    this.sketch.onNote = msg => { note.textContent = msg || hint; };
+    this.sketch.onNote = msg => { note.textContent = msg ? tf(msg) : hint; };
     size.addEventListener('input', () => { readSizes(); note.textContent = hint; }); // a new number clears an old complaint
     size.addEventListener('toggle', readSizes);
     size.addEventListener('submit', e => { // Enter: the shape goes to the middle of the view
@@ -352,7 +353,7 @@ export class GeoFigure extends HTMLElement {
       if (b.matches('.sk-fit')) { this.resetView(); return; }
       if (b === toggle) {
         this.sketch.setTool(this.sketch.on ? null : 'pen');
-        live.textContent = this.sketch.on ? 'ხატვის რეჟიმი: ფანქარი' : 'ხატვის რეჟიმი გამორთულია';
+        live.textContent = tf(this.sketch.on ? 'ხატვის რეჟიმი: ფანქარი' : 'ხატვის რეჟიმი გამორთულია');
         this.touched();
       } else if (b.dataset.tool) this.sketch.setTool(b.dataset.tool as Tool);
       else if (b.dataset.sk === 'undo') this.sketch.undo();
