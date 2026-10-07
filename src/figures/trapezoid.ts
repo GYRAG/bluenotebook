@@ -1,4 +1,4 @@
-import { add, angleAt, area, dist, foot, intersect, lerp, mid, near, parallel, perpendicular, polar, rad, sub, unit, type V } from './engine/geom';
+import { add, angleAt, area, circumcenter, dist, foot, intersect, lerp, mid, near, parallel, perpendicular, polar, rad, sub, unit, type V } from './engine/geom';
 import { figure } from './engine/spec';
 
 // Georgian convention: AD ∥ BC are the bases (AD below, BC on top), AB and CD the legs.
@@ -26,6 +26,7 @@ export default figure({
       L: intersect(A, add(A, add(unit(sub(B, A)), unit(sub(D, A)))), B, add(B, add(unit(sub(A, B)), unit(sub(C, B))))), // bisectors at leg AB
       I: [x0 + a / 2, 0] as V, T: [x0 + a / 2, -h / 2] as V, // incircle centre and its touch point on AD (isosceles + tangential only)
       F: foot(D, A, B), G: intersect(A, B, D, C), // for problems: the foot from D on line AB; where the legs meet
+      U: circumcenter(A, B, D), // the circle through A, B, D (and C when isosceles)
     };
   },
   drag: { B: ['s', 'h'], C: ['b', 'h'], D: ['a'] },

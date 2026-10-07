@@ -37,6 +37,7 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
   A find item may be an expression (`BC/AB`); `labels="\sin A"` names its answer box. `prove` instead of find
   makes a proof problem; `book` lists Topuria's problems of the same type.
   Atomic givens label the figure; finds show as "?". Steps are a hidden solution that drives the figure.
+  A page with only problems (no Formula/Property/Definition) gets just the problems tab and is left off the cheat sheet.
 - `src/content.config.ts` — Zod schema. `src/subjects.ts` — subjects and nav sections.
 - `src/figures/<name>.ts` — figure specs (every `.ts` there is a figure; shared helpers live in `engine/`):
   params → named points (constraints by construction); dragging inverts `points` numerically (`engine/solve.ts`).

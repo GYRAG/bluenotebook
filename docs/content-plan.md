@@ -66,5 +66,5 @@ Batches (book problem sections → site topics):
 3. ✓ §6 → quadrilateral (incl. cyclic, tangential), rectangle, rhombus, square, trapezoid, Thales, triangle midline (30)
 4. ✓ §7–9 → similarity, right triangle (incl. §4's right-triangle angle problems), trigonometry, sine/cosine laws, medians and bisectors (25)
 5. ✓ §10–11 → triangle area, quadrilateral areas, polygons, regular polygons, arcs, sectors, segments (21)
-6. §13 → mixed problems (own page, own figures)
+6. ✓ §13 + §5 touching circles → „სხვადასხვა ამოცანები“ page (section `mixed`), figures tangent-circles and concentric (12)
 7. §14–23 → stereometry (needs 3D measuring in problems.test.ts)

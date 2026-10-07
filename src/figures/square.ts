@@ -14,6 +14,7 @@ export default figure({
       // A1B1C1D1, points one third along each side
       E: [0, -a] as V, F: [a, 0] as V, G: [0, a] as V, H: [-a, 0] as V,
       A1: lerp(A, B, 1 / 3), B1: lerp(B, C, 1 / 3), C1: lerp(C, D, 1 / 3), D1: lerp(D, A, 1 / 3),
+      M: [0, -a / 2 + (a * Math.sqrt(3)) / 2] as V, // ABM equilateral, inside the square
     };
   },
   drag: { C: ['a'] },

@@ -5,7 +5,7 @@ import { cheatView } from '@/components/content';
 import { allTopics, sectionsOf, topicUrl } from '@/lib/topics';
 
 // Every topic's formulas, rendered from the same MDX (formulas-only view). Prints one topic per block.
-const topics = sectionsOf(await allTopics(), 'geometry').flatMap(s => s.items);
+const topics = sectionsOf(await allTopics(), 'geometry').flatMap(s => s.items).filter(t => t.body?.includes('<Formula ')); // a problems-only page has no formulas
 const blocks = await Promise.all(topics.map(async t => ({ t, Content: (await render(t)).Content })));
 ---
 <Shell title="შპარგალკა" panel={false} description="გეომეტრიის ყველა ფორმულა ერთ გვერდზე — დასაბეჭდად.">

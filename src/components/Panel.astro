@@ -3,8 +3,8 @@ import Icon from './Icon.astro';
 
 // The right-hand panel (a bottom sheet on phones): up to four tabs, one scrolling body.
 const ALL = [['tools', 'ხელსაწყოები'], ['formulas', 'ფორმულები'], ['props', 'თვისებები'], ['probs', 'ამოცანები']] as const;
-const { tools = true, problems = false } = Astro.props as { tools?: boolean; problems?: boolean }; // no figure → no tools tab
-const TABS = ALL.filter(([id]) => (id !== 'tools' || tools) && (id !== 'probs' || problems));
+const { tools = true, theory = true, problems = false } = Astro.props as { tools?: boolean; theory?: boolean; problems?: boolean }; // no figure → no tools tab
+const TABS = ALL.filter(([id]) => (id !== 'tools' || tools) && (id === 'probs' ? problems : id === 'tools' || theory));
 ---
 <aside class="panel" aria-label="ხელსაწყოები და ცნობები">
   <button class="grip" type="button" data-sheet-toggle aria-label="პანელის გაშლა" aria-expanded="false"><span></span></button>

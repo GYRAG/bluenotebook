@@ -1,0 +1,111 @@
+---
+title: სხვადასხვა ამოცანები
+slug: mixed
+subject: geometry
+section: mixed
+order: 47
+summary: ამოცანები, რომლებშიც რამდენიმე თემის ცოდნა ერთად გამოიყენება — შეხებული წრეწირები, ჩახაზული და შემოხაზული ფიგურები.
+tags: [ამოცანები, წრეწირი, სამკუთხედი, ტრაპეცია]
+prerequisites: [circle, triangle-centers]
+status: draft
+figure: tangent-circles
+figures: [concentric, square, trapezoid, triangle-centers, triangle-area, right-triangle]
+---
+
+<Problems>
+
+<Problem id="p-mx-touch-angle" set={{ R: 3, r: 1 }} given="O1C=6 O2C=2" find="<ACB AB" answer="90 4√3" book="5.20 13.31"
+  q="$6$ და $2$ რადიუსის წრეწირები ერთმანეთს გარედან $C$ წერტილში ეხება. მათი საერთო გარე მხები წრეწირებს $A$ და $B$ წერტილებში ეხება. იპოვეთ $\angle ACB$ და $AB$."
+  hint="$C$ წერტილში გაავლეთ საერთო შიგა მხები; ის $AB$-ს $M$ წერტილში კვეთს.">
+<Step show="CM" hl="MA=MC MC=MB" tex="MA = MC = MB">ერთი წერტილიდან წრეწირისადმი გავლებული მხებების მონაკვეთები ტოლია: $M$-დან დიდი წრეწირისადმი — $MA = MC$, პატარასადმი — $MB = MC$.</Step>
+<Step hl="AMC BMC" tex="\angle MCA + \angle MCB = \tfrac12 \cdot 180^\circ = 90^\circ">სამკუთხედები $AMC$ და $BMC$ ტოლფერდაა, ამიტომ $\angle ACB$ სამკუთხედ $ACB$-ის დანარჩენი ორი კუთხის ჯამის ტოლია.</Step>
+<Step show="O1A O2B O2F" hl="O1F O2F" tex="AB = O_2F = \sqrt{8^2 - 4^2} = 4\sqrt3">რადიუსები შეხების წერტილებში მხების მართობულია, $O_2F \parallel AB$. მართკუთხა სამკუთხედ $O_1FO_2$-ში $O_1O_2 = 6 + 2 = 8$, $O_1F = 6 - 2 = 4$.</Step>
+</Problem>
+
+<Problem id="p-mx-touch-sides" set={{ R: 3, r: 1 }} show="AC BC" given="O1C=6 O2C=2" find="AC BC" answer="6 2√3" book="13.31"
+  q="$6$ და $2$ რადიუსის წრეწირები ერთმანეთს გარედან $C$ წერტილში ეხება, $AB$ მათი საერთო გარე მხებია. წინა ამოცანის მიხედვით $\angle ACB = 90^\circ$ და $AB = 4\sqrt3$. იპოვეთ $AC$ და $BC$."
+  hint="იპოვეთ $\angle AO_1C$, შემდეგ კი მხებითა და ქორდით შედგენილი კუთხე $BAC$.">
+<Step show="O1A O2F" hl="O1FO2" tex="\angle O_1O_2F = 30^\circ,\qquad \angle AO_1C = 60^\circ">მართკუთხა სამკუთხედ $O_1FO_2$-ში კათეტი $O_1F = 4$ ჰიპოტენუზის $O_1O_2 = 8$ ნახევარია.</Step>
+<Step hl="<BAC" tex="\angle BAC = \tfrac12 \cdot 60^\circ = 30^\circ">მხებითა და ქორდით შედგენილი კუთხე მის შიგნით მდებარე რკალის ნახევარია; $AC$ რკალი $60^\circ$-ია.</Step>
+<Step hl="BC AC" tex="BC = \tfrac12\, AB = 2\sqrt3,\qquad AC = \sqrt{48 - 12} = 6">მართკუთხა სამკუთხედ $ACB$-ში $BC$ $30^\circ$-იანი კუთხის პირდაპირ მდებარეობს.</Step>
+</Problem>
+
+<Problem id="p-mx-touch-radii" set={{ R: 3, r: 2 }} given="O1C/O2C=3/2 O1O2=10" find="O1C O2C" labels="R;r" answer="6 4" book="5.18 5.19"
+  q="ორი წრეწირი ერთმანეთს გარედან ეხება. მათი რადიუსები ისე შეეფარდება ერთმანეთს, როგორც $3 : 2$, ცენტრებს შორის მანძილი კი $10$-ია. იპოვეთ რადიუსები."
+  hint="გარედან შეხებისას შეხების წერტილი ცენტრების შემაერთებელ მონაკვეთზე ძევს.">
+<Step hl="O1C O2C" tex="O_1O_2 = R + r = 10">შეხების წერტილი ცენტრების შემაერთებელ მონაკვეთზე ძევს.</Step>
+<Step tex="3x + 2x = 10 \;\Rightarrow\; x = 2,\qquad R = 6,\quad r = 4">რადიუსებია $3x$ და $2x$.</Step>
+</Problem>
+
+<Problem id="p-mx-ring-chord" figure="concentric" set={{ R: 3, q: 0.6 }} show="AB OA OT <OTB" given="AB=10" find="π*(OA^2-OT^2)" labels="S" answer="25π" book="11.61 11.111"
+  q="ორი კონცენტრული წრეწირიდან დიდის $AB$ ქორდა პატარას ეხება, $AB = 10$. იპოვეთ წრეწირებს შორის მოთავსებული რგოლის ფართობი."
+  hint="რგოლის ფართობი $\pi(R^2 - r^2)$-ია; $R^2 - r^2$ მართკუთხა სამკუთხედ $OTA$-დან იპოვეთ.">
+<Step hl="OT <OTB AT=TB" tex="AT = TB = 5">რადიუსი $OT$ შეხების წერტილში მხების მართობულია და ქორდას შუაზე ყოფს.</Step>
+<Step hl="OTA" tex="R^2 - r^2 = OA^2 - OT^2 = AT^2 = 25">პითაგორას თეორემა სამკუთხედ $OTA$-ში.</Step>
+<Step tex="S = \pi\,(R^2 - r^2) = 25\pi">რგოლის ფართობი დიდი და პატარა წრეების ფართობების სხვაობაა.</Step>
+</Problem>
+
+<Problem id="p-mx-concentric-diameter" figure="concentric" set={{ R: 2.6, q: 0.6153846153846154 }} show="P1P2" given="P1Q1=5 Q1Q2=16 Q2P2=5" find="OP1 OQ1" labels="R;r" answer="13 8" book="5.14 5.15"
+  q="ორი კონცენტრული წრეწირიდან პატარა დიდი წრეწირის დიამეტრს სამ ნაწილად ყოფს: $5$, $16$ და $5$. იპოვეთ წრეწირების რადიუსები."
+  hint="დიამეტრი ცენტრზე გადის, ამიტომ მისი შუა ნაწილი პატარა წრეწირის დიამეტრია.">
+<Step hl="Q1Q2" tex="r = \tfrac12\, Q_1Q_2 = 8">$Q_1Q_2$ ცენტრზე გადის — ის პატარა წრეწირის დიამეტრია.</Step>
+<Step hl="P1P2" tex="R = \tfrac12\,(5 + 16 + 5) = 13">$P_1P_2$ დიდი წრეწირის დიამეტრია.</Step>
+</Problem>
+
+<Problem id="p-mx-square-point" figure="square" set={{ a: 4 }} show="AM BM CM" given="<MAB=60 <MCD=15" find="<MBC" answer="30" book="13.3"
+  q="$ABCD$ კვადრატის შიგნით აღებულია $M$ წერტილი ისე, რომ $\angle MAB = 60^\circ$ და $\angle MCD = 15^\circ$. იპოვეთ $\angle MBC$."
+  hint="განიხილეთ კვადრატის შიგნით $AB$ გვერდზე აგებული ტოლგვერდა სამკუთხედის წვერო.">
+<Step hl="ABM">განვიხილოთ წერტილი $M'$ კვადრატის შიგნით, რომლისთვისაც სამკუთხედი $ABM'$ ტოლგვერდაა.</Step>
+<Step hl="BM=BC" tex="\begin{gathered}BM' = AB = BC \\ \angle M'BC = 90^\circ - 60^\circ = 30^\circ\end{gathered}">სამკუთხედი $BM'C$ ტოლფერდაა.</Step>
+<Step hl="<BCM <MCD" tex="\begin{gathered}\angle BCM' = \frac{180^\circ - 30^\circ}{2} = 75^\circ \\ \angle M'CD = 90^\circ - 75^\circ = 15^\circ\end{gathered}">ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+<Step hl="<MBC" tex="M' = M,\qquad \angle MBC = 30^\circ">$M'$ ძევს $A$-დან $AB$-სთან $60^\circ$-ით გავლებულ სხივზეც და $C$-დან $CD$-სთან $15^\circ$-ით გავლებულ სხივზეც. ორი სხივი ერთ წერტილში იკვეთება, ამიტომ $M' = M$.</Step>
+</Problem>
+
+<Problem id="p-mx-trap-circumradius" figure="trapezoid" set={{ a: 4, b: 3, h: 3.5, s: 0.5 }} show="(UA) U UA UB BH <BHA" given="AD=16 BC=12 BH=14 AB=CD" find="UA" labels="R" answer="10" book="13.19"
+  q="ტოლფერდა ტრაპეციის ფუძეებია $16$ და $12$, სიმაღლე კი $14$-ია. იპოვეთ ტრაპეციაზე შემოხაზული წრეწირის რადიუსი."
+  hint="ცენტრი ტრაპეციის სიმეტრიის ღერძზე ძევს. აღნიშნეთ მისი მანძილი დიდ ფუძემდე $x$-ით.">
+<Step hl="UT">შემოხაზული წრეწირის ცენტრი $U$ ფუძეების საერთო შუამართობზე — ტრაპეციის სიმეტრიის ღერძზე ძევს. ვთქვათ, ის დიდი ფუძიდან $x$ მანძილზეა.</Step>
+<Step hl="UA UB" tex="UA^2 = 8^2 + x^2,\qquad UB^2 = 6^2 + (14 - x)^2">ფუძეების ნახევრებია $8$ და $6$.</Step>
+<Step tex="64 + x^2 = 36 + (14 - x)^2 \;\Rightarrow\; x = 6">$UA = UB$ — ორივე რადიუსია.</Step>
+<Step hl="UA" tex="R = \sqrt{64 + 36} = 10">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-mx-double-angle" figure="triangle-centers" set={{ c: 4, b: 3.2, alpha: 82.81924421854173 }} show="AL" given="<BAC=2*<ABC AC=4 AB=5" find="BC" answer="6" book="13.1"
+  q="$ABC$ სამკუთხედში $\angle A = 2\angle B$, $AC = 4$, $AB = 5$. იპოვეთ $BC$."
+  hint="გაავლეთ $A$ კუთხის ბისექტრისა $AL$ და იპოვეთ ტოლფერდა და მსგავსი სამკუთხედები.">
+<Step hl="<LAB=<ABC ALB" tex="AL = LB">$\angle LAB = \tfrac12 \angle A = \angle B$ — სამკუთხედი $ALB$ ტოლფერდაა.</Step>
+<Step hl="CAL <CAL=<ABC" tex="\triangle CAL \sim \triangle CBA">$\angle CAL = \angle B$, $\angle C$ კი საერთოა.</Step>
+<Step tex="\begin{gathered}AL = \frac{AB \cdot CA}{CB} = \frac{20}{a},\qquad CL = \frac{CA^2}{CB} = \frac{16}{a} \\ \frac{20}{a} = a - \frac{16}{a} \;\Rightarrow\; a^2 = 36\end{gathered}">აღვნიშნოთ $BC = a$. მსგავსებიდან $\tfrac{AL}{AB} = \tfrac{CA}{CB} = \tfrac{CL}{CA}$, ხოლო $AL = LB = a - CL$.</Step>
+<Step hl="BC" tex="BC = 6">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-mx-height-third" figure="triangle-area" set={{ c: 3, b: 3.605551275463989, alpha: 56.309932474020215 }} show="CH <CHA" given="AC=√13 BC=√10 CH=3" find="AB" answer="3" book="13.9"
+  q="მახვილკუთხა $ABC$ სამკუთხედში $AC = \sqrt{13}$, $BC = \sqrt{10}$, ხოლო $AB$ გვერდზე დაშვებული სიმაღლე $CH = 3$. იპოვეთ $AB$."
+  hint="სიმაღლე სამკუთხედს ორ მართკუთხა სამკუთხედად ყოფს.">
+<Step hl="ACH" tex="AH = \sqrt{13 - 9} = 2">პითაგორას თეორემა სამკუთხედ $ACH$-ში.</Step>
+<Step hl="BCH" tex="HB = \sqrt{10 - 9} = 1">იგივე სამკუთხედ $BCH$-ში.</Step>
+<Step hl="AB" tex="AB = AH + HB = 3">სამკუთხედი მახვილკუთხაა, ამიტომ $H$ ძევს $A$-სა და $B$-ს შორის.</Step>
+</Problem>
+
+<Problem id="p-mx-right-radii" figure="right-triangle" set={{ a: 3, b: 4 }} show="CM (IK) IK" given="AB=10 CM/IK=5/2" find="BC AC" answer="6 8" book="13.4"
+  q="მართკუთხა $ABC$ სამკუთხედის ჰიპოტენუზა $AB = 10$, მასზე შემოხაზული და მასში ჩახაზული წრეწირების რადიუსები კი ისე შეეფარდება ერთმანეთს, როგორც $5 : 2$. იპოვეთ კათეტები, თუ $BC \lt AC$."
+  hint="მართკუთხა სამკუთხედში $R = \tfrac{c}{2}$ და $r = \tfrac{a + b - c}{2}$.">
+<Step hl="CM" tex="R = \frac{AB}{2} = 5 \;\Rightarrow\; r = 2">შემოხაზული წრეწირის ცენტრი ჰიპოტენუზის შუაწერტილია.</Step>
+<Step hl="IK" tex="a + b = c + 2r = 14">$r = \tfrac{a + b - c}{2}$.</Step>
+<Step tex="a^2 + b^2 = 100 \;\Rightarrow\; 2ab = 14^2 - 100 = 96">პითაგორას თეორემით.</Step>
+<Step hl="BC AC" tex="ab = 48,\quad a + b = 14 \;\Rightarrow\; BC = 6,\quad AC = 8">კათეტები განტოლების $t^2 - 14t + 48 = 0$ ფესვებია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-mx-touch-midpoint" set={{ R: 2.6, r: 1.4 }} show="CM" prove="MA=MB"
+  q="ორი წრეწირი ერთმანეთს გარედან $C$ წერტილში ეხება, $AB$ მათი საერთო გარე მხებია. $C$ წერტილში გავლებული საერთო მხები $AB$-ს $M$ წერტილში კვეთს. დაამტკიცეთ, რომ $M$ არის $AB$-ს შუაწერტილი."
+  hint="$M$-დან თითოეულ წრეწირს ორი მხები აქვს გავლებული.">
+<Step hl="MA=MC" tex="MA = MC">$M$-დან დიდი წრეწირისადმი გავლებული მხებების მონაკვეთები ტოლია.</Step>
+<Step hl="MC=MB" tex="MC = MB">იგივე პატარა წრეწირისთვის.</Step>
+<Step hl="MA=MB" tex="MA = MB \quad \blacksquare">ორივე $MC$-ს ტოლია.</Step>
+</Problem>
+
+</Problems>
