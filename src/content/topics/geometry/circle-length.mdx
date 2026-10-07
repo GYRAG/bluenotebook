@@ -68,3 +68,42 @@ figure: circle-sector
 </Properties>
 
 <Remark kind="mistake">რკალისა და სექტორის ფორმულებში $\alpha$ გრადუსებშია. რადიანებში იგივე ფორმულები ასე იწერება: $l = R\alpha$, $S_1 = \tfrac12 R^2\alpha$.</Remark>
+
+<Problems>
+
+<Problem id="p-arc-degrees" set={{ R: 3, alpha: 150 }} given="OA=6 π*OA*<AOB/180=5π" find="<AOB" answer="150" book="11.27 11.28"
+  q="$6$ რადიუსის წრეწირის რკალის სიგრძე $5\pi$-ია. იპოვეთ რკალის გრადუსული ზომა."
+  hint="$l = \tfrac{\pi R \alpha}{180^\circ}$.">
+<Step tex="\frac{\pi \cdot 6 \cdot \alpha}{180^\circ} = 5\pi">$\alpha$ გრადუსიანი რკალის სიგრძის ფორმულა.</Step>
+<Step hl="<AOB" tex="\alpha = \frac{5 \cdot 180^\circ}{6} = 150^\circ">ამოვხსნათ $\alpha$-ს მიმართ.</Step>
+</Problem>
+
+<Problem id="p-arc-circle" k={6} set={{ R: 3, alpha: 40 }} given="<AOB=40 π*OA*<AOB/180=4π" find="2*π*OA OA" labels="C;R" answer="36π 18" book="11.29"
+  q="წრეწირის $40^\circ$-იანი რკალის სიგრძე $4\pi$-ია. იპოვეთ წრეწირის სიგრძე და რადიუსი."
+  hint="$40^\circ$ მთელი წრეწირის $\tfrac{40}{360} = \tfrac19$ ნაწილია.">
+<Step tex="C = 4\pi \cdot \frac{360^\circ}{40^\circ} = 36\pi">რკალის სიგრძე მისი გრადუსული ზომის პროპორციულია.</Step>
+<Step hl="OA" tex="R = \frac{C}{2\pi} = 18">$C = 2\pi R$.</Step>
+</Problem>
+
+<Problem id="p-sector-area" set={{ R: 3, alpha: 120 }} given="OA=6 <AOB=120" find="π*OA^2*<AOB/360" labels="S_1" answer="12π" book="11.69"
+  q="სექტორის რადიუსი $6$-ია, ცენტრალური კუთხე კი $120^\circ$. იპოვეთ სექტორის ფართობი."
+  hint="$S_1 = \tfrac{\pi R^2 \alpha}{360^\circ}$.">
+<Step tex="S_1 = \frac{\pi \cdot 36 \cdot 120^\circ}{360^\circ} = 12\pi">სექტორი წრის $\tfrac{120}{360} = \tfrac13$ ნაწილია.</Step>
+</Problem>
+
+<Problem id="p-sector-angle" set={{ R: 3, alpha: 150 }} given="OA=6 π*OA^2*<AOB/360=15π" find="<AOB" answer="150" book="11.72 11.73"
+  q="სექტორის ფართობი $15\pi$-ია, რადიუსი კი $6$. იპოვეთ სექტორის ცენტრალური კუთხე."
+  hint="$S_1 = \tfrac{\pi R^2 \alpha}{360^\circ}$.">
+<Step tex="\frac{\pi \cdot 36 \cdot \alpha}{360^\circ} = 15\pi">სექტორის ფართობის ფორმულა.</Step>
+<Step hl="<AOB" tex="\alpha = \frac{15 \cdot 360^\circ}{36} = 150^\circ">ამოვხსნათ $\alpha$-ს მიმართ.</Step>
+</Problem>
+
+<Problem id="p-segment-area" set={{ R: 3, alpha: 90 }} show="AB" given="OA=6 <AOB=90" find="π*OA^2/4-S(OAB)" labels="S_2" answer="9π-18" book="11.82 11.83"
+  q="წრის რადიუსი $6$-ია. იპოვეთ $90^\circ$-იანი რკალით და მისი ქორდით შემოსაზღვრული სეგმენტის ფართობი."
+  hint="სეგმენტის ფართობი სექტორისა და სამკუთხედის ფართობების სხვაობაა.">
+<Step tex="S_1 = \frac{\pi \cdot 36}{4} = 9\pi">სექტორი წრის მეოთხედია.</Step>
+<Step hl="OAB" tex="S_{OAB} = \tfrac12 \cdot 6 \cdot 6 = 18">სამკუთხედი $OAB$ მართკუთხაა.</Step>
+<Step tex="S_2 = 9\pi - 18">სეგმენტის ფართობი სექტორისა და სამკუთხედის ფართობების სხვაობაა.</Step>
+</Problem>
+
+</Problems>

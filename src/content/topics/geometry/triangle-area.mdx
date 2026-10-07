@@ -67,3 +67,43 @@ parent: triangle
 </Properties>
 
 <Remark kind="mistake">$p$ — ნახევარპერიმეტრია და არა პერიმეტრი: ჰერონის ფორმულაში $P$-ს ჩასმა ფართობს დაახლოებით ოთხჯერ გაზრდის.</Remark>
+
+<Problems>
+
+<Problem id="p-area-heights" set={{ c: 6, b: 4.5, alpha: 41.810314895778596 }} show="CH <CHA" given="AB=12 AC=9 CH=6" find="2*S(ABC)/AC" labels="h_b" answer="8" book="10.15 10.16"
+  q="$ABC$ სამკუთხედში $AB = 12$, $AC = 9$, ხოლო $AB$ გვერდზე დაშვებული სიმაღლე $CH = 6$. იპოვეთ $AC$ გვერდზე დაშვებული სიმაღლე."
+  hint="ფართობი ჩაწერეთ ორი გზით: ორივე გვერდითა და მასზე დაშვებული სიმაღლით.">
+<Step hl="AB CH" tex="S = \tfrac12\, AB \cdot CH = \tfrac12 \cdot 12 \cdot 6 = 36">სამკუთხედის ფართობი ფუძისა და სიმაღლის ნამრავლის ნახევარია.</Step>
+<Step hl="AC" tex="h_b = \frac{2S}{AC} = \frac{72}{9} = 8">იგივე ფართობი $AC$ ფუძით.</Step>
+</Problem>
+
+<Problem id="p-area-sine" set={{ c: 5, b: 4, alpha: 30 }} given="AB=10 AC=8 <A=30" find="S(ABC)" answer="20"
+  q="სამკუთხედის ორი გვერდია $10$ და $8$, მათ შორის კუთხე კი $30^\circ$-ია. იპოვეთ სამკუთხედის ფართობი."
+  hint="ფართობი ორი გვერდისა და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია.">
+<Step hl="ABC <A" tex="S = \tfrac12 \cdot 10 \cdot 8 \cdot \sin 30^\circ = 20">ფართობი ორი გვერდისა და მათ შორის კუთხის სინუსის ნამრავლის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-heron-height" set={{ c: 7, b: 5.666666666666667, alpha: 28.07248693585296 }} given="AB=21 AC=17 BC=10" find="S(ABC) 2*S(ABC)/BC" labels="S;h_a" answer="84 16,8" book="10.96 10.97"
+  q="სამკუთხედის გვერდებია $10$, $17$ და $21$. იპოვეთ მისი ფართობი და უდიდესი სიმაღლე."
+  hint="ჰერონის ფორმულა; უდიდესი სიმაღლე უმცირეს გვერდზე ეშვება.">
+<Step tex="p = \frac{10 + 17 + 21}{2} = 24">ნახევარპერიმეტრი.</Step>
+<Step hl="ABC" tex="S = \sqrt{24 \cdot 14 \cdot 7 \cdot 3} = 84">ჰერონის ფორმულით.</Step>
+<Step hl="BC" tex="h_a = \frac{2S}{BC} = \frac{168}{10} = 16{,}8">უდიდესი სიმაღლე უმცირეს გვერდზე ეშვება.</Step>
+</Problem>
+
+<Problem id="p-radii-from-area" set={{ c: 7, b: 5.666666666666667, alpha: 28.07248693585296 }} show="(IT1) I IT1" given="AB=21 AC=17 BC=10" find="IT1 OA" labels="r;R" answer="3,5 85/8" book="10.109 10.110"
+  q="სამკუთხედის გვერდებია $10$, $17$ და $21$. იპოვეთ მასში ჩახაზული და მასზე შემოხაზული წრეწირების რადიუსები."
+  hint="$S = p\,r$ და $S = \tfrac{abc}{4R}$; ფართობი ჰერონის ფორმულით იპოვეთ.">
+<Step hl="ABC" tex="p = 24,\qquad S = \sqrt{24 \cdot 14 \cdot 7 \cdot 3} = 84">ჰერონის ფორმულით.</Step>
+<Step hl="IT1" tex="r = \frac{S}{p} = \frac{84}{24} = 3{,}5">ფართობი ნახევარპერიმეტრისა და ჩახაზული წრეწირის რადიუსის ნამრავლია.</Step>
+<Step show="(OA) O" hl="OA" tex="R = \frac{abc}{4S} = \frac{10 \cdot 17 \cdot 21}{4 \cdot 84} = \frac{85}{8}">ფართობი უდრის $\tfrac{abc}{4R}$-ს.</Step>
+</Problem>
+
+<Problem id="p-area-same-height" set={{ c: 7, b: 5.938459911664722, alpha: 60 }} show="BD" given="DC=2*AD S(ABC)=18" find="S(ABD) S(DBC)" answer="6 12" book="10.58 10.59"
+  q="$ABC$ სამკუთხედის ფართობი $18$-ია. $AC$ გვერდზე აღებულია $D$ წერტილი ისე, რომ $DC = 2\,AD$. იპოვეთ $ABD$ და $DBC$ სამკუთხედების ფართობები."
+  hint="ორ სამკუთხედს $B$ წვეროდან დაშვებული საერთო სიმაღლე აქვს.">
+<Step hl="ABD DBC" tex="\frac{S_{ABD}}{S_{DBC}} = \frac{AD}{DC} = \frac12">სამკუთხედებს საერთო სიმაღლე აქვს, ამიტომ მათი ფართობები ფუძეების პროპორციულია.</Step>
+<Step tex="S_{ABD} = \tfrac13 \cdot 18 = 6,\qquad S_{DBC} = 12">ფართობი $1 : 2$ შეფარდებით იყოფა.</Step>
+</Problem>
+
+</Problems>

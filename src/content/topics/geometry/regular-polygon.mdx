@@ -66,3 +66,49 @@ parent: polygon
 <Remark>წესიერ ექვსკუთხედს მთავარი დიაგონალები ექვს ტოლგვერდა სამკუთხედად ყოფს, ამიტომ $S_6 = 6 \cdot \tfrac{a^2\sqrt3}{4} = \tfrac{3a^2\sqrt3}{2}$.</Remark>
 
 <Remark kind="mistake">„ყველა გვერდი ტოლია“ წესიერობისთვის არ კმარა: რომბს ყველა გვერდი ტოლი აქვს, მაგრამ (თუ კვადრატი არ არის) წესიერი არ არის — კუთხეებიც ტოლი უნდა იყოს.</Remark>
+
+<Problems>
+
+<Problem id="p-reg-exterior" set={{ n: 12, R: 3 }} given="180-<A=30" find="360/(180-<A) <A" labels="n;\angle A" answer="12 150"
+  q="წესიერი მრავალკუთხედის გარე კუთხე $30^\circ$-ია. რამდენი გვერდი აქვს მას და რას უდრის მისი შიგა კუთხე?"
+  hint="წესიერი მრავალკუთხედის გარე კუთხეები ტოლია, მათი ჯამი კი $360^\circ$-ია.">
+<Step tex="n = \frac{360^\circ}{30^\circ} = 12">გარე კუთხეების ჯამი $360^\circ$-ია და ყველა ტოლია.</Step>
+<Step hl="<A" tex="\angle A = 180^\circ - 30^\circ = 150^\circ">შიგა კუთხე გარე კუთხის მოსაზღვრეა.</Step>
+</Problem>
+
+<Problem id="p-reg-hexagon-radii" k={2} set={{ n: 6, R: 3 }} show="OA OM <OMA" given="P(ABCDEF)=36" find="OA OM" labels="R;r" answer="6 3√3" book="11.9 11.18"
+  q="წესიერი ექვსკუთხედის პერიმეტრი $36$-ია. იპოვეთ მასზე შემოხაზული და მასში ჩახაზული წრეწირების რადიუსები."
+  hint="წესიერი ექვსკუთხედის გვერდი შემოხაზული წრეწირის რადიუსის ტოლია.">
+<Step hl="AB" tex="AB = \frac{36}{6} = 6">წესიერი ექვსკუთხედის ექვსივე გვერდი ტოლია.</Step>
+<Step hl="OAB OA" tex="R = OA = AB = 6">ცენტრალური კუთხე $60^\circ$-ია — სამკუთხედი $OAB$ ტოლგვერდაა.</Step>
+<Step hl="OM" tex="r = OM = \frac{\sqrt3}{2} \cdot 6 = 3\sqrt3">$OM$ ტოლგვერდა სამკუთხედ $OAB$-ის სიმაღლეა.</Step>
+</Problem>
+
+<Problem id="p-reg-triangle-radii" k={1.3333333333333333} set={{ n: 3, R: 3 }} show="OA OM <OMA" given="OA-OM=2" find="AB" answer="4√3" book="11.1"
+  q="წესიერ სამკუთხედზე შემოხაზული და მასში ჩახაზული წრეწირების რადიუსების სხვაობა $2$-ია. იპოვეთ სამკუთხედის გვერდი."
+  hint="წესიერ სამკუთხედში $R = 2r$.">
+<Step hl="OM OA" tex="R = 2r">ცენტრი მედიანებს $2 : 1$ შეფარდებით ყოფს.</Step>
+<Step tex="2r - r = 2 \;\Rightarrow\; r = 2,\quad R = 4">ჩავსვათ სხვაობაში.</Step>
+<Step hl="AB" tex="AB = R\sqrt3 = 4\sqrt3">წესიერი სამკუთხედის გვერდი $R\sqrt3$-ია.</Step>
+</Problem>
+
+<Problem id="p-reg-hexagon-area" set={{ n: 6, R: 3 }} show="OM OA OB <OMA" given="OM=3" find="S(ABCDEF)" answer="18√3" book="11.3 11.7"
+  q="წესიერი ექვსკუთხედი შემოხაზულია $3$ რადიუსის წრეწირზე. იპოვეთ ექვსკუთხედის ფართობი."
+  hint="ექვსკუთხედი ექვს ტოლგვერდა სამკუთხედად იყოფა, რომელთა სიმაღლე $r$-ია.">
+<Step hl="OAB OM" tex="AB = \frac{2r}{\sqrt3} = 2\sqrt3">ტოლგვერდა სამკუთხედის $OAB$ სიმაღლე $r = OM = 3$-ია.</Step>
+<Step hl="ABCDEF" tex="S = 6 \cdot \tfrac12 \cdot AB \cdot OM = 3 \cdot 2\sqrt3 \cdot 3 = 18\sqrt3">ფართობი ექვსი ტოლი სამკუთხედის ფართობების ჯამია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-reg-triangle-half-radius" set={{ n: 3, R: 3 }} show="OA OB OM <OMA" prove="2*OM=OA" book="11.94"
+  q="დაამტკიცეთ, რომ წრეწირში ჩახაზული წესიერი სამკუთხედის გვერდი მის მართობულ რადიუსს შუაზე ყოფს."
+  hint="იპოვეთ $\angle AOM$.">
+<Step hl="<AOB" tex="\angle AOB = \frac{360^\circ}{3} = 120^\circ">წესიერი სამკუთხედის ცენტრალური კუთხე.</Step>
+<Step hl="<AOM <OMA" tex="\angle AOM = 60^\circ,\qquad \angle OAM = 30^\circ">რადიუსი, რომელიც $AB$-ს მართობულია, $AOB$ ტოლფერდა სამკუთხედის ბისექტრისიცაა.</Step>
+<Step hl="OAM OM" tex="OM = \tfrac12\, OA \quad \blacksquare">$OM$ კათეტი $30^\circ$-იანი კუთხის პირდაპირ მდებარეობს — ის რადიუსის ნახევარია.</Step>
+</Problem>
+
+</Problems>

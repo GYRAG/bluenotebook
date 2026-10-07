@@ -1,4 +1,4 @@
-import { angleAt, area, circumcenter, dist, foot, incenter, near, rad, triangleSAS } from './engine/geom';
+import { angleAt, area, circumcenter, dist, foot, incenter, lerp, near, rad, triangleSAS } from './engine/geom';
 import { figure } from './engine/spec';
 
 // Sides a = BC, b = CA, c = AB; H is the foot of the altitude from C, I the incentre with
@@ -13,7 +13,7 @@ export default figure({
   },
   points: ({ c, b, alpha }) => {
     const { A, B, C } = triangleSAS(c, b, alpha), I = incenter(A, B, C);
-    return { A, B, C, H: foot(C, A, B), I, T1: foot(I, A, B), T2: foot(I, B, C), T3: foot(I, C, A), O: circumcenter(A, B, C) };
+    return { A, B, C, H: foot(C, A, B), I, T1: foot(I, A, B), T2: foot(I, B, C), T3: foot(I, C, A), O: circumcenter(A, B, C), D: lerp(A, C, 1 / 3) }; // D: for problems
   },
   drag: { B: ['c'], C: ['b', 'alpha'] },
   base: 'ABC',
