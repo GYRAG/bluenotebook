@@ -60,12 +60,12 @@ an English copy of every page at /en/…. This repo is self-contained — ignore
 - Problem help comes in stages (`[data-help]`): the hint, the solution's first step (stepper locked at 0), all of it.
 - Practice (`/practice/`, `src/lib/practice.ts`): random answer problems from chosen chapters, worked on their
   topic pages (the bar on top of the panel), scored by the help taken before solving. Problem index: `problemsOf()`.
-- Other pages: `/map/` (prerequisite map; „read first“ comes from frontmatter `prerequisites`), `/glossary/`
+- Other pages: `/map/` (one topic with what it builds on above and what builds on it below; from frontmatter `prerequisites`), `/glossary/`
   (glossary.json; each term links to the topic whose `<Definition>` bolds it, `#definition`). Each topic ends with
   `TopicFoot` (read first, previous/next in `readingOrder()`).
 - Link previews: `Shell.astro` sets Open Graph tags; `og:image` is `public/og/<lang>/<subject>/<slug>.png`, falling
   back to `/og/<lang>/home.png` for pages without one (a new topic: rerun `pnpm og`).
-- localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `solved`, `pins`, `practice`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
+- localStorage keys are prefixed `mb:` (`theme`, `last`, `seen`, `solved`, `pins`, `practice`, `practice-log`, `fig:<name>`, `sketch:<name>`, `hint-seen`); every access is guarded.
 
 ## English
 - Georgian pages keep their URLs; English lives under `/en/`. Page bodies are shared views in `src/views/`;

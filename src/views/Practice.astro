@@ -11,6 +11,11 @@ const probs = problemsOf(topics, lang).filter(p => p.calc);
 const chapters = subjectsWithContent(topics).flatMap(sub => sectionsOf(topics, sub, lang))
   .map(s => ({ id: s.id, label: s.label, n: probs.filter(p => p.section === s.id).length })).filter(c => c.n);
 const data = probs.map(({ key, url, topic, section, n }) => ({ key, url, topic, section, n }));
+const QUICK = [
+  { n: 5, time: 0, fresh: false, name: 'სწრაფი ვარჯიში', what: '5 ამოცანა ყველა თავიდან' },
+  { n: 10, time: 0, fresh: true, name: 'ამოუხსნელი', what: '10 ამოცანა, რომლებიც ჯერ არ ამოგიხსნია' },
+  { n: 20, time: 40, fresh: false, name: 'საკონტროლო', what: '20 ამოცანა, 40 წუთი' },
+];
 const L = {
   right: tr(lang, 'სწორია დახმარების გარეშე'), helped: tr(lang, 'მინიშნებით'), shown: tr(lang, 'ამოხსნა ნანახია'), skipped: tr(lang, 'გამოტოვებულია'),
   problem: tr(lang, 'ამოცანა').toLowerCase(), wrong: tr(lang, 'არასწორი პასუხი'), time: tr(lang, 'დრო:'), pool: tr(lang, 'ამოცანები შესარჩევად:'),
@@ -18,62 +23,124 @@ const L = {
 };
 ---
 <Shell title={tr(lang, 'ვარჯიში')} panel={false} lede={tr(lang, 'შემთხვევითი ამოცანები შენ მიერ არჩეული თავებიდან. თითოეულს მის გვერდზე ამოხსნი, ბოლოს კი შედეგს ნახავ.')}>
-  <div class="practice" data-l={JSON.stringify(L)}>
-    <section class="card" data-active hidden aria-labelledby="active-h">
-      <h2 id="active-h" class="home-h">{tr(lang, 'ვარჯიში მიმდინარეობს')}</h2>
-      <p class="big" data-progress></p>
-      <div class="row">
-        <a class="go" data-continue href="/">{tr(lang, 'გაგრძელება')}</a>
-        <button class="btn" type="button" data-stop>{tr(lang, 'დასრულება')}</button>
-      </div>
-    </section>
-
-    <section class="card" data-results hidden aria-labelledby="res-h">
-      <h2 id="res-h" class="home-h">{tr(lang, 'შედეგი')}</h2>
-      <p class="big" data-score></p>
-      <p class="sum" data-sum></p>
-      <ol class="res" data-list></ol>
-    </section>
-
-    <form class="setup" data-setup>
-      <fieldset>
-        <legend class="home-h">{tr(lang, 'თავები')}</legend>
-        <div class="chips">
-          {chapters.map(c => <label class="chip"><input type="checkbox" name="sec" value={c.id} checked /><span>{c.label}</span><span class="n">{c.n}</span></label>)}
+  <div class="pr" data-l={JSON.stringify(L)} data-lang={lang}>
+    <div class="pr-main">
+      <section class="card" data-active hidden aria-labelledby="active-h">
+        <h2 id="active-h" class="h">{tr(lang, 'ვარჯიში მიმდინარეობს')}</h2>
+        <p class="big" data-progress></p>
+        <div class="row">
+          <a class="go" data-continue href="/">{tr(lang, 'გაგრძელება')}</a>
+          <button class="btn" type="button" data-stop>{tr(lang, 'დასრულება')}</button>
         </div>
-        <button class="link" type="button" data-all>{tr(lang, 'ყველა თავი')}</button>
-      </fieldset>
-      <fieldset>
-        <legend class="home-h">{tr(lang, 'რამდენი ამოცანა')}</legend>
-        <div class="chips">{[5, 10, 20].map(n => <label class="chip"><input type="radio" name="count" value={n} checked={n === 10} /><span>{n}</span></label>)}</div>
-      </fieldset>
-      <fieldset>
-        <legend class="home-h">{tr(lang, 'დრო')}</legend>
-        <div class="chips">{[0, 10, 20, 40].map(m => <label class="chip"><input type="radio" name="time" value={m} checked={m === 0} /><span>{m ? `${m} ${tr(lang, 'წთ')}` : tr(lang, 'დროის გარეშე')}</span></label>)}</div>
-      </fieldset>
-      <div class="chips"><label class="chip"><input type="checkbox" name="fresh" /><span>{tr(lang, 'მხოლოდ ამოუხსნელი')}</span></label></div>
-      <p class="pool" data-pool aria-live="polite"></p>
-      <button class="go" type="submit">{tr(lang, 'დაწყება')}</button>
-    </form>
+      </section>
+
+      <section class="card" data-results hidden aria-labelledby="res-h">
+        <h2 id="res-h" class="h">{tr(lang, 'შედეგი')}</h2>
+        <p class="big" data-score></p>
+        <p class="sum" data-sum></p>
+        <ol class="res" data-list></ol>
+      </section>
+
+      <div class="setup" data-setup-all>
+        <h2 class="h">{tr(lang, 'სწრაფი დაწყება')}</h2>
+        <div class="quick">
+          {QUICK.map(q => (
+            <button class="qk" type="button" data-quick={JSON.stringify({ n: q.n, time: q.time, fresh: q.fresh })}>
+              <span class="qk-n">{q.n}</span>
+              <span class="qk-t">{tr(lang, q.name)}</span>
+              <span class="qk-w">{tr(lang, q.what)}</span>
+            </button>
+          ))}
+        </div>
+
+        <h2 class="h">{tr(lang, 'შენი არჩევანით')}</h2>
+        <form class="own" data-setup>
+          <fieldset>
+            <legend class="sr-only">{tr(lang, 'თავები')}</legend>
+            <ul class="secs">
+              {chapters.map(c => (
+                <li><label class="crow">
+                  <input class="vh" type="checkbox" name="sec" value={c.id} checked />
+                  <span class="tick" aria-hidden="true"></span>
+                  <span class="nm">{c.label}</span>
+                  <span class="bar" aria-hidden="true"><i data-bar={c.id}></i></span>
+                  <span class="ct" data-ct={c.id} data-total={c.n}>0 / {c.n}</span>
+                </label></li>
+              ))}
+            </ul>
+            <button class="link" type="button" data-all>{tr(lang, 'ყველა / არცერთი')}</button>
+          </fieldset>
+          <div class="opts">
+            <fieldset>
+              <legend class="k">{tr(lang, 'რამდენი ამოცანა')}</legend>
+              <div class="ovs">{[5, 10, 20].map(n => <label class="ov"><input class="vh" type="radio" name="count" value={n} checked={n === 10} /><span>{n}</span></label>)}</div>
+            </fieldset>
+            <fieldset>
+              <legend class="k">{tr(lang, 'დრო')}</legend>
+              <div class="ovs">{[0, 10, 20, 40].map(m => <label class="ov"><input class="vh" type="radio" name="time" value={m} checked={m === 0} /><span>{m ? `${m} ${tr(lang, 'წთ')}` : tr(lang, 'დროის გარეშე')}</span></label>)}</div>
+            </fieldset>
+          </div>
+          <label class="crow solo"><input class="vh" type="checkbox" name="fresh" /><span class="tick" aria-hidden="true"></span><span class="nm">{tr(lang, 'მხოლოდ ამოუხსნელი')}</span></label>
+          <div class="row">
+            <button class="go" type="submit">{tr(lang, 'დაწყება')}</button>
+            <span class="pool" data-pool aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <aside class="pr-side">
+      <section class="card" aria-labelledby="mine-h">
+        <h2 id="mine-h" class="h">{tr(lang, 'შენი შედეგი')}</h2>
+        <p class="total"><b data-solved>0</b> / {probs.length}</p>
+        <p class="sum">{tr(lang, 'ამოცანა ამოხსნილია')}</p>
+        <span class="bar wide" aria-hidden="true"><i data-solved-bar></i></span>
+      </section>
+      <section class="card" aria-labelledby="log-h">
+        <h2 id="log-h" class="h">{tr(lang, 'ბოლო ვარჯიშები')}</h2>
+        <ol class="log" data-log></ol>
+        <p class="sum" data-log-empty>{tr(lang, 'აქ გამოჩნდება შენი ვარჯიშების შედეგები.')}</p>
+      </section>
+    </aside>
   </div>
 </Shell>
 <script type="application/json" id="practice-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
 <script>
   import { pick, resultOf, session, start, store, type Session } from '@/lib/practice';
-  import { load } from '@/lib/store';
+  import { load, save } from '@/lib/store';
   import { localUrl } from '@/i18n/client';
 
   interface Item { key: string; url: string; topic: string; section: string; n: number }
+  interface Logged { start: number; end: number; n: number; right: number; ms: number }
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
   const data = JSON.parse($('#practice-data').textContent!) as Item[];
   const byKey = new Map(data.map(d => [d.key, d]));
-  const L = JSON.parse($('.practice').dataset.l!) as Record<string, string>;
+  const root = $('.pr'), L = JSON.parse(root.dataset.l!) as Record<string, string>;
   const form = $<HTMLFormElement>('[data-setup]');
+  const solved = new Set(load<string[]>('solved', []));
   const mmss = (ms: number) => { const s = Math.round(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
   const urlOf = (key: string) => byKey.get(key)?.url ?? localUrl(key);
+  const go = (items: string[], minutes: number) => { if (!items.length) return; store(start(items, minutes)); location.href = urlOf(items[0]!); };
 
+  // progress: solved per chapter and in all
+  const done = data.filter(d => solved.has(d.key));
+  for (const el of document.querySelectorAll<HTMLElement>('[data-ct]')) {
+    const n = done.filter(d => d.section === el.dataset.ct).length, total = +el.dataset.total!;
+    el.textContent = `${n} / ${total}`;
+    $(`[data-bar="${el.dataset.ct}"]`).style.width = `${(100 * n) / total}%`;
+  }
+  $('[data-solved]').textContent = String(done.length);
+  $('[data-solved-bar]').style.width = `${(100 * done.length) / data.length}%`;
+
+  // quick starts and the own choice
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-quick]')) {
+    const q = JSON.parse(b.dataset.quick!) as { n: number; time: number; fresh: boolean };
+    const pool = data.filter(d => !(q.fresh && solved.has(d.key)));
+    b.disabled = !pool.length;
+    b.addEventListener('click', () => go(pick(pool, q.n).map(d => d.key), q.time));
+  }
   function pool() {
-    const secs = new Set(new FormData(form).getAll('sec')), solved = new Set(load<string[]>('solved', []));
+    const secs = new Set(new FormData(form).getAll('sec'));
     const fresh = (form.elements.namedItem('fresh') as HTMLInputElement).checked;
     return data.filter(d => secs.has(d.section) && !(fresh && solved.has(d.key)));
   }
@@ -90,27 +157,24 @@ const L = {
   });
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const f = new FormData(form), items = pick(pool(), +f.get('count')!).map(d => d.key);
-    if (!items.length) return;
-    store(start(items, +f.get('time')!));
-    location.href = urlOf(items[0]!);
+    const f = new FormData(form);
+    go(pick(pool(), +f.get('count')!).map(d => d.key), +f.get('time')!);
   });
 
+  // a session under way, or the one just finished (kept in the log, newest first)
   function showActive(s: Session) {
     $('[data-active]').hidden = false;
+    $('[data-setup-all]').hidden = true;
     $('[data-progress]').textContent = `${s.i + 1} / ${s.items.length}`;
     $<HTMLAnchorElement>('[data-continue]').href = urlOf(s.items[s.i]!);
-    $('[data-stop]').addEventListener('click', () => {
-      store({ ...s, end: Date.now() });
-      location.reload();
-    }, { once: true });
+    $('[data-stop]').addEventListener('click', () => { store({ ...s, end: Date.now() }); location.reload(); }, { once: true });
   }
+  const spent = (s: Session) => Math.min(s.end! - s.start, s.limit ?? Infinity);
   function showResults(s: Session) {
     const res = s.items.map(k => resultOf(s, k)), count = (r: string) => res.filter(x => x === r).length;
     $('[data-results]').hidden = false;
     $('[data-score]').textContent = `${count('right')} / ${s.items.length} ${L.right}`;
-    const spent = Math.min(s.end! - s.start, s.limit ?? Infinity);
-    $('[data-sum]').textContent = [`${count('helped')} ${L.helped}`, `${count('shown')} ${L.shown}`, `${count('skipped')} ${L.skipped}`, `${L.time} ${mmss(spent)}`].join(' · ');
+    $('[data-sum]').textContent = [`${count('helped')} ${L.helped}`, `${count('shown')} ${L.shown}`, `${count('skipped')} ${L.skipped}`, `${L.time} ${mmss(spent(s))}`].join(' · ');
     $('[data-list]').replaceChildren(...s.items.map((k, i) => {
       const li = document.createElement('li'), a = document.createElement('a'), r = document.createElement('span'), d = byKey.get(k);
       a.href = urlOf(k);
@@ -121,36 +185,98 @@ const L = {
       li.append(a, r);
       return li;
     }));
+    const log = load<Logged[]>('practice-log', []);
+    if (!log.some(x => x.start === s.start)) save('practice-log', [{ start: s.start, end: s.end!, n: s.items.length, right: count('right'), ms: spent(s) }, ...log].slice(0, 10));
   }
-
   const s = session();
-  if (s && !s.end) { showActive(s); form.hidden = true; }
+  if (s && !s.end) showActive(s);
   else if (s?.end) showResults(s);
+
+  const log = load<Logged[]>('practice-log', []).slice(0, 5);
+  const fmt = root.dataset.lang === 'en' ? new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' })
+    : { format: (t: number) => { const d = new Date(t); return `${d.getDate()}.${String(d.getMonth() + 1).padStart(2, '0')}`; } }; // 7.10: browsers lack Georgian month names
+  $('[data-log]').replaceChildren(...log.map(x => {
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="d"></span><b></b><span class="m"></span>';
+    li.querySelector('.d')!.textContent = fmt.format(x.end);
+    li.querySelector('b')!.textContent = `${x.right} / ${x.n}`;
+    li.querySelector('.m')!.textContent = mmss(x.ms);
+    return li;
+  }));
+  $('[data-log-empty]').hidden = log.length > 0;
   showPool();
 </script>
 <style>
-  .practice { display: grid; gap: var(--s4); max-width: 720px; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .pr { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--s5) 40px; align-items: start; max-width: 1080px; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .pr-main, .pr-side, .setup { display: grid; gap: var(--s4); align-content: start; }
   .card { padding: var(--s3) var(--s4) var(--s4); border: var(--bw) solid var(--ink); border-radius: var(--r); }
-  .home-h { font: var(--w2) var(--fs-ui) var(--font-body); color: var(--ink-2); letter-spacing: .02em; margin-bottom: var(--s3); padding: 0; }
+  .h { font: var(--w2) var(--fs-ui) var(--font-body); color: var(--ink-2); letter-spacing: .02em; }
+  .setup > .h { margin-bottom: calc(-1 * var(--s2)); }
+  .card .h { margin-bottom: var(--s2); }
   .big { font: var(--w2) 22px/1.3 var(--font-head); color: var(--ink); font-variant-numeric: tabular-nums; }
   .sum { font-size: 14px; margin-top: var(--s1); }
-  .row { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
-  .go { display: inline-flex; align-items: center; justify-self: start; min-height: 44px; padding: 0 var(--s4); border-radius: var(--r); background: var(--ink); color: var(--on-ink); font-weight: var(--w2); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); }
+  .card .row { margin-top: var(--s3); }
+  .go { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s5); border-radius: var(--r); background: var(--ink); color: var(--on-ink); font-weight: var(--w2); }
   .go:disabled { opacity: .5; cursor: default; }
   .btn { min-height: 44px; padding: 0 var(--s4); border: var(--bw) solid var(--line); border-radius: var(--r); color: var(--ink); }
+
+  /* quick starts: three index cards with a big number */
+  .quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); }
+  .qk { display: grid; align-content: start; gap: 2px; min-height: 132px; padding: var(--s3) var(--s4) var(--s4); border: var(--bw) solid var(--line-2); border-radius: var(--r); text-align: left; color: var(--ink-2); }
+  .qk:hover:not(:disabled) { border-color: var(--ink); }
+  .qk:hover:not(:disabled) .qk-t { text-decoration: underline 1.5px; text-underline-offset: 5px; }
+  .qk:disabled { opacity: .5; cursor: default; }
+  .qk-n { font: var(--w2) 40px/1 var(--font-head); color: var(--ink); margin-bottom: var(--s2); font-variant-numeric: tabular-nums; }
+  .qk-t { font: var(--w2) 17px/1.3 var(--font-head); color: var(--ink); }
+  .qk-w { font-size: 14px; line-height: 1.4; }
+
+  /* the own choice: chapters ticked like the figure's switches, each with its progress */
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .own { display: grid; gap: var(--s3); }
+  .vh { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+  .secs { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s5); }
+  .crow { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) 64px auto; align-items: center; gap: var(--s3); min-height: 48px; border-bottom: 1px dashed var(--line-2); cursor: pointer; color: var(--ink); font-size: 15px; }
+  .crow.solo { grid-template-columns: 22px auto; border: 0; justify-self: start; }
+  .tick { position: relative; width: 22px; height: 22px; border: var(--bw) solid var(--line-2); border-radius: var(--r); }
+  .crow:has(:checked) .tick { border-color: var(--ink); }
+  .crow:has(:checked) .tick::after { content: ''; position: absolute; left: 6px; top: -7px; width: 9px; height: 20px; border: solid var(--ink); border-width: 0 3px 3px 0; transform: rotate(40deg); }
+  .crow:not(:has(:checked)) .nm { color: var(--ink-2); }
+  .crow:has(:focus-visible) .tick { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .bar { display: block; height: 3px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; width: 0; height: 100%; background: var(--ink); }
+  .bar.wide { margin-top: var(--s3); }
+  .ct { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; min-width: 52px; }
+  .link { justify-self: start; min-height: 44px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* how many, how long: circle the choice, as on paper */
+  .opts { display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); }
+  .k { font-size: 14px; margin-bottom: var(--s1); }
+  .ovs { display: flex; flex-wrap: wrap; gap: 0 var(--s2); }
+  .ov { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 48px; padding: 0 var(--s3); cursor: pointer; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .ov:has(:checked) { color: var(--ink); font-weight: var(--w2); }
+  .ov:has(:checked) span::after { content: ''; position: absolute; inset: 6px 0; border: 1.75px solid var(--ink); border-radius: 50%; transform: rotate(-2deg); pointer-events: none; }
+  .ov:has(:focus-visible) { outline: 2px solid var(--ink); outline-offset: -2px; border-radius: var(--r); }
+  .ov:hover { color: var(--ink); }
+  .pool { font-size: 14px; }
+
+  /* results and the log */
   .res { list-style: none; padding: 0; margin-top: var(--s3); display: grid; }
   .res :global(li) { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 var(--s3); min-height: 44px; border-top: 1px solid var(--line-2); }
   .res :global(a) { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
   .res :global(.r) { font-size: 14px; }
   .res :global(.r[data-r='right']) { color: var(--ink); font-weight: var(--w2); }
-  .setup { display: grid; gap: var(--s4); }
-  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
-  .chip { position: relative; display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s3); border: var(--bw) solid var(--line-2); border-radius: var(--r); color: var(--ink); cursor: pointer; }
-  .chip input { position: absolute; opacity: 0; pointer-events: none; }
-  .chip:has(:checked) { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
-  .chip:has(:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
-  .chip .n { font-size: 13px; opacity: .8; font-variant-numeric: tabular-nums; }
-  .link { min-height: 44px; margin-top: var(--s1); color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
-  .pool { font-size: 14px; }
+  .total { font: var(--w2) 15px var(--font-body); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .total b { font: var(--w2) 40px/1 var(--font-head); color: var(--ink); margin-right: 4px; }
+  .log { list-style: none; padding: 0; display: grid; }
+  .log :global(li) { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: var(--s3); align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line-2); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .log :global(b) { color: var(--ink); }
+
+  @media (max-width: 1199px) { .pr { grid-template-columns: minmax(0, 1fr); } .pr-side { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); } }
+  @media (max-width: 699px) {
+    .quick { grid-template-columns: minmax(0, 1fr); }
+    .qk { min-height: 0; grid-template-columns: 52px minmax(0, 1fr); column-gap: var(--s3); }
+    .qk-n { grid-row: span 2; margin: 0; align-self: center; }
+    .secs { grid-template-columns: minmax(0, 1fr); }
+  }
 </style>
