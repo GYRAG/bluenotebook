@@ -113,3 +113,67 @@ parent: triangle
 </Properties>
 
 <Remark kind="mistake">პითაგორას თეორემა მხოლოდ მართკუთხა სამკუთხედშია სამართლიანი. ზოგად სამკუთხედში $c^2 = a^2 + b^2 - 2ab\cos\gamma$ (კოსინუსების თეორემა).</Remark>
+
+<Problems>
+
+<Problem id="p-rt-30-sum" k={6} set={{ a: 1.5, b: 2.598076211353316 }} given="<ABC=60 AB+BC=27" find="AB" answer="18" book="4.17 4.21"
+  q="მართკუთხა სამკუთხედის ერთი მახვილი კუთხე $60^\circ$-ია, ჰიპოტენუზისა და მცირე კათეტის ჯამი კი $27$-ია. იპოვეთ ჰიპოტენუზა."
+  hint="მცირე კათეტი $30^\circ$-იანი კუთხის პირდაპირ მდებარეობს.">
+<Step hl="<A" tex="\angle A = 90^\circ - 60^\circ = 30^\circ">მართკუთხა სამკუთხედის მახვილი კუთხეების ჯამი $90^\circ$-ია.</Step>
+<Step hl="BC AB" tex="BC = \tfrac12\, AB">$30^\circ$-იანი კუთხის პირდაპირ მდებარე კათეტი ჰიპოტენუზის ნახევარია — ესაა მცირე კათეტი.</Step>
+<Step tex="AB + \tfrac12\, AB = 27 \;\Rightarrow\; AB = 18">ჩავსვათ ჯამში.</Step>
+</Problem>
+
+<Problem id="p-rt-altitude-median" set={{ a: 2.800830152838839, b: 4 }} show="CH CM <CHA" given="<CAB=35" find="<HCM" answer="20" book="4.31 4.32"
+  q="მართკუთხა $ABC$ სამკუთხედში $\angle C = 90^\circ$, $\angle A = 35^\circ$. იპოვეთ კუთხე $C$ წვეროდან გავლებულ $CH$ სიმაღლესა და $CM$ მედიანას შორის."
+  hint="ჰიპოტენუზაზე გავლებული მედიანა ჰიპოტენუზის ნახევარია.">
+<Step hl="CM AM=MC" tex="\angle ACM = \angle A = 35^\circ">$CM = AM$, რადგან მედიანა ჰიპოტენუზის ნახევარია — სამკუთხედი $AMC$ ტოლფერდაა.</Step>
+<Step hl="ACH <CHA" tex="\angle ACH = 90^\circ - 35^\circ = 55^\circ">მართკუთხა სამკუთხედ $ACH$-ში.</Step>
+<Step hl="<HCM" tex="\angle HCM = 55^\circ - 35^\circ = 20^\circ">ორივე კუთხე $CA$ კათეტიდან აითვლება.</Step>
+</Problem>
+
+<Problem id="p-rt-projections" set={{ a: 2, b: 3 }} show="CH <CHB" given="AH=9 HB=4" find="CH AC BC" answer="6 3√13 2√13" book="8.17 8.20 8.21"
+  q="მართკუთხა სამკუთხედის მართი კუთხის წვეროდან დაშვებული $CH$ სიმაღლე ჰიპოტენუზას ყოფს $AH = 9$ და $HB = 4$ მონაკვეთებად. იპოვეთ სიმაღლე და კათეტები."
+  hint="$h^2 = AH \cdot HB$; კათეტი ჰიპოტენუზისა და მისი გეგმილის საშუალო პროპორციულია.">
+<Step hl="CH" tex="CH^2 = AH \cdot HB = 36 \;\Rightarrow\; CH = 6">ჰიპოტენუზაზე დაშვებული სიმაღლის კვადრატი გეგმილების ნამრავლის ტოლია.</Step>
+<Step hl="AC AH" tex="AC^2 = AB \cdot AH = 13 \cdot 9 \;\Rightarrow\; AC = 3\sqrt{13}">კათეტი ჰიპოტენუზისა და მასზე ამ კათეტის გეგმილის საშუალო პროპორციულია.</Step>
+<Step hl="BC HB" tex="BC^2 = AB \cdot HB = 13 \cdot 4 \;\Rightarrow\; BC = 2\sqrt{13}">იგივე მეორე კათეტისთვის.</Step>
+</Problem>
+
+<Problem id="p-rt-median-angles" set={{ a: 1.5, b: 2.598076211353316 }} show="CM" given="CM=5 <ACM/<MCB=1/2" find="AB BC AC" answer="10 5 5√3" book="8.30"
+  q="მართკუთხა სამკუთხედის ჰიპოტენუზაზე გავლებული $CM$ მედიანა $5$-ია და მართ კუთხეს $1 : 2$ შეფარდებით ყოფს. იპოვეთ სამკუთხედის გვერდები."
+  hint="მედიანა ჰიპოტენუზის ნახევარია, ამიტომ ის სამკუთხედს ორ ტოლფერდა სამკუთხედად ყოფს.">
+<Step hl="<ACM <MCB" tex="\angle ACM = 30^\circ,\qquad \angle MCB = 60^\circ">მართი კუთხე $1 : 2$ შეფარდებით იყოფა.</Step>
+<Step hl="AM=MC MC=MB" tex="AB = 2\,CM = 10,\qquad \angle A = \angle ACM = 30^\circ">მედიანა ჰიპოტენუზის ნახევარია, ამიტომ სამკუთხედი $AMC$ ტოლფერდაა.</Step>
+<Step hl="BC AC" tex="BC = \tfrac12\, AB = 5,\qquad AC = \sqrt{100 - 25} = 5\sqrt3">$BC$ $30^\circ$-იანი კუთხის პირდაპირ მდებარეობს; $AC$ — პითაგორას თეორემით.</Step>
+</Problem>
+
+<Problem id="p-rt-incircle-tangents" set={{ a: 1.6666666666666667, b: 4 }} show="(IT) IT IK IL" given="AT=10 TB=3" find="BC AC" answer="5 12" book="8.34 8.35"
+  q="მართკუთხა $ABC$ სამკუთხედში ჩახაზული წრეწირი ჰიპოტენუზას $T$ წერტილში ეხება და მას $AT = 10$ და $TB = 3$ მონაკვეთებად ყოფს. იპოვეთ კათეტები."
+  hint="ერთი წერტილიდან გავლებული მხების მონაკვეთები ტოლია; მართი კუთხის წვეროდან ორივე მხები მონაკვეთი $r$-ის ტოლია.">
+<Step hl="IK IL" tex="AC = 10 + r,\qquad BC = 3 + r">$A$-დან და $B$-დან მხები მონაკვეთები ტოლია, $C$-დან კი ორივე $r$-ია — $CKIL$ კვადრატია.</Step>
+<Step tex="(10 + r)^2 + (3 + r)^2 = 13^2 \;\Rightarrow\; r^2 + 13r - 30 = 0">პითაგორას თეორემით.</Step>
+<Step hl="BC AC" tex="r = 2 \;\Rightarrow\; BC = 5,\qquad AC = 12">განტოლების დადებითი ფესვი.</Step>
+</Problem>
+
+<Problem id="p-rt-altitude-ratio" set={{ a: 3, b: 1.5 }} show="CH <CHB" given="CH=12 AH/HB=1/4" find="AB" answer="30" book="8.18 8.20"
+  q="მართკუთხა სამკუთხედის მართი კუთხის წვეროდან დაშვებული სიმაღლე $12$-ია და ჰიპოტენუზას $1 : 4$ შეფარდებით ყოფს. იპოვეთ ჰიპოტენუზა."
+  hint="$h^2 = AH \cdot HB$.">
+<Step tex="AH = x,\qquad HB = 4x">აღვნიშნოთ ჰიპოტენუზის ნაწილები.</Step>
+<Step hl="CH" tex="12^2 = x \cdot 4x \;\Rightarrow\; x = 6">ჰიპოტენუზაზე დაშვებული სიმაღლის კვადრატი გეგმილების ნამრავლის ტოლია.</Step>
+<Step hl="AB" tex="AB = 5x = 30">ჰიპოტენუზა ორივე ნაწილის ჯამია.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-rt-legs-projections" set={{ a: 3, b: 4 }} show="CH <CHB" prove="AC^2/BC^2=AH/HB" book="8.109"
+  q="დაამტკიცეთ, რომ მართკუთხა სამკუთხედის კათეტების კვადრატები ისე შეეფარდება ერთმანეთს, როგორც მათი გეგმილები ჰიპოტენუზაზე."
+  hint="კათეტი ჰიპოტენუზისა და მისი გეგმილის საშუალო პროპორციულია.">
+<Step hl="AC AH" tex="AC^2 = AB \cdot AH">კათეტი ჰიპოტენუზისა და მასზე ამ კათეტის გეგმილის საშუალო პროპორციულია.</Step>
+<Step hl="BC HB" tex="BC^2 = AB \cdot HB">იგივე მეორე კათეტისთვის.</Step>
+<Step tex="\frac{AC^2}{BC^2} = \frac{AB \cdot AH}{AB \cdot HB} = \frac{AH}{HB} \quad \blacksquare">გავყოთ ტოლობები ერთმანეთზე.</Step>
+</Problem>
+
+</Problems>

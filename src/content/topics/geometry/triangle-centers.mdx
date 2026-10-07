@@ -176,4 +176,27 @@ parent: triangle
 <Step tex="P = \tfrac12\,(6 + 9 + 11) = 13">ანუ მოცემული სამკუთხედის პერიმეტრის ნახევარი.</Step>
 </Problem>
 
+<Problem id="p-median-third-side" set={{ c: 4.5, b: 3.5, alpha: 58.411864494798834 }} show="AA1" given="AB=9 AC=7 AA1=7" find="BC" answer="8" book="9.7 9.10"
+  q="სამკუთხედის ორი გვერდია $AB = 9$ და $AC = 7$, მესამე გვერდზე გავლებული $AA_1$ მედიანა კი $7$-ია. იპოვეთ მესამე გვერდი."
+  hint="მედიანის სიგრძე: $m_a = \tfrac12\sqrt{2b^2 + 2c^2 - a^2}$.">
+<Step hl="AA1" tex="4\,m_a^2 = 2b^2 + 2c^2 - a^2">მედიანის სიგრძის ფორმულა.</Step>
+<Step tex="4 \cdot 49 = 2 \cdot 49 + 2 \cdot 81 - a^2 \;\Rightarrow\; a^2 = 64">ჩავსვათ ცნობილი სიდიდეები.</Step>
+<Step hl="BC" tex="BC = 8">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-bisector-segments" set={{ c: 6, b: 4, alpha: 95.07971579273348 }} show="AL" given="AB=12 AC=8 BC=15" find="BL LC" answer="9 6" book="9.13 9.14 9.15"
+  q="$ABC$ სამკუთხედის გვერდებია $AB = 12$, $AC = 8$ და $BC = 15$. $A$ კუთხის ბისექტრისა $BC$ გვერდს $L$ წერტილში კვეთს. იპოვეთ $BL$ და $LC$."
+  hint="ბისექტრისა მოპირდაპირე გვერდს მოსაზღვრე გვერდების პროპორციულ მონაკვეთებად ყოფს.">
+<Step hl="AL" tex="\frac{BL}{LC} = \frac{AB}{AC} = \frac32">ბისექტრისის თვისება.</Step>
+<Step hl="BL LC" tex="BL = \tfrac35 \cdot 15 = 9,\qquad LC = 6">$BC$ იყოფა $3 : 2$ შეფარდებით.</Step>
+</Problem>
+
+<Problem id="p-bisector-perimeter-2" set={{ c: 3, b: 4.5, alpha: 80.94355522136416 }} show="AL" given="BL=4 LC=6 P(ABC)=25" find="AB AC" answer="6 9" book="9.16 9.17"
+  q="$ABC$ სამკუთხედის $A$ კუთხის ბისექტრისა $BC$ გვერდს ყოფს $BL = 4$ და $LC = 6$ მონაკვეთებად, სამკუთხედის პერიმეტრი კი $25$-ია. იპოვეთ $AB$ და $AC$."
+  hint="$AB : AC = BL : LC$.">
+<Step hl="AL BL LC" tex="AB : AC = 4 : 6 = 2 : 3">ბისექტრისის თვისება.</Step>
+<Step tex="AB + AC = 25 - 10 = 15">$BC = BL + LC = 10$.</Step>
+<Step hl="AB AC" tex="AB = 6,\qquad AC = 9">$15$ იყოფა $2 : 3$ შეფარდებით.</Step>
+</Problem>
+
 </Problems>

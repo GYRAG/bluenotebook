@@ -9,6 +9,7 @@ tags: [მსგავსება, მსგავსების კოეფ�
 prerequisites: [congruence, angles]
 status: draft
 figure: similarity
+figures: [trapezoid]
 ---
 
 <Definition>სამკუთხედები **მსგავსია** ($\triangle ABC \sim \triangle A_1B_1C_1$), თუ მათი შესაბამისი კუთხეები ტოლია, ხოლო შესაბამისი გვერდები პროპორციულია: $\tfrac{A_1B_1}{AB} = \tfrac{B_1C_1}{BC} = \tfrac{C_1A_1}{CA} = k$. რიცხვს $k$ **მსგავსების კოეფიციენტი** ეწოდება.</Definition>
@@ -74,3 +75,50 @@ figure: similarity
 </Properties>
 
 <Remark kind="mistake">მსგავსებისას გვერდები პროპორციულია, ფართობები კი — $k^2$-ის პროპორციული. გვერდის 2-ჯერ გაზრდა ფართობს 4-ჯერ ზრდის.</Remark>
+
+<Problems>
+
+<Problem id="p-sim-sides" set={{ c: 3, b: 2.5, alpha: 41.40962210927086, k: 1.5 }} given="AB=12 AC=10 BC=8 P(A1B1C1)=45" find="A1B1 A1C1 B1C1" answer="18 15 12" book="7.1 7.2 7.3"
+  q="სამკუთხედის გვერდებია $AB = 12$, $AC = 10$ და $BC = 8$. მისი მსგავსი $A_1B_1C_1$ სამკუთხედის პერიმეტრი $45$-ია. იპოვეთ მეორე სამკუთხედის გვერდები."
+  hint="მსგავსი სამკუთხედების პერიმეტრების შეფარდება მსგავსების კოეფიციენტის ტოლია.">
+<Step hl="ABC A1B1C1" tex="k = \frac{P_{A_1B_1C_1}}{P_{ABC}} = \frac{45}{30} = \frac32">მსგავსი სამკუთხედების პერიმეტრების შეფარდება მსგავსების კოეფიციენტის ტოლია.</Step>
+<Step hl="A1B1 A1C1 B1C1" tex="A_1B_1 = 18,\quad A_1C_1 = 15,\quad B_1C_1 = 12">ყოველი გვერდი $\tfrac32$-ჯერ იზრდება.</Step>
+</Problem>
+
+<Problem id="p-sim-parallel-cut" set={{ c: 2.5, b: 2.5, alpha: 97.18075578145829, k: 0.6 }} show="B2C2" given="AB2=6 B2B=4 BC=15" find="B2C2" answer="9" book="7.10 7.14"
+  q="$ABC$ სამკუთხედის $BC$ გვერდის პარალელური წრფე $AB$ და $AC$ გვერდებს $B_2$ და $C_2$ წერტილებში კვეთს. $AB_2 = 6$, $B_2B = 4$, $BC = 15$. იპოვეთ $B_2C_2$."
+  hint="სამკუთხედის გვერდის პარალელური წრფე მისგან მსგავს სამკუთხედს ჩამოჭრის.">
+<Step hl="AB2C2 B2C2||BC" tex="\triangle AB_2C_2 \sim \triangle ABC">სამკუთხედის გვერდის პარალელური წრფე მისგან მსგავს სამკუთხედს ჩამოჭრის.</Step>
+<Step tex="\frac{B_2C_2}{BC} = \frac{AB_2}{AB} = \frac{6}{10}">$AB = 6 + 4 = 10$.</Step>
+<Step hl="B2C2" tex="B_2C_2 = 15 \cdot \frac{6}{10} = 9">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-sim-trap-diagonals" figure="trapezoid" set={{ a: 4.5, b: 3, h: 3.5, s: -0.2712718584653483 }} show="AC BD O" given="AO=9 OC=6 BD=20" find="OB OD" answer="8 12" book="7.44 7.45"
+  q="$ABCD$ ტრაპეციაში $AD \parallel BC$, დიაგონალები კი $O$ წერტილში იკვეთება. $AO = 9$, $OC = 6$, $BD = 20$. იპოვეთ $OB$ და $OD$."
+  hint="დიაგონალები ტრაპეციაში ორ მსგავს სამკუთხედს ქმნის: $AOD$ და $COB$.">
+<Step hl="<OAD=<OCB AD||BC" tex="\angle OAD = \angle OCB,\qquad \angle AOD = \angle COB">$AD \parallel BC$ — შიგა ჯვარედინი კუთხეები ტოლია; $O$-სთან კუთხეები კი ვერტიკალურია.</Step>
+<Step hl="AOD COB" tex="\triangle AOD \sim \triangle COB \;\Rightarrow\; \frac{OD}{OB} = \frac{AO}{OC} = \frac32">სამკუთხედები მსგავსია ორი კუთხით.</Step>
+<Step hl="OB OD" tex="OB = \tfrac25 \cdot 20 = 8,\qquad OD = 12">$BD$ იყოფა $2 : 3$ შეფარდებით.</Step>
+</Problem>
+
+<Problem id="p-sim-legs-meet" figure="trapezoid" set={{ a: 5, b: 3, h: 1.984313483298443, s: -0.25 }} show="BG CG" given="AB=4 BC=6 CD=6 AD=10" find="GA GD" answer="10 15" book="7.42 7.43"
+  q="$ABCD$ ტრაპეციის $AB$ და $CD$ ფერდების გაგრძელებები $G$ წერტილში იკვეთება. $AB = 4$, $BC = 6$, $CD = 6$, $AD = 10$. იპოვეთ $GA$ და $GD$."
+  hint="$BC \parallel AD$, ამიტომ $\triangle GBC \sim \triangle GAD$.">
+<Step hl="GBC BC||AD" tex="\triangle GBC \sim \triangle GAD,\qquad k = \frac{BC}{AD} = \frac35">$BC \parallel AD$ — პარალელური წრფე მსგავს სამკუთხედს ჩამოჭრის.</Step>
+<Step hl="GA" tex="\frac{GA - 4}{GA} = \frac35 \;\Rightarrow\; GA = 10">$GB = GA - AB$.</Step>
+<Step hl="GD" tex="\frac{GD - 6}{GD} = \frac35 \;\Rightarrow\; GD = 15">ანალოგიურად $GC = GD - CD$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-sim-trap-products" figure="trapezoid" set={{ a: 6, b: 3, h: 2.5, s: 0.8 }} show="AC BD O" prove="AO*OB=DO*OC" book="7.71"
+  q="$ABCD$ ტრაპეციაში $AD \parallel BC$, $O$ კი დიაგონალების გადაკვეთის წერტილია. დაამტკიცეთ, რომ $AO \cdot OB = DO \cdot OC$."
+  hint="იპოვეთ ორი მსგავსი სამკუთხედი, რომელთა საერთო წვეროა $O$.">
+<Step hl="AOD COB <OAD=<OCB" tex="\triangle AOD \sim \triangle COB">ორი კუთხით: შიგა ჯვარედინი კუთხეები ($AD \parallel BC$) და ვერტიკალური კუთხეები.</Step>
+<Step tex="\frac{AO}{CO} = \frac{DO}{BO}">მსგავს სამკუთხედებში შესაბამისი გვერდები პროპორციულია.</Step>
+<Step tex="AO \cdot OB = DO \cdot OC \quad \blacksquare">პროპორციის ორივე მხარე გავამრავლოთ $CO \cdot BO$-ზე.</Step>
+</Problem>
+
+</Problems>

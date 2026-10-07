@@ -57,3 +57,53 @@ parent: triangle
 <Remark>სამკუთხედის ამოხსნის ოთხი შემთხვევა. **სამი გვერდი:** კუთხეები კოსინუსების თეორემით. **ორი გვერდი და მათ შორის კუთხე:** მესამე გვერდი კოსინუსების თეორემით, შემდეგ კუთხეები. **გვერდი და ორი კუთხე:** მესამე კუთხე $180^\circ$-დან, გვერდები სინუსების თეორემით. **ორი გვერდი და არა მათ შორის კუთხე:** სინუსების თეორემით — ამ შემთხვევაში შეიძლება იყოს ორი, ერთი ან არცერთი სამკუთხედი.</Remark>
 
 <Remark kind="mistake">სინუსების თეორემით კუთხის პოვნისას ორი პასუხი შეიძლება იყოს: $\sin\alpha = \sin(180^\circ - \alpha)$. შეამოწმე, ორივე ეტევა თუ არა სამკუთხედში.</Remark>
+
+<Problems>
+
+<Problem id="p-cos-law-60" set={{ c: 5.714285714285714, b: 2.142857142857143, alpha: 60 }} given="AB=8 AC=3 <A=60" find="BC" answer="7" book="9.1"
+  q="სამკუთხედის ორი გვერდია $8$ და $3$, მათ შორის კუთხე კი $60^\circ$-ია. იპოვეთ მესამე გვერდი."
+  hint="კოსინუსების თეორემა.">
+<Step hl="BC <A" tex="BC^2 = 8^2 + 3^2 - 2 \cdot 8 \cdot 3 \cos 60^\circ = 49">კოსინუსების თეორემით.</Step>
+<Step hl="BC" tex="BC = 7">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-cos-law-120" set={{ c: 4, b: 3.5, alpha: 120 }} given="AB=8 AC=7 <A=120" find="BC" answer="13" book="9.2"
+  q="სამკუთხედის ორი გვერდია $8$ და $7$, მათ შორის კუთხე კი $120^\circ$-ია. იპოვეთ მესამე გვერდი."
+  hint="$\cos 120^\circ = -\tfrac12$.">
+<Step hl="BC <A" tex="\begin{aligned}BC^2 &= 8^2 + 7^2 - 2 \cdot 8 \cdot 7 \cos 120^\circ \\ &= 64 + 49 + 56 = 169\end{aligned}">კოსინუსების თეორემით.</Step>
+<Step hl="BC" tex="BC = 13">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-cos-law-angle" set={{ c: 5, b: 3.125, alpha: 60 }} given="AB=8 AC=5 BC=7" find="<A" answer="60"
+  q="სამკუთხედის გვერდებია $AB = 8$, $AC = 5$ და $BC = 7$. იპოვეთ $A$ კუთხე."
+  hint="კოსინუსების თეორემიდან გამოსახეთ $\cos A$.">
+<Step hl="BC <A" tex="\begin{aligned}\cos A &= \frac{AB^2 + AC^2 - BC^2}{2 \cdot AB \cdot AC} \\ &= \frac{64 + 25 - 49}{80} = \frac12\end{aligned}">კოსინუსების თეორემით.</Step>
+<Step hl="<A" tex="\angle A = 60^\circ">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-sine-law-radius" set={{ c: 7, b: 4, alpha: 30 }} show="(OA) O OB OC" given="BC=12 <A=30" find="OA" answer="12"
+  q="სამკუთხედის $BC$ გვერდი $12$-ია, მის პირდაპირ მდებარე კუთხე კი $30^\circ$. იპოვეთ შემოხაზული წრეწირის რადიუსი."
+  hint="სინუსების თეორემა: $\tfrac{a}{\sin A} = 2R$.">
+<Step hl="BC <A" tex="\frac{BC}{\sin A} = 2R">სინუსების თეორემა.</Step>
+<Step hl="OA" tex="R = \frac{12}{2 \cdot \tfrac12} = 12">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-sine-law-side" set={{ c: 5, b: 4.482877360840267, alpha: 45 }} given="<A=45 <B=60 BC=6√2" find="AC" answer="6√3"
+  q="$ABC$ სამკუთხედში $\angle A = 45^\circ$, $\angle B = 60^\circ$, $BC = 6\sqrt2$. იპოვეთ $AC$."
+  hint="სინუსების თეორემა.">
+<Step hl="BC AC <A <B" tex="\frac{AC}{\sin B} = \frac{BC}{\sin A}">სინუსების თეორემა: გვერდები მოპირდაპირე კუთხეების სინუსების პროპორციულია.</Step>
+<Step hl="AC" tex="AC = \frac{6\sqrt2 \cdot \tfrac{\sqrt3}{2}}{\tfrac{\sqrt2}{2}} = 6\sqrt3">ჩავსვათ სინუსები.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-sine-30-radius" set={{ c: 6.5, b: 4.5, alpha: 30 }} show="(OA) O OB OC" given="<A=30" prove="BC=OB" book="9.75"
+  q="სამკუთხედის ერთი კუთხე $30^\circ$-ია. დაამტკიცეთ, რომ ამ კუთხის პირდაპირ მდებარე გვერდი შემოხაზული წრეწირის რადიუსის ტოლია."
+  hint="რას უდრის $BC$ რკალზე დაყრდნობილი ცენტრალური კუთხე?">
+<Step hl="<BOC" tex="\angle BOC = 2\angle A = 60^\circ">ჩახაზული კუთხე იმავე რკალზე დაყრდნობილი ცენტრალური კუთხის ნახევარია.</Step>
+<Step hl="OBC OB=OC" tex="BC = OB = R \quad \blacksquare">სამკუთხედი $OBC$ ტოლფერდაა და მისი წვეროსთან კუთხე $60^\circ$-ია — ის ტოლგვერდაა.</Step>
+</Problem>
+
+</Problems>

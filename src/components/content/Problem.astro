@@ -16,6 +16,7 @@ import { names } from '@/figures/engine/refs';
 //   set    figure parameters (figure units); k = problem units per figure unit, by default from
 //          the first given length
 //   book   the book's problems of the same type (Topuria's collection): "6.23 6.27"
+//   labels TeX names for the answer boxes, ';'-separated, when a find item is an expression (BC/AB → \sin A)
 interface Props {
   id: string;
   q: string;
@@ -28,9 +29,10 @@ interface Props {
   show?: string;
   hint?: string;
   book?: string;
+  labels?: string;
   figure?: string;
 }
-const { id, q, find = '', answer = '', given = '', set, show, hint, book, figure } = Astro.props;
+const { id, q, find = '', answer = '', given = '', set, show, hint, book, labels, figure } = Astro.props;
 
 const finds = find.split(/\s+/).filter(Boolean), answers = answer.split(/\s+/).filter(Boolean);
 if (finds.length !== answers.length) throw new Error(`problem ${id}: ${finds.length} find items, ${answers.length} answers`);
@@ -45,7 +47,7 @@ const tags = [
   ...finds.filter(labelled).map(f => `${f}=?`),
 ].join(' ');
 const sub = (s: string) => s.replace(/([A-Z])(\d+)/g, '$1_{$2}'); // R1 → R₁
-const label = (f: string) => (f.startsWith('<') ? `\\angle ${sub(f.slice(1))}` : /^[SP]\(/.test(f) ? f[0]! : sub(f));
+const label = (f: string, i: number) => labels?.split(';')[i]?.trim() || (f.startsWith('<') ? `\\angle ${sub(f.slice(1))}` : /^[SP]\(/.test(f) ? f[0]! : sub(f));
 ---
 <li class="prop prob" id={id} data-problem={JSON.stringify({ set, show, tags })}>
   <button class="prop-row" type="button" aria-expanded="false" aria-controls={`${id}--proof`}>
@@ -60,8 +62,8 @@ const label = (f: string) => (f.startsWith('<') ? `\\angle ${sub(f.slice(1))}` :
     {book && <p class="book">წიგნში: {book.split(/\s+/).join(', ')}</p>}
     {finds.length > 0 && (
       <form class="ans" data-answer={JSON.stringify(values)} data-shown={answers.join(';')}>
-        {finds.map(f => (
-          <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
+        {finds.map((f, i) => (
+          <label class="ans-f"><span class="ans-l" set:html={`${tex(label(f, i))} =`} /><input class="ans-in" type="text" autocomplete="off" spellcheck="false" /></label>
         ))}
         <div class="ans-row">
           <button class="ans-key" type="button" data-key="√" aria-label="ფესვი">√</button>

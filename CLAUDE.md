@@ -34,6 +34,8 @@ content in Georgian. This repo is self-contained — ignore `C:\Users\kinkl\AGEN
 - `<Problems>` / `<Problem>` (the „ამოცანები“ tab): `set` = figure params (exact, not snapped), `given` =
   `lhs=rhs` facts in figure terms (`AB=5`, `<A=60`, `AB-AD=7`, `S(ABCD)`, `P(ABCD)`), `find` + `answer`
   (one value each; `√`, `π`, `2,5` allowed), `k` = problem units per figure unit (default: first given length).
+  A find item may be an expression (`BC/AB`); `labels="\sin A"` names its answer box. `prove` instead of find
+  makes a proof problem; `book` lists Topuria's problems of the same type.
   Atomic givens label the figure; finds show as "?". Steps are a hidden solution that drives the figure.
 - `src/content.config.ts` — Zod schema. `src/subjects.ts` — subjects and nav sections.
 - `src/figures/<name>.ts` — figure specs (every `.ts` there is a figure; shared helpers live in `engine/`):

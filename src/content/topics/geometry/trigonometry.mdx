@@ -76,3 +76,38 @@ figure: trig-triangle
 <Remark>მართკუთხა სამკუთხედის ამოხსნა: $a = c\sin\alpha$, $b = c\cos\alpha$, $a = b\operatorname{tg}\alpha$. ორი ელემენტი (გვერდი და კიდევ ერთი გვერდი ან მახვილი კუთხე) საკმარისია დანარჩენების საპოვნელად.</Remark>
 
 <Remark kind="mistake">სინუსი და კოსინუსი ყოველთვის $1$-ზე ნაკლებია (კათეტი ჰიპოტენუზაზე მოკლეა), ტანგენსი კი ნებისმიერი დადებითი რიცხვი შეიძლება იყოს. თუ $\sin\alpha > 1$ გამოგივიდა — სადღაც შეცდომაა.</Remark>
+
+<Problems>
+
+<Problem id="p-trig-sin-sides" set={{ c: 5, alpha: 36.86989764584402 }} given="AB=10 BC/AB=3/5" find="BC AC" answer="6 8"
+  q="მართკუთხა $ABC$ სამკუთხედის ჰიპოტენუზა $AB = 10$, $\sin A = 0{,}6$. იპოვეთ კათეტები."
+  hint="$\sin A = \tfrac{BC}{AB}$, მეორე კათეტი კი პითაგორას თეორემით.">
+<Step hl="BC" tex="BC = AB \sin A = 10 \cdot 0{,}6 = 6">სინუსი მოპირდაპირე კათეტისა და ჰიპოტენუზის შეფარდებაა.</Step>
+<Step hl="AC" tex="AC = \sqrt{10^2 - 6^2} = 8">პითაგორას თეორემით.</Step>
+</Problem>
+
+<Problem id="p-trig-ratios" set={{ c: 5, alpha: 16.26020470831196 }} given="BC=7 AC=24" find="BC/AB AC/AB BC/AC" labels="\sin A;\cos A;\operatorname{tg} A" answer="7/25 24/25 7/24"
+  q="მართკუთხა $ABC$ სამკუთხედის კათეტებია $BC = 7$ და $AC = 24$. იპოვეთ $\sin A$, $\cos A$ და $\operatorname{tg} A$."
+  hint="ჯერ იპოვეთ ჰიპოტენუზა.">
+<Step hl="AB" tex="AB = \sqrt{7^2 + 24^2} = 25">პითაგორას თეორემით.</Step>
+<Step hl="BC AB" tex="\sin A = \frac{BC}{AB} = \frac{7}{25}">მოპირდაპირე კათეტის შეფარდება ჰიპოტენუზასთან.</Step>
+<Step hl="AC AB" tex="\cos A = \frac{AC}{AB} = \frac{24}{25}">მიმდებარე კათეტის შეფარდება ჰიპოტენუზასთან.</Step>
+<Step hl="BC AC" tex="\operatorname{tg} A = \frac{BC}{AC} = \frac{7}{24}">მოპირდაპირე კათეტის შეფარდება მიმდებარე კათეტთან.</Step>
+</Problem>
+
+<Problem id="p-trig-tan-perimeter" k={3} set={{ c: 5, alpha: 36.86989764584402 }} given="BC/AC=3/4 P(ABC)=36" find="BC AC AB" answer="9 12 15" book="9.62"
+  q="მართკუთხა $ABC$ სამკუთხედში $\angle C = 90^\circ$, $\operatorname{tg} A = 0{,}75$, პერიმეტრი კი $36$-ია. იპოვეთ სამკუთხედის გვერდები."
+  hint="$\operatorname{tg} A = \tfrac{BC}{AC} = \tfrac34$ — აღნიშნეთ კათეტები $3x$-ით და $4x$-ით.">
+<Step hl="BC AC AB" tex="BC = 3x,\quad AC = 4x,\quad AB = 5x">$\operatorname{tg} A = \tfrac{BC}{AC} = \tfrac34$; ჰიპოტენუზა პითაგორას თეორემით.</Step>
+<Step tex="3x + 4x + 5x = 36 \;\Rightarrow\; x = 3">ჩავწეროთ პერიმეტრი.</Step>
+<Step tex="BC = 9,\quad AC = 12,\quad AB = 15">მაშასადამე.</Step>
+</Problem>
+
+<Problem id="p-trig-identity" set={{ c: 5, alpha: 22.61986494804043 }} given="BC/AB=5/13" find="AC/AB BC/AC" labels="\cos A;\operatorname{tg} A" answer="12/13 5/12"
+  q="$A$ მახვილი კუთხისთვის $\sin A = \tfrac{5}{13}$. იპოვეთ $\cos A$ და $\operatorname{tg} A$."
+  hint="$\sin^2 A + \cos^2 A = 1$.">
+<Step tex="\cos A = \sqrt{1 - \tfrac{25}{169}} = \frac{12}{13}">$\sin^2 A + \cos^2 A = 1$, მახვილი კუთხის კოსინუსი კი დადებითია.</Step>
+<Step tex="\operatorname{tg} A = \frac{\sin A}{\cos A} = \frac{5}{12}">ტანგენსი სინუსისა და კოსინუსის შეფარდებაა.</Step>
+</Problem>
+
+</Problems>
