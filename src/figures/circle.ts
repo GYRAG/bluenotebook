@@ -21,6 +21,8 @@ export default figure({
       O: [0, 0] as V, A, B, M: mid(A, B), C, D, N: mid(C, D),
       P: polar(p, tP), T1: polar(R, tP + phi), T2: polar(R, tP - phi),
       U1: [R, 0] as V, U2: [0, R] as V, U3: [-R, 0] as V, U4: [0, -R] as V,
+      // for problems: line OP meets the circle at Q1 (near P) and Q2; H, the midpoint of T1T2 (on OP)
+      Q1: polar(R, tP), Q2: polar(R, tP + 180), H: mid(polar(R, tP + phi), polar(R, tP - phi)),
     };
   },
   drag: { A: ['tA'], B: ['tB'], P: ['p', 'tP'] },

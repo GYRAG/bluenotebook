@@ -89,3 +89,56 @@ figures: [circle-secants]
 </Properties>
 
 <Remark kind="mistake">$PA \cdot PB = PC \cdot PD$-ში ყველა მონაკვეთი $P$-დან იზომება: $PB$ მთელი მკვეთია და არა მისი შიგა ნაწილი $AB$.</Remark>
+
+<Problems>
+
+<Problem id="p-chords-angle" set={{ R: 2.8, tA: 150, tB: 245, tC: 330, tD: 35 }} show="OA OB OC OD" given="<AOB=95 <COD=65" find="<AEB <AED" answer="80 100" book="5.42 5.43"
+  q="$AC$ და $BD$ ქორდები $E$ წერტილში იკვეთება. $AB$ რკალის გრადუსული ზომა $95^\circ$-ია, $CD$ რკალისა კი — $65^\circ$. იპოვეთ $\angle AEB$ და $\angle AED$."
+  hint="ორ გადამკვეთ ქორდას შორის კუთხე მასა და მის ვერტიკალურ კუთხეში მოქცეული რკალების ჯამის ნახევარია.">
+<Step hl="<AEB <AOB <COD" tex="\angle AEB = \frac{\smile AB + \smile CD}{2} = \frac{95^\circ + 65^\circ}{2} = 80^\circ">$\angle AEB$-ში მოქცეულია $AB$ რკალი, მის ვერტიკალურ $\angle CED$-ში კი — $CD$ რკალი.</Step>
+<Step hl="<AED" tex="\angle AED = 180^\circ - 80^\circ = 100^\circ">$\angle AED$ და $\angle AEB$ მოსაზღვრე კუთხეებია.</Step>
+</Problem>
+
+<Problem id="p-chord-products" set={{ R: 2.8, tA: 163.92470222375448, tB: 217.97749677654807, tC: 290.00046570249833, tD: 60.681077807412606 }} given="AE=4 EC=6 BD=11" find="BE ED" answer="3 8"
+  q="$AC$ და $BD$ ქორდები $E$ წერტილში იკვეთება, $AE = 4$, $EC = 6$, $BD = 11$. იპოვეთ $BE$ და $ED$, თუ $BE \lt ED$."
+  hint="ერთი ქორდის მონაკვეთების ნამრავლი მეორის მონაკვეთების ნამრავლის ტოლია.">
+<Step hl="AE EC BE ED" tex="BE \cdot ED = AE \cdot EC = 24">თუ ორი ქორდა იკვეთება, ერთის მონაკვეთების ნამრავლი მეორის მონაკვეთების ნამრავლის ტოლია.</Step>
+<Step tex="x\,(11 - x) = 24 \;\Rightarrow\; x^2 - 11x + 24 = 0">აღვნიშნოთ $BE = x$; მაშინ $ED = 11 - x$.</Step>
+<Step hl="BE ED" tex="x_1 = 3,\quad x_2 = 8 \;\Rightarrow\; BE = 3,\quad ED = 8">$BE \lt ED$, ამიტომ $BE = 3$.</Step>
+</Problem>
+
+<Problem id="p-tangent-chord-ratio" set={{ R: 2.8, tA: 150, tB: 235, tC: 310, tD: 60 }} show="AX" given="<AOC/(360-<AOC)=4/5" find="<XAC" answer="80" book="5.45 5.46"
+  q="$AC$ ქორდა წრეწირს ორ რკალად ყოფს, რომელთა გრადუსული ზომები ისე შეეფარდება ერთმანეთს, როგორც $4 : 5$. იპოვეთ მახვილი კუთხე ქორდასა და მის $A$ ბოლოში გავლებულ $AX$ მხებს შორის."
+  hint="მხებითა და ქორდით შედგენილი კუთხე მის შიგნით მდებარე რკალის ნახევარია.">
+<Step tex="4x + 5x = 360^\circ \;\Rightarrow\; x = 40^\circ">ორი რკალი მთელ წრეწირს შეადგენს: ისინი $160^\circ$-ია და $200^\circ$.</Step>
+<Step hl="<XAC" tex="\angle XAC = \tfrac12 \cdot 160^\circ = 80^\circ">მახვილ კუთხეში მცირე რკალია მოქცეული, ხოლო მხებითა და ქორდით შედგენილი კუთხე მის შიგნით მდებარე რკალის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-secants-angle" figure="circle-secants" set={{ R: 2.6, p: 5.263549017118914, s1: 17.5, s2: 17.5 }} show="OA OC OB OD" given="<AOC=40 <BOD=110" find="<BPD" answer="35" book="5.39 5.44"
+  q="წრეწირის გარეთ მდებარე $P$ წერტილიდან გავლებულია $PAB$ და $PCD$ მკვეთები. მათ შორის მოქცეული რკალებია $\smile AC = 40^\circ$ და $\smile BD = 110^\circ$. იპოვეთ $\angle BPD$."
+  hint="მკვეთებს შორის კუთხე მათ შორის მოქცეული რკალების სხვაობის ნახევარია.">
+<Step hl="<AOC <BOD" tex="\smile BD - \smile AC = 110^\circ - 40^\circ = 70^\circ">დიდი რკალი $BD$-ა, მცირე — $AC$.</Step>
+<Step hl="<BPD" tex="\angle BPD = \tfrac12 \cdot 70^\circ = 35^\circ">წრეწირის გარეთ მდებარე წერტილიდან გავლებულ ორ მკვეთს შორის კუთხე მათ შორის მოქცეული რკალების სხვაობის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-tangent-secant" figure="circle-secants" set={{ R: 2.6, p: 4.2, s1: 10.98057542761218, s2: 11 }} given="PA=4 AB=12" find="PT" answer="8"
+  q="$P$ წერტილიდან წრეწირისადმი გავლებულია $PT$ მხები და $PAB$ მკვეთი, $PA = 4$, $AB = 12$. იპოვეთ $PT$."
+  hint="$PT^2 = PA \cdot PB$.">
+<Step hl="PA PB" tex="PB = PA + AB = 16">მკვეთის გარე ნაწილს შიგა ნაწილი ემატება.</Step>
+<Step hl="PT" tex="PT^2 = PA \cdot PB = 4 \cdot 16 = 64 \;\Rightarrow\; PT = 8">ერთი წერტილიდან გავლებული მხებისა და მკვეთისთვის $PT^2 = PA \cdot PB$.</Step>
+</Problem>
+
+</Problems>
+
+<Problems title="ამოცანები დამტკიცებაზე">
+
+<Problem id="p-equal-chords-parts" set={{ R: 2.8, tA: 150, tB: 235, tC: 310, tD: 35 }} given="AC=BD" prove="AE=DE EC=EB" book="5.62"
+  q="ტოლი $AC$ და $BD$ ქორდები $E$ წერტილში იკვეთება. დაამტკიცეთ, რომ $AE = DE$ და $EC = EB$."
+  hint="ტოლ ქორდებს ტოლი რკალები შეესაბამება; $AB$ და $CD$ რკალებს რას იტყვით?">
+<Step hl="AC=BD" tex="\smile ABC = \smile BCD">ტოლი ქორდები ტოლ რკალებს ჭიმავს.</Step>
+<Step tex="\smile AB = \smile CD">ორივეს გამოვაკლოთ საერთო $BC$ რკალი.</Step>
+<Step hl="<ADB=<DAC AED" tex="\angle ADB = \angle DAC \;\Rightarrow\; AE = DE">ტოლ რკალებზე დაყრდნობილი ჩახაზული კუთხეები ტოლია — სამკუთხედი $AED$ ტოლფერდაა.</Step>
+<Step hl="EC=EB" tex="EC = AC - AE = BD - DE = EB \quad \blacksquare">ტოლი ქორდებიდან ტოლი მონაკვეთები გამოვაკელით.</Step>
+</Problem>
+
+</Problems>

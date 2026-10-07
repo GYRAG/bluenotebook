@@ -62,7 +62,7 @@ checked, a hint, a step-by-step solution on the figure; every given and answer v
 ◐ engine done; each problem names the book problems of its type („წიგნში: 6.23“); proof problems (`prove`) too.
 Batches (book problem sections → site topics):
 1. ✓ §1–4 → angles, congruence, perpendicular bisector, triangle, isosceles triangle (29) + parallelogram pilot (7)
-2. §5 → circle, inscribed angle, circle angles
+2. ✓ §5 → circle, inscribed angle, circle angles, triangle centres (circum/incircle radii) (19)
 3. §6 → quadrilaterals, trapezoid, Thales
 4. §7–9 → similarity, right triangle (incl. §4's right-triangle angle problems), trigonometry, sine/cosine laws
 5. §10–11 → areas, polygons, regular polygons, circumference

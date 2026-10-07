@@ -64,3 +64,37 @@ figure: inscribed-angle
 <Remark kind="convention">${\smile}AB$ ყოველთვის ის რკალია, რომელზეც კუთხე ეყრდნობა — რომელიც კუთხის შიგნით ძევს.</Remark>
 
 <Remark kind="mistake">თუ $C$ და $D$ $AB$ ქორდის სხვადასხვა მხარესაა, $\angle ACB$ და $\angle ADB$ ტოლი არ არის — მათი ჯამი $180^\circ$-ია (ჩახაზული ოთხკუთხედი $ACBD$).</Remark>
+
+<Problems>
+
+<Problem id="p-arcs-ratio" set={{ R: 2.8, tA: 220, tB: 340, tC: 70 }} show="AB" given="<BOC/<AOB=3/4 <AOB/<AOC=4/5" find="<ABC" answer="75" book="5.33"
+  q="წრეწირზე მდებარე $A$, $B$ და $C$ წერტილები მას სამ რკალად ყოფს, რომელთა გრადუსული ზომები ისე შეეფარდება ერთმანეთს, როგორც $3 : 4 : 5$. იპოვეთ $ABC$ სამკუთხედის უდიდესი კუთხე."
+  hint="რკალების ჯამი $360^\circ$-ია, ჩახაზული კუთხე კი იმ რკალის ნახევარია, რომელსაც ეყრდნობა.">
+<Step tex="3x + 4x + 5x = 360^\circ \;\Rightarrow\; x = 30^\circ">სამი რკალი მთელ წრეწირს შეადგენს.</Step>
+<Step show="OC" hl="<AOC" tex="\smile AC = 5 \cdot 30^\circ = 150^\circ">უდიდესი რკალია $AC$; მას $B$ კუთხე ეყრდნობა.</Step>
+<Step hl="<ABC" tex="\angle ABC = \tfrac12 \cdot 150^\circ = 75^\circ">ჩახაზული კუთხე იმავე რკალზე დაყრდნობილი ცენტრალური კუთხის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-inscribed-chord" set={{ R: 2.8, tA: 240, tB: 300, tC: 100 }} show="AB CE" given="<ACB=30 CE=10" find="AB" answer="5" book="5.29"
+  q="$A$, $B$ და $C$ წერტილები წრეწირზე მდებარეობს, $\angle ACB = 30^\circ$, წრეწირის დიამეტრი კი $10$-ია. იპოვეთ $AB$ ქორდის სიგრძე."
+  hint="იპოვეთ $AB$ რკალზე დაყრდნობილი ცენტრალური კუთხე.">
+<Step hl="<AOB" tex="\angle AOB = 2\angle ACB = 60^\circ">ჩახაზული კუთხე იმავე რკალზე დაყრდნობილი ცენტრალური კუთხის ნახევარია.</Step>
+<Step hl="AOB OA=OB" tex="AB = OA = 5">$OA = OB$ და მათ შორის კუთხე $60^\circ$-ია, ამიტომ სამკუთხედი $AOB$ ტოლგვერდაა; $OA$ დიამეტრის ნახევარია.</Step>
+</Problem>
+
+<Problem id="p-chord-radius-angle" set={{ R: 2.8, tA: 224, tB: 300, tC: 100 }} show="AB" given="<AOB=76" find="<OAB" answer="52" book="5.23 5.24"
+  q="$AB$ ქორდა $76^\circ$-იან რკალს ჭიმავს. იპოვეთ კუთხე ქორდასა და მის ბოლოში გავლებულ $OA$ რადიუსს შორის."
+  hint="სამკუთხედი $AOB$ ტოლფერდაა.">
+<Step hl="<AOB" tex="\angle AOB = 76^\circ">ცენტრალური კუთხე იმ რკალის ტოლია, რომელსაც ეყრდნობა.</Step>
+<Step hl="AOB <OAB=<OBA" tex="\angle OAB = \frac{180^\circ - 76^\circ}{2} = 52^\circ">$OA = OB$, ამიტომ ფუძესთან მდებარე კუთხეები ტოლია.</Step>
+</Problem>
+
+<Problem id="p-central-inscribed-sum" set={{ R: 2.8, tA: 220, tB: 310, tC: 100 }} given="<AOB+<ACB=135" find="<AOB <ACB" answer="90 45"
+  q="ერთსა და იმავე რკალზე დაყრდნობილი ცენტრალური და ჩახაზული კუთხეების ჯამი $135^\circ$-ია. იპოვეთ ეს კუთხეები."
+  hint="ცენტრალური კუთხე ჩახაზულზე ორჯერ მეტია.">
+<Step hl="<AOB <ACB" tex="\angle AOB = 2\angle ACB">ჩახაზული კუთხე იმავე რკალზე დაყრდნობილი ცენტრალური კუთხის ნახევარია.</Step>
+<Step tex="2x + x = 135^\circ \;\Rightarrow\; x = 45^\circ">აღვნიშნოთ $\angle ACB = x$.</Step>
+<Step hl="<AOB <ACB" tex="\angle ACB = 45^\circ,\qquad \angle AOB = 90^\circ">მაშასადამე.</Step>
+</Problem>
+
+</Problems>
