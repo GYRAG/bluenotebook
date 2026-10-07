@@ -1,7 +1,7 @@
 ---
 import Shell from '@/layouts/Shell.astro';
 import { allTopics, sectionsOf, subjectsWithContent, topicUrl } from '@/lib/topics';
-import { langOf, t as tr } from '@/i18n';
+import { caps, langOf, t as tr } from '@/i18n';
 
 // The topic map: one topic at a time, with the topics it builds on above it and the ones that build
 // on it below, joined by lines; any card re-centres the map on itself. The whole reading path (all
@@ -11,7 +11,7 @@ const topics = await allTopics(lang);
 const chapters = subjectsWithContent(topics).flatMap(sub => sectionsOf(topics, sub, lang));
 const ids = new Set(topics.map(tp => tp.id));
 const nodes = chapters.flatMap(c => c.items.map(tp => ({
-  id: tp.id, title: tp.data.title, url: topicUrl(tp, lang), chapter: c.label, summary: tp.data.summary,
+  id: tp.id, title: tp.data.title, url: topicUrl(tp, lang), chapter: `${c.no} · ${caps(c.label)}`, chapterName: c.label, summary: tp.data.summary,
   pre: tp.data.prerequisites.filter(p => ids.has(p)),
 })));
 const L = {
@@ -41,7 +41,7 @@ const L = {
       <h2 class="k">{tr(lang, 'ყველა თემა')}</h2>
       {chapters.map(c => (
         <section>
-          <h3>{c.label}</h3>
+          <h3><span class="no">{c.no}</span> <span aria-hidden="true">{caps(c.label)}</span><span class="sr-only">{c.label}</span></h3>
           <ul>{c.items.map(tp => <li><button class="item" type="button" data-id={tp.id} aria-pressed="false">{tp.data.title}</button></li>)}</ul>
         </section>
       ))}
@@ -53,7 +53,7 @@ const L = {
   import { load } from '@/lib/store';
   import { plain } from '@/i18n/client';
 
-  interface Node { id: string; title: string; url: string; chapter: string; summary: string; pre: string[] }
+  interface Node { id: string; title: string; url: string; chapter: string; chapterName: string; summary: string; pre: string[] }
   const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
   const nodes = JSON.parse($('#map-data').textContent!) as Node[];
   const L = JSON.parse($('.tm').dataset.l!) as Record<string, string>;
@@ -68,6 +68,7 @@ const L = {
   function card(id: string) {
     const n = byId.get(id)!, b = document.createElement('button');
     b.type = 'button'; b.className = 'card'; b.dataset.id = id;
+    b.setAttribute('aria-label', `${n.title}, ${n.chapterName}`); // the chapter's capitals are for the eye
     b.innerHTML = '<span class="cc"></span><span class="ct"></span>';
     b.querySelector('.cc')!.textContent = n.chapter;
     b.querySelector('.ct')!.textContent = n.title;
@@ -105,7 +106,9 @@ const L = {
     const n = byId.get(id) ?? nodes[0]!;
     fill($('[data-pre]'), n.pre, L.start!);
     fill($('[data-post]'), post(n.id), L.last!);
-    $('[data-ch]').textContent = n.chapter;
+    const shown = Object.assign(document.createElement('span'), { textContent: n.chapter }); // capitals for the eye, the name for screen readers
+    shown.setAttribute('aria-hidden', 'true');
+    $('[data-ch]').replaceChildren(shown, Object.assign(document.createElement('span'), { className: 'sr-only', textContent: n.chapterName }));
     Object.assign($<HTMLAnchorElement>('[data-title]'), { href: n.url, textContent: n.title });
     $('[data-sum]').textContent = n.summary;
     const path = before(n.id);
@@ -138,7 +141,7 @@ const L = {
   addEventListener('hashchange', () => show(decodeURIComponent(location.hash.slice(1))));
 </script>
 <style>
-  .tm { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--s5) 48px; align-items: start; max-width: 1080px; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
+  .tm { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--s5) 48px; align-items: start; margin-top: var(--s4); padding-bottom: var(--s5); color: var(--ink-2); }
   .k { font: var(--w2) var(--fs-ui) var(--font-body); letter-spacing: .02em; }
   .view .k { justify-self: start; margin-bottom: calc(-1 * var(--s3)); } /* row captions, clear of the lines in the middle */
 
@@ -150,11 +153,11 @@ const L = {
   .cards :global(.card) { display: grid; gap: 2px; width: 196px; min-height: 64px; padding: var(--s2) var(--s3); border: var(--bw) solid var(--line-2); border-radius: var(--r); background: var(--paper); text-align: left; }
   .cards :global(.card:hover) { border-color: var(--ink); }
   .cards :global(.card:hover .ct) { text-decoration: underline; text-underline-offset: 4px; }
-  .cards :global(.cc) { font-size: 12px; color: var(--ink-2); }
+  .cards :global(.cc) { font-size: 11px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .06em; } /* a chapter in capitals, the topic in plain letters */
   .cards :global(.ct) { font-size: 15px; line-height: 1.35; color: var(--ink); }
   .cards :global(.none) { font-size: 14px; padding: var(--s2) var(--s3); background: var(--paper); }
   .focus { position: relative; width: min(440px, 100%); padding: var(--s3) var(--s4) var(--s4); border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--paper); text-align: center; }
-  .ch { font-size: 13px; }
+  .ch { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
   .ft { font: var(--w2) 24px/1.25 var(--font-head); margin: var(--s1) 0 var(--s2); }
   .ft a { color: var(--ink); text-decoration: underline 1.5px; text-underline-offset: 6px; }
   .fs { font-size: 15px; }
@@ -166,8 +169,10 @@ const L = {
   /* every topic, quietly, on the side */
   .all { font-size: 14px; }
   .all .k { text-align: left; margin-bottom: var(--s2); }
-  .all h3 { font: var(--w2) 14px var(--font-head); color: var(--ink); margin: var(--s3) 0 2px; }
-  .all ul { list-style: none; padding: 0; }
+  .all h3 { font: var(--w2) 12px var(--font-body); color: var(--ink-2); text-transform: uppercase; letter-spacing: .06em; margin: var(--s3) 0 2px; }
+  .all h3 .no { font: var(--w2) 14px var(--font-head); color: var(--ink); margin-right: 6px; }
+  .all ul { margin-left: 6px; padding-left: 12px; border-left: 1px solid var(--line-2); }
+  .all ul { list-style: none; }
   .item { display: flex; align-items: center; width: 100%; min-height: 34px; text-align: left; color: var(--ink-2); line-height: 1.3; }
   .item:hover { color: var(--ink); }
   .item[aria-pressed='true'] { color: var(--ink); font-weight: var(--w2); text-decoration: underline 1.5px; text-underline-offset: 5px; }

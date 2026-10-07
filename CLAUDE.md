@@ -42,6 +42,10 @@ an English copy of every page at /en/…. This repo is self-contained — ignore
   Atomic givens label the figure; finds show as "?". Steps are a hidden solution that drives the figure.
   A page with only problems (no Formula/Property/Definition) gets just the problems tab and is left off the cheat sheet.
 - `src/content.config.ts` — Zod schema. `src/subjects.ts` — subjects and nav sections.
+- Nav (`Nav.astro`): the other pages first (two columns, icons from `Icon.astro`), then chapters, each with a Roman
+  numeral (`sectionsOf().no`) and its name in Mtavruli capitals (`caps()` in `src/i18n`; CSS `uppercase` does not
+  touch Georgian), its topics indented on a rule — so chapter „სამკუთხედი“ never reads like the topic. Theme and
+  language are pinned at the bottom. Panel-less pages are one centred column ≤ 1240px (`full` on Shell opts out).
 - `src/figures/<name>.ts` — figure specs (every `.ts` there is a figure; shared helpers live in `engine/`):
   params → named points (constraints by construction); dragging inverts `points` numerically (`engine/solve.ts`).
   Ref grammar in `engine/refs.ts`: `A`, `AB`, `ABC…`, `line:AB`, `ray:AB`, `vec:AB`, `arc:OAB`, `hid:AB`, `<ABC`,

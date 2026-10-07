@@ -9,12 +9,12 @@ const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document
 
 // ---------- theme: system → day → night ----------
 type Theme = 'system' | 'light' | 'dark';
-const THEME_LABEL: Record<Theme, string> = { system: 'თემა: სისტემის', light: 'თემა: დღე', dark: 'თემა: ღამე' };
+const THEME_LABEL: Record<Theme, string> = { system: 'ავტო', light: 'დღე', dark: 'ღამე' }; // shown; the button's name says „თემა: …“
 const NEXT: Record<Theme, Theme> = { system: 'light', light: 'dark', dark: 'system' };
 function applyTheme(t: Theme) {
   if (t === 'system') delete document.documentElement.dataset.theme;
   else document.documentElement.dataset.theme = t;
-  $$('[data-theme-label]').forEach(el => { el.textContent = tc(THEME_LABEL[t]); });
+  $$('[data-theme-label]').forEach(el => { el.textContent = tc(THEME_LABEL[t]); el.closest('button')?.setAttribute('aria-label', `${tc('თემა:')} ${tc(THEME_LABEL[t])}`); });
 }
 let theme = load<Theme>('theme', 'system');
 applyTheme(theme);

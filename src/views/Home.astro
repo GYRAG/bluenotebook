@@ -53,6 +53,7 @@ const stats = lang === 'en'
               <a class="chap-h" href={topicUrl(s.items[0]!, lang)}>
                 <svg class="glyph" viewBox="0 0 64 48" aria-hidden="true" set:html={GLYPH[s.id] ?? ''} />
                 <span class="chap-t">{s.label}</span>
+                <span class="chap-no" aria-hidden="true">{s.no}</span>
               </a>
               <ol class="chap-l">
                 {s.items.map(t => <li><a href={topicUrl(t, lang)} data-topic={topicUrl(t)}>{t.data.title}</a></li>)}
@@ -160,6 +161,7 @@ const stats = lang === 'en'
   .glyph { width: 48px; height: 36px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .glyph :global(.d) { stroke-dasharray: 3 3; opacity: .8; }
   .chap-t { font: var(--w2) 19px/1.25 var(--font-head); }
+  .chap-no { position: absolute; top: var(--s3); right: var(--s4); font: var(--w2) 15px var(--font-head); color: var(--ink-2); } /* the chapter's number, as in the contents */
   .chap-h:hover .chap-t { text-decoration: underline 1.5px; text-underline-offset: 5px; }
   .chap-l { list-style: none; padding: 0; margin: var(--s2) 0 var(--s3); display: grid; }
   .chap-l a { display: flex; align-items: center; gap: var(--s2); min-height: 32px; font-size: 15px; color: var(--ink-2); }

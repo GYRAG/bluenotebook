@@ -15,3 +15,5 @@ export const delocalize = (path: string) => path.replace(/^\/en(?=\/)/, '');
 /** An interface string in a language (interface words first, then figure words). */
 export const t = (lang: Lang, s: string) => (lang === 'en' ? UI_EN[s] ?? CLIENT_EN[s] ?? FIG_EN[s] ?? s : s);
 export const SITE = { ka: 'ლურჯი რვეული', en: 'Blue Notebook' } as const;
+/** Capitals for a chapter name: Georgian becomes Mtavruli (CSS text-transform leaves Georgian alone; Latin gets it there). */
+export const caps = (s: string) => s.replace(/[ა-ჺჽ-ჿ]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xbc0));

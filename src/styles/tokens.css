@@ -29,6 +29,7 @@
   --ease: cubic-bezier(.2, .8, .2, 1);
   color-scheme: dark;
 }
+@media (min-width: 1280px) { :root { --nav-w: 272px; } } /* fewer wrapped topic titles in the contents */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --paper: #0f1c47; --paper-2: #0b1538; --ink: #e9eeff; --ink-2: #aebbe8; --on-ink: #0f1c47;

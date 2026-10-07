@@ -3,9 +3,10 @@
 export type Lang = 'ka' | 'en';
 
 export const CLIENT_EN: Record<string, string> = {
-  'თემა: სისტემის': 'Theme: system',
-  'თემა: დღე': 'Theme: day',
-  'თემა: ღამე': 'Theme: night',
+  'თემა:': 'Theme:',
+  'ავტო': 'Auto',
+  'დღე': 'Day',
+  'ღამე': 'Night',
   'ჩამაგრებული ფორმულები': 'Pinned formulas',
   'ბოლოს ნანახი': 'Last viewed',
   'დაწერე რამდენიმე ასო. ★-ით ჩამაგრებული ფორმულები აქ გამოჩნდება.': 'Type a few letters. Formulas you pin with ★ show up here.',

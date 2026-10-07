@@ -21,9 +21,10 @@ interface Props {
   figure?: boolean; // false: a text topic — the panel takes the page under the title
   draft?: boolean;
   lede?: string;
+  full?: boolean; // no panel and the whole width (the blank sheet)
 }
 const lang = langOf(Astro.url);
-const { title, description = t(lang, 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.'), current, panel = true, figure = true, draft = false, lede } = Astro.props;
+const { title, description = t(lang, 'მათემატიკის პირადი ცნობარი: ფორმულები, თვისებები და დამტკიცებები ნახაზებით.'), current, panel = true, figure = true, draft = false, lede, full = false } = Astro.props;
 const site = SITE[lang];
 
 // the same page in the other language (a topic not translated yet falls back to the English home)
@@ -67,7 +68,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 </head>
 <body data-topic={current ? `/${current.subject}/${current.slug}/` : undefined}>
   <a class="skip" href="#main">{t(lang, 'შინაარსზე გადასვლა')}</a>
-  <div class:list={['app', { 'no-panel': !panel, 'no-figure': panel && !figure }]}>
+  <div class:list={['app', { 'no-panel': !panel, 'no-figure': panel && !figure, full }]}>
     <header class="topbar">
       <button class="icon-btn" type="button" popovertarget="nav" aria-label={t(lang, 'თემების სია')}><Icon name="menu" /></button>
       <span class="topbar-title">{title}</span>

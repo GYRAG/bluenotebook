@@ -35,7 +35,7 @@ summary::-webkit-details-marker { display: none; }
 }
 .app.no-panel { grid-template-columns: var(--nav-w) minmax(0, 1fr); grid-template-areas: 'nav stage'; }
 .topbar { display: none; }
-.stage { grid-area: stage; min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: var(--s5); }
+.stage { grid-area: stage; position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: var(--s5); }
 /* the panel is the notebook margin: a double rule, faint paper */
 .panel {
   grid-area: panel; min-width: 0; min-height: 0; display: flex; flex-direction: column;
@@ -46,7 +46,7 @@ summary::-webkit-details-marker { display: none; }
 
 /* nav: an ordinary column on desktop, a popover drawer on phones */
 .nav[popover] {
-  grid-area: nav; position: static; inset: auto; margin: 0; width: auto; height: auto; max-width: none; max-height: none;
+  grid-area: nav; position: relative; inset: auto; /* relative: screen-reader text inside stays inside, not below the page */ margin: 0; width: auto; height: auto; max-width: none; max-height: none;
   border: 0; color: inherit;
   background: linear-gradient(var(--grid-2) 1px, transparent 1px) 0 0 / 24px 24px local,
     linear-gradient(90deg, var(--grid-2) 1px, transparent 1px) 0 0 / 24px 24px local, var(--paper-2);
@@ -70,8 +70,19 @@ summary::-webkit-details-marker { display: none; }
 .subject ul { margin: 0 0 var(--s3); }
 .subject li a { color: var(--ink-2); }
 .subject li a[aria-current] { color: var(--ink); font-weight: var(--w2); }
-.sec > summary { font-size: var(--fs-ui); color: var(--ink-2); }
-.topics { margin: 2px 0 10px; }
+/* the other pages: two columns under the search, one tap from anywhere */
+.pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--s2); margin: calc(-1 * var(--s3)) 0 var(--s3); padding-bottom: var(--s2); border-bottom: var(--bw) solid var(--line-2); }
+.nav .pages a { gap: 8px; font-size: 13.5px; line-height: 1.2; color: var(--ink-2); }
+.pages .ic { flex: none; width: 18px; height: 18px; }
+.pages a:hover, .pages a[aria-current] { color: var(--ink); }
+.pages a[aria-current] { font-weight: var(--w2); }
+/* a chapter: its number and its name in capitals (Mtavruli), so it never reads like a topic of the same name */
+.sec > summary { justify-content: flex-start; gap: 10px; font-size: 12px; color: var(--ink-2); }
+.sec-no { min-width: 22px; font: var(--w2) 14px var(--font-head); color: var(--ink); }
+.sec-t { flex: 1; text-transform: uppercase; letter-spacing: .06em; font-weight: var(--w2); }
+.sec > summary:hover .sec-t { color: var(--ink); }
+/* its topics hang off the chapter on a thin rule */
+.topics { margin: 0 0 var(--s2) 6px; padding-left: 14px; border-left: 1px solid var(--line-2); }
 /* table of contents: title …… page */
 .nav .topics a { align-items: last baseline; gap: var(--s2); padding: 10px 0; font-size: 15px; line-height: 1.35; color: var(--ink-2); }
 .topics a::after { content: ''; order: 2; flex: 1 0 12px; border-bottom: var(--bw) dotted var(--line-2); transform: translateY(-4px); }
@@ -83,17 +94,15 @@ summary::-webkit-details-marker { display: none; }
 }
 .topics a:hover { color: var(--ink); }
 .topics a[aria-current='page'] { color: var(--ink); font-weight: var(--w2); }
-/* the other pages, after the contents; the back cover (theme, language) stays put at the bottom */
-.nav .extra { margin: var(--s2) 0 var(--s3); padding-top: var(--s2); border-top: var(--bw) solid var(--line-2); }
+/* the back cover: theme and language stay put at the bottom while the contents scroll */
 .nav-end {
   position: sticky; bottom: 0; margin: auto calc(-1 * var(--s4)) 0 calc(-1 * var(--s5)); padding: var(--s2) var(--s4) var(--s2) var(--s5);
   background: var(--paper-2); border-top: var(--bw) solid var(--line-2);
 }
-.nav-foot { padding-top: var(--s1); }
-.extra a { color: var(--ink-2); font-size: 15px; }
-.extra a:hover, .extra a[aria-current] { color: var(--ink); }
-.extra a[aria-current] { font-weight: var(--w2); }
+.nav-foot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
 .app.no-panel .stage { overflow: auto; overscroll-behavior: contain; }
+/* pages without a panel: one centred column on wide screens (the blank sheet keeps the whole width) */
+@media (min-width: 900px) { .app.no-panel:not(.full) .stage { padding-inline: max(36px, (100% - 1240px) / 2) max(var(--s5), (100% - 1240px) / 2); } }
 /* a text topic (no figure): title on top, the panel becomes the page below it */
 .app.no-figure { grid-template-columns: var(--nav-w) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); grid-template-areas: 'nav stage' 'nav panel'; }
 .app.no-figure .stage { padding-bottom: var(--s2); }

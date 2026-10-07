@@ -10,11 +10,16 @@ export async function allTopics(lang: Lang = 'ka'): Promise<Topic[]> {
   return list.sort((a, b) => a.data.order - b.data.order);
 }
 
-/** A subject's sections in registry order, each with its topics; empty sections dropped. */
+/** I, II, … for chapter numbers. */
+const ROMAN: [string, number][] = [['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1]];
+export const roman = (n: number) => ROMAN.reduce((r, [k, v]) => { while (n >= v) { r += k; n -= v; } return r; }, '');
+
+/** A subject's sections in registry order, each with its topics and chapter number; empty sections dropped. */
 export function sectionsOf(topics: Topic[], subject: SubjectId, lang: Lang = 'ka') {
   return Object.entries(SUBJECTS[subject].sections)
     .map(([id, label]) => ({ id, label: t(lang, label), items: topics.filter(tp => tp.data.subject === subject && tp.data.section === id) }))
-    .filter(s => s.items.length);
+    .filter(s => s.items.length)
+    .map((s, i) => ({ ...s, no: roman(i + 1) }));
 }
 
 export const subjectsWithContent = (topics: Topic[]) => SUBJECT_IDS.filter(id => topics.some(tp => tp.data.subject === id));
